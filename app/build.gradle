@@ -64,6 +64,10 @@ dependencies {
     implementation project(':emoticon')
     implementation project(':showcasecard')
 
+    implementation ('org.wordpress:utils:1.6.0') {
+        exclude group: 'com.android.support'
+    }
+
     implementation('com.twitter.sdk.android:twitter:3.3.0@aar') {
         transitive = true
         exclude group: 'com.squareup.okhttp3'
@@ -147,8 +151,9 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.7.3'
     implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
-//    implementation 'com.google.firebase:firebase-messaging:17.0.0:15.0.0'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+
+    // implementation 'org.mod4j.org.apache.commons:lang:2.1.0'
 }
 //TODO
 //Enable it for check dependency tree of any library
