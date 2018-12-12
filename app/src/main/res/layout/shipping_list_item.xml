@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fragment_item_view"
+    android:paddingTop="@dimen/padding_10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_20dp"
+            android:paddingStart="@dimen/padding_20dp"
+            android:id="@+id/shipping_method_main"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/shipping_title"
+                android:paddingRight="@dimen/padding_15dp"
+                android:paddingLeft="@dimen/padding_15dp"
+                android:layout_weight="3.5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title_font_size"/>
+
+            <TextView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/shipping_price"
+                android:layout_weight="1"
+                android:textColor="@color/light_green"
+                android:textSize="@dimen/body_default_font_size"/>
+
+            <include layout="@layout/option_icon_view"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_weight="0.5"
+                android:layout_gravity="right|end"
+                android:id="@+id/option_icon_layout" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shipping_method_main"
+            android:id="@+id/shipping_method_sub_info"
+            android:paddingLeft="@dimen/padding_20dp"
+            android:paddingStart="@dimen/padding_20dp"
+            android:paddingBottom="@dimen/padding_20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/shipping_delivery"
+                android:paddingRight="@dimen/padding_15dp"
+                android:paddingEnd="@dimen/padding_15dp"
+                android:layout_weight="2"
+                android:textSize="@dimen/caption_font_size"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/shipping_limit"
+                android:textStyle="bold"
+                android:layout_weight="2"
+                android:textSize="@dimen/caption_font_size"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    
+</RelativeLayout>

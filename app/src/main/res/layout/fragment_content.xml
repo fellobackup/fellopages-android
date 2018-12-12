@@ -1,0 +1,62 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fellopages.mobileapp.classes.core.startscreens.ContentFragment">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fullscreen_bg_gradient"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/slideTitle"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance"
+            android:shadowColor="@android:color/black"
+            android:shadowRadius="20"
+            android:padding="@dimen/slide_title_padding"
+            android:paddingStart="@dimen/slide_title_padding"
+            android:paddingEnd="@dimen/slide_title_padding"/>
+        <TextView
+            android:id="@+id/slideSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/body_default_font_size"
+            android:shadowColor="@android:color/black"
+            android:shadowRadius="20"
+            android:padding="@dimen/slide_title_padding"
+            android:paddingStart="@dimen/slide_title_padding"
+            android:paddingEnd="@dimen/slide_title_padding"/>
+    </LinearLayout>
+
+</RelativeLayout>

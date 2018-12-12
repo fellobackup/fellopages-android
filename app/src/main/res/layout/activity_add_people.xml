@@ -1,0 +1,83 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/addPeopleContent"
+    tools:context="com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.AddPeople">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/gradient_blackborder"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:textColor="@color/gray_text_color"
+        android:id="@+id/addPeopleBox"
+        android:layout_marginTop="@dimen/margin_10dp"
+        style="@style/TitleView" />
+
+    <View android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_width="match_parent"
+        android:id="@+id/saperator"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_below="@+id/addPeopleBox"
+        android:background="@color/light_gray" />
+
+
+    <com.fellopages.mobileapp.classes.common.ui.PredicateLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:id="@+id/selectedFriends"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:layout_below="@+id/saperator"
+        android:visibility="gone">
+    </com.fellopages.mobileapp.classes.common.ui.PredicateLayout>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/selectedFriends"
+        android:visibility="gone"
+        android:id="@+id/progressBar"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectedFriends"
+        android:id="@+id/friendsList"
+        android:divider="@color/light_gray"
+        android:dividerHeight=".5dp"/>
+
+</RelativeLayout>

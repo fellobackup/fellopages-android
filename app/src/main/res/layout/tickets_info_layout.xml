@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:id="@+id/tickets_main_layout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_2dp"
+        android:paddingRight="@dimen/margin_2dp"
+        android:paddingStart="@dimen/margin_2dp"
+        android:paddingEnd="@dimen/margin_2dp"
+        android:paddingBottom="@dimen/margin_2dp"
+        android:orientation="vertical"
+        android:background="@color/gray_light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:paddingLeft="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:paddingRight="@dimen/padding_5dp"
+                android:paddingEnd="@dimen/padding_5dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tickets_name"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/themeButtonColor"
+                    android:text="@string/more_info_text"
+                    android:id="@+id/more_text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/themeButtonColor"
+                    android:visibility="gone"
+                    android:text="@string/less_info_text"
+                    android:id="@+id/less_text"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:id="@+id/price"/>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/padding_5dp"
+                android:layout_marginStart="@dimen/padding_5dp"
+                android:layout_marginEnd="@dimen/padding_5dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    android:layout_marginEnd="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_6dp"
+                    android:padding="@dimen/padding_5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/quantity"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:id="@+id/subtotal"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:paddingRight="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_light"
+            android:id="@+id/claimed_tickets"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_light"
+            android:visibility="gone"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingBottom="@dimen/padding_10dp"
+            android:id="@+id/end_date"/>
+
+    </LinearLayout>
+
+</LinearLayout>

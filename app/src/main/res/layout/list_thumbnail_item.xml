@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_10dp"
+    android:layout_marginStart="@dimen/margin_10dp"
+    android:layout_marginEnd="@dimen/margin_10dp">
+
+    <com.fellopages.mobileapp.classes.common.ui.CircularImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="@dimen/thumbnail_size"
+        android:layout_height="@dimen/thumbnail_size"
+        android:scaleType="centerCrop"
+        app:civ_border_width="@dimen/margin_2dp"
+        app:civ_border_color="@color/transparent"/>
+
+    <TextView
+        android:layout_width="@dimen/thumbnail_size"
+        android:layout_height="wrap_content"
+        android:id="@+id/filter_name"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:shadowColor="@color/light_gray"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

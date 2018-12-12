@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar" />
+
+       <include layout="@layout/tab_layout"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.fellopages.mobileapp.classes.modules.store.ui.CustomViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:elevation="@dimen/toolbar_elivation"
+        android:orientation="vertical"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <LinearLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/home_icon_tab_height"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:background="@color/themeButtonColor">
+
+            <ImageView
+                android:id="@+id/close_cart"
+                android:layout_width="@dimen/home_icon_tab_height"
+                android:layout_height="@dimen/home_icon_tab_height"
+                android:layout_marginEnd="@dimen/margin_12dp"
+                android:layout_marginStart="@dimen/margin_12dp"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_12dp"
+                android:src="@drawable/ic_clear_white_24dp" />
+
+
+            <TextView
+                android:id="@+id/store_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="start|center_vertical"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:paddingRight="@dimen/padding_15dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_font_size"/>
+
+            <TextView
+                android:id="@+id/update_cart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end|center_vertical"
+                android:layout_gravity="end|center_vertical"
+                android:padding="@dimen/padding_15dp"
+                android:text="@string/update_cart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/body_default_font_size"/>
+
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:id="@+id/view_nested_scroll_view"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <include layout="@layout/event_loaction_date_info" />
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:id="@+id/event_info_divider"
+            android:layout_height="@dimen/view_description_margin_top"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/announcement_layout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/announcement_title"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/padding_10dp"
+                android:paddingBottom="@dimen/padding_3dp"
+                android:textSize="@dimen/body_medium_font_size"
+                android:textColor="@color/themeButtonColor"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingLeft="@dimen/padding_10dp"
+                android:paddingRight="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:id="@+id/announcement_description"/>
+
+            <TextView
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:gravity="end"
+                android:clickable="true"
+                android:visibility="gone"
+                android:padding="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:layout_gravity="end"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:visibility="gone"
+            android:id="@+id/announcement_divider"
+            android:layout_height="@dimen/view_description_margin_top"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:layout_marginStart="@dimen/margin_15dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:layout_marginEnd="@dimen/margin_15dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:id="@+id/eventRsvpForm"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                style="@style/TitleView"
+                android:text="@string/attending_text"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/attendingButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".33"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@string/rsvp_yes"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:paddingTop="@dimen/padding_8dp"
+                android:paddingBottom="@dimen/padding_8dp"
+                android:textAlignment="center"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                android:layout_marginRight="@dimen/login_button_left_right_margin"
+                android:layout_marginEnd="@dimen/login_button_left_right_margin"
+                app:normalStateColor="@color/themeButtonColor"
+                style="@style/BodyMediumView"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/mayBeAttendingButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".33"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@string/rsvp_maybe"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:paddingTop="@dimen/padding_8dp"
+                android:paddingBottom="@dimen/padding_8dp"
+                android:textAlignment="center"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                android:layout_marginRight="@dimen/login_button_left_right_margin"
+                android:layout_marginEnd="@dimen/login_button_left_right_margin"
+                app:normalStateColor="@color/themeButtonColor"
+                style="@style/BodyMediumView"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/notAttendingButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".33"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@string/rsvp_no"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:paddingTop="@dimen/padding_8dp"
+                android:paddingBottom="@dimen/padding_8dp"
+                android:textAlignment="center"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                android:layout_marginRight="@dimen/padding_3dp"
+                android:layout_marginEnd="@dimen/padding_3dp"
+                app:normalStateColor="@color/themeButtonColor"
+                style="@style/BodyMediumView"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/eventJoinForm"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:layout_marginStart="@dimen/margin_15dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:layout_marginEnd="@dimen/margin_15dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/waitlist_text"
+                android:text="@string/added_to_waitlist"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                style="@style/TitleView"
+                android:gravity="center"
+                android:visibility="gone"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/joinEventButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@string/rsvp_join"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:paddingTop="@dimen/padding_8dp"
+                android:paddingBottom="@dimen/padding_8dp"
+                android:textAlignment="center"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                android:layout_marginRight="@dimen/margin_5dp"
+                android:layout_marginEnd="@dimen/margin_5dp"
+                app:normalStateColor="@color/themeButtonColor"
+                style="@style/BodyMediumView"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:visibility="gone"
+            android:id="@+id/rsvp_form_divider"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabsLayout"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/padding_10dp"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:layout_marginStart="@dimen/margin_15dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:layout_marginEnd="@dimen/margin_15dp"
+            android:weightSum="1">
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/writeReview"
+                android:text="@string/write_review_button_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:paddingTop="@dimen/padding_8dp"
+                android:paddingBottom="@dimen/padding_8dp"
+                android:textAlignment="center"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                android:layout_marginRight="@dimen/login_button_left_right_margin"
+                android:layout_marginEnd="@dimen/login_button_left_right_margin"
+                app:normalStateColor="@color/themeButtonColor"
+                style="@style/BodyMediumView"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/addToDiary"
+                android:text= "@string/title_add_to_diary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:paddingTop="@dimen/padding_8dp"
+                android:paddingBottom="@dimen/padding_8dp"
+                android:textAlignment="center"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                android:layout_marginRight="@dimen/login_button_left_right_margin"
+                android:layout_marginEnd="@dimen/login_button_left_right_margin"
+                app:normalStateColor="@color/themeButtonColor"
+                style="@style/BodyMediumView"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/calButtonLayout"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/padding_10dp"
+            android:paddingBottom="@dimen/padding_10dp"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:layout_marginStart="@dimen/margin_15dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:layout_marginEnd="@dimen/margin_15dp"
+            android:weightSum="1">
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/addToCalendar"
+                android:text="@string/add_to_calendar_button_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:paddingTop="@dimen/padding_8dp"
+                android:paddingBottom="@dimen/padding_8dp"
+                android:textAlignment="center"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                android:layout_marginRight="@dimen/login_button_left_right_margin"
+                android:layout_marginEnd="@dimen/login_button_left_right_margin"
+                app:normalStateColor="@color/themeButtonColor"
+                style="@style/BodyMediumView"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:id="@+id/button_form_divider"
+            android:layout_height="@dimen/view_description_margin_top"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/host_info"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginBottom="@dimen/margin_10dp">
+
+            <com.fellopages.mobileapp.classes.common.ui.BezelImageView
+                android:id="@+id/host_image"
+                android:scaleType="centerCrop"
+                android:layout_width="@dimen/profile_image_width_height"
+                android:layout_height="@dimen/profile_image_width_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:foregroundGravity="right"
+                android:src="@drawable/person_image_empty"
+                app:maskDrawable="@drawable/circle_mask"
+                app:borderDrawable="@drawable/circle_border" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hostTag"
+                    android:text="@string/host_tag"
+                    android:textColor="@color/body_text_1"
+                    style="@style/BodyMediumView"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hostName"
+                    android:textColor="@color/body_text_1"
+                    style="@style/BodyMediumView" />
+
+                <include layout="@layout/small_rating_layout"
+                    android:id="@+id/ratingBar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:visibility="gone"
+            android:id="@+id/host_info_divider"
+            android:layout_height="@dimen/view_description_margin_top"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:id="@+id/less_more_layout">
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:maxLines="3" />
+
+            <TextView
+                android:id="@+id/show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/description"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:paddingLeft="@dimen/padding_5dp"
+                android:paddingStart="@dimen/padding_5dp"
+                android:paddingRight="@dimen/padding_5dp"
+                android:paddingEnd="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/hide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/description"
+                android:clickable="true"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:paddingLeft="@dimen/padding_5dp"
+                android:paddingStart="@dimen/padding_5dp"
+                android:paddingRight="@dimen/padding_5dp"
+                android:paddingEnd="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

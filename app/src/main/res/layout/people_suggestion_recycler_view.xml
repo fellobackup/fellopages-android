@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_marginLeft="@dimen/element_spacing_small"
+    android:layout_marginStart="@dimen/element_spacing_small"
+    android:layout_marginRight="@dimen/element_spacing_small"
+    android:layout_marginEnd="@dimen/element_spacing_small"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/people_you_may_know"
+        android:textStyle="bold"
+        android:id="@+id/people_know"
+        android:gravity="center_vertical"
+        android:textColor="@color/grey_dark"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_5dp"/>
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:orientation="horizontal"
+        android:layout_below="@+id/people_know"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_see_all"
+        android:layout_below="@+id/recycler_view_list"
+        android:text="@string/browse_event_filter_sell_all"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/dark_grey_background"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_15dp"/>
+</RelativeLayout>

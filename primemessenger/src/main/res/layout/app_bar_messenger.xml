@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~ You may not use this file except in compliance with the
+  ~ SocialEngineAddOns License Agreement.
+  ~ You may obtain a copy of the License at:
+  ~ https://www.socialengineaddons.com/android-app-license
+  ~ The full copyright and license information is also mentioned
+  ~ in the LICENSE file that was distributed with this
+  ~ source code.
+  ~
+  -->
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="enterAlways"
+            android:id="@+id/searchViewLayout"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/home_button"
+                android:padding="@dimen/margin_12dp"
+                android:paddingStart="@dimen/margin_12dp"
+                android:paddingEnd="@dimen/margin_12dp"
+                android:drawableLeft="@drawable/ic_home"
+                android:drawableStart="@drawable/ic_home"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:text="@string/search"
+                android:textSize="@dimen/body_medium_font_size"
+                android:textColor="@color/grey"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:padding="@dimen/padding_5dp" />
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <com.socialengineaddons.messenger.ui.CustomViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"/>
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/frame_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/create_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_chat_black_24dp"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="@dimen/fab_margin" />
+
+    <com.socialengineaddons.messenger.ui.bottomNavigationBar.BottomNavigationBar
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:foregroundGravity="bottom"/>
+
+</android.support.design.widget.CoordinatorLayout>
+

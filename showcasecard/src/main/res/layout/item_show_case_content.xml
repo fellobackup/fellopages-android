@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/padding_10"
+    android:paddingLeft="@dimen/padding_8"
+    android:paddingStart="@dimen/padding_8">
+
+    <ru.dimorinny.showcasecard.widget.WrapWidthTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/showcase_text"
+        style="@style/ShowCaseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_10"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/count"
+            android:textSize="@dimen/text_size_16sp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/padding_10"
+            android:paddingBottom="@dimen/padding_10"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/next"
+            android:textSize="@dimen/text_size_16sp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/padding_10"
+            android:paddingStart="@dimen/padding_10"
+            android:paddingEnd="@dimen/padding_10"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

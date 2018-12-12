@@ -1,0 +1,75 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_8dp"
+    android:paddingStart="@dimen/padding_8dp"
+    android:paddingEnd="@dimen/padding_8dp"
+    android:background="@drawable/selectable_background_white"
+    android:id="@+id/fragment_notification">
+
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_width="@dimen/user_image_width_height"
+        android:layout_height="@dimen/user_image_width_height"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_vertical">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".9"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/text_view_padding_min"
+            android:paddingStart="@dimen/text_view_padding_min"
+            android:paddingEnd="@dimen/text_view_padding_min"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/notificationTitle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateIconView"
+            android:padding="@dimen/text_view_padding_min"
+            android:paddingStart="@dimen/text_view_padding_min"
+            android:paddingEnd="@dimen/text_view_padding_min"
+            style="@style/CaptionView"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/option_icon_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/option_icon_layout"
+        android:adjustViewBounds="false"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:visibility="gone"
+        android:id="@+id/stickerOption"/>
+
+</LinearLayout>

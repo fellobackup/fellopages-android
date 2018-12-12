@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <stroke
+        android:width="@dimen/margin_3dp"
+        android:color="@color/white"/>
+
+    <size android:height="@dimen/event_profile_collapsing_tool_bar_margin_bottom"
+        android:width="@dimen/event_profile_collapsing_tool_bar_margin_bottom"/>
+
+</shape>
+
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:innerRadius="0dp"-->
+    <!--android:shape="ring"-->
+    <!--android:thicknessRatio="2"-->
+    <!--android:useLevel="false" >-->
+    <!--<solid android:color="@android:color/transparent" />-->
+
+    <!--<stroke-->
+        <!--android:width="@dimen/margin_5dp"-->
+        <!--android:color="@color/white" />-->
+<!--</shape>-->

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id = "@+id/action_cart"
+        android:title="@string/title_activity_cart_view"
+        app:actionLayout="@layout/cart_menu"
+        android:orderInCategory="100"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_event"
+        android:title="@string/action_bar_title_event"
+        android:icon="@drawable/ic_event_icon"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/action_location"
+        android:title="@string/location_label"
+        app:actionLayout="@layout/location_menu"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_search"
+        android:title="@string/search_view_hint"
+        app:actionLayout="@layout/search_menu"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/post_contact"
+        android:title="@string/contact_form_post_text"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="200"
+        android:visible="false"/>
+    <item
+        android:id="@+id/viewToggle"
+        android:title="Toggel View"
+        app:showAsAction="always"
+        android:visible="false"
+        android:orderInCategory="3"
+        android:icon="@drawable/ic_grid_menu"
+        />
+
+
+</menu>

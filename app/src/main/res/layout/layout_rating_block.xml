@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    android:background="@color/grey_light"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_5dp"
+    android:id="@+id/ratingInfo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBlock"
+        android:visibility="gone"
+        android:paddingTop="@dimen/padding_10dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingBottom="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/avgRatingBlock"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal|top"
+            android:gravity="center_horizontal|top"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/avg_user_rating_text"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/padding_5dp"
+                android:id="@+id/avgRatingTitle"
+                style="@style/TitleView"/>
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/options_icon_height"
+                android:isIndicator="true"
+                android:progressDrawable="@drawable/rating_bar_custom"
+                android:id="@+id/avgRatingBar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/gray_text_color"
+                android:id="@+id/userbaseText"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_text_color"
+                android:padding="@dimen/padding_5dp"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/recommendedText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal|top"
+            android:gravity="center_horizontal|top"
+            android:visibility="gone"
+            android:id="@+id/myRatingBlock"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/myRatingTitle"
+                android:padding="@dimen/padding_5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="@string/my_rating_text"
+                style="@style/TitleView"/>
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/options_icon_height"
+                android:isIndicator="true"
+                android:progressDrawable="@drawable/rating_bar_custom"
+                android:id="@+id/myRatingBar"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/padding_5dp"
+                android:gravity="center"
+                android:id="@+id/updateReviewText"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/black"
+                android:text="@string/update_your_review_text"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

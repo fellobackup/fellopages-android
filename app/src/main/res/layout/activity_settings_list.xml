@@ -1,0 +1,412 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootView"
+    tools:context="com.fellopages.mobileapp.classes.modules.user.settings.SettingsListActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolBar">
+    </include>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/CircularProgress"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_below="@+id/toolBar"
+        android:id="@+id/settings_general"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/black"
+            android:id="@+id/general_setting_label"
+            android:text="@string/general_settings_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/general_nextIcon"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:layout_below="@+id/general_setting_label"
+            android:background="@color/light_gray"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:id="@+id/settings_privacy"
+        android:visibility="gone"
+        android:layout_below="@id/settings_general"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/privacy_setting_label"
+            android:text="@string/privacy_settings_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/privacy_nextIcon"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:background="@color/light_gray"
+            android:layout_below="@+id/privacy_setting_label"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:id="@+id/settings_networks"
+        android:layout_below="@+id/settings_privacy"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/network_setting_label"
+            android:text="@string/network_settings_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/networks_nextIcon"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:background="@color/light_gray"
+            android:layout_below="@+id/network_setting_label"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:id="@+id/settings_notifications"
+        android:layout_below="@+id/settings_networks"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/notification_setting_label"
+            android:text="@string/notification_settings_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/notifications_nextIcon"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:background="@color/light_gray"
+            android:layout_below="@+id/notification_setting_label"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:id="@+id/settings_password"
+        android:layout_below="@+id/settings_notifications"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/password_setting_label"
+            android:text="@string/change_password_settings"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/password_nextIcon"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:background="@color/light_gray"
+            android:layout_below="@+id/password_setting_label"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:id="@+id/settings_delete_account"
+        android:layout_below="@id/settings_password"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/delete_account_label"
+            android:textSize="@dimen/body_default_font_size"
+            android:text="@string/delete_account_settings"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/delete_nextIcon"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:id="@+id/delete_accound_bottom_line"
+            android:visibility="gone"
+            android:background="@color/light_gray"
+            android:layout_below="@+id/delete_account_label"
+            android:layout_height="1dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:id="@+id/settings_subscription"
+        android:layout_below="@id/settings_delete_account"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/subscription_label"
+            android:textSize="@dimen/body_default_font_size"
+            android:text="@string/subscription_settings"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/subscription_nextIcon"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:id="@+id/subscription_bottom_line"
+            android:visibility="gone"
+            android:background="@color/light_gray"
+            android:layout_below="@+id/subscription_label"
+            android:layout_height="1dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/settings_mobile_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_subscription"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/mobile_info_setting_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mobile_info_settings"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_default_font_size" />
+
+        <TextView
+            android:id="@+id/mobile_info_nextIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/mobileInfo_bottom_line"
+            android:layout_below="@+id/mobile_info_setting_label"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:visibility="gone"
+            android:background="@color/light_gray"
+            android:padding="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:id="@+id/sound_settings"
+        android:layout_below="@id/settings_mobile_info"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/sound_setting_label"
+            android:textSize="@dimen/body_default_font_size"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/sound_setting_switch"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+

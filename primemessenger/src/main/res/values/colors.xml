@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#2979FF</color>
+    <color name="colorPrimaryDark">#2962FF</color>
+    <color name="colorAccent">#448AFF</color>
+
+    <color name="grey">#c3c3c3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey_light">#eeeeee</color>
+
+    <color name="conversation_background">#F7F8FE</color>
+    <color name="title_color">#545454</color>
+    <color name="secondary_text_color">#B2B4BE</color>
+    <color name="red">#f42738</color>
+    <color name="black">#000000</color>
+    <color name="light_green">#4DBD33</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorSender">#DDFAC8</color>
+    <color name="colorDividerTransparent">#77B6B6B6</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_white">#C0FFFFFF</color>
+    <color name="message_background_light">#FFFFFF</color>
+    <color name="away_color">#ffcc6f</color>
+    <color name="icon_color">#AAAAAA</color>
+    <color name="bg_msg_from">#E6E6E6</color>
+    <color name="date_background_color">#696969</color>
+    <color name="transparent_color">#80000000</color>
+    <color name="colorPrimaryLight">#80E0E0E0</color>
+    <color name="recent_con_back_color">#F7F8FE</color>
+    <color name="separator_color">#E4E1ED</color>
+</resources>

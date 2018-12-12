@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<com.fellopages.mobileapp.classes.common.ui.SplitToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbarBottom"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:background="#F5F5F5"
+    android:visibility="gone"
+    android:alpha=".9"
+    android:layout_alignParentBottom="true">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:id="@+id/likeCommentContent"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight=".30"
+            android:id="@+id/likeBlock"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/reaction_icon_width_height"
+                android:layout_height="@dimen/reaction_icon_width_height"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/margin_8dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_gravity="center"
+                android:id="@+id/reactionIcon"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
+                android:id="@+id/likeUnlikeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:gravity="center"
+                android:paddingLeft="@dimen/padding_3dp"
+                android:paddingStart="@dimen/padding_3dp"
+                android:paddingRight="@dimen/padding_3dp"
+                android:paddingEnd="@dimen/padding_3dp"
+                android:drawablePadding="@dimen/padding_5dp"
+                android:textStyle="bold"
+                style="@style/BodyMediumView"
+                android:textAppearance="?android:textAppearanceSmall"
+                app:iabActivatedColor="@color/themeButtonColor"
+                app:iabColor="@color/grey_dark"
+                android:text="@string/like_text"/>
+
+        </LinearLayout>
+
+
+        <View android:layout_height="fill_parent"
+            android:layout_width="1dp"
+            android:id="@+id/comment_divider"
+            android:background="@color/light_gray" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight=".37"
+            android:id="@+id/commentBlock"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/commentText"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/grey_dark"
+                android:text="@string/comment_text"
+                android:drawableLeft="@drawable/ic_chat_bubble_white_18dp"
+                android:drawableStart="@drawable/ic_chat_bubble_white_18dp"
+                android:drawablePadding="@dimen/padding_5dp"
+                style="@style/BodyMediumView"
+                android:textAppearance="?android:textAppearanceSmall"
+                app:iabActivatedColor="@color/themeButtonColor"
+                app:iabColor="@color/grey_dark" />
+
+        </LinearLayout>
+
+        <View android:layout_height="fill_parent"
+            android:layout_width="1dp"
+            android:background="@color/light_gray" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_weight=".33"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/likeCommentBlock"
+            android:layout_height="wrap_content">
+
+            <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BodyMediumView"
+                android:textColor="@color/grey_dark"
+                android:drawableRight="@drawable/ic_thumb_up_white_18dp"
+                android:drawableEnd="@drawable/ic_thumb_up_white_18dp"
+                android:drawablePadding="@dimen/padding_5dp"
+                android:textStyle="bold"
+                android:textAppearance="?android:textAppearanceSmall"
+                app:iabActivatedColor="@color/themeButtonColor"
+                app:iabColor="@color/grey_dark"
+                android:id="@+id/likeCount"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_dark"
+                style="@style/BodyMediumView"
+                android:text=" / "/>
+
+            <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BodyMediumView"
+                android:textColor="@color/grey_dark"
+                android:drawableRight="@drawable/ic_chat_bubble_white_18dp"
+                android:drawableEnd="@drawable/ic_chat_bubble_white_18dp"
+                android:drawablePadding="@dimen/padding_5dp"
+                android:textAppearance="?android:textAppearanceSmall"
+                app:iabActivatedColor="@color/themeButtonColor"
+                app:iabColor="@color/grey_dark"
+                android:textStyle="bold"
+                android:id="@+id/commentCount"/>
+
+        </LinearLayout>
+
+        <View android:layout_height="fill_parent"
+            android:layout_width="@dimen/dimen_1dp"
+            android:visibility="gone"
+            android:id="@+id/message_divider"
+            android:background="@color/light_gray" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight=".30"
+            android:id="@+id/messageBlock"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/reaction_icon_width_height"
+                android:layout_height="@dimen/reaction_icon_width_height"
+                android:gravity="center"
+                android:src="@drawable/ic_message"
+                android:layout_marginLeft="@dimen/margin_8dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                android:layout_gravity="center"
+                android:id="@+id/messageIcon"
+                android:contentDescription="@string/image_caption" />
+
+            <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
+                android:id="@+id/messageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:gravity="center"
+                android:paddingLeft="@dimen/padding_3dp"
+                android:paddingStart="@dimen/padding_3dp"
+                android:paddingRight="@dimen/padding_3dp"
+                android:paddingEnd="@dimen/padding_3dp"
+                android:drawablePadding="@dimen/padding_5dp"
+                android:textStyle="bold"
+                style="@style/BodyMediumView"
+                android:textAppearance="?android:textAppearanceSmall"
+                app:iabActivatedColor="@color/themeButtonColor"
+                app:iabColor="@color/grey_dark"
+                android:text="@string/contact_us_message"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.fellopages.mobileapp.classes.common.ui.SplitToolbar>

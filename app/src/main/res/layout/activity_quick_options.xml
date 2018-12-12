@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fellopages.mobileapp.classes.modules.store.QuickOptionsActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_380dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_280dp"
+                android:background="@drawable/gradientbackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/store_quick_skip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/padding_10dp"
+                    android:text="@string/skip"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/size_18sp" />
+
+                <TextView
+                    android:id="@+id/store_quick_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dimen_80dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/dimen_30dp"
+                    android:layout_marginRight="@dimen/dimen_30dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:text="@string/store_quick_option_description"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_230dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/margin_10dp"
+                android:paddingTop="@dimen/dimen_5dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/store_quick_option_shipping"
+                        android:layout_width="@dimen/dimen_90dp"
+                        android:layout_height="@dimen/dimen_90dp"
+                        android:layout_gravity="center"
+                        android:elevation="@dimen/dimen_3dp"
+                        app:cardCornerRadius="@dimen/dimen_15dp">
+
+                        <ImageView
+                            android:id="@+id/shipping_method_check"
+                            android:layout_width="@dimen/dimen_36dp"
+                            android:layout_height="@dimen/dimen_36dp"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="@dimen/margin_10dp"
+                            android:src="@drawable/default_check"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_36dp"
+                            android:layout_height="@dimen/dimen_36dp"
+                            android:layout_gravity="center"
+                            android:id="@+id/shipping_method_icon"
+                            android:tint="@color/colorPrimary"
+                            android:src="@drawable/ic_local_shipping_black_24dp" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/shipping_method_label"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/caption_font_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_2dp"
+                    android:layout_marginLeft="@dimen/margin_20dp"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/store_quick_option_payment"
+                        android:layout_width="@dimen/dimen_90dp"
+                        android:layout_height="@dimen/dimen_90dp"
+                        android:layout_gravity="center"
+                        android:elevation="@dimen/dimen_5dp"
+                        app:cardCornerRadius="@dimen/dimen_15dp">
+
+                        <ImageView
+                            android:id="@+id/payment_method_check"
+                            android:layout_width="@dimen/dimen_36dp"
+                            android:layout_height="@dimen/dimen_36dp"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="@dimen/margin_10dp"
+                            android:src="@drawable/default_check"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_36dp"
+                            android:layout_height="@dimen/dimen_36dp"
+                            android:layout_gravity="center"
+                            android:id="@+id/payment_method_icon"
+                            android:tint="@color/colorPrimary"
+                            android:src="@drawable/ic_payment_black_24dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/payment_method_label"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/caption_font_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_2dp"
+                    android:layout_marginLeft="@dimen/margin_20dp"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/store_quick_option_product"
+                        android:layout_width="@dimen/dimen_90dp"
+                        android:layout_height="@dimen/dimen_90dp"
+                        android:layout_gravity="center"
+                        android:elevation="@dimen/dimen_3dp"
+                        app:cardCornerRadius="@dimen/dimen_15dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_36dp"
+                            android:layout_height="@dimen/dimen_36dp"
+                            android:id="@+id/add_product_icon"
+                            android:layout_gravity="center"
+                            android:tint="@color/colorPrimary"
+                            android:src="@drawable/ic_add_box_black_24dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:text="@string/add_product_label"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/caption_font_size"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

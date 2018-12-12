@@ -1,0 +1,98 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:slidingLayer="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context="com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoLightBoxActivity">
+
+
+    <com.fellopages.mobileapp.classes.modules.photoLightBox.LoopViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include layout="@layout/like_comment_photos" />
+
+    <include layout="@layout/photo_light_box_header" />
+
+    <com.wunderlist.slidinglayer.SlidingLayer
+        android:id="@+id/slidingLayer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layer_size"
+        android:layout_alignParentBottom="true"
+        slidingLayer:stickTo="bottom">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button android:id="@+id/rotateLeft"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/white"/>
+
+            <Button android:id="@+id/rotateRight"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/white"/>
+
+            <Button android:id="@+id/flipHorizontal"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/white"/>
+
+
+
+            <Button android:id="@+id/flipVertical"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/white"/>
+
+            <Button android:id="@+id/saveImage"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+
+
+    </com.wunderlist.slidinglayer.SlidingLayer>
+
+</RelativeLayout>

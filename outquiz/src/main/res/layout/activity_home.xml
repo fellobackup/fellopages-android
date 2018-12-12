@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.home.HomeActivity">
+
+    <!-- Background -->
+
+    <ImageView
+        android:id="@+id/bcg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bcg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <!-- ScrollView holds all other items -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--region Icon and faq -->
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                >
+                <ImageView
+                    android:id="@+id/backButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_back_24dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/faqImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/help_dw"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!--endregion-->
+
+            <!--region Next game info -->
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp">
+
+                <Button
+                    android:id="@+id/watchButton"
+                    style="@style/AppTheme.Button.Watch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tr_live_watch_now"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintWidth_percent=".6"
+                    />
+
+                <TextView
+                    android:id="@+id/nextGameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="NEXT GAME\n00:15\nPRIZE\n$100"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressBar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:gravity="center"
+                    android:indeterminateDrawable="@drawable/progressbar_circular"
+
+                    />
+            </android.support.constraint.ConstraintLayout>
+
+
+
+            <!--endregion-->
+
+            <!--region User profile -->
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="32dp"
+                android:background="@drawable/home_panel_bcg_dw"
+                >
+
+                <ImageView
+                    android:id="@+id/menuImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/menu_dw"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatarImageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <ProgressBar
+                    android:id="@+id/avatarProgressBar"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="@id/avatarImageView"
+                    app:layout_constraintBottom_toBottomOf="@id/avatarImageView"
+                    app:layout_constraintStart_toStartOf="@id/avatarImageView"
+                    app:layout_constraintEnd_toEndOf="@id/avatarImageView"
+                    />
+
+                <TextView
+                    android:id="@+id/usernameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="wiZZard"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    app:layout_constraintTop_toBottomOf="@id/avatarImageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/rankTexView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rank this week: -"
+                    android:layout_marginTop="8dp"
+                    android:alpha=".5"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/usernameTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/statistics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@id/rankTexView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    >
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/centerGuidelineProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/livesGuideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.75" />
+
+                    <!-- Balance column -->
+
+                    <TextView
+                        android:id="@+id/balanceValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$16.67"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/centerGuidelineProfile"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tr_balance"
+                        android:alpha=".5"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/balanceValue"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/centerGuidelineProfile"
+
+                        />
+
+                    <!-- Separator -->
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="0dp"
+                        android:background="@color/text"
+                        android:alpha="0.5"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/centerGuidelineProfile"
+                        app:layout_constraintEnd_toEndOf="@id/centerGuidelineProfile"
+                        />
+
+                    <!-- Lives column -->
+
+                    <TextView
+                        android:id="@+id/livesValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:layout_marginEnd="2dp"
+                        android:textSize="30dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/centerGuidelineProfile"
+                        app:layout_constraintEnd_toEndOf="@id/livesGuideline"
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:src="@drawable/heart_home_dw"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="9dp"
+                        app:layout_constraintTop_toTopOf="@id/livesValue"
+                        app:layout_constraintBottom_toBottomOf="@id/livesValue"
+                        app:layout_constraintStart_toStartOf="@id/livesGuideline"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tr_lives"
+                        android:alpha=".5"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/livesValue"
+                        app:layout_constraintStart_toStartOf="@id/centerGuidelineProfile"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <Button
+                    style="@style/AppTheme.Button.Lives"
+                    android:id="@+id/livesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tr_get_more_lives"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/statistics"
+                    app:layout_constraintWidth_percent=".6"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!--endregion-->
+
+            <!--region Leaderboard -->
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:background="@drawable/home_panel_bcg_dw"
+                >
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/centerGuidelineLeaderboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/lbTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tr_leaderboard"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <Button
+                    style="@style/AppTheme.Button.Leaderboard"
+                    android:id="@+id/lbWeekButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tr_this_week"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/lbTitle"
+                    app:layout_constraintEnd_toEndOf="@id/centerGuidelineLeaderboard"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <Button
+                    style="@style/AppTheme.Button.Leaderboard"
+                    android:id="@+id/lbAllButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tr_all_time"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/lbTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/centerGuidelineLeaderboard"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/lbList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:scrollbars="none"
+                    app:layout_constraintTop_toBottomOf="@id/lbWeekButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!--endregion-->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

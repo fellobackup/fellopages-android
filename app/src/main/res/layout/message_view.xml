@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/front"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/selectable_background_white">
+
+    <com.fellopages.mobileapp.classes.common.ui.BezelImageView
+        android:id="@+id/senderImage"
+        android:layout_width="@dimen/user_image_width_height"
+        android:layout_height="@dimen/user_image_width_height"
+        android:scaleType="centerCrop"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:contentDescription="@string/descr_image"
+        android:layout_gravity="center_vertical"
+        app:maskDrawable="@drawable/circle_mask"
+        app:borderDrawable="@drawable/circle_border"
+        android:src="@drawable/default_user_profile"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/ownerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/body_text_1"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_toLeftOf="@+id/messageDate"
+            android:layout_toStartOf="@+id/messageDate"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"/>
+
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:id="@+id/messageDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:id="@+id/messageDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ownerTitle"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/body_text_normal"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

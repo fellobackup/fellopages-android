@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:id="@+id/slide_show_header"
+    android:visibility="gone"
+    android:background="@color/fragment_background"
+    android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/slide_show_pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/slider_view_height"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:paddingRight="@dimen/padding_64dp"
+            android:paddingEnd="@dimen/padding_64dp"
+            android:paddingTop="@dimen/padding_10dp"
+            android:background="@color/white"/>
+
+        <com.fellopages.mobileapp.classes.modules.store.ui.CircleIndicator
+            android:id="@+id/circle_indicator"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/tagview_image_height_width" />
+
+</LinearLayout>
+
+
+

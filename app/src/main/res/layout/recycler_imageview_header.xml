@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/owner_view"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        style="@style/BodyMediumView"
+        android:textColor="@color/body_text_1"
+        android:lineSpacingMultiplier="1.1"
+        android:layout_marginTop="@dimen/view_description_margin_top"
+        android:textAlignment="textStart"
+        android:id="@+id/view_description" />
+
+</LinearLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+<resources>
+    <!-- Application Theme -->
+<color name="colorPrimary">#2196F3</color>
+<color name="colorPrimaryDark">#1565C0</color>
+<color name="colorAccent">#2196F3</color>
+<color name="textColorPrimary">#ffffff</color>
+<color name="themeButtonColor">#2196F3</color>
+    <color name="blue_color_picker">#0066FF</color>
+    <color name="brown_color_picker">#AF593E</color>
+    <color name="green_color_picker">#01A368</color>
+    <color name="orange_color_picker">#FF861F</color>
+    <color name="red_color_picker">#ED0A3F</color>
+    <color name="red_orange_color_picker">#FF3F34</color>
+    <color name="sky_blue_color_picker">#76D7EA</color>
+    <color name="violet_color_picker">#8359A3</color>
+    <color name="yellow_color_picker">#FBE870</color>
+    <color name="yellow_green_color_picker">#C5E17A</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="body_text_1">#de000000</color>
+    <color name="body_text_2">#8a000000</color>
+    <color name="body_text_normal">#7e7e7e</color>
+    <color name="body_text_3">#60000000</color>
+    <color name="body_text_disabled">#44000000</color>
+    <color name="body_text_lightest">#f1f1f1</color>
+    <color name="body_text_1_inverse">#deffffff</color>
+    <color name="body_text_2_inverse">#8affffff</color>
+    <!-- Grey Combination -->
+    <color name="light_gray">#D3D3D3</color>
+    <color name="grey_light">#eeeeee</color>
+    <color name="grey">#c3c3c3</color>
+    <color name="grey_dark">#606060</color>
+    <color name="dark_grey_background">#666666</color>
+    <color name="grey_darker">#424242</color>
+    <color name="dark_gray">#a9a9a9</color>
+    <color name="gray_background">#e5e5e5</color>
+    <color name="fragment_background">#f5f5f5</color>
+    <color name="dark_divider">#32000000</color>
+    <color name="grey_lightest">#f6f6f6</color>
+    <color name="gray_text_color">#8b8b8b</color>
+    <color name="gray_stroke_color">#cecece</color>
+    <color name="grey_lighter">#ededed</color>
+    <color name="dark_grey">#ff212121</color>
+    <color name="gray_light">#ededed</color>
+    <color name="gray_progress_bar">#FFE0E0E0</color>
+    <color name="navigation_item_text_color">#121212</color>
+    <color name="black_overlay">#22000000</color>
+    <color name="input_register_hint">#eceef1</color>
+    <color name="background_color_card_item_light">#fafafa</color>
+    <color name="transparent">#00000000</color>
+<color name="push_notification_background_color">#1565C0</color>
+    <color name="red">#f42738</color>
+    <color name="dark_yellow">#FFCC11</color>
+    <color name="notification_title">#202020</color>
+    <color name="notification_subtitle">#737373</color>
+    <color name="black_translucent">#aa000000</color>
+    <color name="linked">#566cea</color>
+    <color name="text_shadow">#7F000000</color>
+    <color name="text_shadow_white">#FFFFFF</color>
+    <!-- artist activity !-->
+    <color name="artist_activity_callback_text">@color/grey_light</color>
+    <color name="light_blue">#0000FF</color>
+    <color name="like_unlike_button_color">#3B5998</color>
+    <!-- Music Module !-->
+    <color name="card_background">#212121</color>
+    <color name="fullscreen_secondary_line_color">#E5CCCCCC</color>
+    <color name="fullscreen_line_color">#E5FFFFFF</color>
+    <color name="bg_btn_join">#1e6258</color>
+    <color name="bg_msg_input">#dedede</color>
+    <color name="light_green">#4DBD33</color>
+    <color name="chat_background_light">#DEDEDE</color>
+    <color name="message_background_light">#FFFFFF</color>
+    <color name="messageTextSecondary">#aaaaaa</color>
+    <!-- Poll Module vote bar color code -->
+    <color name="poll_vote_bar_colorName1">#f1051b</color>
+    <color name="poll_vote_bar_colorName2">#23aaff</color>
+    <color name="poll_vote_bar_colorName3">#f5a70c</color>
+    <color name="poll_vote_bar_colorName4">#810040</color>
+    <color name="poll_vote_bar_colorName5">#ff7b62</color>
+    <color name="poll_vote_bar_colorName6">#430fdf</color>
+    <color name="poll_vote_bar_colorName7">#019a01</color>
+    <color name="poll_vote_bar_colorName8">#811791</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="green_blue">#00B0B6</color>
+    <color name="dark_pink">#FF1493</color>
+    <color name="colordevider">#64dad8d8</color>
+    <color name="facebook_color">#3B73CC</color>
+    <color name="sticker_color">#E85E44</color>
+    <color name="feeling_color">#F3A045</color>
+    <color name="twitter_color">#3B73CC</color>
+    <color name="photo_color">#4DBD33</color>
+    <color name="video_color">#DE312C</color>
+    <color name="music_color">#430fdf</color>
+    <color name="link_color">#ff7b62</color>
+    <color name="checkin_color">#FF1493</color>
+    <color name="emoticons_color">#FFCC11</color>
+    <color name="tag_color">#5890FF</color>
+    <color name="sell_something_color">#B54399</color>
+    <color name="first_filter">#019a01</color>
+    <color name="second_filter">#1446FA</color>
+    <color name="third_filter">#B54399</color>
+    <color name="forth_filter">#0B6A96</color>
+    <color name="more_filter">#B54399</color>
+    <color name="color_f0f0f0">#f0f0f0</color>
+    <color name="bluelight">#49acd5</color>
+    <color name="orange">#edbc68</color>
+    <color name="green">#45bc62</color>
+    <color name="thumb_background_color">#000000</color>
+    <color name="zomato_red">#a40100</color>
+    <color name="placeholder_background">#222322</color>
+    <color name="color_F0F1F2">#F0F1F2</color>
+    <!-- App intro slide show color-->
+    <color name="bg_slider_screen1">#1ABC9C</color>
+    <color name="bg_slider_screen2">#DB9E36</color>
+    <color name="bg_slider_screen3">#946AAA</color>
+    <color name="bg_slider_screen4">#1ABC9C</color>
+    <color name="bg_slider_screen5">#DB9E36</color>
+    <color name="bg_slider_screen6">#946AAA</color>
+    <color name="bg_slider_screen7">#00B0B6</color>
+    <color name="slide_1_text_color">#ffffff</color>
+    <color name="slide_2_text_color">#ffffff</color>
+    <color name="slide_3_text_color">#ffffff</color>
+    <color name="slide_4_text_color">#ffffff</color>
+    <color name="slide_5_text_color">#ffffff</color>
+    <color name="slide_6_text_color">#ffffff</color>
+    <color name="slide_7_text_color">#ffffff</color>
+    <color name="transparent_white">#40ffffff</color>
+    <color name="transparent_black">#40000000</color>
+    <color name="player_background">#CC000000</color>
+    <color name="color_ffbebebe">#FFBEBEBE</color>
+</resources>

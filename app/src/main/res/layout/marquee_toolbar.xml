@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~    You may not use this file except in compliance with the
+  ~    SocialEngineAddOns License Agreement.
+  ~    You may obtain a copy of the License at:
+  ~    https://www.socialengineaddons.com/android-app-license
+  ~    The full copyright and license information is also mentioned
+  ~    in the LICENSE file that was distributed with this
+  ~    source code.
+  -->
+
+
+<app:android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:theme="@style/ActionBarThemeOverlay"
+    app:popupTheme="@style/ActionBarPopupThemeOverlay"
+    app:layout_collapseMode="pin">
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textAppearance="@style/ActionBar.TitleText"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true" />
+</app:android.support.v7.widget.Toolbar>

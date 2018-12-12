@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_photo_preview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.socialengineaddons.messenger.conversation.view.PhotoPreviewActivity">
+
+    <include layout="@layout/photo_preview_activity_header"
+        android:id="@+id/headerView"/>
+
+    <com.socialengineaddons.messenger.conversation.view.TouchImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_placeholder"
+        android:layout_below="@+id/headerView"
+        android:id="@+id/image" />
+
+    <ImageView
+        android:id="@+id/play_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:src="@drawable/ic_play_circle_outline_black_24dp"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/padding_5dp"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:id="@+id/buttonsLayout"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/cancel_action"
+            android:text="Cancel"
+            style="@style/BodyMediumView"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/margin_5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/choose_button"
+            android:text="Choose"
+            style="@style/BodyMediumView"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_5dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

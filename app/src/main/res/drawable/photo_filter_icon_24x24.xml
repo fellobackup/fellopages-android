@@ -1,0 +1,31 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0">
+    <path
+        android:pathData="M4.71,9.81l3.43,-0.42l3.86,1.71l3.86,-1.71l3,0.42l-0.86,1.72l-2.14,2.14l-1.72,0.86l0,3l-1.71,3l-2.14,-2.14l-0.43,-3.43l-0.86,-1.29l-2.57,-2.14l-1.72,-1.72z"
+        android:fillColor="#fff"/>
+    <path
+        android:pathData="M16.53,8.45A7.47,7.47 0,1 0,24 15.92,7.47 7.47,0 0,0 16.53,8.45ZM16.53,21.67a5.76,5.76 0,1 1,5.76 -5.75A5.74,5.74 0,0 1,16.53 21.67Z"
+        android:fillColor="#fff"/>
+    <path
+        android:pathData="M7.47,8.5A7.47,7.47 0,1 0,14.94 16,7.47 7.47,0 0,0 7.47,8.5ZM7.47,21.79A5.82,5.82 0,1 1,13.29 16,5.82 5.82,0 0,1 7.47,21.79Z"
+        android:fillColor="#fff"/>
+    <path
+        android:pathData="M12.05,0.56A7.47,7.47 0,1 0,19.52 8,7.46 7.46,0 0,0 12.05,0.56ZM12.05,13.95A5.93,5.93 0,1 1,18 8,5.92 5.92,0 0,1 12.05,14Z"
+        android:fillColor="#fff"/>
+</vector>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_group_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.socialengineaddons.messenger.groups.GroupDetails">
+
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/groupDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/groupDetailBlock"
+            android:padding="@dimen/padding_10dp"
+            android:layout_height="wrap_content">
+
+            <com.socialengineaddons.messenger.ui.CircularImageView
+                android:layout_width="@dimen/group_detail_image_height_width"
+                android:layout_height="@dimen/group_detail_image_height_width"
+                android:scaleType="centerCrop"
+                android:id="@+id/group_image"
+                android:layout_centerVertical="true"
+                android:src="@drawable/person_image_empty" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/group_title"
+                android:layout_toEndOf="@+id/group_image"
+                android:textSize="@dimen/body_medium_font_size"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/last_active_time"
+                android:layout_toEndOf="@+id/group_image"
+                android:layout_below="@+id/group_title"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/grey"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/groupMembersBlock"
+        android:layout_below="@id/groupDetails"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/body_medium_font_size"
+            android:padding="@dimen/padding_10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="@string/member"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_6dp"
+            android:layout_marginLeft="@dimen/margin_6dp"
+            android:visibility="gone"
+            android:id="@+id/add_members">
+            <ImageView
+                android:layout_width="@dimen/margin_48dp"
+                android:layout_height="@dimen/margin_48dp"
+                android:id="@+id/addMembersIcon"
+                android:background="@drawable/badge_background"
+                android:src="@drawable/ic_add_24dp"
+                android:scaleType="center" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_medium_font_size"
+                android:textColor="@color/title_color"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:text="@string/add_members"
+                android:layout_marginLeft="@dimen/margin_10dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/margin_55dp"
+            android:layout_marginLeft="@dimen/margin_55dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:layout_marginEnd="@dimen/margin_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@color/separator_color"
+            android:id="@+id/separator"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/membersRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

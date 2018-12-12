@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fragment_main_view"
+    android:layout_margin="@dimen/margin_10dp"
+    android:layout_marginStart="@dimen/margin_10dp"
+    android:layout_marginEnd="@dimen/margin_10dp"
+    tools:context="com.fellopages.mobileapp.classes.common.fragments.MemberFragment">
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:textSize="@dimen/body_default_font_size"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:background="@drawable/tip_message"
+        android:id="@+id/no_data_msg"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/padding_8dp"
+        android:layout_below="@+id/no_data_msg"
+        android:paddingStart="@dimen/padding_8dp"
+        android:paddingEnd="@dimen/padding_8dp"
+        android:visibility="gone"
+        android:id="@+id/waitingMemberInfoContainer"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/like_unlike_button_color"
+            android:id="@+id/waitingMemberInfo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:id="@+id/nextIcon"/>
+
+        <View android:layout_height="1dp"
+            android:id="@+id/waitingcountSaperator"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_below="@+id/waitingMemberInfo"
+            android:layout_width="match_parent"
+            android:background="@color/gray_stroke_color" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

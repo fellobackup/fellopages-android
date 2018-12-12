@@ -1,0 +1,70 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/badge"
+        android:icon="@drawable/ic_attachment_white_24dp"
+        app:showAsAction="always"
+        android:visible="false">
+    </item>
+
+    <item android:id="@+id/add_attachments"
+        android:icon="@drawable/ic_attachment_white_24dp"
+        android:title="@string/attachment_text"
+        app:showAsAction="always"
+        android:visible="true">
+        <menu>
+            <item
+                android:id="@+id/add_photo"
+                android:title="@string/select_single_photo"
+                android:icon="@drawable/ic_photo_camera_black_24dp"
+                android:visible="true"
+                app:showAsAction="withText|ifRoom"/>
+
+            <item
+                android:id="@+id/add_link"
+                android:title="@string/add_link_text"
+                android:visible="true"
+                android:icon="@drawable/ic_link_black_24dp"
+                app:showAsAction="withText|ifRoom"/>
+            <item
+                android:id="@+id/add_video"
+                android:title="@string/add_video_text"
+                android:icon="@drawable/ic_videocam_black_24dp"
+                android:visible="true"
+                app:showAsAction="withText|ifRoom"/>
+
+            <item
+                android:id="@+id/add_music"
+                android:title="@string/select_music_file"
+                android:icon="@drawable/ic_music_note_black_24dp"
+                android:background="@color/white"
+                android:visible="true"
+                app:showAsAction="withText|ifRoom"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/submit"
+        android:title="@string/create"
+        android:icon="@drawable/ic_done_theme_color"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/delete"
+        android:icon="@drawable/ic_action_delete"
+        android:title="@string/delete"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+</menu>

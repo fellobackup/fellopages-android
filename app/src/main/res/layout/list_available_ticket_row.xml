@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/blog_image_view_margin"
+    android:paddingTop="@dimen/margin_10dp"
+    android:paddingLeft="@dimen/margin_10dp"
+    android:paddingRight="@dimen/margin_10dp"
+    android:layout_centerInParent="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_10dp"
+        android:layout_weight="0.8">
+
+        <TextView
+            android:id="@+id/available_ticket_title"
+            style="@style/TitleMediumView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/available_ticket_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/available_ticket_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".30"
+                android:paddingLeft="@dimen/margin_10dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/available_ticket_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".70"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:background="@color/light_gray"
+            android:padding="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/option_icon_layout"
+        layout="@layout/option_icon_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.2"
+        android:adjustViewBounds="false"
+        android:visibility="visible" />
+
+</LinearLayout>

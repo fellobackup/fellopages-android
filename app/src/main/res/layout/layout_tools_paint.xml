@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/black_overlay"
+    android:paddingBottom="@dimen/padding_10dp"
+    android:paddingTop="@dimen/padding_10dp"
+    android:layout_margin="@dimen/margin_8dp"
+    android:layout_marginStart="@dimen/margin_8dp"
+    android:layout_marginEnd="@dimen/margin_8dp"
+    android:layout_marginBottom="@dimen/margin_8dp"
+    android:orientation="horizontal"
+    android:clickable="false">
+
+    <ImageView
+        android:id="@+id/imgPencil"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:src="@drawable/ic_brush"/>
+
+    <ImageView
+        android:id="@+id/imgText"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:src="@drawable/ic_text"/>
+
+    <ImageView
+        android:id="@+id/btnEraser"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:src="@drawable/ic_eraser"/>
+
+    <ImageView
+        android:id="@+id/imgSticker"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:src="@drawable/ic_sticker_icon_24x24"/>
+
+    <ImageView
+        android:id="@+id/imgEmoji"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:src="@drawable/ic_insert_emoticon"/>
+
+    <ImageView
+        android:id="@+id/imgFilter"
+        android:layout_width="@dimen/editor_size"
+        android:layout_height="@dimen/editor_size"
+        android:layout_weight="1"
+        android:padding="@dimen/padding_7"
+        android:paddingStart="@dimen/padding_7"
+        android:paddingEnd="@dimen/padding_7"
+        android:src="@drawable/photo_filter_icon_24x24"/>
+
+</LinearLayout>

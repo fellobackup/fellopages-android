@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~   Copyright (c) 2015 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fellopages.mobileapp">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".classes.core.AppController"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/places_api_key" />
+
+        <provider
+            android:name=".classes.common.utils.FileProviderUtil"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/content_provider" />
+        </provider>
+
+        <activity
+            android:name=".classes.core.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.core.LoginActivity"
+            android:label="@string/SignIn"
+            android:noHistory="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".classes.core.NewLoginActivity"
+            android:label="@string/SignIn"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".classes.core.WelcomeScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".classes.core.startscreens.HomeScreen"
+            android:label="@string/title_activity_home_screen"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.core.startscreens.NewHomeScreen"
+            android:label="@string/title_activity_home_screen"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.ViewItem"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.editor.NewEditorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/VideoViewTheme" />
+        <activity
+            android:name=".classes.modules.forum.ForumProfile"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.forum.ForumView"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.EditEntry"
+            android:label="@string/title_activity_edit_entry"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.CreateNewEntry"
+            android:label="@string/title_activity_create_new_entry"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.multimediaselector.MultiMediaSelectorActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.ReportEntry"
+            android:label="@string/title_activity_report_entry"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.ShareEntry"
+            android:label="@string/share"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".classes.common.activities.ViewGroupEvent"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.Invite"
+            android:label="@string/title_activity_invite"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.PhotoUploadingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.video.VideoView"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/VideoViewTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.advancedVideos.AdvVideoView"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.advancedVideos.ChannelProfilePage"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.advancedVideos.PlaylistProfilePage"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.photoLightBox.PhotoLightBoxActivity"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.multipleListingType.MLTView"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.wishlist.WishlistView"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.common.activities.MapActivity"
+            android:label="@string/title_activity_map"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.likeNComment.Comment"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_comment"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.likeNComment.Likes"
+            android:label="@string/title_activity_likes"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.music.MusicView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.music.AudioPlayerActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.peopleSuggestion.FindFriends"
+            android:label="@string/find_friends"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".classes.modules.music.service.SongService"
+            android:enabled="true" />
+
+        <receiver
+            android:name=".classes.modules.music.receiver.NotificationBroadcast"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.fellopages.mobileapp.player.delete" />
+                <action android:name="com.fellopages.mobileapp.player.pause" />
+                <action android:name="com.fellopages.mobileapp.player.next" />
+                <action android:name="com.fellopages.mobileapp.player.play" />
+                <action android:name="com.fellopages.mobileapp.player.previous" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".classes.common.activities.SearchActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Search">
+
+            <!-- This Activity handles the search intent -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <!--
+                     Intent filter does not need a category = default, since the system delivers
+                     the ACTION_SEARCH intent explicitly to the searchable activity,
+                     using component name.
+                -->
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".classes.modules.advancedActivityFeeds.Status"
+            android:configChanges="keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="video/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".classes.modules.advancedActivityFeeds.AddPeople"
+            android:configChanges="keyboardHidden|screenSize"
+            android:label="@string/title_activity_add_people"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.advancedActivityFeeds.FeelingActivity"
+            android:label="@string/feeling_activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.user.profile.userProfile"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.album.AlbumView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.common.activities.FragmentLoadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Search"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".classes.modules.user.signup.SignUpActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:label="@string/signUpText"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.user.signup.FieldsFormActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:label="@string/signUpText"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.user.signup.SignupPhotoActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:label="@string/signUpText"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.user.settings.MemberSettingsActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.user.profile.EditProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.poll.PollView"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.messages.MessageViewActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.messages.CreateNewMessage"
+            android:configChanges="keyboardHidden|screenSize"
+            android:label="@string/title_activity_create_new_message"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            tools:replace="android:theme" />
+        <activity
+            android:name=".classes.modules.user.settings.SettingsListActivity"
+            android:label="@string/title_activity_settings_list"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".classes.modules.pushnotification.MyFcmListenerService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".classes.common.activities.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.advancedEvents.AdvEventsProfilePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.common.activities.InviteGuest"
+            android:label="@string/title_activity_invite_event"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".classes.modules.advancedEvents.AdvEventsViewDiaries"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".classes.modules.directoryPages.SitePageProfilePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.advancedActivityFeeds.SingleFeedPage"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".classes.modules.user.signup.SubscriptionActivity"
+            android:label="@string/signUpText"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".classes.modules.packages.SelectPackage"
+            android:label="@string/title_activity_select_package"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.packages.PackageView"
+            android:label="@string/title_activity_view_package"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.advancedEvents.ticketsSelling.AdvEventsBuyTicketsInfo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.advancedEvents.ticketsSelling.AdvEventsBuyersInfo"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".classes.modules.advancedEvents.ticketsSelling.AdvEventsOrderViewPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.advancedGroups.AdvGroupsProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.store.ProductViewPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.store.StoreViewPage"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing" />
+        <activity
+            android:name=".classes.modules.store.CartView"
+            android:label="@string/title_activity_cart_view"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.store.order.OrderViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.store.FilterPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.stickers.StickerStore"
+            android:label="@string/title_activity_sticker_store"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.advancedEvents.AdvEventsAvailableTickets"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".classes.core.SafeHandler" />
+        <activity android:name=".classes.modules.store.QuickOptionsActivity" />
+        <activity
+            android:name=".classes.modules.store.ShippingMethods"
+            android:label="@string/title_activity_shipping_methods"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".classes.modules.store.ManageDownloadableProduct"
+            android:label="@string/title_activity_manage_downloadable_product"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".classes.modules.story.StoryCreate"
+            android:label="@string/share_story"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.story.StoryView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.modules.story.photofilter.PhotoEditActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".classes.core.OTPActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".classes.modules.user.settings.MobileInfoSetting"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".classes.common.fragments.VideoLightBoxFragment"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
+
+    </application>
+
+</manifest>

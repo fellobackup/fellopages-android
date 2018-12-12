@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~    You may not use this file except in compliance with the
+  ~    SocialEngineAddOns License Agreement.
+  ~    You may obtain a copy of the License at:
+  ~    https://www.socialengineaddons.com/android-app-license
+  ~    The full copyright and license information is also mentioned
+  ~    in the LICENSE file that was distributed with this
+  ~    source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="@dimen/margin_5dp"
+    android:layout_marginStart="@dimen/margin_5dp"
+    android:layout_marginRight="@dimen/margin_5dp"
+    android:layout_marginEnd="@dimen/margin_5dp"
+    android:id="@+id/stickersMainLayout"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:background="@color/gray_background"
+        android:layout_width="@dimen/add_button_height_width"
+        android:layout_height="@dimen/add_button_height_width"
+        android:scaleType="center"
+        android:padding="@dimen/padding_3dp"
+        android:paddingStart="@dimen/padding_3dp"
+        android:paddingEnd="@dimen/padding_3dp"
+        android:id="@+id/add_sticker_store"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="@dimen/margin_2dp"
+        android:layout_marginStart="@dimen/margin_2dp"
+        android:src="@drawable/ic_action_new"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        app:tabGravity="center"
+        android:background="@color/gray_light"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/add_sticker_store"
+        android:layout_toStartOf="@+id/add_sticker_store"/>
+
+    <android.support.v4.view.ViewPager
+        android:layout_below="@id/tabs"
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_background"
+        android:layout_alignParentBottom="true"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/tabs"
+        android:background="@color/white"/>
+
+</RelativeLayout>

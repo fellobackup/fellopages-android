@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/remove"
+        android:title="@string/remove_listing_dialogue_button"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/submit"
+        android:title="@string/create_desc_button_title"
+        android:icon="@drawable/ic_done_theme_color"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/delete"
+        android:icon="@drawable/ic_action_delete"
+        android:title="@string/delete"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/skip"
+        android:title="@string/redirection_skip"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+</menu>

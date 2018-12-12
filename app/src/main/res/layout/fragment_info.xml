@@ -1,0 +1,388 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_content"
+    tools:context="com.fellopages.mobileapp.classes.common.fragments.InfoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/owner_view"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:id="@+id/eventRsvpForm"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:orientation="vertical">
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body_default_font_size"
+                android:text="@string/attending_text"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:id="@+id/progressBar"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+                </ProgressBar>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/attendingButton"
+                        android:textSize="@dimen/body_default_font_size"
+                        android:text="@string/rsvp_yes"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="@dimen/margin_5dp"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:background="@drawable/buttons_background_blue"
+                        android:layout_weight=".33"/>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mayBeAttendingButton"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/body_default_font_size"
+                        android:textColor="@color/white"
+                        android:background="@drawable/buttons_background_blue"
+                        android:layout_marginLeft="@dimen/margin_5dp"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:text="@string/rsvp_maybe"
+                        android:layout_weight=".33"/>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/body_default_font_size"
+                        android:textColor="@color/white"
+                        android:id="@+id/notAttendingButton"
+                        android:layout_marginLeft="@dimen/margin_5dp"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:background="@drawable/buttons_background_blue"
+                        android:text="@string/rsvp_no"
+                        android:layout_weight=".33"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:id="@+id/categoryInfo"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/category_icon"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:id="@+id/category_label"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_height="wrap_content"
+                android:text="@string/category_label"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:padding="@dimen/padding_5dp" />
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/categoryTitle"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:padding="@dimen/padding_10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/memberCountInfo"
+            android:weightSum="1"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/member_count_icon"/>
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:id="@+id/member_count_label"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:text="@string/member_count_label"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:padding="@dimen/padding_5dp" />
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:id="@+id/memberCount"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:padding="@dimen/padding_10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/viewCountInfo"
+            android:weightSum="1"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/view_count_icon"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_count_label"
+                android:text="@string/view_count_label"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:padding="@dimen/padding_5dp" />
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewCount"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:id="@+id/creationDateInfo"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/creation_date_icon"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:id="@+id/creation_date_label"
+                android:textSize="@dimen/body_default_font_size"
+                android:text="@string/creation_date_label"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:padding="@dimen/padding_5dp" />
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:id="@+id/creationDate"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:padding="@dimen/padding_10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:id="@+id/modificationDateInfo"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/modification_date_icon"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:id="@+id/modification_date_label"
+                android:textSize="@dimen/body_default_font_size"
+                android:text="@string/modification_date_label"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:padding="@dimen/padding_5dp" />
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:id="@+id/lastUpdated"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_line_view_height"
+            android:visibility="gone"
+            android:id="@+id/event_above_horizontal_line"
+            android:background="@color/body_text_lightest"/>
+
+        <include layout="@layout/event_loaction_date_info"
+            android:id="@+id/location_date_layout"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_line_view_height"
+            android:visibility="gone"
+            android:id="@+id/event_below_horizontal_line"
+            android:background="@color/body_text_lightest"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:id="@+id/descriptionBlock"
+            android:layout_height="wrap_content">
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/description"
+                android:autoLink="web"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/web_view"
+            android:id="@+id/view_body"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:background="@color/body_text_lightest"
+            android:layout_height="@dimen/margin_15dp"
+            android:id="@+id/mOverviewSeperaterView"
+            android:visibility="gone"/>
+
+        <include layout="@layout/web_view"
+            android:id="@+id/view_overview"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

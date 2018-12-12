@@ -1,0 +1,306 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fellopages.mobileapp.classes.common.activities.ViewItem">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            app:collapsedTitleTextAppearance="@style/ActionBar.TitleText"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="@dimen/toolbar_expanded_title_margin_start"
+            app:expandedTitleMarginEnd="@dimen/toolbar_expanded_title_margin_end"
+            app:expandedTitleTextAppearance="@style/TransparentText">
+
+
+            <RelativeLayout
+                android:id="@+id/carouselLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/backdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/album_view_background"/>
+
+                <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    style="@style/CoverTitleView"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:id="@+id/content_title"
+                    android:layout_alignParentBottom="true"/>
+
+                <ImageView
+                    android:id="@+id/left_arrow"
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/white"
+                    android:contentDescription="@string/descr_image"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:padding="@dimen/padding_15dp"
+                    android:paddingStart="@dimen/padding_15dp"
+                    android:paddingEnd="@dimen/padding_15dp"
+                    android:src="@drawable/ic_chevron_left"/>
+
+
+                <ImageView
+                    android:id="@+id/right_arrow"
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/descr_image"
+                    android:tint="@color/white"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/padding_15dp"
+                    android:paddingStart="@dimen/padding_15dp"
+                    android:paddingEnd="@dimen/padding_15dp"
+                    android:src="@drawable/ic_chevron_right"/>
+
+                <TextView
+                    android:id="@+id/image_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/right_arrow"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/padding_15dp"
+                    android:paddingLeft="@dimen/padding_15dp"
+                    android:paddingStart="@dimen/padding_15dp"
+                    android:paddingEnd="@dimen/padding_15dp" />
+
+            </RelativeLayout>
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/marquee_toolbar" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/blog_linear_layout"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/blog_titleView"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp">
+
+                <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/view_title"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:paddingBottom="@dimen/padding_8dp"
+                    style="@style/TitleLargeView"/>
+
+                <LinearLayout
+                    android:id="@+id/normal_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                        android:id="@+id/category_view"
+                        style="@style/CaptionView"
+                        android:textColor="@color/body_text_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_8dp"/>
+
+                    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                        android:id="@+id/creator_view"
+                        style="@style/CaptionView"
+                        android:textColor="@color/body_text_2"
+                        android:singleLine="true"
+                        android:maxLength="15"
+                        android:ellipsize="end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/padding_8dp"
+                        android:paddingTop="@dimen/padding_8dp"/>
+
+                    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                        android:id="@+id/date_view"
+                        style="@style/CaptionView"
+                        android:textColor="@color/body_text_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <include layout="@layout/owner_view" />
+
+            <LinearLayout
+                android:id="@+id/detailLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_10dp"
+                    android:paddingStart="@dimen/padding_10dp"
+                    android:paddingEnd="@dimen/padding_10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/categoryIcon"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/body_default_font_size"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_5dp"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+                        android:layout_marginStart="@dimen/keyline_1_minus_8dp"
+                        android:layout_gravity="center">
+
+                        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                            android:id="@+id/categoryLabel"
+                            android:textSize="@dimen/body_default_font_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/category" />
+
+                        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                            android:id="@+id/categoryTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/keyline_1_minus_8dp"
+                            android:layout_marginStart="@dimen/keyline_1_minus_8dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_line_view_height"
+                    android:visibility="gone"
+                    android:id="@+id/field_above_horizontal_line"
+                    android:background="@color/body_text_lightest"/>
+
+                <GridLayout
+                    android:id="@+id/profileFieldLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+                    android:layout_marginBottom="@dimen/keyline_1_minus_8dp"
+                    android:orientation="horizontal"
+                    android:fillViewport="true"
+                    android:columnCount="2">
+                </GridLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_line_view_height"
+                    android:visibility="gone"
+                    android:id="@+id/field_below_horizontal_line"
+                    android:background="@color/body_text_lightest"/>
+
+            </LinearLayout>
+
+
+            <include layout="@layout/web_view"/>
+
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center"/>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        layout="@layout/like_comment"/>
+
+</android.support.design.widget.CoordinatorLayout>

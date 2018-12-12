@@ -1,0 +1,23 @@
+<!--
+  ~
+  ~ Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~ You may not use this file except in compliance with the
+  ~ SocialEngineAddOns License Agreement.
+  ~ You may obtain a copy of the License at:
+  ~ https://www.socialengineaddons.com/android-app-license
+  ~ The full copyright and license information is also mentioned
+  ~ in the LICENSE file that was distributed with this
+  ~ source code.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="20dp"
+        android:height="20dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0">
+    <path
+        android:pathData="M22.3,22.29 L20.78,11.68a3.7,3.7 0,0 0,-2.85 -3.09L17.93,6a6,6 0,0 0,-12 0L5.93,8.56a3.72,3.72 0,0 0,-3 3.2L1.7,22.33A1.49,1.49 0,0 0,3.18 24L20.82,24A1.5,1.5 0,0 0,22.3 22.29ZM7.59,6.18a4.34,4.34 0,0 1,8.68 0L16.27,8.49L7.59,8.49ZM7.38,14a1.48,1.48 0,1 1,1.48 -1.48A1.47,1.47 0,0 1,7.38 14ZM16.62,14a1.48,1.48 0,1 1,1.47 -1.48A1.48,1.48 0,0 1,16.62 14Z"
+        android:fillColor="#fff"/>
+</vector>

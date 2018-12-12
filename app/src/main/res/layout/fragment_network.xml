@@ -1,0 +1,44 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/padding_10dp"
+    android:paddingEnd="@dimen/padding_10dp">
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/body_default_font_size"
+        android:background="@drawable/tip_message"
+        android:id="@+id/noAvailableMessage"/>
+
+    <ListView
+        android:id="@+id/network_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/transparent"
+        android:layout_marginTop="@dimen/margin_10dp">
+    </ListView>
+
+</RelativeLayout>

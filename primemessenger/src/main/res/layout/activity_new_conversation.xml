@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_new_conversation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.socialengineaddons.messenger.conversation.NewConversationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:id="@+id/imageTitleView"
+        android:layout_height="wrap_content">
+
+        <com.socialengineaddons.messenger.ui.CircularImageView
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:scaleType="centerCrop"
+            android:tint="@color/grey_light"
+            android:background="@drawable/imageshape"
+            android:id="@+id/group_image"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            app:civ_border="true"
+            app:civ_borderColor="@color/black"
+            app:civ_border_color="@color/grey"
+            android:visibility="gone"
+            app:civ_border_width="1dp"
+            app:civ_borderWidth="1dp" />
+
+        <ImageView
+            android:id="@+id/upload_image"
+            android:scaleType="center"
+            android:src="@drawable/ic_photo_camera_blue_24dp"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/imageshape" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:hint="@string/group_name_hint"
+            android:id="@+id/groupTitle"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_5dp" />
+
+
+    </LinearLayout>
+
+    <com.socialengineaddons.messenger.groups.ui.MaxHeightScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scroll_view"
+        app:maxHeight="@dimen/dimen_100dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:orientation="vertical"
+        android:id="@+id/addMembersView"
+        android:layout_height="wrap_content">
+
+        <com.socialengineaddons.messenger.groups.ui.PredicateLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/selectedMembers"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+    </com.socialengineaddons.messenger.groups.ui.MaxHeightScrollView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/addMembers"
+        android:hint="@string/search_contacts"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/fragment_container"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+</LinearLayout>

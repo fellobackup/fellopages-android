@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+<com.google.android.gms.ads.formats.NativeContentAdView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/native_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/contentad_image"
+            android:layout_width="@dimen/user_image_width_height"
+            android:layout_height="@dimen/user_image_width_height"
+            android:layout_margin="@dimen/blog_image_view_margin"
+            android:layout_marginStart="@dimen/blog_image_view_margin"
+            android:layout_marginEnd="@dimen/blog_image_view_margin"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center">
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/layout_left_right_margin"
+            android:layout_marginLeft="@dimen/layout_left_right_margin"
+            android:layout_marginRight="@dimen/layout_left_right_margin"
+            android:layout_marginEnd="@dimen/layout_left_right_margin"
+            android:layout_weight=".8"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:id="@+id/contentad_headline" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/blog_image_view_margin"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:id="@+id/contentad_body" />
+
+            <TextView
+                android:id="@+id/contentad_advertiser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/contentad_logo"
+            android:layout_width="@dimen/material_drawer_item_primary_icon"
+            android:layout_height="@dimen/material_drawer_item_primary_icon"
+            android:layout_marginEnd="@dimen/blog_image_view_margin"
+            android:layout_marginRight="@dimen/blog_image_view_margin"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ad_badge"/>
+
+    </LinearLayout>
+</com.google.android.gms.ads.formats.NativeContentAdView>

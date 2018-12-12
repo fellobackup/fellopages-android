@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/conversation_background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/toolbar_header"
+        android:id="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/floatingDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:paddingTop="@dimen/dimen_3dp"
+        android:paddingBottom="@dimen/dimen_3dp"
+        android:paddingRight="@dimen/dimen_6dp"
+        android:paddingLeft="@dimen/dimen_6dp"
+        android:layout_marginLeft="@dimen/dimen_5dp"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:layout_marginRight="@dimen/dimen_5dp"
+        android:layout_marginEnd="@dimen/dimen_5dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:layout_marginBottom="@dimen/dimen_15dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_divider_date"
+        android:textColor="@color/title_color" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messageRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/sendMessageBlock"
+        android:scrollbars="vertical" />
+
+    <RelativeLayout
+        android:layout_width="@dimen/unread_counter_height"
+        android:id="@+id/newMessageUi"
+        android:layout_above="@+id/sendMessageBlock"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="@dimen/unread_counter_height">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/upload_image"
+            android:layout_width="@dimen/unread_floating_button_size"
+            android:layout_height="@dimen/unread_floating_button_size"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:elevation="0dp"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
+            app:fabSize="mini"/>
+
+        <com.socialengineaddons.messenger.conversation.view.BadgeLayout
+            android:id="@+id/newMessageCount"
+            android:layout_width="@dimen/unread_message_indicator_size"
+            android:layout_height="@dimen/unread_message_indicator_size"
+            android:layout_alignEnd="@+id/upload_image"
+            android:layout_alignRight="@+id/upload_image"
+            android:layout_alignTop="@+id/upload_image"
+            android:layout_marginRight="@dimen/element_spacing_minus_medium"
+            android:layout_marginEnd="@dimen/element_spacing_minus_medium"
+            android:elevation="@dimen/unread_badge_count_elevation"
+            android:background="@drawable/badge_background_white"
+            android:ellipsize="none"
+            android:padding="@dimen/element_spacing_xsmall"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/sendMessageBlock">
+
+        <!--<View android:layout_height="1dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="@color/grey_light" />-->
+
+        <ImageButton
+            android:id="@+id/attachmentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_attachment"
+            android:background="@color/transparent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true" />
+
+        <ImageButton
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_send_black_24dp"
+            android:background="@color/transparent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+        <EditText
+            android:id="@+id/messageEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/dimen_15dp"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingRight="@dimen/dimen_10dp"
+            android:paddingEnd="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_3dp"
+            android:layout_marginBottom="@dimen/dimen_3dp"
+            android:hint="@string/type_message"
+            android:inputType="textMultiLine"
+            android:scrollbars="none"
+            android:background="@drawable/round_corner"
+            android:layout_toStartOf="@id/sendButton"
+            android:layout_toEndOf="@+id/attachmentButton"
+            android:minHeight="@dimen/dimen_20dp"
+            android:maxHeight="@dimen/max_height_send_box"
+            android:layout_toLeftOf="@id/sendButton"
+            android:layout_toRightOf="@+id/attachmentButton" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

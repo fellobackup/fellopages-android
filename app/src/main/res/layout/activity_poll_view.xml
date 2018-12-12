@@ -1,0 +1,238 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_content"
+    tools:context=".classes.modules.poll.PollView">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressBarMain"
+        android:layout_gravity="center"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/pollTitleView"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/viewTitle"
+                        android:layout_weight=".75"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:paddingBottom="@dimen/padding_8dp"
+                        style="@style/TitleLargeView"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/closeIcon"
+                        android:textColor="@color/black"
+                        android:paddingBottom="@dimen/padding_8dp"
+                        style="@style/TitleLargeView"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/closeText"
+                        android:textSize="@dimen/body_default_font_size"
+                        android:textColor="@color/dark_gray"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/normal_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                        android:id="@+id/creator_view"
+                        style="@style/CaptionView"
+                        android:textColor="@color/body_text_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                        android:id="@+id/dateView"
+                        style="@style/CaptionView"
+                        android:textColor="@color/body_text_2"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_5dp"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/CaptionView"
+                    android:textColor="@color/body_text_2"
+                    android:id="@+id/viewCountDetail"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:id="@+id/detailDescriptionLayout"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp">
+
+                <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/body_text_1"
+                    style="@style/BodyMediumView"
+                    android:id="@+id/detailDescription"
+                    android:layout_gravity="center_horizontal" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_line_view_height"
+                    android:id="@+id/divider"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:visibility="gone"
+                    android:background="@color/light_gray"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/body_text_1"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:text="@string/tap_on_any_option_tag"
+                    android:padding="@dimen/padding_10dp"
+                    android:paddingStart="@dimen/padding_10dp"
+                    android:paddingEnd="@dimen/padding_10dp"
+                    android:id="@+id/optionTag"
+                    android:visibility="gone"
+                    android:gravity="center_horizontal"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/body_text_1"
+                    android:text="@string/show_question_tag"
+                    android:padding="@dimen/padding_10dp"
+                    android:paddingStart="@dimen/padding_10dp"
+                    android:paddingEnd="@dimen/padding_10dp"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:id="@+id/questionTag"
+                    android:visibility="gone"
+                    android:gravity="center_horizontal" />
+
+                <ProgressBar
+                    android:theme="@style/CircularProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/progressBar"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pollOptionsLayout"
+                android:layout_marginBottom="@dimen/poll_layout_margin_bottom">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_10dp"
+                    android:paddingStart="@dimen/padding_10dp"
+                    android:id="@+id/radioOptionLayout">
+                    <RadioGroup
+                        android:id="@+id/optionRadioGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <!-- This is where our buttons will be -->
+
+                    </RadioGroup>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/padding_10dp"
+                    android:paddingStart="@dimen/padding_10dp"
+                    android:visibility="gone"
+                    android:paddingBottom="@dimen/padding_5dp"
+                    android:id="@+id/barChartOptionLayout">
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        layout="@layout/like_comment"/>
+
+</RelativeLayout>
+

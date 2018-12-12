@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~    You may not use this file except in compliance with the
+  ~    SocialEngineAddOns License Agreement.
+  ~    You may obtain a copy of the License at:
+  ~    https://www.socialengineaddons.com/android-app-license
+  ~    The full copyright and license information is also mentioned
+  ~    in the LICENSE file that was distributed with this
+  ~    source code.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bigsteptech.realtimechat">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/MessengerTheme">
+        <activity
+            android:name=".MessengerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBarTheme" />
+        <activity android:name=".login.LoginActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".conversation.ConversationActivity"
+            android:theme="@style/MessengerTheme"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiimageselector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/MessengerTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".conversation.view.PhotoPreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBarTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".conversation.NewConversationActivity"
+            android:label="@string/new_group"
+            android:theme="@style/MessengerTheme"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".user.BlockedContactsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MessengerTheme"
+            android:label="@string/blocked_users" />
+
+        <service
+            android:name=".service.MusicService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".groups.GroupDetails"
+            android:screenOrientation="portrait"
+            android:theme="@style/MessengerTheme"
+            android:label="@string/group_profile" />
+        <activity android:name=".search.SearchContactsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MessengerTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".user.userProfile"
+            android:screenOrientation="portrait"
+            android:theme="@style/MessengerTheme"
+            android:label="@string/profile_activity_label"></activity>
+
+    </application>
+
+</manifest>

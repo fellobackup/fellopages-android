@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    android:id="@+id/event_location_date_info">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="0.5"
+            android:id="@+id/eventLocationInfo"
+            android:clickable="true"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/locationLabel"
+                android:textSize="@dimen/body_default_font_size"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingLeft="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingRight="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:textColor="@color/dark_gray"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/eventLocation"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:textSize="@dimen/body_default_font_size"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:textColor="@color/body_text_1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/divider_line_view_height"
+            android:layout_height="match_parent"
+            android:id="@+id/event_vertical_line"
+            android:background="@color/body_text_lightest"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:paddingBottom="@dimen/padding_10dp"
+            android:id="@+id/eventDatesInfo"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_10dp"
+                android:textSize="@dimen/body_default_font_size"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:id="@+id/dateLabel"
+                android:textColor="@color/dark_gray"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventStartDate"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"/>
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_to"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"/>
+
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventEndDateTime"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventStatus"
+                android:visibility="gone"
+                style="@style/TitleView" />
+
+        </LinearLayout>
+
+</LinearLayout>

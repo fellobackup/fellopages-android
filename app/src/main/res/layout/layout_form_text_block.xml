@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/form_main_view"
+    android:layout_gravity="center_vertical"
+    android:paddingTop="@dimen/padding_10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:id="@+id/view_label"
+        android:textSize="@dimen/body_default_font_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view_description"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:visibility="gone"
+        android:textSize="@dimen/body_default_font_size" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/field_value"
+            android:paddingTop="@dimen/padding_5dp"
+            android:background="@color/white"
+            android:gravity="start|top"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="gone"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/btn_check_url"
+            android:layout_toStartOf="@+id/btn_check_url"
+            android:textSize="@dimen/body_default_font_size"
+            android:inputType="text" />
+
+        <com.fellopages.mobileapp.classes.common.ui.BaseButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingTop="@dimen/padding_5dp"
+            android:id="@+id/btn_check_url"
+            android:text="@string/check_url"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:padding="@dimen/padding_6dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toLeftOf="@+id/sentToLoadingProgressBar"
+            android:layout_toStartOf="@+id/sentToLoadingProgressBar"
+            app:cornerRadius="@dimen/base_button_default_corner_radius"
+            app:normalStateColor="@color/themeButtonColor" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sentToLoadingProgressBar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            style="?android:attr/progressBarStyleSmall"
+            android:paddingTop="@dimen/padding_5dp"
+            android:layout_marginRight="@dimen/margin_5dp"
+            android:layout_marginEnd="@dimen/margin_5dp"/>
+
+    </RelativeLayout>
+
+    <com.fellopages.mobileapp.classes.common.ui.NestedListView
+        android:id="@+id/friendListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:divider="@color/transparent">
+    </com.fellopages.mobileapp.classes.common.ui.NestedListView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/added_friend_list_view_height"
+        android:id="@+id/addedFriendList"
+        android:visibility="gone"/>
+
+    <android.support.v7.widget.AppCompatAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_field_value"
+        android:background="@color/white"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="gone"
+        android:textSize="@dimen/body_default_font_size"
+        android:hint="@string/please_select_label"
+        android:gravity="center_vertical" />
+
+    <View
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_12dp"
+        android:layout_height="@dimen/divider_line_view_height"
+        android:background="@color/colordevider" />
+
+</LinearLayout>

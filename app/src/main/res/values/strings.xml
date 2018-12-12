@@ -1,0 +1,61 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+<resources>
+    <string name="ad_unit_id" translatable="false"></string>
+<string name="places_api_key" translatable="false">AIzaSyClyNe-R9MndobfF-L_4oFQwdo3CnJvEWw</string>
+<string name="facebook_app_id" translatable="false"></string>
+    <string name="facebook_app_id_temp" translatable="false">509261915900016</string>
+    <string name="facebook_placement_id_temp" translatable="false">509261915900016_563958577097016</string>
+    <string name="facebook_placement_id" translatable="false"></string>
+    <string name="facebook_post" translatable="false">0</string>
+    <string name="twitter_post" translatable="false">0</string>
+<string name="twitter_key" translatable="false"></string>
+<string name="twitter_secret" translatable="false"></string>
+<string name="default_font_name" translatable="false">Roboto-Regular.ttf</string>
+    <string name="font_family_body_1_material" translatable="false">sans-serif</string>
+    <string name="unicode_char" translatable="false"> &amp;#x</string>
+<string name="PROJECT_NUMBER" translatable="false">519324084949 </string>
+    <string name="blank_string" translatable="false"> </string>
+    <string name="title_activity_home_screen" translatable="false">@string/app_name</string>
+    <string name="album_owner_salutation_format" translatable="false">%1$s &lt;b>%2$s&lt;/b></string>
+    <string name="creator_salutation_format" translatable="false">%1$s  &lt;b>%2$s&lt;/b></string>
+    <string name="creator_view_with_date_format" translatable="false">%1$s %2$s - %3$s</string>
+    <string name="plb_album_name_format" translatable="false">%1$s: &lt;b>%2$s&lt;/b></string>
+    <string name="category_salutation_format" translatable="false">%1$s &lt;b>%2$s&lt;/b></string>
+    <string name="video_view_category_date_format" translatable="false">%1$s &lt;b>%2$s&lt;/b> - %3$s</string>
+    <string name="event_date_info_format" translatable="false">%1$s %2$s %3$s</string>
+    <string name="date_salutation" translatable="false">&lt;b>%1$s&lt;/b></string>
+    <string name="view_salutation" translatable="false">%1$d</string>
+    <string name="like_count_text" translatable="false">%1$d\u0020%2$s</string>
+    <string name="comment_count_text" translatable="false">%1$d\u0020%2$s</string>
+    <string name="comment_page_like_count_text_format" translatable="false">%1$s\u0020%2$s %3$s.</string>
+    <string name="playback_view_time" translatable="false">%1$02d:%2$02d</string>
+    <string name="playback_view_title" translatable="false">&lt;b>%1$s&lt;/b> - %2$s</string>
+    <string name="play_count_format" translatable="false">%1$d %2$s</string>
+    <string name="group_member_count_text" translatable="false">%1$d\u0020%2$s</string>
+    <string name="members_waiting_text_format" translatable="false">%1$d\u0020%2$s %3$s</string>
+    <string name="browse_member_count_text_format" translatable="false">%1$d\u0020%2$s %3$s.</string>
+    <string name="joined_network_text_format" translatable="false">%1$s %2$d\u0020%3$s.</string>
+    <string name="forum_replies_count" translatable="false">\u0020%1$d\u0020%2$s</string>
+    <string name="create_view_post_edit_info_format" translatable="false">%1$s &lt;b>%2$s&lt;/b>\u0020 %3$s %4$s</string>
+    <string name="forum_post_with_topic" translatable="false">%1$d %2$s - %3$d %4$s</string>
+    <string name="creator_view_with_date_and_post" translatable="false">%1$d %2$s - %3$s</string>
+    <string name="total_push_notification" translatable="false">%1$d\u0020%2$s</string>
+    <string name="reaction_text_format" translatable="false">%1$s\u0020%2$s</string>
+    <string name="welcome_user_text" translatable="false">%1$s\u0020%2$s !!</string>
+    <string name="like_this_content_text" translatable="false">%1$s\u0020%2$s</string>
+    <string name="one_friend_like_text" translatable="false">%1$s\u0020%2$s\u0020%3$s</string>
+    <string name="two_friend_like_text" translatable="false">%1$s\u0020%2$s\u0020%3$s\u0020%4$s\u0020%5$s</string>
+    <string name="three_friend_like_text" translatable="false">%1$s,\u0020%2$s\u0020%3$s\u0020%4$s\u0020%5$s\u0020%6$s</string>
+    <string name="channel_subscribe_like_count" translatable="false">%1$d %2$s, %3$d %4$s</string>
+    <string name="default_notification_channel_id" translatable="false">default_notification_channel_id</string>
+</resources>

@@ -1,0 +1,138 @@
+<!--
+  ~
+  ~ Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~ You may not use this file except in compliance with the
+  ~ SocialEngineAddOns License Agreement.
+  ~ You may obtain a copy of the License at:
+  ~ https://www.socialengineaddons.com/android-app-license
+  ~ The full copyright and license information is also mentioned
+  ~ in the LICENSE file that was distributed with this
+  ~ source code.
+  ~
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ad_unit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_2dp">
+
+    <ImageView
+        android:id="@+id/native_ad_cover"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_view_height"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/descr_image"
+        android:scaleType="fitXY"/>
+
+    <ImageView
+        android:id="@+id/appinstall_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ad_badge"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_clear_white"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/remove_ads_button"
+        android:visibility="gone"
+        android:tint="@color/grey"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/album_view_background"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/textContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/advertiser_layout"
+            android:layout_toStartOf="@+id/advertiser_layout"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/native_ad_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="left|start"
+                style="@style/BodyLargeView"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/native_ad_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/blog_image_view_margin"
+                style="@style/CaptionView"
+                android:lines="2"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:layout_gravity="left|start"
+                android:shadowRadius="2"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/advertiser_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/blog_image_view_margin"
+            android:layout_marginEnd="@dimen/blog_image_view_margin"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/contentad_advertiser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/blog_image_view_margin"
+                style="@style/CaptionView"
+                android:lines="2"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2" />
+
+            <ImageView
+                android:id="@+id/native_ad_icon"
+                android:layout_width="@dimen/speaker_image_size"
+                android:layout_height="@dimen/speaker_image_size"
+                android:gravity="bottom" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+

@@ -1,0 +1,271 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/comment_activity_view"
+    android:background="@android:color/transparent"
+    tools:context="com.fellopages.mobileapp.classes.modules.likeNComment.Comment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:visibility="gone"
+        android:id="@+id/likeCountInfoContainer"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/popularReactionIcons"
+            android:orientation="horizontal"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_3dp"
+            android:layout_marginStart="@dimen/margin_3dp"
+            android:layout_toRightOf="@+id/popularReactionIcons"
+            android:layout_toEndOf="@+id/popularReactionIcons"
+            style="@style/BodyMediumView"
+            android:textColor="@color/black"
+            android:id="@+id/likeCountInfo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            style="@style/BodyMediumView"
+            android:id="@+id/nextIcon"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_height=".5dp"
+        android:id="@+id/likeCommentSaperator"
+        android:visibility="gone"
+        android:layout_below="@+id/likeCountInfoContainer"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_width="match_parent"
+        android:background="@color/light_gray" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/CircularProgress"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/noCommentsBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/noCommentsImage"
+            style="@style/TitleLargeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:id="@+id/noCommentsText"
+            style="@style/TitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/likeCommentSaperator">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="0dp"
+            android:divider="@color/transparent"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:paddingBottom="@dimen/padding_70dp"
+            android:clipToPadding="false"
+            android:id="@+id/commentList">
+        </ListView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/users_view"
+                android:visibility="gone"
+                android:layout_marginRight="@dimen/margin_50dp"
+                android:layout_marginEnd="@dimen/margin_50dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_above="@+id/commentPostBlock"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="5dp">
+
+                <ListView
+                    android:id="@+id/userList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@color/transparent">
+                </ListView>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/commentPostBlock"
+                android:layout_alignParentBottom="true">
+
+                <View android:layout_height=".5dp"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:layout_marginEnd="@dimen/margin_10dp"
+                    android:layout_width="match_parent"
+                    android:background="@color/light_gray" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/selectedImageBlock"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_marginLeft="@dimen/margin_10dp"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="@dimen/profile_image_width_height"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/imageView"
+                        android:paddingTop="@dimen/padding_5dp"
+                        android:layout_height="@dimen/profile_image_width_height" />
+
+                    <com.fellopages.mobileapp.classes.common.ui.CircularImageView
+                        android:layout_width="@dimen/tagview_image_height_width"
+                        android:layout_height="@dimen/tagview_image_height_width"
+                        android:layout_alignTop="@+id/imageView"
+                        android:layout_alignRight="@+id/imageView"
+                        android:layout_alignEnd="@+id/imageView"
+                        android:padding="@dimen/padding_3dp"
+                        android:paddingEnd="@dimen/padding_3dp"
+                        android:paddingStart="@dimen/padding_3dp"
+                        android:id="@+id/removeImageButton"
+                        android:layout_marginTop="@dimen/minus_margin_2dp"
+                        android:layout_marginRight="@dimen/minus_margin_2dp"
+                        android:layout_marginEnd="@dimen/minus_margin_2dp"
+                        app:civ_border="true"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/white"
+                        android:src="@drawable/ic_cancel_black_24dp"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/title_medium_font_size"
+                        android:layout_weight=".1"
+                        android:paddingLeft="@dimen/padding_6dp"
+                        android:paddingStart="@dimen/padding_6dp"
+                        android:paddingRight="@dimen/padding_6dp"
+                        android:paddingEnd="@dimen/padding_6dp"
+                        android:textColor="@color/grey_dark"
+                        android:id="@+id/photoUploadingButton" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:maxHeight="@dimen/small_image_art_width"
+                        android:hint="@string/write_comment_text"
+                        android:paddingLeft="@dimen/padding_6dp"
+                        android:paddingStart="@dimen/padding_6dp"
+                        android:paddingRight="@dimen/padding_6dp"
+                        android:paddingEnd="@dimen/padding_6dp"
+                        android:paddingBottom="@dimen/padding_10dp"
+                        android:layout_marginLeft="@dimen/margin_5dp"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        style="@style/TitleView"
+                        android:textColor="@color/black"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:focusable="true"
+                        android:background="@color/transparent"
+                        android:layout_weight=".8"
+                        android:inputType="textCapSentences"
+                        android:id="@+id/commentBox"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/comment_post_button_size"
+                        android:layout_weight=".1"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_marginEnd="@dimen/margin_10dp"
+                        android:id="@+id/commentPostButton" />
+                </LinearLayout>
+
+                <include layout="@layout/stickers_popup" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

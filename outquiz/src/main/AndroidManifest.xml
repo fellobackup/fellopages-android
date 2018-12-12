@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.uniprogy.outquiz">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:allowBackup="false"
+         >
+
+        <!--<meta-data-->
+            <!--android:name="com.google.firebase.messaging.default_notification_icon"-->
+            <!--android:resource="@mipmap/ic_launcher" />-->
+
+        <!--<service-->
+            <!--android:name=".notifications.UniFirebaseMessagingService"-->
+            <!--android:permission="com.google.android.c2dm.permission.SEND">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+        <!--<service android:name=".notifications.UniFirebaseInstanceIDService">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
+        <!--<activity-->
+            <!--android:name="com.facebook.FacebookActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+            <!--android:label="@string/tr_login_via_facebook" />-->
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Normal">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name=".activities.signin.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Normal" />
+        <activity android:name=".activities.WebViewActivity" />
+        <activity
+            android:name=".activities.signin.PhoneInputActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/tr_login_via_phone"
+            android:parentActivityName=".activities.signin.LoginActivity" />
+        <activity
+            android:name=".activities.signin.PhoneCodeActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/tr_verify"
+            android:parentActivityName=".activities.signin.PhoneInputActivity" />
+        <activity
+            android:name=".activities.signin.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/tr_profile" />
+        <activity
+            android:name=".activities.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Normal" />
+        <activity
+            android:name=".activities.home.LivesActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/tr_get_more_lives"
+            android:parentActivityName=".activities.home.HomeActivity" />
+        <activity
+            android:name=".activities.home.CashoutActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/tr_cashout"
+            android:parentActivityName=".activities.home.HomeActivity" />
+        <activity android:name=".activities.home.ShowActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Normal"
+            android:parentActivityName=".activities.home.HomeActivity"
+            />
+    </application>
+
+</manifest>
