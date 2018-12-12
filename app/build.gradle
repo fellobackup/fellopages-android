@@ -13,12 +13,12 @@ keyPassword = 'seaddonsandroid_219'
 }
 android {
     compileSdkVersion 27
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         multiDexEnabled true
-applicationId 'com.fellopages.mobileapp'
+        applicationId 'com.fellopages.mobileapp'
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode project.ext.appVersionCode.toInteger()
         versionName project.ext.appVersionName
         vectorDrawables.useSupportLibrary = true
@@ -59,71 +59,88 @@ applicationId 'com.fellopages.mobileapp'
     }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':WordPressEditor')
-    compile project(':emoticon')
-    compile project(':showcasecard')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':WordPressEditor')
+    implementation project(':emoticon')
+    implementation project(':showcasecard')
+
     implementation('com.twitter.sdk.android:twitter:3.3.0@aar') {
         transitive = true
         exclude group: 'com.squareup.okhttp3'
         exclude group: 'com.android.support'
     }
-    compile ('com.facebook.android:audience-network-sdk:4.23.0') {
+
+    implementation ('com.facebook.android:audience-network-sdk:4.23.0') {
         exclude group: 'com.android.support'
         exclude group: 'com.google.android'
         exclude group: 'com.google.android.exoplayer'
     }
-    compile 'com.android.support:support-v13:27.1.1'
-    compile 'com.android.support:support-v4:27.1.1'
-    compile ('com.android.support:recyclerview-v7:27.1.1') {
+
+    implementation 'com.android.support:support-v13:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation ('com.android.support:recyclerview-v7:27.1.1') {
         exclude group: 'com.android.support'
     }
-    compile 'com.android.support:multidex:1.0.3'
-    compile ('com.android.support:design:27.1.1') {
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation ('com.android.support:design:27.1.1') {
         exclude group: 'com.android.support'
     }
-    compile 'com.android.support:cardview-v7:27.1.1'
-    compile ('com.android.support:customtabs:27.1.1') {
+
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation ('com.android.support:customtabs:27.1.1') {
         exclude group: 'com.android.support'
     }
-    compile ('com.google.android.gms:play-services-location:15.0.1') {
+
+    implementation ('com.google.android.gms:play-services-location:15.0.1') {
         exclude group: 'com.android.support'
     }
-    compile ('com.google.android.gms:play-services-maps:15.0.1') {
+
+    implementation ('com.google.android.gms:play-services-maps:15.0.1') {
         exclude group: 'com.android.support'
     }
-    compile 'com.google.maps.android:android-maps-utils:0.5'
-    compile ('com.google.android.gms:play-services-ads:15.0.1') {
+
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation ('com.google.android.gms:play-services-ads:15.0.1') {
         exclude group: 'com.android.support'
     }
-    compile 'org.jsoup:jsoup:1.10.1'
-    compile ('com.wunderlist:sliding-layer:1.2.5') {
+
+    implementation 'org.jsoup:jsoup:1.10.1'
+    implementation ('com.wunderlist:sliding-layer:1.2.5') {
         exclude group: 'com.android.support'
     }
-    compile ('com.facebook.android:facebook-android-sdk:4.18.0') {
+
+    implementation ('com.facebook.android:facebook-android-sdk:4.18.0') {
         exclude group: 'com.android.support'
     }
-    compile 'com.squareup.okhttp3:okhttp:3.10.0'
-    compile ('com.google.firebase:firebase-messaging:17.1.0') {
+
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation ('com.google.firebase:firebase-messaging:17.1.0') {
         exclude group: 'com.google.android'
     }
-    compile ('com.google.firebase:firebase-core:16.0.1') {
+
+    implementation ('com.google.firebase:firebase-core:16.0.1') {
         exclude group: 'com.google.android'
     }
-    compile 'me.leolin:ShortcutBadger:1.1.19@aar'
-    compile ('com.github.bumptech.glide:glide:4.0.0') {
+
+    implementation 'me.leolin:ShortcutBadger:1.1.19@aar'
+    implementation ('com.github.bumptech.glide:glide:4.0.0') {
         exclude group: 'com.android.support'
     }
-    compile 'com.android.support.constraint:constraint-layout:1.1.3'
-    compile ('ja.burhanrashid52:photoeditor:0.1.1') {
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation ('ja.burhanrashid52:photoeditor:0.1.1') {
         exclude group: 'com.android.support'
     }
-    compile ('com.github.zomato:androidphotofilters:1.0.1') {
+
+    implementation ('com.github.zomato:androidphotofilters:1.0.1') {
         exclude group: 'com.android.support'
     }
+    
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
-        transitive = true;
+        transitive = true
     }
+
     // exo player
     implementation 'com.google.android.exoplayer:exoplayer-core:2.7.3'
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.7.3'
