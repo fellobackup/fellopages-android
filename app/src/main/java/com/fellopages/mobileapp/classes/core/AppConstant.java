@@ -1023,12 +1023,31 @@ public class AppConstant {
         });
     }
 
-    public void proceedToUserLogin(Context mContext, Bundle bundle, String intentAction, String intentType,
-                                   String emailValue, String passwordValue, JSONObject jsonObject) {
+    /**
+     * proceedToUserLogin
+     *
+     * @param mContext Context
+     * @param bundle Bundle
+     * @param intentAction Intent action
+     * @param intentType Intent type
+     * @param emailValue email
+     * @param passwordValue password
+     * @param jsonObject json object
+     */
+    public void proceedToUserLogin(Context mContext,
+                                   Bundle bundle,
+                                   String intentAction,
+                                   String intentType,
+                                   String emailValue,
+                                   String passwordValue,
+                                   JSONObject jsonObject) {
+
         PreferencesUtils.clearSharedPreferences(mContext);
         PreferencesUtils.clearDashboardData(mContext);
         DataStorage.clearApplicationData(mContext);
+
         final Intent intent;
+
         if (bundle != null) {
             intent = new Intent(mContext, Status.class);
             intent.putExtras(bundle);
@@ -1039,32 +1058,33 @@ public class AppConstant {
             intent.putExtra("isSetLocation", true);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+
         if (jsonObject.has("oauth_token")) {
             JSONObject userDetail = jsonObject.optJSONObject("user");
             String user_language = userDetail.optString("language");
             String oauthToken = jsonObject.optString("oauth_token");
             String oauth_secret = jsonObject.optString("oauth_secret");
-            PreferencesUtils.updateUserPreferences(mContext, userDetail.toString(),
-                    oauth_secret, oauthToken);
+            PreferencesUtils.updateUserPreferences(mContext, userDetail.toString(), oauth_secret, oauthToken);
+
             // Save email and base64 encrypted password in SharedPreferences
-            PreferencesUtils.UpdateLoginInfoPref(mContext, emailValue, passwordValue,
-                    userDetail.optInt("user_id"));
+            PreferencesUtils.UpdateLoginInfoPref(mContext, emailValue, passwordValue, userDetail.optInt("user_id"));
+
              /* English is coming from API instead of it's language code, It will automatically
                 work when API issue will be resolved.. */
             if (user_language.equals("English")) {
                 user_language = "en";
             }
+
             // Set default language to current language when we have only single language for the app
             String multiLanguages = PreferencesUtils.getLanguages(mContext);
             if (multiLanguages != null && !multiLanguages.isEmpty()) {
-                PreferencesUtils.updateDashBoardData(mContext,
-                        PreferencesUtils.CURRENT_LANGUAGE, user_language);
+                PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.CURRENT_LANGUAGE, user_language);
                 changeAppLocale(user_language, false);
             } else {
-                PreferencesUtils.updateDashBoardData(mContext,
-                        PreferencesUtils.CURRENT_LANGUAGE, PreferencesUtils.getDefaultLanguage(mContext));
+                PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.CURRENT_LANGUAGE, PreferencesUtils.getDefaultLanguage(mContext));
                 changeAppLocale(PreferencesUtils.getDefaultLanguage(mContext), false);
             }
+
             mContext.startActivity(intent);
             ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } else if (jsonObject.optString("body") != null && !jsonObject.optString("body").isEmpty()) {
@@ -1092,25 +1112,28 @@ public class AppConstant {
             String OauthToken = body.optString("oauth_token");
             String oauth_secret = body.optString("oauth_secret");
             JSONObject userDetail = body.optJSONObject("user");
+
             if (userDetail != null) {
                 String user_language = userDetail.optString("language");
+
                 if (user_language.equals("English"))
                     user_language = "en";
+
                 // Set default language to current language when we have only single language for the app
                 String multiLanguages = PreferencesUtils.getLanguages(mContext);
+
                 if (multiLanguages != null && !multiLanguages.isEmpty()) {
-                    PreferencesUtils.updateDashBoardData(mContext,
-                            PreferencesUtils.CURRENT_LANGUAGE, user_language);
+                    PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.CURRENT_LANGUAGE, user_language);
                 } else {
-                    PreferencesUtils.updateDashBoardData(mContext,
-                            PreferencesUtils.CURRENT_LANGUAGE, PreferencesUtils.getDefaultLanguage(mContext));
+                    PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.CURRENT_LANGUAGE, PreferencesUtils.getDefaultLanguage(mContext));
                 }
-                PreferencesUtils.updateUserPreferences(mContext, userDetail.toString(),
-                        oauth_secret, OauthToken);
+
+                PreferencesUtils.updateUserPreferences(mContext, userDetail.toString(), oauth_secret, OauthToken);
+
                 // Save email and base64 encrypted password in SharedPreferences
-                PreferencesUtils.UpdateLoginInfoPref(mContext, emailAddress,
-                        password, userDetail.optInt("user_id"));
+                PreferencesUtils.UpdateLoginInfoPref(mContext, emailAddress, password, userDetail.optInt("user_id"));
             }
+
             Intent intent = new Intent(mContext, MainActivity.class);
             intent.putExtra("isSetLocation", true);
             ((Activity) mContext).finish();
@@ -1122,9 +1145,11 @@ public class AppConstant {
             intent.putExtra("email", emailAddress);
             intent.putExtra("password", password);
             intent.putExtra("url", subscriptionUrl);
+
             if (mFbTwitterBundle != null && !mFbTwitterBundle.isEmpty()) {
                 intent.putExtra("fb_twitter_info", mFbTwitterBundle);
             }
+
             ((Activity) mContext).startActivityForResult(intent, ConstantVariables.SIGN_UP_WEBVIEW_CODE);
             ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
