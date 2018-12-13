@@ -79,6 +79,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
+
 public class AppConstant {
     private Context mContext;
     private String oauthToken, oauth_secret;
@@ -107,10 +108,10 @@ public class AppConstant {
     // GridView image padding
     public static final int STICKERS_GRID_PADDING = 8; // in dp
 
-    // Default url for data access
-    public static final String DEFAULT_URL = "https://fellopages.com/beta1/api/rest/";
-    public static final String oauth_consumer_key = "908dsexs8skeo8r2abnc9cieyf39qpnz";
-    public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f72iq";
+    // Default url for data access - OLD
+    public static final String DEFAULT_URL = "https://www.fellopages.com/beta1/api/rest/";
+    public static final String oauth_consumer_key = "tqrqueo5pxnae436nmrgeqhzs6jiud1n";
+    public static final String oauth_consumer_secret = "dlixjfdviokbfk48mv1x0ir2u8v7o9xj";
 
     public static final String tag_json_obj = "json_obj_req";
     public static boolean isLocationEnable = false;
