@@ -88,28 +88,35 @@ public class AppConstant {
     private boolean isRetryOption = false, mIsLoginSignUpRequest = false;
     public ProgressDialog pDialog;
     public Map<String, String> postParams, mAuthParams, mRequestParams;
+
     int mStatusCode;
     public static final int REQUEST_TIMEOUT_MS = 10000;
     public static final float BACK_OF_MULTIPLIER = 2.0f;
     public static final int NO_OF_RETRY_ATTEMPTS = 3;
+
     // GridView image padding
     public static final int GRID_PADDING = 2; // in dp
+
     // Number of items shown per page
     // by default 20 but user can configure this
     public static final int LIMIT = 20;
     public static int NUM_OF_COLUMNS_FOR_VIEW_PAGE = 3;
     public static int NUM_OF_COLUMNS_FOR_PHOTO_GRID = 2;
     public static final int FEATURED_CONTENT_LIMIT = 5;
+
     // GridView image padding
     public static final int STICKERS_GRID_PADDING = 8; // in dp
+
     // Default url for data access
-public static final String DEFAULT_URL = "https://fellopages.com/beta1/api/rest/";
-public static final String oauth_consumer_key = "908dsexs8skeo8r2abnc9cieyf39qpnz";
-public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f72iq";
+    public static final String DEFAULT_URL = "https://fellopages.com/beta1/api/rest/";
+    public static final String oauth_consumer_key = "908dsexs8skeo8r2abnc9cieyf39qpnz";
+    public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f72iq";
+
     public static final String tag_json_obj = "json_obj_req";
     public static boolean isLocationEnable = false;
     public static String mLocationType = "";
     public static int isDeviceLocationEnable = 0, isDeviceLocationChange = 1;
+
     OnCommunityAdsLoadedListener mCommunityAdsLoadedListener;
     public AppConstant(Context context) {
         mContext = context;
@@ -118,13 +125,16 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         pDialog.setCancelable(false);
         initializeVariable();
     }
+
     public AppConstant(Context context, boolean isNeedProgressDialog) {
         mContext = context;
+
         if (isNeedProgressDialog) {
             pDialog = new ProgressDialog(context);
             pDialog.setMessage(context.getResources().getString(R.string.progress_dialog_wait) + "…");
             pDialog.setCancelable(false);
         }
+
         initializeVariable();
     }
     /**
@@ -137,17 +147,21 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         oauth_secret = PreferencesUtils.getUserPreferences(mContext).getString("oauth_secret", null);
         mAuthParams.put("oauth_consumer_key", oauth_consumer_key);
         mAuthParams.put("oauth_consumer_secret", oauth_consumer_secret);
+
         if (oauthToken != null) {
             mAuthParams.put("oauth_token", oauthToken);
             mAuthParams.put("oauth_secret", oauth_secret);
         }
+
         if (checkManifestPermission(android.Manifest.permission.READ_PHONE_STATE)) {
             TelephonyManager  tm=(TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE);
             mRequestParams.put("device_id", tm.getDeviceId());
         }
+
         mRequestParams.put("language", PreferencesUtils.getCurrentLanguage(mContext));
         mRequestParams.put("_ANDROID_VERSION", PreferencesUtils.getCurrentAppVersion(mContext));
         mRequestParams.put("restapilocation", PreferencesUtils.getDefaultLocation(mContext));
+
         if (PreferencesUtils.getUserDetail(mContext) != null) {
             try {
                 mUserDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
@@ -166,6 +180,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
     public boolean isLoggedOutUser() {
         return oauthToken == null;
     }
+
     public static int getNumOfColumns(Context context) {
         if (context.getResources().getBoolean(R.bool.isTabletView)) {
             return 2;
@@ -173,12 +188,14 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             return 1;
         }
     }
+
     public Map<String, String> getAuthenticationParams() {
         return mAuthParams;
     }
     public Map<String, String> getRequestParams() {
         return mRequestParams;
     }
+
     /**
      * Get request execution for getting the response from server.
      *
@@ -188,6 +205,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
     public void getJsonResponseFromUrl(String url, final OnResponseListener responseListener) {
         manageResponse(url, Request.Method.GET, null, responseListener);
     }
+
     /**
      * Used to execute post request on server without looking for response.
      *
@@ -197,6 +215,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
     public void postJsonRequest(String url, Map<String, String> params) {
         manageResponse(url, Request.Method.POST, params, null);
     }
+
     /**
      * Used to execute post request on server without looking for response and params.
      *
@@ -205,6 +224,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
     public void postJsonRequest(String url) {
         manageResponse(url, Request.Method.POST, new HashMap<String, String>(), null);
     }
+
     /**
      * Used to execute post request on server without params.
      *
@@ -214,6 +234,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
     public void postJsonRequestWithoutParams(String url, final OnResponseListener responseListener) {
         manageResponse(url, Request.Method.POST, new HashMap<String, String>(), responseListener);
     }
+
     /**
      * Used to execute post request on server..
      *
@@ -226,6 +247,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         mIsLoginSignUpRequest = true;
         manageResponse(url, Request.Method.POST, params, responseListener);
     }
+
     /**
      * Used to execute post request on server..
      *
@@ -237,6 +259,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
                                        final OnResponseListener responseListener) {
         manageResponse(url, Request.Method.POST, params, responseListener);
     }
+
     /**
      * Used to execute delete request on server..
      *
@@ -248,6 +271,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
                                      final OnResponseListener responseListener) {
         manageResponse(url, Request.Method.DELETE, params, responseListener);
     }
+
     /**
      * Used to update song tally count.
      *
@@ -259,6 +283,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
                                   final OnResponseListener responseListener) {
         manageResponse(url, Request.Method.PUT, params, responseListener);
     }
+
     /**
      * Method to manage response for GET, POST, DELETE, and PUT Request.
      *
@@ -373,6 +398,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             e.printStackTrace();
         }
     }
+
     //Method for converting JSONArray to JSONObject
     public JSONObject convertToJsonObject(JSONArray jsonArray) {
         JSONObject newJsonObject = new JSONObject();
@@ -383,18 +409,21 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         }
         return newJsonObject;
     }
+
     /**
      * Marking all messages as read
      */
     public void markAllMessageRead(HashMap<String, String> params) {
         postJsonRequest(UrlUtil.MESSAGE_READ_URL, params);
     }
+
     /**
      * Marking all notifications as read
      */
     public void markAllNotificationsRead() {
         postJsonRequest(UrlUtil.NOTIFICATION_ALL_READ_URL, null);
     }
+
     /**
      * Marking all friend requests as read
      */
@@ -412,6 +441,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
                 return false;
         }
     }
+
     //Used to display volley errors on every page using the error instance
     public String displayVolleyError(VolleyError error) {
         if (error instanceof TimeoutError) {
@@ -432,14 +462,14 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             return mContext.getResources().getString(R.string.please_retry_option);
         }
     }
+
     /*
      * getting screen width
      */
     @SuppressWarnings("deprecation")
     public int getScreenWidth() {
         int columnWidth;
-        WindowManager wm = (WindowManager) mContext
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         final Point point = new Point();
         try {
@@ -452,14 +482,14 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         columnWidth = point.x;
         return columnWidth;
     }
+
     /*
      * getting screen height
      */
     @SuppressWarnings("deprecation")
     public int getScreenHeight() {
         int columnHeight;
-        WindowManager wm = (WindowManager) mContext
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         final Point point = new Point();
         try {
@@ -472,15 +502,19 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         columnHeight = point.y;
         return columnHeight;
     }
+
     public static String convertDateFormat(Resources resources, String date) {
         DateFormat sourceFormat;
+
         if (mLocale != null) {
             sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", mLocale);
         } else {
             sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         }
+
         sourceFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         String s = "";
+
         try {
             Date dob_var = sourceFormat.parse(date);
             if (dob_var != null) {
@@ -511,6 +545,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return s;
     }
     public static String getYearFormat(String date) {
@@ -529,6 +564,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         }
         return stringMonth;
     }
+
     public static String getMonthFromDate(String date, String monthFormat) {
         String stringMonth = "";
         SimpleDateFormat format;
@@ -545,6 +581,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         }
         return stringMonth;
     }
+
     public static String getDayFromDate(String date) {
         String day = "";
         SimpleDateFormat format;
@@ -561,6 +598,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         }
         return day;
     }
+
     public static String getHoursFromDate(String date) {
         String timeString = null;
         String minuteString;
@@ -589,6 +627,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         }
         return timeString;
     }
+
     public String calculateDifference(int seconds) {
         int day = (int) TimeUnit.SECONDS.toDays(seconds);
         long hours = TimeUnit.SECONDS.toHours(seconds) - (day * 24);
@@ -625,6 +664,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         }
         return tempTimer;
     }
+
     /**
      * Used to build url string.
      *
@@ -632,6 +672,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
      * @param requestUrl  - url in which the parameters will be added
      */
     public String buildQueryString(String requestUrl, Map<String, String> queryParams) {
+
         for (Map.Entry<String, String> entry : queryParams.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
@@ -640,8 +681,10 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
                     .appendQueryParameter(key, value)
                     .build().toString();
         }
+
         return requestUrl;
     }
+
     public void showProgressDialog() {
         try {
             if (!pDialog.isShowing())
@@ -650,6 +693,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             e.printStackTrace();
         }
     }
+
     public void hideProgressDialog() {
         try {
             if (pDialog.isShowing())
@@ -658,6 +702,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             e.printStackTrace();
         }
     }
+
     public void hideKeyboard() {
         View view = ((Activity) mContext).getCurrentFocus();
         if (view != null) {
@@ -665,12 +710,14 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
     public void hideKeyboardInDialog(View view) {
         if (view != null) {
             InputMethodManager im = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
             im.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
     public void showKeyboard() {
         View view = ((Activity) mContext).getCurrentFocus();
         if (view != null) {
@@ -678,6 +725,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             imm.toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_FORCED, 0);
         }
     }
+
     //Refreshing the user details
     public void refreshUserData() {
         if (!isLoggedOutUser()) {
@@ -704,6 +752,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             });
         }
     }
+
     /**
      * Used to update user data for reflecting the changes in dashboard.
      *
@@ -767,6 +816,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
                     String.valueOf(jsonObject.optInt("app_tour")));
         }
     }
+
     public void changeLanguage(final Context mContext, final String currentSelectedOption){
         try {
             final ArrayAdapter<String> languageAdapter, locationAdapter;
@@ -820,11 +870,13 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             e.printStackTrace();
         }
     }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public boolean isRtlSupported() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1
                 && ((Activity) mContext).getWindow().getDecorView().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
     }
+
     public void changeAppLocale(String languageCode, boolean isDashBoardRequest) {
         Locale locale;
         if (languageCode.contains("_")) {
@@ -850,10 +902,12 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             }
         }
     }
+
     public boolean checkManifestPermission(String manifestPermission) {
         return ContextCompat.checkSelfPermission(mContext, manifestPermission)
                 == PackageManager.PERMISSION_GRANTED;
     }
+
     public void requestForManifestPermission(String manifestPermission, int requestCode) {
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(mContext, manifestPermission)
@@ -863,6 +917,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
                     new String[]{manifestPermission}, requestCode);
         }
     }
+
     /**
      * Method to get the screen width pixels.
      *
@@ -874,6 +929,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         ((Activity) context).getWindow().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels;
     }
+
     /**
      * Method to get the screen height pixels.
      *
@@ -885,6 +941,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         ((Activity) context).getWindow().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
     }
+
     public void eraseUserDatabase() {
         PreferencesUtils.clearSharedPreferences(mContext);
         DataStorage.clearApplicationData(mContext);
@@ -904,11 +961,13 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         ((Activity) mContext).finish();
         ((Activity) mContext).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
     public static Animation getZoomInAnimation(Context context) {
         Animation zoomInAnimation = AnimationUtils.loadAnimation(context, R.anim.bubble);
         zoomInAnimation.setDuration(300);
         return zoomInAnimation;
     }
+
     public String getDeviceUUID() {
         return Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
@@ -921,9 +980,11 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
         int status = googleAPI.isGooglePlayServicesAvailable(mContext);
         return status == ConnectionResult.SUCCESS;
     }
+
     public void setOnCommunityAdsLoadedListener(OnCommunityAdsLoadedListener communityAdsLoadedListener){
         mCommunityAdsLoadedListener = communityAdsLoadedListener;
     }
+
     public void getCommunityAds(int placementCount, int adType){
         String communityAdsUrl = UrlUtil.GET_COMMUNITY_ADS_URL + "?placementCount=" + placementCount + "&type=" + adType;
         getJsonResponseFromUrl(communityAdsUrl, new OnResponseListener() {
@@ -941,6 +1002,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             }
         });
     }
+
     public void getCommunityAds(int placementCount, int adType, JSONObject jsonObject, final OnCommunityAdsLoadedListnerFeeds onCommunityAdsLoadedListnerFeeds){
         final JSONObject dataObject = jsonObject;
         String communityAdsUrl = UrlUtil.GET_COMMUNITY_ADS_URL + "?placementCount=" + placementCount + "&type=" + adType;
@@ -959,6 +1021,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             }
         });
     }
+
     public void proceedToUserLogin(Context mContext, Bundle bundle, String intentAction, String intentType,
                                    String emailValue, String passwordValue, JSONObject jsonObject) {
         PreferencesUtils.clearSharedPreferences(mContext);
@@ -1013,6 +1076,7 @@ public static final String oauth_consumer_secret = "smvc6a6k4j7aflexmnd83q2xtg0f
             ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     }
+
     public void proceedToUserSignup(Context mContext, Bundle mFbTwitterBundle, String emailAddress,
                                     String password, String subscriptionUrl, JSONObject body) {
         /**
