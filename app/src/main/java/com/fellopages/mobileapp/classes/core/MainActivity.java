@@ -233,6 +233,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtHandler(this));
         intentFilter = new IntentFilter();
         intentFilter.addAction(ConstantVariables.ACTION_VIEW_ALL_MESSAGES);
@@ -244,8 +245,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
 
         if(!mAppConst.checkManifestPermission(Manifest.permission.WAKE_LOCK)){
-            mAppConst.requestForManifestPermission(Manifest.permission.WAKE_LOCK,
-                    ConstantVariables.PERMISSION_WAKE_LOCK);
+            mAppConst.requestForManifestPermission(Manifest.permission.WAKE_LOCK, ConstantVariables.PERMISSION_WAKE_LOCK);
         }else{
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         }
@@ -276,56 +276,51 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
         mToolbarParams = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
         appBarLayout = findViewById(R.id.appbar);
 
         // Header search bar's text view.
         TextView tvSearch = (TextView) findViewById(R.id.tv_search);
         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search).mutate();
-        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color),
-                PorterDuff.Mode.SRC_ATOP));
+        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
         tvSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
         //drawer layout settings
-        drawerFragment = (FragmentDrawer) getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout),toolbar);
+        drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout),toolbar);
         drawerFragment.setDrawerListener(MainActivity.this);
         isSetLocation = getIntent().hasExtra("isSetLocation");
 
         // Updating dashboard data.
-        mAppConst.getJsonResponseFromUrl(UrlUtil.DASHBOARD_URL + "?browse_as_guest=1",
-                new OnResponseListener() {
+        mAppConst.getJsonResponseFromUrl(UrlUtil.DASHBOARD_URL + "?browse_as_guest=1", new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
 
                 updateServerSettings();
                 // Updating location & guest user info.
-                PreferencesUtils.updateLocationEnabledSetting(mContext,
-                        jsonObject.optInt("location"));
-                PreferencesUtils.updateGuestUserSettings(mContext,
-                        jsonObject.optString("browse_as_guest"));
-                PreferencesUtils.setVideoQualityPref(mContext,
-                        jsonObject.optInt("video_quality"));
+                PreferencesUtils.updateLocationEnabledSetting(mContext, jsonObject.optInt("location"));
+                PreferencesUtils.updateGuestUserSettings(mContext, jsonObject.optString("browse_as_guest"));
+                PreferencesUtils.setVideoQualityPref(mContext, jsonObject.optInt("video_quality"));
                 PreferencesUtils.setFilterEnabled(mContext, jsonObject.optInt("showFilterType"));
                 PreferencesUtils.setStoryDuration(mContext, jsonObject.optInt("storyDuration"));
                 PreferencesUtils.setOtpEnabledOption(mContext, jsonObject.optString("loginoption"));
                 PreferencesUtils.setOtpPluginEnabled(mContext, jsonObject.optInt("isOTPEnable"));
 
                 JSONArray enabledModules = jsonObject.optJSONArray("enable_modules");
+
                 if (enabledModules != null) {
                     String modules = enabledModules.toString().replace("[\"", "");
                     modules = modules.replace("\"]", "");
-                    PreferencesUtils.updateNestedCommentEnabled(mContext,
-                            enabledModules.toString().contains("nestedcomment") ? 1 : 0);
-                    PreferencesUtils.updateSiteContentCoverPhotoEnabled(mContext,
-                            enabledModules.toString().contains("sitecontentcoverphoto") ? 1 : 0);
+                    PreferencesUtils.updateNestedCommentEnabled(mContext, enabledModules.toString().contains("nestedcomment") ? 1 : 0);
+                    PreferencesUtils.updateSiteContentCoverPhotoEnabled(mContext, enabledModules.toString().contains("sitecontentcoverphoto") ? 1 : 0);
                     PreferencesUtils.setEnabledModuleList(mContext, modules);
                 }
+
                 invalidateOptionsMenu();
                 // Saving dashboard response into preferences.
                 mAppConst.saveDashboardValues(jsonObject);
@@ -350,8 +345,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         });
 
         // calling for status post options.
-        mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feeds/feed-decoration",
-                new OnResponseListener() {
+        mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feeds/feed-decoration", new OnResponseListener() {
                     @Override
                     public void onTaskCompleted(JSONObject jsonObject) {
                         STATUS_POST_OPTIONS.put(ConstantVariables.FEED_DECORATION,
@@ -368,8 +362,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     }
                 });
 
-        mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feelings/banner",
-                new OnResponseListener() {
+        mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feelings/banner", new OnResponseListener() {
                     @Override
                     public void onTaskCompleted(JSONObject jsonObject) {
                         STATUS_POST_OPTIONS.put(ConstantVariables.BANNER_DECORATION,
@@ -383,8 +376,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 });
 
         // Making server call to get response of the upgrade params.
-        mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "get-new-version?type=android",
-                new OnResponseListener() {
+        mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "get-new-version?type=android", new OnResponseListener() {
                     @Override
                     public void onTaskCompleted(JSONObject jsonObject) {
                         try {
@@ -394,10 +386,12 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
                             String currentVersion = pInfo.versionName;
                             int hoursDifference = 0;
+
                             if (PreferencesUtils.getAppUpgradeRemindTime(mContext) != null) {
                                 hoursDifference = GlobalFunctions.hoursDifferenceFromCurrentDate(PreferencesUtils.
                                         getAppUpgradeRemindTime(mContext));
                             }
+
                             // Checking for the conditions in which upgrade app dialog needs to be shown.
                             if (isPopUpEnabled && !PreferencesUtils.isAppUpgradeDialogIgnored(mContext)
                                     && latestVersion != null && !latestVersion.isEmpty() && currentVersion != null
@@ -422,6 +416,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
 
         Bundle extras = getIntent().getExtras();
+
         // Check is there any push notification intent coming from MyFcmListenerService Class
         if(extras != null) {
             int id = extras.getInt("id");
@@ -513,11 +508,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     /*
      * Add show case view step and display them (app quick tour guide)
      * */
-
     private void displayShowCaseView() {
 
         Context mContext = getApplicationContext();
-
         View searchBar = findViewById(R.id.search_bar);
 
         if (isHomePage && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.NAVIGATION_ICON_CASE_VIEW)) {
