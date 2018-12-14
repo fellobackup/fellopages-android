@@ -63,6 +63,8 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * The notifications tab item.
  */
 public class NotificationFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -89,7 +91,6 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
     private Snackbar snackbar;
     private AlertDialogWithAction mAlertDialogWithAction;
 
-
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -108,9 +109,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBrowseItemList = new ArrayList<>();
         mBrowseList = new BrowseListItems();
         postParams = new HashMap<>();
@@ -119,7 +118,6 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
 
         // Inflate the layout for this fragment
-
         rootView = inflater.inflate(R.layout.recycler_view_layout, null);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -138,21 +136,21 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                 new NotificationViewAdapter.OnItemClickListener() {
                     BrowseListItems listItems;
                     int id;
+
                     @Override
                     public void onItemClick(View view, int position) {
 
                         listItems = (BrowseListItems) mBrowseItemList.get(position);
 
                         if(listItems.getIsRead() == 0){
-                            view.setBackground(ContextCompat.getDrawable(mContext,
-                                    R.drawable.selectable_background_white));
+                            view.setBackground(ContextCompat.getDrawable(mContext, R.drawable.selectable_background_white));
                             String notificationReadUrl = UrlUtil.NOTIFICATION_READ_URL;
                             postParams.put("action_id", String.valueOf(listItems.getNotificationId()));
+
                             mAppConst.postJsonResponseForUrl(notificationReadUrl, postParams,
                                     new OnResponseListener() {
                                         @Override
-                                        public void onTaskCompleted(JSONObject jsonObject)
-                                                throws JSONException {
+                                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
                                             listItems.setIsRead(1);
                                             mNotificationViewAdapter.notifyDataSetChanged();
                                         }
@@ -163,6 +161,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                                         }
                                     });
                         }
+
                         JSONObject jsonObject;
                         String type;
 
@@ -190,30 +189,29 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                             mViewForumTopicPageTitle = jsonObject.optString("title");
                             mViewForumTopicPageSlug = jsonObject.optString("slug");
                         }
+
                         startNewActivity(type, id, listItems, jsonObject);
                     }
 
                     @Override
                     public void onProfilePictureClicked(View view, int position) {
                         listItems = (BrowseListItems) mBrowseItemList.get(position);
-                        id = GlobalFunctions.getIdOfModule(listItems.getSubjectResponse(),
-                                listItems.getNotificationSubjectType());
+                        id = GlobalFunctions.getIdOfModule(listItems.getSubjectResponse(), listItems.getNotificationSubjectType());
                         startNewActivity(listItems.getNotificationSubjectType(), id, listItems, null);
                     }
 
-
                     @Override
-                    public void onOptionSelected(View v, BrowseListItems listItems, int position) {
-
-                    }
+                    public void onOptionSelected(View v, BrowseListItems listItems, int position) { }
                 });
 
         mRecyclerView.setAdapter(mNotificationViewAdapter);
         return rootView;
     }
+
     @Override
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
+
         if (visible && !isVisibleToUser) {
             makeRequest();
         } else {
@@ -240,6 +238,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
             case ConstantVariables.SITE_STORE_VIDEO_MENU_TITLE:
             case ConstantVariables.PRODUCT_VIDEO_MENU_TITLE:
                 List<String> enabledModuleList = null;
+
                 if (PreferencesUtils.getEnabledModuleList(mContext) != null) {
                     enabledModuleList = new ArrayList<>(Arrays.asList(PreferencesUtils.getEnabledModuleList(mContext).split("\",\"")));
                 }
@@ -251,10 +250,9 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                 } else {
                     viewIntent = GlobalFunctions.getIntentForModule(mContext, id, type, mViewForumTopicPageSlug);
 
-                    viewIntent.putExtra(ConstantVariables.VIDEO_TYPE,
-                            customList.getObjectResponse().optInt("type"));
-                    viewIntent.putExtra(ConstantVariables.VIDEO_URL,
-                            customList.getObjectResponse().optString("video_url"));
+                    viewIntent.putExtra(ConstantVariables.VIDEO_TYPE, customList.getObjectResponse().optInt("type"));
+                    viewIntent.putExtra(ConstantVariables.VIDEO_URL, customList.getObjectResponse().optString("video_url"));
+
                     if (!type.equals("video")) {
                         viewIntent = GlobalFunctions.setIntentParamForVideo(type, jsonObject, id, viewIntent);
                     }
@@ -269,8 +267,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
             case "activity_comment":
                 int action_id;
 
-                if (type.equals("activity_comment") && customList.getObjectResponse() != null
-                        && customList.getObjectResponse().length() > 0) {
+                if (type.equals("activity_comment") && customList.getObjectResponse() != null && customList.getObjectResponse().length() > 0) {
                     action_id = customList.getObjectResponse().optInt("resource_id");
                 } else {
                     action_id = customList.getNotificationObjectId();
@@ -329,6 +326,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
 
             case ConstantVariables.ALBUM_PHOTO_MENU_TITLE:
                 ArrayList<PhotoListDetails> mPhotoDetails = new ArrayList<>();
+
                 if (jsonObject != null) {
                     int photoId = jsonObject.optInt("photo_id");
                     int albumId = jsonObject.optInt("album_id");
@@ -344,8 +342,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
 
                     String albumViewUrl = UrlUtil.ALBUM_VIEW_PAGE + albumId + "?gutter_menu=1";
 
-                    mPhotoDetails.add(new PhotoListDetails(photoId, image,
-                            likesCount, commentCount, mUserTagArray, likeStatus, reactions));
+                    mPhotoDetails.add(new PhotoListDetails(photoId, image, likesCount, commentCount, mUserTagArray, likeStatus, reactions));
                     openPhotoLightBox(mPhotoDetails, albumViewUrl, albumId);
                 }
 
@@ -372,23 +369,19 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                         startActivity(webViewActivity);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }else {
-                        CustomTabUtil.launchCustomTab((Activity) mContext, GlobalFunctions.
-                                getWebViewUrl(customList.getmNotificationUrl(), mContext));
+                        CustomTabUtil.launchCustomTab((Activity) mContext, GlobalFunctions.getWebViewUrl(customList.getmNotificationUrl(), mContext));
                     }
-
                 }
         }
-
     }
 
     public void makeRequest() {
-
         mAppConst.getJsonResponseFromUrl(mNotificationRequestUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject)
-                    throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
                 mBrowseItemList.clear();
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
                 if(snackbar != null && snackbar.isShown()) {
                     snackbar.dismiss();
                 }
@@ -407,6 +400,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                     errorIcon.setText("\uf0f3");
                     errorMessage.setText(mContext.getResources().getString(R.string.no_notifications));
                 }
+
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
@@ -415,9 +409,11 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
                 if(swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+
                 if (isRetryOption) {
                     snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message,
                             new SnackbarUtils.OnSnackbarActionClickListener() {
@@ -439,9 +435,11 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
 
         mTotalUpdatedItemCount = mBody.optInt("recentUpdateTotalItemCount");
         mBrowseList.setmTotalItemCount(mTotalUpdatedItemCount);
+
         if(mTotalUpdatedItemCount != 0){
             rootView.findViewById(R.id.message_layout).setVisibility(View.GONE);
             mRecentUpdatedItemArray = mBody.optJSONArray("recentUpdates");
+
             for(int i = 0;i<mRecentUpdatedItemArray.length();i++){
                 mNotificationObject = mRecentUpdatedItemArray.optJSONObject(i);
                 mNotificationId = mNotificationObject.optInt("notification_id");
@@ -458,17 +456,28 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                 mSubjectResponse = mNotificationObject.optJSONObject("subject");
                 mObjectResponse = mNotificationObject.optJSONObject("object");
                 mActionBodyParamsArray = mNotificationObject.optJSONArray("action_type_body_params");
-                mBrowseItemList.add(new BrowseListItems(mNotificationId, mCurrentUserId, mSubjectId,
-                        mObjectId,isRead, mSubjectType, mObjectType, mNotificationObject,
-                        mActionTypeBody, mFeedTitle,mNotificationType,mNotificationUrl, mSubjectResponse,
-                        mObjectResponse, mActionBodyParamsArray));
 
-
+                mBrowseItemList.add(new BrowseListItems(mNotificationId,
+                                                        mCurrentUserId,
+                                                        mSubjectId,
+                                                        mObjectId,
+                                                        isRead,
+                                                        mSubjectType,
+                                                        mObjectType,
+                                                        mNotificationObject,
+                                                        mActionTypeBody,
+                                                        mFeedTitle,
+                                                        mNotificationType,
+                                                        mNotificationUrl,
+                                                        mSubjectResponse,
+                                                        mObjectResponse,
+                                                        mActionBodyParamsArray));
             }
+
             mBrowseItemList.add(ConstantVariables.FOOTER_TYPE);
             mNotificationViewAdapter.notifyItemInserted(mBrowseItemList.size() - 1);
 
-        }else {
+        } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
             TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
             TextView errorMessage = (TextView) rootView.findViewById(R.id.error_message);
@@ -476,7 +485,6 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
             errorIcon.setText("\uf0f3");
             errorMessage.setText(mContext.getResources().getString(R.string.no_notifications));
         }
-
     }
 
     @Override
@@ -493,6 +501,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
             mRecyclerView.smoothScrollToPosition(0);
         }
     }
+
     @Override
     public void onRefresh() {
         /**
@@ -508,9 +517,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
         });
     }
 
-
     private void openPhotoLightBox(ArrayList<PhotoListDetails> mFeedPhotoDetails, String albumUrl, int albumId){
-
         Bundle bundle = new Bundle();
         bundle.putSerializable(PhotoLightBoxActivity.EXTRA_IMAGE_URL_LIST, mFeedPhotoDetails);
         Intent i = new Intent(mContext, PhotoLightBoxActivity.class);
@@ -522,5 +529,4 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
         i.putExtras(bundle);
         startActivity(i);
     }
-
 }
