@@ -47,7 +47,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+/**
+ * The inbox tab item.
+ */
 public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private Context mContext;
@@ -170,7 +172,9 @@ public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void onTaskCompleted(JSONObject jsonObject) {
                 mBrowseItemList.clear();
+
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
                 if(snackbar != null && snackbar.isShown()) {
                     snackbar.dismiss();
                 }
@@ -181,6 +185,7 @@ public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.
 
                 if (bodyJsonArray != null && bodyJsonArray.length() > 0) {
                     rootView.findViewById(R.id.message_layout).setVisibility(View.GONE);
+
                     for (int i = 0; i < bodyJsonArray.length(); i++) {
                         JSONObject jsonDataObject = bodyJsonArray.optJSONObject(i);
 
@@ -205,9 +210,17 @@ public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.
                             mInboxRead = mReceiverDataResponse.optInt("inbox_read");
                             mInboxDeleted = mReceiverDataResponse.optInt("inbox_deleted");
                         }
-                        mBrowseItemList.add(new BrowseListItems(mUserDisplayName, mUserProfileImage,
-                                mMessageTitle, mMessageBody, mConversationId, mMessageId,
-                                mMessageUpdatedDate, mReceiverDataResponse, mInboxRead, mInboxDeleted));
+
+                        mBrowseItemList.add(new BrowseListItems(mUserDisplayName,
+                                                                mUserProfileImage,
+                                                                mMessageTitle,
+                                                                mMessageBody,
+                                                                mConversationId,
+                                                                mMessageId,
+                                                                mMessageUpdatedDate,
+                                                                mReceiverDataResponse,
+                                                                mInboxRead,
+                                                                mInboxDeleted));
                     }
 
                     if(mTotalItemCount > AppConstant.LIMIT){
@@ -225,6 +238,7 @@ public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.
 
                 isVisibleToUser = true;
                 mRecyclerViewAdapter.notifyDataSetChanged();
+
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
@@ -233,12 +247,13 @@ public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+
                 if (isRetryOption) {
-                    snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message,
-                            new SnackbarUtils.OnSnackbarActionClickListener() {
+                    snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message, new SnackbarUtils.OnSnackbarActionClickListener() {
                                 @Override
                                 public void onSnackbarActionClick() {
                                     rootView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
@@ -257,6 +272,7 @@ public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+
         if(mRecyclerView != null){
             mRecyclerView.smoothScrollToPosition(0);
         }
@@ -293,6 +309,7 @@ public class NewMessagesFragment extends Fragment implements SwipeRefreshLayout.
             }
 
         }
+
         makeRequest();
     }
 
