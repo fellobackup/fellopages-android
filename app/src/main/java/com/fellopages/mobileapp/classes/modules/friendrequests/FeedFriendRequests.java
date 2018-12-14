@@ -88,8 +88,7 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mBrowseItemList = new ArrayList<>();
         mBrowseList = new BrowseListItems();
@@ -109,16 +108,14 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
-        mFriendRequestUrl = UrlUtil.FRIEND_REQUEST_URL + "&page=" + pageNumber ;
-
+        mFriendRequestUrl = UrlUtil.FRIEND_REQUEST_URL + "&page=" + pageNumber;
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                final LinearLayoutManager layoutManager = (LinearLayoutManager)mRecyclerView
-                        .getLayoutManager();
+
+                final LinearLayoutManager layoutManager = (LinearLayoutManager)mRecyclerView.getLayoutManager();
                 int firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
                 int totalItemCount = layoutManager.getItemCount();
                 int lastVisibleCount = layoutManager.findLastVisibleItemPosition() + 1;
@@ -128,17 +125,13 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
 
                 if(limit == totalItemCount && !isLoading) {
 
-                    if(limit >= AppConstant.LIMIT && (AppConstant.LIMIT * mLoadingPageNo)  <
-                            mBrowseList.getmTotalItemCount()){
-
+                    if(limit >= AppConstant.LIMIT && (AppConstant.LIMIT * mLoadingPageNo)  < mBrowseList.getmTotalItemCount()){
                         mLoadingPageNo = mLoadingPageNo + 1;
                         String url = UrlUtil.FRIEND_REQUEST_URL + "&page=" + mLoadingPageNo;
                         isLoading = true;
                         loadMoreData(url);
                     }
-
                 }
-
             }
         });
 
@@ -151,6 +144,7 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
                         BrowseListItems listItems = mBrowseItemList.get(position);
                         postParams.put("user_id",String.valueOf(listItems.getmUserId()));
                         String acceptRequestUrl = UrlUtil.USER_CONFIRM_URL;
+
                         mAppConst.postJsonResponseForUrl(acceptRequestUrl, postParams,
                                 new OnResponseListener() {
                                     @Override
@@ -175,6 +169,7 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
                         BrowseListItems listItems = mBrowseItemList.get(position);
                         postParams.put("user_id", String.valueOf(listItems.getmUserId()));
                         String rejectRequestUrl = UrlUtil.USER_REJECT_URL;
+
                         mAppConst.postJsonResponseForUrl(rejectRequestUrl, postParams,
                                 new OnResponseListener() {
                                     @Override
@@ -209,6 +204,7 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
+
         if (visible && !isVisibleToUser) {
             makeRequest();
         } else {
@@ -216,6 +212,7 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
                 snackbar.dismiss();
         }
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -223,14 +220,14 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
     }
 
     public void makeRequest() {
-
         mLoadingPageNo = 1;
+
         mAppConst.getJsonResponseFromUrl(mFriendRequestUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject)
-                    throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
                 mBrowseItemList.clear();
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
                 if (snackbar != null && snackbar.isShown()) {
                     snackbar.dismiss();
                 }
@@ -239,6 +236,7 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
 
                 isVisibleToUser = true;
                 mFriendRequestViewAdapter.notifyDataSetChanged();
+
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
@@ -247,9 +245,11 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+
                 if (message != null) {
                     if (isRetryOption) {
                         snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message,
@@ -299,8 +299,10 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
         mTotalRequestCount = mBody.optInt("totalItemCount");
         mBrowseList.setmTotalItemCount(mTotalRequestCount);
         mDataResponseArray = mBody.optJSONArray("response");
+
         if(mDataResponseArray != null && mDataResponseArray.length() > 0) {
             rootView.findViewById(R.id.message_layout).setVisibility(View.GONE);
+
             for (int i = 0; i < mDataResponseArray.length(); i++) {
                 mFRequestObject = mDataResponseArray.optJSONObject(i);
                 mSubjectResponse = mFRequestObject.optJSONObject("subject");
@@ -309,15 +311,13 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
                 mRequestSenderImage = mSubjectResponse.optString("image_profile");
                 mBrowseItemList.add(new BrowseListItems(mRequestSenderId, mRequestSenderName, mRequestSenderImage));
             }
-        }else {
+        } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
             TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
             SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf235");
             errorMessage.setText(mContext.getResources().getString(R.string.no_friend_requests));
-
-
         }
     }
 
@@ -325,6 +325,7 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+
         if (mRecyclerView != null) {
             mRecyclerView.smoothScrollToPosition(0);
         }
