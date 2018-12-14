@@ -64,6 +64,7 @@ public class AppController extends MultiDexApplication {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -104,8 +105,8 @@ public class AppController extends MultiDexApplication {
                         return true;
                     }
                 })
-
                 .build();
+
         OkHttpUtils.initClient(okHttpClient);
     }
 

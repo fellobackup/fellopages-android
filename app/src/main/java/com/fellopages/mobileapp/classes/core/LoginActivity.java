@@ -114,8 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         scrollView = (ScrollView) findViewById(R.id.scroll_view);
         loginButton = (Button) findViewById(R.id.login_button);
-        loginButton.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding),
-                0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
+        loginButton.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding), 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
         loginButton.setOnClickListener(this);
         usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
         passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
@@ -136,17 +135,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 passwordWrapper.setVisibility(View.VISIBLE);
                 mForgotPassword.setVisibility(View.VISIBLE);
             }
+
             usernameWrapper.setHint(getResources().getString(R.string.lbl_enter_email_phone));
         }
+
         LogUtils.LOGD(LoginActivity.class.getSimpleName(), "OtpEnabledOption->" + PreferencesUtils.getOtpEnabledOption(mContext));
     }
 
     public void setViewHideShow() {
         usernameWrapper.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -160,6 +159,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     isNormalLogin = true;
                     loginButton.setText(getResources().getString(R.string.login_btn_name));
                     mForgotPassword.setVisibility(View.VISIBLE);
+
                     if (charSequence.length() != 0) {
                         passwordWrapper.setVisibility(View.VISIBLE);
                         mForgotPassword.setVisibility(View.VISIBLE);
@@ -171,9 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) { }
         });
     }
 
@@ -215,8 +213,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
 
-                    mAppConst.proceedToUserLogin(mContext, bundle, intentAction, intentType,
-                                                emailValue, passwordValue, jsonObject);
+                    mAppConst.proceedToUserLogin(mContext,
+                                                 bundle,
+                                                 intentAction,
+                                                 intentType,
+                                                 emailValue,
+                                                 passwordValue,
+                                                 jsonObject);
                 }
 
                 @Override

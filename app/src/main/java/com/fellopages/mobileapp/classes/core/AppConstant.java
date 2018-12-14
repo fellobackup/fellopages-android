@@ -119,6 +119,7 @@ public class AppConstant {
     public static int isDeviceLocationEnable = 0, isDeviceLocationChange = 1;
 
     OnCommunityAdsLoadedListener mCommunityAdsLoadedListener;
+
     public AppConstant(Context context) {
         mContext = context;
         pDialog = new ProgressDialog(context);
@@ -298,15 +299,19 @@ public class AppConstant {
         try {
             if (!url.contains("graph")) {
                 url = buildQueryString(url, mAuthParams);
+
                 // Don't send location for browse albums
                 if (url.contains("rest/albums?")) {
                     mRequestParams.remove("restapilocation");
                 }
+
                 // Put Language Params, location params, and version params in Params
                 url = buildQueryString(url, mRequestParams);
             }
+
             postParams = params;
             LogUtils.LOGD(AppConstant.class.getSimpleName(), "Request Url: " + url);
+
             StringRequest request = new StringRequest(method, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -316,6 +321,7 @@ public class AppConstant {
                             JSONObject json = new JSONObject(response);
                             mStatusCode = json.optInt("status_code");
                             mBody = json.optJSONObject("body");
+
                             if (mStatusCode != 0 && isRequestSuccessful(mStatusCode) && mBody == null) {
                                 JSONArray bodyJsonArray = json.optJSONArray("body");
                                 mBody = convertToJsonObject(bodyJsonArray);
@@ -323,6 +329,7 @@ public class AppConstant {
                                     mBody = json;
                                 }
                             }
+
                             if (mStatusCode == 406) {
                                 eraseUserDatabase();
                             } else if (isRequestSuccessful(mStatusCode) && onResponseListener != null) {
@@ -330,10 +337,12 @@ public class AppConstant {
                             } else if (onResponseListener != null) {
                                 String message = json.optString("message");
                                 String errorCode = json.optString("error_code");
-                                if (errorCode != null && (errorCode.equals("email_not_verified") ||
-                                        errorCode.equals("not_approved") || errorCode.equals("subscription_fail"))) {
+
+                                if (errorCode != null &&
+                                    (errorCode.equals("email_not_verified") || errorCode.equals("not_approved") || errorCode.equals("subscription_fail"))) {
                                     message = json.optString("error_code");
                                 }
+
                                 onResponseListener.onErrorInExecutingTask(message, isRetryOption);
                             }
                         } else {
@@ -344,6 +353,7 @@ public class AppConstant {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+
                         if (onResponseListener != null) {
                             onResponseListener.onErrorInExecutingTask(mContext.getResources()
                                     .getString(R.string.parse_error), isRetryOption);
@@ -354,6 +364,7 @@ public class AppConstant {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     LogUtils.LOGD(AppConstant.class.getSimpleName(), "VolleyError: " + error);
+
                     if (onResponseListener != null) {
                         onResponseListener.onErrorInExecutingTask(displayVolleyError(error), isRetryOption);
                     }
@@ -375,24 +386,27 @@ public class AppConstant {
                     LogUtils.LOGD(AppConstant.class.getSimpleName(), "Request Params: " + postParams);
                     return postParams;
                 }
+
                 @Override
                 protected VolleyError parseNetworkError(VolleyError volleyError) {
                     if (volleyError.networkResponse != null && volleyError.networkResponse.data != null) {
                         volleyError = new VolleyError(new String(volleyError.networkResponse.data));
                     }
+
                     return volleyError;
                 }
             };
+
             //Setting timeout to 0 to fix multiple post request at once
             if (method == Request.Method.POST) {
-                request.setRetryPolicy(new DefaultRetryPolicy(
-                        0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                request.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             } else {
                 request.setRetryPolicy(new DefaultRetryPolicy(
                         REQUEST_TIMEOUT_MS,
                         NO_OF_RETRY_ATTEMPTS,
                         BACK_OF_MULTIPLIER));
             }
+
             // Adding request to request queue
             AppController.getInstance().addToRequestQueue(request, tag_json_obj);
         } catch (Exception e) {
@@ -403,11 +417,13 @@ public class AppConstant {
     //Method for converting JSONArray to JSONObject
     public JSONObject convertToJsonObject(JSONArray jsonArray) {
         JSONObject newJsonObject = new JSONObject();
+
         try {
             newJsonObject.put("response", jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return newJsonObject;
     }
 
@@ -473,6 +489,7 @@ public class AppConstant {
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         final Point point = new Point();
+
         try {
             display.getSize(point);
         } catch (NoSuchMethodError ignore) {
@@ -480,7 +497,9 @@ public class AppConstant {
             point.x = display.getWidth();
             point.y = display.getHeight();
         }
+
         columnWidth = point.x;
+
         return columnWidth;
     }
 
@@ -493,6 +512,7 @@ public class AppConstant {
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         final Point point = new Point();
+
         try {
             display.getSize(point);
         } catch (NoSuchMethodError ignore) {
@@ -500,6 +520,7 @@ public class AppConstant {
             point.x = display.getWidth();
             point.y = display.getHeight();
         }
+
         columnHeight = point.y;
         return columnHeight;
     }
@@ -552,51 +573,60 @@ public class AppConstant {
     public static String getYearFormat(String date) {
         String stringMonth = "";
         SimpleDateFormat format;
+
         if (mLocale != null) {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", mLocale);
         } else {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         }
+
         try {
             Date dateObj = format.parse(date);
             stringMonth = (String) android.text.format.DateFormat.format("yyyy", dateObj);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return stringMonth;
     }
 
     public static String getMonthFromDate(String date, String monthFormat) {
         String stringMonth = "";
         SimpleDateFormat format;
+
         if (mLocale != null) {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", mLocale);
         } else {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         }
+
         try {
             Date dateObj = format.parse(date);
             stringMonth = (String) android.text.format.DateFormat.format(monthFormat, dateObj);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return stringMonth;
     }
 
     public static String getDayFromDate(String date) {
         String day = "";
         SimpleDateFormat format;
+
         if (mLocale != null) {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", mLocale);
         } else {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         }
+
         try {
             Date dateObj = format.parse(date);
             day = (String) android.text.format.DateFormat.format("dd", dateObj);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return day;
     }
 
@@ -604,11 +634,13 @@ public class AppConstant {
         String timeString = null;
         String minuteString;
         SimpleDateFormat format;
+
         if (mLocale != null) {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", mLocale);
         } else {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         }
+
         try {
             Date dateObj = format.parse(date);
             int hours = dateObj.getHours();
@@ -626,6 +658,7 @@ public class AppConstant {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return timeString;
     }
 
@@ -635,12 +668,14 @@ public class AppConstant {
         long minute = TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds) * 60);
         long second = TimeUnit.SECONDS.toSeconds(seconds) - (TimeUnit.SECONDS.toMinutes(seconds) * 60);
         String tempTimer;
+
         // Adding hours.
         if (hours == 0) {
             tempTimer = "";
         } else {
             tempTimer = ((hours < 10) ? "0" + hours + ":" : hours + ":");
         }
+
         // Adding minutes.
         if (minute == 0) {
             // Checking if the hours is not 0 then adding the hours in timer string.
@@ -652,6 +687,7 @@ public class AppConstant {
         } else {
             tempTimer = tempTimer + ((minute < 10) ? "0" + minute : "" + minute);
         }
+
         // Adding seconds.
         if (second == 0) {
             // Checking if the hours/minutes is not 0 then adding the seconds into timer string.
@@ -663,6 +699,7 @@ public class AppConstant {
         } else {
             tempTimer = tempTimer + ((second < 10) ? ":0" + second : ":" + second);
         }
+
         return tempTimer;
     }
 
@@ -747,6 +784,7 @@ public class AppConstant {
                         }
                     }
                 }
+
                 @Override
                 public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 }
@@ -762,11 +800,14 @@ public class AppConstant {
     public void saveDashboardValues(JSONObject jsonObject) {
         if (jsonObject != null) {
             JSONArray menuObject = jsonObject.optJSONArray("menus");
+
             // Language Work
             JSONObject mLanguageObject = jsonObject.optJSONObject("languages");
+
             if (mLanguageObject != null && mLanguageObject.length() != 0) {
                 String mDefaultLanguageCode = mLanguageObject.optString("default");
                 JSONObject mMultiLanguages = mLanguageObject.optJSONObject("languages");
+
                 // Pass Language Params using intent
                 if (mDefaultLanguageCode != null && !mDefaultLanguageCode.isEmpty() &&
                         !mDefaultLanguageCode.equals("null")) {
@@ -782,23 +823,23 @@ public class AppConstant {
                             mMultiLanguages.toString());
                 }
             }
+
             // Location Work
             JSONObject mLocationObject = jsonObject.optJSONObject("restapilocation");
+
             if (mLocationObject != null && mLocationObject.length() != 0) {
                 String mDefaultLocation = mLocationObject.optString("default");
                 JSONObject mMultiLocations = mLocationObject.optJSONObject("restapilocation");
                 mLocationType = mLocationObject.optString("locationType");
                 isLocationEnable = true;
-                if (PreferencesUtils.getDefaultLocation(mContext) == null
-                        && mDefaultLocation != null && !mDefaultLocation.isEmpty()) {
-                    PreferencesUtils.updateDashBoardData(mContext,
-                            PreferencesUtils.DASHBOARD_DEFAULT_LOCATION,
-                            mDefaultLocation);
+
+                if (PreferencesUtils.getDefaultLocation(mContext) == null &&
+                    mDefaultLocation != null &&
+                    !mDefaultLocation.isEmpty()) {
+                    PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_DEFAULT_LOCATION, mDefaultLocation);
                 }
                 if (mMultiLocations != null && mMultiLocations.length() != 0) {
-                    PreferencesUtils.updateDashBoardData(mContext,
-                            PreferencesUtils.DASHBOARD_MULTI_LOCATION,
-                            mMultiLocations.toString());
+                    PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_MULTI_LOCATION, mMultiLocations.toString());
                 }
                 if (mLocationType.equals("notspecific")) {
                     // Get device location is enable or not
@@ -806,15 +847,14 @@ public class AppConstant {
                     isDeviceLocationChange = mLocationObject.optInt("isChangeManually", 1);
                 }
             }
+
             // Pass Dashboard Menus using intent
             if (menuObject != null && menuObject.length() != 0) {
-                PreferencesUtils.updateDashBoardData(mContext,
-                        PreferencesUtils.DASHBOARD_MENUS,
-                        menuObject.toString());
+                PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_MENUS, menuObject.toString());
             }
+
             // Set pref for app tour setting
-            PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.APP_TOUR_ENABLED,
-                    String.valueOf(jsonObject.optInt("app_tour")));
+            PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.APP_TOUR_ENABLED, String.valueOf(jsonObject.optInt("app_tour")));
         }
     }
 
@@ -822,37 +862,46 @@ public class AppConstant {
         try {
             final ArrayAdapter<String> languageAdapter, locationAdapter;
             final Map<String, String> mSelectedLanguageInfo;
+
             mSelectedLanguageInfo = new HashMap<>();
+
             final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(mContext);
             alertBuilder.setTitle(mContext.getResources().getString(R.string.language_popup_title));
+
             JSONObject multiLanguages = null;
             int selectedPosition = 0;
+
             languageAdapter = new ArrayAdapter<>(mContext, android.R.layout.select_dialog_singlechoice);
             String languages = PreferencesUtils.getLanguages(mContext);
+
             if (languages != null && !languages.isEmpty()) {
                 multiLanguages = new JSONObject(languages);
                 JSONArray localeNames = multiLanguages.names();
+
                 for (int i = 0; i < multiLanguages.length(); i++) {
                     String locale = localeNames.getString(i);
                     languageAdapter.add(multiLanguages.getString(locale));
                     mSelectedLanguageInfo.put(multiLanguages.getString(locale), locale);
                 }
             }
+
             if (multiLanguages != null && multiLanguages.has(PreferencesUtils.getCurrentLanguage(mContext))) {
                 String defaultLang = multiLanguages.optString(PreferencesUtils.getCurrentLanguage(mContext));
                 selectedPosition = languageAdapter.getPosition(defaultLang);
             }
+
             alertBuilder.setSingleChoiceItems(languageAdapter, selectedPosition,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String localeName = mSelectedLanguageInfo.get(languageAdapter.getItem(which));
-                            if (localeName != null &&
-                                    !localeName.equals(PreferencesUtils.getCurrentLanguage(mContext))) {
+
+                            if (localeName != null && !localeName.equals(PreferencesUtils.getCurrentLanguage(mContext))) {
+
                                 changeAppLocale(localeName, false);
-                                PreferencesUtils.updateDashBoardData(mContext,
-                                        PreferencesUtils.CURRENT_LANGUAGE,
-                                        localeName);
+
+                                PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.CURRENT_LANGUAGE, localeName);
+
                                 Bundle bundle = new Bundle();
                                 bundle.putString("previousSelected", currentSelectedOption);
                                 Intent intent = new Intent(mContext, WelcomeScreen.class);
@@ -863,9 +912,11 @@ public class AppConstant {
                                 ((Activity) mContext).overridePendingTransition(0, 0);
                                 mContext.startActivity(intent);
                             }
+
                             dialog.dismiss();
                         }
                     });
+
             alertBuilder.create().show();
         }catch (JSONException |NullPointerException e) {
             e.printStackTrace();
@@ -874,24 +925,27 @@ public class AppConstant {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public boolean isRtlSupported() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1
-                && ((Activity) mContext).getWindow().getDecorView().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && ((Activity) mContext).getWindow().getDecorView().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
     }
 
     public void changeAppLocale(String languageCode, boolean isDashBoardRequest) {
         Locale locale;
+
         if (languageCode.contains("_")) {
             String localNameArray[] = languageCode.split("_");
             locale = new Locale(localNameArray[0], localNameArray[1]);
         } else {
             locale = new Locale(languageCode);
         }
+
         Locale.setDefault(locale);
+
         if (!isDashBoardRequest) {
             Configuration config = new Configuration();
             config.locale = locale;
             ((Activity) mContext).getBaseContext().getResources().updateConfiguration(config, null);
         }
+
         // Change App Locale when user change language of app
         if (PreferencesUtils.getUserDetail(mContext) != null) {
             try {
@@ -905,17 +959,14 @@ public class AppConstant {
     }
 
     public boolean checkManifestPermission(String manifestPermission) {
-        return ContextCompat.checkSelfPermission(mContext, manifestPermission)
-                == PackageManager.PERMISSION_GRANTED;
+        return ContextCompat.checkSelfPermission(mContext, manifestPermission) == PackageManager.PERMISSION_GRANTED;
     }
 
     public void requestForManifestPermission(String manifestPermission, int requestCode) {
         // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(mContext, manifestPermission)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(mContext, manifestPermission) != PackageManager.PERMISSION_GRANTED) {
             // No explanation needed, we can request the permission.
-            ActivityCompat.requestPermissions((Activity) mContext,
-                    new String[]{manifestPermission}, requestCode);
+            ActivityCompat.requestPermissions((Activity) mContext, new String[]{manifestPermission}, requestCode);
         }
     }
 
@@ -952,11 +1003,13 @@ public class AppConstant {
         TwitterCore.getInstance().getSessionManager().clearActiveSession();
         LoginManager.getInstance().logOut();
         Intent homeScreen;
+
         if (ConstantVariables.INTRO_SLIDE_SHOW_ENABLED == 1) {
             homeScreen = new Intent(mContext, NewLoginActivity.class);
         } else {
             homeScreen = new Intent(mContext, LoginActivity.class);
         }
+
         homeScreen.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mContext.startActivity(homeScreen);
         ((Activity) mContext).finish();
@@ -973,6 +1026,7 @@ public class AppConstant {
         return Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
     }
+
     /**
      * Check the device to make sure it has the Google Play Services APK.
      */
@@ -988,6 +1042,7 @@ public class AppConstant {
 
     public void getCommunityAds(int placementCount, int adType){
         String communityAdsUrl = UrlUtil.GET_COMMUNITY_ADS_URL + "?placementCount=" + placementCount + "&type=" + adType;
+
         getJsonResponseFromUrl(communityAdsUrl, new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
@@ -1007,6 +1062,7 @@ public class AppConstant {
     public void getCommunityAds(int placementCount, int adType, JSONObject jsonObject, final OnCommunityAdsLoadedListnerFeeds onCommunityAdsLoadedListnerFeeds){
         final JSONObject dataObject = jsonObject;
         String communityAdsUrl = UrlUtil.GET_COMMUNITY_ADS_URL + "?placementCount=" + placementCount + "&type=" + adType;
+
         getJsonResponseFromUrl(communityAdsUrl, new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
@@ -1069,8 +1125,7 @@ public class AppConstant {
             // Save email and base64 encrypted password in SharedPreferences
             PreferencesUtils.UpdateLoginInfoPref(mContext, emailValue, passwordValue, userDetail.optInt("user_id"));
 
-             /* English is coming from API instead of it's language code, It will automatically
-                work when API issue will be resolved.. */
+             /* English is coming from API instead of it's language code, It will automatically work when API issue will be resolved.. */
             if (user_language.equals("English")) {
                 user_language = "en";
             }
@@ -1098,8 +1153,12 @@ public class AppConstant {
         }
     }
 
-    public void proceedToUserSignup(Context mContext, Bundle mFbTwitterBundle, String emailAddress,
-                                    String password, String subscriptionUrl, JSONObject body) {
+    public void proceedToUserSignup(Context mContext,
+                                    Bundle mFbTwitterBundle,
+                                    String emailAddress,
+                                    String password,
+                                    String subscriptionUrl,
+                                    JSONObject body) {
         /**
          * Check If there user has chosen a paid subscription
          * redirect to the web view activity on the url which is coming with body string in response.
