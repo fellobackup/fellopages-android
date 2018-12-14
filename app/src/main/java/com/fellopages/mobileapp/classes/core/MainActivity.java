@@ -165,8 +165,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         GoogleApiClient.OnConnectionFailedListener, LocationListener, ShowCaseStepDisplayer.DismissListener {
 
     private final int TYPE_HOME = 1,TYPE_MODULE = 2,TYPE_OTHER = 3;
-    private boolean isHomePage = false, mIsCanView = true, isGuestUserHomePage = false,
-            isSetLocation = false, isCurrentLocationSet = false;
+    private boolean isHomePage = false, mIsCanView = true, isGuestUserHomePage = false, isSetLocation = false, isCurrentLocationSet = false;
     private String mAppTitle;
     private String mUploadPhotoUrl, mIcon, mSingularLabel;
     private ArrayList<String> mSelectPath;
@@ -205,24 +204,24 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     private int menuCallingTime = 1;
     private AppBarLayout appBarLayout;
 
-    /* Broadcast receiver for receiving broadcasting intent action for
-    viewing message and notification module (view all)    */
-
+    /**
+     * Broadcast receiver for receiving broadcasting intent action for
+     * viewing message and notification module (view all)
+     */
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if( intent!=null){
                 switch (intent.getAction()) {
                     case ConstantVariables.ACTION_VIEW_ALL_MESSAGES:
-                        selectItem("core_mini_messages",
-                                getResources().getString(R.string.message_tab_name), null, null, 1);
+                        selectItem("core_mini_messages", getResources().getString(R.string.message_tab_name), null, null, 1);
                         break;
+
                     case ConstantVariables.ACTION_VIEW_ALL_NOTIFICATIONS:
                         if(optionMenu != null){
                             optionMenu.findItem(R.id.action_search).setVisible(false);
                         }
-                        selectItem("core_mini_notification",
-                                getResources().getString(R.string.notification_drawer), null, null, 1);
+                        selectItem("core_mini_notification", getResources().getString(R.string.notification_drawer), null, null, 1);
                         break;
                 }
             }
@@ -300,8 +299,8 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         mAppConst.getJsonResponseFromUrl(UrlUtil.DASHBOARD_URL + "?browse_as_guest=1", new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
-
                 updateServerSettings();
+
                 // Updating location & guest user info.
                 PreferencesUtils.updateLocationEnabledSetting(mContext, jsonObject.optInt("location"));
                 PreferencesUtils.updateGuestUserSettings(mContext, jsonObject.optString("browse_as_guest"));
@@ -348,18 +347,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feeds/feed-decoration", new OnResponseListener() {
                     @Override
                     public void onTaskCompleted(JSONObject jsonObject) {
-                        STATUS_POST_OPTIONS.put(ConstantVariables.FEED_DECORATION,
-                                jsonObject.optJSONObject("feed_docoration_setting"));
-                        STATUS_POST_OPTIONS.put(ConstantVariables.WORD_STYLING,
-                                jsonObject.optJSONArray("word_styling"));
-                        STATUS_POST_OPTIONS.put(ConstantVariables.ON_THIS_DAY,
-                                jsonObject.optJSONObject("on_thisDay"));
+                        STATUS_POST_OPTIONS.put(ConstantVariables.FEED_DECORATION, jsonObject.optJSONObject("feed_docoration_setting"));
+                        STATUS_POST_OPTIONS.put(ConstantVariables.WORD_STYLING, jsonObject.optJSONArray("word_styling"));
+                        STATUS_POST_OPTIONS.put(ConstantVariables.ON_THIS_DAY, jsonObject.optJSONObject("on_thisDay"));
                     }
 
                     @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-
-                    }
+                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
                 });
 
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feelings/banner", new OnResponseListener() {
@@ -370,9 +364,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     }
 
                     @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-
-                    }
+                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
                 });
 
         // Making server call to get response of the upgrade params.
@@ -388,8 +380,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             int hoursDifference = 0;
 
                             if (PreferencesUtils.getAppUpgradeRemindTime(mContext) != null) {
-                                hoursDifference = GlobalFunctions.hoursDifferenceFromCurrentDate(PreferencesUtils.
-                                        getAppUpgradeRemindTime(mContext));
+                                hoursDifference = GlobalFunctions.hoursDifferenceFromCurrentDate(PreferencesUtils.getAppUpgradeRemindTime(mContext));
                             }
 
                             // Checking for the conditions in which upgrade app dialog needs to be shown.
@@ -409,9 +400,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     }
 
                     @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-
-                    }
+                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
                 });
 
 
@@ -443,8 +432,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     if (!type.isEmpty()) {
 
                         if (type.equals("core_comment")) {
-                            selectItem("core_mini_notification" ,getResources().
-                                    getString(R.string.notification_drawer), null, null, 0);
+                            selectItem("core_mini_notification", getResources().getString(R.string.notification_drawer), null, null, 0);
                         } else if (type.equals("album_photo") && albumId != 0) {
                             startNewActivity(type, albumId, listingTypeId, notificationViewUrl, headerTitle, paramsObject);
                             selectItem("home", mAppTitle, null, null, 0);
@@ -462,11 +450,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 }
             } else if (extras.getBoolean("isRedirectedFromEventProfile")) {
                 mPackagesEnabled = PreferencesUtils.getAdvEventPackageEnabled(mContext);
-                selectItem(ConstantVariables.ADVANCED_EVENT_MENU_TITLE,
-                        PreferencesUtils.getAdvEventTitle(mContext), null, null, PreferencesUtils.getCanCreate(mContext));
+                selectItem(ConstantVariables.ADVANCED_EVENT_MENU_TITLE, PreferencesUtils.getAdvEventTitle(mContext), null, null, PreferencesUtils.getCanCreate(mContext));
             } else {
                 selectItem("home", mAppTitle, null, null, 0);
-
             }
         } else {
             //first page selection when the app loaded first time
@@ -490,16 +476,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     }
 
                     @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-
-                    }
+                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
                 });
     }
 
     private void autoUpdateCurrentLocation() {
         if (AppConstant.isDeviceLocationEnable == 1 && AppConstant.mLocationType.equals("notspecific")) {
-            if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
             }
         }
@@ -519,62 +502,72 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             showCaseStepDisplayer.addStep(new ShowCaseStep(new TopLeftToolbar(), mContext.getResources().getString(R.string.navigation_show_case_text)));
         }
 
-        if (searchBar != null && isHomePage &&
-                searchBar.getVisibility() == View.VISIBLE && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW)) {
+        if (searchBar != null &&
+            isHomePage &&
+            searchBar.getVisibility() == View.VISIBLE &&
+            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW)) {
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW);
             isShowCaseView = true;
-            showCaseStepDisplayer.addStep(new ShowCaseStep(new ViewPosition(searchBar.findViewById(R.id.tv_search)),
-                    mContext.getResources().getString(R.string.search_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
+            showCaseStepDisplayer.addStep(new ShowCaseStep(new ViewPosition(searchBar.findViewById(R.id.tv_search)), mContext.getResources().getString(R.string.search_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
         }
 
-        if (cartItem!= null && isHomePage && cartItem.isVisible() && isHomePage
-                && cartItem.getActionView() != null && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.CART_ICON_CASE_VIEW)) {
+        if (cartItem!= null &&
+            isHomePage &&
+            cartItem.isVisible() &&
+            isHomePage &&
+            cartItem.getActionView() != null &&
+            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.CART_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.CART_ICON_CASE_VIEW);
-            showCaseStepDisplayer.addStep(new ShowCaseStep(cartItem.getActionView(),
-                    mContext.getResources().getString(R.string.cart_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
+            showCaseStepDisplayer.addStep(new ShowCaseStep(cartItem.getActionView(), mContext.getResources().getString(R.string.cart_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
         }
 
-        if (locationItem != null && locationItem.isVisible() && isHomePage && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.LOCATION_ICON_CASE_VIEW)) {
+        if (locationItem != null &&
+            locationItem.isVisible() &&
+            isHomePage &&
+            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.LOCATION_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.LOCATION_ICON_CASE_VIEW);
-            showCaseStepDisplayer.addStep(new ShowCaseStep(locationItem.getActionView(),
-                    mContext.getResources().getString(R.string.location_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
+            showCaseStepDisplayer.addStep(new ShowCaseStep(locationItem.getActionView(), mContext.getResources().getString(R.string.location_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
         }
 
-        if (searchItem != null && searchItem.isVisible()
-                && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_ICON_CASE_VIEW)) {
+        if (searchItem != null &&
+            searchItem.isVisible() &&
+            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.SEARCH_ICON_CASE_VIEW);
-            showCaseStepDisplayer.addStep(new ShowCaseStep(searchItem.getActionView(),
-                    mContext.getResources().getString(R.string.search_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
+            showCaseStepDisplayer.addStep(new ShowCaseStep(searchItem.getActionView(), mContext.getResources().getString(R.string.search_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
         }
 
         View postView = findViewById(R.id.status_update_text);
-        if (postView != null && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.STATUS_POST_CASE_VIEW)
-                && !drawerFragment.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+
+        if (postView != null &&
+            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.STATUS_POST_CASE_VIEW) &&
+            !drawerFragment.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.STATUS_POST_CASE_VIEW);
-            showCaseStepDisplayer.addStep(new ShowCaseStep(postView,
-                    mContext.getResources().getString(R.string.feed_post_show_case_text), mContext.getResources().getDimension(R.dimen.radius_20)));
+            showCaseStepDisplayer.addStep(new ShowCaseStep(postView, mContext.getResources().getString(R.string.feed_post_show_case_text), mContext.getResources().getDimension(R.dimen.radius_20)));
         }
 
-        if (!isHomePage && mFabCreate != null && mFabCreate.getVisibility() == View.VISIBLE
-                && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_CREATE_CASE_VIEW)
-                && !currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE)) {
+        if (!isHomePage &&
+            mFabCreate != null &&
+            mFabCreate.getVisibility() == View.VISIBLE &&
+            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_CREATE_CASE_VIEW) &&
+            !currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.FAB_CREATE_CASE_VIEW);
             showCaseStepDisplayer.addStep(new ShowCaseStep(new ViewPosition(mFabCreate), mContext.getResources().getString(R.string.create_content_show_case_text)));
         }
 
-        if (!isHomePage && mFabMenu != null && mFabMenu.getVisibility() == View.VISIBLE
-                && currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE)
-                && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW) ) {
+        if (!isHomePage &&
+            mFabMenu != null &&
+            mFabMenu.getVisibility() == View.VISIBLE &&
+            currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE) &&
+            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW) ) {
             isShowCaseView = true;
             int padding70 = (int) getResources().getDimensionPixelOffset(R.dimen.padding_70dp);
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW);
-            showCaseStepDisplayer.addStep(new ShowCaseStep(new BottomRightCustom(padding70), mContext.getResources().getString(R.string.create_album_show_case_text),
-                    mContext.getResources().getDimension(R.dimen.radius_25)));
+            showCaseStepDisplayer.addStep(new ShowCaseStep(new BottomRightCustom(padding70), mContext.getResources().getString(R.string.create_album_show_case_text), mContext.getResources().getDimension(R.dimen.radius_25)));
         }
 
         if (isShowCaseView) {
@@ -582,15 +575,14 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         } else {
             checkLocationPermission();
         }
-
     }
 
     // Display product count over the cart menu icon in toolbar
     public void displayCartCount() {
         if (mCartCountBadge != null) {
             if (!PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("0") &&
-                    !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("")
-                    && !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("null")) {
+                !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("") &&
+                !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("null")) {
                 mCartCountBadge.setVisibility(View.VISIBLE);
                 mCartCountBadge.setText(PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT));
             }  else {
@@ -640,6 +632,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 openAppInPlayStore();
             }
         });
+
         tvRemindMeLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -648,6 +641,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH).format(new Date()));
             }
         });
+
         tvIgnore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1890,7 +1884,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
     }
 
-    /* Executing background task for sending post request for sing out */
+    /**
+     * Executing background task for sending post request for sing out
+     */
     AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
         @Override
         protected void onPreExecute() {
@@ -1991,8 +1987,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         // Show an explanation to the user, After the user
                         // sees the explanation, try again to request the permission.
 
-                        mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.WAKE_LOCK,
-                                ConstantVariables.PERMISSION_WAKE_LOCK);
+                        mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.WAKE_LOCK, ConstantVariables.PERMISSION_WAKE_LOCK);
 
                     }else{
                         // If user pressed never ask again on permission popup
@@ -2070,33 +2065,30 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ContextCompat.checkSelfPermission(mContext,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED && mGoogleApiClient.isConnected()) {
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+            mGoogleApiClient.isConnected()) {
 
-            LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient, mLocationRequest, this);
-
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-    }
+    public void onConnectionSuspended(int i) { }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { }
 
     @Override
     public void onLocationChanged(Location location) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
         try {
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),
-                    location.getLongitude(), 1);
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
             if (addresses != null) {
                 Address address = addresses.get(0);
                 ArrayList<String> addressFragments = new ArrayList<>();
+
                 // Fetch the address lines using getAddressLine and join them.
                 for(int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
                     addressFragments.add(address.getAddressLine(i));
@@ -2106,11 +2098,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     isCurrentLocationSet = true;
                     String mNewLocation = TextUtils.join(System.getProperty("line.separator"), addressFragments);
 
-                    Toast.makeText(mContext, getResources().getString(R.string.current_location_text) + " " + mNewLocation,
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.current_location_text) + " " + mNewLocation, Toast.LENGTH_LONG).show();
 
-                    PreferencesUtils.updateDashBoardData(mContext,
-                            PreferencesUtils.DASHBOARD_DEFAULT_LOCATION, mNewLocation);
+                    PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_DEFAULT_LOCATION, mNewLocation);
 
                     JSONObject userDetail = (!mAppConst.isLoggedOutUser() && PreferencesUtils.getUserDetail(mContext) != null ) ? new JSONObject(PreferencesUtils.getUserDetail(mContext)) : null;
 
@@ -2146,7 +2136,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
             }
         } catch (IllegalStateException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
 
     }
@@ -2158,25 +2148,20 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         mAppConst.postJsonResponseForUrl(url, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
-
-            }
+            public void onTaskCompleted(JSONObject jsonObject) throws JSONException { }
 
             @Override
-            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-
-            }
+            public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
         });
-
     }
 
     public void requestForDeviceLocation() {
-
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
         mGoogleApiClient.connect();
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
@@ -2196,6 +2181,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             loadFragmentOnGPSEnabled();
                         }
                         break;
+
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         try {
                             status.startResolutionForResult((Activity) mContext, ConstantVariables.PERMISSION_GPS_SETTINGS);
@@ -2203,15 +2189,17 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             e.printStackTrace();
                         }
                         break;
+
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
                         break;
                 }
             }
         });
     }
-    /*
-    * Show case view dismiss listener override method
-    * */
+
+    /**
+     * Show case view dismiss listener override method
+     */
     @Override
     public void onDismiss() {
         isShowCaseView = false;
@@ -2221,12 +2209,14 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     /* Check and request for device location to access all the location based features */
     private void checkLocationPermission() {
         isCurrentLocationSet = false;
-        if (isSetLocation && AppConstant.mLocationType != null && AppConstant.mLocationType.equals("notspecific")
-                && AppConstant.isDeviceLocationEnable == 1) {
+        if (isSetLocation &&
+            AppConstant.mLocationType != null &&
+            AppConstant.mLocationType.equals("notspecific") &&
+            AppConstant.isDeviceLocationEnable == 1) {
             isSetLocation = false;
+
             if (!mAppConst.checkManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                mAppConst.requestForManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION,
-                        ConstantVariables.ACCESS_FINE_LOCATION);
+                mAppConst.requestForManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION, ConstantVariables.ACCESS_FINE_LOCATION);
             } else {
                 requestForDeviceLocation();
             }
