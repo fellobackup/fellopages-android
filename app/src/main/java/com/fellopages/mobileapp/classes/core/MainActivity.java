@@ -471,8 +471,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 new OnResponseListener() {
                     @Override
                     public void onTaskCompleted(JSONObject response) {
-                        SERVER_SETTINGS.put(ConstantVariables.SERVER_SETTINGS_KEY,
-                                response);
+                        SERVER_SETTINGS.put(ConstantVariables.SERVER_SETTINGS_KEY, response);
                     }
 
                     @Override

@@ -47,6 +47,8 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * Friend request feed tab
  */
 public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private Context mContext;
