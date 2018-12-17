@@ -126,7 +126,8 @@
 <string name="re_publish_event_request">Re Publish Event</string>
 <string name="added_to_waitlist">You are added to waitlist</string>
 <string name="add_me_to_waitlist">Add me to waitlist</string>
-<string name="book_now_button_text">Book Now</string>
+<!--<string name="book_now_button_text">Book Now</string>-->
+<string name="book_now_button_text">Register</string>
 <string name="inbox_tab">Inbox</string>
 <string name="sentbox_tab">Sent</string>
 <string name="message_type_hint">Type a message</string>
@@ -140,7 +141,8 @@
 <string name="category_salutation">in</string>
 <string name="unlike">Unlike</string>
 <string name="comment_text">Comment</string>
-<string name="like_text">Like</string>
+<!--<string name="like_text">Like</string>-->
+<string name="like_text">Fello Like</string>
 <string name="comment_empty_msg">Please Enter a Comment</string>
 <string name="viewAll">View All Comments</string>
 <string name="comment_page_like_count_text">this</string>
