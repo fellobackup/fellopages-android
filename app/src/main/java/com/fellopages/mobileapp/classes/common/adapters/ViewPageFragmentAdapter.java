@@ -215,6 +215,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
 
         String tabName;
         Fragment loadFragment = null;
+
         try {
             JSONObject profileTabObject = mProfileTab.getJSONObject(position);
             tabName = profileTabObject.getString("name");
@@ -222,11 +223,14 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
             JSONObject urlParams = profileTabObject.optJSONObject("urlParams");
             int totalItemCount = profileTabObject.optInt("totalItemCount");
             String url = profileTabObject.optString("url");
+
             if (url != null && !url.isEmpty()) {
                 redirectUrl = AppConstant.DEFAULT_URL + url;
+
                 if (urlParams != null && urlParams.length() != 0) {
                     JSONArray urlParamsNames = urlParams.names();
                     Map<String, String> params = new HashMap<>();
+
                     for (int j = 0; j < urlParams.length(); j++) {
                         String name = urlParamsNames.optString(j);
                         String value = urlParams.optString(name);
@@ -278,6 +282,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
                     bundle.putInt(ConstantVariables.USER_ID, mBundle.getInt(ConstantVariables.USER_ID));
                     break;
             }
+
             bundle.putInt(ConstantVariables.CAN_UPLOAD, mBundle.getInt(ConstantVariables.CAN_UPLOAD));
             bundle.putInt(ConstantVariables.CONTENT_ID, mBundle.getInt(ConstantVariables.CONTENT_ID));
             bundle.putString(ConstantVariables.RESPONSE_OBJECT, mBundle.getString(ConstantVariables.RESPONSE_OBJECT));

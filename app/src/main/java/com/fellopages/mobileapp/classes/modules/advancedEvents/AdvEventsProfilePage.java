@@ -81,7 +81,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     private String successMessage;
     private String mContentUrl, mInviteGuestUrl, location, startTime, endTime;
     private int mContentId, mEventId, mOccurrenceId, mProfileTabSize;
-    private CharSequence[] items = new CharSequence[3];
+    // private CharSequence[] items = new CharSequence[3]; // TODO: Just enable this back if rsvp will applied
     private int isClosed;
     private boolean isLoadingFromCreate = false, isContentEdited = false, isContentDeleted = false;
     private CollapsingToolbarLayout collapsingToolbar;
@@ -149,9 +149,10 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        items[0] = sAttending =  mContext.getResources().getString(R.string.rsvp_filter_attending);
-        items[1] = sMayBeAttending = mContext.getResources().getString(R.string.rsvp_filter_may_be_attending);
-        items[2] = sNotAttending = mContext.getResources().getString(R.string.rsvp_filter_not_attending);
+        // TODO: Enable this again if rsvp will be applied
+        // items[0] = sAttending =  mContext.getResources().getString(R.string.rsvp_filter_attending);
+        // items[1] = sMayBeAttending = mContext.getResources().getString(R.string.rsvp_filter_may_be_attending);
+        // items[2] = sNotAttending = mContext.getResources().getString(R.string.rsvp_filter_not_attending);
 
         if (getIntent().getExtras().containsKey(ConstantVariables.VIEW_PAGE_URL)) {
             mItemViewUrl = getIntent().getStringExtra(ConstantVariables.VIEW_PAGE_URL);
@@ -259,8 +260,6 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             }
         });
     }
-
-
 
     private void getCoverMenuRequest() {
         String menuUrl = UrlUtil.GET_COVER_MENU_URL +"subject_id=" + mEventId +

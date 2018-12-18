@@ -75,7 +75,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-
+/**
+ * Invited Guests tab in the Event profile.
+ */
 public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterView.OnItemClickListener,
         SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener, View.OnClickListener,
         AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener {
@@ -132,8 +134,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mBrowseItemList = new ArrayList<>();
         mBrowseList = new BrowseListItems();
@@ -167,17 +168,18 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
         if (mCurrentList != null && mCurrentList.equals("members_siteevent")) {
             title = getArguments().getString(ConstantVariables.CONTENT_TITLE);
             mTitle = getArguments().getString(ConstantVariables.CONTENT_TITLE);
+
             if (mEventId != 0) {
                 AdvEventGuestDetailsFragment.sEventId = mEventId;
             }
         } else {
             mCurrentList = "occurrence_siteevent";
         }
+
         PreferencesUtils.updateCurrentList(mContext, mCurrentList);
 
         // Setting-up the adapter for guest list.
-        mManageDataAdapter = new AdvModulesManageDataAdapter(mContext, R.layout.list_row, mBrowseItemList,
-                mCurrentList, new OnItemDeleteResponseListener() {
+        mManageDataAdapter = new AdvModulesManageDataAdapter(mContext, R.layout.list_row, mBrowseItemList, mCurrentList, new OnItemDeleteResponseListener() {
             @Override
             public void onItemDelete(int itemCount, boolean isUserReviewDelete) {
                 if (itemCount != 0 && mOnFragmentDataChangeListener != null) {
@@ -188,6 +190,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
                 }
             }
         });
+
         mListView.setAdapter(mManageDataAdapter);
 
         // Setting-up the adapter for the rsvp filter.
@@ -214,10 +217,13 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
     }
 
     public void getViews() {
-
-        mListView = (ListView) rootView.findViewById(R.id.listview);
-        spinner = (Spinner) rootView.findViewById(R.id.filter_view);
+        // hide the rsvp filter
+        // TODO: remove this code if needed to apply rsvp again
         filterLayout = (CardView) rootView.findViewById(R.id.categoryFilterLayout);
+        filterLayout.setVisibility(View.GONE);
+
+        spinner = (Spinner) rootView.findViewById(R.id.filter_view);
+        mListView = (ListView) rootView.findViewById(R.id.listview);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_listview_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -244,7 +250,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
             url = mAppConst.buildQueryString(url, searchParams);
             isSearchGuest = true;
             mBrowseItemList.clear();
-            filterLayout.setVisibility(View.GONE);
+            // filterLayout.setVisibility(View.GONE);
         }
 
         mLoadingPageNo = 1;
@@ -276,6 +282,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
                 }
+
                 if (isRetryOption) {
                     snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message,
                             new SnackbarUtils.OnSnackbarActionClickListener() {
@@ -356,9 +363,11 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
 
                 } else {
                     if (!isSearchGuest) {
-                        filterLayout.setVisibility(View.VISIBLE);
+                        // filterLayout.setVisibility(View.VISIBLE);
                     }
+
                     mWaitingItemCount = jsonObject.optInt("getWaitingItemCount");
+
                     if (mWaitingItemCount != 0 && !isSearchPageRequest) {
                         mWaitingMemberBlock.setVisibility(View.VISIBLE);
                         mWaitingMemberText.setText(mWaitingItemCount + " " + mContext.getResources().getString(R.string.waiting_member_text));
@@ -370,9 +379,11 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
 
                     int totalItemCount = jsonObject.getInt("getTotalItemCount");
                     mBrowseList.setmTotalItemCount(totalItemCount);
+
                     if (mOnFragmentDataChangeListener != null) {
                         mOnFragmentDataChangeListener.onFragmentTitleUpdated(AdvEventGuestDetailsFragment.this, totalItemCount);
                     }
+
                     if (totalItemCount != 0){
                         rootView.findViewById(R.id.message_layout).setVisibility(View.GONE);
                         JSONArray dataResponse = jsonObject.optJSONArray("members");
@@ -396,10 +407,12 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
                                 if (user_id == 0) {
                                     name = getResources().getString(R.string.deleted_member_text);
                                 }
+
                                 int rsvp = jsonDataObject.optInt("rsvp");
                                 String guestImage = jsonDataObject.optString("image");
                                 JSONArray menuArray = jsonDataObject.optJSONArray("menu");
                                 int isVerified = jsonDataObject.optInt("isVerified");
+
                                 if (menuArray != null){
                                     try {
                                         JSONObject friendshipObject = new JSONObject();
@@ -437,7 +450,6 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
     }
 
     public void showDateTimeDialogue(final Context context, final EditText dateField, final String type) {
-
         AlertDialog.Builder builder;
 
         try {
@@ -580,7 +592,6 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
         AdvEventGuestDetailsFragment.sEventId = mEventId;
 
         if (id == R.id.action_message){
-
             String redirectUrl = mAppConst.DEFAULT_URL + "advancedevents/member/compose/" + mEventId;
             Intent message = new Intent(mContext, CreateNewEntry.class);
             message.putExtra(ConstantVariables.CREATE_URL, redirectUrl);
@@ -589,9 +600,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
             mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             return true;
-
         } else if (id == R.id.search_occurrence) {
-
             if (mCurrentList.equals("occurrence_siteevent")) {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(mContext);
 
@@ -644,11 +653,13 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
                         dialog.cancel();
                     }
                 });
+
                 alertBuilder.create().show();
 
             }
                 return true;
             }
+
             return super.onOptionsItemSelected(item);
     }
 
