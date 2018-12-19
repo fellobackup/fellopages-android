@@ -12,8 +12,8 @@
   ~ source code.
   ~
   -->
-
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -67,6 +67,7 @@
         android:id="@+id/comment_view"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center">
+
         <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
             android:id="@+id/comment_button"
             android:layout_width="wrap_content"
@@ -98,7 +99,9 @@
         android:layout_gravity="center"
         android:background="?android:attr/selectableItemBackground"
         android:id="@+id/share_view"
+        android:visibility="gone"
         android:gravity="center">
+
         <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
             android:id="@+id/share_button"
             android:layout_width="wrap_content"
@@ -122,4 +125,35 @@
             app:iabColor="?android:textColorTertiary" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/button_size_content_card"
+        android:layout_gravity="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:id="@+id/save_feed_view"
+        android:gravity="center">
+
+        <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
+            android:id="@+id/save_feed_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_share"
+            android:drawableStart="@drawable/ic_share"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingLeft="@dimen/element_spacing_normal"
+            android:paddingStart="@dimen/element_spacing_normal"
+            android:paddingRight="@dimen/element_spacing_normal"
+            android:paddingEnd="@dimen/element_spacing_normal"
+            android:drawablePadding="@dimen/element_spacing_normal"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:text="@string/saved_feed"
+            android:textStyle="bold"
+            app:iabActivatedColor="@color/themeButtonColor"
+            app:iabColor="?android:textColorTertiary" />
+    </LinearLayout>
 </merge>

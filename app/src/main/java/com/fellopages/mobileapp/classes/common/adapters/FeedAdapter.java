@@ -355,15 +355,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 break;
 
             case COMMUNITY_ADS:
-                viewHolder = new CommunityAdsHolder(this, inflater.inflate(R.layout.list_community_ads,
-                        viewGroup, false), ConstantVariables.FEED_ADS_POSITION,
-                        ConstantVariables.FEED_ADS_TYPE, mRemoveAds);
+                viewHolder = new CommunityAdsHolder(this,
+                                                    inflater.inflate(R.layout.list_community_ads, viewGroup, false),
+                                                    ConstantVariables.FEED_ADS_POSITION,
+                                                    ConstantVariables.FEED_ADS_TYPE, mRemoveAds);
                 break;
 
             case SPONSORED_STORIES:
-                viewHolder = new SponsoredStoriesHolder(this, inflater.inflate(R.layout.list_sponsored_stories_feed,
-                        viewGroup, false), ConstantVariables.FEED_ADS_POSITION,
-                        ConstantVariables.FEED_ADS_TYPE, mRemoveAds);
+                viewHolder = new SponsoredStoriesHolder(this,
+                                                        inflater.inflate(R.layout.list_sponsored_stories_feed, viewGroup, false),
+                                                        ConstantVariables.FEED_ADS_POSITION,
+                                                        ConstantVariables.FEED_ADS_TYPE,
+                                                        mRemoveAds);
                 break;
 
             case PEOPLE_SUGGESTION:
@@ -2316,8 +2319,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                         listItemHolder.mMusicAttachmentView.setVisibility(View.GONE);
                         listItemHolder.ivSticker.setVisibility(View.GONE);
 
-                        int columnHeight = (int) (mAppConst.getScreenWidth() / ConstantVariables.
-                                IMAGE_SCALE_FACTOR);
+                        int columnHeight = (int) (mAppConst.getScreenWidth() / ConstantVariables.IMAGE_SCALE_FACTOR);
 
                         if (listItemHolder.mPhotoAttachmentCount == 1) {
 
@@ -2326,12 +2328,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             // Show Single image in ImageView.
                             if (imageMainObj != null && imageMainObj.length() > 0) {
                                 singleImageParam = getSingleImageParamFromWidthHeight(imageMainObj, listItemHolder.mSingleAttachmentImage);
-                                singleImageParam.setMargins(0,
-                                        mContext.getResources().getDimensionPixelSize(R.dimen.element_spacing_small), 0, 0);
-                                listItemHolder.rlSingleImageLayout.setLayoutParams(
-                                        singleImageParam);
-                                mImageLoader.setFeedImage(mainImage, listItemHolder.mSingleAttachmentImage,
-                                        singleImageParam.width, singleImageParam.height);
+                                singleImageParam.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.element_spacing_small), 0, 0);
+                                listItemHolder.rlSingleImageLayout.setLayoutParams(singleImageParam);
+                                mImageLoader.setFeedImage(mainImage, listItemHolder.mSingleAttachmentImage, singleImageParam.width, singleImageParam.height);
 
                                 final String imageSrc = mainImage;
 
