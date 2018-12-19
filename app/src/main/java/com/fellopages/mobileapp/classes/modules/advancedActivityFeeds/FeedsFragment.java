@@ -467,13 +467,14 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         }
 
         // Do Not Load Data from Caching in case of profile pages.
-        if (!isRefreshing && mHashTagValue == null
-                && !(mSubjectType != null && !mSubjectType.isEmpty() && mSubjectId != 0)) {
+        if (!isRefreshing && mHashTagValue == null && !(mSubjectType != null && !mSubjectType.isEmpty() && mSubjectId != 0)) {
             try {
                 if (mFeedItemsList != null) {
                     mFeedItemsList.clear();
                 }
+
                 String tempData = DataStorage.getResponseFromLocalStorage(mContext, DataStorage.ACTIVITY_FEED_FILE);
+
                 if (tempData != null) {
                     swipeRefreshLayout.post(new Runnable() {
                         @Override
@@ -481,12 +482,14 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                             swipeRefreshLayout.setRefreshing(true);
                         }
                     });
+
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(tempData);
 
                     if (jsonObject.length() != 0) {
                         addHeader(jsonObject, true);
                         addDataToList(jsonObject, true);
+
                         if (isNewPost)
                             layoutManager.scrollToPositionWithOffset(0, 0);
                     }
@@ -501,6 +504,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                             getString(R.string.welcome_user_text),
                                     mContext.getResources().getString(R.string.welcomeText), displayName
                             ));
+
                             welcomeUserTextView.setVisibility(View.VISIBLE);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -518,11 +522,12 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         mAppConst.getJsonResponseFromUrl(url, new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) {
-
                 isVisibleToUser = true;
+
                 if (mFeedItemsList != null) {
                     mFeedItemsList.clear();
                 }
+
                 mFeedAdapter.clearLists();
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                 mRetryMessageBlock.setVisibility(View.GONE);
@@ -530,6 +535,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
                 if (jsonObject != null && jsonObject.length() != 0) {
                     mBody = jsonObject;
+
                     if (!isFeedUpdate)
                         mMinFeedId = jsonObject.optInt("minid");
 
@@ -539,6 +545,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
                     addHeader(jsonObject, false);
                     addDataToList(jsonObject, false);
+
                     if (isCommunityAds) {
                         mAppConst.getCommunityAds(ConstantVariables.FEED_ADS_POSITION,
                                 ConstantVariables.FEED_ADS_TYPE, jsonObject, new OnCommunityAdsLoadedListnerFeeds() {
@@ -546,18 +553,21 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                     public void onCommunityAdsLoaded(JSONArray advertisementsArray, JSONObject jsonObject) {
                                         mAdvertisementsArray = advertisementsArray;
                                         isLoading = false;
+
                                         if (!isAdLoaded && mAdvertisementsArray != null) {
                                             isAdLoaded = true;
                                             int j = 0;
+
                                             for (int i = 0; i <= mFeedItemsList.size(); i++) {
-                                                if (i != 0 && i % ConstantVariables.FEED_ADS_POSITION == 0 &&
-                                                        j < mAdvertisementsArray.length()) {
+                                                if (i != 0 && i % ConstantVariables.FEED_ADS_POSITION == 0 && j < mAdvertisementsArray.length()) {
                                                     if (ConstantVariables.FEED_ADS_TYPE == ConstantVariables.TYPE_COMMUNITY_ADS) {
                                                         mFeedItemsList.add(i, addCommunityAddsToList(j));
                                                     } else {
                                                         mFeedItemsList.add(i, addSponsoredStoriesToList(j));
                                                     }
+
                                                     j++;
+
                                                     mFeedAdapter.notifyDataSetChanged();
                                                 }
                                             }
@@ -567,6 +577,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                                     mFeedItemsList.remove(mFeedItemsList.size() - 1);
                                                     mFeedAdapter.notifyItemRemoved(mFeedItemsList.size());
                                                 }
+
                                                 addDataToList(jsonObject, false);
                                             }
                                         }
@@ -575,15 +586,13 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                     }
 
                     // Do not save data in caching in case of profile pages.
-                    if ((mSubjectType == null || mSubjectType.isEmpty())
-                            && mSubjectId == 0 && mHashTagValue == null) {
+                    if ((mSubjectType == null || mSubjectType.isEmpty()) && mSubjectId == 0 && mHashTagValue == null) {
                         DataStorage.createTempFile(mContext, DataStorage.ACTIVITY_FEED_FILE, jsonObject.toString());
                     }
                 }
 
                 if (swipeRefreshLayout != null)
                     swipeRefreshLayout.setRefreshing(false);
-
 
                 // playing sound effect when post is posted and sound option is enabled.
                 if (getArguments() != null && getArguments().containsKey("isPosted")) {
@@ -592,6 +601,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                         layoutManager.scrollToPositionWithOffset(1, 0);
 //                        mFeedsRecyclerView.smoothScrollToPosition(1);
                     }
+
                     if (PreferencesUtils.isSoundEffectEnabled(mContext) && !isRefreshing) {
                         SoundUtil.playSoundEffectOnPost(mContext);
                     }
@@ -1559,8 +1569,9 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
             // Adding the people suggestion list into feed list.
             for (int i = 0 ; i <= mFeedItemsList.size(); i++) {
-                if (!isSuggestionLoaded && i != 0 && browseItemArrayList.size() > 0
-                        && i % ConstantVariables.PEOPLE_SUGGESTION_POSITION == 0) {
+                if (!isSuggestionLoaded && i != 0 &&
+                    browseItemArrayList.size() > 0 &&
+                    i % ConstantVariables.PEOPLE_SUGGESTION_POSITION == 0) {
                     mFeedItemsList.add(i, browseItemArrayList);
                     mFeedAdapter.notifyDataSetChanged();
                     isSuggestionLoaded = true;

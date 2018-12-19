@@ -330,6 +330,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         RecyclerView.ViewHolder viewHolder;
+
         switch (viewType) {
             case PREVIEW_TYPE:
             case FEED_TYPE:
@@ -388,13 +389,11 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
-
         int type = getItemViewType(position);
 
         /* End */
 
         /* Start : To set data in feeds */
-
         switch (type) {
             case FEED_TYPE:
                 mFeedItem = (FeedList) this.mFeedItemList.get(position);
@@ -411,7 +410,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
                 listItemHolder.mPhotoAttachmentCount = mFeedItem.getmPhotoAttachmentCount();
 
-            /* Start: Set Horizontal Scrolling in Images RecyclerView */
+                /* Start: Set Horizontal Scrolling in Images RecyclerView */
                 CustomGridLayoutManager gridLayoutManager = new CustomGridLayoutManager(listItemHolder.mImagesGallery,
                         2, LinearLayoutManager.VERTICAL, false);
                 listItemHolder.mImagesGallery.setLayoutManager(gridLayoutManager);
@@ -433,7 +432,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
 
                 listItemHolder.mImagesGallery.setTag(listItemHolder);
-            /* End */
+                /* End */
 
                 listItemHolder.mCounterView.setTag(position);
                 listItemHolder.mWebUrl = mFeedItem.getmWebUrl();
@@ -443,8 +442,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
                     /* Share feed icon */
                     if (mFeedItem.getmShareFeedIcon() != null && !mFeedItem.getmShareFeedIcon().isEmpty()) {
-                        mImageLoader.setImageForUserProfile(mFeedItem.getmShareFeedIcon(),
-                                listItemHolder.mShareFeedIcon);
+                        mImageLoader.setImageForUserProfile(mFeedItem.getmShareFeedIcon(), listItemHolder.mShareFeedIcon);
                     }
 
                     listItemHolder.mShareFeedIcon.setOnClickListener(new View.OnClickListener() {
@@ -484,6 +482,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             String[] keyParts = key.split("-");
                             final String attachment_type = keyParts[1];
                             final int attachment_id = Integer.parseInt(keyParts[2]);
+
                             if (keyParts.length >= 4) {
                                 slug = keyParts[3];
                             } else {
@@ -502,8 +501,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                     ClickableSpan myClickableSpan = new ClickableSpan() {
                                         @Override
                                         public void onClick(View widget) {
-                                            redirectToActivity(value, slug, attachment_type, attachment_id,
-                                                    listItemHolder, null);
+                                            redirectToActivity(value, slug, attachment_type, attachment_id, listItemHolder, null);
                                         }
 
                                         @Override
@@ -513,6 +511,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                             ds.setColor(ContextCompat.getColor(mContext, R.color.black));
                                         }
                                     };
+
                                     text.setSpan(myClickableSpan, i1, i2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                                 }
                             }
@@ -523,8 +522,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     }
 
                     /* Show Feed Share Time */
-                    listItemHolder.mShareFeedTime.setText(AppConstant.convertDateFormat(mContext.getResources()
-                            , mFeedItem.getmShareDate()));
+                    listItemHolder.mShareFeedTime.setText(AppConstant.convertDateFormat(mContext.getResources(), mFeedItem.getmShareDate()));
 
                     /* Share feed body */
                     if (mFeedItem.getmShareBody() != null && !mFeedItem.getmShareBody().isEmpty()) {
@@ -534,6 +532,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     } else {
                         listItemHolder.mShareFeedBody.setVisibility(View.GONE);
                     }
+
                     listItemHolder.mShareFeedContainer.setVisibility(View.VISIBLE);
                     listItemHolder.mShareFeedDivider.setVisibility(View.VISIBLE);
                     int padding15 = (int) mContext.getResources().getDimension(R.dimen.padding_15dp);
@@ -548,14 +547,12 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             /* End share feed work */
 
             /* Start: Show Feed Icon Image */
-                mImageLoader.setImageForUserProfile(mFeedItem.getmFeedIcon(),
-                        listItemHolder.mFeedProfileImage);
+                mImageLoader.setImageForUserProfile(mFeedItem.getmFeedIcon(), listItemHolder.mFeedProfileImage);
 
                 listItemHolder.mFeedProfileImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FeedList feedList = (FeedList) mFeedItemList.get(
-                                listItemHolder.getAdapterPosition());
+                        FeedList feedList = (FeedList) mFeedItemList.get(listItemHolder.getAdapterPosition());
                         int subjectId;
                         String subjectType;
 
@@ -623,6 +620,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                         String[] keyParts = key.split("-");
                         final String attachment_type = keyParts[1];
                         final int attachment_id = Integer.parseInt(keyParts[2]);
+
                         if (keyParts.length >= 4) {
                             slug = keyParts[3];
                         } else {
@@ -641,8 +639,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                 ClickableSpan myClickableSpan = new ClickableSpan() {
                                     @Override
                                     public void onClick(View widget) {
-                                        redirectToActivity(value, slug, attachment_type, attachment_id,
-                                                listItemHolder, videoInfo);
+                                        redirectToActivity(value, slug, attachment_type, attachment_id, listItemHolder, videoInfo);
                                     }
 
                                     @Override
@@ -652,6 +649,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                         ds.setColor(ContextCompat.getColor(mContext, R.color.black));
                                     }
                                 };
+
                                 text.setSpan(myClickableSpan, i1, i2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                             }
                         }
@@ -944,35 +942,41 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                 listItemHolder.mLikeButton.setCompoundDrawablesWithIntrinsicBounds(
                                         ContextCompat.getDrawable(mContext, R.drawable.ic_thumbs_up),
                                         null, null, null);
+
                                 int drawablePadding = mContext.getResources().getDimensionPixelSize(R.dimen.element_spacing_normal);
                                 listItemHolder.mLikeButton.setCompoundDrawablePadding(drawablePadding);
                                 listItemHolder.mLikeButton.setActivated(false);
-                                listItemHolder.mLikeButton.setTextColor(
-                                        ContextCompat.getColor(mContext, R.color.grey_dark));
-                                listItemHolder.mLikeButton.setText(mContext.getResources().
-                                        getString(R.string.like_text));
+                                listItemHolder.mLikeButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_dark));
+                                listItemHolder.mLikeButton.setText(mContext.getResources().getString(R.string.like_text));
+
                                 listItemHolder.mReactionImage.setVisibility(View.GONE);
                             } else {
                                 listItemHolder.mLikeButton.setActivated(true);
-                                listItemHolder.mLikeButton.setTextColor(
-                                        ContextCompat.getColor(mContext, R.color.themeButtonColor));
+                                listItemHolder.mLikeButton.setTextColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+
                                 if (mReactionsEnabled == 1 && mFeedItem.getmMyFeedReactions() != null) {
                                     String reactionImage = mFeedItem.getmMyFeedReactions().optString("reaction_image_icon");
 
                                     listItemHolder.mReactionImage.setVisibility(View.VISIBLE);
                                     mImageLoader.setImageUrl(reactionImage, listItemHolder.mReactionImage);
                                     listItemHolder.mLikeButton.setCompoundDrawables(null, null, null, null);
-                                    listItemHolder.mLikeButton.setText(mFeedItem.getmMyFeedReactions()
-                                            .optString("caption"));
+
+                                    // listItemHolder.mLikeButton.setText(mFeedItem.getmMyFeedReactions().optString("caption"));
+                                    // TODO: The text is replaced manually since the Like string is from the API and should be changed from there.
+                                    // TODO: Restore the above commented code if the text from the API is changed.
+                                    String likeText = mFeedItem.getmMyFeedReactions().optString("caption");
+                                    if(likeText.toLowerCase().equals("like")){
+                                        // change to Fello Like
+                                        likeText = mContext.getResources().getString(R.string.like_text);
+                                    }
+                                    listItemHolder.mLikeButton.setText(likeText);
                                 } else {
                                     listItemHolder.mReactionImage.setVisibility(View.GONE);
-                                    listItemHolder.mLikeButton.setCompoundDrawablesWithIntrinsicBounds(
-                                            ContextCompat.getDrawable(mContext, R.drawable.ic_thumbs_up),
-                                            null, null, null);
-                                    listItemHolder.mLikeButton.setText(mContext.getResources().
-                                            getString(R.string.like_text));
+                                    listItemHolder.mLikeButton.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(mContext, R.drawable.ic_thumbs_up), null, null, null);
+                                    listItemHolder.mLikeButton.setText(mContext.getResources().getString(R.string.like_text));
                                 }
                             }
+
                             listItemHolder.mLikeButton.setVisibility(View.VISIBLE);
                             listItemHolder.mLikeBlock.setTag(position);
                             listItemHolder.mCommentButton.setVisibility(View.VISIBLE);
@@ -987,19 +991,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             listItemHolder.mLikeBlock.setVisibility(View.GONE);
                             listItemHolder.mCommentBlock.setVisibility(View.GONE);
                             listItemHolder.mReactionImage.setVisibility(View.GONE);
-
                         }
 
                         // Show Share Option
-                        if (mFeedItem.getmShareAble() != 0
-                                && mFeedItem.getmFeedFooterMenus().optJSONObject("share") != null) {
+                        if (mFeedItem.getmShareAble() != 0 && mFeedItem.getmFeedFooterMenus().optJSONObject("share") != null) {
                             listItemHolder.mShareButton.setVisibility(View.VISIBLE);
                             listItemHolder.mShareBlock.setVisibility(View.VISIBLE);
-                            listItemHolder.mShareButton.setText(mFeedItem.getmFeedFooterMenus().
-                                    optJSONObject("share").getString("label").trim());
+                            listItemHolder.mShareButton.setText(mFeedItem.getmFeedFooterMenus().optJSONObject("share").getString("label").trim());
                             listItemHolder.mShareBlock.setTag(position);
-
-
                         } else {
                             listItemHolder.mShareButton.setVisibility(View.GONE);
                             listItemHolder.mShareBlock.setVisibility(View.GONE);
@@ -1027,6 +1026,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             launchSingleFeedPage(listItemHolder);
                         } else {
                             mAppConst.showKeyboard();
+
                             if (mCommentEditText != null)
                                 mCommentEditText.requestFocus();
                         }
@@ -1044,6 +1044,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                         public void onClick(View view) {
                             itemPosition = (int) view.getTag();
                             FeedList feedList = (FeedList) mFeedItemList.get(listItemHolder.getAdapterPosition());
+
                             if (feedList.getmPhotoAttachmentCount() > 1 || mIsSingleFeed) {
                                 showComments(true);
                             } else if (!mIsSingleFeed ) {
@@ -1076,8 +1077,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             reactionsRecyclerView.setLayoutManager(linearLayoutManager);
                             reactionsRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-                            final PopupWindow popUp = new PopupWindow(reactionsRecyclerView, LinearLayout.LayoutParams.WRAP_CONTENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT);
+                            final PopupWindow popUp = new PopupWindow(reactionsRecyclerView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                             popUp.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.shape));
                             popUp.setTouchable(true);
                             popUp.setFocusable(true);
@@ -1088,8 +1088,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
                                 SoundUtil.playSoundEffectOnReactionsPopup(mContext);
                             }
-                            popUp.showAtLocation(reactionsRecyclerView, Gravity.TOP, location[0], location[1]);
 
+                            popUp.showAtLocation(reactionsRecyclerView, Gravity.TOP, location[0], location[1]);
 
                             if (mReactions != null && mReactionsArray != null) {
 
@@ -1097,15 +1097,12 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
                                 for (int i = 0; i < mReactionsArray.size(); i++) {
                                     JSONObject reactionObject = mReactionsArray.get(i);
-                                    String reaction_image_url = reactionObject.optJSONObject("icon").
-                                            optString("reaction_image_icon");
+                                    String reaction_image_url = reactionObject.optJSONObject("icon").optString("reaction_image_icon");
                                     String caption = reactionObject.optString("caption");
                                     String reaction = reactionObject.optString("reaction");
                                     int reactionId = reactionObject.optInt("reactionicon_id");
-                                    String reactionIconUrl = reactionObject.optJSONObject("icon").
-                                            optString("reaction_image_icon");
-                                    reactionsImages.add(new ImageViewList(reaction_image_url, caption,
-                                            reaction, reactionId, reactionIconUrl));
+                                    String reactionIconUrl = reactionObject.optJSONObject("icon").optString("reaction_image_icon");
+                                    reactionsImages.add(new ImageViewList(reaction_image_url, caption, reaction, reactionId, reactionIconUrl));
                                 }
 
                                 reactionsAdapter = new ImageAdapter((Activity) mContext, reactionsImages, true,
@@ -1153,18 +1150,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                          * Apply animation on like button
                          */
                         listItemHolder.mLikeButton.startAnimation(AppConstant.getZoomInAnimation(mContext));
-
                         itemPosition = (int) view.getTag();
 
                         int reactionId = 0;
                         String reactionIcon = null;
+
                         if (mReactions != null) {
                             reactionId = mReactions.optJSONObject("like").optInt("reactionicon_id");
-                            reactionIcon = mReactions.optJSONObject("like").optJSONObject("icon").
-                                    optString("reaction_image_icon");
+                            reactionIcon = mReactions.optJSONObject("like").optJSONObject("icon").optString("reaction_image_icon");
                         }
-                        instantLike(listItemHolder, mContext.getResources().getString(R.string.like_text),
-                                reactionId, reactionIcon, false);
+
+                        instantLike(listItemHolder, mContext.getResources().getString(R.string.like_text), reactionId, reactionIcon, false);
                         doLikeUnlike(itemPosition, null, false);
                     }
 
@@ -1189,8 +1185,10 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             url = AppConstant.DEFAULT_URL + shareJsonObject.getString("url");
                             JSONObject urlParams = shareJsonObject.optJSONObject("urlParams");
                             HashMap<String, String> shareParams = new HashMap<>();
+
                             if (urlParams != null && urlParams.length() != 0) {
                                 JSONArray urlParamsKeys = urlParams.names();
+
                                 for (int i = 0; i < urlParams.length(); i++) {
                                     String key = urlParamsKeys.getString(i);
                                     String value = urlParams.getString(key);
@@ -1223,8 +1221,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                         socialShareUtil.sharePost(view, title, image, url,
                                 attachmentType,
                                 (contentUrl != null && !contentUrl.isEmpty() ? contentUrl : feedObject.optString("url")));
-
-
                     }
                 });
            /* End: Click Listener on Share Menu */
@@ -1244,6 +1240,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 }
                 // Show Hidden Type Feed
                 final HiddenItemHolder hiddenItemHolder = (HiddenItemHolder) viewHolder;
+
                 if (type == HIDDEN_TYPE && mFeedItem != null) {
                     String hideBodyText = mFeedItem.getmHiddenBodyText();
                     final String undoURl = mFeedItem.getmUndoHiddenFeedURl();
@@ -1256,6 +1253,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     Spannable mySpannable = (Spannable) hiddenItemHolder.mHiddenFeedBody.getText();
                     int start = hideBodyText.length() + 1;
                     int end = start + undoText.length();
+
                     ClickableSpan myClickableSpan = new ClickableSpan() {
 
                         @Override
@@ -1289,6 +1287,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             ds.setColor(ContextCompat.getColor(mContext, R.color.black));
                         }
                     };
+
                     mySpannable.setSpan(myClickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                     // Set File a Report Option and Redirect to Report Activity
@@ -1324,6 +1323,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 if (mFeedItem != null) {
                     mSubjectPositionList.put(mFeedItem.getmSubjectId() + "-" + position, position);
                 }
+
                 // Show Header Block with Status Menus and Filters
                 final HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
 
@@ -1333,6 +1333,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 boolean isNoFeed = mFeedItem.isNoFeed();
                 mReactionsEnabled = mFeedItem.getmReactionsEnabled();
                 mReactions = mFeedItem.getmReactions();
+
                 if (mReactions != null) {
                     mReactionsArray = GlobalFunctions.sortReactionsObjectWithOrder(mReactions);
                 }
@@ -1351,8 +1352,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
                     if (mFeedPostMenus != null && mFeedPostMenus.length() != 0 && !mIsSingleFeed) {
                         if (mProfileIconImage != null && !mProfileIconImage.isEmpty()) {
-                            mImageLoader.setImageForUserProfile(mProfileIconImage,
-                                    headerViewHolder.mUserProfileImage);
+                            mImageLoader.setImageForUserProfile(mProfileIconImage, headerViewHolder.mUserProfileImage);
 
                             headerViewHolder.mUserProfileImage.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -1429,8 +1429,10 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     }
 
                     // Set filters.
-                    if (PreferencesUtils.isAAFFilterEnabled(mContext) && mFeedFiltersArray != null
-                            && mFeedFiltersArray.length() != 0 && (mSubjectType == null || mSubjectType.isEmpty())) {
+                    if (PreferencesUtils.isAAFFilterEnabled(mContext) &&
+                        mFeedFiltersArray != null &&
+                        mFeedFiltersArray.length() != 0 &&
+                        (mSubjectType == null || mSubjectType.isEmpty())) {
 
                         List<SheetItemModel> mOptionsItemList = new ArrayList<>();
                         headerViewHolder.llFilterBlock.setVisibility(View.VISIBLE);
@@ -1445,6 +1447,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             JSONObject urlParams = filterObject.optJSONObject("urlParams");
                             String filterType = urlParams.optString("filter_type");
                             String filterTitle = filterObject.optString("tab_title");
+
                             // Showing first 4 filters directly with icons and rest filters will be showing in bottom sheet.
                             if (i < 4) {
                                 if (i == 0) {
@@ -4193,8 +4196,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         }
     }
 
-    private void instantLike(ListItemHolder listItemHolder, String likeButtonText, int reactionId,
-                             String reactionIcon, boolean isReactionChanged) {
+    private void instantLike(ListItemHolder listItemHolder, String likeButtonText, int reactionId, String reactionIcon, boolean isReactionChanged) {
         FeedList feedInfoList = (FeedList) mFeedItemList.get(itemPosition);
 
         if (feedInfoList.getmIsLike() == 0) {
