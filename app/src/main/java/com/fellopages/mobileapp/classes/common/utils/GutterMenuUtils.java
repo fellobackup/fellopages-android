@@ -553,6 +553,17 @@ public class GutterMenuUtils {
                             menu.add(Menu.NONE, i, Menu.NONE, mMenuJsonObject.getString("label").trim());
                             break;
 
+                        case "book_now":
+                            String label = mMenuJsonObject.getString("label").trim();
+                            // TODO: This will override the string Book Now to Register. Proper approach for this is to change the API response.
+                            // TODO: Remove the entire case block if the text in API response is already changed.
+                            if(label.toLowerCase().equals("book now")){
+                                label = "Register";
+                            }
+
+                            menu.add(Menu.NONE, i, Menu.NONE, label);
+                            break;
+
                         default:
                             menu.add(Menu.NONE, i, Menu.NONE, mMenuJsonObject.getString("label").trim());
                             break;
