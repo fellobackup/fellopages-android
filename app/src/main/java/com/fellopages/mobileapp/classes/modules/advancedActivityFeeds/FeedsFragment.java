@@ -193,8 +193,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
         mAppConst = new AppConstant(mContext);
         mFeedItemsList = new ArrayList<>();
@@ -253,10 +252,12 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         mRetryIconAndMessage = (ActionIconThemedTextView) mHeaderView.findViewById(R.id.retry_message);
 
         Drawable img = ContextCompat.getDrawable(getContext(), R.drawable.ic_replay_white_18dp);
+
         if (img != null) {
             img.setBounds(0, 0, 30, 30);
             mRetryIconAndMessage.setCompoundDrawables(img, null, null, null);
         }
+
         // Adding header view to main view.
         mMainContent.addView(mHeaderView);
         CustomViews.addHeaderView(R.id.retryMessageBlock, swipeRefreshLayout);
@@ -269,8 +270,8 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                final LinearLayoutManager gridLayoutManager = (LinearLayoutManager) mFeedsRecyclerView
-                        .getLayoutManager();
+
+                final LinearLayoutManager gridLayoutManager = (LinearLayoutManager) mFeedsRecyclerView.getLayoutManager();
                 int firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition();
                 int totalItemCount = gridLayoutManager.getItemCount();
                 int lastVisibleCount = gridLayoutManager.findLastVisibleItemPosition() + 1;
@@ -313,9 +314,11 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                             if (mSubjectType != null && mSubjectId != 0) {
                                 feedUrl += "&subject_type=" + mSubjectType + "&subject_id=" + mSubjectId;
                             }
+
                             if (mFilterType != null && !mFilterType.isEmpty()) {
                                 feedUrl += "&filter_type=" + mFilterType;
                             }
+
                             feedUrl += "&maxid=" + mMaxFeedId;
                             isLoading = true;
                             loadMoreFeeds(feedUrl);
@@ -356,8 +359,17 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             }
         });
 
-        mFeedAdapter = new FeedAdapter(mContext, R.layout.list_feeds, mFeedItemsList, false, null,
-                mSubjectType, mSubjectId, mModuleName, -1, false, this);
+        mFeedAdapter = new FeedAdapter( mContext,
+                                        R.layout.list_feeds,
+                                        mFeedItemsList,
+                        false,
+                        null,
+                                        mSubjectType,
+                                        mSubjectId,
+                                        mModuleName,
+                            -1,
+                             false,
+                          this);
 
         mFeedAdapter.setmFilterSelectedListener(FeedsFragment.this);
         mFeedAdapter.setOnGifPlayListener(FeedsFragment.this);

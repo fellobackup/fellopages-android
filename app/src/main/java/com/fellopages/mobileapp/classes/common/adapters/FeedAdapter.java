@@ -65,6 +65,7 @@ import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 import com.facebook.ads.NativeAd;
+import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.activities.MapActivity;
@@ -589,12 +590,10 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 }
 
                 // Showing post schedule time.
-                if (mFeedItem.getSchedulePostTime() != null && !mFeedItem.getSchedulePostTime().isEmpty()
-                        && !mFeedItem.getSchedulePostTime().equals("null")) {
+                if (mFeedItem.getSchedulePostTime() != null && !mFeedItem.getSchedulePostTime().isEmpty() && !mFeedItem.getSchedulePostTime().equals("null")) {
                     listItemHolder.tvPostSchedule.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     listItemHolder.tvPostSchedule.setVisibility(View.VISIBLE);
-                    listItemHolder.tvPostSchedule.setText("\uf017 " + mContext.getResources().getString(R.string.feed_will_post)
-                            + " " + mFeedItem.getSchedulePostTime());
+                    listItemHolder.tvPostSchedule.setText("\uf017 " + mContext.getResources().getString(R.string.feed_will_post) + " " + mFeedItem.getSchedulePostTime());
                 } else {
                     listItemHolder.tvPostSchedule.setVisibility(View.GONE);
                 }
@@ -749,8 +748,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     privacyIcon = " \u2022 " + privacyIcon;
                 }
                 listItemHolder.mFeedPostedTime.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-                listItemHolder.mFeedPostedTime.setText(AppConstant.convertDateFormat(mContext.getResources()
-                        , mFeedItem.getmFeedPostTime()) + privacyIcon);
+                listItemHolder.mFeedPostedTime.setText(AppConstant.convertDateFormat(mContext.getResources(), mFeedItem.getmFeedPostTime()) + privacyIcon);
             /* End Feed Post Time work */
 
             /* Show Feed Menus Icon with options Delete Feed, Hide feed etc. */
@@ -852,10 +850,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                         listItemHolder.sellPhotosRecyclerView.setVisibility(View.GONE);
                     }
                 }
-
-
-
-
             /* End: Show Attachment Info */
 
 
@@ -933,9 +927,19 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
 
             /* Start: Show FooterMenus Like/Comment/Share */
-                if (mFeedItem.getmFeedFooterMenus() != null &&
-                        mFeedItem.getmFeedFooterMenus().length() != 0) {
+                if (mFeedItem.getmFeedFooterMenus() != null && mFeedItem.getmFeedFooterMenus().length() != 0) {
                     listItemHolder.mFeedFooterMenusBlock.setVisibility(View.VISIBLE);
+
+                    // Change the state of save feed button
+                    int saveFeedOption = mFeedItem.getmIsSaveFeedOption();
+
+                    if(saveFeedOption == 1){
+                        listItemHolder.mSaveFeedBlock.setActivated(false);
+                        listItemHolder.mSaveFeedButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_dark));
+                    } else {
+                        listItemHolder.mSaveFeedBlock.setActivated(true);
+                        listItemHolder.mSaveFeedButton.setTextColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+                    }
 
                     try {
                         if (mFeedItem.ismCanComment() != 0) {
@@ -1014,6 +1018,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     listItemHolder.mFeedFooterMenusBlock.setVisibility(View.GONE);
                 }
             /* End: Show FooterMenus Like/Comment/Share */
+
+
 
             /* Start: Click Listener on Comment Option */
 
@@ -1169,6 +1175,25 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
                 });
             /* End: Click Listener on Like Menu */
+
+            /* Start: Save Feed Block click listener */
+                listItemHolder.mSaveFeedBlock.setTag(position);
+                listItemHolder.mSaveFeedBlock.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        // Toast.makeText(view.getContext(), "Save Feed!", Toast.LENGTH_SHORT).show();
+
+                        /**
+                         * Apply animation on like button
+                         */
+                        listItemHolder.mSaveFeedBlock.startAnimation(AppConstant.getZoomInAnimation(mContext));
+                        itemPosition = (int) view.getTag();
+
+                        initiateSaveFeed(view, listItemHolder, itemPosition);
+                        // doSaveUnsaveFeedIndicate(listItemHolder, itemPosition);
+                    }
+                });
+            /* End: Save Feed Block click listener */
 
             /* Start: Click Listener on Share Menu */
 
@@ -3214,18 +3239,114 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     /**
+     * Initiate the saving of feed
+     *
+     * @param view
+     * @param listItemHolder
+     * @param itemPosition
+     */
+    private void initiateSaveFeed(View view, ListItemHolder listItemHolder, int itemPosition){
+        final FeedList feedInfoList = (FeedList) mFeedItemList.get(itemPosition);
+        JSONArray menuArray = feedInfoList.getmFeedMenusArray();
+        // final int actionID = feedInfoList.getmActionId();
+        // final JSONObject feedJsonObject = feedInfoList.getmFeedFooterMenus();
+
+        mGutterMenuUtils.mFeedList = feedInfoList;
+        mGutterMenuUtils.onMenuItemSelected(null, 2, menuArray, true, false, null);
+
+        // TODO: Enable the showing of dialog.
+        // mAppConst.showProgressDialog();
+
+        // The index of 2 is from the header menu of the feed which is Save Feed
+        // TODO: This would mimic the execution of save feed from Gutter menu. Feel free to change if you want a new implementation.
+//        try {
+//            JSONArray menuArray = feedInfoList.getmFeedMenusArray();
+//
+//            JSONObject menuJsonObject = menuArray.optJSONObject(2);
+//            JSONObject urlParams = menuJsonObject.optJSONObject("urlParams");
+//            String redirectUrl = AppConstant.DEFAULT_URL + menuJsonObject.optString("url");
+//
+//            if (urlParams != null && urlParams.length() != 0) {
+//                JSONArray urlParamsNames = urlParams.names();
+//
+//                for (int j = 0; j < urlParams.length(); j++) {
+//                    String name = urlParamsNames.getString(j);
+//                    String value = urlParams.getString(name);
+//
+//                    mPostParams.put(name, value);
+//                }
+//
+//                redirectUrl = mAppConst.buildQueryString(redirectUrl, mPostParams);
+//
+//
+//
+//                // Execute POST API for Saving of feed
+//                mAppConst.postJsonResponseForUrl(redirectUrl, mPostParams, new OnResponseListener() {
+//                    @Override
+//                    public void onTaskCompleted(JSONObject jsonObject) {
+//                        feedInfoList.setmIsSaveFeedOption(feedInfoList.getmIsSaveFeedOption() == 1 ? 0 : 1);
+//
+//                        if (mOnMenuClickResponseListener != null) {
+//                            switch (mMenuName) {
+//                                case "hide":
+//                                case "report_feed":
+//                                    mOnMenuClickResponseListener.onItemActionSuccess(mPosition,
+//                                            updateFeedInfo(jsonObject, mFeedList), mMenuName);
+//                                    break;
+//
+//                                case "disable_comment":
+//                                case "lock_this_feed":
+//                                case "update_save_feed":
+//                                case "unpin_post":
+//                                    mOnMenuClickResponseListener.onItemActionSuccess(mPosition, mFeedList, mMenuName);
+//                                    break;
+//
+//                                default:
+//                                    mOnMenuClickResponseListener.onItemActionSuccess(mPosition, mBrowseListItems,
+//                                            mMenuName);
+//                                    break;
+//                            }
+//                        }
+//
+//                        if (mOnOptionItemClickResponseListener != null) {
+//                            if (mMenuName.equals("favourite")) {
+//                                mOnOptionItemClickResponseListener.onOptionItemActionSuccess(mBrowseListItems, mMenuName);
+//                            } else if (mMenuName.equals("make_profile_photo") && mMainView != null) {
+//                                mAppConst.refreshUserData();
+//                                SnackbarUtils.displaySnackbar(mMainView,
+//                                        mContext.getResources().getString(R.string.profile_photo_updated));
+//                            }
+//                        }
+//                        mAppConst.hideProgressDialog();
+//                    }
+//
+//                    @Override
+//                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+//                        mAppConst.hideProgressDialog();
+//                        SnackbarUtils.displaySnackbar(mMainView, message);
+//                    }
+//                });
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+
+    }
+
+    /**
      * Function Called to change Like/Unlike Option in footer Menus
      */
-
     public void doLikeUnlike(final int position, String reaction, boolean isReactionChanged) {
-
         final Map<String, String> likeParams = new HashMap<>();
         final FeedList feedInfoList = (FeedList) mFeedItemList.get(position);
         final int action_id = feedInfoList.getmActionId();
         likeParams.put("action_id", String.valueOf(action_id));
+
         if (reaction != null) {
             likeParams.put("reaction", reaction);
         }
+
         final JSONObject likeJsonObject = feedInfoList.getmFeedFooterMenus().optJSONObject("like");
 
         String likeUnlikeUrl = AppConstant.DEFAULT_URL;
@@ -3234,6 +3355,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             feedInfoList.setmIsLike(1);
             notifyItemChanged(position);
             likeUnlikeUrl += "/advancedactivity/like?sendNotification=0";
+
             mAppConst.postJsonResponseForUrl(likeUnlikeUrl, likeParams, new OnResponseListener() {
                 @Override
                 public void onTaskCompleted(JSONObject jsonObject) {
@@ -3241,20 +3363,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     try {
                         likeJsonObject.put("label", "Unlike");
                         likeJsonObject.put("name", "unlike");
-                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like",
-                                likeJsonObject));
+                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like", likeJsonObject));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                     if (mIsSingleFeed && mClickedFeedPosition != -1) {
                         if (mReactionsEnabled == 1) {
-                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.FEED_REACTIONS,
-                                    feedInfoList.getmFeedReactions());
-                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.MY_FEED_REACTIONS,
-                                    feedInfoList.getmMyFeedReactions());
+                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.FEED_REACTIONS, feedInfoList.getmFeedReactions());
+                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.MY_FEED_REACTIONS, feedInfoList.getmMyFeedReactions());
                         }
                     }
+
                     updatePhotoLikeCommentCount(position);
 
                     /* Calling to send notifications after like action */
@@ -3266,8 +3386,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     try {
                         likeJsonObject.put("label", "Like");
                         likeJsonObject.put("name", "like");
-                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like",
-                                likeJsonObject));
+                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like", likeJsonObject));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -3281,7 +3400,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 likeUnlikeUrl += "/advancedactivity/unlike";
                 feedInfoList.setmIsLike(0);
             }
+
             notifyItemChanged(position);
+
             mAppConst.postJsonResponseForUrl(likeUnlikeUrl, likeParams, new OnResponseListener() {
                 @Override
                 public void onTaskCompleted(JSONObject jsonObject) {
@@ -3289,20 +3410,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     try {
                         likeJsonObject.put("label", "Like");
                         likeJsonObject.put("name", "like");
-                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like",
-                                likeJsonObject));
+                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like", likeJsonObject));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                     if (mIsSingleFeed && mClickedFeedPosition != -1) {
                         if (mReactionsEnabled == 1) {
-                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.FEED_REACTIONS,
-                                    feedInfoList.getmFeedReactions());
-                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.MY_FEED_REACTIONS,
-                                    feedInfoList.getmMyFeedReactions());
+                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.FEED_REACTIONS, feedInfoList.getmFeedReactions());
+                            PreferencesUtils.updateFeedReactionsPref(mContext, PreferencesUtils.MY_FEED_REACTIONS, feedInfoList.getmMyFeedReactions());
                         }
                     }
+
                     updatePhotoLikeCommentCount(position);
                 }
 
@@ -3311,8 +3430,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     try {
                         likeJsonObject.put("label", "Unlike");
                         likeJsonObject.put("name", "unlike");
-                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like",
-                                likeJsonObject));
+                        feedInfoList.setmFeedFooterMenus(feedInfoList.getmFeedFooterMenus().put("like", likeJsonObject));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -3996,8 +4114,10 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      * @param postBodyText   long which which needs to be truncated.
      * @param attachmentType if see more option is clicked for attachment.
      */
-    public void seeMoreOption(TextView postTextView, String postBodyText,
-                              final ListItemHolder listItemHolder, final String attachmentType,
+    public void seeMoreOption(TextView postTextView,
+                              String postBodyText,
+                              final ListItemHolder listItemHolder,
+                              final String attachmentType,
                               boolean isFeedTitle) {
 
         try {
@@ -4033,8 +4153,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             String mTitleBody = postBodyText.trim().substring(0, index);
 
             mTitleBody = mTitleBody.concat("..." + mContext.getResources().getString(R.string.readMore)).replaceAll("<img.+?>|<IMG.+?>", "");
-            int index1 = mTitleBody.trim().length() -
-                    mContext.getResources().getString(R.string.readMore).length();
+            int index1 = mTitleBody.trim().length() - mContext.getResources().getString(R.string.readMore).length();
             int index2 = mTitleBody.trim().length();
 
             postTextView.setMovementMethod(LinkMovementMethod.getInstance());
@@ -4046,6 +4165,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 public void onClick(View view) {
 
                     FeedList feedList = (FeedList) mFeedItemList.get(listItemHolder.getAdapterPosition());
+
                     if (attachmentType != null && !attachmentType.equals("advancedactivity_sell")) {
                         JSONArray attachmentArray = feedList.getmFeedAttachmentArray();
                         JSONObject singleAttachmentObject = attachmentArray.optJSONObject(0);
@@ -4053,6 +4173,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                         final String attachmentTitle = singleAttachmentObject.optString("title");
                         final String attachmentVideoType = singleAttachmentObject.optString("attachment_video_type");
                         final String attachment_video_url = singleAttachmentObject.optString("attachment_video_url");
+
                         /*
                         Redirect to view pages when see more get clicked on body of attachments
                         */
@@ -4109,6 +4230,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     ds.setColor(ContextCompat.getColor(mContext, R.color.body_text_3));
                 }
             };
+
             mySpannable.setSpan(myClickableSpan, index1, index2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -4118,7 +4240,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
         if (mDialog != null)
             mDialog.dismiss();
 
@@ -4144,8 +4265,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     private void openPhotoLightBox(int feedPosition, String album_url, int photoCount, String mFeedAttachmentType, int albumId) {
-
         mSelectedFeedList = (FeedList) mFeedItemList.get(feedPosition);
+
         Bundle bundle = new Bundle();
         ArrayList<PhotoListDetails> mFeedPhotoDetails = mSelectedFeedList.getmPhotoDetails();
         bundle.putSerializable(PhotoLightBoxActivity.EXTRA_IMAGE_URL_LIST, mFeedPhotoDetails);
@@ -4157,6 +4278,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         i.putExtra(ConstantVariables.PHOTO_REQUEST_URL, album_url);
         i.putExtra(ConstantVariables.ALBUM_ID, albumId);
         i.putExtras(bundle);
+
         if (mFeedsFragment != null) {
             mFeedsFragment.startActivityForResult(i, ConstantVariables.VIEW_LIGHT_BOX);
         } else {
@@ -4170,28 +4292,49 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             // You and count others
             if (isLike == 1) {
                 if (likeCount == 1) {
-                    listItemHolder.mLikeCount.setText(mContext.getResources().
-                            getString(R.string.reaction_string));
+                    listItemHolder.mLikeCount.setText(mContext.getResources().getString(R.string.reaction_string));
                 } else {
-                    String likeText = mContext.getResources().getQuantityString(R.plurals.others,
-                            likeCount - 1, likeCount - 1);
-                    listItemHolder.mLikeCount.setText(String.format(mContext.getResources().
-                                    getString(R.string.reaction_text_format),
-                            mContext.getResources().getString(R.string.you_and_text), likeText
-                    ));
+                    String likeText = mContext.getResources().getQuantityString(R.plurals.others, likeCount - 1, likeCount - 1);
+                    listItemHolder.mLikeCount.setText(
+                            String.format(mContext.getResources().getString(R.string.reaction_text_format),
+                                    mContext.getResources().getString(R.string.you_and_text),
+                                    likeText));
                 }
             } else {
                 // Only count
                 listItemHolder.mLikeCount.setText(Integer.toString(mFeedItem.getmLikeCount()));
             }
         } else {
-            String likeText = mContext.getResources().getQuantityString(R.plurals.profile_page_like,
-                    likeCount);
-            listItemHolder.mLikeCount.setText(String.format(
-                    mContext.getResources().getString(R.string.like_count_text),
-                    likeCount, likeText));
+            String likeText = mContext.getResources().getQuantityString(R.plurals.profile_page_like, likeCount);
+            listItemHolder.mLikeCount.setText(String.format(mContext.getResources().getString(R.string.like_count_text), likeCount, likeText));
             listItemHolder.mCountSaperator.setVisibility(View.GONE);
             listItemHolder.mPopularReactionsView.setVisibility(View.GONE);
+        }
+    }
+
+    private void doSaveUnsaveFeedIndicate(ListItemHolder listItemHolder, int itemPosition){
+        FeedList feedInfoList = (FeedList) mFeedItemList.get(itemPosition);
+
+        if(feedInfoList.getmIsSaveFeedOption() == 1){
+            // Playing likeSound effect when user liked a post.
+            if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
+                SoundUtil.playSoundEffectOnLike(mContext);
+            }
+
+            // color the save block / button blue to signify that the feed is saved
+            listItemHolder.mSaveFeedBlock.setActivated(true);
+            listItemHolder.mSaveFeedButton.setTextColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+
+            // TODO: This is temporary remove this if save feed api call is done. This should be set there depending on the response of the server.
+            feedInfoList.setmIsSaveFeedOption(0);
+        } else {
+
+            // color the save block / button to grey to signify unsave feed
+            listItemHolder.mSaveFeedBlock.setActivated(false);
+            listItemHolder.mSaveFeedButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_dark));
+
+            // TODO: This is temporary remove this if save feed api call is done. This should be set there depending on the response of the server.
+            feedInfoList.setmIsSaveFeedOption(1);
         }
     }
 
@@ -4216,15 +4359,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             listItemHolder.mCounterView.setVisibility(View.VISIBLE);
             listItemHolder.mLikeCount.setVisibility(View.VISIBLE);
 
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) listItemHolder.
-                    mCommentCount.getLayoutParams();
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) listItemHolder.mCommentCount.getLayoutParams();
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
             listItemHolder.mCommentCount.setLayoutParams(layoutParams);
 
             listItemHolder.mLikeButton.setActivated(true);
-            listItemHolder.mLikeButton.setTextColor(
-                    ContextCompat.getColor(mContext, R.color.themeButtonColor));
+            listItemHolder.mLikeButton.setTextColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
             listItemHolder.mLikeButton.setText(likeButtonText);
 
             if (mReactionsEnabled == 1) {
@@ -4247,26 +4388,25 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 if (feedInfoList.getmLikeCount() == 1) {
                     feedInfoList.setmLikeCount(feedInfoList.getmLikeCount() - 1);
                     listItemHolder.mLikeCount.setVisibility(View.GONE);
-                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) listItemHolder.
-                            mCommentCount.getLayoutParams();
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) listItemHolder.mCommentCount.getLayoutParams();
                     layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, 0);
                     layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
                     listItemHolder.mCommentCount.setLayoutParams(layoutParams);
+
                     if (feedInfoList.getmCommentCount() == 0)
                         listItemHolder.mCounterView.setVisibility(View.INVISIBLE);
                 } else {
                     feedInfoList.setmLikeCount(feedInfoList.getmLikeCount() - 1);
                     setLikeCount(0, feedInfoList.getmLikeCount(), listItemHolder);
                     listItemHolder.mLikeCount.setVisibility(View.VISIBLE);
-                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) listItemHolder.
-                            mCommentCount.getLayoutParams();
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) listItemHolder.mCommentCount.getLayoutParams();
                     layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
                     layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
                     listItemHolder.mCommentCount.setLayoutParams(layoutParams);
                 }
+
                 listItemHolder.mLikeButton.setActivated(false);
-                listItemHolder.mLikeButton.setTextColor(
-                        ContextCompat.getColor(mContext, R.color.grey_dark));
+                listItemHolder.mLikeButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_dark));
             }
 
             /**
@@ -4283,15 +4423,16 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
                     if (myFeedReactions != null && feedReactions != null) {
                         int myReactionId = myFeedReactions.optInt("reactionicon_id");
+
                         if (feedReactions.optJSONObject(String.valueOf(myReactionId)) != null) {
-                            int myReactionCount = feedReactions.optJSONObject(String.valueOf(myReactionId)).
-                                    optInt("reaction_count");
+                            int myReactionCount = feedReactions.optJSONObject(String.valueOf(myReactionId)).optInt("reaction_count");
+
                             if ((myReactionCount - 1) <= 0) {
                                 feedReactions.remove(String.valueOf(myReactionId));
                             } else {
-                                feedReactions.optJSONObject(String.valueOf(myReactionId)).put("reaction_count",
-                                        myReactionCount - 1);
+                                feedReactions.optJSONObject(String.valueOf(myReactionId)).put("reaction_count", myReactionCount - 1);
                             }
+
                             feedInfoList.setmFeedReactions(feedReactions);
                         }
                     }
@@ -4307,7 +4448,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             }
 
             listItemHolder.mLikeButton.setText(likeButtonText);
-
         }
     }
 
@@ -4345,7 +4485,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      */
     public static class ListItemHolder extends RecyclerView.ViewHolder {
 
-        ActionIconThemedTextView mLikeButton, mCommentButton, mShareButton;
+        ActionIconThemedTextView mLikeButton, mCommentButton, mShareButton, mSaveFeedButton;
         ThemedTextView mLikeCount, mCommentCount;
         BezelImageView mFeedProfileImage;
         RelativeLayout mAttachmentPreviewBlock;
@@ -4363,7 +4503,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         RelativeLayout mCounterView;
         RelativeLayout rlSingleImageLayout;
         RecyclerView mImagesGallery, mMultiPhotoRecyclerView, sellPhotosRecyclerView;
-        View mCountSaperator, mLikeBlock, mCommentBlock, mShareBlock;
+        View mCountSaperator, mLikeBlock, mCommentBlock, mShareBlock, mSaveFeedBlock;
         ImageView mReactionImage, mCancelUpload;
         Double mLatitude, mLongitude;
         String mLocationLabel, mPlaceId;
@@ -4452,9 +4592,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             mShareButton = (ActionIconThemedTextView) itemView.findViewById(R.id.share_button);
             mLikeButton = (ActionIconThemedTextView) itemView.findViewById(R.id.like_button);
             mCommentButton = (ActionIconThemedTextView) itemView.findViewById(R.id.comment_button);
+            mSaveFeedButton = (ActionIconThemedTextView) itemView.findViewById(R.id.save_feed_button);
             mLikeBlock = itemView.findViewById(R.id.like_view);
             mCommentBlock = itemView.findViewById(R.id.comment_view);
             mShareBlock = itemView.findViewById(R.id.share_view);
+            mSaveFeedBlock = itemView.findViewById(R.id.save_feed_view);
+            // for save feed block
+
+
             /*
             Feed Footer Menu Fields
              */

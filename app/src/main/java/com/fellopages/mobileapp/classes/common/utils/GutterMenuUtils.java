@@ -104,7 +104,8 @@ public class GutterMenuUtils {
     private OnMenuClickResponseListener mOnMenuClickResponseListener;
     private OnOptionItemClickResponseListener mOnOptionItemClickResponseListener;
     private BrowseListItems mBrowseListItems = new BrowseListItems();
-    private FeedList mFeedList;
+    // private FeedList mFeedList;
+    public FeedList mFeedList;
     private CommentList mCommentList;
     private Fragment mCallingFragment;
     private AlertDialogWithAction mAlertDialogWithAction;
