@@ -313,6 +313,31 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 mDataResponse = bodyJsonObject.getJSONObject("response");
                 mGutterMenus = bodyJsonObject.getJSONArray("gutterMenu");
 
+                //region dev-sareno
+                /*
+                * Issue #12: https://docs.google.com/spreadsheets/d/1exMPK9meQuKtfGCF4dnQ5fIC55vWsKvACSFLG-CoGF8/edit#gid=0
+                * Issue #5: https://docs.google.com/spreadsheets/d/1bhwwf6UNV1HuPcjta3cen5NiiQb6H3IDy6dQy8fDzM4/edit#gid=0
+                * */
+
+                /*
+                * Check if user logged in
+                * */
+                if (!mAppConst.isLoggedOutUser()) {
+                    /*
+                    * Add dashboard menu item
+                    * */
+                    String label = getResources().getString(R.string.dashboard);
+                    String url = mDataResponse.getString("content_url");
+
+                    JSONObject jsonMenu = new JSONObject();
+                    jsonMenu.put("label", label);
+                    jsonMenu.put("name", "dashboard");
+                    jsonMenu.put("urlExt", url);
+
+                    mGutterMenus.put(jsonMenu);
+                }
+                //endregion
+
                 /*
                 Check Invite Option exist in GutterMenus or not to add + icon on Members Page
                  */

@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -35,6 +36,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -1392,12 +1394,42 @@ public class GutterMenuUtils {
                 break;
 
             case "create_ticket":
-                    intent = new Intent(mContext, AdvEventsAvailableTickets.class);
-                    intent.putExtra("url", mRedirectUrl);
-                    intent.putExtra("urlParams", mUrlParams.toString());
-                    mContext.startActivity(intent);
-                    ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    break;
+                intent = new Intent(mContext, AdvEventsAvailableTickets.class);
+                intent.putExtra("url", mRedirectUrl);
+                intent.putExtra("urlParams", mUrlParams.toString());
+                mContext.startActivity(intent);
+                ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+
+            //region dev-sareno
+            /*
+             * Issue #12: https://docs.google.com/spreadsheets/d/1exMPK9meQuKtfGCF4dnQ5fIC55vWsKvACSFLG-CoGF8/edit#gid=0
+             * Issue #5: https://docs.google.com/spreadsheets/d/1bhwwf6UNV1HuPcjta3cen5NiiQb6H3IDy6dQy8fDzM4/edit#gid=0
+             * */
+            case "dashboard":
+                AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(mContext);
+                dlgBuilder.setTitle(null);
+                dlgBuilder.setMessage(mContext.getResources().getString(R.string.browse_dashboard_dialog_message));
+                dlgBuilder.setCancelable(true);
+                dlgBuilder.setNegativeButton(mContext.getResources().getString(R.string.browse_dashboard_dialog_negative_button), (dialog, which) -> dialog.dismiss());
+                dlgBuilder.setPositiveButton(mContext.getResources().getString(R.string.browse_dashboard_dialog_positive_button), (dialog, which) -> {
+                    try {
+                        String webUrl = mMenuJsonObject.getString("urlExt");
+                        if (URLUtil.isValidUrl(webUrl)) {
+                            Intent lIntent = new Intent(Intent.ACTION_VIEW);
+                            lIntent.setData(Uri.parse(webUrl));
+                            mContext.startActivity(Intent.createChooser(lIntent, mContext.getResources().getString(R.string.browse_dashboard_title)));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    dialog.dismiss();
+                });
+                dlgBuilder.create().show();
+
+                break;
+            //endregion
 
             case "invite":
             case "suggest":
