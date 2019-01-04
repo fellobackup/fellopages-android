@@ -363,6 +363,7 @@ public static final int WEBVIEW_ENABLE = 1;
     public static final String PAYMENT_CONFIG_METHOD = "payment_config_method";
     public static final String SUGGESTION = "suggestion";
     public static final String IS_OWNER = "is_owner";
+    public static final String IS_GUEST = "is_guest";
     //Activity feed post length
     public static final int FEED_TITLE_BODY_LENGTH = 300;
     // User Profile Code

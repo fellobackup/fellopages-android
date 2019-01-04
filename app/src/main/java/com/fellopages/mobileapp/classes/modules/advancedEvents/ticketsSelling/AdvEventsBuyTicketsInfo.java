@@ -14,6 +14,7 @@
 package com.fellopages.mobileapp.classes.modules.advancedEvents.ticketsSelling;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +46,10 @@ import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsBrowseDataAdapter;
 
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -215,19 +219,12 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 progressBar.setVisibility(View.GONE);
-
-                if (message.toLowerCase().contains("")) {
-                    //region dev-sareno@Changes ~com.fellopages.mobileapp.classes.common.utils.projectchanges.ChangesTracker.ISSUE_NO_10
-
-                    //endregion
-                } else {
-                    SnackbarUtils.displaySnackbarLongWithListener(mListView, message, new SnackbarUtils.OnSnackbarDismissListener() {
-                        @Override
-                        public void onSnackbarDismissed() {
-                            finish();
-                        }
-                    });
-                }
+                SnackbarUtils.displaySnackbarLongWithListener(mListView, message, new SnackbarUtils.OnSnackbarDismissListener() {
+                    @Override
+                    public void onSnackbarDismissed() {
+                        finish();
+                    }
+                });
             }
         });
     }
