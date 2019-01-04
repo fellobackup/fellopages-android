@@ -216,12 +216,18 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 progressBar.setVisibility(View.GONE);
 
-                SnackbarUtils.displaySnackbarLongWithListener(mListView, message, new SnackbarUtils.OnSnackbarDismissListener() {
-                    @Override
-                    public void onSnackbarDismissed() {
-                        finish();
-                    }
-                });
+                if (message.toLowerCase().contains("")) {
+                    //region dev-sareno@Changes ~com.fellopages.mobileapp.classes.common.utils.projectchanges.ChangesTracker.ISSUE_NO_10
+
+                    //endregion
+                } else {
+                    SnackbarUtils.displaySnackbarLongWithListener(mListView, message, new SnackbarUtils.OnSnackbarDismissListener() {
+                        @Override
+                        public void onSnackbarDismissed() {
+                            finish();
+                        }
+                    });
+                }
             }
         });
     }
