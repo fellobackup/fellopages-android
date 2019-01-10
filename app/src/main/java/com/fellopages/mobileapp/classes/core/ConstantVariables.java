@@ -499,4 +499,9 @@ public static final boolean SHOW_CART_ICON = false;
     public static final String KEY_SHARE_TYPE_MEDIA = "shareTypeMedia";
     public static final int VALUE_FAST_FORWARD_INCREMENT = 3000;
     public static final int VALUE_REWIND_INCREMENT = 3000;
+    /**
+     * Create session for user
+     */
+    public static final int CODE_USER_CREATE_SESSION = 7000;
+    public static final String KEY_USER_CREATE_SESSION = "user_create_session";
 }

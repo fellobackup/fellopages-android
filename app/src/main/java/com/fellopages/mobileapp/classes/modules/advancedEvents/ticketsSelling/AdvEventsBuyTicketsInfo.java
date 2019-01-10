@@ -13,10 +13,11 @@
 
 package com.fellopages.mobileapp.classes.modules.advancedEvents.ticketsSelling;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,12 +45,11 @@ import com.fellopages.mobileapp.classes.common.utils.UrlUtil;
 import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
+import com.fellopages.mobileapp.classes.core.LoginActivity;
 import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsBrowseDataAdapter;
+import com.fellopages.mobileapp.classes.modules.user.signup.SignUpActivity;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -329,7 +329,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                     intent.putExtra(ConstantVariables.SUBJECT_ID, mEventId);
                     intent.putExtra(ConstantVariables.RESPONSE_OBJECT, mOrderInfoObject);
                     if (mCouponInfoObject != null)
-                    intent.putExtra("couponInfoObject", mCouponInfoObject.toString());
+                        intent.putExtra("couponInfoObject", mCouponInfoObject.toString());
                     startActivityForResult(intent, ConstantVariables.CREATE_REQUEST_CODE);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
@@ -427,11 +427,46 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
         switch (id) {
             case R.id.bookNowButton:
                 if (ticketsCount != 0) {
-                    isBookNowButtonCliked = true;
-                    mAppConst.showProgressDialog();
-                    url = mAppConst.buildQueryString(mTickestInfoUrl, postParams);
-                    url = mAppConst.buildQueryString(url, urlParams);
-                    makeRequest(url);
+                    if (!mAppConst.isLoggedOutUser(true)) {
+                        /*
+                        * Login
+                        * */
+                        isBookNowButtonCliked = true;
+                        mAppConst.showProgressDialog();
+                        url = mAppConst.buildQueryString(mTickestInfoUrl, postParams);
+                        url = mAppConst.buildQueryString(url, urlParams);
+                        makeRequest(url);
+
+                    } else {
+                        /*
+                         * Logged out, ask user for action
+                         * */
+
+                        AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(this);
+                        dlgBuilder.setTitle(null);
+                        dlgBuilder.setMessage(getResources().getString(R.string.alert_user_not_logged_in_body));
+                        dlgBuilder.setPositiveButton(getResources().getString(R.string.alert_user_not_logged_in_action_login), (dialog, which) -> {
+                            /*
+                             * Open login page
+                             * */
+                            Intent intent = new Intent(this, LoginActivity.class);
+                            intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                            startActivityForResult(intent, ConstantVariables.CODE_USER_CREATE_SESSION);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        });
+                        dlgBuilder.setNegativeButton(getResources().getString(R.string.alert_user_not_logged_in_action_register), (dialog, which) -> {
+                            /*
+                             * Open sign up page
+                             * */
+                            Intent intent = new Intent(this, SignUpActivity.class);
+                            intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                            startActivityForResult(intent, ConstantVariables.CODE_USER_CREATE_SESSION);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        });
+                        dlgBuilder.setNeutralButton(getResources().getString(R.string.alert_user_not_logged_in_action_cancel), (dialog, which) -> dialog.dismiss());
+                        dlgBuilder.create().show();
+                    }
+
                 } else {
                     SnackbarUtils.displaySnackbarLongTime(mListView, getResources().getString(R.string.no_tickets_select_message));
                 }
@@ -460,6 +495,16 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION && requestCode == ConstantVariables.CODE_USER_CREATE_SESSION) {
+            /*
+            * Perform click
+            * */
+            if (mBookNowButton != null) {
+                mBookNowButton.performClick();
+            }
+            return;
+        }
+
         // Check which request we're responding to
         if (requestCode == ConstantVariables.CREATE_REQUEST_CODE && resultCode == ConstantVariables.CREATE_REQUEST_CODE) {
             finish();
@@ -481,6 +526,21 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        /*
+        * Check if user has signed in on this page
+        * */
+        if (mAppConst.isLoggedOutUser() && !mAppConst.isLoggedOutUser(true)) {
+            /*
+            * Restart the app
+            * */
+            mAppConst.restartApp();
+        }
+
+        super.onDestroy();
     }
 }
 

@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
@@ -51,6 +52,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.login.LoginManager;
+import com.fellopages.mobileapp.classes.core.impl.LoginListener;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.fellopages.mobileapp.R;
@@ -179,6 +181,20 @@ public class AppConstant {
             }
         }
     }
+
+    /**
+     * Check if user isn't logged in
+     * @param refresh true if recheck from shared preference
+     * @return true if user isn't logged in, otherwise false
+     */
+    public boolean isLoggedOutUser(boolean refresh) {
+        if (refresh) {
+            return PreferencesUtils.getUserPreferences(mContext).getString("oauth_token", null) == null;
+        } else {
+            return isLoggedOutUser();
+        }
+    }
+
     public boolean isLoggedOutUser() {
         return oauthToken == null;
     }
@@ -1097,6 +1113,29 @@ public class AppConstant {
                                    String emailValue,
                                    String passwordValue,
                                    JSONObject jsonObject) {
+        proceedToUserLogin(mContext, bundle, intentAction, intentType, emailValue, passwordValue, jsonObject, null);
+    }
+
+    /**
+     * proceedToUserLogin
+     *
+     * @param mContext Context
+     * @param bundle Bundle
+     * @param intentAction Intent action
+     * @param intentType Intent type
+     * @param emailValue email
+     * @param passwordValue password
+     * @param jsonObject json object
+     * @param loginListener override callback
+     */
+    public void proceedToUserLogin(Context mContext,
+                                   Bundle bundle,
+                                   String intentAction,
+                                   String intentType,
+                                   String emailValue,
+                                   String passwordValue,
+                                   JSONObject jsonObject,
+                                   @Nullable LoginListener loginListener) {
 
         PreferencesUtils.clearSharedPreferences(mContext);
         PreferencesUtils.clearDashboardData(mContext);
@@ -1140,8 +1179,13 @@ public class AppConstant {
                 changeAppLocale(PreferencesUtils.getDefaultLanguage(mContext), false);
             }
 
-            mContext.startActivity(intent);
-            ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            if (loginListener != null) {
+                loginListener.onOverrideLogin();
+            } else {
+                mContext.startActivity(intent);
+                ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+
         } else if (jsonObject.optString("body") != null && !jsonObject.optString("body").isEmpty()) {
             Intent webViewIntent = new Intent(mContext, WebViewActivity.class);
             webViewIntent.putExtra("email", emailValue);
@@ -1212,5 +1256,14 @@ public class AppConstant {
             ((Activity) mContext).startActivityForResult(intent, ConstantVariables.SIGN_UP_WEBVIEW_CODE);
             ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
+    }
+
+    /**
+     * Restart the app
+     */
+    public void restartApp() {
+        Intent intent = new Intent(mContext, WelcomeScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 }

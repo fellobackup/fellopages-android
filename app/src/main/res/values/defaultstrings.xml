@@ -1588,4 +1588,8 @@
     <string name="browse_dashboard_dialog_message">Please go to website to manage your dashboard.</string>
     <string name="browse_dashboard_dialog_positive_button">Go to website</string>
     <string name="browse_dashboard_dialog_negative_button">Later</string>
+    <string name="alert_user_not_logged_in_body">Please log in or create an account to proceed</string>
+    <string name="alert_user_not_logged_in_action_login">Login</string>
+    <string name="alert_user_not_logged_in_action_register">Register</string>
+    <string name="alert_user_not_logged_in_action_cancel">Cancel</string>
 </resources>

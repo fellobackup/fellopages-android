@@ -17,15 +17,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import android.content.res.ColorStateList;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,13 +28,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fellopages.mobileapp.R;
-import com.fellopages.mobileapp.classes.common.activities.WebViewActivity;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
 import com.fellopages.mobileapp.classes.common.ui.CustomViews;
 import com.fellopages.mobileapp.classes.common.utils.GlobalFunctions;
@@ -49,11 +40,9 @@ import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.fellopages.mobileapp.classes.common.utils.SoundUtil;
 import com.fellopages.mobileapp.classes.common.utils.UrlUtil;
+import com.fellopages.mobileapp.classes.core.impl.LoginListener;
 import com.fellopages.mobileapp.classes.core.startscreens.HomeScreen;
-import com.fellopages.mobileapp.classes.common.utils.DataStorage;
-import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.Status;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -214,12 +203,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     mAppConst.hideProgressDialog();
 
                     mAppConst.proceedToUserLogin(mContext,
-                                                 bundle,
-                                                 intentAction,
-                                                 intentType,
-                                                 emailValue,
-                                                 passwordValue,
-                                                 jsonObject);
+                            bundle,
+                            intentAction,
+                            intentType,
+                            emailValue,
+                            passwordValue,
+                            jsonObject,
+                            new LoginListener() {
+                                @Override
+                                public void onOverrideLogin() {
+                                    setResult(ConstantVariables.CODE_USER_CREATE_SESSION);
+                                    finish();
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                }
+                            });
                 }
 
                 @Override
@@ -352,6 +349,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
+        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            return;
+        }
+
         Intent loginActivity = new Intent(LoginActivity.this, HomeScreen.class);
         loginActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(loginActivity);
