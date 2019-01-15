@@ -48,6 +48,7 @@ import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import com.fellopages.mobileapp.classes.core.LoginActivity;
 import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsBrowseDataAdapter;
 import com.fellopages.mobileapp.classes.modules.user.signup.SignUpActivity;
+import com.fellopages.mobileapp.classes.modules.user.signup.SubscriptionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -429,8 +430,9 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                 if (ticketsCount != 0) {
                     if (!mAppConst.isLoggedOutUser(true)) {
                         /*
-                        * Login
+                        * Already login, proceed
                         * */
+
                         isBookNowButtonCliked = true;
                         mAppConst.showProgressDialog();
                         url = mAppConst.buildQueryString(mTickestInfoUrl, postParams);
@@ -446,6 +448,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                         dlgBuilder.setTitle(null);
                         dlgBuilder.setMessage(getResources().getString(R.string.alert_user_not_logged_in_body));
                         dlgBuilder.setPositiveButton(getResources().getString(R.string.alert_user_not_logged_in_action_login), (dialog, which) -> {
+                            dialog.dismiss();
                             /*
                              * Open login page
                              * */
@@ -455,10 +458,11 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         });
                         dlgBuilder.setNegativeButton(getResources().getString(R.string.alert_user_not_logged_in_action_register), (dialog, which) -> {
+                            dialog.dismiss();
                             /*
                              * Open sign up page
                              * */
-                            Intent intent = new Intent(this, SignUpActivity.class);
+                            Intent intent = new Intent(this, SubscriptionActivity.class);
                             intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
                             startActivityForResult(intent, ConstantVariables.CODE_USER_CREATE_SESSION);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -495,19 +499,29 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION && requestCode == ConstantVariables.CODE_USER_CREATE_SESSION) {
-            /*
-            * Perform click
-            * */
-            if (mBookNowButton != null) {
-                mBookNowButton.performClick();
-            }
-            return;
-        }
-
         // Check which request we're responding to
         if (requestCode == ConstantVariables.CREATE_REQUEST_CODE && resultCode == ConstantVariables.CREATE_REQUEST_CODE) {
             finish();
+        } else if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION || resultCode == ConstantVariables.CODE_USER_CREATE_SESSION_CANCELLED) {
+            if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION) {
+                boolean bSessionLogin = data != null && data.getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, false);
+                if (bSessionLogin) {
+                    /*
+                     * Perform click
+                     * */
+                    if (mBookNowButton != null) {
+                        mBookNowButton.performClick();
+                    }
+                } else {
+                    /*
+                     * Open login page
+                     * */
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                    startActivityForResult(intent, ConstantVariables.CODE_USER_CREATE_SESSION);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            }
         }
     }
 

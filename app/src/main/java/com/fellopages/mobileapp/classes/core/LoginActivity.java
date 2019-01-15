@@ -212,7 +212,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             new LoginListener() {
                                 @Override
                                 public void onOverrideLogin() {
-                                    setResult(ConstantVariables.CODE_USER_CREATE_SESSION);
+                                    Intent data = new Intent();
+                                    data.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, true);
+                                    setResult(ConstantVariables.CODE_USER_CREATE_SESSION, data);
                                     finish();
                                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 }
@@ -350,6 +352,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+            Intent data = new Intent();
+            data.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, true);
+            setResult(ConstantVariables.CODE_USER_CREATE_SESSION_CANCELLED, data);
             finish();
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             return;

@@ -503,5 +503,7 @@ public static final boolean SHOW_CART_ICON = false;
      * Create session for user
      */
     public static final int CODE_USER_CREATE_SESSION = 7000;
+    public static final int CODE_USER_CREATE_SESSION_CANCELLED = 7001;
     public static final String KEY_USER_CREATE_SESSION = "user_create_session";
+    public static final String KEY_USER_CREATE_SESSION_LOGIN = "user_create_session_login";
 }

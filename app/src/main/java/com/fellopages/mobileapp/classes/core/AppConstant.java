@@ -1266,4 +1266,20 @@ public class AppConstant {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }
+
+    public void animateEnter() {
+        animateEnter((Activity) mContext);
+    }
+
+    public void animateClose() {
+        animateClose((Activity) mContext);
+    }
+
+    public static void animateEnter(Activity activity) {
+        activity.overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
+    }
+
+    public static void animateClose(Activity activity) {
+        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
 }
