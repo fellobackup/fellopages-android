@@ -202,23 +202,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
 
-                    mAppConst.proceedToUserLogin(mContext,
-                            bundle,
-                            intentAction,
-                            intentType,
-                            emailValue,
-                            passwordValue,
-                            jsonObject,
-                            new LoginListener() {
-                                @Override
-                                public void onOverrideLogin() {
-                                    Intent data = new Intent();
-                                    data.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, true);
-                                    setResult(ConstantVariables.CODE_USER_CREATE_SESSION, data);
-                                    finish();
-                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                }
-                            });
+                    if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+                        mAppConst.proceedToUserLogin(mContext,
+                                bundle,
+                                intentAction,
+                                intentType,
+                                emailValue,
+                                passwordValue,
+                                jsonObject,
+                                new LoginListener() {
+                                    @Override
+                                    public void onOverrideLogin() {
+                                        Intent data = new Intent();
+                                        data.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, true);
+                                        setResult(ConstantVariables.CODE_USER_CREATE_SESSION, data);
+                                        finish();
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    }
+                                });
+                    } else {
+                        mAppConst.proceedToUserLogin(mContext,
+                                bundle,
+                                intentAction,
+                                intentType,
+                                emailValue,
+                                passwordValue,
+                                jsonObject);
+                    }
                 }
 
                 @Override
