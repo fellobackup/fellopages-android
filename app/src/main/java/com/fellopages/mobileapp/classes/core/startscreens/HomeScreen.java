@@ -145,19 +145,19 @@ public class HomeScreen extends FragmentActivity implements View.OnClickListener
             case 1:
 
                 fragments.add(ContentFragment.newInstance(getResources().getString(R.string.first_slide_title),
-                        getResources().getString(R.string.first_slide_subtitle), R.drawable.first));
+                        getResources().getString(R.string.first_slide_subtitle), R.drawable.first_new));
                 break;
 
             case 2:
                 fragments.add(ContentFragment.newInstance(getResources().getString(R.string.first_slide_title),
-                        getResources().getString(R.string.first_slide_subtitle), R.drawable.first));
+                        getResources().getString(R.string.first_slide_subtitle), R.drawable.first_new));
                 fragments.add(ContentFragment.newInstance(getResources().getString(R.string.second_slide_title),
                         getResources().getString(R.string.second_slide_subtitle)
                         , R.drawable.second));
                 break;
             case 3:
                 fragments.add(ContentFragment.newInstance(getResources().getString(R.string.first_slide_title),
-                        getResources().getString(R.string.first_slide_subtitle), R.drawable.first));
+                        getResources().getString(R.string.first_slide_subtitle), R.drawable.first_new));
                 fragments.add(ContentFragment.newInstance(getResources().getString(R.string.second_slide_title),
                         getResources().getString(R.string.second_slide_subtitle)
                         , R.drawable.second));

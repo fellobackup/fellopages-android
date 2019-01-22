@@ -58,4 +58,5 @@
     <string name="three_friend_like_text" translatable="false">%1$s,\u0020%2$s\u0020%3$s\u0020%4$s\u0020%5$s\u0020%6$s</string>
     <string name="channel_subscribe_like_count" translatable="false">%1$d %2$s, %3$d %4$s</string>
     <string name="default_notification_channel_id" translatable="false">default_notification_channel_id</string>
+    <string name="background">Background</string>
 </resources>

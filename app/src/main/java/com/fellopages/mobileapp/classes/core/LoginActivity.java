@@ -19,6 +19,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -72,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getWindow().setBackgroundDrawableResource(R.drawable.first);
+        getWindow().setBackgroundDrawableResource(R.drawable.login_bg);
         mContext = this;
         mAppConst = new AppConstant(this);
 
