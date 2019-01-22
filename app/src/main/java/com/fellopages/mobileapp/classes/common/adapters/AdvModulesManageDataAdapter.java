@@ -294,6 +294,8 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
 
                             listItemHolder.mOptionIcon = (TextView) mRootView.findViewById(R.id.optionsIcon);
                             listItemHolder.mOptionIcon.setTag(position);
+
+                            listItemHolder.mEventStatus = mRootView.findViewById(R.id.tv_event_status);
                             break;
 
                         case "sitepage_review":
@@ -722,6 +724,20 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                             }
                         });
 
+                        String status = listItems.getmEventStatus();
+                        if (status != null) {
+                            switch (status.toLowerCase()) {
+                                case "trial":
+                                    listItemHolder.mEventStatus.setVisibility(View.VISIBLE);
+                                    listItemHolder.mEventStatus.setText(R.string.trial);
+                                    break;
+                                default:
+                                    listItemHolder.mEventStatus.setVisibility(View.GONE);
+                            }
+                        } else {
+                            listItemHolder.mEventStatus.setVisibility(View.GONE);
+                        }
+
                         break;
 
                     case "sitepage_review":
@@ -1112,6 +1128,7 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
         LinearLayout rsvpFilterLayout, mTicketsMainLayout;
         RatingBar mRatingBar;
         Boolean isLiked = false;
+        TextView mEventStatus;
 
 
     }
