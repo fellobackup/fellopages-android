@@ -377,7 +377,12 @@ public class GutterMenuUtils {
                             mMenuLabel = getMenuLabel(false, mMenuName);
                             popup.getMenu().add(Menu.NONE, i, Menu.NONE, mMenuLabel);
                             break;
-
+                        case "create":
+                            if (!mAppConst.isLoggedOutUser()) {
+                                popup.getMenu().add(Menu.NONE, i, Menu.NONE, mMenuJsonObject.
+                                        optString("label").trim());
+                            }
+                            break;
                         case "publish":
                             if (mBrowseListItems.getmPublished() == 0) {
                                 mMenuLabel = mContext.getResources().
