@@ -794,6 +794,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     currentSelectedOption = name;
                     PreferencesUtils.updateCurrentModule(mContext, name);
                     if(mAppConst.isLoggedOutUser()){
+                        mFabCreate.hide();
                         if (name.equals("sitereview_listing")) {
                             PreferencesUtils.updateCurrentListingType(mContext, mListingTypeId, label,
                                     mSingularLabel, mListingTypeId, mBrowseType, mViewType, mIcon,
@@ -802,7 +803,10 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             label = headerLabel = mAppTitle;
                             isHomePage = true;
                             isGuestUserHomePage = true;
+                        } else if (name.equals("core_main_siteevent")){
+                            mFabCreate.show();
                         }
+
                         if (mIsCanView) {
                             fragment = GlobalFunctions.getGuestUserFragment(name);
                         }
