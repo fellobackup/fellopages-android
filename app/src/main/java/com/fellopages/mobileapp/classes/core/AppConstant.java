@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
@@ -630,6 +631,30 @@ public class AppConstant {
         return day;
     }
 
+    @Nullable
+    public static String getHoursFromDate(String date, boolean use12hrFormat) {
+        if (use12hrFormat) {
+            String timeString = null;
+            String minuteString;
+            SimpleDateFormat format;
+
+            if (mLocale != null) {
+                format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", mLocale);
+            } else {
+                format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            }
+            try {
+                Date dateObj = format.parse(date);
+                return new SimpleDateFormat("h:mm a", mLocale == null ? Locale.getDefault() : mLocale).format(dateObj);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            return getHoursFromDate(date);
+        }
+    }
+
     public static String getHoursFromDate(String date) {
         String timeString = null;
         String minuteString;
@@ -652,7 +677,7 @@ public class AppConstant {
             if (hours > 12) {
                 hours -= 12;
                 timeString = hours + ":" + minuteString + " PM ";
-            } else {
+            } else{
                 timeString = hours + ":" + minuteString + " AM ";
             }
         } catch (ParseException e) {

@@ -389,7 +389,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                                 AppConstant.getMonthFromDate(listItemHolder.mStartDate, "MM") + "-" +
                                 AppConstant.getDayFromDate(listItemHolder.mStartDate);
 
-                        String timeFormat = AppConstant.getHoursFromDate(listItemHolder.mStartDate);
+                        String timeFormat = AppConstant.getHoursFromDate(listItemHolder.mStartDate,true);
 
                         listItemHolder.mDateIcon.setTypeface(fontIcon);
                         listItemHolder.mDateIcon.setText("\uf017");
