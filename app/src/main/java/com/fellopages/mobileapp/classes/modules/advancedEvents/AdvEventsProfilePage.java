@@ -199,6 +199,10 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         mProfileTabs = new JSONArray();
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
 
+        //Restart App if newly logged in
+        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+            mAppConst.restartApp();
+
         /*
         Load Data Directly if Coming from Create Page.
          */

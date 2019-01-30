@@ -1454,6 +1454,8 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                 if (mAdvEventPaymentUrl != null) {
                     LogUtils.LOGD(CreateNewEntry.class.getSimpleName(), "isAdvEventPayment_onUpload_2--" +isAdvEventPayment);
                     Intent intent = new Intent(mContext, WebViewActivity.class);
+                    if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+                        intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
                     intent.putExtra("isAdvEventPayment",mAdvEventPayment );
                     intent.putExtra("isAdvEventId", mEventId);
                     intent.putExtra("url", mAdvEventPaymentUrl);

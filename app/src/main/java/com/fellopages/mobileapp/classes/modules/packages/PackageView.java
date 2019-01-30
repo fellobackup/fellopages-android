@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,8 @@ import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.fellopages.mobileapp.classes.common.utils.SoundUtil;
 import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
+import com.fellopages.mobileapp.classes.core.LoginActivity;
+import com.fellopages.mobileapp.classes.modules.user.signup.SubscriptionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -203,11 +206,38 @@ public class PackageView extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (id) {
             case R.id.submit:
-                if (isPackageUpgrade) {
-                    mAppConst.showProgressDialog();
-                    upgradePackage();
-                } else {
-                    openCreateEntry();
+                if (!mAppConst.isLoggedOutUser()) {
+                    submit();
+                }else {
+                    /*
+                     * Logged out, ask user for action
+                     * */
+
+                    AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(this);
+                    dlgBuilder.setTitle(null);
+                    dlgBuilder.setMessage(getResources().getString(R.string.alert_user_not_logged_in_body));
+                    dlgBuilder.setPositiveButton(getResources().getString(R.string.alert_user_not_logged_in_action_login), (dialog, which) -> {
+                        dialog.dismiss();
+                        /*
+                         * Open login page
+                         * */
+                        Intent intent = new Intent(this, LoginActivity.class);
+                        intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                        startActivityForResult(intent, ConstantVariables.CODE_USER_CREATE_SESSION);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    });
+                    dlgBuilder.setNegativeButton(getResources().getString(R.string.alert_user_not_logged_in_action_register), (dialog, which) -> {
+                        dialog.dismiss();
+                        /*
+                         * Open sign up page
+                         * */
+                        Intent intent = new Intent(this, SubscriptionActivity.class);
+                        intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                        startActivityForResult(intent, ConstantVariables.CODE_USER_CREATE_SESSION);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    });
+                    dlgBuilder.setNeutralButton(getResources().getString(R.string.alert_user_not_logged_in_action_cancel), (dialog, which) -> dialog.dismiss());
+                    dlgBuilder.create().show();
                 }
                 break;
             case android.R.id.home:
@@ -220,6 +250,15 @@ public class PackageView extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void submit(){
+        if (isPackageUpgrade) {
+            mAppConst.showProgressDialog();
+            upgradePackage();
+        } else {
+            openCreateEntry();
+        }
     }
 
     private void upgradePackage() {
@@ -286,6 +325,15 @@ public class PackageView extends AppCompatActivity {
         createIntent.putExtra(ConstantVariables.LISTING_TYPE_ID, mListingTypeId);
         createIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, currentSelectedOption);
         createIntent.putExtra("isAdvEventPayment", mAdvEventPayment);
+        /*
+         * Check if user has signed in on this page
+         * */
+        if (mAppConst.isLoggedOutUser() && !mAppConst.isLoggedOutUser(true)) {
+            /*
+             * Put flag to restart app after the next activity's business
+             * */
+            createIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+        }
         startActivityForResult(createIntent, ConstantVariables.CREATE_REQUEST_CODE);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         LogUtils.LOGD(PackageView.class.getSimpleName(), "currentSelectedModule-listingId->" +currentSelectedOption+"-"+mListingTypeId);
@@ -294,6 +342,27 @@ public class PackageView extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //HANDLE LOGIN/REGISTER
+        if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION || resultCode == ConstantVariables.CODE_USER_CREATE_SESSION_CANCELLED){
+            if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION) {
+                boolean bSessionLogin = data != null && data.getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, false);
+                if (bSessionLogin) {
+                    /*
+                     * Proceed original action
+                     * */
+                    submit();
+                } else {
+                    /*
+                     * Open login page
+                     * */
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                    startActivityForResult(intent, ConstantVariables.CODE_USER_CREATE_SESSION);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            }
+            return;
+        }
 
         LogUtils.LOGD(PackageView.class.getSimpleName(), "resultCodeFromEvent->" +requestCode+"-"+resultCode);
         LogUtils.LOGD(PackageView.class.getSimpleName(), "resultCodeData->" +data);

@@ -709,6 +709,8 @@ public class WebViewActivity extends AppCompatActivity {
                         url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
                         viewIntent = new Intent(mContext, AdvEventsProfilePage.class);
 //                        viewIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+                            viewIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
                         viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
                         viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
                         viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
