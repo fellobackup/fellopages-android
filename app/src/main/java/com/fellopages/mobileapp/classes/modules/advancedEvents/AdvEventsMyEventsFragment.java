@@ -420,6 +420,7 @@ public class AdvEventsMyEventsFragment extends Fragment implements AdapterView.O
                         String location = jsonDataObject.optString("location");
                         String starttime = jsonDataObject.optString("starttime");
                         String image_icon = jsonDataObject.optString("image");
+                        String event_status = jsonDataObject.optString("status");
 
                         JSONObject hostObject = jsonDataObject.optJSONObject("hosted_by");
                         String hostTitle = null, hostType = null, hostImage = null;
@@ -443,7 +444,7 @@ public class AdvEventsMyEventsFragment extends Fragment implements AdapterView.O
                                 hostTitle, member_count, event_id, closed,
                                 jsonDataObject.optJSONArray("menu"), location,
                                 starttime, hostId, likes_count, view_count, hostType, (allow_to_view == 1) ,
-                                (isOrganizerEvents || isMemberEvents), hasMultipleDates, isJoined));
+                                (isOrganizerEvents || isMemberEvents), hasMultipleDates, isJoined, event_status));
 //
 //                        if (allow_to_view == 1) {
 //                            if (isOrganizerEvents || isMemberEvents) {

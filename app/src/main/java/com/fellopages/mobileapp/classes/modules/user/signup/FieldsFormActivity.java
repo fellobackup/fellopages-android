@@ -326,7 +326,12 @@ public class FieldsFormActivity extends FormActivity {
         photoIntent.putExtra("account_form_values", mAccountFormValues);
         photoIntent.putExtra("field_form_values", mSignupParams);
         if (mHasProfileFields) {
-            startActivity(photoIntent);
+            if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+                photoIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                startActivityForResult(photoIntent, ConstantVariables.CODE_USER_CREATE_SESSION);
+            } else {
+                startActivity(photoIntent);
+            }
         } else {
             mAppConst.hideProgressDialog();
             startActivityForResult(photoIntent, ConstantVariables.SIGN_UP_CODE);
@@ -415,6 +420,9 @@ public class FieldsFormActivity extends FormActivity {
             mAlertDialogWithAction.showAlertDialogForSignUpError("payment_error");
         } else if (requestCode == ConstantVariables.SIGN_UP_CODE) {
             onBackPressed();
+        } else if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION) {
+            setResult(ConstantVariables.CODE_USER_CREATE_SESSION);
+            finish();
         }
     }
 }

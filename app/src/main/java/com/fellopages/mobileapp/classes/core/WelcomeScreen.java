@@ -72,18 +72,18 @@ public class WelcomeScreen extends AppCompatActivity {
 
         ImageView ivScreen = (ImageView) findViewById(R.id.iv_screen);
         TypedValue value = new TypedValue();
-        getResources().getValue(R.mipmap.screen, value, true);
+        getResources().getValue(R.mipmap.splash, value, true);
         boolean isScreenGif = value.string != null && value.string.toString().contains(".gif");
         if (!isScreenGif) {
             ivScreen.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.mipmap.screen);
-        requestOptions.error(R.mipmap.screen);
+        requestOptions.placeholder(R.mipmap.splash);
+        requestOptions.error(R.mipmap.splash);
         Glide.with(mContext)
                 .setDefaultRequestOptions(requestOptions)
-                .load(R.mipmap.screen)
+                .load(R.mipmap.splash)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

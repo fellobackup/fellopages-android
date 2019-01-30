@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrowseListItems {
-    String mBrowseImgUrl,mVideoUrl, mStaff,mArtistImageUrl, mHostImageUrl;
+    String mBrowseImgUrl,mVideoUrl, mStaff,mArtistImageUrl, mHostImageUrl, mEventStatus;
     String mBrowseListTitle, mDescription, mFriendShipType, mEmail;
     String mBrowseListOwnerTitle;
     String mBrowseViewCount, mBrowseVoteCount;
@@ -782,6 +782,10 @@ public class BrowseListItems {
     }
 
     // For Manage Advanced Events
+    /**
+     * @deprecated eventStatus was added
+     */
+    @Deprecated
     public BrowseListItems(String imgurl, String hostImageUrl, String listTitle, String ownerTitle, int memberCount,
                            int listItemId, int closed, JSONArray menuJsonArray, String location, String startTime, int ownerId,
                            int likesCount, int viewCount, String hostType, boolean allowToView,
@@ -804,6 +808,31 @@ public class BrowseListItems {
         mIsShowOptionMenu = isShowOptionMenu;
         mHasMultipleDates = hasMultipleDates;
         mJoined = joined;
+    }
+
+    public BrowseListItems(String imgurl, String hostImageUrl, String listTitle, String ownerTitle, int memberCount,
+                           int listItemId, int closed, JSONArray menuJsonArray, String location, String startTime, int ownerId,
+                           int likesCount, int viewCount, String hostType, boolean allowToView,
+                           Boolean isShowOptionMenu, int hasMultipleDates, int joined, String eventStatus){
+        mBrowseImgUrl = imgurl;
+        mHostImageUrl = hostImageUrl;
+        mBrowseListTitle = listTitle;
+        mBrowseListOwnerTitle = ownerTitle;
+        mMemberCount = memberCount;
+        mListItemId = listItemId;
+        menuArray = menuJsonArray;
+        mLocation = location;
+        mStartTime = startTime;
+        mOwnerId = ownerId;
+        mLikeCount = likesCount;
+        mViewCount = viewCount;
+        mClosed = closed;
+        mHostType = hostType;
+        this.allowToView = allowToView;
+        mIsShowOptionMenu = isShowOptionMenu;
+        mHasMultipleDates = hasMultipleDates;
+        mJoined = joined;
+        mEventStatus = eventStatus;
     }
 
     //For Browse Diaries Advanced Events
@@ -2005,6 +2034,10 @@ public class BrowseListItems {
 
     public String getmHostImageUrl() {
         return mHostImageUrl;
+    }
+
+    public String getmEventStatus() {
+        return mEventStatus;
     }
 
     public int getmOwnerId() {

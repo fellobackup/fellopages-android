@@ -240,6 +240,9 @@ public class SignUpActivity extends FormActivity {
                     if(!isError){
                         Intent fieldsIntent = new Intent(mContext, FieldsFormActivity.class);
 
+                        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+                            fieldsIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                        }
 
                         /* Check signUp type, facebook and send details to FieldFormActivity */
 
@@ -276,6 +279,10 @@ public class SignUpActivity extends FormActivity {
 
     @Override
     public void onBackPressed() {
+        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+            setResult(ConstantVariables.CODE_USER_CREATE_SESSION_CANCELLED);
+            finish();
+        }
 
         SocialLoginUtil.clearFbTwitterInstances(this, loginType);
         if(mSelectedPackageId != null && !mSelectedPackageId.isEmpty()){
@@ -324,6 +331,9 @@ public class SignUpActivity extends FormActivity {
                 e.printStackTrace();
             }
 
+        } else if (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION) {
+            setResult(ConstantVariables.CODE_USER_CREATE_SESSION);
+            finish();
         }
     }
 }

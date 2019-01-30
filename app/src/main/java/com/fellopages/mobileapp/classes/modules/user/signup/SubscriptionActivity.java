@@ -107,10 +107,16 @@ public class SubscriptionActivity extends FormActivity {
                 if (mSubscriptionObject != null) {
                     mAccountFormView.addView(generateForm(mResponseObject, false, "subscription_account"));
                 } else if (!((Activity) mContext).isFinishing()) {
-                    finish();
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivityForResult(intent, ConstantVariables.SIGN_UP_CODE);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+                        intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                        startActivityForResult(intent, ConstantVariables.SIGN_UP_CODE);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    } else {
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        finish();
+                        startActivityForResult(intent, ConstantVariables.SIGN_UP_CODE);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
                 }
             }
 
@@ -176,6 +182,15 @@ public class SubscriptionActivity extends FormActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false)) {
+            Intent intentData = new Intent();
+            intentData.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, false);
+            setResult(ConstantVariables.CODE_USER_CREATE_SESSION_CANCELLED, intentData);
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            return;
+        }
+
         SocialLoginUtil.clearFbTwitterInstances(this, loginType);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
@@ -189,6 +204,15 @@ public class SubscriptionActivity extends FormActivity {
          * As the FormActivity now have the layout of Signup activity
          * so, on this activity, the fields are blank and it does not proceed further.
          */
+
+        if(requestCode == ConstantVariables.SIGN_UP_CODE
+                && (resultCode == ConstantVariables.CODE_USER_CREATE_SESSION || resultCode == ConstantVariables.CODE_USER_CREATE_SESSION_CANCELLED)) {
+            Intent intentData = new Intent();
+            intentData.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, false);
+            setResult(resultCode, intentData);
+            finish();
+            return;
+        }
 
         if(requestCode == ConstantVariables.SIGN_UP_CODE && data != null){
             int packageId = data.getIntExtra("package_id", 0);
@@ -205,7 +229,6 @@ public class SubscriptionActivity extends FormActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     }
 

@@ -166,11 +166,13 @@ public class AlertDialogWithAction {
      * @param errorType Sign-up error type.
      */
     public void showAlertDialogForSignUpError(String errorType) {
+        boolean bModeSignUp = false;
 
         String buttonTitle = mContext.getResources().getString(R.string.date_time_dialogue_ok_button);
         switch (errorType) {
 
             case "email_not_verified":
+                bModeSignUp = true;
                 mDialogBuilder.setMessage(mContext.getResources().getString(R.string.signup_successful_message));
                 mDialogBuilder.setTitle(mContext.getResources().getString(R.string.singup_success_dialogue_title));
                 buttonTitle = mContext.getResources().getString(R.string.signup_success_dialogue_positive_button);
@@ -185,21 +187,33 @@ public class AlertDialogWithAction {
                 break;
         }
 
+        boolean fnlbSignUp = bModeSignUp;
         mDialogBuilder.setPositiveButton(buttonTitle,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
-                        Intent loginActivity;
-                        if (ConstantVariables.INTRO_SLIDE_SHOW_ENABLED == 1) {
-                            loginActivity = new Intent(mContext, NewLoginActivity.class);
+                        Activity activity = (Activity) mContext;
+
+                        boolean bCreateSession = activity.getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false);
+                        if (fnlbSignUp && bCreateSession) {
+                            Intent data = new Intent();
+                            data.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, false);
+                            activity.setResult(ConstantVariables.CODE_USER_CREATE_SESSION, data);
+                            activity.finish();
                         } else {
-                            loginActivity = new Intent(mContext, HomeScreen.class);
+                            Intent loginActivity;
+                            if (ConstantVariables.INTRO_SLIDE_SHOW_ENABLED == 1) {
+                                loginActivity = new Intent(mContext, NewLoginActivity.class);
+                            } else {
+                                loginActivity = new Intent(mContext, HomeScreen.class);
+                            }
+                            loginActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                            activity.finish();
+                            mContext.startActivity(loginActivity);
+                            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         }
-                        loginActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ((Activity) mContext).finish();
-                        mContext.startActivity(loginActivity);
-                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
 

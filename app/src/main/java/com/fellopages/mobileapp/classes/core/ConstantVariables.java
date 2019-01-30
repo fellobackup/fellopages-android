@@ -363,6 +363,7 @@ public static final int WEBVIEW_ENABLE = 1;
     public static final String PAYMENT_CONFIG_METHOD = "payment_config_method";
     public static final String SUGGESTION = "suggestion";
     public static final String IS_OWNER = "is_owner";
+    public static final String IS_GUEST = "is_guest";
     //Activity feed post length
     public static final int FEED_TITLE_BODY_LENGTH = 300;
     // User Profile Code
@@ -498,4 +499,11 @@ public static final boolean SHOW_CART_ICON = false;
     public static final String KEY_SHARE_TYPE_MEDIA = "shareTypeMedia";
     public static final int VALUE_FAST_FORWARD_INCREMENT = 3000;
     public static final int VALUE_REWIND_INCREMENT = 3000;
+    /**
+     * Create session for user
+     */
+    public static final int CODE_USER_CREATE_SESSION = 7000;
+    public static final int CODE_USER_CREATE_SESSION_CANCELLED = 7001;
+    public static final String KEY_USER_CREATE_SESSION = "user_create_session";
+    public static final String KEY_USER_CREATE_SESSION_LOGIN = "user_create_session_login";
 }

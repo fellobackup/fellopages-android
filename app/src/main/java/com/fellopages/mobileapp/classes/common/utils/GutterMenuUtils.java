@@ -1406,11 +1406,7 @@ public class GutterMenuUtils {
                 ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
 
-            //region dev-sareno
-            /*
-             * Issue #12: https://docs.google.com/spreadsheets/d/1exMPK9meQuKtfGCF4dnQ5fIC55vWsKvACSFLG-CoGF8/edit#gid=0
-             * Issue #5: https://docs.google.com/spreadsheets/d/1bhwwf6UNV1HuPcjta3cen5NiiQb6H3IDy6dQy8fDzM4/edit#gid=0
-             * */
+            //region dev-sareno@Changes ~com.fellopages.mobileapp.classes.common.utils.projectchanges.ChangesTracker.ISSUE_NO_5
             case "dashboard":
                 AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(mContext);
                 dlgBuilder.setTitle(null);
