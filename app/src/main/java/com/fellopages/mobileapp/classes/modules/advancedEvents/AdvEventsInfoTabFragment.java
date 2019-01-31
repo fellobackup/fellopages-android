@@ -264,6 +264,8 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
                 String eventStatus =  mDataResponse.getString("status");
                 mStatusColor = mDataResponse.optString("status_color");
                 mOccurrenceId = mDataResponse.optInt("occurrence_id");
+                String timezone = mDataResponse.getString("timezone");
+                timezone = timezone != null ? "\n" + timezone : "";
 
                 JSONObject hostObject = mDataResponse.getJSONObject("host");
                 JSONObject imageObject = hostObject.getJSONObject("image_icon");
@@ -308,7 +310,7 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
 
                 String dateFormat = AppConstant.getMonthFromDate(startTime, "MMM") + " " + AppConstant.getDayFromDate(startTime) +
                         ", " + AppConstant.getYearFormat(startTime);
-                String timeFormat = AppConstant.getHoursFromDate(startTime);
+                String timeFormat = AppConstant.getHoursFromDate(startTime,true);
                 String createTextFormat = mContext.getResources().getString(R.string.event_date_info_format);
                 String dateDetail = String.format(createTextFormat, dateFormat,
                         mContext.getResources().getString(R.string.event_date_info), timeFormat);
@@ -319,12 +321,12 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
 
                 String dateFormat1 = AppConstant.getMonthFromDate(endTime, "MMM") + " " + AppConstant.getDayFromDate(endTime) +
                         ", " + AppConstant.getYearFormat(endTime);
-                String timeFormat1 = AppConstant.getHoursFromDate(endTime);
+                String timeFormat1 = AppConstant.getHoursFromDate(endTime,true);
                 String createTextFormat1 = mContext.getResources().getString(R.string.event_date_info_format);
                 String dateDetail1 = String.format(createTextFormat1, dateFormat1,
                         mContext.getResources().getString(R.string.event_date_info), timeFormat1);
 
-                mEventEndDateTime.setText(dateDetail1);
+                mEventEndDateTime.setText(dateDetail1 + timezone);
 
                 /* Set color of event status */
                 if(mStatusColor != null){
