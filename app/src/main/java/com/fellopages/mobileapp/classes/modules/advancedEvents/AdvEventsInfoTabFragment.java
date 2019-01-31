@@ -265,7 +265,7 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
                 mStatusColor = mDataResponse.optString("status_color");
                 mOccurrenceId = mDataResponse.optInt("occurrence_id");
                 String timezone = mDataResponse.getString("timezone");
-                timezone = timezone != null ? "\n" + timezone : "";
+                timezone = timezone != null ? "\n(GMT): " + timezone : "";
 
                 JSONObject hostObject = mDataResponse.getJSONObject("host");
                 JSONObject imageObject = hostObject.getJSONObject("image_icon");
