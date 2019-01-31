@@ -1414,15 +1414,11 @@ public class GutterMenuUtils {
                 dlgBuilder.setCancelable(true);
                 dlgBuilder.setNegativeButton(mContext.getResources().getString(R.string.browse_dashboard_dialog_negative_button), (dialog, which) -> dialog.dismiss());
                 dlgBuilder.setPositiveButton(mContext.getResources().getString(R.string.browse_dashboard_dialog_positive_button), (dialog, which) -> {
-                    try {
-                        String webUrl = mMenuJsonObject.getString("urlExt");
-                        if (URLUtil.isValidUrl(webUrl)) {
-                            Intent lIntent = new Intent(Intent.ACTION_VIEW);
-                            lIntent.setData(Uri.parse(webUrl));
-                            mContext.startActivity(Intent.createChooser(lIntent, mContext.getResources().getString(R.string.browse_dashboard_title)));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    String webUrl = mRedirectUrl.replace("api/rest/", "");
+                    if (URLUtil.isValidUrl(webUrl)) {
+                        Intent lIntent = new Intent(Intent.ACTION_VIEW);
+                        lIntent.setData(Uri.parse(webUrl));
+                        mContext.startActivity(Intent.createChooser(lIntent, mContext.getResources().getString(R.string.browse_dashboard_title)));
                     }
 
                     dialog.dismiss();

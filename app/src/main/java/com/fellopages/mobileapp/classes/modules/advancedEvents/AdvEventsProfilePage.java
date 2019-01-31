@@ -317,26 +317,6 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 mDataResponse = bodyJsonObject.getJSONObject("response");
                 mGutterMenus = bodyJsonObject.getJSONArray("gutterMenu");
 
-                //region dev-sareno@Changes ~com.fellopages.mobileapp.classes.common.utils.projectchanges.ChangesTracker.ISSUE_NO_5
-                /*
-                * Check if user logged in
-                * */
-                if (!mAppConst.isLoggedOutUser()) {
-                    /*
-                    * Add dashboard menu item
-                    * */
-                    String label = getResources().getString(R.string.dashboard);
-                    String url = mDataResponse.getString("content_url");
-
-                    JSONObject jsonMenu = new JSONObject();
-                    jsonMenu.put("label", label);
-                    jsonMenu.put("name", "dashboard");
-                    jsonMenu.put("urlExt", url);
-
-                    mGutterMenus.put(jsonMenu);
-                }
-                //endregion
-
                 /*
                 Check Invite Option exist in GutterMenus or not to add + icon on Members Page
                  */
