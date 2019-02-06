@@ -84,7 +84,7 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
             mWriteReviewButton, mAddToDiaryButton,mAddToCalendar;
     private TextView mHostName, mEventStatus, mShow, mHide, mLocationIcon, mDateIcon,
             mAnnouncementTitle, mAnnouncementDescription, mMoreText;
-    private String location, hostTitle, startTime, endTime, hostImage;
+    private String location, hostTitle, startTime, endTime, hostImage, phone, email, website;
     private SelectableTextView mEventStartDate, mEventEndDateTime, mDescription;
     private BezelImageView mHostImage;
     private RatingBar mRating;
@@ -258,6 +258,9 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
                 title = mDataResponse.getString("title");
                 String descrption = mDataResponse.optString("body");
                 location = mDataResponse.getString("location");
+//                phone = mDataResponse.getString("phone");
+//                email = mDataResponse.getString("email");
+//                website = mDataResponse.getString("website");
                 String guid = mDataResponse.getString("guid");
                 startTime = mDataResponse.getString("starttime");
                 endTime = mDataResponse.getString("endtime");

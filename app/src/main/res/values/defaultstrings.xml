@@ -1593,4 +1593,5 @@
     <string name="alert_user_not_logged_in_action_register">Register</string>
     <string name="alert_user_not_logged_in_action_cancel">Cancel</string>
     <string name="trial">Trial</string>
+    <string name="end_time_invalid">Start time must be earlier than end time.</string>
 </resources>

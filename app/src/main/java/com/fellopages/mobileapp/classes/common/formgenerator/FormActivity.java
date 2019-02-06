@@ -13,11 +13,13 @@
 
 package com.fellopages.mobileapp.classes.common.formgenerator;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckedTextView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,6 +32,7 @@ import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.activities.CreateNewEntry;
 import com.fellopages.mobileapp.classes.common.adapters.AddPeopleAdapter;
 import com.fellopages.mobileapp.classes.common.utils.LogUtils;
+import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.common.ui.CustomViews;
 import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
@@ -39,8 +42,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -766,9 +772,22 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
             if (jsonObject.optString("type").equals("Checkbox") && fieldName.equals("terms"))
                 fieldLabel = jsonObject.optString("description");
 
+            if (fieldLabel != null && fieldLabel.equals("null"))
+                continue;
+
             boolean hasValidator = jsonObject.optBoolean("hasValidator");
 
             boolean toggles = hasToggles(jsonObject);
+
+            if (fieldLabel != null)
+                switch (fieldName){
+                    case "phone":
+                        hasValidator = true;
+                        break;
+                    case "email":
+                        hasValidator = true;
+                        break;
+                }
 
             widget = getWidget(this, fieldName, jsonObject, fieldLabel, hasValidator, createForm,
                     fieldDescription, _widgets, _map, mCurrentSelectedOption, subCategory, categoryFields, repeatOccurences, null, formValues, mAdvancedMemberWhatWhereWithinmile);
@@ -782,7 +801,7 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
 
             if (jsonObject.has(FormActivity.SCHEMA_KEY_HINT))
                 widget.setHint(jsonObject.optString(FormActivity.SCHEMA_KEY_HINT));
-
+//
             _widgets.add(widget);
             _map.put(fieldName, widget);
 
@@ -1070,12 +1089,37 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
-
+        if (isEndDateEarlier(params)){
+            success = false;
+            SnackbarUtils.displaySnackbar(((Activity)mContext).findViewById(android.R.id.content), mContext.getResources().getString(R.string.end_time_invalid));
+        }
         if (success) {
             return params;
         }
 
         return null;
+    }
+
+    //start time must be earlier than end time
+    private boolean isEndDateEarlier(HashMap<String, String> params) {
+        if (params != null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            try {
+                String startTime = params.get("starttime");
+                String endTime = params.get("endtime");
+                if (startTime != null && endTime != null){
+                Date date1 = format.parse(startTime);
+                Date date2 = format.parse(endTime);
+                Log.v("rowentesttime","date2.compareTo(date1)");
+                if (date2.compareTo(date1) <= 0)
+                    return true;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+
     }
 
     public boolean showValidations(JSONObject validationMessages) {
@@ -1213,6 +1257,7 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
         JSONArray jsonArray;
         JSONObject jsonObject;
         String value;
+        String inputType;
         mCurrentSelectedOption = currentSelectedOption;
         if (property != null) {
             String type = property.optString(FormActivity.SCHEMA_KEY_TYPE);
@@ -1250,15 +1295,19 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
 
                         }
                     } else {
+                        inputType = property.optString("inputType");
                         if (name.contains("first_name")) {
                             value = first_name;
                         } else if (name.contains("last_name")) {
                             value = last_name;
-                        } else {
+                        } else if (name.contains("phone")){
+                            value = property.optString("value");
+                            inputType = "phone";
+                        }else {
                             value = property.optString("value");
                         }
                         return new FormEditText(context, name, property, description, hasValidator, type,
-                                property.optString("inputType"), _widgets, _map, mContentId, createForm,
+                                inputType, _widgets, _map, mContentId, createForm,
                                 false, value, mCurrentSelectedOption);
                     }
 

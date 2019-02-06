@@ -13,6 +13,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -44,13 +45,84 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:id="@+id/eventLocation"
-                android:padding="@dimen/padding_10dp"
+                android:padding="@dimen/padding_2dp"
                 android:paddingStart="@dimen/padding_10dp"
                 android:paddingEnd="@dimen/padding_10dp"
                 android:textSize="@dimen/body_default_font_size"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
+                android:text="fasdfsdsdf"
                 android:textColor="@color/body_text_1"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_2dp"
+                android:paddingStart="@dimen/padding_8dp"
+                android:paddingEnd="@dimen/padding_8dp">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    app:srcCompat="@drawable/ic_phone_android"
+                    android:tint="@color/dark_gray"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventPhone"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/body_text_1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_2dp"
+                android:paddingStart="@dimen/padding_8dp"
+                android:paddingEnd="@dimen/padding_8dp">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    app:srcCompat="@drawable/ic_email_white_24dp"
+                    android:tint="@color/dark_gray"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventEmail"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/body_text_1"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_2dp"
+                android:paddingStart="@dimen/padding_8dp"
+                android:paddingEnd="@dimen/padding_8dp">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    app:srcCompat="@drawable/ic_desktop_windows_white_24dp"
+                    android:tint="@color/dark_gray"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eventWebsite"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:background="?attr/selectableItemBackground"
+                    android:textColor="@color/body_text_1"/>
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -1667,12 +1667,12 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                             mOnDateSelectedListener.onDateSelected(strDateTime);
                         }
                     }
-                });
-
-        builder.setNegativeButton(mContext.getResources().getString(R.string.date_time_dialogue_cancel_button),
+                }).setNegativeButton(mContext.getResources().getString(R.string.date_time_dialogue_cancel_button),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         strDateTime = null;
+                        if (timePicker != null)
+                            tvDateTime.setText("");
                         dialog.cancel();
                     }
                 });
