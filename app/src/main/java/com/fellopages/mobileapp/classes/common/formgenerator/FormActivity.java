@@ -1100,7 +1100,7 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
         return null;
     }
 
-    //start time must be earlier than end time
+    //start time must be earlier than end time: rjanmoreno
     private boolean isEndDateEarlier(HashMap<String, String> params) {
         if (params != null) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -1110,8 +1110,7 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
                 if (startTime != null && endTime != null){
                 Date date1 = format.parse(startTime);
                 Date date2 = format.parse(endTime);
-                Log.v("rowentesttime","date2.compareTo(date1)");
-                if (date2.compareTo(date1) <= 0)
+                if (date2.compareTo(date1) <= 0 || date2.compareTo(date1) == 0)
                     return true;
                 }
             } catch (ParseException e) {

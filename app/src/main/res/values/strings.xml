@@ -59,4 +59,6 @@
     <string name="channel_subscribe_like_count" translatable="false">%1$d %2$s, %3$d %4$s</string>
     <string name="default_notification_channel_id" translatable="false">default_notification_channel_id</string>
     <string name="background">Background</string>
+    <string name="visit_website">Visit Website</string>
+    <string name="email_mee">E-mail me</string>
 </resources>
