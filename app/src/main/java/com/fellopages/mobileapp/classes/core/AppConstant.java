@@ -1306,4 +1306,10 @@ public class AppConstant {
     public static void animateClose(Activity activity) {
         activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
+    public static String buildUrl(Integer id){
+        String url = DEFAULT_URL + "advancedevents/view/"+ id +"?gutter_menu=" + 1;
+
+        return url;
+    }
 }

@@ -905,7 +905,8 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 //                                mFabCreate.setImageDrawable(ContextCompat.getDrawable(
 //                                        this, R.drawable.ic_action_new));
 
-                                if(canCreate == 1) {
+                                if(canCreate == 1) { mFabCreate.setImageDrawable(ContextCompat.getDrawable(
+                                        this, R.drawable.ic_action_new));
                                     mFabCreate.show();
                                 }else {
                                     mFabCreate.hide();

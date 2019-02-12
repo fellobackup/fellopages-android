@@ -766,7 +766,12 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
             JSONObject jsonObject = jsonArray.optJSONObject(j);
 
             String fieldName = jsonObject.optString("name");
-            String fieldLabel = jsonObject.optString("label");
+            String fieldLabel = null;
+            try {
+                fieldLabel = jsonObject.getString("label");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             String fieldDescription = jsonObject.optString("description");
 
             if (jsonObject.optString("type").equals("Checkbox") && fieldName.equals("terms"))

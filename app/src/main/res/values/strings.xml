@@ -11,19 +11,19 @@
   -->
 <resources>
     <string name="ad_unit_id" translatable="false"></string>
-<string name="places_api_key" translatable="false">AIzaSyClyNe-R9MndobfF-L_4oFQwdo3CnJvEWw</string>
-<string name="facebook_app_id" translatable="false"></string>
+    <string name="places_api_key" translatable="false">AIzaSyClyNe-R9MndobfF-L_4oFQwdo3CnJvEWw</string>
+    <string name="facebook_app_id" translatable="false"></string>
     <string name="facebook_app_id_temp" translatable="false">509261915900016</string>
     <string name="facebook_placement_id_temp" translatable="false">509261915900016_563958577097016</string>
     <string name="facebook_placement_id" translatable="false"></string>
     <string name="facebook_post" translatable="false">0</string>
     <string name="twitter_post" translatable="false">0</string>
-<string name="twitter_key" translatable="false"></string>
-<string name="twitter_secret" translatable="false"></string>
-<string name="default_font_name" translatable="false">Roboto-Regular.ttf</string>
+    <string name="twitter_key" translatable="false"></string>
+    <string name="twitter_secret" translatable="false"></string>
+    <string name="default_font_name" translatable="false">Roboto-Regular.ttf</string>
     <string name="font_family_body_1_material" translatable="false">sans-serif</string>
     <string name="unicode_char" translatable="false"> &amp;#x</string>
-<string name="PROJECT_NUMBER" translatable="false">519324084949 </string>
+    <string name="PROJECT_NUMBER" translatable="false">519324084949 </string>
     <string name="blank_string" translatable="false"> </string>
     <string name="title_activity_home_screen" translatable="false">@string/app_name</string>
     <string name="album_owner_salutation_format" translatable="false">%1$s &lt;b>%2$s&lt;/b></string>
@@ -61,4 +61,6 @@
     <string name="background">Background</string>
     <string name="visit_website">Visit Website</string>
     <string name="email_mee">E-mail me</string>
+    <string name="like_label">Like</string>
+    <string name="unlike_label">Unlike</string>
 </resources>

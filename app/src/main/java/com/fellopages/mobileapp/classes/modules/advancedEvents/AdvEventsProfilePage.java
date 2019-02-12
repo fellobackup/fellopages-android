@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -26,11 +27,14 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fellopages.mobileapp.R;
@@ -57,6 +61,8 @@ import com.fellopages.mobileapp.classes.core.MainActivity;
 import com.fellopages.mobileapp.classes.common.utils.ImageLoader;
 import com.fellopages.mobileapp.classes.modules.advancedEvents.ticketsSelling.AdvEventsBuyTicketsInfo;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
+import com.fellopages.mobileapp.classes.modules.likeNComment.EventLikesActivity;
+import com.fellopages.mobileapp.classes.modules.likeNComment.Likes;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoLightBoxActivity;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoListDetails;
 
@@ -65,6 +71,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener,
@@ -78,6 +86,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     private JSONObject mBody, mDataResponse;
     private JSONArray mGutterMenus, mProfileTabs;
     private String title, profileImageUrl, mItemViewUrl, coverImageUrl;
+    private Integer likeCount = 0;
     private String successMessage;
     private String mContentUrl, mInviteGuestUrl, location, startTime, endTime;
     private int mContentId, mEventId, mOccurrenceId, mProfileTabSize;
@@ -85,11 +94,12 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     private int isClosed;
     private boolean isLoadingFromCreate = false, isContentEdited = false, isContentDeleted = false;
     private CollapsingToolbarLayout collapsingToolbar;
-    private ImageView mCoverImage, mProfileImage;
+    private ImageView mCoverImage, mProfileImage, mLikeIcon;
     private CoordinatorLayout mMainContent;
     private Toolbar mToolbar;
     public static AppBarLayout appBar;
-    private TextView mProfileImageMenus, mCoverImageMenus, mContentTitle;
+    private TextView mProfileImageMenus, mCoverImageMenus, mContentTitle, mLikeCount, mLikeLabel;
+    private RelativeLayout mLikeButton;
     private Bundle bundle;
     private boolean isAdapterSet,  isCoverRequest = false;
     private ViewPager viewPager;
@@ -107,11 +117,16 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     private boolean isRedirectedFromEventProfile = false;
     private ImageLoader mImageLoader;
     private boolean isCoverProfilePictureRequest = false;
-
+    private Integer likeID = 0;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        intent = getIntent();
+
+        //CHECK IF OPENED VIA URL
+        checkIfOpenedViaURL();
 
         mContext = this;
         mPhotoDetails = new ArrayList<>();
@@ -130,14 +145,14 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        isRedirectedFromEventProfile = getIntent().getBooleanExtra("isRedirectedFromEventProfile", false);
+        isRedirectedFromEventProfile = intent.getBooleanExtra("isRedirectedFromEventProfile", false);
         LogUtils.LOGD(AdvEventsProfilePage.class.getSimpleName(), "isRedirectedFromEventProfile->" +isRedirectedFromEventProfile );
 
-        mModuleName = getIntent().getStringExtra(ConstantVariables.EXTRA_MODULE_TYPE);
-        mContentId = getIntent().getExtras().getInt(ConstantVariables.VIEW_PAGE_ID);
+        mModuleName = intent.getStringExtra(ConstantVariables.EXTRA_MODULE_TYPE);
+        mContentId = intent.getExtras().getInt(ConstantVariables.VIEW_PAGE_ID);
 
         // If response coming from create page.
-        mBody = GlobalFunctions.getCreateResponse(getIntent().getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE));
+        mBody = GlobalFunctions.getCreateResponse(intent.getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE));
 
          /* Create Back Button On Action Bar **/
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -154,8 +169,8 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         // items[1] = sMayBeAttending = mContext.getResources().getString(R.string.rsvp_filter_may_be_attending);
         // items[2] = sNotAttending = mContext.getResources().getString(R.string.rsvp_filter_not_attending);
 
-        if (getIntent().getExtras().containsKey(ConstantVariables.VIEW_PAGE_URL)) {
-            mItemViewUrl = getIntent().getStringExtra(ConstantVariables.VIEW_PAGE_URL);
+        if (intent.getExtras().containsKey(ConstantVariables.VIEW_PAGE_URL)) {
+            mItemViewUrl = intent.getStringExtra(ConstantVariables.VIEW_PAGE_URL);
         } else {
             mItemViewUrl = AppConstant.DEFAULT_URL + "advancedevents/view/"+ mContentId +"?gutter_menu=" + 1;
         }
@@ -189,8 +204,13 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         mProfileImage = (ImageView) findViewById(R.id.profile_image);
         mCoverImageMenus = (TextView) findViewById(R.id.cover_image_menus);
         mProfileImageMenus = (TextView) findViewById(R.id.profile_image_menus);
+        mLikeCount = (TextView) findViewById(R.id.like_count);
+        mLikeLabel = findViewById(R.id.like_label);
+        mLikeButton = findViewById(R.id.like_button);
+        mLikeIcon = findViewById(R.id.like_icon);
         mCoverImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mProfileImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
+
 
         //Creating a new instance of AppConstant class
         mAppConst = new AppConstant(this);
@@ -200,7 +220,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
 
         //Restart App if newly logged in
-        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+        if (intent.getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
             mAppConst.restartApp();
 
         /*
@@ -214,6 +234,20 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
 
     }
 
+    private void checkIfOpenedViaURL() {
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action != null && action.equals("android.intent.action.VIEW")) {
+                Uri uri = intent.getData();
+                Integer id = Integer.valueOf(uri.getLastPathSegment());
+                String url = AppConstant.buildUrl(id);
+                intent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
+                intent.putExtra(ConstantVariables.VIEW_PAGE_ID, id);
+                intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
+            }
+        }
+    }
+
     public void makeRequest(){
         // Do not send request if coming from create page
         if(!isLoadingFromCreate){
@@ -222,6 +256,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 public void onTaskCompleted(JSONObject jsonObject) {
                     mBody = jsonObject;
                     checkSiteVideoPluginEnabled();
+                    checkLikeStatus();
                 }
 
                 @Override
@@ -236,7 +271,100 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                             });
                 }
             });
+
         }
+    }
+
+    private void checkLikeStatus() {
+        if (!mAppConst.isLoggedOutUser()) {
+            mLikeButton.setEnabled(false);
+            String url = AppConstant.DEFAULT_URL + "advancedactivity/event-has-like?sendNotification=0";
+            Map<String, String> params = new HashMap<>();
+            params.put("resource_id", mContentId + "");
+            params.put("resource_type", "siteevent_event");
+            mAppConst.postJsonResponseForUrl(url, params, new OnResponseListener() {
+                @Override
+                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    Boolean status = jsonObject.getBoolean("status");
+                    likeCount = jsonObject.getInt("count_likes");
+                    String likeCountString = likeCount > 1 || likeCount == 0 ? likeCount + " likes" : likeCount + " like";
+                    mLikeCount.setText(likeCountString);
+                    likeID = jsonObject.getInt("like_id");
+
+                    if (status){
+                        mLikeLabel.setText(R.string.unlike_label);
+                        mLikeIcon.setImageDrawable(getDrawable(R.drawable.ic_thumb_down_white_24dp));
+                    }else{
+                        mLikeLabel.setText(R.string.like_label);
+                        mLikeIcon.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_white_24dp));
+                    }
+
+                    mLikeButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mLikeButton.setEnabled(false);
+                            String url = AppConstant.DEFAULT_URL + "advancedactivity/event-like?sendNotification=0";
+                            Map<String,String> postParams = new HashMap<>();
+                            postParams.put("resource_id",String.valueOf(mEventId));
+                            postParams.put("resource_type","siteevent_event");
+                            postParams.put("like_id",likeID+"");
+
+                            if (likeID != 0){
+                                mLikeLabel.setText(R.string.like_label);
+                                mLikeIcon.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_white_24dp));
+                                likeCount--;
+                            }else{
+                                mLikeLabel.setText(R.string.unlike_label);
+                                mLikeIcon.setImageDrawable(getDrawable(R.drawable.ic_thumb_down_white_24dp));
+                                likeCount++;
+                            }
+
+                            String likeCountString = likeCount > 1 || likeCount == 0 ? likeCount + " likes" : likeCount + " like";
+                            mLikeCount.setText(likeCountString);
+
+                            mAppConst.postJsonResponseForUrl(url, postParams, new OnResponseListener() {
+                                @Override
+                                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                    Boolean status = jsonObject.getBoolean("status");
+                                    if (status) {
+                                        likeID = jsonObject.getInt("like_id");
+                                    }else{
+                                        likeID = 0;
+                                    }
+                                    mLikeButton.setEnabled(true);
+                                }
+
+                                @Override
+                                public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                                    mLikeButton.setEnabled(true);
+                                    if (likeID != 0){
+                                        mLikeLabel.setText(R.string.unlike_label);
+                                        mLikeIcon.setImageDrawable(getDrawable(R.drawable.ic_thumb_down_white_24dp));
+                                        likeCount++;
+                                    }else{
+                                        mLikeIcon.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_white_24dp));
+                                        mLikeLabel.setText(R.string.like_label);
+                                        likeCount--;
+                                    }
+
+                                    String likeCountString = likeCount > 1 || likeCount == 0 ? likeCount + " likes" : likeCount + " like";
+                                    mLikeCount.setText(likeCountString);
+                                }
+                            });
+                        }
+                    });
+                }
+
+                @Override
+                public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                    mLikeButton.setEnabled(true);
+                }
+            });
+        }
+    }
+
+    private void refreshLabel(){
+
     }
 
     /**
@@ -370,7 +498,6 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 title = mDataResponse.getString("title");
                 profileImageUrl = mDataResponse.getString("image");
                 coverImageUrl = mDataResponse.optString("cover_image");
-
                 mContentUrl = mDataResponse.optString("content_url");
                 mOccurrenceId = mDataResponse.optInt("occurrence_id");
                 location = mDataResponse.getString("location");
@@ -378,6 +505,15 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 endTime = mDataResponse.getString("endtime");
                 isClosed = mDataResponse.optInt("closed");
                 sSelectedRsvpValue = mDataResponse.optInt("rsvp");
+                likeCount = mDataResponse.optInt("like_count");
+                String likeCountString = likeCount > 1 || likeCount == 0 ? likeCount + " likes" : likeCount + " like";
+                if (mAppConst.isLoggedOutUser()) {
+                    mLikeCount.setText(likeCountString);
+                }else{
+                    mLikeButton.setVisibility(View.VISIBLE);
+                    mLikeButton.setEnabled(true);
+                }
+                mLikeCount.setVisibility(View.VISIBLE);
 
                 mBrowseList = new BrowseListItems(mEventId, mOccurrenceId, title, profileImageUrl, mContentUrl, isClosed);
 
@@ -516,6 +652,17 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                         }
                     }
                 });
+
+                mLikeCount.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(AdvEventsProfilePage.this,EventLikesActivity.class);
+                        i.putExtra(ConstantVariables.VIEW_PAGE_URL,mItemViewUrl);
+                        startActivity(i);
+                    }
+                });
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -767,7 +914,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             default:
                 sMembershipRequestCode = 0;
                 finish();
-                startActivity(getIntent());
+                startActivity(intent);
                 break;
         }
 

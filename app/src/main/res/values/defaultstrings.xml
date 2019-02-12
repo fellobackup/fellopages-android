@@ -1594,4 +1594,6 @@
     <string name="alert_user_not_logged_in_action_cancel">Cancel</string>
     <string name="trial">Trial</string>
     <string name="end_time_invalid">Start time must be earlier than end time.</string>
+    <string name="upload_profile_pic">Upload profile picture</string>
+    <string name="alert_upload_profile_pic_desc">Upload your profile picture. It makes your account look legit and professional.</string>
 </resources>

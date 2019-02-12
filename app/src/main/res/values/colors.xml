@@ -140,6 +140,7 @@
     <color name="transparent_black">#40000000</color>
     <color name="player_background">#CC000000</color>
     <color name="color_ffbebebe">#FFBEBEBE</color>
+    <color name="like_button_color">#3497d3</color>
     <!-- My Events -->
     <color name="label_event_status_background">#ffff00</color>
 </resources>
