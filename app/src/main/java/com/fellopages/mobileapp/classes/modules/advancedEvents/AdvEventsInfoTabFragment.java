@@ -15,6 +15,7 @@ package com.fellopages.mobileapp.classes.modules.advancedEvents;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -79,19 +80,19 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
     private JSONArray mGutterMenus;
 
     private LinearLayout mEventRsvpForm, mEventJoinForm, mLocationInfoBlock, mHostInfo, mEventDiaryTab,
-            mEventsDateInfo, mAnnouncementLayout;
+            mEventsDateInfo, mAnnouncementLayout, mPhoneInfoBlock,mEmailInfoBlock,mWebsiteInfoBlock;
     private Button mAttendingButton, mMayBeAttendingButton, mNotAttendingButton, mJoinButton,
             mWriteReviewButton, mAddToDiaryButton,mAddToCalendar;
     private TextView mHostName, mEventStatus, mShow, mHide, mLocationIcon, mDateIcon,
             mAnnouncementTitle, mAnnouncementDescription, mMoreText;
-    private String location, hostTitle, startTime, endTime, hostImage;
+    private String location, hostTitle, startTime, endTime, hostImage, phone, email, website;
     private SelectableTextView mEventStartDate, mEventEndDateTime, mDescription;
     private BezelImageView mHostImage;
     private RatingBar mRating;
     private LinearLayout.LayoutParams layoutParams;
     private JSONObject mResponseJsonObject;
     private View mRootView;
-    private TextView mEventLocation;
+    private TextView mEventLocation,mEventPhone,mEventEmail,mEventWebsite;
     private ImageLoader mImageLoader;
     public static String sGuid;
 
@@ -208,7 +209,13 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
         mEventStartDate = (SelectableTextView) mRootView.findViewById(R.id.eventStartDate);
         mEventEndDateTime = (SelectableTextView) mRootView.findViewById(R.id.eventEndDateTime);
         mLocationInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventLocationInfo);
+        mPhoneInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventPhoneInfo);
+        mWebsiteInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventWebsiteInfo);
+        mEmailInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventEmailInfo);
         mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocation);
+        mEventPhone = (TextView) mRootView.findViewById(R.id.eventPhone);
+        mEventEmail = (TextView) mRootView.findViewById(R.id.eventEmail);
+        mEventWebsite = (TextView) mRootView.findViewById(R.id.eventWebsite);
         mLocationIcon = (TextView) mRootView.findViewById(R.id.locationLabel);
         mEventsDateInfo = (LinearLayout) mRootView.findViewById(R.id.eventDatesInfo);
         mDateIcon = (TextView) mRootView.findViewById(R.id.dateLabel);
@@ -267,6 +274,11 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
                 String timezone = mDataResponse.getString("timezone");
                 timezone = timezone != null ? "\n(GMT): " + timezone : "";
 
+                JSONObject contactObject = mDataResponse.getJSONObject("contact_info");
+                phone = contactObject.getString("phone");
+                email = contactObject.getString("email");
+                website = contactObject.getString("website");
+
                 JSONObject hostObject = mDataResponse.getJSONObject("host");
                 JSONObject imageObject = hostObject.getJSONObject("image_icon");
                 hostImage = imageObject.getString("image");
@@ -301,12 +313,53 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
                         }
                     });
 
-                } else {
+                }else{
                     mLocationInfoBlock.setVisibility(View.GONE);
-                    mRootView.findViewById(R.id.event_vertical_line).setVisibility(View.GONE);
-                    layoutParams.setMargins(padding, 0, padding, 0);
-                    mEventsDateInfo.setLayoutParams(layoutParams);
                 }
+
+                if (phone != null && !phone.isEmpty()) {
+                    mEventPhone.setText(phone);
+                }else{
+                    mPhoneInfoBlock.setVisibility(View.GONE);
+                }
+                if (email != null && !email.isEmpty()) {
+                    mEventEmail.setText(email);
+                    //Uncomment to redirect
+//                    mEventEmail.setOnClickListener(view -> {
+//                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+//                        emailIntent.setData(Uri.parse(email));
+//
+//                        try {
+//                            startActivity(emailIntent);
+//                        } catch (ActivityNotFoundException e) {
+//                            //TODO: Handle case where no email app is available
+//                        }
+//                    });
+                }else{
+                    mEmailInfoBlock.setVisibility(View.GONE);
+                }
+
+                if (website != null && !website.isEmpty()) {
+                    mEventWebsite.setText(website);
+                    //Uncomment to redirect
+//                    mEventWebsite.setOnClickListener(view -> {
+//                        Intent lIntent = new Intent(Intent.ACTION_VIEW);
+//                        lIntent.setData(Uri.parse(website));
+//                        mContext.startActivity(Intent.createChooser(lIntent, mContext.getResources().getString(R.string.browse_dashboard_title)));
+//
+//                    });
+                } else{
+                    mWebsiteInfoBlock.setVisibility(View.GONE);
+                }
+                /*
+                   hide location block
+                 */
+//                else {
+//                    mLocationInfoBlock.setVisibility(View.GONE);
+//                    mRootView.findViewById(R.id.event_vertical_line).setVisibility(View.GONE);
+//                    layoutParams.setMargins(padding, 0, padding, 0);
+//                    mEventsDateInfo.setLayoutParams(layoutParams);
+//                }
 
                 String dateFormat = AppConstant.getMonthFromDate(startTime, "MMM") + " " + AppConstant.getDayFromDate(startTime) +
                         ", " + AppConstant.getYearFormat(startTime);

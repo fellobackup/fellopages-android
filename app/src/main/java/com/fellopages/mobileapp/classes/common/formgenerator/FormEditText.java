@@ -374,6 +374,8 @@ public class FormEditText extends FormWidget implements TextWatcher, AdapterView
         // setting input type to number if field is for numeric value.
         if (inputType != null && inputType.equals("number")) {
             etFieldValue.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        }else if (inputType != null && inputType.equals("phone")){
+            etFieldValue.setInputType(InputType.TYPE_CLASS_PHONE);
         }
     }
 

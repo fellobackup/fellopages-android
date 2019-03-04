@@ -391,7 +391,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".classes.modules.advancedEvents.AdvEventsProfilePage"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            >
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                    android:host="www.fellopages.com"
+                    android:pathPrefix="/beta1/event-item" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".classes.common.activities.InviteGuest"
             android:label="@string/title_activity_invite_event"
@@ -458,8 +468,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".classes.modules.advancedEvents.AdvEventsAvailableTickets"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".classes.core.SafeHandler" />
         <activity android:name=".classes.modules.store.QuickOptionsActivity" />
         <activity
@@ -484,16 +493,16 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".classes.core.OTPActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".classes.modules.user.settings.MobileInfoSetting"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".classes.common.fragments.VideoLightBoxFragment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".classes.common.fragments.VideoLightBoxFragment"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
-
+        <activity android:name=".classes.modules.likeNComment.EventLikesActivity"></activity>
     </application>
 
 </manifest>

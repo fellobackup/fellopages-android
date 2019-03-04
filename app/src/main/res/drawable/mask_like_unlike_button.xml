@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--region Pressed-->
+    <item android:state_pressed="true">
+        <layer-list>
+
+            <item>
+                <shape>
+                    <corners android:radius="50dp"/>
+                </shape>
+            </item>
+
+            <item android:left="0.6dp"
+                android:top="0.3dp"
+                android:right="0.2dp"
+                android:bottom="0.7dp">
+                <shape>
+                    <stroke android:width="2px" android:color="#ffffff" />
+                    <solid android:color="#2672a0"/>
+                    <corners android:radius="50dp"/>
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+    <!--endregion-->
+
+    <!--region Focused-->
+    <item android:state_focused="true">
+        <layer-list>
+
+            <item>
+                <shape>
+                    <stroke android:width="2px" android:color="#ffffff" />
+                    <solid android:color="@color/like_button_color"/>
+                    <corners android:radius="50dp"/>
+                </shape>
+            </item>
+
+            <item android:left="1dp"
+                android:top="1dp"
+                android:right="1dp"
+                android:bottom="1dp">
+                <shape>
+                    <stroke android:width="2px" android:color="#ffffff" />
+                    <solid android:color="@color/like_button_color"/>
+                    <corners android:radius="50dp"/>
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+    <!--endregion-->
+
+    <!-- region Default-->
+    <item>
+        <layer-list>
+
+            <item>
+                <shape>
+                    <corners android:topLeftRadius="2dp"
+                        android:topRightRadius="3dp"
+                        android:bottomLeftRadius="2.5dp"
+                        android:bottomRightRadius="3dp"/>
+                </shape>
+            </item>
+
+            <item android:left="0.6dp"
+                android:top="0.3dp"
+                android:right="0.2dp"
+                android:bottom="0.7dp">
+                <shape>
+                    <stroke android:width="2px" android:color="#ffffff" />
+                    <solid android:color="#23aaff" />
+                    <corners android:radius="50dp" />
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+    <!--endregion-->
+
+</selector>

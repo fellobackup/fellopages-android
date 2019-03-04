@@ -29,6 +29,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -58,8 +59,10 @@ import com.fellopages.mobileapp.classes.common.utils.SoundUtil;
 import com.fellopages.mobileapp.classes.common.utils.UploadFileToServerUtils;
 import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
+import com.fellopages.mobileapp.classes.core.LoginActivity;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoLightBoxActivity;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoListDetails;
+import com.fellopages.mobileapp.classes.modules.user.signup.SubscriptionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -373,10 +376,11 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                     mProfileImageMenus.setVisibility(View.VISIBLE);
                     mProfileImageMenus.setText("\uf030");
                 }
-
                 //Showing profile image.
                 mImageLoader.setImageForUserProfile(userImageProfile, mProfileImage);
-
+                if (isCache && (userImageProfile == null || userImageProfile.contains("nophoto_user_thumb_profile.png")|| userImageProfile.isEmpty())) {
+                    showUploadImageDialog();
+                }
                 //Showing Cover image.
                 mImageLoader.setImageUrl(mCoverImageUrl, mCoverImage);
 
@@ -480,6 +484,22 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
         // Method to check profile options.
         if (!isCache)
             checkForOptions();
+    }
+
+    private void showUploadImageDialog(){
+        AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(this);
+        dlgBuilder.setTitle(null);
+        dlgBuilder.setMessage(getResources().getString(R.string.alert_upload_profile_pic_desc));
+        dlgBuilder.setPositiveButton(getResources().getString(R.string.upload_profile_pic), (dialog, which) -> {
+            dialog.dismiss();
+            startImageUploading();
+
+        });
+        dlgBuilder.setNegativeButton(getResources().getString(R.string.browse_dashboard_dialog_negative_button), (dialog, which) -> {
+            dialog.dismiss();
+
+        });
+        dlgBuilder.create().show();
     }
 
     private void checkForOptions() {
@@ -789,10 +809,15 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
     }
 
     private void startImageUploading() {
-        Intent intent = new Intent(mContext, PhotoUploadingActivity.class);
-        intent.putExtra("selection_mode", true);
-        intent.putExtra(ConstantVariables.IS_PHOTO_UPLOADED, true);
-        startActivityForResult(intent, ConstantVariables.PAGE_EDIT_CODE);
+        if (!mAppConst.checkManifestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            mAppConst.requestForManifestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    ConstantVariables.WRITE_EXTERNAL_STORAGE);
+        }else {
+            Intent intent = new Intent(mContext, PhotoUploadingActivity.class);
+            intent.putExtra("selection_mode", true);
+            intent.putExtra(ConstantVariables.IS_PHOTO_UPLOADED, true);
+            startActivityForResult(intent, ConstantVariables.PAGE_EDIT_CODE);
+        }
     }
 
     @Override
@@ -867,12 +892,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
 
             case "upload_cover_photo":
             case "upload_photo":
-                if (!mAppConst.checkManifestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    mAppConst.requestForManifestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            ConstantVariables.WRITE_EXTERNAL_STORAGE);
-                } else {
-                    startImageUploading();
-                }
+                startImageUploading();
                 break;
 
             case "choose_from_album":

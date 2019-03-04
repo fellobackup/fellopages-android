@@ -675,7 +675,7 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                         final String dateFormat = AppConstant.getMonthFromDate(listItemHolder.mStartDate, "MMM") + " " + AppConstant.getDayFromDate(listItemHolder.mStartDate) +
                                 ", " + AppConstant.getYearFormat(listItemHolder.mStartDate);
 
-                        String timeFormat = AppConstant.getHoursFromDate(listItemHolder.mStartDate);
+                        String timeFormat = AppConstant.getHoursFromDate(listItemHolder.mStartDate,true);
 
                         listItemHolder.mDateIcon.setTypeface(fontIcon);
                         listItemHolder.mDateIcon.setText("\uf017");
