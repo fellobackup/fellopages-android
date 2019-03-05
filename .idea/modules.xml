@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Fellopages.iml" filepath="$PROJECT_DIR$/Fellopages.iml" />
       <module fileurl="file://$PROJECT_DIR$/WordPressEditor/WordPressEditor.iml" filepath="$PROJECT_DIR$/WordPressEditor/WordPressEditor.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticon/emoticon.iml" filepath="$PROJECT_DIR$/emoticon/emoticon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fellopages-android.iml" filepath="$PROJECT_DIR$/fellopages-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/showcasecard/showcasecard.iml" filepath="$PROJECT_DIR$/showcasecard/showcasecard.iml" />
     </modules>
   </component>

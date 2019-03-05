@@ -434,7 +434,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements OnMenuC
                 mListItem = (BrowseListItems) mBrowseItemList.get(position);
 
                 ((ItemViewHolder) holder).listItem = mListItem;
-                ((ItemViewHolder) holder).mContentTitle.setText(mListItem.getmBrowseListTitle());
+                String browseTitle = mContext.getResources().getText(R.string.title)+": "+mListItem.getmBrowseListTitle();
+                ((ItemViewHolder) holder).mContentTitle.setText(browseTitle);
 
                 ((ItemViewHolder) holder).container.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -654,9 +655,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements OnMenuC
                         }
                         break;
                     case "show_available_tickets":
-                        //((ItemViewHolder) holder).available_ticket_title.setText(String.valueOf(mListItem.getTicketTitle()));
-                        ((ItemViewHolder) holder).available_ticket_price.setText(String.valueOf(mListItem.getTicketPrice()));
-                        ((ItemViewHolder) holder).available_ticket_quantity.setText(String.valueOf(mListItem.getTicketQuantity()));
+
+                        String price = mContext.getResources().getText(R.string.price)+": "+String.valueOf(mListItem.getTicketPrice());
+                        String ticketQuantity = mContext.getResources().getText(R.string.quantity_label)+": "+mListItem.getTicketQuantity();
+//                        String price = mContext.getResources().getText(R.string.price)+" "+mListItem/
+
+
+                        ((ItemViewHolder) holder).available_ticket_price.setText(price);
+                        ((ItemViewHolder) holder).available_ticket_quantity.setText(ticketQuantity);
                         break;
                 }
                 if (!currentSelectedOption.equals("core_main_siteevent")

@@ -255,13 +255,14 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
             for (int i = 0; i < responseArray.length(); i++) {
                 JSONObject jsonDataObject = responseArray.optJSONObject(i);
                 String ticket_title = jsonDataObject.optString("title");
-                String ticket_price = jsonDataObject.optString("price");
+                String ticket_price = jsonDataObject.optString("price").replace("A","");
                 String ticket_quantity = jsonDataObject.optString("quantity");
                 ticket_id = jsonDataObject.optInt("ticket_id");
+                Log.d("TicketAvailable ", ticket_title+" "+ticket_price);
                 mBrowseItemList.add(new BrowseListItems(ticket_title, ticket_price, ticket_quantity,
                         ticket_id, jsonDataObject.optJSONArray("menu")));
-//                System.out.println("Ticket_Details-- " + ticket_title + " " + ticket_price + " " + ticket_quantity);
-//                System.out.println("Gutter_options--"+ jsonDataObject.optJSONArray("menu"));
+                System.out.println("Ticket_Details-- " + ticket_title + " " + ticket_price + " " + ticket_quantity);
+                System.out.println("Gutter_options--"+ jsonDataObject.optJSONArray("menu"));
 
             }
         }else {

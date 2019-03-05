@@ -31,6 +31,7 @@ import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -312,6 +313,8 @@ public class AppConstant {
      */
     public void manageResponse(String url, final int method, Map<String, String> params,
                                final OnResponseListener onResponseListener) {
+
+        Log.d("JsonTagUrl ", String.valueOf(method)+" "+params);
         try {
             if (!url.contains("graph")) {
                 url = buildQueryString(url, mAuthParams);
@@ -337,7 +340,7 @@ public class AppConstant {
                             JSONObject json = new JSONObject(response);
                             mStatusCode = json.optInt("status_code");
                             mBody = json.optJSONObject("body");
-
+                            Log.d("JsonTag ", json.toString());
                             if (mStatusCode != 0 && isRequestSuccessful(mStatusCode) && mBody == null) {
                                 JSONArray bodyJsonArray = json.optJSONArray("body");
                                 mBody = convertToJsonObject(bodyJsonArray);

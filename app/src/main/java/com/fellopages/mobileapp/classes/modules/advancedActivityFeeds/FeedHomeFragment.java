@@ -39,6 +39,7 @@ import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
+import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsMyEventsFragment;
 import com.fellopages.mobileapp.classes.modules.friendrequests.FeedFriendRequests;
 import com.fellopages.mobileapp.classes.modules.messages.NewMessagesFragment;
 import com.fellopages.mobileapp.classes.modules.notifications.NotificationFragment;
@@ -199,8 +200,8 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                 adapter.addFragmentWithIcon(FeedsFragment.newInstance(bundle),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home),
                         mContext.getResources().getString(R.string.feed_tab_name));
-                adapter.addFragmentWithIcon(FeedFriendRequests.newInstance(null),
-                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_friend_request_home),
+                adapter.addFragmentWithIcon(AdvEventsMyEventsFragment.newInstance(null),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event_icon),
                         mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)
@@ -213,8 +214,8 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                 adapter.addFragmentWithIcon(FeedsFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home)
                         , mContext.getResources().getString(R.string.feed_tab_name));
-                adapter.addFragmentWithIcon(FeedFriendRequests.newInstance(null),
-                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_friend_request_home),
+                adapter.addFragmentWithIcon(AdvEventsMyEventsFragment.newInstance(null),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event_icon),
                         mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)

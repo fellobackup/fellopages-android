@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:tint="@color/grey_light"
             android:layout_gravity="center"
-            android:src="@drawable/ic_friend_request_home"
+            android:src="@drawable/ic_event_icon"
             android:background="@drawable/abc_item_background_holo_dark"/>
 
         <com.fellopages.mobileapp.classes.common.ui.BadgeView

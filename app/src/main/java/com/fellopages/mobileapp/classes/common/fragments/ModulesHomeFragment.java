@@ -47,7 +47,6 @@ import com.fellopages.mobileapp.classes.modules.notifications.MainNotificationFr
 import com.fellopages.mobileapp.classes.modules.notifications.MyRequestsFragment;
 import com.fellopages.mobileapp.classes.modules.poll.PollUtil;
 import com.fellopages.mobileapp.classes.modules.pushnotification.MyFcmListenerService;
-import com.fellopages.mobileapp.classes.modules.store.fragments.BrowseProductFragment;
 import com.fellopages.mobileapp.classes.modules.store.utils.StoreUtil;
 import com.fellopages.mobileapp.classes.modules.video.VideoUtil;
 
@@ -86,6 +85,12 @@ public class ModulesHomeFragment extends Fragment implements TabLayout.OnTabSele
         }
     }
 
+    public static ModulesHomeFragment newInstance(Bundle bundle) {
+        // Required  public constructor
+        ModulesHomeFragment fragment = new ModulesHomeFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

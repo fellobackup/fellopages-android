@@ -28,6 +28,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -249,6 +250,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                         int packagesEnabled = drawerItem.getmPackagesEnabled();
                         String icon = drawerItem.getmItemIcon();
                         hideBadgeCount(position,name);
+                        Log.d("DrawerSelectedItem ", name+" "+label+" "+headerLabel);
                         drawerListener.onDrawerItemSelected(view, name, label, headerLabel, singularLabel,
                                 itemUrl, listingTypeId, browseType, viewType, icon,canCreate,
                                 packagesEnabled, drawerItem.getSiteStoreEnabled(),

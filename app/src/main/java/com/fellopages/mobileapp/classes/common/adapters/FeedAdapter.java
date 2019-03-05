@@ -26,6 +26,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.icu.util.Currency;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
@@ -42,6 +43,7 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.util.Patterns;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -331,7 +333,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         RecyclerView.ViewHolder viewHolder;
-
+//        Log.d("ListViewType ", viewType);
         switch (viewType) {
             case PREVIEW_TYPE:
             case FEED_TYPE:
@@ -2648,7 +2650,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                     && singleAttachmentObject.optString("currency") != null
                                     && !singleAttachmentObject.optString("currency").isEmpty()) {
                                 listItemHolder.tvPrice.setVisibility(View.VISIBLE);
-                                listItemHolder.tvPrice.setText("\uf155  " + singleAttachmentObject.optString("currency")
+                                Map<Currency, Locale> map = getCurrencyLocaleMap();
+                                Locale locale = new Locale("en", singleAttachmentObject.optString("currency"));
+                                Currency currency = Currency.getInstance(singleAttachmentObject.optString("currency"));
+                                String symbol = currency.getSymbol(map.get(currency)).replace("US", "");
+                                Log.d("TestPrice ", symbol+" \uf155  " + singleAttachmentObject.optString("currency")
+                                        + " " + singleAttachmentObject.optDouble("price"));
+                                listItemHolder.tvPrice.setText(symbol+" " + singleAttachmentObject.optString("currency")
                                         + " " + singleAttachmentObject.optDouble("price"));
                             } else {
                                 listItemHolder.tvPrice.setVisibility(View.GONE);
@@ -4753,6 +4761,20 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             outRect.bottom = mVerticalSpaceHeight;
             outRect.right = mVerticalSpaceHeight;
         }
+    }
+
+    public static Map<Currency, Locale> getCurrencyLocaleMap() {
+        Map<Currency, Locale> map = new HashMap<>();
+        for (Locale locale : Locale.getAvailableLocales()) {
+            try {
+                Currency currency = Currency.getInstance(locale);
+                map.put(currency, locale);
+            }
+            catch (Exception e){
+                // skip strange locale
+            }
+        }
+        return map;
     }
 
 }

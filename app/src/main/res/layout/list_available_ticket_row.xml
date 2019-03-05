@@ -23,29 +23,30 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black" />
 
-        <LinearLayout
-            android:id="@+id/available_ticket_details"
+        <TextView
+            android:id="@+id/available_ticket_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_5dp"
-            android:orientation="horizontal">
+            android:textColor="@color/black" />
+        <!--android:paddingLeft="@dimen/margin_10dp"-->
 
-            <TextView
-                android:id="@+id/available_ticket_price"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".30"
-                android:paddingLeft="@dimen/margin_10dp"
-                android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/available_ticket_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/available_ticket_quantity"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".70"
-                android:textColor="@color/black" />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/available_ticket_details"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/margin_5dp"-->
+            <!--android:orientation="horizontal">-->
 
-        </LinearLayout>
+            <!---->
+
+        <!--</LinearLayout>-->
 
         <View
             android:layout_width="match_parent"
