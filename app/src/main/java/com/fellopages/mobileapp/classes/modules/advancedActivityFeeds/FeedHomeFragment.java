@@ -34,7 +34,10 @@ import android.widget.ImageButton;
 
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.adapters.FragmentAdapter;
+import com.fellopages.mobileapp.classes.common.fragments.ModulesHomeFragment;
+import com.fellopages.mobileapp.classes.common.fragments.MyEventsFragment;
 import com.fellopages.mobileapp.classes.common.ui.BadgeView;
+import com.fellopages.mobileapp.classes.common.utils.GlobalFunctions;
 import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
@@ -196,12 +199,11 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
 
             if (getArguments() != null) {
                 bundle = getArguments();
-
                 adapter.addFragmentWithIcon(FeedsFragment.newInstance(bundle),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home),
                         mContext.getResources().getString(R.string.feed_tab_name));
-                adapter.addFragmentWithIcon(AdvEventsMyEventsFragment.newInstance(null),
-                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event_icon),
+                adapter.addFragmentWithIcon(MyEventsFragment.newInstance(null),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event),
                         mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)
@@ -214,8 +216,8 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                 adapter.addFragmentWithIcon(FeedsFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home)
                         , mContext.getResources().getString(R.string.feed_tab_name));
-                adapter.addFragmentWithIcon(AdvEventsMyEventsFragment.newInstance(null),
-                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event_icon),
+                adapter.addFragmentWithIcon(MyEventsFragment.newInstance(null),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event),
                         mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)
