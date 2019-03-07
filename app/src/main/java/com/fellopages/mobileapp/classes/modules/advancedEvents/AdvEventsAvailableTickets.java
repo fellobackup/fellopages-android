@@ -114,8 +114,13 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
 
         if(getIntent() != null){
             try {
-                mEventInfoObject = new JSONObject(getIntent().getStringExtra("urlParams"));
-                mEventId = mEventInfoObject.optInt("event_id");
+                if (getIntent().getStringExtra("urlParams") != null) {
+                    mEventInfoObject = new JSONObject(getIntent().getStringExtra("urlParams"));
+                    mEventId = mEventInfoObject.optInt("event_id");
+                } else {
+                    mEventId = getIntent().getIntExtra("isAdvEventId", 0);
+                    Log.d("AdvEventsSam ", String.valueOf(mEventId));
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

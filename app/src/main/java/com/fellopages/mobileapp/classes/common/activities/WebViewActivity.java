@@ -33,6 +33,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -123,7 +124,7 @@ public class WebViewActivity extends AppCompatActivity {
         alertDialogWithAction = new AlertDialogWithAction(mContext);
 
         isRedirectedFromEventProfile = getIntent().getBooleanExtra("isRedirectedFromEventProfile", false);
-        LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "isRedirectedFromEventProfile->" +isRedirectedFromEventProfile );
+        LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "isRedirectedFromEventProfile->" + isRedirectedFromEventProfile);
 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -151,7 +152,7 @@ public class WebViewActivity extends AppCompatActivity {
         if (mWebUrl != null && !mWebUrl.isEmpty()) {
             urlParams = new HashMap<>();
 
-            isStorePayment = getIntent().getBooleanExtra("cartorder",false);
+            isStorePayment = getIntent().getBooleanExtra("cartorder", false);
             // Added Parameter to disable header and footer.
 
             if (!mWebUrl.contains("disableHeaderAndFooter")) {
@@ -172,7 +173,7 @@ public class WebViewActivity extends AppCompatActivity {
                 mWebUrl = mAppConst.buildQueryString(mWebUrl, urlParams);
         }
 
-        if(getIntent().hasExtra("isSubscription") || getIntent().hasExtra("isPackagePayment")
+        if (getIntent().hasExtra("isSubscription") || getIntent().hasExtra("isPackagePayment")
                 || getIntent().hasExtra("isChangeSubscriptionPlan") || getIntent().hasExtra("isTicketsPayment")
                 || getIntent().hasExtra("isAdvEventPayment")) {
             isSubscription = getIntent().getBooleanExtra("isSubscription", false);
@@ -181,14 +182,15 @@ public class WebViewActivity extends AppCompatActivity {
             isTicketsPayment = getIntent().getBooleanExtra("isTicketsPayment", false);
             isAdvEventPayment = getIntent().getBooleanExtra("isAdvEventPayment", false);
             mEventId = getIntent().getIntExtra("isAdvEventId", mEventId);
-            if(isAdvEventPayment){
+            Log.d("EVENT_ID_WEBVIEW", String.valueOf(mEventId));
+            if (isAdvEventPayment) {
                 isAdvEventPaymentMethod = true;
             }
             LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "isAdvEventPayment--" + isAdvEventPayment);
-            LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "isAdvEventPayment_eventId--" +mEventId);
+            LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "isAdvEventPayment_eventId--" + mEventId);
             LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "isAdvEventPaymentMethod--" + isAdvEventPaymentMethod);
 
-            if(isPackagePayment || isTicketsPayment || isAdvEventPayment){
+            if (isPackagePayment || isTicketsPayment || isAdvEventPayment) {
                 mToolbar.setTitle(mContext.getResources().getString(R.string.package_payment));
             } else {
                 mToolbar.setTitle(mContext.getResources().getString(R.string.subscription));
@@ -327,16 +329,16 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(data != null){
+        if (data != null) {
             isRedirectedFromEventProfile = data.getBooleanExtra("isRedirectedFromEventProfile", false);
         }
-        LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "request--result->" +requestCode+"-"+resultCode);
-        LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "resultCodeData->" +data);
+        LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "request--result->" + requestCode + "-" + resultCode);
+        LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "resultCodeData->" + data);
         LogUtils.LOGD(WebViewActivity.class.getSimpleName(), "isRedirectedFromEventProfile->" + isRedirectedFromEventProfile);
 
-        if(requestCode == ConstantVariables.CREATE_REQUEST_CODE
+        if (requestCode == ConstantVariables.CREATE_REQUEST_CODE
                 && resultCode == ConstantVariables.IS_REDIRECTED_FROM_EVENT_PROFILE
-                && isRedirectedFromEventProfile){
+                && isRedirectedFromEventProfile) {
             Intent intent = new Intent();
             intent.putExtra("isRedirectedFromEventProfile", isRedirectedFromEventProfile);
             setResult(ConstantVariables.VIEW_PAGE_CODE, intent);
@@ -387,7 +389,7 @@ public class WebViewActivity extends AppCompatActivity {
                 case KeyEvent.KEYCODE_BACK:
                     if (mWebView.canGoBack() && !isSubscription && !isPackagePayment && !isChangeSubscriptionPlan) {
                         mWebView.goBack();
-                    }else{
+                    } else {
                         onBackPressed();
                     }
                     return true;
@@ -401,10 +403,10 @@ public class WebViewActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_with_action_icon, menu);
 
 //        menu.findItem(R.id.submit).setVisible(false);
-        if(isAdvEventPayment){
+        if (isAdvEventPayment) {
             menu.findItem(R.id.skip).setVisible(false);
             menu.findItem(R.id.submit).setVisible(false);
-        }else{
+        } else {
             menu.findItem(R.id.skip).setVisible(false);
             menu.findItem(R.id.submit).setVisible(false);
         }
@@ -427,7 +429,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
             return true;
         }
-        if(id == R.id.skip){
+        if (id == R.id.skip) {
             sendToPaymentMethod();
         }
 
@@ -440,26 +442,25 @@ public class WebViewActivity extends AppCompatActivity {
          * Clear Twitter and Facebook instances if subscription
          * payment is not completed
          */
-        if(isSubscription){
+        if (isSubscription) {
             SocialLoginUtil.clearFbTwitterInstances(this, loginType);
         }
         /**
          * Finish the webview activity in case of subscription when back button is pressed from any where.
          */
-        if(isSubscription){
+        if (isSubscription) {
             super.onBackPressed();
             Intent intent = new Intent();
             setResult(ConstantVariables.SIGN_UP_WEBVIEW_CODE, intent);
             finish();
-        }else if (isChangeSubscriptionPlan || isTicketsPayment) {
+        } else if (isChangeSubscriptionPlan || isTicketsPayment) {
             Intent intent = new Intent();
             setResult(ConstantVariables.PAYMENT_FAILED_ACTIVITY_CODE, intent);
             super.onBackPressed();
             finish();
-        } else if(isAdvEventPayment){
+        } else if (isAdvEventPayment) {
             showAlertPopup(true);
-        }else
-        {
+        } else {
             super.onBackPressed();
             setResult(RESULT_CANCELED);
             finish();
@@ -491,7 +492,7 @@ public class WebViewActivity extends AppCompatActivity {
                 finish();
             } else if (url.contains("smsto:")) {
                 smsUrl = url;
-                if(!mAppConst.checkManifestPermission(Manifest.permission.SEND_SMS)){
+                if (!mAppConst.checkManifestPermission(Manifest.permission.SEND_SMS)) {
                     mAppConst.requestForManifestPermission(Manifest.permission.SEND_SMS,
                             ConstantVariables.SEND_SMS);
                 } else {
@@ -515,6 +516,7 @@ public class WebViewActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            Log.d("EVENT_ID ", String.valueOf(mEventId));
             if (!isRedirected) {
 
                 // Showing tool bar title which is the current page title in WebView.
@@ -526,15 +528,15 @@ public class WebViewActivity extends AppCompatActivity {
                     if (url.contains("state/active") || url.contains("products/success")) {
                         setResult(RESULT_OK);
                         finish();
-                    }else if (url.contains("state/")) {
+                    } else if (url.contains("state/")) {
                         setResult(RESULT_CANCELED);
                         finish();
                     }
                     //TODO needs to check
-                }else if(isAdvEventPayment){
+                } else if (isAdvEventPayment) {
                     if (url.contains("state/active")) {
                         sendToPaymentMethod();
-                    } else if(url.contains("state/")){
+                    } else if (url.contains("state/")) {
                         showAlertPopup(false);
                     }
                 } else if (isSubscription) {
@@ -646,11 +648,12 @@ public class WebViewActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            finish();
+//                            finish();
+                            sendToPaymentMethod();
                         }
                     }, DELAY_TIME);
                 }
-            } else if((isChangeSubscriptionPlan || isTicketsPayment ) && url.contains("/state/active")) {
+            } else if ((isChangeSubscriptionPlan || isTicketsPayment) && url.contains("/state/active")) {
                 if (isTicketsPayment) {
                     setResult(ConstantVariables.PAYMENT_SUCCESS_ACTIVITY_CODE);
                 }
@@ -681,20 +684,33 @@ public class WebViewActivity extends AppCompatActivity {
         }
     }
 
-    public void sendToPaymentMethod(){
-        Intent createEntry;
-        String payment_method_url = null;
-        createEntry = new Intent(WebViewActivity.this, CreateNewEntry.class);
-        payment_method_url = AppConstant.DEFAULT_URL + "advancedeventtickets/order/payment-info?" + "event_id=" + mEventId;
-        createEntry.putExtra(ConstantVariables.CREATE_URL, payment_method_url);
-        createEntry.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADV_EVENT_PAYMENT_METHOD);
-        createEntry.putExtra(ConstantVariables.FORM_TYPE, ConstantVariables.PAYMENT_CONFIG_METHOD);
-        createEntry.putExtra("isAdvEventPaymentMethod", isAdvEventPaymentMethod);
-        createEntry.putExtra("isAdvEventId", mEventId);
-        mContext.startActivity(createEntry);
-        finish();
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
+    public void sendToPaymentMethod() {
+        alertDialogWithAction.showAlertDialogWithTwoBtnAction(
+                mContext.getResources().getString(R.string.payment_method_label),
+                mContext.getResources().getString(R.string.set_up_your_payment_method),
+                mContext.getResources().getString(R.string.setup_now), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String payment_method_url = null;
+                        payment_method_url = AppConstant.DEFAULT_URL
+                                + "advancedeventtickets/order/payment-info?" + "event_id=" + mEventId;
+                        Intent intent = new Intent(mContext, EditEntry.class);
+                        intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADV_EVENT_PAYMENT_METHOD);
+                        intent.putExtra(ConstantVariables.FORM_TYPE, ConstantVariables.PAYMENT_CONFIG_METHOD);
+                        intent.putExtra(ConstantVariables.URL_STRING, payment_method_url);
+                        intent.putExtra("isAdvEventId", mEventId);
+                        mContext.startActivity(intent);
+                        finish();
+                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        finish();
+                        alertDialogWithAction.showDialogForClosedContent("",mContext.getResources().getString(R.string.you_can_set_up));
+                    }
+                });
     }
 
     public void showAlertPopup(boolean showCancel) {
@@ -745,7 +761,7 @@ public class WebViewActivity extends AppCompatActivity {
                         mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.SEND_SMS,
                                 ConstantVariables.SEND_SMS);
 
-                    }else{
+                    } else {
                         // If user pressed never ask again on permission popup
                         // show snackbar with open app info button
                         // user can revoke the permission from Permission section of App Info.

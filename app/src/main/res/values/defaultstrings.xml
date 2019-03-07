@@ -1596,4 +1596,7 @@
     <string name="end_time_invalid">Start time must be earlier than end time.</string>
     <string name="upload_profile_pic">Upload profile picture</string>
     <string name="alert_upload_profile_pic_desc">Upload your profile picture. It makes your account look legit and professional.</string>
+    <string name="set_up_your_payment_method">Set up your payment methods</string>
+    <string name="setup_now">Setup now</string>
+    <string name="you_can_set_up">You can set up your payment methods anytime by going to your event dashboard</string>
 </resources>

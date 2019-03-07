@@ -29,6 +29,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +57,7 @@ import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
 import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.Status;
+import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsAvailableTickets;
 import com.fellopages.mobileapp.classes.modules.editor.NewEditorActivity;
 import com.fellopages.mobileapp.classes.modules.forum.ForumUtil;
 
@@ -100,7 +102,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
         mSelectPath = new ArrayList<>();
         mSelectedMusicFiles = new ArrayList<>();
         mHashMap = new HashMap<>();
-
+        Log.d("ThisWasLogged ","EditEntry true");
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -806,7 +808,8 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                                         intent.putExtras(bundle);
                                         setResult(ConstantVariables.PAGE_EDIT_CODE, intent);
                                     }
-                                    finish();
+                                    redirectToAdvEventsAvailableTickets();
+//                                    finish();
                                 }
                             });
                     break;
@@ -921,6 +924,15 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                 break;
 
         }
+    }
+
+    public void redirectToAdvEventsAvailableTickets(){
+        intent = new Intent(mContext, AdvEventsAvailableTickets.class);
+        intent.putExtra("url", editFormUrl);
+        intent.putExtra("isAdvEventId", mEventId);
+        mContext.startActivity(intent);
+        finish();
+        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 }

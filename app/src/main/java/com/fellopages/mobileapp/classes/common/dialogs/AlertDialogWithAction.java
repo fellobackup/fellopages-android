@@ -302,6 +302,16 @@ public class AlertDialogWithAction {
         alertDialog.show();
     }
 
+    public void showAlertDialogWithTwoBtnAction(String headerTitle, String message, String buttonTitleOne,
+                                          DialogInterface.OnClickListener onClickListener, DialogInterface.OnClickListener onCancelClickListener) {
+
+        mDialogBuilder.setTitle(headerTitle);
+        mDialogBuilder.setMessage(message);
+        mDialogBuilder.setPositiveButton(buttonTitleOne, onClickListener);
+        mDialogBuilder.setNegativeButton("Later", onCancelClickListener);
+        AlertDialog alertDialog = mDialogBuilder.create();
+        alertDialog.show();
+    }
     /**
      * Method to show Alert dialog with message.
      * @param message Message content.

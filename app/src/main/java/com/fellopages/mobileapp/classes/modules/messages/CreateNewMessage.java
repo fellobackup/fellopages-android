@@ -32,6 +32,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -226,6 +227,7 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
+                Log.d("Logger 3 ", "true");
                 SnackbarUtils.displaySnackbarLongWithListener(findViewById(R.id.create_form),
                         message, new SnackbarUtils.OnSnackbarDismissListener() {
                             @Override
@@ -612,6 +614,7 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 findViewById(R.id.sentToLoadingProgressBar).setVisibility(View.GONE);
+                Log.d("Logger 4 ", "true");
                 SnackbarUtils.displaySnackbar(findViewById(R.id.create_form), message);
             }
         });
@@ -643,7 +646,7 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
         mAppConst.hideKeyboard();
         checkValidation();
 
-        if(!isBodyBlank && !isRecipientBlank){
+        if(!isRecipientBlank){
             Set<String> keySet = selectedFriends.keySet();
             String res = "";
             for (Iterator<String> iterator = keySet.iterator(); iterator.hasNext();) {
@@ -686,13 +689,13 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
             mRecipientView.setError(null);
             isRecipientBlank = false;
         }
-        if(mBodyView.getText().length() == 0 || mBodyView.getText().toString().trim().isEmpty()){
-            mBodyView.setError(getResources().getString(R.string.field_blank_msg));
-            isBodyBlank = true;
-        }else {
-            mBodyView.setError(null);
-            isBodyBlank = false;
-        }
+//        if(mBodyView.getText().length() == 0 || mBodyView.getText().toString().trim().isEmpty()){
+//            mBodyView.setError(getResources().getString(R.string.field_blank_msg));
+//            isBodyBlank = true;
+//        }else {
+//            mBodyView.setError(null);
+//            isBodyBlank = false;
+//        }
     }
 
     @Override
@@ -740,8 +743,15 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
                     }
 
                 } else {
+                    String message;
+                    if (response.optString("message").contains("RESPONSE_MESSAGE_VALIDATION_FAIL: ")){
+                        message = response.optString("message")
+                                .replace("RESPONSE_MESSAGE_VALIDATION_FAIL: ", "");
+                    } else {
+                        message = response.optString("message");
+                    }
                     SnackbarUtils.displaySnackbar(findViewById(R.id.create_form),
-                            response.optString("message"));
+                            message);
                 }
             } else {
                 if (isRequestSuccessful) {
@@ -771,6 +781,7 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
                     mSelectedMusicFile = "";
                     mAttachType = "";
                     assert response != null;
+                    Log.d("Logger 1 ", "true");
                     SnackbarUtils.displaySnackbar(findViewById(R.id.create_form),
                             response.optString("message"));
                 }

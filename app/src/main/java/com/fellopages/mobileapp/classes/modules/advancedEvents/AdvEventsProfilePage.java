@@ -134,7 +134,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         mImageLoader = new ImageLoader(getApplicationContext());
 
         setContentView(R.layout.activity_profile_pages);
-
+        Log.d("SoThisIsIt", "AdvEventsProfilePage");
         /* Create Back Button On Action Bar **/
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
@@ -731,6 +731,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
 
         menu.clear();
         if(mGutterMenus != null){
+            mGutterMenuUtils.setEventId(mEventId);
             mGutterMenuUtils.showOptionMenus(menu, mGutterMenus, mModuleName, mBrowseList);
         }
         return super.onPrepareOptionsMenu(menu);

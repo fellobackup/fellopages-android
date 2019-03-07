@@ -30,8 +30,10 @@ import android.support.v7.widget.PopupMenu;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.LoginFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -98,7 +100,7 @@ public class GutterMenuUtils {
     private String mRedirectUrl, mChangedFriendShipType, mFriendShipUrl, mMenuName,
             mDialogueMessage, mDialogueTitle, mDialogueButton, mSuccessMessage,
             mMenuLabel, mCurrentSelectedModule;
-    private int mSelectedRsvpValue = 0, mPosition, mListingTypeId;
+    private int mSelectedRsvpValue = 0, mPosition, mListingTypeId, mEventId;
     private boolean isNeedToDismiss = true, isActionPerformed = false;
     private Map<String, String> mPostParams;
     private JSONObject mMenuJsonObject, mUrlParams;
@@ -124,6 +126,11 @@ public class GutterMenuUtils {
         mPostParams = new HashMap<>();
         mAppConst = new AppConstant(mContext);
         mSocialShareUtil = new SocialShareUtil(mContext);
+    }
+
+    public void setEventId(int mEventId){
+        this.mEventId = mEventId;
+        Log.d("ThisWasTriggered", String.valueOf(mEventId));
     }
 
     /**
@@ -1064,6 +1071,7 @@ public class GutterMenuUtils {
             mUrlParams = mMenuJsonObject.optJSONObject("urlParams");
             mRedirectUrl = AppConstant.DEFAULT_URL + mMenuJsonObject.optString("url");
 
+
             if (mUrlParams != null && mUrlParams.length() != 0) {
                 JSONArray urlParamsNames = mUrlParams.names();
                 for (int j = 0; j < mUrlParams.length(); j++) {
@@ -1320,11 +1328,14 @@ public class GutterMenuUtils {
                 intent = new Intent(mContext, WebViewActivity.class);
                 intent.putExtra("isPackagePayment", true);
                 intent.putExtra("url", mRedirectUrl);
+                intent.putExtra("isAdvEventId", mEventId);
+                Log.d("finallythisisIt ", String.valueOf(mEventId));
                 mContext.startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
 
             case ConstantVariables.PAYMENT_METHOD:
+                Log.d("SampleJsonHere ", String.valueOf(mUrlParams));
                 if (mCurrentSelectedModule.equals(ConstantVariables.ADVANCED_EVENT_MENU_TITLE)) {
                     intent = new Intent(mContext, EditEntry.class);
                     int mEventId = mUrlParams.optInt("event_id");
@@ -1402,6 +1413,7 @@ public class GutterMenuUtils {
                 intent = new Intent(mContext, AdvEventsAvailableTickets.class);
                 intent.putExtra("url", mRedirectUrl);
                 intent.putExtra("urlParams", mUrlParams.toString());
+                Log.d("CreateTicketParams ", mUrlParams.toString());
                 mContext.startActivity(intent);
                 ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
