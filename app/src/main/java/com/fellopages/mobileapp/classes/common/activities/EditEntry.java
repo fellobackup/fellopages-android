@@ -58,6 +58,7 @@ import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
 import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.Status;
 import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsAvailableTickets;
+import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsProfilePage;
 import com.fellopages.mobileapp.classes.modules.editor.NewEditorActivity;
 import com.fellopages.mobileapp.classes.modules.forum.ForumUtil;
 
@@ -85,6 +86,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
     private Context mFormActivityContext;
     private boolean isStatusPage = false, mIsFormLoaded = false;
     private boolean mShowCamera;
+    private boolean isFromWebViewPayment = false;
     private String mUploadingOption, property, mSelectedFilePath;
     private HashMap<String, ArrayList> mHashMap;
     private AlertDialogWithAction mAlertDialogWithAction;
@@ -102,16 +104,18 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
         mSelectPath = new ArrayList<>();
         mSelectedMusicFiles = new ArrayList<>();
         mHashMap = new HashMap<>();
-        Log.d("ThisWasLogged ","EditEntry true");
+
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         editFormView = (RelativeLayout)findViewById(R.id.form_view);
+        isFromWebViewPayment = getIntent().getBooleanExtra("isFromWebViewPayment", false);
         mFormType = getIntent().getStringExtra(ConstantVariables.FORM_TYPE);
         mRequestCode = getIntent().getIntExtra(ConstantVariables.REQUEST_CODE, ConstantVariables.PAGE_EDIT_CODE);
         isStatusPage = getIntent().getBooleanExtra("isStatusPage", false);
+
         scheduleFormValue = getIntent().getStringExtra("form_value");
 
         //Fetch Current Selected Module
@@ -360,6 +364,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_with_action_icon, menu);
         menu.findItem(R.id.submit).setTitle(getResources().getString(R.string.save_menu_title));
+        menu.findItem(R.id.skip).setTitle(getResources().getString(R.string.skip));
         return true;
     }
 
@@ -372,6 +377,9 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
         if (submit != null) {
             Drawable drawable = submit.getIcon();
             drawable.setColorFilter(ContextCompat.getColor(this, R.color.textColorPrimary), PorterDuff.Mode.SRC_ATOP);
+        }
+        if (currentSelectedOption.equals("adv_event_payment_method")){
+            menu.findItem(R.id.skip).setVisible(true);
         }
 
         if (isStatusPage && Status.FORM_OBJECT != null && Status.FORM_OBJECT.length() > 0) {
@@ -416,13 +424,17 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                     finish();
                 }
                 break;
+            case R.id.skip:
+                redirectToAdvEventsAvailableTickets();
 
+                break;
             case android.R.id.home:
                 onBackPressed();
                 // Playing backSound effect when user tapped on back button from tool bar.
                 if (PreferencesUtils.isSoundEffectEnabled(EditEntry.this)) {
                     SoundUtil.playSoundEffectOnBackPressed(EditEntry.this);
                 }
+
                 return true;
         }
 
@@ -860,7 +872,21 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
     @Override
     public void onBackPressed() {
         mAppConst.hideKeyboard();
-        if ((currentSelectedOption.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)
+        if (isFromWebViewPayment){
+            Intent viewIntent;
+            String url = AppConstant.DEFAULT_URL;
+            url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
+            viewIntent = new Intent(mContext, AdvEventsProfilePage.class);
+            if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+                viewIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+            viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
+            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
+            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
+            viewIntent.putExtra("isRedirectedFromEventProfile", true);
+            startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        } else if ((currentSelectedOption.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)
                 && (mFormType != null && mFormType.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)))) {
             setResult(ConstantVariables.REQUEST_CANCLED);
             finish();
@@ -930,6 +956,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
         intent = new Intent(mContext, AdvEventsAvailableTickets.class);
         intent.putExtra("url", editFormUrl);
         intent.putExtra("isAdvEventId", mEventId);
+        intent.putExtra("isFromWebViewPayment", true);
         mContext.startActivity(intent);
         finish();
         ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

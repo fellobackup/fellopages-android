@@ -182,7 +182,6 @@ public class WebViewActivity extends AppCompatActivity {
             isTicketsPayment = getIntent().getBooleanExtra("isTicketsPayment", false);
             isAdvEventPayment = getIntent().getBooleanExtra("isAdvEventPayment", false);
             mEventId = getIntent().getIntExtra("isAdvEventId", mEventId);
-            Log.d("EVENT_ID_WEBVIEW", String.valueOf(mEventId));
             if (isAdvEventPayment) {
                 isAdvEventPaymentMethod = true;
             }
@@ -516,7 +515,6 @@ public class WebViewActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            Log.d("EVENT_ID ", String.valueOf(mEventId));
             if (!isRedirected) {
 
                 // Showing tool bar title which is the current page title in WebView.
@@ -694,11 +692,25 @@ public class WebViewActivity extends AppCompatActivity {
                         String payment_method_url = null;
                         payment_method_url = AppConstant.DEFAULT_URL
                                 + "advancedeventtickets/order/payment-info?" + "event_id=" + mEventId;
+
+                        String url = AppConstant.DEFAULT_URL;
+                        url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
+
                         Intent intent = new Intent(mContext, EditEntry.class);
                         intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADV_EVENT_PAYMENT_METHOD);
                         intent.putExtra(ConstantVariables.FORM_TYPE, ConstantVariables.PAYMENT_CONFIG_METHOD);
                         intent.putExtra(ConstantVariables.URL_STRING, payment_method_url);
+                        intent.putExtra("isFromWebViewPayment", true);
                         intent.putExtra("isAdvEventId", mEventId);
+
+
+//                        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+//                            intent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+//                        intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
+//                        intent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
+//                        intent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
+//                        intent.putExtra("isRedirectedFromEventProfile", true);
+
                         mContext.startActivity(intent);
                         finish();
                         ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -706,9 +718,19 @@ public class WebViewActivity extends AppCompatActivity {
                 }, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent viewIntent;
+                        String url = AppConstant.DEFAULT_URL;
+                        url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
+                        viewIntent = new Intent(mContext, AdvEventsProfilePage.class);
+                        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+                            viewIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                        viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
+                        viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
+                        viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
+                        viewIntent.putExtra("isRedirectedFromEventProfile", true);
                         dialogInterface.dismiss();
-                        finish();
-                        alertDialogWithAction.showDialogForClosedContent("",mContext.getResources().getString(R.string.you_can_set_up));
+                        startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
     }

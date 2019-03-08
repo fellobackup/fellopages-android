@@ -19,11 +19,11 @@
         android:visible="false"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/submit"
-        android:title="@string/create_desc_button_title"
-        android:icon="@drawable/ic_done_theme_color"
-        android:visible="true"
+    <item android:id="@+id/skip"
+        android:title="@string/redirection_skip"
+        android:visible="false"
         app:showAsAction="always"/>
+
 
     <item android:id="@+id/delete"
         android:icon="@drawable/ic_action_delete"
@@ -31,9 +31,10 @@
         android:visible="false"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/skip"
-        android:title="@string/redirection_skip"
-        android:visible="false"
-        app:showAsAction="always"/>
 
+    <item android:id="@+id/submit"
+        android:title="@string/create_desc_button_title"
+        android:icon="@drawable/ic_done_theme_color"
+        android:visible="true"
+        app:showAsAction="always"/>
 </menu>

@@ -72,6 +72,7 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
     private String currentModule, available_tickets_url;
     private int mLoadingPageNo = 1, mEventId, ticket_id;
     private boolean isLoading = false;
+    private boolean isFromWebViewPayment = false;
 
 
 
@@ -113,6 +114,7 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
         vg.addView(fab);
 
         if(getIntent() != null){
+            isFromWebViewPayment = getIntent().getBooleanExtra("isFromWebViewPayment", false);
             try {
                 if (getIntent().getStringExtra("urlParams") != null) {
                     mEventInfoObject = new JSONObject(getIntent().getStringExtra("urlParams"));
@@ -331,7 +333,22 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        if (isFromWebViewPayment){
+            Intent viewIntent;
+            String url = AppConstant.DEFAULT_URL;
+            url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
+            viewIntent = new Intent(mContext, AdvEventsProfilePage.class);
+            if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+                viewIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+            viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
+            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
+            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
+            viewIntent.putExtra("isRedirectedFromEventProfile", true);
+            startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
     }
 
     @Override

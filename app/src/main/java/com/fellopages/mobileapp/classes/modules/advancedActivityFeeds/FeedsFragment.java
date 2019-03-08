@@ -33,6 +33,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -511,7 +512,6 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                         try {
                             JSONObject userDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
                             String displayName = userDetail.getString("displayname");
-
                             welcomeUserTextView.setText(String.format(mContext.getResources().
                                             getString(R.string.welcome_user_text),
                                     mContext.getResources().getString(R.string.welcomeText), displayName
@@ -1608,7 +1608,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             if (mSubjectType != null && !mSubjectType.isEmpty()) {
                 getFeedCountUrl += "&subject_type=" + mSubjectType + "&subject_id=" + mSubjectId;
             }
-
+            Log.d("FilterTypeHere ", mFilterType);
             if (mFilterType != null && !mFilterType.isEmpty()) {
                 getFeedCountUrl += "&filter_type=" + mFilterType;
             }
@@ -1707,9 +1707,9 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
      *
      * @param filterType Selected Filter Type
      */
+    //TODO implement saved feeds to sliding menu
     @Override
     public void setFilterType(String filterType) {
-
         mFilterType = filterType;
         String feedsUrl = mFeedsUrl;
         if (mFilterType != null && !mFilterType.isEmpty()) {
