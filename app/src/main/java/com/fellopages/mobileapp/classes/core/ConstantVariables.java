@@ -179,6 +179,7 @@ public static final int WEBVIEW_ENABLE = 1;
     public static final String CONTACT_INFO_MENU_TITLE = "contact_info";
     public static final String APP_TOUR_MENU_TITLE = "core_main_app_tour";
     public static final String SIGN_UP_FIELDS = "signup_fields";
+    public static final String SAVE_FEEDS = "save_feeds";
     //Message titles
     public static final String MESSAGE_MENU_TITLE = "core_mini_messages";
     public static final String MESSAGE_CONVERSATION_MENU_TITLE = "messages_conversation";

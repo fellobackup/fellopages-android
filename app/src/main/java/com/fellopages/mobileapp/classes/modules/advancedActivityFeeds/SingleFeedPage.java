@@ -244,7 +244,7 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
         mSubjectType = "activity_action";
 
         mFeedAdapter = new FeedAdapter(this, R.layout.list_feeds, mFeedItemsList, true, mCommentBox,
-                mSubjectType, mActionId, null, mFeedPosition, false, null);
+                mSubjectType, mActionId, null, mFeedPosition, false, false, null);
 
         mFeedsRecyclerView.setAdapter(mFeedAdapter);
         mFeedAdapter.setOnFeedDisableCommentListener(SingleFeedPage.this);

@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.icu.util.Currency;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -67,6 +68,7 @@ import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 import com.facebook.ads.NativeAd;
+import com.fellopages.mobileapp.classes.common.multimediaselector.bean.Folder;
 import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
 import com.fellopages.mobileapp.R;
@@ -214,11 +216,12 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private BottomSheetDialog mBottomSheetDialog;
     private OnGifPlayListener mOnGifPlayListener;
     private FeedList mFeedPreviewItem;
+    private boolean isSaveFeeds = false;
 
 
     public FeedAdapter(Context context, int layoutResourceID, List<Object> listItem, boolean isSinglePageFeed,
                        EditText commentEditText, String subjectType, int subjectId, String moduleName,
-                       int feedPosition, boolean hidePhotos, FeedsFragment feedsFragment) {
+                       int feedPosition, boolean hidePhotos, boolean isSaveFeeds, FeedsFragment feedsFragment) {
 
 
         mContext = context;
@@ -252,7 +255,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         mDeletedModulesList = Arrays.asList(ConstantVariables.DELETED_MODULES);
 
         mCommentEditText = commentEditText;
-
+        this.isSaveFeeds = isSaveFeeds;
         mFeedsFragment = feedsFragment;
         mTagSelectingTextView = new TagSelectingTextView();
 
@@ -1559,11 +1562,21 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                         headerViewHolder.ivBgShapeMoreFilter, "more_filter", mContext.getResources().getString(R.string.more), R.color.second_filter);
                                 mOptionsItemList.add(new SheetItemModel(filterTitle, filterType, getFilterIcon(filterType)));
                                 mSheetAdapter = new SimpleSheetAdapter(mContext, mOptionsItemList, true, true);
+                                Log.d("SampleKeyHere ", String.valueOf(isSaveFeeds));
+//                                if (isSaveFeeds){
+//                                    new Handler().postDelayed(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            mFilterSelectedListener.setFilterType("user_saved");
+//                                        }
+//                                    }, 2500);
+//                                }
                                 mSheetAdapter.setOnItemClickListener(new SimpleSheetAdapter.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(SheetItemModel item, int position) {
                                         mBottomSheetDialog.dismiss();
                                         if (item.getKey() != null && mFilterSelectedListener != null) {
+                                            Log.d("SelectedOption ", item.getKey());
                                             mFilterSelectedListener.setFilterType(item.getKey());
                                         }
                                     }

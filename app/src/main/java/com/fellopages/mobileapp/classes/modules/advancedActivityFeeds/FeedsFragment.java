@@ -157,6 +157,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private int mGifPosition, muteStoryCount = 0;
     private List<Object> browseItemArrayList;
     private JSONArray usersArray;
+    private boolean isSaveFeeds = false;
 
 
     public FeedsFragment() {
@@ -227,6 +228,8 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                     e.printStackTrace();
                 }
             }
+
+            isSaveFeeds = getArguments().getBoolean("isSaveFeeds");
         }
 
         // Inflate the layout for this fragment
@@ -370,6 +373,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                                         mModuleName,
                             -1,
                              false,
+                                        isSaveFeeds,
                           this);
 
         mFeedAdapter.setmFilterSelectedListener(FeedsFragment.this);
@@ -409,8 +413,14 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             handler.removeCallbacksAndMessages(runnableCode);
         }
 
-        if (mSubjectType == null || !mSubjectType.equals(ConstantVariables.SITE_VIDEO_CHANNEL_MENU_TITLE))
-            getFeeds(mFeedsUrl, false);
+        if (mSubjectType == null || !mSubjectType.equals(ConstantVariables.SITE_VIDEO_CHANNEL_MENU_TITLE)) {
+            if (isSaveFeeds){
+                setFilterType("user_saved");
+            } else {
+                getFeeds(mFeedsUrl, false);
+            }
+        }
+
 
         // Kick off the first runnable task right away
         isHandlerStopped = false;
@@ -470,7 +480,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
      * @param isRefreshing
      */
     public void getFeeds(String url, final boolean isRefreshing) {
-
+        Log.d("getFeedsUrlNow ", url);
         if (defaultFeedCount != 0) {
             url += "&limit=" + defaultFeedCount;
         }
@@ -1710,6 +1720,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     //TODO implement saved feeds to sliding menu
     @Override
     public void setFilterType(String filterType) {
+        Log.d("ListFeedsFragment", filterType);
         mFilterType = filterType;
         String feedsUrl = mFeedsUrl;
         if (mFilterType != null && !mFilterType.isEmpty()) {

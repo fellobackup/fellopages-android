@@ -37,6 +37,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -107,6 +108,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 
@@ -520,8 +522,17 @@ public class GlobalFunctions {
             case ConstantVariables.FORUM_MENU_TITLE:
                 loadFragment = ForumUtil.getHomePageInstance();
                 break;
+            case ConstantVariables.SAVE_FEEDS:
             case ConstantVariables.HOME_MENU_TITLE:
-                loadFragment = new FeedHomeFragment();
+                if (currentSelectedModule.equals(ConstantVariables.SAVE_FEEDS)){
+                    loadFragment = new FeedHomeFragment();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putBoolean("isSaveFeeds", true);
+                    loadFragment.setArguments(bundle2);
+                } else {
+                    loadFragment = new FeedHomeFragment();
+                }
+
                 break;
             case ConstantVariables.MLT_WISHLIST_MENU_TITLE:
                 loadFragment = MLTUtil.getBrowseWishListPageInstance();

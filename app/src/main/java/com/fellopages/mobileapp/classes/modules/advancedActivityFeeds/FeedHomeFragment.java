@@ -25,6 +25,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,6 +70,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     private FloatingActionButton mFabCreate;
     private int mSelectedTabPosition = 0;
     private IntentFilter intentFilter;
+    private boolean isSaveFeeds = false;
 
     public static FeedHomeFragment newInstance() {
         return new FeedHomeFragment();
@@ -78,6 +80,12 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
+    public static FeedHomeFragment newInstance(Bundle bundle) {
+        // Required  public constructor
+        FeedHomeFragment fragment = new FeedHomeFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
                /* Broadcast receiver for receiving broadcasting intent action for*/
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -117,6 +125,9 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         mAppConst = new AppConstant(mContext);
         rootView = inflater.inflate(R.layout.view_pager, null);
         mFabCreate = (FloatingActionButton) getActivity().findViewById(R.id.create_fab);
+
+
+
         home = (ImageButton) getActivity().findViewById(R.id.home_button);
         friend = (ImageButton) getActivity().findViewById(R.id.friend_tab);
         message = (ImageButton) getActivity().findViewById(R.id.msg_tab);
@@ -213,7 +224,8 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                         , mContext.getResources().getString(R.string.notification_tab_name));
 
             } else {
-                adapter.addFragmentWithIcon(FeedsFragment.newInstance(null),
+                bundle = getArguments();
+                adapter.addFragmentWithIcon(FeedsFragment.newInstance(bundle),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home)
                         , mContext.getResources().getString(R.string.feed_tab_name));
                 adapter.addFragmentWithIcon(MyEventsFragment.newInstance(null),

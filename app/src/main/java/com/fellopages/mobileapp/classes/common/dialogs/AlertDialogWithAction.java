@@ -31,6 +31,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.style.ClickableSpan;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -66,7 +67,6 @@ public class AlertDialogWithAction {
      */
     public void showDialogForAccessPermission(final String permissionType,
                                                 final int requestCode) {
-
         final AppConstant appConstant = new AppConstant(mContext);
         String message;
         switch (permissionType) {

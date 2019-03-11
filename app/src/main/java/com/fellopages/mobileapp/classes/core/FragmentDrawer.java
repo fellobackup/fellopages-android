@@ -55,7 +55,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ru.dimorinny.showcasecard.ShowCaseView;
 import ru.dimorinny.showcasecard.position.ShowCasePosition;
@@ -380,6 +383,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                         mPackagesEnabled = 0;
                     }
                     if (mMenuType.equals("menu")) {
+                        Log.d("MenuName ", mMenuJson.getString("name"));
                         mChildMenuRegName = mMenuJson.getString("name");
 
                         if (mChildMenuRegName != null && !mChildMenuRegName.isEmpty() && !mChildMenuRegName.equals("null")) {
@@ -395,6 +399,11 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                                     break;
 
                                 case ConstantVariables.FRIEND_REQUEST_MENU_TITLE:
+                                    dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
+                                            mChildMenuRegName, mRequestCount, 0, 0, mItemIcon,  mIconColor, canView));
+                                    break;
+
+                                case ConstantVariables.SAVE_FEEDS:
                                     dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
                                             mChildMenuRegName, mRequestCount, 0, 0, mItemIcon,  mIconColor, canView));
                                     break;
@@ -813,6 +822,23 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
     public void scrolledToTop() {
         recyclerView.smoothScrollToPosition(0);
+    }
+
+    public ArrayList<DrawerItem>  removeDuplicates(ArrayList<DrawerItem> list){
+        Set set = new TreeSet(new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                if(((DrawerItem)o1).getmHeaderLabel().equalsIgnoreCase(((DrawerItem)o2).getmHeaderLabel())){
+                    return 0;
+                }
+                return 1;
+            }
+        });
+        set.addAll(list);
+
+        final ArrayList newList = new ArrayList(set);
+        return newList;
     }
 
 }

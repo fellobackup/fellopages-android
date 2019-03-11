@@ -53,6 +53,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -688,6 +689,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         isGuestUserHomePage = false;
         BrowseMLTFragment.selectedViewType = 0;
         // update the main content by replacing fragments
+        Log.d("SelectedName ", name);
         if (name != null) {
             AppController.getInstance().trackEvent(name, "Dashboard Selection", label);
             switch (name) {
@@ -833,6 +835,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         mTabHost.setVisibility(View.GONE);
                     }else {
                         switch (name) {
+                            case ConstantVariables.SAVE_FEEDS:
                             case ConstantVariables.HOME_MENU_TITLE:
                                 setTabVisibility(TYPE_HOME);
                                 label = headerLabel = mAppTitle;
