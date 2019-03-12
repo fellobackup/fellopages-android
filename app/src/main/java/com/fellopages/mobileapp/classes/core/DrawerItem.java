@@ -19,6 +19,7 @@ public class DrawerItem {
     int mListingTypeId, mBrowseType, mViewType,mCanCreate, mPackagesEnabled,siteStoreEnabled,mListingEnabled;
     boolean canView = true;
     public int mSecondaryViewType;
+    public int duplicate = 0;
 
     // For Notifications, Messages, Friend Request
     public DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
@@ -33,6 +34,21 @@ public class DrawerItem {
         mItemIcon = icon;
         mIconBackgroundColor = iconColor;
         this.canView = canView;
+    }
+
+    public DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
+                      int packagesEnabled, String icon, String iconColor, boolean canView, int duplicate){
+        super();
+        mHeaderLabel = headerTitle;
+        ItemName=itemName;
+        mItemRegName=itemRegName;
+        mBadgeCount =  badgeCount;
+        mCanCreate = canCreate;
+        mPackagesEnabled = packagesEnabled;
+        mItemIcon = icon;
+        mIconBackgroundColor = iconColor;
+        this.canView = canView;
+        this.duplicate = duplicate;
     }
 
     // For Other Options in drawer
@@ -173,5 +189,13 @@ public class DrawerItem {
 
     public String getmIconBackgroundColor() {
         return mIconBackgroundColor;
+    }
+
+    public int getDuplicate() {
+        return duplicate;
+    }
+
+    public void setDuplicate(int duplicate) {
+        this.duplicate = duplicate;
     }
 }

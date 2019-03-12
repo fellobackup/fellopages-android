@@ -314,7 +314,7 @@ public class AppConstant {
     public void manageResponse(String url, final int method, Map<String, String> params,
                                final OnResponseListener onResponseListener) {
 
-        Log.d("JsonTagUrl ", String.valueOf(method)+" "+params);
+
         try {
             if (!url.contains("graph")) {
                 url = buildQueryString(url, mAuthParams);
@@ -326,9 +326,13 @@ public class AppConstant {
 
                 // Put Language Params, location params, and version params in Params
                 url = buildQueryString(url, mRequestParams);
-            }
 
+            }
             postParams = params;
+
+
+
+            Log.d("LoggedParamsAndUrl ", url+" "+postParams);
             LogUtils.LOGD(AppConstant.class.getSimpleName(), "Request Url: " + url);
 
             StringRequest request = new StringRequest(method, url, new Response.Listener<String>() {

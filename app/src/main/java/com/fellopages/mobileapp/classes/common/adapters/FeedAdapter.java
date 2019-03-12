@@ -1557,6 +1557,14 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                 }
 
                             } else {
+                                if (isSaveFeeds){
+                                    setSelectedView(headerViewHolder.moreFilterBlock,
+                                            headerViewHolder.firstFilterBlock,
+                                            headerViewHolder.secondFilterBlock,
+                                            headerViewHolder.thirdFilterBlock,
+                                            headerViewHolder.forthFilterBlock);
+                                    isSaveFeeds = false;
+                                }
                                 setFilterDataInViews(headerViewHolder.moreFilterBlock,
                                         headerViewHolder.tvMoreIcon, headerViewHolder.tvMore,
                                         headerViewHolder.ivBgShapeMoreFilter, "more_filter", mContext.getResources().getString(R.string.more), R.color.second_filter);
@@ -2953,7 +2961,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      * @param filterTitle     Title of filter.
      * @param filterIconColor Filter icon color.
      */
-    private void setFilterDataInViews(View filterBlock, TextView tvFilterIcon, TextView tvFilter,
+    public void setFilterDataInViews(View filterBlock, TextView tvFilterIcon, TextView tvFilter,
                                       ImageView ivBgShapeFilter, String filterType, String filterTitle, int filterIconColor) {
         filterBlock.setTag(filterType);
         try {

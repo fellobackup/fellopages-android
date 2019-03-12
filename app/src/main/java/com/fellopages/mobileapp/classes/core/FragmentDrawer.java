@@ -235,6 +235,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
         // Initializing
         dataList = new ArrayList<>();
+
         adapter = new NavigationDrawerAdapter(getActivity(), dataList,
                 new NavigationDrawerAdapter.OnDrawerItemClickListener() {
                     @Override
@@ -364,7 +365,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
             // preparing navigation drawer items
             if (menuObject != null && menuObject.length() > 0) {
-                for (int i = 0; i < menuObject.length(); i++) {
+                int i;
+                for (i = 0; i < menuObject.length(); i++) {
                     mMenuJson = menuObject.optJSONObject(i);
                     mMenuType = mMenuJson.optString("type");
                     mChildMenuLabel = mMenuJson.getString("label");
@@ -405,7 +407,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
                                 case ConstantVariables.SAVE_FEEDS:
                                     dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                            mChildMenuRegName, mRequestCount, 0, 0, mItemIcon,  mIconColor, canView));
+                                            mChildMenuRegName, mRequestCount, 0, 0, mItemIcon,  mIconColor, canView, i));
                                     break;
 
                                 case ConstantVariables.PRODUCT_CART_MENU_TITLE:
@@ -541,6 +543,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     } else if (mMenuType.equals("category")) {
                         dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel)); // adding a header to the list
                     }
+
+//                    dataList = removeDuplicates(dataList);
 
                     mProgressBar.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
@@ -824,20 +828,24 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         recyclerView.smoothScrollToPosition(0);
     }
 
-    public ArrayList<DrawerItem>  removeDuplicates(ArrayList<DrawerItem> list){
-        Set set = new TreeSet(new Comparator() {
+    public static <Object> List<Object> removeDuplicates(List<Object> list)
+    {
 
-            @Override
-            public int compare(Object o1, Object o2) {
-                if(((DrawerItem)o1).getmHeaderLabel().equalsIgnoreCase(((DrawerItem)o2).getmHeaderLabel())){
-                    return 0;
-                }
-                return 1;
+        // Create a new ArrayList
+        List<Object> newList = new ArrayList<Object>();
+
+        // Traverse through the first list
+        for (Object element : list) {
+
+            // If this element is not present in newList
+            // then add it
+            if (!newList.contains(element)) {
+
+                newList.add(element);
             }
-        });
-        set.addAll(list);
+        }
 
-        final ArrayList newList = new ArrayList(set);
+        // return the new list
         return newList;
     }
 

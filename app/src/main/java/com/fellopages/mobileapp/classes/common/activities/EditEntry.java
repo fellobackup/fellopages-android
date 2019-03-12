@@ -892,18 +892,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         } else if(mFormType.equals("edit_event")){
-            Intent viewIntent;
-            String url = AppConstant.DEFAULT_URL;
-            url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
-            viewIntent = new Intent(mContext, AdvEventsProfilePage.class);
-            if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
-                viewIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
-            viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
-            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
-            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
-            viewIntent.putExtra("isRedirectedFromEventProfile", true);
-            startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            finish();
 
         } else if ((currentSelectedOption.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)
                 && (mFormType != null && mFormType.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)))) {

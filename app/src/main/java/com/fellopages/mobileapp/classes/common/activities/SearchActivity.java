@@ -21,6 +21,7 @@ import android.database.MatrixCursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,7 +29,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -146,6 +150,8 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
         String query = getIntent().getStringExtra(SearchManager.QUERY);
         query = query == null ? "" : query;
 
+
+
         mTagName = getIntent().getStringExtra("tag");
         mTagId = getIntent().getStringExtra("tag_id");
         categoryValue = getIntent().getStringExtra(ConstantVariables.CATEGORY_VALUE);
@@ -165,7 +171,6 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
             //Setting up the filter option in drawer view by sending asynchronous request
             setDrawerViewForFilter();
         } else {
-
             loadSearchFragment();
         }
         //setting up the query hint
@@ -177,7 +182,6 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
     }
 
     private void getSearchUrl(String query) {
-
         // update the Query hint according to the module
 
         if (currentSelectedOption != null && (!isDashBoardSearch || isAdvSearch)) {
@@ -363,6 +367,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent.hasExtra(SearchManager.QUERY)) {
+
             String query = intent.getStringExtra(SearchManager.QUERY);
             isHashTagSearch = getIntent().getBooleanExtra(ConstantVariables.HASTAG_SEARCH, false);
             if (!TextUtils.isEmpty(query) && filterTextView != null) {
@@ -489,11 +494,11 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
     }
 
     public void loadSearchFragment() {
-
         try {
             Fragment fragment = null;
             postParams = new HashMap<>();
             searchParamsBundle = new Bundle();
+
 
             switch (currentSelectedOption) {
                 case ConstantVariables.EVENT_MENU_TITLE:
@@ -539,6 +544,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
             if (mSearchView != null && filterTextView != null) {
 
                 mSearchView.setQuery(filterTextView.getText().toString(), false);
+
                 if (isSearchingHashTag) {
                     searchParamsBundle.putString(QUERY_STRING, mSearchView.getQuery().toString().trim());
                 }
@@ -619,6 +625,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
                 }
             }
 
+
             if (currentSelectedOption != null && (!isDashBoardSearch || isAdvSearch)) {
                 switch (currentSelectedOption) {
 
@@ -633,117 +640,6 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
                         }
                         break;
 
-                    case ConstantVariables.CLASSIFIED_MENU_TITLE:
-                    case ConstantVariables.CLASSIFIED_TITLE:
-                        fragment = ClassifiedUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.BLOG_MENU_TITLE:
-                    case ConstantVariables.BLOG_TITLE:
-                        fragment = BlogUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.ALBUM_MENU_TITLE:
-                    case ConstantVariables.ALBUM_TITLE:
-                        fragment = AlbumUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.VIDEO_MENU_TITLE:
-                    case ConstantVariables.VIDEO_TITLE:
-                        fragment = VideoUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.ADV_VIDEO_MENU_TITLE:
-                    case ConstantVariables.ADV_VIDEO_TITLE:
-                        fragment = AdvVideoUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.ADV_VIDEO_CHANNEL_MENU_TITLE:
-                        fragment = AdvVideoUtil.getChannelBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.ADV_VIDEO_PLAYLIST_MENU_TITLE:
-                        fragment = AdvVideoUtil.getPlaylistBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.GROUP_MENU_TITLE:
-                    case ConstantVariables.GROUP_TITLE:
-                        fragment = GroupUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.EVENT_MENU_TITLE:
-                    case ConstantVariables.EVENT_TITLE:
-                        fragment = EventUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.MUSIC_MENU_TITLE:
-                    case ConstantVariables.MUSIC_TITLE:
-                    case ConstantVariables.MUSIC_PLAYLIST_TITLE:
-                    case ConstantVariables.MUSIC_PLAYLIST_SONG_TITLE:
-                        fragment = MusicUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.USER_MENU_TITLE:
-                    case ConstantVariables.USER_TITLE:
-                        fragment = new BrowseMemberFragment();
-                        break;
-
-                    case ConstantVariables.POLL_MENU_TITLE:
-                    case ConstantVariables.POLL_TITLE:
-                        fragment = PollUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.MLT_MENU_TITLE:
-                    case ConstantVariables.MLT_TITLE:
-                        fragment = MLTUtil.getBrowsePageInstance();
-                        if (mListingTypeId != 0) {
-                            searchParamsBundle.putInt(ConstantVariables.LISTING_TYPE_ID, mListingTypeId);
-                        }
-                        break;
-
-                    case ConstantVariables.MLT_WISHLIST_MENU_TITLE:
-                        fragment = MLTUtil.getBrowseWishListPageInstance();
-                        break;
-
-                    case ConstantVariables.PRODUCT_WISHLIST_MENU_TITLE:
-                        fragment = StoreUtil.getBrowseWishListPageInstance();
-                        break;
-
-                    case ConstantVariables.STORE_ORDER_MENU_TITLE:
-                        fragment = StoreUtil.getBrowseOrderPageInstance();
-                        break;
-
-                    case ConstantVariables.ADVANCED_EVENT_MENU_TITLE:
-                    case ConstantVariables.ADVANCED_EVENT_TITLE:
-                        fragment = AdvEventsUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.DIARY_MENU_TITLE:
-                        fragment = AdvEventsUtil.getBrowseDiariesInstance();
-                        break;
-
-                    case ConstantVariables.SITE_PAGE_MENU_TITLE:
-                    case ConstantVariables.SITE_PAGE_TITLE:
-                        fragment = SitePageUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.ADV_GROUPS_MENU_TITLE:
-                    case ConstantVariables.ADV_GROUPS_TITLE:
-                        fragment = AdvGroupUtil.getBrowsePageInstance();
-                        break;
-
-                    case ConstantVariables.STORE_MENU_TITLE:
-                    case ConstantVariables.STORE_TITLE:
-                        fragment = StoreUtil.getBrowseStoreInstance();
-                        break;
-
-                    case ConstantVariables.PRODUCT_MENU_TITLE:
-                    case ConstantVariables.PRODUCT_TITLE:
-                        fragment = StoreUtil.getBrowseProductPageInstance();
-                        break;
-
-                    default:
-                        break;
                 }
             } else if (isSearchingHashTag) {
                 fragment = new FeedsFragment();
@@ -815,7 +711,6 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
                 mDrawerLayout.closeDrawers();
 
                 isFilterApplied = categoryId != null;
-
                 loadSearchFragment();
                 break;
 
@@ -834,7 +729,6 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
 
     @Override
     public boolean onQueryTextSubmit(String searchText) {
-
         if (currentSelectedOption != null && currentSelectedOption.equals("home")) {
             mQuery = searchText;
             if (isHashTagSearch) {
@@ -852,7 +746,6 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
         if (filterTextView != null) {
             filterTextView.setText(searchText);
         }
-
         loadSearchFragment();
         return true;
     }
@@ -926,7 +819,6 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
         String feedName = cursor.getString(1);
         mSearchView.setQuery(feedName, false);
         mSearchView.clearFocus();
-
         loadSearchFragment();
         mSearchView.setSuggestionsAdapter(null);
         return true;
@@ -992,6 +884,31 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
         View inflateView = drawerView.findViewWithTag(mViewTag);
         if (inflateView != null) {
             filterTextView = (EditText) inflateView.findViewById(R.id.field_value);
+            filterTextView.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                    getSearchUrl(filterTextView.getText().toString().trim());
+//                    Log.d("TextChanged ", filterTextView.getText().toString().trim());
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadSearchFragment();
+                        }
+                    },1000);
+
+//                    mSearchView.setQuery(charSequence, true);
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
 
             // Populate filter text field if Adv search is performed with any query
             if (mSearchView != null && mSearchView.getQuery() != null && !mSearchView.getQuery().toString().isEmpty() &&

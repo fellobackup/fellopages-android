@@ -489,18 +489,20 @@ public class WebViewActivity extends AppCompatActivity {
             } else if (url.contains("mailto:")) {
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse(url)));
                 finish();
-            } else if (url.contains("smsto:")) {
-                smsUrl = url;
-                if (!mAppConst.checkManifestPermission(Manifest.permission.SEND_SMS)) {
-                    mAppConst.requestForManifestPermission(Manifest.permission.SEND_SMS,
-                            ConstantVariables.SEND_SMS);
-                } else {
-                    openSmsApp();
-                }
             } else {
                 view.loadUrl(url);
                 isRedirected = true;
             }
+
+//             else if (url.contains("smsto:")) {
+//                smsUrl = url;
+//                if (!mAppConst.checkManifestPermission(Manifest.permission.SEND_SMS)) {
+//                    mAppConst.requestForManifestPermission(Manifest.permission.SEND_SMS,
+//                            ConstantVariables.SEND_SMS);
+//                } else {
+//                    openSmsApp();
+//                }
+//            }
             return true;
         }
 
@@ -718,6 +720,7 @@ public class WebViewActivity extends AppCompatActivity {
                 }, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+//                        SnackbarUtils.displaySnackbar(mWebView, "You can set up your payment methods anytime by going to your event dashboard");
                         Intent viewIntent;
                         String url = AppConstant.DEFAULT_URL;
                         url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
@@ -727,6 +730,7 @@ public class WebViewActivity extends AppCompatActivity {
                         viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
                         viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
                         viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
+                        viewIntent.putExtra("isFromWebPayment", true);
                         viewIntent.putExtra("isRedirectedFromEventProfile", true);
                         dialogInterface.dismiss();
                         startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
@@ -761,46 +765,46 @@ public class WebViewActivity extends AppCompatActivity {
                 });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case ConstantVariables.SEND_SMS:
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, proceed to the normal flow.
-                    openSmsApp();
-                } else {
-                    // If user deny the permission popup
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                            Manifest.permission.SEND_SMS)) {
-
-                        // Show an explanation to the user, After the user
-                        // sees the explanation, try again to request the permission.
-                        AlertDialogWithAction mAlertDialogWithAction = new AlertDialogWithAction(mContext);
-
-                        mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.SEND_SMS,
-                                ConstantVariables.SEND_SMS);
-
-                    } else {
-                        // If user pressed never ask again on permission popup
-                        // show snackbar with open app info button
-                        // user can revoke the permission from Permission section of App Info.
-                        SnackbarUtils.displaySnackbarOnPermissionResult(mContext, mWebView, ConstantVariables.SEND_SMS);
-
-                    }
-                }
-                break;
-        }
-    }
-
-    private void openSmsApp() {
-        Intent sms_intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(smsUrl));
-        if (GlobalFunctions.isIntentAvailable(mContext, sms_intent)) {
-            startActivity(sms_intent);
-        } else {
-            SnackbarUtils.displaySnackbar(mWebView, "No activity available to handle your request");
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        switch (requestCode) {
+//            case ConstantVariables.SEND_SMS:
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//
+//                    // permission was granted, proceed to the normal flow.
+//                    openSmsApp();
+//                } else {
+//                    // If user deny the permission popup
+//                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+//                            Manifest.permission.SEND_SMS)) {
+//
+//                        // Show an explanation to the user, After the user
+//                        // sees the explanation, try again to request the permission.
+//                        AlertDialogWithAction mAlertDialogWithAction = new AlertDialogWithAction(mContext);
+//
+//                        mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.SEND_SMS,
+//                                ConstantVariables.SEND_SMS);
+//
+//                    } else {
+//                        // If user pressed never ask again on permission popup
+//                        // show snackbar with open app info button
+//                        // user can revoke the permission from Permission section of App Info.
+//                        SnackbarUtils.displaySnackbarOnPermissionResult(mContext, mWebView, ConstantVariables.SEND_SMS);
+//
+//                    }
+//                }
+//                break;
+//        }
+//    }
+//
+//    private void openSmsApp() {
+//        Intent sms_intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(smsUrl));
+//        if (GlobalFunctions.isIntentAvailable(mContext, sms_intent)) {
+//            startActivity(sms_intent);
+//        } else {
+//            SnackbarUtils.displaySnackbar(mWebView, "No activity available to handle your request");
+//        }
+//    }
 }

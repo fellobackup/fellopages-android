@@ -19,6 +19,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -147,6 +149,12 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                     holder.icon.setText(GlobalFunctions.getItemIcon(current.getItemRegName()));
                 }
 
+//                Log.d("SaveFeeds", current.getItemRegName());
+                String save_feeds = "";
+//                for (int x = 0; x < data.size(); x++){
+//                    DrawerItem item = (DrawerItem) data.get()
+//                    data.get(x).
+//                }
 
 
                 holder.count.setTextSize(TypedValue.COMPLEX_UNIT_PX, (mContext.getResources().getDimensionPixelSize(R.dimen.body_default_font_size) + 1));
@@ -219,6 +227,11 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public int getItemCount() {
         return data.size();
     }
@@ -257,5 +270,26 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
             ivProfileImage = (CircularImageView) itemView.findViewById(R.id.user_profile_image);
             llDrawerHeader = (RelativeLayout) itemView.findViewById(R.id.material_drawer_account_header_text_section);
         }
+    }
+
+    public static <Object> List<Object> removeDuplicates(List<Object> list)
+    {
+
+        // Create a new ArrayList
+        List<Object> newList = new ArrayList<Object>();
+
+        // Traverse through the first list
+        for (Object element : list) {
+
+            // If this element is not present in newList
+            // then add it
+            if (!newList.contains(element)) {
+
+                newList.add(element);
+            }
+        }
+
+        // return the new list
+        return newList;
     }
 }

@@ -118,6 +118,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     private ImageLoader mImageLoader;
     private boolean isCoverProfilePictureRequest = false;
     private Integer likeID = 0;
+    private boolean isFromWebPayment = false;
     Intent intent;
 
     @Override
@@ -150,6 +151,13 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
 
         mModuleName = intent.getStringExtra(ConstantVariables.EXTRA_MODULE_TYPE);
         mContentId = intent.getExtras().getInt(ConstantVariables.VIEW_PAGE_ID);
+        isFromWebPayment = intent.getBooleanExtra("isFromWebPayment", false);
+
+        if (isFromWebPayment){
+            View parentLayout = findViewById(android.R.id.content);
+            SnackbarUtils.displaySnackbarLongTime(parentLayout, "You can set up your payment methods anytime by going to your event dashboard");
+        }
+
 
         // If response coming from create page.
         mBody = GlobalFunctions.getCreateResponse(intent.getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE));

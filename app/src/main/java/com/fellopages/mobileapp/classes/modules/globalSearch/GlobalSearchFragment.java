@@ -16,8 +16,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fellopages.mobileapp.classes.common.activities.WebViewActivity;
 import com.fellopages.mobileapp.classes.common.ui.CustomViews;
@@ -122,10 +125,13 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
     }
 
     public void postSearchRequest(String searchUrl, final boolean isScrolling){
-
+        Log.d("PostParams ", String.valueOf(postParams));
         mCounter = 0;
         CustomViews.hideEndOfResults(footerView);
+        Log.d("GlobalSearch ", searchUrl+" "+postParams);
 
+//        searchUrl = "\n" +
+//                "https://www.fellopages.com/beta1/api/rest/search?oauth_consumer_key=tqrqueo5pxnae436nmrgeqhzs6jiud1n&oauth_secret=a01objk8tgm35mvtqrxxhqkle87z0fy3&oauth_consumer_secret=dlixjfdviokbfk48mv1x0ir2u8v7o9xj&oauth_token=xpc6cnig4a8f8a62v6wlwv00yvv7tnv1&_ANDROID_VERSION=3.1.10page=1&limit=20&query=Vict";
         mAppConst.postJsonResponseForUrl(searchUrl, postParams, new OnResponseListener() {
 
             @Override
@@ -140,7 +146,14 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 mRootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                SnackbarUtils.displaySnackbar(mRootView, message);
+
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        SnackbarUtils.displaySnackbar(getActivity().findViewById(android.R.id.content), message);
+//                    }
+//                },1500);
+
             }
         });
     }
