@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +91,7 @@ public class AdvBrowseCategoriesFragment extends Fragment implements SwipeRefres
 
         mAppConst = new AppConstant(getActivity());
         extraModuleName = PreferencesUtils.getCurrentSelectedModule(mContext);
-
+        Log.d("ThisIsTheListCats ", "true");
         if (extraModuleName != null) {
             switch (extraModuleName) {
                 case ConstantVariables.PRODUCT_MENU_TITLE:

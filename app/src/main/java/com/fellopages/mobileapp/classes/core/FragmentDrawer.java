@@ -549,6 +549,16 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     mProgressBar.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }
+//                List<Object> temp = new ArrayList<>();
+//                for (int x = 0; x < dataList.size(); x++){
+//                    DrawerItem item = (DrawerItem) dataList.get(x);
+//                    Log.d("ItemRegName ", item.getItemRegName());
+//                    if (ConstantVariables.SAVE_FEEDS.equals(item.getItemRegName())){
+////                        dataList.remove(x);
+////                        dataList.notify();
+////                        break;
+//                    }
+//                }
             }
 
             isMLTDataUpdated = true;

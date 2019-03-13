@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,7 +166,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
         if (mRootView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             listItemHolder = new ListItemHolder();
-
+//            Log.d("ViewTypeList ", type);
             switch (type) {
                 case TYPE_ITEM:
                     mRootView = inflater.inflate(mLayoutResID, parent, false);
@@ -316,7 +317,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
             case TYPE_ITEM:
                 listItems = (BrowseListItems) this.mBrowseItemList.get(position);
                 listItemHolder.mBrowseListName = listItems.getmBrowseListName();
-
+                Log.d("ListEventCat ", mCurrentSelectedList);
                 /*
                 Set Data in the List View Items
                  */

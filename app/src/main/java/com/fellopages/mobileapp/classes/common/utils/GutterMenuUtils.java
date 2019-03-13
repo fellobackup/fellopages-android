@@ -1637,16 +1637,17 @@ public class GutterMenuUtils {
             case "delete_method":
             case "delete_file":
             case "delete_product":
-
-                if (mCurrentSelectedModule.equals(ConstantVariables.MLT_MENU_TITLE) && mListingTypeId != 0
-                        && currentList != null) {
-                    if (currentList.equals("user_review")) {
-                        mRedirectUrl += "&listing_id=" + mBrowseListItems.getmListItemId() +
-                                "&listingtype_id=" + mListingTypeId;
-                    } else if (currentList.equals("light_box")) {
-                        mRedirectUrl += "?photo_id=" + mBrowseListItems.getmContentId() +
-                                "&listingtype_id=" + mListingTypeId;
-                    }
+                Log.d("LoggedCurrentMod ", mCurrentSelectedModule+" "+mListingTypeId+" "+currentList);
+//                if (mCurrentSelectedModule.equals(ConstantVariables.MLT_MENU_TITLE) && mListingTypeId != 0
+//                        && currentList != null) {
+//
+//                }
+                if (currentList.equals("user_review")) {
+                    mRedirectUrl += "&listing_id=" + mBrowseListItems.getmListItemId() +
+                            "&listingtype_id=" + mListingTypeId;
+                } else if (currentList.equals("light_box")) {
+                    mRedirectUrl += "?photo_id=" + mBrowseListItems.getmContentId() +
+                            "&listingtype_id=" + mListingTypeId;
                 }
 
                 mDialogueMessage = mContext.getResources().getString(R.string.delete_dialogue_message);

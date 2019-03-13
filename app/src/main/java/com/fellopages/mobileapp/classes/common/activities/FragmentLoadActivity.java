@@ -26,6 +26,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,7 +109,7 @@ public class FragmentLoadActivity extends AppCompatActivity implements View.OnCl
             mTabLabel = getIntent().getStringExtra(ConstantVariables.TAB_LABEL);
             mFabCreate.hide();
             mFabCreate.setOnClickListener(this);
-
+            Log.d("mFragmentName ", mFragmentName);
             switch (mFragmentName) {
                 case "members":
                     switch (currentSelectedOption) {
