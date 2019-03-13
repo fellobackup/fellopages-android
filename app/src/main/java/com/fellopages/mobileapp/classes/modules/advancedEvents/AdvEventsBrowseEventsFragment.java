@@ -512,6 +512,7 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
                     /**
                      * Show Sub Categories of the selected category
                      */
+
                     if (isLoadSubCategory) {
                         mSubCategoryResponse = mBody.optJSONArray("subCategories");
 
@@ -552,6 +553,7 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
 
                     mTotalItemCount = mBody.optInt("totalEventCount");
                     mDataResponse = mBody.optJSONArray("events");
+                    Log.d("SampleEventNamecat ", String.valueOf(mDataResponse));
                     if(mTotalItemCount == 0 && isFirstRequest){
                         subCategoryLayout.setVisibility(View.GONE);
                         subSubCategoryLayout.setVisibility(View.GONE);
@@ -568,11 +570,13 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
                 mBrowseList.setmTotalItemCount(mTotalItemCount);
 
                 if (mDataResponse != null && mDataResponse.length() > 0) {
+                    Log.d("SampleEventNamecat 2 ", String.valueOf(mDataResponse));
                     rootView.findViewById(R.id.message_layout).setVisibility(View.GONE);
 
                     for (int i = 0; i < mDataResponse.length(); i++) {
                         if ((isAdLoaded || AdFetcher.isAdLoaded()) && mBrowseItemList.size() != 0
                                 && mBrowseItemList.size() % ConstantVariables.ADV_EVENT_ADS_POSITION == 0) {
+                            Log.d("SampleEventNamecat 3 ", String.valueOf(mDataResponse));
                             switch (ConstantVariables.ADV_EVENT_ADS_TYPE){
                                 case ConstantVariables.TYPE_FACEBOOK_ADS:
                                     NativeAd ad = this.listNativeAdsManager.nextNativeAd();
@@ -602,9 +606,16 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
                             }
                         }
 
+
+
                         JSONObject jsonDataObject = mDataResponse.getJSONObject(i);
                         int event_id = jsonDataObject.optInt("event_id");
-                        String title = jsonDataObject.optString("title");
+                        String title = "";
+                        if (jsonDataObject.has("title")){
+                            title = jsonDataObject.optString("title");
+                        } else {
+                            title = jsonDataObject.optString("event_title");
+                        }
                         String location = jsonDataObject.optString("location");
                         String starttime = jsonDataObject.optString("starttime");
                         int featured = isCategoryEvents ? 0 : jsonDataObject.optInt("featured");

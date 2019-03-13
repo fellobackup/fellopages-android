@@ -328,7 +328,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                         mRootView.findViewById(R.id.diaryImageView1).setVisibility(View.GONE);
                         mRootView.findViewById(R.id.diaryImageView2).setVisibility(View.GONE);
                         mImageLoader.setImageUrl(listItems.getmBrowseImgUrl(), listItemHolder.mListImage);
-
+                        Log.d("SampleEventText", listItems.getmBrowseListTitle());
                         if (listItems.getmBrowseListTitle() != null && !listItems.getmBrowseListTitle().isEmpty()) {
                             listItemHolder.mContentTitle.setVisibility(View.VISIBLE);
                             listItemHolder.mContentTitle.setText(Html.fromHtml(listItems.getmBrowseListTitle()));
@@ -400,10 +400,14 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                                 mContext.getResources().getString(R.string.event_date_info), timeFormat);
 
                         if(listItems.getmHasMultipleDates() == 1) {
+
+                            Log.d("EventTimeStart ", dateDetail + "(" +
+                                    mContext.getResources().getString(R.string.multiple_date_text) + ")");
                             listItemHolder.mEventTime.setText(dateDetail + "(" +
                                     mContext.getResources().getString(R.string.multiple_date_text) + ")");
                         }else{
                             listItemHolder.mEventTime.setText(dateDetail);
+                            Log.d("EventTimeStart ", dateDetail);
                         }
 
 

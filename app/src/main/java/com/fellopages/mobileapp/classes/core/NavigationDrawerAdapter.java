@@ -94,6 +94,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (getItemViewType(position) == TYPE_ITEM) {
             final MyViewHolder holder = (MyViewHolder) viewHolder;
             DrawerItem current = (DrawerItem) data.get(position);
+
+
             if (current.getTitle() != null) {
                 //Setting the Main Header
                 holder.headerLayout.setVisibility(LinearLayout.VISIBLE);
@@ -148,14 +150,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                     holder.icon.setText(GlobalFunctions.getItemIcon(current.getItemRegName()));
                 }
-
-//                Log.d("SaveFeeds", current.getItemRegName());
-                String save_feeds = "";
-//                for (int x = 0; x < data.size(); x++){
-//                    DrawerItem item = (DrawerItem) data.get()
-//                    data.get(x).
-//                }
-
 
                 holder.count.setTextSize(TypedValue.COMPLEX_UNIT_PX, (mContext.getResources().getDimensionPixelSize(R.dimen.body_default_font_size) + 1));
                 holder.ItemName.setTextSize(TypedValue.COMPLEX_UNIT_PX, (mContext.getResources().getDimensionPixelSize(R.dimen.body_default_font_size) + 1));
@@ -226,6 +220,15 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+
+    private List<Object> deleteAnElement(List<Object> listData){
+
+        listData.remove(5);
+
+        return listData;
+    }
+
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -272,24 +275,18 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public static <Object> List<Object> removeDuplicates(List<Object> list)
-    {
 
-        // Create a new ArrayList
-        List<Object> newList = new ArrayList<Object>();
-
-        // Traverse through the first list
-        for (Object element : list) {
-
-            // If this element is not present in newList
-            // then add it
-            if (!newList.contains(element)) {
-
-                newList.add(element);
+    public void deletDuplicate(){
+        int index = 0;
+        for (int x = 0; x < data.size(); x++){
+            DrawerItem drawerItem = (DrawerItem) data.get(x);
+            if (drawerItem.getItemRegName().equals(ConstantVariables.SAVE_FEEDS)){
+                index = x;
+                break;
             }
         }
-
-        // return the new list
-        return newList;
+        Log.d("GetIndexHere ", String.valueOf(index));
+        data.remove(index);
+        notifyDataSetChanged();
     }
 }
