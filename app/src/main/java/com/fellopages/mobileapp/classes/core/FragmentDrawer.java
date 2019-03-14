@@ -549,18 +549,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     mProgressBar.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }
-//                List<Object> temp = new ArrayList<>();
-//                for (int x = 0; x < dataList.size(); x++){
-//                    DrawerItem item = (DrawerItem) dataList.get(x);
-//                    Log.d("ItemRegName ", item.getItemRegName());
-//                    if (ConstantVariables.SAVE_FEEDS.equals(item.getItemRegName())){
-////                        dataList.remove(x);
-////                        dataList.notify();
-////                        break;
-//                    }
-//                }
             }
-
+            dataList.remove(7);
             isMLTDataUpdated = true;
             adapter.notifyDataSetChanged();
 
@@ -570,6 +560,19 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     getResources().getString(R.string.no_data_available));
         }
 
+    }
+
+
+
+    private List<Object> deleteDuplicate(){
+        List<Object> newList = new ArrayList<Object>();
+
+        for (int i = 0; i < dataList.size() /* - 1 */ ; i++) {
+            if (!newList.contains(dataList.get(i)))
+                newList.add( /* 0, */ (dataList.get(i)));
+        }
+
+        return newList;
     }
 
     public boolean isModuleEnabled(String name){

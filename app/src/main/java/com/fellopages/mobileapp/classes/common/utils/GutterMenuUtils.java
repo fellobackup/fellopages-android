@@ -1486,7 +1486,7 @@ public class GutterMenuUtils {
 
             case "ticket_details":
                 Intent detailsIntent = new Intent(mContext, FragmentLoadActivity.class);
-                String url = mRedirectUrl + "&event_id=" + mBrowseListItems.getmEventId() + "&ticket_id=" + mBrowseListItems.getTicketId();
+                String url = mRedirectUrl;
                 detailsIntent.putExtra(ConstantVariables.URL_STRING, url);
                 detailsIntent.putExtra(ConstantVariables.FORM_TYPE, ConstantVariables.TICKET_DETAILS_FORM_TYPE);
                 detailsIntent.putExtra(ConstantVariables.FRAGMENT_NAME, ConstantVariables.TICKET_DETAILS_FRAGMENT_NAME);
@@ -1633,11 +1633,9 @@ public class GutterMenuUtils {
             case "delete_album":
             case "delete_event":
             case "delete_poll":
-            case "ticket_delete":
             case "delete_method":
             case "delete_file":
             case "delete_product":
-                Log.d("LoggedCurrentMod ", mCurrentSelectedModule+" "+mListingTypeId+" "+currentList);
 //                if (mCurrentSelectedModule.equals(ConstantVariables.MLT_MENU_TITLE) && mListingTypeId != 0
 //                        && currentList != null) {
 //
@@ -1649,6 +1647,26 @@ public class GutterMenuUtils {
                     mRedirectUrl += "?photo_id=" + mBrowseListItems.getmContentId() +
                             "&listingtype_id=" + mListingTypeId;
                 }
+
+                mDialogueMessage = mContext.getResources().getString(R.string.delete_dialogue_message);
+                mDialogueTitle = mContext.getResources().getString(R.string.delete_dialogue_title);
+                mDialogueButton = mContext.getResources().getString(R.string.delete_dialogue_button);
+                mSuccessMessage = mContext.getResources().getString(R.string.delete_dialogue_success_message);
+                performAction();
+                break;
+
+            case "ticket_delete":
+                if (mCurrentSelectedModule.equals(ConstantVariables.MLT_MENU_TITLE) && mListingTypeId != 0
+                        && currentList != null) {
+                    if (currentList.equals("user_review")) {
+                        mRedirectUrl += "&listing_id=" + mBrowseListItems.getmListItemId() +
+                                "&listingtype_id=" + mListingTypeId;
+                    } else if (currentList.equals("light_box")) {
+                        mRedirectUrl += "?photo_id=" + mBrowseListItems.getmContentId() +
+                                "&listingtype_id=" + mListingTypeId;
+                    }
+                }
+
 
                 mDialogueMessage = mContext.getResources().getString(R.string.delete_dialogue_message);
                 mDialogueTitle = mContext.getResources().getString(R.string.delete_dialogue_title);
