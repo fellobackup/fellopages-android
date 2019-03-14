@@ -1107,9 +1107,8 @@ public class GutterMenuUtils {
             e.printStackTrace();
         }
         Intent intent;
-
+        Log.d("LoggedGuterName ", mMenuName);
         switch (mMenuName) {
-
             case "choose_from_album":
                 mBrowseListItems.setmBrowseListTitle(mMenuJsonObject.optString("label").trim());
             case "upload_cover_photo":
@@ -1442,17 +1441,22 @@ public class GutterMenuUtils {
 
             case "invite":
             case "suggest":
-                switch (mCurrentSelectedModule) {
+                if (mCurrentSelectedModule != null){
+                    switch (mCurrentSelectedModule) {
 
-                    case ConstantVariables.GROUP_MENU_TITLE:
-                    case ConstantVariables.EVENT_MENU_TITLE:
-                        intent = new Intent(mContext, Invite.class);
-                        break;
+                        case ConstantVariables.GROUP_MENU_TITLE:
+                        case ConstantVariables.EVENT_MENU_TITLE:
+                            intent = new Intent(mContext, Invite.class);
+                            break;
 
-                    default:
-                        intent = new Intent(mContext, InviteGuest.class);
-                        break;
+                        default:
+                            intent = new Intent(mContext, InviteGuest.class);
+                            break;
+                    }
+                } else {
+                    intent = new Intent(mContext, InviteGuest.class);
                 }
+
                 intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, mCurrentSelectedModule);
                 intent.putExtra(ConstantVariables.CONTENT_TITLE, mMenuJsonObject.optString("label"));
                 intent.putExtra(ConstantVariables.URL_STRING, mRedirectUrl);
@@ -1510,50 +1514,56 @@ public class GutterMenuUtils {
             case "edit_settings":
             case "edit_privacy":
             case "ticket_edit":
-
+                Log.d("ThisWasLoggdHere ", "true"+" "+mCurrentSelectedModule);
                 intent = new Intent(mContext, EditEntry.class);
                 intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, mCurrentSelectedModule);
-                switch (mCurrentSelectedModule) {
-                    case ConstantVariables.FORUM_MENU_TITLE:
-                        intent.putExtra(ConstantVariables.FORM_TYPE, "edit_post");
-                        intent.putExtra(ConstantVariables.ITEM_POSITION, mPosition);
-                        break;
+                if (mCurrentSelectedModule != null){
+                    switch (mCurrentSelectedModule) {
+                        case ConstantVariables.FORUM_MENU_TITLE:
+                            intent.putExtra(ConstantVariables.FORM_TYPE, "edit_post");
+                            intent.putExtra(ConstantVariables.ITEM_POSITION, mPosition);
+                            break;
 
-                    case ConstantVariables.ADVANCED_EVENT_MENU_TITLE:
-                    case ConstantVariables.DIARY_MENU_TITLE:
-                    case ConstantVariables.ADV_EVENT_TICKET_MENU_TITLE:
-                        if (currentList != null && currentList.equals("diaries_siteevent")) {
-                            intent.putExtra(ConstantVariables.FORM_TYPE, "edit_diary");
+                        case ConstantVariables.ADVANCED_EVENT_MENU_TITLE:
+                        case ConstantVariables.DIARY_MENU_TITLE:
+                        case ConstantVariables.ADV_EVENT_TICKET_MENU_TITLE:
+                            if (currentList != null && currentList.equals("diaries_siteevent")) {
+                                intent.putExtra(ConstantVariables.FORM_TYPE, "edit_diary");
+                                intent.putExtra(ConstantVariables.CONTENT_TITLE, mMenuJsonObject.optString("label").trim());
+                            } else {
+                                intent.putExtra(ConstantVariables.FORM_TYPE, "edit_event");
+                                Log.d("ThisWasLogged ", "true ");
+                            }
+                            break;
+
+                        case ConstantVariables.MLT_MENU_TITLE:
+                            if (currentList != null && currentList.equals("light_box")) {
+                                mRedirectUrl += "?photo_id=" + mBrowseListItems.getmContentId() +
+                                        "&listingtype_id=" + mListingTypeId;
+
+                            } else {
+                                mRedirectUrl += "?listingtype_id=" + mListingTypeId;
+                                intent.putExtra(ConstantVariables.FORM_TYPE, "edit_listing");
+                                intent.putExtra(ConstantVariables.CONTENT_TITLE, mMenuJsonObject.optString("label").trim());
+                            }
+                            break;
+
+                        case ConstantVariables.MLT_WISHLIST_MENU_TITLE:
+                            intent.putExtra(ConstantVariables.FORM_TYPE, "edit_wishlist");
                             intent.putExtra(ConstantVariables.CONTENT_TITLE, mMenuJsonObject.optString("label").trim());
-                        } else {
-                            intent.putExtra(ConstantVariables.FORM_TYPE, "edit_event");
-                        }
-                        break;
-
-                    case ConstantVariables.MLT_MENU_TITLE:
-                        if (currentList != null && currentList.equals("light_box")) {
-                            mRedirectUrl += "?photo_id=" + mBrowseListItems.getmContentId() +
-                                    "&listingtype_id=" + mListingTypeId;
-
-                        } else {
-                            mRedirectUrl += "?listingtype_id=" + mListingTypeId;
-                            intent.putExtra(ConstantVariables.FORM_TYPE, "edit_listing");
-                            intent.putExtra(ConstantVariables.CONTENT_TITLE, mMenuJsonObject.optString("label").trim());
-                        }
-                        break;
-
-                    case ConstantVariables.MLT_WISHLIST_MENU_TITLE:
-                        intent.putExtra(ConstantVariables.FORM_TYPE, "edit_wishlist");
-                        intent.putExtra(ConstantVariables.CONTENT_TITLE, mMenuJsonObject.optString("label").trim());
-                        break;
+                            break;
+                    }
+                } else {
+                    intent.putExtra("isFromEventList", true);
                 }
+
                 intent.putExtra(ConstantVariables.URL_STRING, mRedirectUrl);
 
                 if (isRequestFromViewPage) {
                     intent.putExtra(ConstantVariables.REQUEST_CODE, ConstantVariables.VIEW_PAGE_EDIT_CODE);
                     ((Activity) mContext).startActivityForResult(intent, ConstantVariables.VIEW_PAGE_EDIT_CODE);
 
-                } else if (mCurrentSelectedModule.equals(ConstantVariables.ADV_EVENT_TICKET_MENU_TITLE)){
+                } else if (mCurrentSelectedModule != null && mCurrentSelectedModule.equals(ConstantVariables.ADV_EVENT_TICKET_MENU_TITLE)){
                     ((Activity)mContext).startActivityForResult(intent, ConstantVariables.VIEW_PAGE_EDIT_CODE);
                 } else {
                     if (mCallingFragment != null) {

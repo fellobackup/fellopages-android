@@ -550,7 +550,19 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     adapter.notifyDataSetChanged();
                 }
             }
-            dataList.remove(7);
+            if(!mAppConst.isLoggedOutUser()){
+                int index = 0;
+                for (int x = 0; x < dataList.size(); x++){
+                    if (dataList.get(x) instanceof DrawerItem){
+                        DrawerItem drawerItem = (DrawerItem) dataList.get(x);
+                        if ("Save Feeds".equals(drawerItem.getItemName())){
+                            index = x;
+                            break;
+                        }
+                    }
+                }
+                dataList.remove(index);
+            }
             isMLTDataUpdated = true;
             adapter.notifyDataSetChanged();
 

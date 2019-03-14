@@ -91,6 +91,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
     private HashMap<String, ArrayList> mHashMap;
     private AlertDialogWithAction mAlertDialogWithAction;
     private int mEventId;
+    private boolean isFromEventList = false;
 
 
     @Override
@@ -115,6 +116,8 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
         mFormType = getIntent().getStringExtra(ConstantVariables.FORM_TYPE);
         mRequestCode = getIntent().getIntExtra(ConstantVariables.REQUEST_CODE, ConstantVariables.PAGE_EDIT_CODE);
         isStatusPage = getIntent().getBooleanExtra("isStatusPage", false);
+
+        isFromEventList = getIntent().getBooleanExtra("isFromEventList", false);
 
         scheduleFormValue = getIntent().getStringExtra("form_value");
 
@@ -806,6 +809,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                                 public void onSnackbarDismissed() {
                                     Bundle bundle = new Bundle();
                                     Intent intent = new Intent();
+                                    Log.d("ThisWasLoggedEdit ", mSuccessMessage+" "+"true");
                                     if (currentSelectedOption.equals(ConstantVariables.CONTACT_INFO_MENU_TITLE)) {
                                         String bodyObject = String.valueOf(jsonObject.optJSONObject("body"));
                                         bundle.putString(ConstantVariables.RESPONSE_OBJECT, bodyObject);
@@ -816,14 +820,17 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                                         if (mFormType != null && !mFormType.isEmpty() && mFormType.equals("story_setting")) {
                                             bundle.putString("response", jsonObject.toString());
                                         }
+
                                         bundle.putString(ConstantVariables.EXTRA_MODULE_TYPE, currentSelectedOption);
                                         intent.putExtras(bundle);
                                         setResult(ConstantVariables.PAGE_EDIT_CODE, intent);
                                     }
 
-                                    if(mFormType.equals("edit_event")){
+                                    if(mFormType != null && mFormType.equals("edit_event")){
                                         finish();
-                                    } else {
+                                    } else if(isFromEventList){
+                                        finish();
+                                    } else  {
                                         redirectToAdvEventsAvailableTickets();
                                     }
 //                                    finish();
@@ -890,11 +897,11 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
             viewIntent.putExtra("isRedirectedFromEventProfile", true);
             startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-        } else if(mFormType.equals("edit_event")){
+        } else if(mFormType != null && mFormType.equals("edit_event")){
             finish();
-
-        } else if ((currentSelectedOption.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)
+        } else if (isFromEventList){
+            finish();
+        }else if ((currentSelectedOption.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)
                 && (mFormType != null && mFormType.equals(ConstantVariables.PAYMENT_METHOD_CONFIG)))) {
             setResult(ConstantVariables.REQUEST_CANCLED);
             finish();

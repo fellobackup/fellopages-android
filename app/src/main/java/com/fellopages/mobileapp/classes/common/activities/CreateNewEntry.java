@@ -1555,7 +1555,8 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
 
         Calendar newCalendar = Calendar.getInstance();
         DatePicker datePicker = new DatePicker(mContext);
-
+//        newCalendar.add(Calendar.DATE, -1);
+        datePicker.setMinDate(System.currentTimeMillis() - 1000);
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             datePicker.setCalendarViewShown(false);
         }

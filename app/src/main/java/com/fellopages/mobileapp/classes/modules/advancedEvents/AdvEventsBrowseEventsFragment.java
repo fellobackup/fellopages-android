@@ -131,7 +131,6 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
         mBrowseItemList = new ArrayList<>();
         mSlideShowItemList = new ArrayList<>();
         mBrowseList = new BrowseListItems();
-        Log.d("LogEvent1Viewed ", "AdvEventsBrowseEventsFragment");
         mAppConst = new AppConstant(mContext);
         mAppConst.setOnCommunityAdsLoadedListener(this);
 
