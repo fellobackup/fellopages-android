@@ -105,6 +105,7 @@ import com.fellopages.mobileapp.classes.common.interfaces.OnCancelClickListener;
 import com.fellopages.mobileapp.classes.common.interfaces.OnCheckInLocationResponseListener;
 import com.fellopages.mobileapp.classes.common.interfaces.OnItemClickListener;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
+import com.fellopages.mobileapp.classes.common.interfaces.OnViewTouchListener;
 import com.fellopages.mobileapp.classes.common.multimediaselector.MultiMediaSelectorActivity;
 import com.fellopages.mobileapp.classes.common.ui.CustomViews;
 import com.fellopages.mobileapp.classes.common.ui.PredicateLayout;
@@ -259,7 +260,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         mSelectPath = new ArrayList<>();
         Status.mBody = null;
         //Setting up the action bar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(getResources().getString(R.string.title_activity_status));
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -270,16 +271,16 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
 
         mSelectedPrivacyKey = PreferencesUtils.getStatusPrivacyKey(mContext);
         mIsStickerEnabled = PreferencesUtils.getStickersEnabled(mContext) == 1;
-        mStickersParentView = (RelativeLayout) findViewById(R.id.stickersMainLayout);
-        llSticker = (LinearLayout) findViewById(R.id.sticker_popup);
+        mStickersParentView = findViewById(R.id.stickersMainLayout);
+        llSticker = findViewById(R.id.sticker_popup);
 
-        mNestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
+        mNestedScrollView = findViewById(R.id.nestedScrollView);
         nestedViewParams = (RelativeLayout.LayoutParams) mNestedScrollView.getLayoutParams();
-        mBodyView = (RelativeLayout) findViewById(R.id.body_view);
-        rlTitleView = (RelativeLayout) findViewById(R.id.title_view);
+        mBodyView = findViewById(R.id.body_view);
+        rlTitleView = findViewById(R.id.title_view);
         titleViewParam = (LinearLayout.LayoutParams) rlTitleView.getLayoutParams();
         bannerView = findViewById(R.id.banner_view);
-        ivBannerIndicator = (ImageView) findViewById(R.id.banner_indicator);
+        ivBannerIndicator = findViewById(R.id.banner_indicator);
         ivBannerIndicator.setOnClickListener(this);
         bannerIndicatorShape = new GradientDrawable();
         bannerIndicatorShape.setShape(GradientDrawable.RECTANGLE);
@@ -291,70 +292,65 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         ivBannerIndicator.setImageResource(R.drawable.ic_chevron_left);
         ivBannerIndicator.setBackground(bannerIndicatorShape);
 
-        ivSticker = (ImageView) findViewById(R.id.iv_sticker);
-        ivCancelSticker = (ImageView) findViewById(R.id.iv_cancel_sticker);
+        ivSticker = findViewById(R.id.iv_sticker);
+        ivCancelSticker = findViewById(R.id.iv_cancel_sticker);
         ivCancelSticker.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color),
                 PorterDuff.Mode.SRC_ATOP);
 
-        mStatusBodyField = (EmojiconEditText) findViewById(R.id.statusBody);
+        mStatusBodyField = findViewById(R.id.statusBody);
         mStatusBodyField.setHint(mContext.getResources().getString(R.string.status_box_default_text) + "...");
-        mStatusBodyField.addListener(new TextContextMenuListener() {
-            @Override
-            public void onUpdate() {
-                detectUri(mCharSequence, mStart, true);
-            }
-        });
-        musicAddedMessage = (TextView) findViewById(R.id.music_added_msg);
+        mStatusBodyField.addListener(() -> detectUri(mCharSequence, mStart, true));
+        musicAddedMessage = findViewById(R.id.music_added_msg);
 
         selectedFriends = new HashMap<>();
         selectedLocation = new HashMap<>();
 
-        clBottom = (CoordinatorLayout) findViewById(R.id.bottom_sheet_layout);
-        mAddVideoText = (TextView) findViewById(R.id.addVideoText);
-        mAddVideoLayout = (LinearLayout) findViewById(R.id.addVideoLayout);
-        mTaggedFriendsLayout = (PredicateLayout) findViewById(R.id.taggedFriends);
-        mLocationsLayout = (LinearLayout) findViewById(R.id.Locations);
+        clBottom = findViewById(R.id.bottom_sheet_layout);
+        mAddVideoText = findViewById(R.id.addVideoText);
+        mAddVideoLayout = findViewById(R.id.addVideoLayout);
+        mTaggedFriendsLayout = findViewById(R.id.taggedFriends);
+        mLocationsLayout = findViewById(R.id.Locations);
 
-        mLocationPrefix = (TextView) findViewById(R.id.locationPrefix);
-        mLocationLabel = (TextView) findViewById(R.id.name);
-        mCancelSelectedLocation = (ImageView) findViewById(R.id.cancel);
+        mLocationPrefix = findViewById(R.id.locationPrefix);
+        mLocationLabel = findViewById(R.id.name);
+        mCancelSelectedLocation = findViewById(R.id.cancel);
         mCancelSelectedLocation.setOnClickListener(this);
 
-        mAddLinkLayout = (LinearLayout) findViewById(R.id.addLinkBlock);
-        mEnterLinkText = (EditText) findViewById(R.id.enterLinkText);
-        mAttachLinkButton = (Button) findViewById(R.id.attachLinkButton);
-        mAddLinkText = (TextView) findViewById(R.id.addLinkText);
+        mAddLinkLayout = findViewById(R.id.addLinkBlock);
+        mEnterLinkText = findViewById(R.id.enterLinkText);
+        mAttachLinkButton = findViewById(R.id.attachLinkButton);
+        mAddLinkText = findViewById(R.id.addLinkText);
 
         //Link Attachment Info
-        mLinkAttachmentBlock = (LinearLayout) findViewById(R.id.linkAttachment);
-        mLinkAttachmentImage = (ImageView) findViewById(R.id.linkAttachmentImage);
-        mLinkAttachmentTitle = (TextView) findViewById(R.id.linkAttachmentTitle);
-        mLinkAttachmentDescription = (TextView) findViewById(R.id.linkAttachmentDescription);
-        mLinkAttachmentUrl = (TextView) findViewById(R.id.linkAttachmentUrl);
+        mLinkAttachmentBlock = findViewById(R.id.linkAttachment);
+        mLinkAttachmentImage = findViewById(R.id.linkAttachmentImage);
+        mLinkAttachmentTitle = findViewById(R.id.linkAttachmentTitle);
+        mLinkAttachmentDescription = findViewById(R.id.linkAttachmentDescription);
+        mLinkAttachmentUrl = findViewById(R.id.linkAttachmentUrl);
 
         //Video attachment info.
-        mVideoAttachmentIcon = (ImageView) findViewById(R.id.attachmentIcon);
-        mVideoAttachmentTitle = (TextView) findViewById(R.id.attachmentTitle);
-        mVideoAttachmentBody = (TextView) findViewById(R.id.attachmentBody);
-        tvVideoAddedMsg = (TextView) findViewById(R.id.video_added_msg);
-        tvPrice = (TextView) findViewById(R.id.price_text);
-        tvLocation = (TextView) findViewById(R.id.location);
-        tvEdit = (TextView) findViewById(R.id.edit);
-        tvCancel = (TextView) findViewById(R.id.cancel_attachment);
+        mVideoAttachmentIcon = findViewById(R.id.attachmentIcon);
+        mVideoAttachmentTitle = findViewById(R.id.attachmentTitle);
+        mVideoAttachmentBody = findViewById(R.id.attachmentBody);
+        tvVideoAddedMsg = findViewById(R.id.video_added_msg);
+        tvPrice = findViewById(R.id.price_text);
+        tvLocation = findViewById(R.id.location);
+        tvEdit = findViewById(R.id.edit);
+        tvCancel = findViewById(R.id.cancel_attachment);
 
         mVideoPreviewLayout = findViewById(R.id.attachment_preview_layout);
         // Photos preview recycler view.
-        mPhotosRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_list);
+        mPhotosRecyclerView = findViewById(R.id.recycler_view_list);
         mPhotosRecyclerView.setNestedScrollingEnabled(false);
         mPhotosRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mPhotosRecyclerView.addItemDecoration(new LinearDividerItemDecorationUtil(mContext));
 
-        mSellSomethingPhotosRecyclerView = (RecyclerView) findViewById(R.id.sell_something_recycler_view_list);
+        mSellSomethingPhotosRecyclerView = findViewById(R.id.sell_something_recycler_view_list);
         mSellSomethingPhotosRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,
                 LinearLayoutManager.HORIZONTAL, false));
         mSellSomethingPhotosRecyclerView.addItemDecoration(new LinearDividerItemDecorationUtil(mContext));
 
-        mBannerRecyclerView = (RecyclerView) findViewById(R.id.banner_recycler_view);
+        mBannerRecyclerView = findViewById(R.id.banner_recycler_view);
         mBannerRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,
                 LinearLayoutManager.HORIZONTAL, false));
 
@@ -548,13 +544,13 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         }
 
         // Showing user image and name.
-        ImageView ivUserProfile = (ImageView) findViewById(R.id.user_profile_image);
-        tvUserTitle = (TextView) findViewById(R.id.user_name);
-        tvPrivacy = (TextView) findViewById(R.id.post_privacy);
+        ImageView ivUserProfile = findViewById(R.id.user_profile_image);
+        tvUserTitle = findViewById(R.id.user_name);
+        tvPrivacy = findViewById(R.id.post_privacy);
         tvPrivacy.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-        tvPostSchedule = (TextView) findViewById(R.id.post_schedule);
+        tvPostSchedule = findViewById(R.id.post_schedule);
         tvPostSchedule.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-        tvTargetAudience = (TextView) findViewById(R.id.target_audience);
+        tvTargetAudience = findViewById(R.id.target_audience);
         tvTargetAudience.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         if (PreferencesUtils.getUserDetail(mContext) != null) {
             try {
@@ -719,73 +715,67 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                         mFeedList.getBannerObject()));
                 selectedBanner = mBrowseList.size() - 1;
             }
-            mBannerAdapter = new BannerPhotoRecyclerAdapter(mContext, mBrowseList, new OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
+            mBannerAdapter = new BannerPhotoRecyclerAdapter(mContext, mBrowseList, (view, position) -> {
 
-                    scrollToBottom();
+                scrollToBottom();
 
-                    if (position == 0 && (mFeedList == null || mEditBannerUrl == null)) {
-                        isBannerSelected = false;
-                        isAttachmentAttached = false;
-                        mStatusBodyField.setGravity(Gravity.START);
-                        mBodyView.setMinimumHeight(0);
-                        mBodyView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+                if (position == 0 && (mFeedList == null || mEditBannerUrl == null)) {
+                    isBannerSelected = false;
+                    isAttachmentAttached = false;
+                    mStatusBodyField.setGravity(Gravity.START);
+                    mBodyView.setMinimumHeight(0);
+                    mBodyView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
 
-                        if (mStatusBodyField.getText() != null
-                                && mStatusBodyField.getText().length() > decorationCharacterLength) {
-                            setDecorationOnStatusBody(mContext.getResources().getDimension(R.dimen.title_medium_font_size), true);
-                        } else {
-                            setDecorationOnStatusBody(fontSize, false);
-                        }
-
+                    if (mStatusBodyField.getText() != null
+                            && mStatusBodyField.getText().length() > decorationCharacterLength) {
+                        setDecorationOnStatusBody(mContext.getResources().getDimension(R.dimen.title_medium_font_size), true);
                     } else {
-                        BrowseListItems browseListItems = mBrowseList.get(position);
-                        bannerObject = browseListItems.getBannerObject();
-                        bannerFontColor = bannerObject.optString("color");
-
-                        isBannerSelected = true;
-                        isAttachmentAttached = true;
-                        mStatusBodyField.setGravity(Gravity.CENTER);
-                        mStatusBodyField.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
-                        mBodyView.setMinimumHeight(mContext.getResources().getDimensionPixelSize(R.dimen.app_bar_height));
-                        setDecorationOnStatusBody(bannerTextSize,
-                                (mStatusBodyField.getText().length() > feedDecoration.optInt("banner_feed_length")));
-
-                        if (browseListItems.getmBrowseImgUrl() != null
-                                && CacheUtils.getInstance(mContext).getLru().get(browseListItems.getmBrowseImgUrl()) != null) {
-                            mBannerDrawable = new BitmapDrawable(mContext.getResources(),
-                                    CacheUtils.getInstance(mContext).getLru().get(browseListItems.getmBrowseImgUrl()));
-                            mBodyView.setBackground(mBannerDrawable);
-
-                        } else if (browseListItems.getmBrowseImgUrl() != null && !browseListItems.getmBrowseImgUrl().isEmpty()) {
-                            new BitMapCreatorUtil(mContext, browseListItems.getmBrowseImgUrl(),
-                                    new BitMapCreatorUtil.OnBitmapLoadListener() {
-                                        @Override
-                                        public void onBitMapLoad(Bitmap bitmap) {
-                                            mBannerDrawable = new BitmapDrawable(mContext.getResources(), bitmap);
-                                            mBodyView.setBackground(mBannerDrawable);
-                                        }
-                                    }).execute();
-
-                        } else if (bannerObject.optString("background-color") != null
-                                && CacheUtils.getInstance(mContext).getLru()
-                                .get(bannerObject.optString("background-color")) != null) {
-                            mBannerDrawable = null;
-                            try {
-                                mBodyView.setBackgroundColor(Color.parseColor(bannerObject.optString("background-color")));
-                            } catch (IllegalArgumentException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        scrollToBottom();
+                        setDecorationOnStatusBody(fontSize, false);
                     }
 
-                    mStatusBodyField.setText(mStatusBodyField.getText());
-                    mStatusBodyField.setSelection(mStatusBodyField != null ? mStatusBodyField.getText().length() : 0);
+                } else {
+                    BrowseListItems browseListItems = mBrowseList.get(position);
+                    bannerObject = browseListItems.getBannerObject();
+                    bannerFontColor = bannerObject.optString("color");
 
+                    isBannerSelected = true;
+                    isAttachmentAttached = true;
+                    mStatusBodyField.setGravity(Gravity.CENTER);
+                    mStatusBodyField.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
+                    mBodyView.setMinimumHeight(mContext.getResources().getDimensionPixelSize(R.dimen.app_bar_height));
+                    setDecorationOnStatusBody(bannerTextSize,
+                            (mStatusBodyField.getText().length() > feedDecoration.optInt("banner_feed_length")));
 
+                    if (browseListItems.getmBrowseImgUrl() != null
+                            && CacheUtils.getInstance(mContext).getLru().get(browseListItems.getmBrowseImgUrl()) != null) {
+                        mBannerDrawable = new BitmapDrawable(mContext.getResources(),
+                                CacheUtils.getInstance(mContext).getLru().get(browseListItems.getmBrowseImgUrl()));
+                        mBodyView.setBackground(mBannerDrawable);
+
+                    } else if (browseListItems.getmBrowseImgUrl() != null && !browseListItems.getmBrowseImgUrl().isEmpty()) {
+                        new BitMapCreatorUtil(mContext, browseListItems.getmBrowseImgUrl(),
+                                bitmap -> {
+                                    mBannerDrawable = new BitmapDrawable(mContext.getResources(), bitmap);
+                                    mBodyView.setBackground(mBannerDrawable);
+                                }).execute();
+
+                    } else if (bannerObject.optString("background-color") != null
+                            && CacheUtils.getInstance(mContext).getLru()
+                            .get(bannerObject.optString("background-color")) != null) {
+                        mBannerDrawable = null;
+                        try {
+                            mBodyView.setBackgroundColor(Color.parseColor(bannerObject.optString("background-color")));
+                        } catch (IllegalArgumentException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    scrollToBottom();
                 }
+
+                mStatusBodyField.setText(mStatusBodyField.getText());
+                mStatusBodyField.setSelection(mStatusBodyField != null ? mStatusBodyField.getText().length() : 0);
+
+
             });
             mBannerRecyclerView.setAdapter(mBannerAdapter);
             mBannerAdapter.notifyDataSetChanged();
@@ -805,12 +795,9 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
      * Method to scroll the nested scroll view to bottom of the page.
      */
     private void scrollToBottom() {
-        findViewById(R.id.rootView).post(new Runnable() {
-            @Override
-            public void run() {
-                //call smooth scroll
-                mNestedScrollView.fullScroll(View.FOCUS_DOWN);
-            }
+        findViewById(R.id.rootView).post(() -> {
+            //call smooth scroll
+            mNestedScrollView.fullScroll(View.FOCUS_DOWN);
         });
     }
 
@@ -1012,10 +999,10 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             }
         }
 
-        TextView tvPhoto = (TextView) persistentBottomSheet.findViewById(R.id.photo);
-        TextView tvCheckIn = (TextView) persistentBottomSheet.findViewById(R.id.checkin);
-        TextView tvEmoticons = (TextView) persistentBottomSheet.findViewById(R.id.emoticons);
-        TextView tvTagFriends = (TextView) persistentBottomSheet.findViewById(R.id.tag_friends);
+        TextView tvPhoto = persistentBottomSheet.findViewById(R.id.photo);
+        TextView tvCheckIn = persistentBottomSheet.findViewById(R.id.checkin);
+        TextView tvEmoticons = persistentBottomSheet.findViewById(R.id.emoticons);
+        TextView tvTagFriends = persistentBottomSheet.findViewById(R.id.tag_friends);
         tvPhoto.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         tvCheckIn.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         tvEmoticons.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
@@ -1025,101 +1012,95 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         tvEmoticons.setText("\uF118");
         tvTagFriends.setText("\uF234");
 
-        persistentBottomSheet.findViewById(R.id.attachment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                    persistentBottomSheet.findViewById(R.id.attachment).setVisibility(View.GONE);
-                    persistentBottomSheet.bringToFront();
-                    mAppConst.hideKeyboard();
-                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                } else {
-                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
+        persistentBottomSheet.findViewById(R.id.attachment).setOnClickListener(view -> {
+            if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                persistentBottomSheet.findViewById(R.id.attachment).setVisibility(View.GONE);
+                persistentBottomSheet.bringToFront();
+                mAppConst.hideKeyboard();
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            } else {
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
 
-        final RecyclerView recyclerView = (RecyclerView) persistentBottomSheet.findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView = persistentBottomSheet.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         final List<BrowseListItems> mBrowseList = new ArrayList<>();
-        postAdapter = new StatusPostRecyclerViewAdapter(mContext, mBrowseList, new OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                BrowseListItems listItem = mBrowseList.get(position);
+        postAdapter = new StatusPostRecyclerViewAdapter(mContext, mBrowseList, (view, position) -> {
+            BrowseListItems listItem = mBrowseList.get(position);
 
-                switch (listItem.getKey()) {
-                    case "facebook":
-                        if (!isFacebookPost) {
-                            callbackManager = CallbackManager.Factory.create();
-                            FacebookSdk.sdkInitialize(getApplicationContext());
-                            FacebookSdk.setApplicationId(getResources().getString(R.string.facebook_app_id));
-                        }
-                        isFacebookPost = !isFacebookPost;
-                        listItem.setAlreadyAdded(isFacebookPost);
-                        postAdapter.notifyItemChanged(position);
-                        break;
+            switch (listItem.getKey()) {
+                case "facebook":
+                    if (!isFacebookPost) {
+                        callbackManager = CallbackManager.Factory.create();
+                        FacebookSdk.sdkInitialize(getApplicationContext());
+                        FacebookSdk.setApplicationId(getResources().getString(R.string.facebook_app_id));
+                    }
+                    isFacebookPost = !isFacebookPost;
+                    listItem.setAlreadyAdded(isFacebookPost);
+                    postAdapter.notifyItemChanged(position);
+                    break;
 
-                    case "twitter":
-                        isTwitterPost = !isTwitterPost;
-                        listItem.setAlreadyAdded(isTwitterPost);
-                        postAdapter.notifyItemChanged(position);
-                        break;
+                case "twitter":
+                    isTwitterPost = !isTwitterPost;
+                    listItem.setAlreadyAdded(isTwitterPost);
+                    postAdapter.notifyItemChanged(position);
+                    break;
 
-                    case "tag":
-                        Intent addPeopleIntent = new Intent(Status.this, AddPeople.class);
+                case "tag":
+                    Intent addPeopleIntent = new Intent(Status.this, AddPeople.class);
 
-                        Set<String> keySet = selectedFriends.keySet();
-                        Bundle bundle = new Bundle();
+                    Set<String> keySet = selectedFriends.keySet();
+                    Bundle bundle = new Bundle();
 
-                        for (String key : keySet) {
-                            String value = selectedFriends.get(key);
-                            bundle.putString(key, value);
-                        }
+                    for (String key : keySet) {
+                        String value = selectedFriends.get(key);
+                        bundle.putString(key, value);
+                    }
 
-                        bundle.putInt(ConstantVariables.SUBJECT_ID, mSubjectId);
-                        bundle.putString(ConstantVariables.SUBJECT_TYPE, mSubjectType);
-                        addPeopleIntent.putExtras(bundle);
-                        startActivityForResult(addPeopleIntent, ConstantVariables.ADD_PEOPLE_CODE);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        break;
+                    bundle.putInt(ConstantVariables.SUBJECT_ID, mSubjectId);
+                    bundle.putString(ConstantVariables.SUBJECT_TYPE, mSubjectType);
+                    addPeopleIntent.putExtras(bundle);
+                    startActivityForResult(addPeopleIntent, ConstantVariables.ADD_PEOPLE_CODE);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    break;
 
-                    case "emoticons":
-                        /* To show Emoji Keyboard */
-                        EmojiUtil.showEmojiKeyboard(mContext, mStatusBodyField);
-                        break;
+                case "emoticons":
+                    /* To show Emoji Keyboard */
+                    EmojiUtil.showEmojiKeyboard(mContext, mStatusBodyField);
+                    break;
 
-                    case "checkin":
-                        if (!mAppConst.checkManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                            mAppConst.requestForManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION,
-                                    ConstantVariables.ACCESS_FINE_LOCATION);
-                        } else {
-                            addLocation(false);
-                        }
-                        break;
+                case "checkin":
+                    if (!mAppConst.checkManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        mAppConst.requestForManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION,
+                                ConstantVariables.ACCESS_FINE_LOCATION);
+                    } else {
+                        addLocation(false);
+                    }
+                    break;
 
-                    case "feeling":
-                        launchFeelingActivity();
-                        break;
+                case "feeling":
+                    launchFeelingActivity();
+                    break;
 
-                    case "photo":
-                    case "video":
-                    case "music":
-                    case "link":
-                    case "sticker":
-                    case "sell_something":
-                        checkForAttachmentOptions(listItem.getKey());
-                        break;
-                }
-
-                if (!listItem.getKey().equals("facebook") && !listItem.getKey().equals("twitter")
-                        && !listItem.getKey().equals("sticker")
-                        && mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-
+                case "photo":
+                case "video":
+                case "music":
+                case "link":
+                case "sticker":
+                case "sell_something":
+                    checkForAttachmentOptions(listItem.getKey());
+                    break;
             }
+
+            if (!listItem.getKey().equals("facebook") && !listItem.getKey().equals("twitter")
+                    && !listItem.getKey().equals("sticker")
+                    && mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+
         });
 
         // Adding attachment options.
@@ -1165,24 +1146,21 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                                 findViewById(R.id.rootView),
                                 mStickersParentView, mStatusBodyField, persistentBottomSheet,
                                 mBottomSheetBehavior, llSticker, jsonObject);
-                        mStickersPopup.setOnStickerClickedListener(new StickersClickListener() {
-                            @Override
-                            public void onStickerClicked(ImageViewList stickerItem) {
-                                persistentBottomSheet.setVisibility(View.VISIBLE);
-                                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                                mAttachType = "sticker";
-                                showHideBanner(false);
-                                mStickerGuid = stickerItem.getmStickerGuid();
-                                mStickerImage = stickerItem.getmGridViewImageUrl();
-                                if (stickerItem.getmGridViewImageUrl() != null
-                                        && !stickerItem.getmGridViewImageUrl().isEmpty()) {
-                                    findViewById(R.id.sticker_view).setVisibility(View.VISIBLE);
-                                    mStatusBodyField.setGravity(Gravity.CENTER);
-                                    mImageLoader.setAlbumPhoto(stickerItem.getmGridViewImageUrl(), ivSticker);
-                                    StickersUtil.showStickerView();
-                                } else {
-                                    findViewById(R.id.sticker_view).setVisibility(View.GONE);
-                                }
+                        mStickersPopup.setOnStickerClickedListener(stickerItem -> {
+                            persistentBottomSheet.setVisibility(View.VISIBLE);
+                            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                            mAttachType = "sticker";
+                            showHideBanner(false);
+                            mStickerGuid = stickerItem.getmStickerGuid();
+                            mStickerImage = stickerItem.getmGridViewImageUrl();
+                            if (stickerItem.getmGridViewImageUrl() != null
+                                    && !stickerItem.getmGridViewImageUrl().isEmpty()) {
+                                findViewById(R.id.sticker_view).setVisibility(View.VISIBLE);
+                                mStatusBodyField.setGravity(Gravity.CENTER);
+                                mImageLoader.setAlbumPhoto(stickerItem.getmGridViewImageUrl(), ivSticker);
+                                StickersUtil.showStickerView();
+                            } else {
+                                findViewById(R.id.sticker_view).setVisibility(View.GONE);
                             }
                         });
                     }
@@ -1325,22 +1303,17 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                     mEnterLinkText.setVisibility(View.VISIBLE);
                     mEnterLinkText.setText("");
                     mAttachLinkButton.setVisibility(View.VISIBLE);
-                    mEnterLinkText.setOnTouchListener(new View.OnTouchListener() {
-                        public boolean onTouch(View v, MotionEvent event) {
-                            if (event.getAction() == MotionEvent.ACTION_UP) {
-                                EmojiUtil.dismissEmojiPopup();
-                            }
-                            return false;
+                    mEnterLinkText.setOnTouchListener((view, event) -> {
+                        if (event.getAction() == MotionEvent.ACTION_UP) {
+                            EmojiUtil.dismissEmojiPopup();
                         }
+                        return false;
                     });
 
-                    mAttachLinkButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+                    mAttachLinkButton.setOnClickListener(view -> {
 
-                            String text = mEnterLinkText.getText().toString().trim();
-                            attachLink(text);
-                        }
+                        String text = mEnterLinkText.getText().toString().trim();
+                        attachLink(text);
                     });
                     break;
 
@@ -1887,20 +1860,17 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                         mVideoAttachmentBody.setText(Html.fromHtml(sellSomethingFormValues.optString("description").substring(0, 150)
                                 + "<font color=\"#a9a9a9\">" + " ..."
                                 + mContext.getResources().getString(R.string.readMore) + " </font>"));
-                        mVideoAttachmentBody.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (isFullTextShowing) {
-                                    mVideoAttachmentBody.setText(Html.fromHtml(sellSomethingFormValues.optString("description").substring(0, 150)
-                                            + "<font color=\"#a9a9a9\">" + " ..."
-                                            + mContext.getResources().getString(R.string.readMore) + " </font>"));
-                                } else {
-                                    mVideoAttachmentBody.setText(Html.fromHtml(sellSomethingFormValues.optString("description")
-                                            + "<font color=\"#a9a9a9\">" + " ..."
-                                            + mContext.getResources().getString(R.string.readLess) + " </font>"));
-                                }
-                                isFullTextShowing = !isFullTextShowing;
+                        mVideoAttachmentBody.setOnClickListener(v -> {
+                            if (isFullTextShowing) {
+                                mVideoAttachmentBody.setText(Html.fromHtml(sellSomethingFormValues.optString("description").substring(0, 150)
+                                        + "<font color=\"#a9a9a9\">" + " ..."
+                                        + mContext.getResources().getString(R.string.readMore) + " </font>"));
+                            } else {
+                                mVideoAttachmentBody.setText(Html.fromHtml(sellSomethingFormValues.optString("description")
+                                        + "<font color=\"#a9a9a9\">" + " ..."
+                                        + mContext.getResources().getString(R.string.readLess) + " </font>"));
                             }
+                            isFullTextShowing = !isFullTextShowing;
                         });
                     } else {
                         mVideoAttachmentBody.setText(sellSomethingFormValues.optString("description"));
@@ -2137,6 +2107,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
 
     }
 
+
     // Get image from bitmap for real path
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -2247,7 +2218,6 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                     boolean isSelected = (mMultiSelectUserPrivacy != null && mMultiSelectUserPrivacy.size() > 0)
                             && mMultiSelectUserPrivacy.get(key) != null && mMultiSelectUserPrivacy.get(key).equals("1");
                     popup.getMenu().add(Menu.NONE, i, Menu.NONE, privacyLabel).setCheckable(isSelected).setChecked(isSelected);
-                    ;
                 }
             }
         }
@@ -2268,21 +2238,19 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             }
         }
 
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
+        popup.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
 
-                mSelectedPrivacyKey = popupMenuList.get(id);
+            mSelectedPrivacyKey = popupMenuList.get(id);
 
-                // Clearing list when any other popup option(other than multiple friend/network list) is clicked.
-                if (!mSelectedPrivacyKey.equals("network_list_custom")
-                        && !mSelectedPrivacyKey.equals("friend_list_custom")) {
-                    mMultiSelectUserPrivacy.clear();
-                }
-
-                setPrivacyOption(true);
-                return true;
+            // Clearing list when any other popup option(other than multiple friend/network list) is clicked.
+            if (!mSelectedPrivacyKey.equals("network_list_custom")
+                    && !mSelectedPrivacyKey.equals("friend_list_custom")) {
+                mMultiSelectUserPrivacy.clear();
             }
+
+            setPrivacyOption(true);
+            return true;
         });
         popup.show();
     }
@@ -2527,12 +2495,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                             && CacheUtils.getInstance(mContext).getLru().get(feelingIcon) != null) {
                         setFeeling(CacheUtils.getInstance(mContext).getLru().get(feelingIcon));
                     } else if (feelingIcon != null) {
-                        new BitMapCreatorUtil(mContext, feelingIcon, new BitMapCreatorUtil.OnBitmapLoadListener() {
-                            @Override
-                            public void onBitMapLoad(Bitmap bitmap) {
-                                setFeeling(CacheUtils.getInstance(mContext).getLru().get(feelingIcon));
-                            }
-                        }).execute();
+                        new BitMapCreatorUtil(mContext, feelingIcon, bitmap -> setFeeling(CacheUtils.getInstance(mContext).getLru().get(feelingIcon))).execute();
                     }
                 }
                 break;
@@ -2614,38 +2577,29 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         String message = ConstantVariables.VALID_FILE_SIZE;
         if ((message = GlobalFunctions.validateFileSize(length, mContext)).equals(ConstantVariables.VALID_FILE_SIZE)) {
             mAppConst.showProgressDialog();
-            mImageLoader.getBitMapFromUrl(mSelectedVideoPath, new BitMapCreatorUtil.OnBitmapLoadListener() {
-                @Override
-                public void onBitMapLoad(Bitmap bitmap) {
-                    try {
-                        File outputDir = mContext.getCacheDir();
-                        Random generator = new Random();
-                        int n = 10000;
-                        n = generator.nextInt(n);
-                        String fileName = "Image-" + n ;
-                        File outputFile = File.createTempFile(fileName, ".png", outputDir);
-                        FileOutputStream out = new FileOutputStream(outputFile);
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-                        out.flush();
-                        out.close();
-                        mSelectedVideoThumbnail = outputFile.getAbsolutePath();
-                        showAttachedVideo(GlobalFunctions.getFileNameFromPath(mSelectedVideoPath), "", "");
-                        mAppConst.hideProgressDialog();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            mImageLoader.getBitMapFromUrl(mSelectedVideoPath, bitmap -> {
+                try {
+                    File outputDir = mContext.getCacheDir();
+                    Random generator = new Random();
+                    int n = 10000;
+                    n = generator.nextInt(n);
+                    String fileName = "Image-" + n ;
+                    File outputFile = File.createTempFile(fileName, ".png", outputDir);
+                    FileOutputStream out = new FileOutputStream(outputFile);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+                    out.flush();
+                    out.close();
+                    mSelectedVideoThumbnail = outputFile.getAbsolutePath();
+                    showAttachedVideo(GlobalFunctions.getFileNameFromPath(mSelectedVideoPath), "", "");
+                    mAppConst.hideProgressDialog();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             });
         } else {
             mSelectedVideoPath = null;
             SnackbarUtils.displayMultiLineSnackbarWithAction(mContext, findViewById(R.id.rootView), message, mContext.getResources().
-                    getString(R.string.try_again), new SnackbarUtils.OnSnackbarActionClickListener() {
-
-                @Override
-                public void onSnackbarActionClick() {
-                    attachVideo();
-                }
-            });
+                    getString(R.string.try_again), this::attachVideo);
         }
     }
 
@@ -2702,12 +2656,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
     public void createSelectedLocationLayout(String label) {
 
         mLocationLabel.setText(label);
-        mLocationsLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addLocation(false);
-            }
-        });
+        mLocationsLayout.setOnClickListener(view -> addLocation(false));
         mLocationsLayout.setVisibility(View.VISIBLE);
     }
 
@@ -2913,12 +2862,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                 } else {
                     isPosted = false;
                     SnackbarUtils.displaySnackbarLongWithListener(findViewById(R.id.rootView),
-                            response.optString("message"), new SnackbarUtils.OnSnackbarDismissListener() {
-                                @Override
-                                public void onSnackbarDismissed() {
-                                    finish();
-                                }
-                            });
+                            response.optString("message"), this::finish);
                 }
 
             } else {
@@ -3428,34 +3372,31 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             mProgressDialog.dismiss();
 
             mCustomImageAdapter = new CustomImageAdapter(((Activity) mContext), mPhotoUrls, true, isPhotoPreview,
-                    columnWidth, new OnCancelClickListener() {
-                @Override
-                public void onCancelButtonClicked(int removedImagePosition) {
-                    if (mSelectPath != null && !mSelectPath.isEmpty()) {
-                        mSelectPath.remove(removedImagePosition);
-                        mPhotoUrls.remove(removedImagePosition);
-                        if (!isPhotoPreview && mPhotoUrls.size() == 1) {
-                            columnWidth = AppConstant.getDisplayMetricsWidth(mContext)
-                                    - mContext.getResources().getDimensionPixelSize(R.dimen.margin_60dp);
-                            mCustomImageAdapter.setColumnWidth(columnWidth);
-                            mRecyclerView.setAdapter(mCustomImageAdapter);
-                        }
-                        mCustomImageAdapter.notifyDataSetChanged();
+                    columnWidth, removedImagePosition -> {
+                        if (mSelectPath != null && !mSelectPath.isEmpty()) {
+                            mSelectPath.remove(removedImagePosition);
+                            mPhotoUrls.remove(removedImagePosition);
+                            if (!isPhotoPreview && mPhotoUrls.size() == 1) {
+                                columnWidth = AppConstant.getDisplayMetricsWidth(mContext)
+                                        - mContext.getResources().getDimensionPixelSize(R.dimen.margin_60dp);
+                                mCustomImageAdapter.setColumnWidth(columnWidth);
+                                mRecyclerView.setAdapter(mCustomImageAdapter);
+                            }
+                            mCustomImageAdapter.notifyDataSetChanged();
 
-                        // If all images are removed then making other attachments clickable.
-                        if (mSelectPath.isEmpty()) {
-                            mRecyclerView.setVisibility(View.GONE);
-                            // If canceled all the selected images then hide photoBlockLayout
-                            // and enabled other attachement click.
-                            if (isPhotoPreview) {
-                                mAttachType = "";
-                                isAttachmentAttached = false;
-                                showHideBanner(true);
+                            // If all images are removed then making other attachments clickable.
+                            if (mSelectPath.isEmpty()) {
+                                mRecyclerView.setVisibility(View.GONE);
+                                // If canceled all the selected images then hide photoBlockLayout
+                                // and enabled other attachement click.
+                                if (isPhotoPreview) {
+                                    mAttachType = "";
+                                    isAttachmentAttached = false;
+                                    showHideBanner(true);
+                                }
                             }
                         }
-                    }
-                }
-            });
+                    });
             mRecyclerView.setAdapter(mCustomImageAdapter);
             mCustomImageAdapter.notifyDataSetChanged();
             mRecyclerView.setVisibility(View.VISIBLE);

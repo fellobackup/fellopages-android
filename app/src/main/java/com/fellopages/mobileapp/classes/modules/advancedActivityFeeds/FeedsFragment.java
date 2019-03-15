@@ -1620,6 +1620,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             }
 
             if (mFilterType != null && !mFilterType.isEmpty()) {
+                Log.d("FilterTypeHere ", mFilterType);
                 getFeedCountUrl += "&filter_type=" + mFilterType;
             }
 
