@@ -2499,9 +2499,25 @@ public class GutterMenuUtils {
 
             case "feed_link":
                 if (mFeedList.getFeedLink() != null && !mFeedList.getFeedLink().isEmpty()) {
+                    Log.d("Feed Link", "Feed link: " + mFeedList.getFeedLink());
                     ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("Feed Link", mFeedList.getFeedLink());
-                    clipboard.setPrimaryClip(clip);
+                    if (clipboard != null) {
+                        clipboard.setPrimaryClip(clip);
+                    }
+                    Toast.makeText(mContext, mContext.getResources().getString(R.string.feed_link_copied),
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case "copy_link":
+                if (mRedirectUrl != null && !mRedirectUrl.isEmpty()) {
+                    Log.d("Feed Link", "Copy link: " + mRedirectUrl);
+                    ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Event Link", mRedirectUrl);
+                    if (clipboard != null) {
+                        clipboard.setPrimaryClip(clip);
+                    }
                     Toast.makeText(mContext, mContext.getResources().getString(R.string.feed_link_copied),
                             Toast.LENGTH_SHORT).show();
                 }
