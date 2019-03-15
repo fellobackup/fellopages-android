@@ -140,27 +140,24 @@ public class PhotoUploadingActivity extends FragmentActivity implements MultiMed
             mSubmitButton.setEnabled(true);
         }
 
-        mSubmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(resultList != null && resultList.size() >0){
-                    findViewById(R.id.image_grid).setVisibility(View.GONE);
-                    for (String p : resultList) {
-                        try {
-                            Bitmap selectedImage = BitmapUtils.decodeSampledBitmapFromFile(PhotoUploadingActivity.this,
-                                    p, width, (int) getResources().getDimension(R.dimen.feed_attachment_image_height), false);
-                            mPhotoUrls.add(new ImageViewList(selectedImage));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+        mSubmitButton.setOnClickListener(view -> {
+            if(resultList != null && resultList.size() >0){
+                findViewById(R.id.image_grid).setVisibility(View.GONE);
+                for (String p : resultList) {
+                    try {
+                        Bitmap selectedImage = BitmapUtils.decodeSampledBitmapFromFile(PhotoUploadingActivity.this,
+                                p, width, (int) getResources().getDimension(R.dimen.feed_attachment_image_height), false);
+                        mPhotoUrls.add(new ImageViewList(selectedImage));
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                    adapter = new GridViewAdapter(mActivity, columnWidth, mPhotoUrls,false, true);
-                    mGridView.setAdapter(adapter);
-
-                    mSubmitButton.setVisibility(View.GONE);
-                    mUploadButton.setVisibility(View.VISIBLE);
                 }
+
+                adapter = new GridViewAdapter(mActivity, columnWidth, mPhotoUrls,false, true);
+                mGridView.setAdapter(adapter);
+
+                mSubmitButton.setVisibility(View.GONE);
+                mUploadButton.setVisibility(View.VISIBLE);
             }
         });
 

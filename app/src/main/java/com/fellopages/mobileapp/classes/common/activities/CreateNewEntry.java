@@ -367,15 +367,12 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                     tvErrorMessage.setTextColor(ContextCompat.getColor(mContext, R.color.black));
                     tvErrorMessage.setText(mContext.getResources().getString(R.string.no_friend_list));
                     tvAction.setText(mContext.getResources().getString(R.string.manage_list));
-                    tvAction.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(mContext, userProfile.class);
-                            intent.putExtra("isShowFriends", true);
-                            intent.putExtra(ConstantVariables.USER_ID,  getIntent().getIntExtra("user_id", 0));
-                            startActivityForResult(intent, ConstantVariables.USER_PRIVACY_REQUEST_CODE);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        }
+                    tvAction.setOnClickListener(v -> {
+                        Intent intent = new Intent(mContext, userProfile.class);
+                        intent.putExtra("isShowFriends", true);
+                        intent.putExtra(ConstantVariables.USER_ID,  getIntent().getIntExtra("user_id", 0));
+                        startActivityForResult(intent, ConstantVariables.USER_PRIVACY_REQUEST_CODE);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     });
                     errorView.setVisibility(View.VISIBLE);
                     createFormView.setGravity(Gravity.CENTER);
@@ -412,12 +409,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                         case ConstantVariables.CLASSIFIED_MENU_TITLE:
                         case ConstantVariables.FORUM_MENU_TITLE:
                             createFormView.addView(generateForm(jsonObject, true, mCurrentSelectedModule));
-                            createFormView.findViewById(R.id.add_description).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    openEditor();
-                                }
-                            });
+                            createFormView.findViewById(R.id.add_description).setOnClickListener(view -> openEditor());
                             break;
 
                         case ConstantVariables.MLT_MENU_TITLE:
@@ -1556,6 +1548,35 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
         DatePicker datePicker = new DatePicker(mContext);
 //        newCalendar.add(Calendar.DATE, -1);
         datePicker.setMinDate(System.currentTimeMillis() - 1000);
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            datePicker.setCalendarViewShown(false);
+        }
+
+        // Showing the recently selected value in date picker if the user recently selected.
+        if (yearString != null && !yearString.isEmpty() && monthString != null && !monthString.isEmpty()) {
+            datePicker.init(Integer.parseInt(yearString), Integer.parseInt(monthString) - 1, Integer.parseInt(dateString), null);
+        } else {
+            datePicker.init(newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH), null);
+        }
+        showDateTimePicker(context, type, tvDateTime, datePicker, null);
+        if (minDate != 0L) {
+            datePicker.setMinDate(minDate);
+        }
+    }
+
+
+    public void showDateTimeDialogue(final Context context, TextView tvDateTime, final String type,
+                                     long minDate, boolean isNonTimeSched) {
+
+        mContext = context;
+
+        Calendar newCalendar = Calendar.getInstance();
+        DatePicker datePicker = new DatePicker(mContext);
+//        newCalendar.add(Calendar.DATE, -1);
+        if (!isNonTimeSched){
+            datePicker.setMinDate(System.currentTimeMillis() - 1000);
+        }
+
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             datePicker.setCalendarViewShown(false);
         }

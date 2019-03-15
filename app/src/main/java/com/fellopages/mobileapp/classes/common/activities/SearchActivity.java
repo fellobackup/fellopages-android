@@ -121,16 +121,13 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
             mPreviousSelectedModuleListingTypeId = PreferencesUtils.getCurrentSelectedListingId(this);
         }
 
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                // Playing backSound effect when user tapped on back button from tool bar.
-                if (PreferencesUtils.isSoundEffectEnabled(SearchActivity.this)) {
-                    SoundUtil.playSoundEffectOnBackPressed(SearchActivity.this);
-                }
-
+        mToolbar.setNavigationOnClickListener(view -> {
+            onBackPressed();
+            // Playing backSound effect when user tapped on back button from tool bar.
+            if (PreferencesUtils.isSoundEffectEnabled(SearchActivity.this)) {
+                SoundUtil.playSoundEffectOnBackPressed(SearchActivity.this);
             }
+
         });
 
         mDrawerLayout = findViewById(R.id.drawer_layout_search);

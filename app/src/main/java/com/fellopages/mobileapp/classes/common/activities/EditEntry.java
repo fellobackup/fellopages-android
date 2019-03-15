@@ -273,12 +273,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                     case ConstantVariables.CLASSIFIED_MENU_TITLE:
                         mBodyString = jsonObject.optJSONObject("formValues").optString("body");
                         editFormView.addView(populate(jsonObject, currentSelectedOption));
-                        editFormView.findViewById(R.id.add_description).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                openEditor();
-                            }
-                        });
+                        editFormView.findViewById(R.id.add_description).setOnClickListener(view -> openEditor());
                         break;
 
                     case ConstantVariables.MLT_MENU_TITLE:

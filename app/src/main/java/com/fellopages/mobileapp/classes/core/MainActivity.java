@@ -495,7 +495,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         Context mContext = getApplicationContext();
         View searchBar = findViewById(R.id.search_bar);
-
+        Log.d("ShowItHere ", "true"+" "+searchBar+" "+isHomePage+" "+PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW));
         if (isHomePage && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.NAVIGATION_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.NAVIGATION_ICON_CASE_VIEW);

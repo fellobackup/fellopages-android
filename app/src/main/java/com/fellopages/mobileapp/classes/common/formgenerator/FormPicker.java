@@ -21,6 +21,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 
 import com.fellopages.mobileapp.classes.common.activities.CreateNewEntry;
@@ -61,6 +62,7 @@ public class FormPicker extends FormWidget implements View.OnClickListener,
     private CreateNewEntry createNewEntry;
     private EditEntry editEntry;
     private static long mMinDate = 0L;
+    private boolean isFromBday = false;
 
 
     /**
@@ -379,6 +381,13 @@ public class FormPicker extends FormWidget implements View.OnClickListener,
                 setMinDate(etStartTime.getText().toString());
                 mIsDateSet = true;
             }
+            Log.d("LoggedBday ", mFieldName);
+
+            if (mFieldName.contains("birthdate")){
+                isFromBday = true;
+            }
+
+
             switch (mFieldName) {
                 case "starttime":
                 case "schedule_time":
@@ -406,7 +415,7 @@ public class FormPicker extends FormWidget implements View.OnClickListener,
                     }
                     break;
                 default:
-                    createNewEntry.showDateTimeDialogue(mContext, etFieldValue, mDateType, 0L);
+                    createNewEntry.showDateTimeDialogue(mContext, etFieldValue, mDateType, 0L, isFromBday);
                     break;
             }
         } else if (mIsCreateForm) {

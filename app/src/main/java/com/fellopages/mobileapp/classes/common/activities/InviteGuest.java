@@ -23,6 +23,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -116,6 +117,9 @@ public class InviteGuest extends AppCompatActivity implements TextWatcher, Adapt
                     mSnackBarMessage = getResources().getString(R.string.invitation_successful);
                     break;
             }
+        } else {
+            mToolBarTitle = getResources().getString(R.string.add_people);
+            mSnackBarMessage = getResources().getString(R.string.add_people_success_message);
         }
 
         mToolbar = findViewById(R.id.toolbar);
@@ -299,13 +303,9 @@ public class InviteGuest extends AppCompatActivity implements TextWatcher, Adapt
                 @Override
                 public void onTaskCompleted(JSONObject jsonObject) {
                     findViewById(R.id.progressBar).setVisibility(View.GONE);
+//                    Log.d("LambdaCleanUp ", mSnackBarMessage)
                     SnackbarUtils.displaySnackbarShortWithListener(mainLayout, mSnackBarMessage,
-                            new SnackbarUtils.OnSnackbarDismissListener() {
-                                @Override
-                                public void onSnackbarDismissed() {
-                                    finish();
-                                }
-                            });
+                            InviteGuest.this::finish);
                 }
 
                 @Override

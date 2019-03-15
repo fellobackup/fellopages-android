@@ -450,16 +450,12 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
 
                             mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.VISIBLE);
                             listItemHolder.mListItemId = listItems.getmUserId();
-                            listItemHolder.mOptionIconImage.setOnClickListener(new View.OnClickListener() {
+                            listItemHolder.mOptionIconImage.setOnClickListener(view -> {
 
-                                @Override
-                                public void onClick(View view) {
-
-                                    mPosition = (int) view.getTag();
-                                    mGutterMenuUtils.showPopup(view, listItemHolder.mOptionsArray,
-                                            mPosition, mBrowseItemList, currentSelectedOption,
-                                            mCallingFragment, mCurrentSelectedList);
-                                }
+                                mPosition = (int) view.getTag();
+                                mGutterMenuUtils.showPopup(view, listItemHolder.mOptionsArray,
+                                        mPosition, mBrowseItemList, currentSelectedOption,
+                                        mCallingFragment, mCurrentSelectedList);
                             });
                         } else {
                             mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.GONE);
@@ -488,14 +484,11 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                                     break;
                             }
 
-                            listItemHolder.mMemberOption.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    int position = (int) view.getTag();
-                                    BrowseListItems browseListItems = (BrowseListItems) mBrowseItemList.get(position);
-                                    mGutterMenuUtils.setPopUpForFriendShipType(position, browseListItems,
-                                            null, currentSelectedOption);
-                                }
+                            listItemHolder.mMemberOption.setOnClickListener(view -> {
+                                int position1 = (int) view.getTag();
+                                BrowseListItems browseListItems = (BrowseListItems) mBrowseItemList.get(position1);
+                                mGutterMenuUtils.setPopUpForFriendShipType(position1, browseListItems,
+                                        null, currentSelectedOption);
                             });
                         } else {
                             listItemHolder.mMemberOption.setVisibility(View.GONE);
@@ -529,19 +522,16 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                             listItemHolder.mContentTitle.setText(listItems.getmTotalItemCount() + " " + guestText);
 
                             listItemHolder.mContentTitle.setTag(position);
-                            listItemHolder.mContentTitle.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
+                            listItemHolder.mContentTitle.setOnClickListener(v -> {
 
-                                    int clickedPosition = (int) v.getTag();
-                                    BrowseListItems browseListItems = (BrowseListItems) mBrowseItemList.get(clickedPosition);
-                                    if (browseListItems.getmGuestArray() != null
-                                            && browseListItems.getmGuestArray().length() > 0) {
-                                        Intent intent = new Intent(mContext, Likes.class);
-                                        intent.putExtra(ConstantVariables.MENU_ARRAY, browseListItems.getmGuestArray().toString());
-                                        mContext.startActivity(intent);
-                                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    }
+                                int clickedPosition = (int) v.getTag();
+                                BrowseListItems browseListItems = (BrowseListItems) mBrowseItemList.get(clickedPosition);
+                                if (browseListItems.getmGuestArray() != null
+                                        && browseListItems.getmGuestArray().length() > 0) {
+                                    Intent intent = new Intent(mContext, Likes.class);
+                                    intent.putExtra(ConstantVariables.MENU_ARRAY, browseListItems.getmGuestArray().toString());
+                                    mContext.startActivity(intent);
+                                    ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 }
                             });
 
@@ -604,16 +594,13 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                         if (listItemHolder.mOptionsArray != null && listItemHolder.mOptionsArray.length() > 0) {
 
                             listItemHolder.mOptionIconImage.setVisibility(View.VISIBLE);
-                            listItemHolder.mOptionIconImage.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
+                            listItemHolder.mOptionIconImage.setOnClickListener(view -> {
 
-                                    mPosition = (int) view.getTag();
-                                    mGutterMenuUtils.showPopup(view, listItemHolder.mOptionsArray,
-                                            mPosition, mBrowseItemList, currentSelectedOption,
-                                            mCallingFragment, mCurrentSelectedList);
+                                mPosition = (int) view.getTag();
+                                mGutterMenuUtils.showPopup(view, listItemHolder.mOptionsArray,
+                                        mPosition, mBrowseItemList, currentSelectedOption,
+                                        mCallingFragment, mCurrentSelectedList);
 
-                                }
                             });
                         } else {
                             listItemHolder.mOptionIconImage.setVisibility(View.GONE);
@@ -638,26 +625,23 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                         listItemHolder.mHostId = listItems.getmOwnerId();
 
 
-                        listItemHolder.mHostImage.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                        listItemHolder.mHostImage.setOnClickListener(v -> {
 
-                                if (listItemHolder.mHostType != null && listItemHolder.mHostType.equals("user")) {
+                            if (listItemHolder.mHostType != null && listItemHolder.mHostType.equals("user")) {
 
-                                    Intent intent = new Intent(mContext, userProfile.class);
-                                    intent.putExtra(ConstantVariables.USER_ID, listItemHolder.mHostId);
-                                    intent.putExtra(ConstantVariables.PROFILE_TYPE, "user_profile");
-                                    mContext.startActivity(intent);
-                                    ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                Intent intent = new Intent(mContext, userProfile.class);
+                                intent.putExtra(ConstantVariables.USER_ID, listItemHolder.mHostId);
+                                intent.putExtra(ConstantVariables.PROFILE_TYPE, "user_profile");
+                                mContext.startActivity(intent);
+                                ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
-                                } else if (listItemHolder.mHostType != null && listItemHolder.mHostType.equals("siteevent_organizer")) {
+                            } else if (listItemHolder.mHostType != null && listItemHolder.mHostType.equals("siteevent_organizer")) {
 
-                                    Intent intent = new Intent(mContext, userProfile.class);
-                                    intent.putExtra(ConstantVariables.USER_ID, listItemHolder.mHostId);
-                                    intent.putExtra(ConstantVariables.PROFILE_TYPE, "organizer_profile");
-                                    mContext.startActivity(intent);
-                                    ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                }
+                                Intent intent = new Intent(mContext, userProfile.class);
+                                intent.putExtra(ConstantVariables.USER_ID, listItemHolder.mHostId);
+                                intent.putExtra(ConstantVariables.PROFILE_TYPE, "organizer_profile");
+                                mContext.startActivity(intent);
+                                ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             }
                         });
 

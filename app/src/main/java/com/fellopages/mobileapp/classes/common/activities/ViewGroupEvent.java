@@ -296,18 +296,15 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
                 mCoverImageDetails.add(new PhotoListDetails(image));
                 mImageLoader.setImageUrl(image, mCoverImage);
 
-                mCoverImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(PhotoLightBoxActivity.EXTRA_IMAGE_URL_LIST, mCoverImageDetails);
-                        Intent i = new Intent(mContext, PhotoLightBoxActivity.class);
-                        i.putExtra(ConstantVariables.TOTAL_ITEM_COUNT, 1);
-                        i.putExtra(ConstantVariables.SHOW_OPTIONS, false);
-                        i.putExtras(bundle);
-                        startActivityForResult(i, ConstantVariables.VIEW_LIGHT_BOX);
+                mCoverImage.setOnClickListener(v -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(PhotoLightBoxActivity.EXTRA_IMAGE_URL_LIST, mCoverImageDetails);
+                    Intent i = new Intent(mContext, PhotoLightBoxActivity.class);
+                    i.putExtra(ConstantVariables.TOTAL_ITEM_COUNT, 1);
+                    i.putExtra(ConstantVariables.SHOW_OPTIONS, false);
+                    i.putExtras(bundle);
+                    startActivityForResult(i, ConstantVariables.VIEW_LIGHT_BOX);
 
-                    }
                 });
 
                 mContentTitle.setText(title);
