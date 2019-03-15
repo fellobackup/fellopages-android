@@ -11,6 +11,7 @@
  *
  */
 package com.fellopages.mobileapp.classes.core;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -41,6 +42,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.ArrayAdapter;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -53,6 +55,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.login.LoginManager;
+import com.fellopages.mobileapp.BuildConfig;
 import com.fellopages.mobileapp.classes.core.impl.LoginListener;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -69,9 +72,11 @@ import com.fellopages.mobileapp.classes.common.utils.UrlUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.Status;
 import com.twitter.sdk.android.core.TwitterCore;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -112,6 +117,8 @@ public class AppConstant {
     public static final int STICKERS_GRID_PADDING = 8; // in dp
 
     // Default url for data access - OLD
+//    public static final String DEFAULT_URL =
+//            BuildConfig.DEBUG ? "https://www.fellopages.com/beta1/api/rest/" : "https://www.fellopages.com/api/rest/";
     public static final String DEFAULT_URL = "https://www.fellopages.com/api/rest/";
 //    public static final String DEFAULT_URL = "https://www.fellopages.com/beta1/api/rest/";
     public static final String oauth_consumer_key = "tqrqueo5pxnae436nmrgeqhzs6jiud1n";
@@ -143,6 +150,7 @@ public class AppConstant {
 
         initializeVariable();
     }
+
     /**
      * Method to initialize class member variables.
      */
@@ -160,7 +168,7 @@ public class AppConstant {
         }
 
         if (checkManifestPermission(android.Manifest.permission.READ_PHONE_STATE)) {
-            TelephonyManager  tm=(TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
             mRequestParams.put("device_id", tm.getDeviceId());
         }
 
@@ -186,6 +194,7 @@ public class AppConstant {
 
     /**
      * Check if user isn't logged in
+     *
      * @param refresh true if recheck from shared preference
      * @return true if user isn't logged in, otherwise false
      */
@@ -212,6 +221,7 @@ public class AppConstant {
     public Map<String, String> getAuthenticationParams() {
         return mAuthParams;
     }
+
     public Map<String, String> getRequestParams() {
         return mRequestParams;
     }
@@ -239,7 +249,7 @@ public class AppConstant {
     /**
      * Used to execute post request on server without looking for response and params.
      *
-     * @param url    Url on which the request will be executed
+     * @param url Url on which the request will be executed
      */
     public void postJsonRequest(String url) {
         manageResponse(url, Request.Method.POST, new HashMap<String, String>(), null);
@@ -248,7 +258,7 @@ public class AppConstant {
     /**
      * Used to execute post request on server without params.
      *
-     * @param url    Url on which the request will be executed
+     * @param url              Url on which the request will be executed
      * @param responseListener Interface used to listen response events
      */
     public void postJsonRequestWithoutParams(String url, final OnResponseListener responseListener) {
@@ -332,10 +342,8 @@ public class AppConstant {
             postParams = params;
 
 
-
-
             LogUtils.LOGD(AppConstant.class.getSimpleName(), "Request Url: " + url);
-            Log.d("LikeAction ", params+" "+url);
+            Log.d("LikeAction ", params + " " + url);
             StringRequest request = new StringRequest(method, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -364,7 +372,7 @@ public class AppConstant {
                                 String errorCode = json.optString("error_code");
 
                                 if (errorCode != null &&
-                                    (errorCode.equals("email_not_verified") || errorCode.equals("not_approved") || errorCode.equals("subscription_fail"))) {
+                                        (errorCode.equals("email_not_verified") || errorCode.equals("not_approved") || errorCode.equals("subscription_fail"))) {
                                     message = json.optString("error_code");
                                 }
 
@@ -472,6 +480,7 @@ public class AppConstant {
     public void markAllFriendRequestsRead() {
         postJsonRequest(UrlUtil.REQUEST_READ_URL, null);
     }
+
     public static boolean isRequestSuccessful(int statusCode) {
         switch (statusCode) {
             case 200:
@@ -595,6 +604,7 @@ public class AppConstant {
 
         return s;
     }
+
     public static String getYearFormat(String date) {
         String stringMonth = "";
         SimpleDateFormat format;
@@ -701,7 +711,7 @@ public class AppConstant {
             if (hours > 12) {
                 hours -= 12;
                 timeString = hours + ":" + minuteString + " PM ";
-            } else{
+            } else {
                 timeString = hours + ":" + minuteString + " AM ";
             }
         } catch (ParseException e) {
@@ -823,7 +833,7 @@ public class AppConstant {
                         JSONObject userDetail = jsonObject.optJSONObject("response");
                         userDetail.put("gutterMenu", jsonObject.optJSONArray("gutterMenu"));
                         userDetail.put("profile_tabs", jsonObject.optJSONArray("profile_tabs"));
-                        if (userDetail != null ) {
+                        if (userDetail != null) {
                             PreferencesUtils.updateUserPreferences(mContext, userDetail.toString(),
                                     oauth_secret, oauthToken);
                             if (userDetail.length() > 0
@@ -883,8 +893,8 @@ public class AppConstant {
                 isLocationEnable = true;
 
                 if (PreferencesUtils.getDefaultLocation(mContext) == null &&
-                    mDefaultLocation != null &&
-                    !mDefaultLocation.isEmpty()) {
+                        mDefaultLocation != null &&
+                        !mDefaultLocation.isEmpty()) {
                     PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_DEFAULT_LOCATION, mDefaultLocation);
                 }
                 if (mMultiLocations != null && mMultiLocations.length() != 0) {
@@ -907,7 +917,7 @@ public class AppConstant {
         }
     }
 
-    public void changeLanguage(final Context mContext, final String currentSelectedOption){
+    public void changeLanguage(final Context mContext, final String currentSelectedOption) {
         try {
             final ArrayAdapter<String> languageAdapter, locationAdapter;
             final Map<String, String> mSelectedLanguageInfo;
@@ -967,7 +977,7 @@ public class AppConstant {
                     });
 
             alertBuilder.create().show();
-        }catch (JSONException |NullPointerException e) {
+        } catch (JSONException | NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -1085,43 +1095,45 @@ public class AppConstant {
         return status == ConnectionResult.SUCCESS;
     }
 
-    public void setOnCommunityAdsLoadedListener(OnCommunityAdsLoadedListener communityAdsLoadedListener){
+    public void setOnCommunityAdsLoadedListener(OnCommunityAdsLoadedListener communityAdsLoadedListener) {
         mCommunityAdsLoadedListener = communityAdsLoadedListener;
     }
 
-    public void getCommunityAds(int placementCount, int adType){
+    public void getCommunityAds(int placementCount, int adType) {
         String communityAdsUrl = UrlUtil.GET_COMMUNITY_ADS_URL + "?placementCount=" + placementCount + "&type=" + adType;
 
         getJsonResponseFromUrl(communityAdsUrl, new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
-                if(mCommunityAdsLoadedListener != null){
+                if (mCommunityAdsLoadedListener != null) {
                     mCommunityAdsLoadedListener.onCommunityAdsLoaded(jsonObject.optJSONArray("advertisments"));
                 }
             }
+
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                if(mCommunityAdsLoadedListener != null){
+                if (mCommunityAdsLoadedListener != null) {
                     mCommunityAdsLoadedListener.onCommunityAdsLoaded(null);
                 }
             }
         });
     }
 
-    public void getCommunityAds(int placementCount, int adType, JSONObject jsonObject, final OnCommunityAdsLoadedListnerFeeds onCommunityAdsLoadedListnerFeeds){
+    public void getCommunityAds(int placementCount, int adType, JSONObject jsonObject, final OnCommunityAdsLoadedListnerFeeds onCommunityAdsLoadedListnerFeeds) {
         final JSONObject dataObject = jsonObject;
         String communityAdsUrl = UrlUtil.GET_COMMUNITY_ADS_URL + "?placementCount=" + placementCount + "&type=" + adType;
 
         getJsonResponseFromUrl(communityAdsUrl, new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
-                if(onCommunityAdsLoadedListnerFeeds != null){
+                if (onCommunityAdsLoadedListnerFeeds != null) {
                     onCommunityAdsLoadedListnerFeeds.onCommunityAdsLoaded(jsonObject.optJSONArray("advertisments"), dataObject);
                 }
             }
+
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                if(onCommunityAdsLoadedListnerFeeds != null){
+                if (onCommunityAdsLoadedListnerFeeds != null) {
                     onCommunityAdsLoadedListnerFeeds.onCommunityAdsLoaded(null, dataObject);
                 }
             }
@@ -1131,13 +1143,13 @@ public class AppConstant {
     /**
      * proceedToUserLogin
      *
-     * @param mContext Context
-     * @param bundle Bundle
-     * @param intentAction Intent action
-     * @param intentType Intent type
-     * @param emailValue email
+     * @param mContext      Context
+     * @param bundle        Bundle
+     * @param intentAction  Intent action
+     * @param intentType    Intent type
+     * @param emailValue    email
      * @param passwordValue password
-     * @param jsonObject json object
+     * @param jsonObject    json object
      */
     public void proceedToUserLogin(Context mContext,
                                    Bundle bundle,
@@ -1152,13 +1164,13 @@ public class AppConstant {
     /**
      * proceedToUserLogin
      *
-     * @param mContext Context
-     * @param bundle Bundle
-     * @param intentAction Intent action
-     * @param intentType Intent type
-     * @param emailValue email
+     * @param mContext      Context
+     * @param bundle        Bundle
+     * @param intentAction  Intent action
+     * @param intentType    Intent type
+     * @param emailValue    email
      * @param passwordValue password
-     * @param jsonObject json object
+     * @param jsonObject    json object
      * @param loginListener override callback
      */
     public void proceedToUserLogin(Context mContext,
@@ -1197,7 +1209,7 @@ public class AppConstant {
             // Save email and base64 encrypted password in SharedPreferences
             PreferencesUtils.UpdateLoginInfoPref(mContext, emailValue, passwordValue, userDetail.optInt("user_id"));
 
-             /* English is coming from API instead of it's language code, It will automatically work when API issue will be resolved.. */
+            /* English is coming from API instead of it's language code, It will automatically work when API issue will be resolved.. */
             if (user_language.equals("English")) {
                 user_language = "en";
             }
@@ -1316,8 +1328,8 @@ public class AppConstant {
         activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
-    public static String buildUrl(Integer id){
-        String url = DEFAULT_URL + "advancedevents/view/"+ id +"?gutter_menu=" + 1;
+    public static String buildUrl(Integer id) {
+        String url = DEFAULT_URL + "advancedevents/view/" + id + "?gutter_menu=" + 1;
 
         return url;
     }
