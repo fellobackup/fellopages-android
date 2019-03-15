@@ -89,8 +89,8 @@ public class ReviewFragment extends Fragment implements SwipeRefreshLayout.OnRef
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.recycler_view_layout, container,false);
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setRefreshing(false);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -156,7 +156,7 @@ public class ReviewFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
             mAppConst.getJsonResponseFromUrl(reviewPageUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     mReviewList.clear();
 
@@ -266,8 +266,8 @@ public class ReviewFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            TextView errorMessage = (TextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            TextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf007");
             errorMessage.setText(getResources().getString(R.string.no_review_text));

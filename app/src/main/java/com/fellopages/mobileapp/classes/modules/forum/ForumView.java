@@ -75,9 +75,9 @@ public class ForumView extends AppCompatActivity implements SwipeRefreshLayout.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_view);
-        textViewTopicCloseInfo = (TextView)findViewById(R.id.topic_close_info);
-        mListView = (ListView)findViewById(R.id.listView_forumProfile);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        textViewTopicCloseInfo = findViewById(R.id.topic_close_info);
+        mListView = findViewById(R.id.listView_forumProfile);
+        progressBar = findViewById(R.id.progressBar);
         footerView = CustomViews.getFooterView(getLayoutInflater());
 
         mBrowseList = new BrowseListItems();
@@ -86,7 +86,7 @@ public class ForumView extends AppCompatActivity implements SwipeRefreshLayout.O
         mGutterMenuUtils.setOnOptionItemClickResponseListener(this);
         contextOfParent = ForumView.this;
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,7 +107,7 @@ public class ForumView extends AppCompatActivity implements SwipeRefreshLayout.O
         mForumAdapter = new ForumAdapter(ForumView.this,
                 R.layout.view_forum_topic_item, mBrowseForumList,"ForumView");
 
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 

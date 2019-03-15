@@ -108,11 +108,11 @@ public class MyEventsFragment extends Fragment implements AdapterView.OnItemClic
         Log.d("ThisWasLogged ", "MyEventsFragment");
         footerView = CustomViews.getFooterView(inflater);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mGridView = rootView.findViewById(R.id.gridView);
         mGridView.setOnScrollListener(this);
         mGridView.addFooterView(footerView);
         footerView.setVisibility(View.GONE);
@@ -367,8 +367,8 @@ public class MyEventsFragment extends Fragment implements AdapterView.OnItemClic
                 } else {
                     mGridView.setVisibility(View.INVISIBLE);
                     rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                    TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                    SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById
+                    TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                    SelectableTextView errorMessage = rootView.findViewById
                             (R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     errorIcon.setText("\uf073");

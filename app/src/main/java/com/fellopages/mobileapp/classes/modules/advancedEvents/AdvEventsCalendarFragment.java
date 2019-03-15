@@ -104,7 +104,7 @@ public class AdvEventsCalendarFragment extends Fragment implements SwipeRefreshL
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.calendar_view_layout, container, false);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -121,19 +121,19 @@ public class AdvEventsCalendarFragment extends Fragment implements SwipeRefreshL
         month = _calendar.get(Calendar.MONTH) + 1;
         year = _calendar.get(Calendar.YEAR);
 
-        prevYear = (ImageView) rootView.findViewById(R.id.prevYear);
-        nextYear = (ImageView) rootView.findViewById(R.id.nextYear);
+        prevYear = rootView.findViewById(R.id.prevYear);
+        nextYear = rootView.findViewById(R.id.nextYear);
 
-        prevMonth = (TextView) rootView.findViewById(R.id.prevMonth);
-        nextMonth = (TextView) rootView.findViewById(R.id.nextMonth);
+        prevMonth = rootView.findViewById(R.id.prevMonth);
+        nextMonth = rootView.findViewById(R.id.nextMonth);
 
-        mSun = (TextView) rootView.findViewById(R.id.day_sun);
-        mMon = (TextView) rootView.findViewById(R.id.day_mon);
-        mTue = (TextView) rootView.findViewById(R.id.day_tue);
-        mWed = (TextView) rootView.findViewById(R.id.day_wed);
-        mThu = (TextView) rootView.findViewById(R.id.day_thu);
-        mFri = (TextView) rootView.findViewById(R.id.day_fri);
-        mSat = (TextView) rootView.findViewById(R.id.day_sat);
+        mSun = rootView.findViewById(R.id.day_sun);
+        mMon = rootView.findViewById(R.id.day_mon);
+        mTue = rootView.findViewById(R.id.day_tue);
+        mWed = rootView.findViewById(R.id.day_wed);
+        mThu = rootView.findViewById(R.id.day_thu);
+        mFri = rootView.findViewById(R.id.day_fri);
+        mSat = rootView.findViewById(R.id.day_sat);
 
         prevMonth.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         nextMonth.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
@@ -143,9 +143,9 @@ public class AdvEventsCalendarFragment extends Fragment implements SwipeRefreshL
         prevMonth.setOnClickListener(this);
         nextMonth.setOnClickListener(this);
 
-        currentMonth = (TextView) rootView.findViewById(R.id.currentMonth);
+        currentMonth = rootView.findViewById(R.id.currentMonth);
 
-        calendarView = (GridView) rootView.findViewById(R.id.calendar);
+        calendarView = rootView.findViewById(R.id.calendar);
 
         // Initialised
         adapter = new GridCellAdapter(mContext, R.id.calendar_day_gridcell, month, year);
@@ -262,8 +262,8 @@ public class AdvEventsCalendarFragment extends Fragment implements SwipeRefreshL
 
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            TextView errorMessage = (TextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            TextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf073");
             errorMessage.setText(mContext.getResources().getString(R.string.no_events));
@@ -566,7 +566,7 @@ public class AdvEventsCalendarFragment extends Fragment implements SwipeRefreshL
             }
 
             // Get a reference to the Day gridcell
-            gridcell = (TextView) row.findViewById(R.id.calendar_day_gridcell);
+            gridcell = row.findViewById(R.id.calendar_day_gridcell);
 
             String[] day_color = list.get(position).split("-");
             String theday = day_color[0];

@@ -137,8 +137,8 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         setContentView(R.layout.activity_profile_pages);
         Log.d("SoThisIsIt", "AdvEventsProfilePage");
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -163,8 +163,8 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         mBody = GlobalFunctions.getCreateResponse(intent.getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE));
 
          /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -190,7 +190,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
          */
 
         /* Create Back Button On Action Bar **/
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.blank_string));
@@ -198,21 +198,21 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         }
 
         //Header view
-        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        mMainContent = findViewById(R.id.main_content);
+        appBar = findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(this);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
 
         // Setup the Tabs
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        mSlidingTabs = (TabLayout) findViewById(R.id.slidingTabs);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mContentTitle = (TextView) findViewById(R.id.content_title);
-        mCoverImage = (ImageView) findViewById(R.id.coverImage);
-        mProfileImage = (ImageView) findViewById(R.id.profile_image);
-        mCoverImageMenus = (TextView) findViewById(R.id.cover_image_menus);
-        mProfileImageMenus = (TextView) findViewById(R.id.profile_image_menus);
-        mLikeCount = (TextView) findViewById(R.id.like_count);
+        viewPager = findViewById(R.id.pager);
+        mSlidingTabs = findViewById(R.id.slidingTabs);
+        mProgressBar = findViewById(R.id.progressBar);
+        mContentTitle = findViewById(R.id.content_title);
+        mCoverImage = findViewById(R.id.coverImage);
+        mProfileImage = findViewById(R.id.profile_image);
+        mCoverImageMenus = findViewById(R.id.cover_image_menus);
+        mProfileImageMenus = findViewById(R.id.profile_image_menus);
+        mLikeCount = findViewById(R.id.like_count);
         mLikeLabel = findViewById(R.id.like_label);
         mLikeButton = findViewById(R.id.like_button);
         mLikeIcon = findViewById(R.id.like_icon);

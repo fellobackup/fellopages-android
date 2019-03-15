@@ -338,11 +338,11 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
             super(view);
             view.setClickable(true);
             container = view;
-            userImage = (ImageView) view.findViewById(R.id.userImage);
-            mOptionIcon = (ImageView) view.findViewById(R.id.optionIcon);
-            mNotificationTitle = (TextView) view.findViewById(R.id.notificationTitle);
-            mDateView = (TextView) view.findViewById(R.id.dateIconView);
-            mStickerOption = (ImageView) view.findViewById(R.id.stickerOption);
+            userImage = view.findViewById(R.id.userImage);
+            mOptionIcon = view.findViewById(R.id.optionIcon);
+            mNotificationTitle = view.findViewById(R.id.notificationTitle);
+            mDateView = view.findViewById(R.id.dateIconView);
+            mStickerOption = view.findViewById(R.id.stickerOption);
         }
     }
 

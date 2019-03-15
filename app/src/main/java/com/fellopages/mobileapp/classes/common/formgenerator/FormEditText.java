@@ -210,12 +210,12 @@ public class FormEditText extends FormWidget implements TextWatcher, AdapterView
     private void getViews(View configFieldView, String description) {
 
         // Getting label, description and field value views.
-        TextView tvLabel = (TextView) configFieldView.findViewById(R.id.view_label);
+        TextView tvLabel = configFieldView.findViewById(R.id.view_label);
         tvLabel.setTypeface(Typeface.DEFAULT_BOLD);
-        TextView tvDescription = (TextView) configFieldView.findViewById(R.id.view_description);
-        etFieldValue = (EditText) configFieldView.findViewById(R.id.field_value);
-        tvLocationField = (AppCompatAutoCompleteTextView) configFieldView.findViewById(R.id.location_field_value);
-        btnCheckUrl = (BaseButton) configFieldView.findViewById(R.id.btn_check_url);
+        TextView tvDescription = configFieldView.findViewById(R.id.view_description);
+        etFieldValue = configFieldView.findViewById(R.id.field_value);
+        tvLocationField = configFieldView.findViewById(R.id.location_field_value);
+        btnCheckUrl = configFieldView.findViewById(R.id.btn_check_url);
 
         // Showing auto complete text view only for the location.
         if (mFieldName.contains("location")) {
@@ -243,13 +243,13 @@ public class FormEditText extends FormWidget implements TextWatcher, AdapterView
             mSelectedFriendsMap = new HashMap<>();
             mShowNonSelectedFriend = new HashMap<>();
 
-            pbLoadFriendList = (ProgressBar) configFieldView.findViewById(R.id.sentToLoadingProgressBar);
-            mFriendNestedListView = (NestedListView) configFieldView.findViewById(R.id.friendListView);
+            pbLoadFriendList = configFieldView.findViewById(R.id.sentToLoadingProgressBar);
+            mFriendNestedListView = configFieldView.findViewById(R.id.friendListView);
             mAddPeopleAdapter = new AddPeopleAdapter(mContext, R.layout.list_friends, mAddPeopleList);
             mFriendNestedListView.setAdapter(mAddPeopleAdapter);
             mFriendNestedListView.setVisibility(View.VISIBLE);
 
-            mAddedFriendRecyclerView = (RecyclerView) configFieldView.findViewById(R.id.addedFriendList);
+            mAddedFriendRecyclerView = configFieldView.findViewById(R.id.addedFriendList);
             LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
             mAddedFriendRecyclerView.setLayoutManager(layoutManager);
             mSelectedFriendListAdapter = new SelectedFriendListAdapter(mSelectedFriendList,

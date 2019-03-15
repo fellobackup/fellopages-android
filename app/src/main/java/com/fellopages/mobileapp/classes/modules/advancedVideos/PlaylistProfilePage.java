@@ -182,39 +182,39 @@ public class PlaylistProfilePage extends AppCompatActivity implements AppBarLayo
 
         // Getting header views.
         mRootView = findViewById(R.id.main_layout);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.blank_string));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        fabPlayAll = (FloatingActionButton) findViewById(R.id.play_all_btn);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        fabPlayAll = findViewById(R.id.play_all_btn);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        AppBarLayout appBarLayout = findViewById(R.id.appbar);
         appBarLayout.addOnOffsetChangedListener(this);
-        tvToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        tvToolBarTitle = findViewById(R.id.toolbar_title);
         tvToolBarTitle.setSelected(true);
-        ivCoverImage = (ImageView) findViewById(R.id.cover_image);
-        tvTitle = (TextView) findViewById(R.id.content_title);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        ivCoverImage = findViewById(R.id.cover_image);
+        tvTitle = findViewById(R.id.content_title);
+        mProgressBar = findViewById(R.id.progressBar);
 
         toolBarBackgroundDrawable = mToolbar.getBackground();
         layoutParams = (AppBarLayout.LayoutParams) collapsingToolbar.getLayoutParams();
-        rlTitleBlock = (RelativeLayout) findViewById(R.id.title_block);
-        rlVideoPlayer = (RelativeLayout) findViewById(R.id.player_layout);
-        webVideoPlayer = (WebView) findViewById(R.id.webView);
-        videoViewPlayer = (android.widget.VideoView) findViewById(R.id.video_player);
+        rlTitleBlock = findViewById(R.id.title_block);
+        rlVideoPlayer = findViewById(R.id.player_layout);
+        webVideoPlayer = findViewById(R.id.webView);
+        videoViewPlayer = findViewById(R.id.video_player);
         mController = new MediaController(this);
         mController.setAnchorView(videoViewPlayer);
         videoViewPlayer.setMediaController(mController);
-        tvVideoMode = (TextView) findViewById(R.id.video_mode);
-        mVideoLoadingProgress = (ProgressBar) findViewById(R.id.loadingProgress);
+        tvVideoMode = findViewById(R.id.video_mode);
+        mVideoLoadingProgress = findViewById(R.id.loadingProgress);
         fabPlayAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

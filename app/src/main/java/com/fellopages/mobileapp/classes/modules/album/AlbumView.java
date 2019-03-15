@@ -144,8 +144,8 @@ public class AlbumView extends AppCompatActivity implements View.OnClickListener
 
         /* Create Back Button On Action Bar **/
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
@@ -211,34 +211,34 @@ public class AlbumView extends AppCompatActivity implements View.OnClickListener
         Like and Unlike Fields...
          */
 
-        mLikeCountTextView = (ActionIconThemedTextView) findViewById(R.id.likeCount);
-        mCommentCountTextView = (ActionIconThemedTextView) findViewById(R.id.commentCount);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        mLikeUnlikeText = (ActionIconThemedTextView) findViewById(R.id.likeUnlikeText);
+        mLikeCountTextView = findViewById(R.id.likeCount);
+        mCommentCountTextView = findViewById(R.id.commentCount);
+        mReactionIcon = findViewById(R.id.reactionIcon);
+        mLikeUnlikeText = findViewById(R.id.likeUnlikeText);
 
-        LinearLayout mLikeBlock = (LinearLayout) findViewById(R.id.likeBlock);
-        LinearLayout mCommentBlock = (LinearLayout) findViewById(R.id.commentBlock);
-        LinearLayout mLikeCommentBlock = (LinearLayout) findViewById(R.id.likeCommentBlock);
+        LinearLayout mLikeBlock = findViewById(R.id.likeBlock);
+        LinearLayout mCommentBlock = findViewById(R.id.commentBlock);
+        LinearLayout mLikeCommentBlock = findViewById(R.id.likeCommentBlock);
 
         mLikeBlock.setOnClickListener(this);
         mLikeBlock.setOnLongClickListener(this);
         mCommentBlock.setOnClickListener(this);
         mLikeCommentBlock.setOnClickListener(this);
 
-        mLikeCommentContent = (LinearLayout) findViewById(R.id.likeCommentContent);
+        mLikeCommentContent = findViewById(R.id.likeCommentContent);
 
         //Getting all the views
-        mMainLayout = (CoordinatorLayout) findViewById(R.id.main_content);
-        mCoverImageLayout = (FrameLayout) findViewById(R.id.cover_image_layout);
-        coverImageView = (ImageView) findViewById(R.id.backdropImage);
-        mContentTitle = (SelectableTextView) findViewById(R.id.content_title);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mBottomToolBar = (SplitToolbar) findViewById(R.id.toolbarBottom);
-        mDateView = (SelectableTextView) findViewById(R.id.dateView);
-        mViewCount = (SelectableTextView) findViewById(R.id.viewDetail);
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        mMainLayout = findViewById(R.id.main_content);
+        mCoverImageLayout = findViewById(R.id.cover_image_layout);
+        coverImageView = findViewById(R.id.backdropImage);
+        mContentTitle = findViewById(R.id.content_title);
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mBottomToolBar = findViewById(R.id.toolbarBottom);
+        mDateView = findViewById(R.id.dateView);
+        mViewCount = findViewById(R.id.viewDetail);
+        appBar = findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(this);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
 
         // Hiding cover image layout.
         if ((bundle != null && !bundle.isEmpty()) || mSubjectType.equals("sitereview_album")) {
@@ -289,7 +289,7 @@ public class AlbumView extends AppCompatActivity implements View.OnClickListener
                     mAppConst.showProgressDialog();
                     mAppConst.postJsonResponseForUrl(actionUrl, postParams, new OnResponseListener() {
                         @Override
-                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                        public void onTaskCompleted(JSONObject jsonObject) {
                             launchUserProfileOnSuccessOrError(successMessage);
                         }
 
@@ -361,7 +361,7 @@ public class AlbumView extends AppCompatActivity implements View.OnClickListener
                         isLoading = true;
                         mAppConst.getJsonResponseFromUrl(mLoadingImageUrl, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
                                 mPhotoUrls.remove(mPhotoUrls.size() - 1);
                                 recyclerViewAdapter.notifyItemRemoved(mPhotoUrls.size());
                                 mBody = jsonObject;
@@ -422,7 +422,7 @@ public class AlbumView extends AppCompatActivity implements View.OnClickListener
                     "&subject_id=" + mSubjectId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     mContentReactions = mReactionsObject.optJSONObject("feed_reactions");
@@ -1175,7 +1175,7 @@ public class AlbumView extends AppCompatActivity implements View.OnClickListener
                     if (!isLike) {
                         mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                             }
 

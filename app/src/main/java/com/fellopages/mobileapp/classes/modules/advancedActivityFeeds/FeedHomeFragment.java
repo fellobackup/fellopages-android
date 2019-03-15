@@ -124,14 +124,14 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         mContext = getActivity();
         mAppConst = new AppConstant(mContext);
         rootView = inflater.inflate(R.layout.view_pager, null);
-        mFabCreate = (FloatingActionButton) getActivity().findViewById(R.id.create_fab);
+        mFabCreate = getActivity().findViewById(R.id.create_fab);
 
 
 
-        home = (ImageButton) getActivity().findViewById(R.id.home_button);
-        friend = (ImageButton) getActivity().findViewById(R.id.friend_tab);
-        message = (ImageButton) getActivity().findViewById(R.id.msg_tab);
-        notification = (ImageButton) getActivity().findViewById(R.id.notification_tab);
+        home = getActivity().findViewById(R.id.home_button);
+        friend = getActivity().findViewById(R.id.friend_tab);
+        message = getActivity().findViewById(R.id.msg_tab);
+        notification = getActivity().findViewById(R.id.notification_tab);
         home.setOnClickListener(this);
         friend.setOnClickListener(this);
         message.setOnClickListener(this);
@@ -139,12 +139,12 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
 
         mFabCreate.setVisibility(View.GONE);
         //Setting up badge view for notification count
-        requestBadge = (BadgeView) getActivity().findViewById(R.id.request_indicator);
-        messageBadge = (BadgeView) getActivity().findViewById(R.id.message_indicator);
-        notificationBadge = (BadgeView) getActivity().findViewById(R.id.notification_indicator);
+        requestBadge = getActivity().findViewById(R.id.request_indicator);
+        messageBadge = getActivity().findViewById(R.id.message_indicator);
+        notificationBadge = getActivity().findViewById(R.id.notification_indicator);
         updateNotificationCounts(false);
 
-        pager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        pager = rootView.findViewById(R.id.viewpager);
 
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -264,7 +264,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "notifications/new-updates",
                 new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
                         if (jsonObject != null) {
 
                             PreferencesUtils.updateNotificationPreferences(mContext,

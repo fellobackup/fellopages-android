@@ -433,17 +433,17 @@ public class PeopleSuggestionAdapter extends RecyclerView.
         public PeopleSuggestionViewHolder(View view, String suggestionViewType) {
             super(view);
             mContainer = view;
-            ivUserProfile = (ImageView) view.findViewById(R.id.user_profile_image);
-            tvUserName = (TextView) view.findViewById(R.id.user_name);
-            tvMutualFriendCount = (TextView) view.findViewById(R.id.mutual_friend_count);
-            tvAddFriend = (TextView) view.findViewById(R.id.add_friend);
-            tvRemoveSuggestion = (TextView) view.findViewById(R.id.remove_suggestion);
-            tvCancelRequest = (TextView) view.findViewById(R.id.cancel_request);
-            pbLoading = (ProgressBar) view.findViewById(R.id.progressBar);
+            ivUserProfile = view.findViewById(R.id.user_profile_image);
+            tvUserName = view.findViewById(R.id.user_name);
+            tvMutualFriendCount = view.findViewById(R.id.mutual_friend_count);
+            tvAddFriend = view.findViewById(R.id.add_friend);
+            tvRemoveSuggestion = view.findViewById(R.id.remove_suggestion);
+            tvCancelRequest = view.findViewById(R.id.cancel_request);
+            pbLoading = view.findViewById(R.id.progressBar);
             if (suggestionViewType.equals("feed_suggestion")) {
-                llAddFriend = (LinearLayout) view.findViewById(R.id.add_friend_layout);
-                llRemoveSuggestion = (LinearLayout) view.findViewById(R.id.remove_suggestion_layout);
-                llCancelRequest = (LinearLayout) view.findViewById(R.id.cancel_request_layout);
+                llAddFriend = view.findViewById(R.id.add_friend_layout);
+                llRemoveSuggestion = view.findViewById(R.id.remove_suggestion_layout);
+                llCancelRequest = view.findViewById(R.id.cancel_request_layout);
             }
         }
     }
@@ -454,8 +454,8 @@ public class PeopleSuggestionAdapter extends RecyclerView.
 
         public ProgressViewHolder(View v) {
             super(v);
-            progressBar = (ProgressBar) v.findViewById(R.id.progressBar);
-            mFooterText = (TextView) v.findViewById(R.id.footer_text);
+            progressBar = v.findViewById(R.id.progressBar);
+            mFooterText = v.findViewById(R.id.footer_text);
         }
     }
 

@@ -188,9 +188,9 @@ public class PhotoFragment extends Fragment implements SwipeRefreshLayout.OnRefr
      */
     public void getViews() {
 
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mProgressBar = mRootView.findViewById(R.id.progressBar);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mSwipeRefreshLayout.getLayoutParams();
@@ -198,8 +198,8 @@ public class PhotoFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         mSwipeRefreshLayout.setLayoutParams(layoutParams);
 
         // Adding no data view at top of the recycler view.
-        mNoPhotoMessage = (SelectableTextView) mInfoView.findViewById(R.id.no_data_msg);
-        RelativeLayout mainView = (RelativeLayout) mRootView.findViewById(R.id.main_view_recycler);
+        mNoPhotoMessage = mInfoView.findViewById(R.id.no_data_msg);
+        RelativeLayout mainView = mRootView.findViewById(R.id.main_view_recycler);
         mainView.addView(mInfoView);
         CustomViews.addHeaderView(R.id.fragment_main_view, mSwipeRefreshLayout);
     }

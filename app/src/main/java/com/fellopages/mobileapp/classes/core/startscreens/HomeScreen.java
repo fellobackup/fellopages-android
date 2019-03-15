@@ -88,8 +88,8 @@ public class HomeScreen extends FragmentActivity implements View.OnClickListener
         setContentView(R.layout.activity_home_screen);
         callbackManager = CallbackManager.Factory.create();
         mainView = findViewById(R.id.main_content);
-        facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
-        twitterLoginButton= (TwitterLoginButton) findViewById(R.id.twitter_login_button);
+        facebookLoginButton = findViewById(R.id.facebook_login_button);
+        twitterLoginButton= findViewById(R.id.twitter_login_button);
 
         // Hide Facebook button when facebook_app_id is null or Empty.
         if (!getResources().getString(R.string.facebook_app_id).isEmpty()) {
@@ -116,18 +116,18 @@ public class HomeScreen extends FragmentActivity implements View.OnClickListener
         facebookLoginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));
 
 
-        mBrowseAsGuest = (TextView) findViewById(R.id.browse_as_guest);
+        mBrowseAsGuest = findViewById(R.id.browse_as_guest);
         mBrowseAsGuest.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         mBrowseAsGuest.setOnClickListener(this);
 
-        mChooseLanguage = (TextView) findViewById(R.id.choose_language);
+        mChooseLanguage = findViewById(R.id.choose_language);
         mChooseLanguage.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         mChooseLanguage.setOnClickListener(this);
 
-        mSignUpBtn = (Button) findViewById(R.id.signup_button);
+        mSignUpBtn = findViewById(R.id.signup_button);
         mSignUpBtn.setOnClickListener(this);
 
-        mSignInBtn = (Button) findViewById(R.id.signin_button);
+        mSignInBtn = findViewById(R.id.signin_button);
         mSignInBtn.setOnClickListener(this);
         mSignInBtn.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding),
                 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
@@ -135,7 +135,7 @@ public class HomeScreen extends FragmentActivity implements View.OnClickListener
                 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
 
         mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(this.mPagerAdapter);
 
         setBrowseGuestAndLanguageOptions();

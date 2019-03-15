@@ -72,10 +72,10 @@ public class CommunityAdsHolder extends RecyclerView.ViewHolder {
     public static void inflateAd(final CommunityAdsList mCommunityAd,
                                  final View adView, final Context context, final int adPosition) {
         // Create native UI using the ad metadata.
-        TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+        TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
         nativeAdTitle.setText(mCommunityAd.getmCommunityAdTitle());
 
-        TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+        TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
         if(mCommunityAd.getmCommunityAdBody() != null && !mCommunityAd.getmCommunityAdBody().isEmpty()){
             nativeAdBody.setVisibility(View.VISIBLE);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -90,7 +90,7 @@ public class CommunityAdsHolder extends RecyclerView.ViewHolder {
         ImageLoader imageLoader = new ImageLoader(context);
 
         if(adView.findViewById(R.id.native_ad_cover) != null){
-            ImageView nativeAdCover = (ImageView) adView.findViewById(R.id.native_ad_cover);
+            ImageView nativeAdCover = adView.findViewById(R.id.native_ad_cover);
             imageLoader.setImageUrl(mCommunityAd.getmCommunityAdImage(), nativeAdCover);
             nativeAdCover.setScaleType(ImageView.ScaleType.FIT_CENTER);
             if(adView.findViewById(R.id.advertiser_layout) != null)
@@ -99,7 +99,7 @@ public class CommunityAdsHolder extends RecyclerView.ViewHolder {
 
         // Downloading and setting the ad icon.
         if(adView.findViewById(R.id.native_ad_icon) != null ) {
-            ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+            ImageView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
             nativeAdIcon.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageLoader.setImageUrl(mCommunityAd.getmCommunityAdImage(), nativeAdIcon);
         }
@@ -150,7 +150,7 @@ public class CommunityAdsHolder extends RecyclerView.ViewHolder {
                             AppConstant appConstant = new AppConstant(context);
                             appConstant.getJsonResponseFromUrl(removeAdsUrl, new OnResponseListener() {
                                 @Override
-                                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                public void onTaskCompleted(JSONObject jsonObject) {
 
                                     PreferencesUtils.updateReportAdsFormArray(context, jsonObject.optJSONArray("form"));
 

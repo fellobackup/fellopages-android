@@ -273,8 +273,8 @@ public class FormMultiOptions extends FormWidget implements View.OnClickListener
                     EditText etMinAge = null, etMaxAge = null;
                     int minAge = 0, maxAge = 0;
                     if (minAgeConfigView != null && maxAgeConfigView != null) {
-                        etMinAge = (EditText) minAgeConfigView.findViewById(R.id.field_value);
-                        etMaxAge = (EditText) maxAgeConfigView.findViewById(R.id.field_value);
+                        etMinAge = minAgeConfigView.findViewById(R.id.field_value);
+                        etMaxAge = maxAgeConfigView.findViewById(R.id.field_value);
                         minAge = etMinAge.getTag() != null ? Integer.parseInt(etMinAge.getTag().toString()) : 0;
                         maxAge = etMaxAge.getTag() != null ? Integer.parseInt(etMaxAge.getTag().toString()) : 0;
                     }
@@ -344,13 +344,13 @@ public class FormMultiOptions extends FormWidget implements View.OnClickListener
     private void getViews(View configFieldView, String label, String description) {
 
         // Getting label, description and field value views.
-        TextView tvLabel = (TextView) configFieldView.findViewById(R.id.view_label);
+        TextView tvLabel = configFieldView.findViewById(R.id.view_label);
         tvLabel.setTypeface(Typeface.DEFAULT_BOLD);
-        TextView tvDescription = (TextView) configFieldView.findViewById(R.id.view_description);
-        LinearLayout llTitleFields = (LinearLayout) configFieldView.findViewById(R.id.title_fields_layout);
-        etFieldValue = (EditText) configFieldView.findViewById(R.id.field_value);
+        TextView tvDescription = configFieldView.findViewById(R.id.view_description);
+        LinearLayout llTitleFields = configFieldView.findViewById(R.id.title_fields_layout);
+        etFieldValue = configFieldView.findViewById(R.id.field_value);
         etFieldValue.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        tvError = (TextView) configFieldView.findViewById(R.id.error_view);
+        tvError = configFieldView.findViewById(R.id.error_view);
 
         // Setting up click listener on form view.
         // Setting up click listener on form view.
@@ -708,7 +708,7 @@ public class FormMultiOptions extends FormWidget implements View.OnClickListener
 
     private void checkMonthlyTypeRepeatEvent() {
 
-        isMonthlyTypeCheck = (AppCompatCheckedTextView) FormActivity._layout.findViewById(R.id.monthly_type);
+        isMonthlyTypeCheck = FormActivity._layout.findViewById(R.id.monthly_type);
         if (isMonthlyTypeCheck != null && !isRemoveRepeatEvent && !sIsChangedMonthlyField) {
             sIsChangedMonthlyField = true;
             sIsEventRepeatTypeMonthly = true;
@@ -838,7 +838,7 @@ public class FormMultiOptions extends FormWidget implements View.OnClickListener
                     /*Change type and field of monthly type repeat event on change checkbox value */
 
                         if (key.equals("monthly") && !sIsChangedMonthlyField) {
-                            final AppCompatCheckedTextView isMonthlyTypeCheck1 = (AppCompatCheckedTextView) FormActivity._layout.findViewById(R.id.monthly_type);
+                            final AppCompatCheckedTextView isMonthlyTypeCheck1 = FormActivity._layout.findViewById(R.id.monthly_type);
                             for (int i = 0; i < mFormWidgetList.size(); i++) {
                                 if (mFormWidgetList.get(i).getPropertyName().equals("repeat_week") || mFormWidgetList.get(i).getPropertyName().equals("repeat_weekday")) {
                                     mFormWidgetList.get(i).getView().setVisibility(View.VISIBLE);
@@ -1435,7 +1435,7 @@ public class FormMultiOptions extends FormWidget implements View.OnClickListener
             case R.id.field_value:
             case R.id.form_main_view:
                 View inflateView = mLayoutInflater.inflate(R.layout.fragmen_cart, null);
-                RecyclerView recyclerView = (RecyclerView) inflateView.findViewById(R.id.recycler_view);
+                RecyclerView recyclerView = inflateView.findViewById(R.id.recycler_view);
                 inflateView.findViewById(R.id.cart_bottom).setVisibility(View.GONE);
                 recyclerView.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
                 recyclerView.setHasFixedSize(true);

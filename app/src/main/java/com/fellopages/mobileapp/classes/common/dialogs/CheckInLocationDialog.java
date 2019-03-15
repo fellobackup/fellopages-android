@@ -143,28 +143,28 @@ public class CheckInLocationDialog extends Dialog implements TextWatcher,
         // Setting adapter.
         mCheckInList = new ArrayList<>();
         mCheckInAdapter = new CheckInAdapter(mContext, R.layout.checkin_list, mCheckInList);
-        ListView locationsListView = (ListView) findViewById(R.id.listView);
+        ListView locationsListView = findViewById(R.id.listView);
         locationsListView.setAdapter(mCheckInAdapter);
         locationsListView.setOnItemClickListener(this);
 
         // Getting views.
         findViewById(R.id.toolbar).setVisibility(View.GONE);
-        TextView searchIcon = (TextView) findViewById(R.id.searchIcon);
+        TextView searchIcon = findViewById(R.id.searchIcon);
         searchIcon.setVisibility(View.VISIBLE);
         searchIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         searchIcon.setText("\uf002");
 
-        mProgressBar = (ProgressBar) findViewById(R.id.loadingBar);
-        mSearchLocationBox = (EditText) findViewById(R.id.searchBox);
+        mProgressBar = findViewById(R.id.loadingBar);
+        mSearchLocationBox = findViewById(R.id.searchBox);
         mSearchLocationBox.setHint(mContext.getResources().getString(R.string.search_for_places));
         mSearchLocationBox.addTextChangedListener(this);
 
-        mMyLocationButton = (LinearLayout) findViewById(R.id.my_location_view);
+        mMyLocationButton = findViewById(R.id.my_location_view);
 
-        mRemoveLocationButton = (TextView) findViewById(R.id.removeLocationButton);
+        mRemoveLocationButton = findViewById(R.id.removeLocationButton);
         mRemoveLocationButton.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mRemoveLocationButton.setText("\uf00d");
-        mSubmitLocation = (TextView) findViewById(R.id.submitLocation);
+        mSubmitLocation = findViewById(R.id.submitLocation);
         mSubmitLocation.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mSubmitLocation.setText("\uf00c");
 

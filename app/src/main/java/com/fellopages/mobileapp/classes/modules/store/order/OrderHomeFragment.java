@@ -53,8 +53,8 @@ public class OrderHomeFragment extends Fragment implements TabLayout.OnTabSelect
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.view_pager, null);
-        pager = (ViewPager) rootView.findViewById(R.id.viewpager);
-        tabHost = (TabLayout) getActivity().findViewById(R.id.materialTabHost);
+        pager = rootView.findViewById(R.id.viewpager);
+        tabHost = getActivity().findViewById(R.id.materialTabHost);
         tabHost.setVisibility(View.VISIBLE);
         tabHost.setTabMode(TabLayout.MODE_FIXED);
 

@@ -134,8 +134,8 @@ public class BrowseStoreFragment extends Fragment implements SwipeRefreshLayout.
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.recycler_view_layout, container,false);
         mHeaderView = inflater.inflate(R.layout.layout_category_block, null, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setRefreshing(false);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -184,14 +184,14 @@ public class BrowseStoreFragment extends Fragment implements SwipeRefreshLayout.
         // getting header views, when it is laoded for category page.
         if(isCategoryBased){
             postParams = new HashMap<>();
-            subCategoryLayout = (CardView) mHeaderView.findViewById(R.id.categoryFilterLayout);
-            subSubCategoryLayout = (CardView) mHeaderView.findViewById(R.id.subCategoryFilterLayout);
-            subCategorySpinner = (Spinner) subCategoryLayout.findViewById(R.id.filter_view);
-            subSubCategorySpinner = (Spinner) subSubCategoryLayout.findViewById(R.id.filter_view);
+            subCategoryLayout = mHeaderView.findViewById(R.id.categoryFilterLayout);
+            subSubCategoryLayout = mHeaderView.findViewById(R.id.subCategoryFilterLayout);
+            subCategorySpinner = subCategoryLayout.findViewById(R.id.filter_view);
+            subSubCategorySpinner = subSubCategoryLayout.findViewById(R.id.filter_view);
             mHeaderView.findViewById(R.id.mlt_category_block).setVisibility(View.VISIBLE);
             mHeaderView.findViewById(R.id.toolbar).setVisibility(View.GONE);
             // Adding header view to main view.
-            RelativeLayout mainView = (RelativeLayout) rootView.findViewById(R.id.main_view_recycler);
+            RelativeLayout mainView = rootView.findViewById(R.id.main_view_recycler);
             mainView.addView(mHeaderView);
             CustomViews.addHeaderView(R.id.mlt_category_block, mSwipeRefreshLayout);
             mHeaderView.findViewById(R.id.mlt_category_block).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -296,7 +296,7 @@ public class BrowseStoreFragment extends Fragment implements SwipeRefreshLayout.
 
             mAppConst.getJsonResponseFromUrl(mBrowseStoreUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     if (snackbar != null && snackbar.isShown()) {
                         snackbar.dismiss();
@@ -442,8 +442,8 @@ public class BrowseStoreFragment extends Fragment implements SwipeRefreshLayout.
 
             } else {
                 rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+                TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
                 errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                 errorIcon.setText("\uf187");
                 errorMessage.setText(mContext.getResources().getString(R.string.no_store_available));

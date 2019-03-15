@@ -40,7 +40,7 @@ public class VideoRequestHandler extends RequestHandler {
     }
 
     @Override
-    public Result load(Request data, int arg1) throws IOException {
+    public Result load(Request data, int arg1) {
         Bitmap bm = ThumbnailUtils.createVideoThumbnail(data.uri.getPath(), MediaStore.Images.Thumbnails.MINI_KIND);
         // Storing the bitmap into cache, so that next time it will show the thumbnail from cache.
         if (bm != null) {

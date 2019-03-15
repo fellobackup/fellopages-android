@@ -159,14 +159,14 @@ public class ViewItem extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_item);
 
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        appBar = findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(this);
         mProfileFieldMap = new LinkedHashMap<>();
 
         /* Create Back Button On Action Bar **/
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
 
         setSupportActionBar(mToolbar);
@@ -196,17 +196,17 @@ public class ViewItem extends AppCompatActivity implements View.OnClickListener,
 
         /* Like and Unlike Fields...*/
 
-        mLikeCountTextView = (TextView) findViewById(R.id.likeCount);
-        mCommentCountTextView = (TextView) findViewById(R.id.commentCount);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        mLikeUnlikeText = (ActionIconThemedTextView) findViewById(R.id.likeUnlikeText);
+        mLikeCountTextView = findViewById(R.id.likeCount);
+        mCommentCountTextView = findViewById(R.id.commentCount);
+        mReactionIcon = findViewById(R.id.reactionIcon);
+        mLikeUnlikeText = findViewById(R.id.likeUnlikeText);
         mCommentCountTextView.setTypeface(fontIcon);
         mLikeCountTextView.setTypeface(fontIcon);
         mLikeUnlikeText.setTypeface(fontIcon);
 
-        LinearLayout mLikeBlock = (LinearLayout) findViewById(R.id.likeBlock);
-        LinearLayout mCommentBlock = (LinearLayout) findViewById(R.id.commentBlock);
-        LinearLayout mLikeCommentBlock = (LinearLayout) findViewById(R.id.likeCommentBlock);
+        LinearLayout mLikeBlock = findViewById(R.id.likeBlock);
+        LinearLayout mCommentBlock = findViewById(R.id.commentBlock);
+        LinearLayout mLikeCommentBlock = findViewById(R.id.likeCommentBlock);
 
         mLikeBlock.setOnClickListener(this);
         mReactionsEnabled = PreferencesUtils.getReactionsEnabled(mContext);
@@ -216,49 +216,49 @@ public class ViewItem extends AppCompatActivity implements View.OnClickListener,
         mCommentBlock.setOnClickListener(this);
         mLikeCommentBlock.setOnClickListener(this);
 
-        mLikeCommentContent = (LinearLayout) findViewById(R.id.likeCommentContent);
+        mLikeCommentContent = findViewById(R.id.likeCommentContent);
 
-        mNestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
-        mSplitToolBar = (SplitToolbar) findViewById(R.id.toolbarBottom);
+        mNestedScrollView = findViewById(R.id.nestedScrollView);
+        mSplitToolBar = findViewById(R.id.toolbarBottom);
 
-        mBlogLinearLayout = (LinearLayout) findViewById(R.id.blog_linear_layout);
+        mBlogLinearLayout = findViewById(R.id.blog_linear_layout);
 
         //Getting all the views
         mMainContent = findViewById(R.id.main_content);
-        mViewTitle = (SelectableTextView) findViewById(R.id.view_title);
-        mViewDescription = (WebView) findViewById(R.id.view_description);
+        mViewTitle = findViewById(R.id.view_title);
+        mViewDescription = findViewById(R.id.view_description);
         mViewDescription.setVisibility(View.VISIBLE);
 //        mViewDescription.setPadding(1,1,1,mContext.getResources().getDimensionPixelSize(R.dimen.ticket_fab_bottom_margin));
-        coverImagePager = (ViewPager) findViewById(R.id.backdrop);
-        mCategoryView = (SelectableTextView) findViewById(R.id.category_view);
-        mCreatorView = (SelectableTextView) findViewById(R.id.creator_view);
-        mPhotoCountIcon = (TextView) findViewById(R.id.image_count);
-        mDateView = (SelectableTextView) findViewById(R.id.date_view);
+        coverImagePager = findViewById(R.id.backdrop);
+        mCategoryView = findViewById(R.id.category_view);
+        mCreatorView = findViewById(R.id.creator_view);
+        mPhotoCountIcon = findViewById(R.id.image_count);
+        mDateView = findViewById(R.id.date_view);
         mCategoryView.setOnClickListener(this);
         mCreatorView.setOnClickListener(this);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mContentTitle = (SelectableTextView) findViewById(R.id.content_title);
-        detailView = (LinearLayout) findViewById(R.id.detailLayout);
-        carouselView = (RelativeLayout) findViewById(R.id.carouselLayout);
-        blogTitleView = (LinearLayout) findViewById(R.id.blog_titleView);
-        profileFieldLayout = (GridLayout) findViewById(R.id.profileFieldLayout);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        mContentTitle = findViewById(R.id.content_title);
+        detailView = findViewById(R.id.detailLayout);
+        carouselView = findViewById(R.id.carouselLayout);
+        blogTitleView = findViewById(R.id.blog_titleView);
+        profileFieldLayout = findViewById(R.id.profileFieldLayout);
 
-        mOwnerDetailView = (LinearLayout) findViewById(R.id.ownerDetailView);
+        mOwnerDetailView = findViewById(R.id.ownerDetailView);
         mOwnerDetailView.setVisibility(View.GONE);
-        mOwnerImage = (BezelImageView) findViewById(R.id.owner_image);
-        mOwnerTitle = (SelectableTextView) findViewById(R.id.owner_title);
+        mOwnerImage = findViewById(R.id.owner_image);
+        mOwnerTitle = findViewById(R.id.owner_title);
 
-        mCategoryName = (SelectableTextView) findViewById(R.id.categoryTitle);
-        categoryIcon = (TextView) findViewById(R.id.categoryIcon);
+        mCategoryName = findViewById(R.id.categoryTitle);
+        categoryIcon = findViewById(R.id.categoryIcon);
 
         mOwnerTitle.setOnClickListener(this);
         mCategoryName.setOnClickListener(this);
         mOwnerDetailView.setOnClickListener(this);
 
 
-        leftArrow = (ImageView) findViewById(R.id.left_arrow);
-        rightArrow = (ImageView) findViewById(R.id.right_arrow);
+        leftArrow = findViewById(R.id.left_arrow);
+        rightArrow = findViewById(R.id.right_arrow);
 
         categoryIcon.setTypeface(fontIcon);
         categoryIcon.setText("\uf097");
@@ -376,7 +376,7 @@ public class ViewItem extends AppCompatActivity implements View.OnClickListener,
                     "&subject_id=" + mSubjectId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     mContentReactions = mReactionsObject.optJSONObject("feed_reactions");
@@ -1000,7 +1000,7 @@ public class ViewItem extends AppCompatActivity implements View.OnClickListener,
                     if (!isLike) {
                         mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                             }
 

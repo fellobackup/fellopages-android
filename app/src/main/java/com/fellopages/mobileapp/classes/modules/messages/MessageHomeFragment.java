@@ -47,9 +47,9 @@ public class MessageHomeFragment extends Fragment implements TabLayout.OnTabSele
 
         mContext = getActivity();
         rootView = inflater.inflate(R.layout.view_pager, null);
-        pager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        pager = rootView.findViewById(R.id.viewpager);
 
-        tabHost = (TabLayout) getActivity().findViewById(R.id.materialTabHost);
+        tabHost = getActivity().findViewById(R.id.materialTabHost);
         tabHost.setVisibility(View.VISIBLE);
         tabHost.setTabMode(TabLayout.MODE_FIXED);
         if (pager != null) {

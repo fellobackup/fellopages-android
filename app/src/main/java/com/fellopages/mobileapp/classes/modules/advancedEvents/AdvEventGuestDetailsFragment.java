@@ -219,20 +219,20 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
     public void getViews() {
         // hide the rsvp filter
         // TODO: remove this code if needed to apply rsvp again
-        filterLayout = (CardView) rootView.findViewById(R.id.categoryFilterLayout);
+        filterLayout = rootView.findViewById(R.id.categoryFilterLayout);
         filterLayout.setVisibility(View.GONE);
 
-        spinner = (Spinner) rootView.findViewById(R.id.filter_view);
-        mListView = (ListView) rootView.findViewById(R.id.listview);
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_listview_layout);
+        spinner = rootView.findViewById(R.id.filter_view);
+        mListView = rootView.findViewById(R.id.listview);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_listview_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
 
         // Waiting member block views.
-        mWaitingMemberBlock = (RelativeLayout) rootView.findViewById(R.id.waitingMemberBlock);
-        mWaitingMemberText = (TextView) rootView.findViewById(R.id.waitingMemberText);
-        mNextIcon  = (TextView) rootView.findViewById(R.id.nextIcon);
+        mWaitingMemberBlock = rootView.findViewById(R.id.waitingMemberBlock);
+        mWaitingMemberText = rootView.findViewById(R.id.waitingMemberText);
+        mNextIcon  = rootView.findViewById(R.id.nextIcon);
         fontIcon = GlobalFunctions.getFontIconTypeFace(mContext);
     }
 
@@ -354,8 +354,8 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
 
                     } else {
                         rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                        TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                        TextView errorMessage = (TextView) rootView.findViewById(R.id.error_message);
+                        TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                        TextView errorMessage = rootView.findViewById(R.id.error_message);
                         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                         errorIcon.setText("\uf073");
                         errorMessage.setText(mContext.getResources().getString(R.string.no_occurrences_found));
@@ -433,8 +433,8 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
                         }
                     } else {
                         rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                        TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                        TextView errorMessage = (TextView) rootView.findViewById(R.id.error_message);
+                        TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                        TextView errorMessage = rootView.findViewById(R.id.error_message);
                         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                         errorIcon.setText("\uf007");
                         errorMessage.setText(mContext.getResources().getString(R.string.no_guest_found));
@@ -461,7 +461,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final View view = inflater.inflate(R.layout.datetimepicker_dialogue, null);
-        final TimePicker timePicker = (TimePicker) view.findViewById(R.id.timePicker);
+        final TimePicker timePicker = view.findViewById(R.id.timePicker);
         timePicker.setIs24HourView(false);
 
         DateFormat sourceFormat;
@@ -479,7 +479,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
             e.printStackTrace();
         }
 
-        final DatePicker datePicker = (DatePicker) view.findViewById(R.id.datePicker);
+        final DatePicker datePicker = view.findViewById(R.id.datePicker);
         datePicker.setMinDate(dob_var.getTime());
 
         builder.setView(view);
@@ -592,7 +592,7 @@ public class AdvEventGuestDetailsFragment  extends Fragment implements AdapterVi
         AdvEventGuestDetailsFragment.sEventId = mEventId;
 
         if (id == R.id.action_message){
-            String redirectUrl = mAppConst.DEFAULT_URL + "advancedevents/member/compose/" + mEventId;
+            String redirectUrl = AppConstant.DEFAULT_URL + "advancedevents/member/compose/" + mEventId;
             Intent message = new Intent(mContext, CreateNewEntry.class);
             message.putExtra(ConstantVariables.CREATE_URL, redirectUrl);
             message.putExtra(ConstantVariables.FORM_TYPE, "compose_message");

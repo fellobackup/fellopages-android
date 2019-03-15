@@ -117,35 +117,35 @@ public class ForumAdapter extends ArrayAdapter<Object> implements View.OnClickLi
 
                         case "ForumHome":
 
-                            listItemHolder.forumTitle = (TextView) mRootView.findViewById(R.id.forum_title);
-                            listItemHolder.forumIcon = (TextView) mRootView.findViewById(R.id.forum_icon);
+                            listItemHolder.forumTitle = mRootView.findViewById(R.id.forum_title);
+                            listItemHolder.forumIcon = mRootView.findViewById(R.id.forum_icon);
                             listItemHolder.forumIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-                            listItemHolder.forumPostTopicCount = (TextView) mRootView.findViewById(R.id.forum_post_topic);
-                            listItemHolder.categoryTitle = (TextView) mRootView.findViewById(R.id.category_title);
-                            listItemHolder.forumTitleAndDescription = (LinearLayout) mRootView.findViewById(R.id.forum_title_des);
+                            listItemHolder.forumPostTopicCount = mRootView.findViewById(R.id.forum_post_topic);
+                            listItemHolder.categoryTitle = mRootView.findViewById(R.id.category_title);
+                            listItemHolder.forumTitleAndDescription = mRootView.findViewById(R.id.forum_title_des);
                             break;
 
                         case "ForumProfile":
 
-                            listItemHolder.lastPostBy = (TextView) mRootView.findViewById(R.id.last_post_by);
-                            listItemHolder.lastPostTime = (TextView) mRootView.findViewById(R.id.last_post_time);
-                            listItemHolder.totalReplies = (TextView) mRootView.findViewById(R.id.total_replies);
-                            listItemHolder.forumProfileImage = (ImageView) mRootView.findViewById(R.id.forum_profileImage);
-                            listItemHolder.topicTitle = (TextView) mRootView.findViewById(R.id.topic_title);
-                            listItemHolder.isTopicClose = (TextView) mRootView.findViewById(R.id.topic_close_icon);
+                            listItemHolder.lastPostBy = mRootView.findViewById(R.id.last_post_by);
+                            listItemHolder.lastPostTime = mRootView.findViewById(R.id.last_post_time);
+                            listItemHolder.totalReplies = mRootView.findViewById(R.id.total_replies);
+                            listItemHolder.forumProfileImage = mRootView.findViewById(R.id.forum_profileImage);
+                            listItemHolder.topicTitle = mRootView.findViewById(R.id.topic_title);
+                            listItemHolder.isTopicClose = mRootView.findViewById(R.id.topic_close_icon);
                             listItemHolder.lastPostBy.setTag(position);
                             listItemHolder.lastPostBy.setOnClickListener(this);
                             break;
 
                         case "ForumView":
 
-                            listItemHolder.topicPostOwner = (TextView) mRootView.findViewById(R.id.topic_post_by_owner);
-                            listItemHolder.topicPostImage = (ImageView) mRootView.findViewById(R.id.topic_post_by_image);
-                            listItemHolder.ownerTotalPostWithDate = (TextView) mRootView.findViewById(R.id.owner_post_and_date);
-                            listItemHolder.mOptionIcon = (ImageView) mRootView.findViewById(R.id.topicOptionsIcon);
-                            listItemHolder.postBody = (TextView) mRootView.findViewById(R.id.topic_content);
-                            listItemHolder.linearLayout = (LinearLayout) mRootView.findViewById(R.id.forum_post_body);
-                            listItemHolder.postEditInfo = (TextView) mRootView.findViewById(R.id.post_edit_info);
+                            listItemHolder.topicPostOwner = mRootView.findViewById(R.id.topic_post_by_owner);
+                            listItemHolder.topicPostImage = mRootView.findViewById(R.id.topic_post_by_image);
+                            listItemHolder.ownerTotalPostWithDate = mRootView.findViewById(R.id.owner_post_and_date);
+                            listItemHolder.mOptionIcon = mRootView.findViewById(R.id.topicOptionsIcon);
+                            listItemHolder.postBody = mRootView.findViewById(R.id.topic_content);
+                            listItemHolder.linearLayout = mRootView.findViewById(R.id.forum_post_body);
+                            listItemHolder.postEditInfo = mRootView.findViewById(R.id.post_edit_info);
                             listItemHolder.mOptionIcon.setTag(position);
                             listItemHolder.topicPostOwner.setTag(position);
                             listItemHolder.postEditInfo.setTag(position);

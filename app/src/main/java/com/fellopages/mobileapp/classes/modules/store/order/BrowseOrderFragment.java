@@ -94,8 +94,8 @@ public class BrowseOrderFragment extends Fragment implements SwipeRefreshLayout.
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.recycler_view_layout, container,false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setRefreshing(false);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -121,8 +121,8 @@ public class BrowseOrderFragment extends Fragment implements SwipeRefreshLayout.
             if(getArguments().containsKey("isStoreOrders")){
                 mBrowseOrderUrl = UrlUtil.MY_ORDERS_URL + "/my-store-order?page="+pageNumber;
                 isStoreOrders = true;
-                contentSpinnerLayout = (CardView)rootView.findViewById(R.id.filterLayout);
-                contentSpinner = (Spinner) rootView.findViewById(R.id.filter_view);
+                contentSpinnerLayout = rootView.findViewById(R.id.filterLayout);
+                contentSpinner = rootView.findViewById(R.id.filter_view);
             }
             Set<String> searchArgumentSet = getArguments().keySet();
             searchParams = new HashMap<>();
@@ -189,7 +189,7 @@ public class BrowseOrderFragment extends Fragment implements SwipeRefreshLayout.
             }
             mAppConst.getJsonResponseFromUrl(mBrowseOrderUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mOrderList.clear();
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     addDataToList(jsonObject);
@@ -274,8 +274,8 @@ public class BrowseOrderFragment extends Fragment implements SwipeRefreshLayout.
         }else {
             mBrowseOrderAdapter.notifyDataSetChanged();
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf291");
             errorMessage.setText(mContext.getResources().getString(R.string.no_orders));

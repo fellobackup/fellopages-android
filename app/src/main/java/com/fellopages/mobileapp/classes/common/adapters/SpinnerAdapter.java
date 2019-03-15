@@ -58,8 +58,8 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
         } else {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.spinner_value_layout, parent, false);
-            TextView textView = (TextView) v.findViewById(R.id.text);
-            TextView tvIcon = (TextView) v.findViewById(R.id.icon);
+            TextView textView = v.findViewById(R.id.text);
+            TextView tvIcon = v.findViewById(R.id.icon);
             tvIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
             BrowseListItems browseListItems = mBrowseList.get(position);

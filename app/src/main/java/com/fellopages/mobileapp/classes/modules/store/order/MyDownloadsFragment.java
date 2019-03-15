@@ -76,8 +76,8 @@ public class MyDownloadsFragment extends Fragment implements OnItemClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.recycler_view_layout, container,false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setRefreshing(false);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -144,7 +144,7 @@ public class MyDownloadsFragment extends Fragment implements OnItemClickListener
             mLoadingPageNo = 1;
             mAppConst.getJsonResponseFromUrl(mBrowseOrderUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mOrderList.clear();
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     if(snackbar != null && snackbar.isShown())
@@ -235,8 +235,8 @@ public class MyDownloadsFragment extends Fragment implements OnItemClickListener
             }
         }else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf0ed");
             errorMessage.setText(mContext.getResources().getString(R.string.no_downloads));

@@ -107,24 +107,24 @@ public class MessageListAdapter extends BaseAdapter implements View.OnClickListe
                     null);
         }
 
-        ExpandableTextView txtMsg = (ExpandableTextView) convertView.findViewById(R.id.message);
-        ExpandableTextView txtMsgWithAttachment = (ExpandableTextView) convertView.findViewById(R.id.message_with_attachment);
-        SelectableTextView msgTimeStamp = (SelectableTextView) convertView.findViewById(R.id.messagets);
-        BezelImageView avatar = (BezelImageView) convertView.findViewById(R.id.avatar);
-        LinearLayout messageAttachment = (LinearLayout) convertView.findViewById(R.id.message_attachment);
-        LinearLayout messageContainer = (LinearLayout) convertView.findViewById(R.id.message_container);
+        ExpandableTextView txtMsg = convertView.findViewById(R.id.message);
+        ExpandableTextView txtMsgWithAttachment = convertView.findViewById(R.id.message_with_attachment);
+        SelectableTextView msgTimeStamp = convertView.findViewById(R.id.messagets);
+        BezelImageView avatar = convertView.findViewById(R.id.avatar);
+        LinearLayout messageAttachment = convertView.findViewById(R.id.message_attachment);
+        LinearLayout messageContainer = convertView.findViewById(R.id.message_container);
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) messageContainer.getLayoutParams();
 
-        CardView cardViewAttachment = (CardView) convertView.findViewById(R.id.card_view_attachments);
+        CardView cardViewAttachment = convertView.findViewById(R.id.card_view_attachments);
         cardViewAttachment.setOnClickListener(this);
-        TextView attachmentBody = (TextView) convertView.findViewById(R.id.attachment_body);
-        TextView attachmentTitle = (TextView) convertView.findViewById(R.id.attachment_title);
-        LinearLayout musicAttachmentBlock = (LinearLayout) convertView.findViewById(R.id.music_attachment_block);
-        TextView musicIcon = (TextView) convertView.findViewById(R.id.music_icon);
-        TextView musicTitle = (TextView) convertView.findViewById(R.id.music_title);
+        TextView attachmentBody = convertView.findViewById(R.id.attachment_body);
+        TextView attachmentTitle = convertView.findViewById(R.id.attachment_title);
+        LinearLayout musicAttachmentBlock = convertView.findViewById(R.id.music_attachment_block);
+        TextView musicIcon = convertView.findViewById(R.id.music_icon);
+        TextView musicTitle = convertView.findViewById(R.id.music_title);
         musicIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
-        ImageView attachmentIcon = (ImageView) convertView.findViewById(R.id.attachment_icon);
-        TextView playIcon = (TextView) convertView.findViewById(R.id.play_button);
+        ImageView attachmentIcon = convertView.findViewById(R.id.attachment_icon);
+        TextView playIcon = convertView.findViewById(R.id.play_button);
         playIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
 
         avatar.setOnClickListener(this);

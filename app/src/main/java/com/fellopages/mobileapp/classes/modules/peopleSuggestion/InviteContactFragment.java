@@ -143,10 +143,10 @@ public class InviteContactFragment extends Fragment implements GetContactsAsync.
      * Method to get views.
      */
     public void getViews() {
-        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        SwipeRefreshLayout swipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -204,8 +204,8 @@ public class InviteContactFragment extends Fragment implements GetContactsAsync.
      */
     public void showError() {
         mRootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-        TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-        SelectableTextView errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+        TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+        SelectableTextView errorMessage = mRootView.findViewById(R.id.error_message);
         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         errorIcon.setText("\uf007");
         errorMessage.setText(mContext.getResources().getString(R.string.no_member_to_display));

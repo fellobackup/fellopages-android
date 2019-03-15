@@ -110,34 +110,34 @@ public class ShippingDetailFragment extends Fragment implements View.OnClickList
         mRootView = inflater.inflate(R.layout.fragment_shipping_detail,container,false);
 
 
-        mShippingBlock = (LinearLayout) mRootView.findViewById(R.id.shipping_block);
-        mBFirstName = (EditText)mRootView.findViewById(R.id.bill_name);
-        mBLastName = (EditText)mRootView.findViewById(R.id.bill_send_name);
-        mBPhoneNo = (EditText)mRootView.findViewById(R.id.bill_ph_no);
-        mBCountry = (EditText)mRootView.findViewById(R.id.bill_country);
-        mBRegion = (EditText)mRootView.findViewById(R.id.bill_rgn);
-        mBCity = (EditText)mRootView.findViewById(R.id.bill_city);
-        mBLoc = (EditText) mRootView.findViewById(R.id.bill_locality);
-        mBZip = (EditText)mRootView.findViewById(R.id.bill_zip);
-        mBAddress = (EditText)mRootView.findViewById(R.id.bill_addr);
-        mBEmailId = (EditText) mRootView.findViewById(R.id.email_billing);
+        mShippingBlock = mRootView.findViewById(R.id.shipping_block);
+        mBFirstName = mRootView.findViewById(R.id.bill_name);
+        mBLastName = mRootView.findViewById(R.id.bill_send_name);
+        mBPhoneNo = mRootView.findViewById(R.id.bill_ph_no);
+        mBCountry = mRootView.findViewById(R.id.bill_country);
+        mBRegion = mRootView.findViewById(R.id.bill_rgn);
+        mBCity = mRootView.findViewById(R.id.bill_city);
+        mBLoc = mRootView.findViewById(R.id.bill_locality);
+        mBZip = mRootView.findViewById(R.id.bill_zip);
+        mBAddress = mRootView.findViewById(R.id.bill_addr);
+        mBEmailId = mRootView.findViewById(R.id.email_billing);
 
-        mBillingRegionView = (TextView) mRootView.findViewById(R.id.billing_region);
-        mShippingRegionView = (TextView) mRootView.findViewById(R.id.shipping_region);
+        mBillingRegionView = mRootView.findViewById(R.id.billing_region);
+        mShippingRegionView = mRootView.findViewById(R.id.shipping_region);
         mBillingRegionView.setText(mContext.getResources().getString(R.string.region_label)+" / "
                 +mContext.getResources().getString(R.string.state_label));
         mShippingRegionView.setText(mContext.getResources().getString(R.string.region_label)+" / "
                 +mContext.getResources().getString(R.string.state_label));
 
 
-        mContinueButton = (TextView) mRootView.findViewById(R.id.order);
+        mContinueButton = mRootView.findViewById(R.id.order);
         mContinueButton.setOnClickListener(this);
         for (Drawable drawable : mContinueButton.getCompoundDrawables()) {
             if (drawable != null) {
                 DrawableCompat.setTint(drawable,ContextCompat.getColor(getActivity(),R.color.white));
             }
         }
-        mAddrSwitch = (SwitchCompat) mRootView.findViewById(R.id.addr_switch);
+        mAddrSwitch = mRootView.findViewById(R.id.addr_switch);
         mAddrSwitch.setChecked(true);
         mAddrSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -308,15 +308,15 @@ public class ShippingDetailFragment extends Fragment implements View.OnClickList
     public void initializeShippingDetails(){
 
         mShippingBlock.setVisibility(View.VISIBLE);
-        mSFirstName = (EditText)mRootView.findViewById(R.id.ship_name);
-        mSLastName = (EditText)mRootView.findViewById(R.id.ship_second_name);
-        mSPhoneNo = (EditText)mRootView.findViewById(R.id.ship_ph_no);
-        mSCountry = (EditText)mRootView.findViewById(R.id.ship_country);
-        mSRegion = (EditText)mRootView.findViewById(R.id.ship_rgn);
-        mSCity = (EditText)mRootView.findViewById(R.id.ship_city);
-        mSZip = (EditText)mRootView.findViewById(R.id.ship_zip);
-        mSAddress = (EditText)mRootView.findViewById(R.id.ship_addr);
-        mSLoc = (EditText) mRootView.findViewById(R.id.ship_locality);
+        mSFirstName = mRootView.findViewById(R.id.ship_name);
+        mSLastName = mRootView.findViewById(R.id.ship_second_name);
+        mSPhoneNo = mRootView.findViewById(R.id.ship_ph_no);
+        mSCountry = mRootView.findViewById(R.id.ship_country);
+        mSRegion = mRootView.findViewById(R.id.ship_rgn);
+        mSCity = mRootView.findViewById(R.id.ship_city);
+        mSZip = mRootView.findViewById(R.id.ship_zip);
+        mSAddress = mRootView.findViewById(R.id.ship_addr);
+        mSLoc = mRootView.findViewById(R.id.ship_locality);
 
         if(mShippingDetails != null) {
 
@@ -439,7 +439,7 @@ public class ShippingDetailFragment extends Fragment implements View.OnClickList
     }
 
     public void setOptionValue(final String viewTag, String item, final String key){
-        EditText editText = (EditText) mRootView.findViewWithTag(viewTag);
+        EditText editText = mRootView.findViewWithTag(viewTag);
 
         switch (viewTag){
             case "country_shipping":
@@ -451,7 +451,7 @@ public class ShippingDetailFragment extends Fragment implements View.OnClickList
                         CartData.getStoreInfo(mContext)+"&country=" + key,
                         new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
                         LogUtils.LOGD("FormArray",viewTag);
                         LogUtils.LOGD("ViewTag",jsonObject.toString());
                         if(viewTag.equals("country_billing")) {
@@ -491,7 +491,7 @@ public class ShippingDetailFragment extends Fragment implements View.OnClickList
         if(mBillingForm != null) {
             for (int i = 0; i < mBillingForm.length(); i++) {
                 JSONObject object = mBillingForm.optJSONObject(i);
-                EditText editText = (EditText) mRootView.findViewWithTag(object.optString("name"));
+                EditText editText = mRootView.findViewWithTag(object.optString("name"));
                 if (editText != null) {
                     if (editText.getText().length() != 0) {
                         LogUtils.LOGD("Shipping Details", mBillingForm.optJSONObject(i).optString("name"));
@@ -514,7 +514,7 @@ public class ShippingDetailFragment extends Fragment implements View.OnClickList
                     postParams.put("common", "1");
                 }else {
                     JSONObject object = mShippingForm.optJSONObject(i);
-                    editText = (EditText) mRootView.findViewWithTag(object.optString("name"));
+                    editText = mRootView.findViewWithTag(object.optString("name"));
                     if(editText.getText().length() != 0){
                         LogUtils.LOGD("Shipping Details", mShippingForm.optJSONObject(i).optString("name"));
                         postParams.put(mShippingForm.optJSONObject(i).optString("name"),
@@ -538,7 +538,7 @@ public class ShippingDetailFragment extends Fragment implements View.OnClickList
                     + mCartPref.getProductArray(mContext) : UrlUtil.POST_BILL_SHIP_URL +
                     CartData.getStoreInfo(mContext), postParams, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     CartData.updateBillingAddressId(mContext,jsonObject.optString("billingAddress"));
                     CartData.updateShippingAddressId(mContext,jsonObject.optString("shippingAddress"));

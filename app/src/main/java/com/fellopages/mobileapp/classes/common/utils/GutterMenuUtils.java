@@ -502,7 +502,7 @@ public class GutterMenuUtils {
                                     .setIcon(cartIcon)
                                     .setActionView(R.layout.cart_menu)
                                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-                            BadgeView mCartCountBadge = (BadgeView) menu.getItem(i)
+                            BadgeView mCartCountBadge = menu.getItem(i)
                                     .getActionView().findViewById(R.id.cart_item_count);
                             menu.getItem(i)
                                     .getActionView().setOnClickListener(new View.OnClickListener() {
@@ -2846,8 +2846,8 @@ public class GutterMenuUtils {
                     if (isCommentBox) {
                         inflatedView.findViewById(R.id.edit_text_layout).setVisibility(View.VISIBLE);
                         inflatedView.findViewById(R.id.tv_label).setVisibility(View.GONE);
-                        etValue = (EditText) inflatedView.findViewById(R.id.et_value);
-                        final TextView tvCharLeft = (TextView) inflatedView.findViewById(R.id.et_char_left);
+                        etValue = inflatedView.findViewById(R.id.et_value);
+                        final TextView tvCharLeft = inflatedView.findViewById(R.id.et_char_left);
                         tvCharLeft.setVisibility(View.VISIBLE);
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) etValue.getLayoutParams();
                         layoutParams.weight = 2;
@@ -2955,8 +2955,8 @@ public class GutterMenuUtils {
                     inflatedView.findViewById(R.id.edit_text_layout).setVisibility(View.VISIBLE);
                     inflatedView.findViewById(R.id.et_bottom_line).setVisibility(View.VISIBLE);
                     inflatedView.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                    TextView tvLabel = (TextView) inflatedView.findViewById(R.id.tv_label);
-                    etValue = (EditText) inflatedView.findViewById(R.id.et_value);
+                    TextView tvLabel = inflatedView.findViewById(R.id.tv_label);
+                    etValue = inflatedView.findViewById(R.id.et_value);
                     tvLabel.setText(mContext.getResources().getString(R.string.pin_feed));
                     etValue.setHint(mContext.getResources().getString(R.string.enter_pin_post_time));
                     etValue.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -3047,7 +3047,7 @@ public class GutterMenuUtils {
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View checkBoxView = inflater.inflate(R.layout.checkbox, null, false);
-                CheckBox checkBox = (CheckBox) checkBoxView.findViewById(R.id.checkbox);
+                CheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                     @Override

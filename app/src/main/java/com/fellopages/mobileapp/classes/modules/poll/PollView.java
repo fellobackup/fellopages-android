@@ -141,7 +141,7 @@ public class PollView extends AppCompatActivity implements View.OnClickListener,
 
         /* Create Back Button On Action Bar **/
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.blank_string));
@@ -171,46 +171,46 @@ public class PollView extends AppCompatActivity implements View.OnClickListener,
         Like and Unlike Fields...
          */
 
-        mLikeCountTextView = (TextView) findViewById(R.id.likeCount);
-        mCommentCountTextView = (TextView) findViewById(R.id.commentCount);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        mLikeUnlikeText = (TextView) findViewById(R.id.likeUnlikeText);
+        mLikeCountTextView = findViewById(R.id.likeCount);
+        mCommentCountTextView = findViewById(R.id.commentCount);
+        mReactionIcon = findViewById(R.id.reactionIcon);
+        mLikeUnlikeText = findViewById(R.id.likeUnlikeText);
 
-        LinearLayout mLikeBlock = (LinearLayout) findViewById(R.id.likeBlock);
-        LinearLayout mCommentBlock = (LinearLayout) findViewById(R.id.commentBlock);
-        LinearLayout mLikeCommentBlock = (LinearLayout) findViewById(R.id.likeCommentBlock);
+        LinearLayout mLikeBlock = findViewById(R.id.likeBlock);
+        LinearLayout mCommentBlock = findViewById(R.id.commentBlock);
+        LinearLayout mLikeCommentBlock = findViewById(R.id.likeCommentBlock);
 
         mLikeBlock.setOnClickListener(this);
         mLikeBlock.setOnLongClickListener(this);
         mCommentBlock.setOnClickListener(this);
         mLikeCommentBlock.setOnClickListener(this);
 
-        mLikeCommentContent = (LinearLayout) findViewById(R.id.likeCommentContent);
+        mLikeCommentContent = findViewById(R.id.likeCommentContent);
 
         //Getting all the views
 
-        mViewTitle = (SelectableTextView) findViewById(R.id.viewTitle);
-        mCloseIcon = (TextView) findViewById(R.id.closeIcon);
-        mCloseText = (TextView) findViewById(R.id.closeText);
-        mCreatorView = (SelectableTextView) findViewById(R.id.creator_view);
-        mDateView = (SelectableTextView) findViewById(R.id.dateView);
-        mViewCountDetail = (TextView) findViewById(R.id.viewCountDetail);
-        mDetailDescription = (SelectableTextView) findViewById(R.id.detailDescription);
+        mViewTitle = findViewById(R.id.viewTitle);
+        mCloseIcon = findViewById(R.id.closeIcon);
+        mCloseText = findViewById(R.id.closeText);
+        mCreatorView = findViewById(R.id.creator_view);
+        mDateView = findViewById(R.id.dateView);
+        mViewCountDetail = findViewById(R.id.viewCountDetail);
+        mDetailDescription = findViewById(R.id.detailDescription);
 
         mDetailDescription.setMovementMethod(LinkMovementMethod.getInstance());
-        mProgressBarMain = (ProgressBar) findViewById(R.id.progressBarMain);
+        mProgressBarMain = findViewById(R.id.progressBarMain);
 
-        mSplitToolBar = (SplitToolbar) findViewById(R.id.toolbarBottom);
-        mScrollView = (ScrollView) findViewById(R.id.scrollView);
-        scrollViewProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mSplitToolBar = findViewById(R.id.toolbarBottom);
+        mScrollView = findViewById(R.id.scrollView);
+        scrollViewProgressBar = findViewById(R.id.progressBar);
 
-        mOptionTag = (TextView) findViewById(R.id.optionTag);
-        mQuestionTag = (TextView) findViewById(R.id.questionTag);
+        mOptionTag = findViewById(R.id.optionTag);
+        mQuestionTag = findViewById(R.id.questionTag);
 
-        mRadioOptionLayout = (LinearLayout) findViewById(R.id.radioOptionLayout);
-        mBarChartLayout = (LinearLayout) findViewById(R.id.barChartOptionLayout);
+        mRadioOptionLayout = findViewById(R.id.radioOptionLayout);
+        mBarChartLayout = findViewById(R.id.barChartOptionLayout);
 
-        mRadioGroup = (RadioGroup) findViewById(R.id.optionRadioGroup);
+        mRadioGroup = findViewById(R.id.optionRadioGroup);
 
         mSubjectType = "poll";
         mSubjectId = mContent_id;
@@ -285,7 +285,7 @@ public class PollView extends AppCompatActivity implements View.OnClickListener,
                     "&subject_id=" + mSubjectId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     mContentReactions = mReactionsObject.optJSONObject("feed_reactions");
@@ -465,7 +465,7 @@ public class PollView extends AppCompatActivity implements View.OnClickListener,
 
                     mAppConst.postJsonResponseForUrl(votePollUrl, postParams, new OnResponseListener() {
                         @Override
-                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                        public void onTaskCompleted(JSONObject jsonObject) {
 
                             check++;
                             if (jsonObject != null) {
@@ -1011,7 +1011,7 @@ public class PollView extends AppCompatActivity implements View.OnClickListener,
                     if (!mIsLike) {
                         mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                             }
 

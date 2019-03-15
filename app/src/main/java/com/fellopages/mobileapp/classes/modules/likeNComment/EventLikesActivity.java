@@ -107,9 +107,9 @@ public class EventLikesActivity extends AppCompatActivity implements AdapterView
     private void init(){
         mLikeListItems = new ArrayList<>();
         mTabSaperator = findViewById(R.id.tabSaperator);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTabLayout= (TabLayout) findViewById(R.id.tabs);
-        mLikeListView = (ListView) findViewById(R.id.likeList);
+        viewPager = findViewById(R.id.viewpager);
+        mTabLayout= findViewById(R.id.tabs);
+        mLikeListView = findViewById(R.id.likeList);
         mProgressBar = findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
         mLikeAdapter = new CommentAdapter(this, R.layout.list_comment, mLikeListItems, new CommentList(), false);
@@ -119,7 +119,7 @@ public class EventLikesActivity extends AppCompatActivity implements AdapterView
     }
 
     private void setupToolbar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mContext = this;
         mImageLoader = new ImageLoader(getApplicationContext());
 

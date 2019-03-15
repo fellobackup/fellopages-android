@@ -58,14 +58,14 @@ public class GlobalSearchAdapter extends ArrayAdapter<BrowseListItems> {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             listItemHolder = new ListItemHolder();
             mRootView = inflater.inflate(mLayoutResID, parent, false);
-            listItemHolder.mGlobalSearchLayout = (LinearLayout) mRootView.findViewById(R.id.globalSearchLayout);
+            listItemHolder.mGlobalSearchLayout = mRootView.findViewById(R.id.globalSearchLayout);
             listItemHolder.mGlobalSearchLayout.setVisibility(View.VISIBLE);
             mRootView.findViewById(R.id.contentTitle).setVisibility(View.GONE);
-            listItemHolder.mContentDetail = (TextView) mRootView.findViewById(R.id.contentDetail);
-            listItemHolder.mTitle = (TextView) mRootView.findViewById(R.id.title);
-            listItemHolder.mModuleName = (TextView) mRootView.findViewById(R.id.moduleName);
-            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-            listItemHolder.mOptionIcon = (ImageView) mRootView.findViewById(R.id.optionIcon);
+            listItemHolder.mContentDetail = mRootView.findViewById(R.id.contentDetail);
+            listItemHolder.mTitle = mRootView.findViewById(R.id.title);
+            listItemHolder.mModuleName = mRootView.findViewById(R.id.moduleName);
+            listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+            listItemHolder.mOptionIcon = mRootView.findViewById(R.id.optionIcon);
             listItemHolder.mOptionIcon.setVisibility(View.GONE);
 
             mRootView.setTag(listItemHolder);

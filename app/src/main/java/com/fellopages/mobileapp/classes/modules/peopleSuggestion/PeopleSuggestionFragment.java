@@ -136,7 +136,7 @@ public class PeopleSuggestionFragment extends Fragment implements SwipeRefreshLa
 
         // Recycler view.
         mRootView.findViewById(R.id.main_view_recycler).setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
@@ -144,13 +144,13 @@ public class PeopleSuggestionFragment extends Fragment implements SwipeRefreshLa
         mRecyclerView.addItemDecoration(new LinearDividerItemDecorationUtil(mContext));
 
         // Swipe refresh view.
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
         // No data message views
-        llErrorMessage = (LinearLayout) mRootView.findViewById(R.id.message_layout);
-        tvErrorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
+        llErrorMessage = mRootView.findViewById(R.id.message_layout);
+        tvErrorIcon = mRootView.findViewById(R.id.error_icon);
         tvErrorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
         tvErrorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
     }

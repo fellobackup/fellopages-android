@@ -152,9 +152,9 @@ public class AttachmentDialogUtil {
      */
     public void showAttachedMusic(String attachMusicTitle, View dialogView) {
 
-        CardView mAddMusicBlock = (CardView) dialogView.findViewById(R.id.addMusicBlock);
-        TextView musicIcon = (TextView) dialogView.findViewById(R.id.music_icon);
-        TextView musicTitle = (TextView) dialogView.findViewById(R.id.music_title);
+        CardView mAddMusicBlock = dialogView.findViewById(R.id.addMusicBlock);
+        TextView musicIcon = dialogView.findViewById(R.id.music_icon);
+        TextView musicTitle = dialogView.findViewById(R.id.music_title);
         musicIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mAddMusicBlock.setVisibility(View.VISIBLE);
         musicIcon.setText("\uf001");
@@ -171,10 +171,10 @@ public class AttachmentDialogUtil {
     public void showAttachedVideo(String mVideoTitle, String mVideoImage,
                                   String mVideoDescription, View dialogView) {
 
-        LinearLayout mAddVideoLayout = (LinearLayout) dialogView.findViewById(R.id.addVideoLayout);
-        ImageView mVideoAttachmentIcon = (ImageView) dialogView.findViewById(R.id.attachmentIcon);
-        TextView mVideoAttachmentTitle = (TextView) dialogView.findViewById(R.id.attachmentTitle);
-        TextView mVideoAttachmentBody = (TextView) dialogView.findViewById(R.id.attachmentBody);
+        LinearLayout mAddVideoLayout = dialogView.findViewById(R.id.addVideoLayout);
+        ImageView mVideoAttachmentIcon = dialogView.findViewById(R.id.attachmentIcon);
+        TextView mVideoAttachmentTitle = dialogView.findViewById(R.id.attachmentTitle);
+        TextView mVideoAttachmentBody = dialogView.findViewById(R.id.attachmentBody);
         mAddVideoLayout.setVisibility(View.VISIBLE);
         mImageLoader.setImageUrl(mVideoImage, mVideoAttachmentIcon);
         mVideoAttachmentTitle.setText(Html.fromHtml(mVideoTitle));
@@ -196,7 +196,7 @@ public class AttachmentDialogUtil {
 
         // Checking If there is any null image.
         if (bitmap != null) {
-            ImageView mSelectedImageView = (ImageView) dialogView.findViewById(R.id.selectedImage);
+            ImageView mSelectedImageView = dialogView.findViewById(R.id.selectedImage);
             mSelectedImageView.setVisibility(View.VISIBLE);
             mSelectedImageView.setImageBitmap(bitmap);
         } else {
@@ -214,11 +214,11 @@ public class AttachmentDialogUtil {
      */
     public void showAttachedLink(String url, String title, String image, String description, View dialogView) {
 
-        CardView mLinkAttachmentBlock = (CardView) dialogView.findViewById(R.id.linkAttachment);
-        ImageView mLinkAttachmentImage = (ImageView) dialogView.findViewById(R.id.linkAttachmentImage);
-        TextView mLinkAttachmentTitle = (TextView) dialogView.findViewById(R.id.linkAttachmentTitle);
-        TextView mLinkAttachmentDescription = (TextView) dialogView.findViewById(R.id.linkAttachmentDescription);
-        TextView mLinkAttachmentUrl = (TextView) dialogView.findViewById(R.id.linkAttachmentUrl);
+        CardView mLinkAttachmentBlock = dialogView.findViewById(R.id.linkAttachment);
+        ImageView mLinkAttachmentImage = dialogView.findViewById(R.id.linkAttachmentImage);
+        TextView mLinkAttachmentTitle = dialogView.findViewById(R.id.linkAttachmentTitle);
+        TextView mLinkAttachmentDescription = dialogView.findViewById(R.id.linkAttachmentDescription);
+        TextView mLinkAttachmentUrl = dialogView.findViewById(R.id.linkAttachmentUrl);
         mLinkAttachmentBlock.setVisibility(View.VISIBLE);
         mLinkAttachmentUrl.setText(Html.fromHtml(url));
         mLinkAttachmentTitle.setText(Html.fromHtml(title));

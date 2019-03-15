@@ -173,14 +173,14 @@ public class OrderViewAdapter extends RecyclerView.Adapter {
         public OrderViewHolder(View itemView) {
             super(itemView);
             mainView = itemView;
-            titleView = (TextView) itemView.findViewById(R.id.order_title);
-            optionIcon = (ImageView) itemView.findViewById(R.id.optionIcon);
-            statusView = (TextView) itemView.findViewById(R.id.order_status);
-            dateView = (TextView) itemView.findViewById(R.id.order_date);
-            orderAmountView =(TextView) itemView.findViewById(R.id.order_amount);
-            fileStatus = (TextView) itemView.findViewById(R.id.file_status);
-            itemThumb = (ImageView) itemView.findViewById(R.id.item_thumb);
-            itemTitle = (TextView) itemView.findViewById(R.id.item_title);
+            titleView = itemView.findViewById(R.id.order_title);
+            optionIcon = itemView.findViewById(R.id.optionIcon);
+            statusView = itemView.findViewById(R.id.order_status);
+            dateView = itemView.findViewById(R.id.order_date);
+            orderAmountView = itemView.findViewById(R.id.order_amount);
+            fileStatus = itemView.findViewById(R.id.file_status);
+            itemThumb = itemView.findViewById(R.id.item_thumb);
+            itemTitle = itemView.findViewById(R.id.item_title);
         }
     }
 }

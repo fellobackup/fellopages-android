@@ -29,7 +29,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.fellopages.mobileapp.R;
@@ -81,16 +81,16 @@ public class SearchStickersGridView implements SearchView.OnQueryTextListener, A
             rootView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.black_overlay));
         }
 
-        mainContent = (RelativeLayout) rootView.findViewById(R.id.main_content);
+        mainContent = rootView.findViewById(R.id.main_content);
 
-        mSearchGridView = (GridView) rootView.findViewById(R.id.searchStickersGridView);
-        mSearchResultGridView = (GridView) rootView.findViewById(R.id.searchResultsGridView);
+        mSearchGridView = rootView.findViewById(R.id.searchStickersGridView);
+        mSearchResultGridView = rootView.findViewById(R.id.searchResultsGridView);
 
         rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
-        mSearchView = (SearchView) rootView.findViewById(R.id.searchView);
+        mSearchView = rootView.findViewById(R.id.searchView);
         mSearchView.setVisibility(View.VISIBLE);
 
-        mMessageLayout = (LinearLayout ) rootView.findViewById(R.id.message_layout);
+        mMessageLayout = rootView.findViewById(R.id.message_layout);
 
         InitializeGridLayout(mSearchGridView, 2);
         InitializeGridLayout(mSearchResultGridView, 4);
@@ -182,7 +182,7 @@ public class SearchStickersGridView implements SearchView.OnQueryTextListener, A
         mSearchView.setIconified(false);
         mSearchView.clearFocus();
         int searchImgId = mContext.getResources().getIdentifier("android:id/search_mag_icon", null, null);
-        ImageView searchIconView = (ImageView) mSearchView.findViewById(searchImgId);
+        ImageView searchIconView = mSearchView.findViewById(searchImgId);
         if(searchIconView != null){
             Drawable searchIcon = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
             DrawableCompat.setTint(searchIcon, ContextCompat.getColor(mContext, R.color.light_gray));
@@ -201,7 +201,7 @@ public class SearchStickersGridView implements SearchView.OnQueryTextListener, A
         if (searchPlate != null) {
             int searchTextId = searchPlate.getContext().getResources().
                     getIdentifier("android:id/search_src_text", null, null);
-            final TextView searchText = (TextView) searchPlate.findViewById(searchTextId);
+            final TextView searchText = searchPlate.findViewById(searchTextId);
             searchText.setHintTextColor(ContextCompat.getColor(mContext, R.color.gray_stroke_color));
 
             if (StickersUtil.isStorySticker) {
@@ -213,7 +213,7 @@ public class SearchStickersGridView implements SearchView.OnQueryTextListener, A
             mSearchView.setQueryHint("Search stickers");
             int searchCloseBtnId = mSearchView.getContext().getResources().
                     getIdentifier("android:id/search_close_btn", null, null);
-            searchCloseBtn = (ImageView) mSearchView.findViewById(searchCloseBtnId);
+            searchCloseBtn = mSearchView.findViewById(searchCloseBtnId);
             searchCloseBtn.setEnabled(false);
             searchCloseButtonDrawable = ContextCompat.getDrawable
                     (mContext, R.drawable.ic_clear_white_24dp);
@@ -293,8 +293,8 @@ public class SearchStickersGridView implements SearchView.OnQueryTextListener, A
                         mSearchResultGridView.setVisibility(View.VISIBLE);
                     } else{
                         mMessageLayout.setVisibility(View.VISIBLE);
-                        TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                        SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById
+                        TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                        SelectableTextView errorMessage = rootView.findViewById
                                 (R.id.error_message);
                         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                         errorMessage.setText(mContext.getResources().getString(R.string.no_stickers));

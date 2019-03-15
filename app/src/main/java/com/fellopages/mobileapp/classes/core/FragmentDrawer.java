@@ -182,8 +182,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
         callbackManager = CallbackManager.Factory.create();
 
-        facebookLoginButton = (LoginButton) mLayoutMain.findViewById(R.id.facebook_login_button);
-        twitterLoginButton= (TwitterLoginButton) mLayoutMain.findViewById(R.id.twitter_login_button);
+        facebookLoginButton = mLayoutMain.findViewById(R.id.facebook_login_button);
+        twitterLoginButton= mLayoutMain.findViewById(R.id.twitter_login_button);
 
         twitterLoginButton.setText(getResources().getString(R.string.twitter));
         twitterLoginButton.setTextSize(15);
@@ -219,11 +219,11 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         facebookLoginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));
         facebookLoginButton.setFragment(this);
 
-        mProgressBar = (ProgressBar) mLayoutMain.findViewById(R.id.progressBar);
-        bottomButton = (LinearLayout)mLayoutMain.findViewById(R.id.bottomButtons);
-        socialSitesButton = (LinearLayout) mLayoutMain.findViewById(R.id.socialSiteButtons);
-        mSignInButton = (Button) mLayoutMain.findViewById(R.id.signin_button);
-        mSignUpButton = (Button) mLayoutMain.findViewById(R.id.signup_button);
+        mProgressBar = mLayoutMain.findViewById(R.id.progressBar);
+        bottomButton = mLayoutMain.findViewById(R.id.bottomButtons);
+        socialSitesButton = mLayoutMain.findViewById(R.id.socialSiteButtons);
+        mSignInButton = mLayoutMain.findViewById(R.id.signin_button);
+        mSignUpButton = mLayoutMain.findViewById(R.id.signup_button);
         mSignInButton.setOnClickListener(this);
         mSignUpButton.setOnClickListener(this);
         mSignInButton.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding),
@@ -231,7 +231,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         mSignUpButton.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding),
                 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
 
-        recyclerView = (RecyclerView) mLayoutMain.findViewById(R.id.drawerList);
+        recyclerView = mLayoutMain.findViewById(R.id.drawerList);
 
         // Initializing
         dataList = new ArrayList<>();
@@ -340,7 +340,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "get-enabled-modules",
                 new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
                         mEnabledModule = jsonObject.optJSONArray("response");
                         dataList.clear();
                         addDataToDrawerList();
@@ -790,7 +790,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     mainIntent = new Intent(mContext, NewLoginActivity.class);
                 } else {
                     mainIntent = new Intent(mContext, LoginActivity.class);
-                };
+                }
                 startActivity(mainIntent);
                 ((AppCompatActivity)mContext).overridePendingTransition(R.anim.slide_in_right,
                         R.anim.slide_out_left);

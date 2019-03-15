@@ -103,11 +103,11 @@ public class StickerStoreDetailsFragment extends Fragment implements View.OnClic
     }
 
     private void getViews(){
-        mImageView = (ImageView) rootView.findViewById(R.id.stickerStoreImage);
-        mTitleView = (TextView) rootView.findViewById(R.id.stickerStoreTitle);
-        mBodyView = (TextView) rootView.findViewById(R.id.stickerStoreDescription);
-        mStickerOptionButton = (BaseButton) rootView.findViewById(R.id.stickerStoreButton);
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mImageView = rootView.findViewById(R.id.stickerStoreImage);
+        mTitleView = rootView.findViewById(R.id.stickerStoreTitle);
+        mBodyView = rootView.findViewById(R.id.stickerStoreDescription);
+        mStickerOptionButton = rootView.findViewById(R.id.stickerStoreButton);
+        mGridView = rootView.findViewById(R.id.gridView);
         mStickersList = new ArrayList<>();
         InitializeGridLayout();
 
@@ -119,8 +119,7 @@ public class StickerStoreDetailsFragment extends Fragment implements View.OnClic
 
         mAppConst.getJsonResponseFromUrl(mStickerStoreViewUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject)
-                    throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                 mDataResponseArray = jsonObject.optJSONArray("response");
 

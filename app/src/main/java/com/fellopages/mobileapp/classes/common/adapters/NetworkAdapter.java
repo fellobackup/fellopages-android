@@ -69,9 +69,9 @@ public class NetworkAdapter extends ArrayAdapter<NetworkList> {
             listItemHolder = new ListItemHolder();
             mRootView = inflater.inflate(mLayoutResID, parent, false);
 
-            listItemHolder.mNetworkTitle = (SelectableTextView) mRootView.findViewById(R.id.networkTitle);
-            listItemHolder.mMemberCount = (SelectableTextView) mRootView.findViewById(R.id.memberCount);
-            listItemHolder.mNetworkOption = (TextView) mRootView.findViewById(R.id.leavejoinOption);
+            listItemHolder.mNetworkTitle = mRootView.findViewById(R.id.networkTitle);
+            listItemHolder.mMemberCount = mRootView.findViewById(R.id.memberCount);
+            listItemHolder.mNetworkOption = mRootView.findViewById(R.id.leavejoinOption);
             listItemHolder.mNetworkOption.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             listItemHolder.mNetworkOption.setTag(position);
 

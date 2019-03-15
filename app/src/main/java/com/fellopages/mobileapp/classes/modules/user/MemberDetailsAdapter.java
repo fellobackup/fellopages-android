@@ -150,9 +150,9 @@ public class MemberDetailsAdapter extends RecyclerView.Adapter {
             mContainer = itemView;
             mContainer.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.padding_8dp), 0,
                     context.getResources().getDimensionPixelSize(R.dimen.padding_8dp));
-            ivUserProfile = (ImageView) itemView.findViewById(R.id.ownerImage);
-            tvUserName = (TextView) itemView.findViewById(R.id.ownerTitle);
-            tvDescription = (TextView) itemView.findViewById(R.id.rsvpInfo);
+            ivUserProfile = itemView.findViewById(R.id.ownerImage);
+            tvUserName = itemView.findViewById(R.id.ownerTitle);
+            tvDescription = itemView.findViewById(R.id.rsvpInfo);
             tvDescription.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.padding_5dp), 0, 0);
         }
     }

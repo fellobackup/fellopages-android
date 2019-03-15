@@ -87,6 +87,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -158,7 +159,7 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
 
         /* Set Toolbar */
 
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -166,16 +167,16 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
 
         CustomViews.createMarqueeTitle(this, mToolBar);
 
-        mCommentsListView = (ListView) findViewById(R.id.commentList);
+        mCommentsListView = findViewById(R.id.commentList);
         mCommentsListView.setOnScrollListener(this);
 
         LayoutInflater inflater = getLayoutInflater();
-        View header = (View) inflater.inflate(R.layout.single_feed_page_recyclerview, null, false);
+        View header = inflater.inflate(R.layout.single_feed_page_recyclerview, null, false);
         mCommentsListView.addHeaderView(header);
 
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mFeedsRecyclerView = (RecyclerView) findViewById(R.id.feedsGrid);
+        mProgressBar = findViewById(R.id.progressBar);
+        mFeedsRecyclerView = findViewById(R.id.feedsGrid);
         mFeedsRecyclerView.setNestedScrollingEnabled(false);
         mFeedsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mFeedsRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -184,18 +185,18 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
 
 
         // For tag user in comments
-        mUserListView = (ListView) findViewById(R.id.userList);
-        mUserView = (CardView) findViewById(R.id.users_view);
+        mUserListView = findViewById(R.id.userList);
+        mUserView = findViewById(R.id.users_view);
 
-        mCommentPostBlock = (LinearLayout) findViewById(R.id.commentPostBlock);
-        mCommentBox = (EditText) findViewById(R.id.commentBox);
+        mCommentPostBlock = findViewById(R.id.commentPostBlock);
+        mCommentBox = findViewById(R.id.commentBox);
         mCommentBox.addTextChangedListener(this);
 
-        mCommentPostButton = (TextView) findViewById(R.id.commentPostButton);
+        mCommentPostButton = findViewById(R.id.commentPostButton);
         mCommentPostButton.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         mCommentPostButton.setOnClickListener(this);
 
-        mPhotoUploadingButton = (TextView) findViewById(R.id.photoUploadingButton);
+        mPhotoUploadingButton = findViewById(R.id.photoUploadingButton);
         mPhotoUploadingButton.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         mPhotoUploadingButton.setText("\uf030");
         mPhotoUploadingButton.setOnClickListener(this);
@@ -225,7 +226,7 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
             }
         }
 
-        mStickersParentView = (RelativeLayout) findViewById(R.id.stickersMainLayout);
+        mStickersParentView = findViewById(R.id.stickersMainLayout);
         if (mStickersEnabled == 1) {
             mCommentPostButton.setText("\uf118");
             mCommentPostButton.setTextColor(ContextCompat.getColor(this, R.color.themeButtonColor));
@@ -268,9 +269,9 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                 mCommentList, true, mSubjectType, mActionId, mActionId);
         mCommentsListView.setAdapter(mCommentAdapter);
 
-        mSelectedImageBlock = (RelativeLayout) findViewById(R.id.selectedImageBlock);
-        mSelectedImageView = (ImageView) findViewById(R.id.imageView);
-        mCancelImageView = (ImageView) findViewById(R.id.removeImageButton);
+        mSelectedImageBlock = findViewById(R.id.selectedImageBlock);
+        mSelectedImageView = findViewById(R.id.imageView);
+        mCancelImageView = findViewById(R.id.removeImageButton);
         Drawable addDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_cancel_black_24dp);
         addDrawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.black),
                 PorterDuff.Mode.SRC_ATOP));
@@ -317,7 +318,7 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                         mAppConst.getJsonResponseFromUrl(UrlUtil.AAF_VIEW_STICKERS_URL, new OnResponseListener() {
 
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                                 if (jsonObject != null) {
                                     mStickersPopup = StickersUtil.createStickersPopup(mContext, findViewById(R.id.commentList),
@@ -944,28 +945,24 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                         StickersUtil.showStickersKeyboard();
                     }
                 } else {
-                    try {
 
-                        byte[] bytes = mCommentBox.getText().toString().trim().getBytes("UTF-8");
-                        commentBody = new String(bytes, Charset.forName("UTF-8"));
+                    byte[] bytes = mCommentBox.getText().toString().trim().getBytes(StandardCharsets.UTF_8);
+                    commentBody = new String(bytes, Charset.forName("UTF-8"));
 
-                        if ((commentBody.length() == 0 || commentBody.trim().isEmpty()) && mSelectPath.isEmpty()) {
-                            Toast.makeText(this, getResources().getString(R.string.comment_empty_msg),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            mAppConst.hideKeyboard();
-                            params = new HashMap<>();
+                    if ((commentBody.length() == 0 || commentBody.trim().isEmpty()) && mSelectPath.isEmpty()) {
+                        Toast.makeText(this, getResources().getString(R.string.comment_empty_msg),
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        mAppConst.hideKeyboard();
+                        params = new HashMap<>();
 
-                            // Convert text smileys to emoticons in comments
-                            commentBody = Smileys.getEmojiFromString(commentBody);
-                            params.put("body", commentBody);
+                        // Convert text smileys to emoticons in comments
+                        commentBody = Smileys.getEmojiFromString(commentBody);
+                        params.put("body", commentBody);
 
-                            mCommentBox.setText("");
-                            mCommentBox.setHint(getResources().getString(R.string.write_comment_text) + "…");
-                            postComment(commentBody, null, null);
-                        }
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                        mCommentBox.setText("");
+                        mCommentBox.setHint(getResources().getString(R.string.write_comment_text) + "…");
+                        postComment(commentBody, null, null);
                     }
                 }
                 break;

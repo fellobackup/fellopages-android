@@ -102,8 +102,8 @@ public class SelectedFriendListAdapter extends RecyclerView.Adapter<RecyclerView
             super(v);
 
             container = v;
-            closeBtn = (ImageView) v.findViewById(R.id.cancel);
-            userName = (TextView) v.findViewById(R.id.name);
+            closeBtn = v.findViewById(R.id.cancel);
+            userName = v.findViewById(R.id.name);
         }
     }
 }

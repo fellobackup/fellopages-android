@@ -833,81 +833,81 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements OnMenuC
         public ItemViewHolder(View view, String moduleName, int mMLTViewType, Context context) {
             super(view);
             container = view;
-            mOptionIcon = (ImageView) view.findViewById(R.id.optionIcon);
-            mCloseIcon = (TextView) view.findViewById(R.id.closeIcon);
-            mOptionIconLayout = (LinearLayout) view.findViewById(R.id.option_icon_layout);
+            mOptionIcon = view.findViewById(R.id.optionIcon);
+            mCloseIcon = view.findViewById(R.id.closeIcon);
+            mOptionIconLayout = view.findViewById(R.id.option_icon_layout);
             switch (moduleName) {
                 case "core_main_sitestoreproduct":
                 case "core_main_siteevent":
                 case ConstantVariables.ADV_VIDEO_MENU_TITLE:
                 case ConstantVariables.ADV_VIDEO_CHANNEL_MENU_TITLE:
-                    mContentTitle = (TextView) view.findViewById(R.id.itemTitle);
-                    itemImage = (ImageView) view.findViewById(R.id.viewImage);
+                    mContentTitle = view.findViewById(R.id.itemTitle);
+                    itemImage = view.findViewById(R.id.viewImage);
                     break;
 
                 case ConstantVariables.ADV_VIDEO_PLAYLIST_MENU_TITLE:
                 case "core_main_classified":
                 case "core_main_music":
-                    itemImage = (ImageView) view.findViewById(R.id.viewImage);
-                    mPlayIcon = (ImageView) view.findViewById(R.id.play_button);
-                    mContentTitle = (TextView) view.findViewById(R.id.itemTitle);
-                    itemDesc = (TextView) view.findViewById(R.id.itemDesc);
-                    tvVideoCount = (TextView) view.findViewById(R.id.video_count);
+                    itemImage = view.findViewById(R.id.viewImage);
+                    mPlayIcon = view.findViewById(R.id.play_button);
+                    mContentTitle = view.findViewById(R.id.itemTitle);
+                    itemDesc = view.findViewById(R.id.itemDesc);
+                    tvVideoCount = view.findViewById(R.id.video_count);
                     break;
                 case "sitereview_listing":
                 case "sitereview_wishlist":
-                    mCountContainer = (LinearLayout) view.findViewById(R.id.counts_container);
-                    mViewCountIcon = (TextView) view.findViewById(R.id.view_count_icon);
-                    mViewCount = (TextView) view.findViewById(R.id.view_count);
-                    mReviewCountIcon = (TextView) view.findViewById(R.id.review_count_icon);
-                    mReviewCount = (TextView) view.findViewById(R.id.review_count);
-                    mCommentCountIcon = (TextView) view.findViewById(R.id.comment_count_icon);
-                    mCommentCount = (TextView) view.findViewById(R.id.comment_count);
-                    mLikeCountIcon = (TextView) view.findViewById(R.id.like_count_icon);
-                    mLikeCount = (TextView) view.findViewById(R.id.like_count);
+                    mCountContainer = view.findViewById(R.id.counts_container);
+                    mViewCountIcon = view.findViewById(R.id.view_count_icon);
+                    mViewCount = view.findViewById(R.id.view_count);
+                    mReviewCountIcon = view.findViewById(R.id.review_count_icon);
+                    mReviewCount = view.findViewById(R.id.review_count);
+                    mCommentCountIcon = view.findViewById(R.id.comment_count_icon);
+                    mCommentCount = view.findViewById(R.id.comment_count);
+                    mLikeCountIcon = view.findViewById(R.id.like_count_icon);
+                    mLikeCount = view.findViewById(R.id.like_count);
 
                     switch (mMLTViewType) {
                         case ConstantVariables.GRID_VIEW:
-                            mLeftArrow = (TextView) view.findViewById(R.id.left_arrow_view);
+                            mLeftArrow = view.findViewById(R.id.left_arrow_view);
                             view.findViewById(R.id.day_month_layout).setVisibility(View.GONE);
                             view.findViewById(R.id.date_layout).setVisibility(View.GONE);
-                            mLocationLayout = (LinearLayout) view.findViewById(R.id.location_layout);
-                            mLocationIcon = (TextView) view.findViewById(R.id.location_icon);
-                            mLocation = (TextView) view.findViewById(R.id.eventLocationInfo);
+                            mLocationLayout = view.findViewById(R.id.location_layout);
+                            mLocationIcon = view.findViewById(R.id.location_icon);
+                            mLocation = view.findViewById(R.id.eventLocationInfo);
 
                         case ConstantVariables.LIST_VIEW:
-                            itemImage = (ImageView) view.findViewById(R.id.contentImage);
-                            mContentTitle = (TextView) view.findViewById(R.id.contentTitle);
-                            itemDesc = (TextView) view.findViewById(R.id.contentDetail);
-                            mPriceTag = (TextView) view.findViewById(R.id.price_tag);
-                            mFeatured = (TextView) view.findViewById(R.id.featuredLabel);
-                            mSponsored = (TextView) view.findViewById(R.id.sponsoredLabel);
+                            itemImage = view.findViewById(R.id.contentImage);
+                            mContentTitle = view.findViewById(R.id.contentTitle);
+                            itemDesc = view.findViewById(R.id.contentDetail);
+                            mPriceTag = view.findViewById(R.id.price_tag);
+                            mFeatured = view.findViewById(R.id.featuredLabel);
+                            mSponsored = view.findViewById(R.id.sponsoredLabel);
                             break;
 
                         case ConstantVariables.MATRIX_VIEW:
-                            itemImage = (ImageView) view.findViewById(R.id.viewImage);
-                            mContentTitle = (TextView) view.findViewById(R.id.itemTitle);
-                            itemDesc = (TextView) view.findViewById(R.id.itemDesc);
-                            mCreationDate = (TextView) view.findViewById(R.id.listing_date);
-                            mFeatured = (TextView) view.findViewById(R.id.featuredLabel);
-                            mSponsored = (TextView) view.findViewById(R.id.sponsoredLabel);
-                            mPriceTag = (TextView) view.findViewById(R.id.price_tag);
+                            itemImage = view.findViewById(R.id.viewImage);
+                            mContentTitle = view.findViewById(R.id.itemTitle);
+                            itemDesc = view.findViewById(R.id.itemDesc);
+                            mCreationDate = view.findViewById(R.id.listing_date);
+                            mFeatured = view.findViewById(R.id.featuredLabel);
+                            mSponsored = view.findViewById(R.id.sponsoredLabel);
+                            mPriceTag = view.findViewById(R.id.price_tag);
                             break;
                     }
                     break;
 
                 case "core_main_album":
-                    itemImage = (ImageView) view.findViewById(R.id.viewImage);
-                    mContentTitle = (TextView) view.findViewById(R.id.itemTitle);
+                    itemImage = view.findViewById(R.id.viewImage);
+                    mContentTitle = view.findViewById(R.id.itemTitle);
                     container.findViewById(R.id.album_view).setVisibility(View.VISIBLE);
-                    mOwnerName = (TextView) view.findViewById(R.id.ownerName);
-                    mPhotoCount = (TextView) view.findViewById(R.id.photoCount);
-                    mPlayIcon = (ImageView) view.findViewById(R.id.play_button);
-                    mLikeCount = (TextView) view.findViewById(R.id.likeCount);
-                    mLikeIcon = (TextView) view.findViewById(R.id.likeImg);
+                    mOwnerName = view.findViewById(R.id.ownerName);
+                    mPhotoCount = view.findViewById(R.id.photoCount);
+                    mPlayIcon = view.findViewById(R.id.play_button);
+                    mLikeCount = view.findViewById(R.id.likeCount);
+                    mLikeIcon = view.findViewById(R.id.likeImg);
 
-                    mCommentCount = (TextView) view.findViewById(R.id.commentCount);
-                    mCommentIcon = (TextView) view.findViewById(R.id.commentImg);
+                    mCommentCount = view.findViewById(R.id.commentCount);
+                    mCommentIcon = view.findViewById(R.id.commentImg);
 
                     mOptionIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_item_overflow));
                     mOptionIcon.setColorFilter(ContextCompat.getColor(context, R.color.white),
@@ -916,23 +916,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements OnMenuC
 
                     break;
                 case ConstantVariables.STORE_MENU_TITLE:
-                    mShippingTitle = (TextView) view.findViewById(R.id.shipping_title);
-                    mContentTitle = (TextView) view.findViewById(R.id.shipping_title);
-                    mShippingPrice = (TextView) view.findViewById(R.id.shipping_price);
-                    mShippingDelivery = (TextView) view.findViewById(R.id.shipping_delivery);
-                    mShippingLimit = (TextView) view.findViewById(R.id.shipping_limit);
+                    mShippingTitle = view.findViewById(R.id.shipping_title);
+                    mContentTitle = view.findViewById(R.id.shipping_title);
+                    mShippingPrice = view.findViewById(R.id.shipping_price);
+                    mShippingDelivery = view.findViewById(R.id.shipping_delivery);
+                    mShippingLimit = view.findViewById(R.id.shipping_limit);
                     break;
                 case "downloadable_product":
-                    mDownloadableTitle = (TextView) view.findViewById(R.id.downloadable_title);
-                    mContentTitle = (TextView) view.findViewById(R.id.downloadable_title);
-                    mDownloadableCount = (TextView) view.findViewById(R.id.downloadable_max_count);
-                    mDownloadableExt = (TextView) view.findViewById(R.id.downloadable_extension);
+                    mDownloadableTitle = view.findViewById(R.id.downloadable_title);
+                    mContentTitle = view.findViewById(R.id.downloadable_title);
+                    mDownloadableCount = view.findViewById(R.id.downloadable_max_count);
+                    mDownloadableExt = view.findViewById(R.id.downloadable_extension);
                     break;
 
                 case "show_available_tickets":
-                    mContentTitle = (TextView) view.findViewById(R.id.available_ticket_title);
-                    available_ticket_price = (TextView) view.findViewById(R.id.available_ticket_price);
-                    available_ticket_quantity = (TextView) view.findViewById(R.id.available_ticket_quantity);
+                    mContentTitle = view.findViewById(R.id.available_ticket_title);
+                    available_ticket_price = view.findViewById(R.id.available_ticket_price);
+                    available_ticket_quantity = view.findViewById(R.id.available_ticket_quantity);
                     break;
             }
 
@@ -953,11 +953,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements OnMenuC
             super(itemView);
 
             if (moduleName.equals("sitereview_listing")) {
-                mSlideShowLayout = (LinearLayout) itemView.findViewById(R.id.slide_show_header);
-                mSlideShowPager = (ViewPager) itemView.findViewById(R.id.slide_show_pager);
-                mCircleIndicator = (CircleIndicator) itemView.findViewById(R.id.circle_indicator);
+                mSlideShowLayout = itemView.findViewById(R.id.slide_show_header);
+                mSlideShowPager = itemView.findViewById(R.id.slide_show_pager);
+                mCircleIndicator = itemView.findViewById(R.id.circle_indicator);
             } else {
-                mHeader = (TextView) itemView.findViewById(R.id.locationLabel);
+                mHeader = itemView.findViewById(R.id.locationLabel);
             }
         }
     }

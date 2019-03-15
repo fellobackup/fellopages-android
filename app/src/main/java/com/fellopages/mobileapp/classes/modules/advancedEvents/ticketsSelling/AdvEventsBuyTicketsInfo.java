@@ -95,7 +95,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
 
         /* Create Back Button On Action Bar **/
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.action_bar_title_tickets));
@@ -126,8 +126,8 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
         mEndTime = getIntent().getStringExtra("endtime");
 
 
-        mListView = (ListView) findViewById(R.id.listview);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarMain);
+        mListView = findViewById(R.id.listview);
+        progressBar = findViewById(R.id.progressBarMain);
 
         headerView =  ((LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).
                 inflate(R.layout.tickets_info_list_header, null, false);
@@ -137,26 +137,26 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                 inflate(R.layout.tickets_info_list_footer, null, false);
         mListView.addFooterView(footerView);
 
-        title = (TextView) headerView.findViewById(R.id.title);
-        locationInfo = (TextView) headerView.findViewById(R.id.location_info);
-        dateInfo = (TextView) headerView.findViewById(R.id.date_info);
-        occurrenceFilter = (Spinner) headerView.findViewById(R.id.filter_view);
+        title = headerView.findViewById(R.id.title);
+        locationInfo = headerView.findViewById(R.id.location_info);
+        dateInfo = headerView.findViewById(R.id.date_info);
+        occurrenceFilter = headerView.findViewById(R.id.filter_view);
 
-        ticketsType = (TextView) headerView.findViewById(R.id.tickets_type);
-        price = (TextView) headerView.findViewById(R.id.price);
-        quantity = (TextView) headerView.findViewById(R.id.quantity);
+        ticketsType = headerView.findViewById(R.id.tickets_type);
+        price = headerView.findViewById(R.id.price);
+        quantity = headerView.findViewById(R.id.quantity);
 
-        mHaveCouponTextView = (TextView) footerView.findViewById(R.id.have_coupon_text);
-        mCouponEditText = (EditText) footerView.findViewById(R.id.coupon_edit_text);
-        mSubmitCouponButton = (BaseButton) footerView.findViewById(R.id.coupon_submit_button);
-        progressBarSmall = (ProgressBar) footerView.findViewById(R.id.loadingBarSmall);
-        mCouponMessageView = (TextView) footerView.findViewById(R.id.coupon_message);
-        mSubtotalTextView = (TextView) footerView.findViewById(R.id.subtotal);
-        mDiscountTextView = (TextView) footerView.findViewById(R.id.discount);
-        mTaxText = (TextView) footerView.findViewById(R.id.taxText);
-        mTaxTextView = (TextView) footerView.findViewById(R.id.tax);
-        mGrandTotalTextView = (TextView) footerView.findViewById(R.id.total);
-        mBookNowButton = (BaseButton) footerView.findViewById(R.id.bookNowButton);
+        mHaveCouponTextView = footerView.findViewById(R.id.have_coupon_text);
+        mCouponEditText = footerView.findViewById(R.id.coupon_edit_text);
+        mSubmitCouponButton = footerView.findViewById(R.id.coupon_submit_button);
+        progressBarSmall = footerView.findViewById(R.id.loadingBarSmall);
+        mCouponMessageView = footerView.findViewById(R.id.coupon_message);
+        mSubtotalTextView = footerView.findViewById(R.id.subtotal);
+        mDiscountTextView = footerView.findViewById(R.id.discount);
+        mTaxText = footerView.findViewById(R.id.taxText);
+        mTaxTextView = footerView.findViewById(R.id.tax);
+        mGrandTotalTextView = footerView.findViewById(R.id.total);
+        mBookNowButton = footerView.findViewById(R.id.bookNowButton);
         mBookNowButton.setVisibility(View.VISIBLE);
 
         spinnerAdapter = new SpinnerAdapter(this, R.layout.simple_text_view, mFilterSelectedItem);

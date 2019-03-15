@@ -82,7 +82,7 @@ public class Likes extends AppCompatActivity implements AbsListView.OnScrollList
         /*
         Set Back Button on Action Bar
          */
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mContext = this;
         mImageLoader = new ImageLoader(getApplicationContext());
 
@@ -106,9 +106,9 @@ public class Likes extends AppCompatActivity implements AbsListView.OnScrollList
         CustomViews.createMarqueeTitle(this, mToolbar);
 
         mTabSaperator = findViewById(R.id.tabSaperator);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTabLayout= (TabLayout) findViewById(R.id.tabs);
-        mLikeListView = (ListView) findViewById(R.id.likeList);
+        viewPager = findViewById(R.id.viewpager);
+        mTabLayout= findViewById(R.id.tabs);
+        mLikeListView = findViewById(R.id.likeList);
 
         mAppConst = new AppConstant(this);
 
@@ -356,8 +356,8 @@ public class Likes extends AppCompatActivity implements AbsListView.OnScrollList
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(imageWidthHeight, imageWidthHeight);
             for(int i = 0; i < mReactionTabs.length(); i++){
                 View linearLayout = LayoutInflater.from(this).inflate(R.layout.reactions_tab_layout, null);
-                ImageView imageView = (ImageView) linearLayout.findViewById(R.id.reactionIcon);
-                TextView textView = (TextView) linearLayout.findViewById(R.id.reactionsCount);
+                ImageView imageView = linearLayout.findViewById(R.id.reactionIcon);
+                TextView textView = linearLayout.findViewById(R.id.reactionsCount);
 
                 JSONObject jsonObject = mReactionTabs.optJSONObject(i);
                 int reactionCount = jsonObject.optInt("reaction_count");

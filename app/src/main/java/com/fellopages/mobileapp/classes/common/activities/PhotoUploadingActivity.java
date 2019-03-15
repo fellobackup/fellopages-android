@@ -86,8 +86,8 @@ public class PhotoUploadingActivity extends FragmentActivity implements MultiMed
             finish();
         }
 
-        mSubmitButton = (Button) findViewById(R.id.commit);
-        mUploadButton = (Button) findViewById(R.id.upload);
+        mSubmitButton = findViewById(R.id.commit);
+        mUploadButton = findViewById(R.id.upload);
 
         Bundle bundle = new Bundle();
 
@@ -110,9 +110,9 @@ public class PhotoUploadingActivity extends FragmentActivity implements MultiMed
 
         mPhotoUrls = new ArrayList<>();
 
-        mBackButton = (ImageView) findViewById(R.id.btn_back);
+        mBackButton = findViewById(R.id.btn_back);
         mBackButton.setOnClickListener(this);
-        mGridView = (GridView) findViewById(R.id.gridView);
+        mGridView = findViewById(R.id.gridView);
         mGridView.setVisibility(View.VISIBLE);
         initilizeGridLayout();
 

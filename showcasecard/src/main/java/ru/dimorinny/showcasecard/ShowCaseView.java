@@ -175,10 +175,7 @@ public class ShowCaseView extends FrameLayout implements View.OnTouchListener {
         Rect nextTextRect = new Rect();
         cardNext.getHitRect(nextTextRect);
 
-        if (!nextTextRect.contains((int)touchEvent.getX(), (int)touchEvent.getY())) {
-            return false;
-        }
-        return true;
+        return nextTextRect.contains((int) touchEvent.getX(), (int) touchEvent.getY());
     }
 
     private void removeFromWindow() {

@@ -121,7 +121,7 @@ public class MultiMediaSelectorActivity extends FragmentActivity implements Mult
         });
 
         // Finish button
-        mSubmitButton = (Button) findViewById(R.id.commit);
+        mSubmitButton = findViewById(R.id.commit);
         if(resultList == null || resultList.size()<=0){
             mSubmitButton.setText(getResources().getString(R.string.action_bar_button_title));
             mSubmitButton.setEnabled(false);

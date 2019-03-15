@@ -111,7 +111,7 @@ public class BrowseOffersFragment extends Fragment implements SwipeRefreshLayout
         mImageLoader = new ImageLoader(getActivity());
 
         rootView = inflater.inflate(R.layout.list_view_layout, container,false);
-        mListView = (ListView) rootView.findViewById(R.id.list_item_view);
+        mListView = rootView.findViewById(R.id.list_item_view);
         footerView = CustomViews.getFooterView(inflater);
 
         ViewCompat.setNestedScrollingEnabled(mListView,true);
@@ -142,7 +142,7 @@ public class BrowseOffersFragment extends Fragment implements SwipeRefreshLayout
         mBrowseDataAdapter = new BrowseDataAdapter(getActivity(), R.layout.offer_view, mBrowseItemList);
         mListView.setAdapter(mBrowseDataAdapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(mContext, R.color.colorAccent));
 
@@ -160,7 +160,7 @@ public class BrowseOffersFragment extends Fragment implements SwipeRefreshLayout
 
         mAppConst.getJsonResponseFromUrl(mBrowseOffersUrl + "&page=" + mLoadingPageNo, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mBrowseItemList.clear();
                 isVisibleToUser = true;
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
@@ -243,8 +243,8 @@ public class BrowseOffersFragment extends Fragment implements SwipeRefreshLayout
             }
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf080");
             errorMessage.setText(mContext.getResources().getString(R.string.no_offers));
@@ -282,13 +282,13 @@ public class BrowseOffersFragment extends Fragment implements SwipeRefreshLayout
         View offerInfoView = ((LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).
                 inflate(R.layout.offer_view, null, false);
 
-        ImageView offerImageView = (ImageView) offerInfoView.findViewById(R.id.contentImage);
-        TextView offerTitle = (TextView) offerInfoView.findViewById(R.id.contentTitle);
-        TextView offerEndDate = (TextView) offerInfoView.findViewById(R.id.contentDetail);
-        TextView offerStartDate = (TextView) offerInfoView.findViewById(R.id.coupon_start_date);
-        TextView offerClaimCount = (TextView) offerInfoView.findViewById(R.id.claimCount);
-        SelectableTextView couponCodeButton = (SelectableTextView) offerInfoView.findViewById(R.id.couponCodeButton);
-        TextView offerDescription = (TextView) offerInfoView.findViewById(R.id.offerDescription);
+        ImageView offerImageView = offerInfoView.findViewById(R.id.contentImage);
+        TextView offerTitle = offerInfoView.findViewById(R.id.contentTitle);
+        TextView offerEndDate = offerInfoView.findViewById(R.id.contentDetail);
+        TextView offerStartDate = offerInfoView.findViewById(R.id.coupon_start_date);
+        TextView offerClaimCount = offerInfoView.findViewById(R.id.claimCount);
+        SelectableTextView couponCodeButton = offerInfoView.findViewById(R.id.couponCodeButton);
+        TextView offerDescription = offerInfoView.findViewById(R.id.offerDescription);
 
         mImageLoader.setImageUrl(listItems.getmBrowseImgUrl(), offerImageView);
 
@@ -368,7 +368,7 @@ public class BrowseOffersFragment extends Fragment implements SwipeRefreshLayout
     private void loadMoreData(String url) {
         mAppConst.getJsonResponseFromUrl(url, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 CustomViews.removeFooterView(mListView, footerView);
                 addDataToList(jsonObject);
                 isLoading = false;

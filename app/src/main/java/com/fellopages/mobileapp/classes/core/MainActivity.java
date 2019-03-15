@@ -260,21 +260,21 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
         mAppTitle =  getApplicationContext().getResources().getString(R.string.app_name);
-        mHomeTabs = (LinearLayout) findViewById(R.id.home_tab_layout);
-        mFooterTabs = (LinearLayout) findViewById(R.id.quick_return_footer_ll);
-        mEventFilters = (CardView) findViewById(R.id.eventFilterBlock);
-        mTabHost = (TabLayout) findViewById(R.id.materialTabHost);
-        mFabMenu = (FloatingActionMenu) findViewById(R.id.fab_menu);
-        mFabCreate = (FloatingActionButton) findViewById(R.id.create_fab);
+        mHomeTabs = findViewById(R.id.home_tab_layout);
+        mFooterTabs = findViewById(R.id.quick_return_footer_ll);
+        mEventFilters = findViewById(R.id.eventFilterBlock);
+        mTabHost = findViewById(R.id.materialTabHost);
+        mFabMenu = findViewById(R.id.fab_menu);
+        mFabCreate = findViewById(R.id.create_fab);
         mFabCreate.hide();
         mFooterTabs.setVisibility(View.GONE);
-        fabAlbumCreate = (CustomFloatingActionButton) findViewById(R.id.create_new_album);
-        fabAlbumUpload = (CustomFloatingActionButton) findViewById(R.id.edit_album);
+        fabAlbumCreate = findViewById(R.id.create_new_album);
+        fabAlbumUpload = findViewById(R.id.edit_album);
         mFabCreate.setOnClickListener(this);
         fabAlbumUpload.setOnClickListener(this);
         fabAlbumCreate.setOnClickListener(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if(getSupportActionBar() != null) {
@@ -285,21 +285,21 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         appBarLayout = findViewById(R.id.appbar);
 
         // Header search bar's text view.
-        TextView tvSearch = (TextView) findViewById(R.id.tv_search);
+        TextView tvSearch = findViewById(R.id.tv_search);
         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search).mutate();
         drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
         tvSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
         //drawer layout settings
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout),toolbar);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, findViewById(R.id.drawer_layout),toolbar);
         drawerFragment.setDrawerListener(MainActivity.this);
         isSetLocation = getIntent().hasExtra("isSetLocation");
 
         // Updating dashboard data.
         mAppConst.getJsonResponseFromUrl(UrlUtil.DASHBOARD_URL + "?browse_as_guest=1", new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 updateServerSettings();
 
                 // Updating location & guest user info.
@@ -565,7 +565,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE) &&
             !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW) ) {
             isShowCaseView = true;
-            int padding70 = (int) getResources().getDimensionPixelOffset(R.dimen.padding_70dp);
+            int padding70 = getResources().getDimensionPixelOffset(R.dimen.padding_70dp);
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW);
             showCaseStepDisplayer.addStep(new ShowCaseStep(new BottomRightCustom(padding70), mContext.getResources().getString(R.string.create_album_show_case_text), mContext.getResources().getDimension(R.dimen.radius_25)));
         }
@@ -598,11 +598,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
      */
     private void showUpgradeDialogIfNeeded(String latestVersion, String description) {
         View view = getLayoutInflater().inflate(R.layout.layout_upgrade_dialog, null);
-        TextView tvTitle = (TextView) view.findViewById(R.id.tv_title);
-        TextView tvDescription = (TextView) view.findViewById(R.id.tv_description);
-        TextView tvDownload = (TextView) view.findViewById(R.id.tv_download);
-        TextView tvRemindMeLater = (TextView) view.findViewById(R.id.tv_reming_me_later);
-        TextView tvIgnore = (TextView) view.findViewById(R.id.tv_ignore);
+        TextView tvTitle = view.findViewById(R.id.tv_title);
+        TextView tvDescription = view.findViewById(R.id.tv_description);
+        TextView tvDownload = view.findViewById(R.id.tv_download);
+        TextView tvRemindMeLater = view.findViewById(R.id.tv_reming_me_later);
+        TextView tvIgnore = view.findViewById(R.id.tv_ignore);
         tvTitle.setText(getResources().getString(R.string.new_version_available) + " (" + latestVersion + ")");
         tvDescription.setText(description);
         GradientDrawable drawable = (GradientDrawable) view.getBackground();
@@ -1063,13 +1063,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         cartItem = menu.findItem(R.id.action_cart);
         searchBar = findViewById(R.id.search_bar);
         if (searchItem != null && searchItem.getActionView() != null) {
-            setColorFilter((ImageView)searchItem.getActionView().findViewById(R.id.search_icon));
+            setColorFilter(searchItem.getActionView().findViewById(R.id.search_icon));
         }
         if (locationItem != null && locationItem.getActionView() != null) {
-            setColorFilter((ImageView)locationItem.getActionView().findViewById(R.id.location_icon));
+            setColorFilter(locationItem.getActionView().findViewById(R.id.location_icon));
         }
         if (cartItem != null && cartItem.getActionView() != null) {
-            setColorFilter((ImageView)cartItem.getActionView().findViewById(R.id.cart_icon));
+            setColorFilter(cartItem.getActionView().findViewById(R.id.cart_icon));
         }
 
         if(behavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
@@ -1085,7 +1085,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         if (enabledModuleList != null && enabledModuleList.contains("sitestore") && ConstantVariables.SHOW_CART_ICON) {
             cartItem.setVisible(true);
             cartItem.getActionView().setOnClickListener(this);
-            mCartCountBadge = (BadgeView) cartItem.getActionView().findViewById(R.id.cart_item_count);
+            mCartCountBadge = cartItem.getActionView().findViewById(R.id.cart_item_count);
             displayCartCount();
         } else {
             cartItem.setVisible(false);
@@ -2155,7 +2155,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         mAppConst.postJsonResponseForUrl(url, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException { }
+            public void onTaskCompleted(JSONObject jsonObject) { }
 
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) { }

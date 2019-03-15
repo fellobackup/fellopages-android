@@ -90,7 +90,7 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
 
         View headerView = getLayoutInflater().inflate(R.layout.toolbar, null, false);
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) headerView.findViewById(R.id.toolbar);
+        mToolbar = headerView.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,7 +110,7 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
         fab.setLayoutParams(lay);
 
         // Adding fab button to main view.
-        ViewGroup vg = (ViewGroup) findViewById(R.id.main_view_recycler);
+        ViewGroup vg = findViewById(R.id.main_view_recycler);
         vg.addView(fab);
 
         if(getIntent() != null){
@@ -128,9 +128,9 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
             }
         }
         currentModule = ConstantVariables.ADV_EVENT_TICKET_MENU_TITLE;
-        mRootView = (RelativeLayout) findViewById(R.id.main_view_recycler);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        mRootView = findViewById(R.id.main_view_recycler);
+        mRecyclerView = findViewById(R.id.recycler_view);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         // Adding header view to main view.
@@ -196,7 +196,7 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
         mLoadingPageNo = 1;
         mAppConst.getJsonResponseFromUrl(available_tickets_url, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                 if (snackbar != null && snackbar.isShown()) {
                     snackbar.dismiss();
@@ -274,8 +274,8 @@ public class AdvEventsAvailableTickets extends AppCompatActivity implements Swip
             }
         }else {
             findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) findViewById(R.id.error_message);
+            TextView errorIcon = findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf046");
             errorMessage.setText(mContext.getResources().getString(R.string.no_available_tickets));

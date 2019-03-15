@@ -236,13 +236,13 @@ public class FormPicker extends FormWidget implements View.OnClickListener,
     private void getViews() {
 
         // Getting label, description and field value views.
-        tvLabel = (TextView) mConfigFieldView.findViewById(R.id.view_label);
+        tvLabel = mConfigFieldView.findViewById(R.id.view_label);
         tvLabel.setTypeface(Typeface.DEFAULT_BOLD);
         tvLabel.setText(mLabel != null ? mLabel : getDisplayText());
-        TextView tvDescription = (TextView) mConfigFieldView.findViewById(R.id.view_description);
-        etFieldValue = (EditText) mConfigFieldView.findViewById(R.id.field_value);
-        tvError = (TextView) mConfigFieldView.findViewById(R.id.error_view);
-        mRatingBar = (RatingBar) mConfigFieldView.findViewById(R.id.ratingBar);
+        TextView tvDescription = mConfigFieldView.findViewById(R.id.view_description);
+        etFieldValue = mConfigFieldView.findViewById(R.id.field_value);
+        tvError = mConfigFieldView.findViewById(R.id.error_view);
+        mRatingBar = mConfigFieldView.findViewById(R.id.ratingBar);
 
         // Checking for the inflated field type.
         if (mIsRatingBarField) {
@@ -369,8 +369,8 @@ public class FormPicker extends FormWidget implements View.OnClickListener,
             View endTimeConfigView = FormActivity._layout.findViewWithTag("endtime");
             EditText etStartTime = null, etEndTime = null;
             if (startTimeConfigView != null && endTimeConfigView != null) {
-                etStartTime = (EditText) startTimeConfigView.findViewById(R.id.field_value);
-                etEndTime = (EditText) endTimeConfigView.findViewById(R.id.field_value);
+                etStartTime = startTimeConfigView.findViewById(R.id.field_value);
+                etEndTime = endTimeConfigView.findViewById(R.id.field_value);
             }
 
             // When the form is loaded from edit form then setting the min date with the start date.

@@ -188,8 +188,8 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
         mImageLoader = new ImageLoader(getApplicationContext());
 
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -232,7 +232,7 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
                     "&subject_id=" + mContentId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     mContentReactions = mReactionsObject.optJSONObject("feed_reactions");
@@ -283,16 +283,16 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
          * Common views in all view types
          */
         //Header view
-        mCoverLayout = (FrameLayout) findViewById(R.id.cover_layout);
-        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        mCoverLayout = findViewById(R.id.cover_layout);
+        mMainContent = findViewById(R.id.main_content);
+        appBar = findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(this);
 
         // Setup the Tabs
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        mSlidingTabs = (TabLayout) findViewById(R.id.slidingTabs);
+        viewPager = findViewById(R.id.pager);
+        mSlidingTabs = findViewById(R.id.slidingTabs);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
 
         switch (mMLTViewType) {
             case ConstantVariables.BLOG_VIEW:
@@ -300,14 +300,14 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
                 viewPager.setVisibility(View.GONE);
                 mSlidingTabs.setVisibility(View.GONE);
 
-                mScrollView = (NestedScrollView) findViewById(R.id.scroll_view);
-                mOwnerView = (LinearLayout) findViewById(R.id.owner_detail_layout);
-                mOwnerImage = (BezelImageView) findViewById(R.id.owner_image);
-                mOwnerTitle = (TextView) findViewById(R.id.owner_title);
-                mCategoryText = (TextView) findViewById(R.id.category);
+                mScrollView = findViewById(R.id.scroll_view);
+                mOwnerView = findViewById(R.id.owner_detail_layout);
+                mOwnerImage = findViewById(R.id.owner_image);
+                mOwnerTitle = findViewById(R.id.owner_title);
+                mCategoryText = findViewById(R.id.category);
                 mOverviewSeperaterView = findViewById(R.id.mOverviewSeperaterView);
-                mViewBody = (WebView) findViewById(R.id.view_blog_body);
-                mViewDescription = (WebView) findViewById(R.id.view_blog_overview);
+                mViewBody = findViewById(R.id.view_blog_body);
+                mViewDescription = findViewById(R.id.view_blog_overview);
                 GlobalFunctions.setWebSettings(mViewBody, false);
                 GlobalFunctions.setWebSettings(mViewDescription, false);
                 break;
@@ -315,12 +315,12 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
             case ConstantVariables.CLASSIFIED_VIEW_WITH_CAROUSEL:
                 mCarouselView = LayoutInflater.from(this).inflate(R.layout.layout_carousel_image, null);
 
-                mCarouselLayout = (RelativeLayout) mCarouselView.findViewById(R.id.carouselLayout);
-                coverImagePager = (ViewPager) mCarouselView.findViewById(R.id.backdrop);
-                mCoverTitle = (TextView) mCarouselView.findViewById(R.id.content_title);
-                leftArrow = (ImageView) mCarouselView.findViewById(R.id.left_arrow);
-                rightArrow = (ImageView) mCarouselView.findViewById(R.id.right_arrow);
-                mPhotoCountIcon = (TextView) mCarouselView.findViewById(R.id.image_count);
+                mCarouselLayout = mCarouselView.findViewById(R.id.carouselLayout);
+                coverImagePager = mCarouselView.findViewById(R.id.backdrop);
+                mCoverTitle = mCarouselView.findViewById(R.id.content_title);
+                leftArrow = mCarouselView.findViewById(R.id.left_arrow);
+                rightArrow = mCarouselView.findViewById(R.id.right_arrow);
+                mPhotoCountIcon = mCarouselView.findViewById(R.id.image_count);
                 mPhotoCountIcon.setTypeface(fontIcon);
 
                 sliderAdapter = new SliderAdapter(this, mPhotoUrls, new OnItemClickListener() {
@@ -348,12 +348,12 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
                 break;
         }
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mCoverImage = (ImageView) findViewById(R.id.coverImage);
-        mContentTitle = (TextView) findViewById(R.id.content_title);
-        mProfileImage = (ImageView) findViewById(R.id.profile_image);
-        mCoverImageMenus = (TextView) findViewById(R.id.cover_image_menus);
-        mProfileImageMenus = (TextView) findViewById(R.id.profile_image_menus);
+        mProgressBar = findViewById(R.id.progressBar);
+        mCoverImage = findViewById(R.id.coverImage);
+        mContentTitle = findViewById(R.id.content_title);
+        mProfileImage = findViewById(R.id.profile_image);
+        mCoverImageMenus = findViewById(R.id.cover_image_menus);
+        mProfileImageMenus = findViewById(R.id.profile_image_menus);
         mCoverImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mProfileImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
@@ -361,10 +361,10 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
         /*
             Like and Unlike Fields...
         */
-        mLikeCountTextView = (TextView) findViewById(R.id.likeCount);
-        mCommentCountTextView = (TextView) findViewById(R.id.commentCount);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        mLikeUnlikeText = (TextView) findViewById(R.id.likeUnlikeText);
+        mLikeCountTextView = findViewById(R.id.likeCount);
+        mCommentCountTextView = findViewById(R.id.commentCount);
+        mReactionIcon = findViewById(R.id.reactionIcon);
+        mLikeUnlikeText = findViewById(R.id.likeUnlikeText);
 
         View likeBlock = findViewById(R.id.likeBlock);
         View likeCommentCountBlock = findViewById(R.id.likeCommentBlock);
@@ -384,8 +384,8 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
         likeBlock.setOnLongClickListener(this);
         likeCommentCountBlock.setOnClickListener(this);
 
-        mLikeCommentContent = (LinearLayout) findViewById(R.id.likeCommentContent);
-        mBottomToolBar = (SplitToolbar) findViewById(R.id.toolbarBottom);
+        mLikeCommentContent = findViewById(R.id.likeCommentContent);
+        mBottomToolBar = findViewById(R.id.toolbarBottom);
     }
 
     /**
@@ -1344,7 +1344,7 @@ public class MLTView extends AppCompatActivity implements ViewPager.OnPageChange
                     if (!isLiked) {
                         mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                             }
 

@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class PreferencesUtils {
@@ -624,18 +625,14 @@ public class PreferencesUtils {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(LOGIN_EMAIL, email);
         editor.putInt(LOGIN_USER_ID, userId);
-        try {
-            if(password != null) {
-                byte[] passwordBytes = password.getBytes("UTF-8");
-                String encryptedPassword = Base64.encodeToString(passwordBytes, Base64.NO_WRAP);
-                editor.putString(LOGIN_PASSWORD, encryptedPassword);
-            }else {
-                editor.putString(LOGIN_PASSWORD, null);
-            }
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        if(password != null) {
+            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
+            String encryptedPassword = Base64.encodeToString(passwordBytes, Base64.NO_WRAP);
+            editor.putString(LOGIN_PASSWORD, encryptedPassword);
+        }else {
+            editor.putString(LOGIN_PASSWORD, null);
         }
+
         editor.apply();
     }
 

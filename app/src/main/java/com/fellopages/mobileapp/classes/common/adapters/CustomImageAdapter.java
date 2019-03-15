@@ -269,7 +269,7 @@ public class CustomImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 itemViewHolder.container.findViewById(R.id.main_view).setPadding(padding, padding, padding, padding);
 
                 if (itemViewHolder.holderImageList.getmSelectedItemPos() == 1) {
-                    itemViewHolder.mSelectedPosition = position;
+                    ViewHolder.mSelectedPosition = position;
                     itemViewHolder.container.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.themeButtonColor));
                 } else {
                     itemViewHolder.container.setBackgroundColor(Color.TRANSPARENT);
@@ -285,8 +285,8 @@ public class CustomImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     public void onClick(View v) {
                         if (mOnItemClickListener != null) {
 
-                            if (itemViewHolder.mSelectedPosition < getItemCount()) {
-                                ImageViewList imageViewListOld = mPhotoList.get(itemViewHolder.mSelectedPosition);
+                            if (ViewHolder.mSelectedPosition < getItemCount()) {
+                                ImageViewList imageViewListOld = mPhotoList.get(ViewHolder.mSelectedPosition);
                                 imageViewListOld.setmSelectedItemPos(0);
                             }
 
@@ -512,13 +512,13 @@ public class CustomImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             super(v);
 
             container = v;
-            imageView = (ImageView) v.findViewById(R.id.thumbnail);
-            ivGifIcon = (ImageView) v.findViewById(R.id.gif_icon);
-            tvCancel = (TextView) v.findViewById(R.id.btn_image_remove);
+            imageView = v.findViewById(R.id.thumbnail);
+            ivGifIcon = v.findViewById(R.id.gif_icon);
+            tvCancel = v.findViewById(R.id.btn_image_remove);
             imageView.setLayoutParams(CustomViews.getCustomWidthHeightRelativeLayoutParams(imageWidth, imageWidth));
-            ivCancelImage = (ImageView) v.findViewById(R.id.image_remove);
-            tvDescription = (TextView) v.findViewById(R.id.image_desc);
-            llDescriptionBlock = (RelativeLayout) v.findViewById(R.id.description_block);
+            ivCancelImage = v.findViewById(R.id.image_remove);
+            tvDescription = v.findViewById(R.id.image_desc);
+            llDescriptionBlock = v.findViewById(R.id.description_block);
 
         }
 
@@ -535,9 +535,9 @@ public class CustomImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public HeaderViewHolder(View v) {
             super(v);
             mUserView = v;
-            mOwnerImageView = (BezelImageView) v.findViewById(R.id.owner_image);
-            mOwnerTitleView = (TextView) v.findViewById(R.id.owner_title);
-            mViewDescription = (SelectableTextView) v.findViewById(R.id.view_description);
+            mOwnerImageView = v.findViewById(R.id.owner_image);
+            mOwnerTitleView = v.findViewById(R.id.owner_title);
+            mViewDescription = v.findViewById(R.id.view_description);
 
         }
     }

@@ -79,8 +79,8 @@ public class SelectPackage extends AppCompatActivity implements AdapterView.OnIt
         mContext = this;
         mAppConst = new AppConstant(mContext);
 
-        mListView = (ListView) findViewById(R.id.list_item_view);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mListView = findViewById(R.id.list_item_view);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -88,7 +88,7 @@ public class SelectPackage extends AppCompatActivity implements AdapterView.OnIt
         CustomViews.createMarqueeTitle(this, mToolbar);
         footerView = CustomViews.getFooterView(getLayoutInflater());
 
-        mHeaderView = (TextView) findViewById(R.id.header_view_text);
+        mHeaderView = findViewById(R.id.header_view_text);
 
         mCurrentSelectedOption = getIntent().getStringExtra(ConstantVariables.EXTRA_MODULE_TYPE);
         if (mCurrentSelectedOption == null || mCurrentSelectedOption.isEmpty()) {
@@ -115,7 +115,7 @@ public class SelectPackage extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -206,8 +206,8 @@ public class SelectPackage extends AppCompatActivity implements AdapterView.OnIt
 
         } else {
             findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) findViewById(R.id.error_message);
+            TextView errorIcon = findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf143");
             errorMessage.setText(mContext.getResources().getString(R.string.no_packages));

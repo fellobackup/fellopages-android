@@ -296,28 +296,28 @@ public class UserReviewFragment extends Fragment implements SwipeRefreshLayout.O
     // Getting all views.
     public void getViews() {
 
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // No data message views
-        llMessage = (LinearLayout) mRootView.findViewById(R.id.message_layout);
-        tvErrorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-        stvErrorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+        llMessage = mRootView.findViewById(R.id.message_layout);
+        tvErrorIcon = mRootView.findViewById(R.id.error_icon);
+        stvErrorMessage = mRootView.findViewById(R.id.error_message);
         tvErrorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
         //Swipe refresh layout view.
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
         // Getting header views
-        tvUserBasedText = (TextView) mHeaderView.findViewById(R.id.userbaseText);
-        tvRecommendedText = (TextView) mHeaderView.findViewById(R.id.recommendedText);
-        tvUpdateReview = (TextView) mHeaderView.findViewById(R.id.updateReviewText);
-        rbAverage = (RatingBar) mHeaderView.findViewById(R.id.avgRatingBar);
-        rbMy = (RatingBar) mHeaderView.findViewById(R.id.myRatingBar);
+        tvUserBasedText = mHeaderView.findViewById(R.id.userbaseText);
+        tvRecommendedText = mHeaderView.findViewById(R.id.recommendedText);
+        tvUpdateReview = mHeaderView.findViewById(R.id.updateReviewText);
+        rbAverage = mHeaderView.findViewById(R.id.avgRatingBar);
+        rbMy = mHeaderView.findViewById(R.id.myRatingBar);
         tvUpdateReview.setOnClickListener(this);
-        RelativeLayout mainView = (RelativeLayout) mRootView.findViewById(R.id.main_view_recycler);
+        RelativeLayout mainView = mRootView.findViewById(R.id.main_view_recycler);
         mainView.addView(mHeaderView);
         CustomViews.addHeaderView(R.id.ratingInfo, mSwipeRefreshLayout);
         mHeaderView.findViewById(R.id.ratingInfo).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;

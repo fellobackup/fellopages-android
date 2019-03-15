@@ -181,7 +181,7 @@ public class VideoView extends AppCompatActivity implements  View.OnClickListene
         mVideoType = getIntent().getIntExtra(ConstantVariables.VIDEO_TYPE, 0);
         mVideoViewUrl = getIntent().getStringExtra(ConstantVariables.VIDEO_URL);
 
-        mScrollView = (ScrollView) findViewById(R.id.bottomAreaScroller);
+        mScrollView = findViewById(R.id.bottomAreaScroller);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.blank_string));
@@ -210,38 +210,38 @@ public class VideoView extends AppCompatActivity implements  View.OnClickListene
         /*
         Like and Unlike Fields...
          */
-        mLikeBlock = (LinearLayout) findViewById(R.id.likeBlock);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        mLikeButton = (ActionIconThemedTextView) findViewById(R.id.like_button);
-        mCommentButton  = (ActionIconThemedTextView) findViewById(R.id.comment_button);
-        mCountsBlock = (LinearLayout) findViewById(R.id.countsBlock);
-        mLikeCountTextView = (TextView) findViewById(R.id.likeCount);
-        mCommentCountTextView = (TextView) findViewById(R.id.commentCount);
+        mLikeBlock = findViewById(R.id.likeBlock);
+        mReactionIcon = findViewById(R.id.reactionIcon);
+        mLikeButton = findViewById(R.id.like_button);
+        mCommentButton  = findViewById(R.id.comment_button);
+        mCountsBlock = findViewById(R.id.countsBlock);
+        mLikeCountTextView = findViewById(R.id.likeCount);
+        mCommentCountTextView = findViewById(R.id.commentCount);
         mLikeBlock.setOnClickListener(this);
         mLikeBlock.setOnLongClickListener(this);
         mCommentButton.setOnClickListener(this);
         mCountsBlock.setOnClickListener(this);
 
-        mViewTitle = (SelectableTextView) findViewById(R.id.video_title);
-        mViewDetails = (SelectableTextView) findViewById(R.id.video_detail);
-        mViewCount = (SelectableTextView) findViewById(R.id.video_view_count);
-        mViewOwnerName = (SelectableTextView) findViewById(R.id.owner_title);
-        mViewDescription = (SelectableTextView) findViewById(R.id.video_description);
-        mOwnerProfilePic = (BezelImageView) findViewById(R.id.owner_image);
-        loadingProgress = (ProgressBar) findViewById(R.id.loadingProgress);
-        mRatingBar = (RatingBar) findViewById(R.id.smallRatingBar);
-        mTagView = (SelectableTextView) findViewById(R.id.tagView);
+        mViewTitle = findViewById(R.id.video_title);
+        mViewDetails = findViewById(R.id.video_detail);
+        mViewCount = findViewById(R.id.video_view_count);
+        mViewOwnerName = findViewById(R.id.owner_title);
+        mViewDescription = findViewById(R.id.video_description);
+        mOwnerProfilePic = findViewById(R.id.owner_image);
+        loadingProgress = findViewById(R.id.loadingProgress);
+        mRatingBar = findViewById(R.id.smallRatingBar);
+        mTagView = findViewById(R.id.tagView);
 
         //Setting up local video player
-        tvVideoMode = (TextView) findViewById(R.id.video_mode);
-        videoView = (android.widget.VideoView) findViewById(R.id.video_player);
+        tvVideoMode = findViewById(R.id.video_mode);
+        videoView = findViewById(R.id.video_player);
         mController = new MediaController(this);
         mController.setAnchorView(videoView);
         videoView.setMediaController(mController);
         videoView.requestFocus();
 
         //Setting up webview for playing youtube and vimeo videos
-        mVideoWebView = (WebView) findViewById(R.id.webView);
+        mVideoWebView = findViewById(R.id.webView);
         loadVideoUrl();
 
         // Hide Rating Bar in case of Logged-out user
@@ -263,7 +263,7 @@ public class VideoView extends AppCompatActivity implements  View.OnClickListene
                     "&subject_id=" + mViewId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     if (reactionsData != null) {
@@ -627,7 +627,7 @@ public class VideoView extends AppCompatActivity implements  View.OnClickListene
                 mDataResponse.optInt("video_id");
         mAppConst.postJsonResponseForUrl(postRatingUrl, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
 
             }
 
@@ -961,7 +961,7 @@ public class VideoView extends AppCompatActivity implements  View.OnClickListene
                     if (!isLike) {
                         mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                             }
 

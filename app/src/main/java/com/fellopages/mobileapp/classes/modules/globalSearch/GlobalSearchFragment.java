@@ -90,7 +90,7 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
         // Inflate the layout for this fragment
         mRootView =  inflater.inflate(R.layout.list_view_layout, container, false);
         mContext = getContext();
-        mListView = (ListView) mRootView.findViewById(R.id.list_item_view);
+        mListView = mRootView.findViewById(R.id.list_item_view);
 
         postParams = new HashMap<>();
         mBrowseItemList = new ArrayList<>();
@@ -102,7 +102,7 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
         mListView.setOnItemClickListener(this);
         mListView.setOnScrollListener(this);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -135,7 +135,7 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
         mAppConst.postJsonResponseForUrl(searchUrl, postParams, new OnResponseListener() {
 
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mRootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                 mBrowseItemList.clear();
 
@@ -309,8 +309,8 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
 
             }else {
                 mRootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-                SelectableTextView errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+                TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+                SelectableTextView errorMessage = mRootView.findViewById(R.id.error_message);
                 errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                 errorIcon.setText("\uf119");
                 errorMessage.setText(mContext.getResources().getString(R.string.no_data_available));
@@ -330,7 +330,7 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
 
         mAppConst.postJsonResponseForUrl(url, postParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 CustomViews.removeFooterView(mListView, footerView);
                 addDataToList(jsonObject);
 

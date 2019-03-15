@@ -127,7 +127,7 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
 
         // -- WebView configuration
 
-        mWebView = (EditorWebViewAbstract) view.findViewById(R.id.webview);
+        mWebView = view.findViewById(R.id.webview);
 
         mWebView.setOnTouchListener(this);
         mWebView.setOnImeBackListener(this);
@@ -158,8 +158,8 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
         // -- HTML mode configuration
 
         mSourceView = view.findViewById(R.id.sourceview);
-        mSourceViewTitle = (SourceViewEditText) view.findViewById(R.id.sourceview_title);
-        mSourceViewContent = (SourceViewEditText) view.findViewById(R.id.sourceview_content);
+        mSourceViewTitle = view.findViewById(R.id.sourceview_title);
+        mSourceViewContent = view.findViewById(R.id.sourceview_content);
 
         // Toggle format bar on/off as user changes focus between title and content in HTML mode
         mSourceViewTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -264,7 +264,7 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
                 }
 
                 if (mSourceView.getVisibility() == View.VISIBLE) {
-                    ToggleButton htmlButton = (ToggleButton) formatBar.findViewById(R.id.format_bar_button_html);
+                    ToggleButton htmlButton = formatBar.findViewById(R.id.format_bar_button_html);
                     htmlButton.setChecked(true);
                 }
             }
@@ -298,37 +298,37 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
     }
 
     private void setupFormatBarButtonMap(View view) {
-        ToggleButton boldButton = (ToggleButton) view.findViewById(R.id.format_bar_button_bold);
+        ToggleButton boldButton = view.findViewById(R.id.format_bar_button_bold);
         mTagToggleButtonMap.put(getString(R.string.format_bar_tag_bold), boldButton);
 
-        ToggleButton italicButton = (ToggleButton) view.findViewById(R.id.format_bar_button_italic);
+        ToggleButton italicButton = view.findViewById(R.id.format_bar_button_italic);
         mTagToggleButtonMap.put(getString(R.string.format_bar_tag_italic), italicButton);
 
-        ToggleButton quoteButton = (ToggleButton) view.findViewById(R.id.format_bar_button_quote);
+        ToggleButton quoteButton = view.findViewById(R.id.format_bar_button_quote);
         mTagToggleButtonMap.put(getString(R.string.format_bar_tag_blockquote), quoteButton);
 
-        ToggleButton ulButton = (ToggleButton) view.findViewById(R.id.format_bar_button_ul);
+        ToggleButton ulButton = view.findViewById(R.id.format_bar_button_ul);
         mTagToggleButtonMap.put(getString(R.string.format_bar_tag_unorderedList), ulButton);
 
-        ToggleButton olButton = (ToggleButton) view.findViewById(R.id.format_bar_button_ol);
+        ToggleButton olButton = view.findViewById(R.id.format_bar_button_ol);
         mTagToggleButtonMap.put(getString(R.string.format_bar_tag_orderedList), olButton);
 
         // Tablet-only
-        ToggleButton strikethroughButton = (ToggleButton) view.findViewById(R.id.format_bar_button_strikethrough);
+        ToggleButton strikethroughButton = view.findViewById(R.id.format_bar_button_strikethrough);
         if (strikethroughButton != null) {
             mTagToggleButtonMap.put(getString(R.string.format_bar_tag_strikethrough), strikethroughButton);
         }
 
-        ToggleButton mediaButton = (ToggleButton) view.findViewById(R.id.format_bar_button_media);
+        ToggleButton mediaButton = view.findViewById(R.id.format_bar_button_media);
         mediaButton.setVisibility(View.GONE);
         mTagToggleButtonMap.put(TAG_FORMAT_BAR_BUTTON_MEDIA, mediaButton);
 
         registerForContextMenu(mediaButton);
 
-        ToggleButton linkButton = (ToggleButton) view.findViewById(R.id.format_bar_button_link);
+        ToggleButton linkButton = view.findViewById(R.id.format_bar_button_link);
         mTagToggleButtonMap.put(TAG_FORMAT_BAR_BUTTON_LINK, linkButton);
 
-        ToggleButton htmlButton = (ToggleButton) view.findViewById(R.id.format_bar_button_html);
+        ToggleButton htmlButton = view.findViewById(R.id.format_bar_button_html);
         htmlButton.setVisibility(View.GONE);
         htmlButton.setOnClickListener(this);
 
@@ -769,7 +769,7 @@ public class EditorFragment extends EditorFragmentAbstract implements View.OnCli
                 hideActionBarIfNeeded();
 
                 // Reset all format bar buttons (in case they remained active through activity re-creation)
-                ToggleButton htmlButton = (ToggleButton) getActivity().findViewById(R.id.format_bar_button_html);
+                ToggleButton htmlButton = getActivity().findViewById(R.id.format_bar_button_html);
                 htmlButton.setChecked(false);
                 for (ToggleButton button : mTagToggleButtonMap.values()) {
                     button.setChecked(false);

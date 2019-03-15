@@ -57,7 +57,7 @@ public class OrderViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_view);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar(findViewById(R.id.toolbar));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.order_detail_label));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -71,26 +71,26 @@ public class OrderViewActivity extends AppCompatActivity {
         if(getIntent().getStringExtra("shipping_url") != null){
             orderViewUrl=getIntent().getStringExtra("shipping_url");
         }
-        mBillingInfoView = (LinearLayout) findViewById(R.id.billing_info_view);
-        mShippingInfoView = (LinearLayout) findViewById(R.id.shipping_info_view);
-        mOrderInfoView = (LinearLayout) findViewById(R.id.order_info_view);
-        mPaymentInfoView = (LinearLayout) findViewById(R.id.payment_info_view);
-        mOrderSummaryView = (LinearLayout) findViewById(R.id.order_summary_info_view);
-        mProductInfoView = (LinearLayout) findViewById(R.id.product_info_view);
-        mShippingDetailsView = (LinearLayout) findViewById(R.id.shipping_details_view);
-        mPriceFieldsView = (GridLayout)findViewById(R.id.price_fields);
-        mOrderDate =(TextView) findViewById(R.id.order_date);
-        mOrderStatus =(TextView) findViewById(R.id.order_status);
-        mOrderTax =(TextView) findViewById(R.id.order_tax_amount);
-        mOrderShipping =(TextView) findViewById(R.id.order_shipping_amount);
-        mOrderDelivery =(TextView) findViewById(R.id.order_delivery);
-        mOrderIp =(TextView) findViewById(R.id.ip_address);
-        mOrderId =(TextView) findViewById(R.id.order_id);
+        mBillingInfoView = findViewById(R.id.billing_info_view);
+        mShippingInfoView = findViewById(R.id.shipping_info_view);
+        mOrderInfoView = findViewById(R.id.order_info_view);
+        mPaymentInfoView = findViewById(R.id.payment_info_view);
+        mOrderSummaryView = findViewById(R.id.order_summary_info_view);
+        mProductInfoView = findViewById(R.id.product_info_view);
+        mShippingDetailsView = findViewById(R.id.shipping_details_view);
+        mPriceFieldsView = findViewById(R.id.price_fields);
+        mOrderDate = findViewById(R.id.order_date);
+        mOrderStatus = findViewById(R.id.order_status);
+        mOrderTax = findViewById(R.id.order_tax_amount);
+        mOrderShipping = findViewById(R.id.order_shipping_amount);
+        mOrderDelivery = findViewById(R.id.order_delivery);
+        mOrderIp = findViewById(R.id.ip_address);
+        mOrderId = findViewById(R.id.order_id);
 
-        storeTitle = (TextView) findViewById(R.id.store_title);
-        totalAmount = (TextView) findViewById(R.id.total_amount);
-        taxVat = (TextView) findViewById(R.id.taxVatAmount);
-        shippingAmount = (TextView) findViewById(R.id.shipping_amount);
+        storeTitle = findViewById(R.id.store_title);
+        totalAmount = findViewById(R.id.total_amount);
+        taxVat = findViewById(R.id.taxVatAmount);
+        shippingAmount = findViewById(R.id.shipping_amount);
 
         getOrderDetails();
     }
@@ -98,7 +98,7 @@ public class OrderViewActivity extends AppCompatActivity {
     public void getOrderDetails(){
         mAppConst.getJsonResponseFromUrl(orderViewUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                 setOrderDetails(jsonObject);
             }
@@ -214,14 +214,14 @@ public class OrderViewActivity extends AppCompatActivity {
                         View productInfoView = getLayoutInflater().inflate(R.layout.ordered_product_view, null);
                         productInfoView.findViewById(R.id.info_fields).setVisibility(View.GONE);
                         productInfoView.findViewById(R.id.product_info_fields).setVisibility(View.VISIBLE);
-                        TextView productTitle = (TextView) productInfoView.findViewById(R.id.item_title);
-                        TextView productSku = (TextView) productInfoView.findViewById(R.id.sku_name);
-                        TextView productQty = (TextView) productInfoView.findViewById(R.id.product_qty);
-                        TextView productPrice = (TextView) productInfoView.findViewById(R.id.product_price);
-                        TextView productTax = (TextView) productInfoView.findViewById(R.id.taxVatAmount);
-                        TextView productTotal = (TextView) productInfoView.findViewById(R.id.subtotal_amount);
-                        TextView productStatus = (TextView) productInfoView.findViewById(R.id.product_status);
-                        ImageView productThumb = (ImageView)productInfoView.findViewById(R.id.product_thumb);
+                        TextView productTitle = productInfoView.findViewById(R.id.item_title);
+                        TextView productSku = productInfoView.findViewById(R.id.sku_name);
+                        TextView productQty = productInfoView.findViewById(R.id.product_qty);
+                        TextView productPrice = productInfoView.findViewById(R.id.product_price);
+                        TextView productTax = productInfoView.findViewById(R.id.taxVatAmount);
+                        TextView productTotal = productInfoView.findViewById(R.id.subtotal_amount);
+                        TextView productStatus = productInfoView.findViewById(R.id.product_status);
+                        ImageView productThumb = productInfoView.findViewById(R.id.product_thumb);
                         String productImage = productObject.optString("image");
                         Picasso.with(OrderViewActivity.this)
                                 .load(productImage)

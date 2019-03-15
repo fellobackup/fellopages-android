@@ -134,29 +134,29 @@ public class CommentAdapter extends ArrayAdapter<CommentList> implements OnMenuC
             listItemHolder = new ListItemHolder();
             mRootView = inflater.inflate(mLayoutResID, parent, false);
 
-            listItemHolder.mAuthorImage = (ImageView) mRootView.findViewById(R.id.authorImage);
-            listItemHolder.mAuthorTitle = (TextView) mRootView.findViewById(R.id.authorTitle);
-            listItemHolder.mCommentBody = (EmojiconTextView) mRootView.findViewById(R.id.commentBody);
-            listItemHolder.mCommentDate = (TextView) mRootView.findViewById(R.id.commentDate);
-            listItemHolder.mPostingText = (TextView) mRootView.findViewById(R.id.postingText);
-            listItemHolder.mStickerImage = (ImageView) mRootView.findViewById(R.id.stickerImage);
-            listItemHolder.mGifIV = (ImageView) mRootView.findViewById(R.id.gif_icon);
-            listItemHolder.mAttchmentView = (RelativeLayout) mRootView.findViewById(R.id.attachment_imageview);
+            listItemHolder.mAuthorImage = mRootView.findViewById(R.id.authorImage);
+            listItemHolder.mAuthorTitle = mRootView.findViewById(R.id.authorTitle);
+            listItemHolder.mCommentBody = mRootView.findViewById(R.id.commentBody);
+            listItemHolder.mCommentDate = mRootView.findViewById(R.id.commentDate);
+            listItemHolder.mPostingText = mRootView.findViewById(R.id.postingText);
+            listItemHolder.mStickerImage = mRootView.findViewById(R.id.stickerImage);
+            listItemHolder.mGifIV = mRootView.findViewById(R.id.gif_icon);
+            listItemHolder.mAttchmentView = mRootView.findViewById(R.id.attachment_imageview);
 
-            listItemHolder.mCommentOptionsBlock = (LinearLayout) mRootView.findViewById(R.id.commentOptionsBlock);
-            listItemHolder.mCommentLikeCount = (TextView) mRootView.findViewById(R.id.commentLikeCount);
+            listItemHolder.mCommentOptionsBlock = mRootView.findViewById(R.id.commentOptionsBlock);
+            listItemHolder.mCommentLikeCount = mRootView.findViewById(R.id.commentLikeCount);
             listItemHolder.mCommentLikeCount.setTag(position);
 
-            listItemHolder.mMemberOptions = (TextView) mRootView.findViewById(R.id.memberOption);
+            listItemHolder.mMemberOptions = mRootView.findViewById(R.id.memberOption);
             listItemHolder.mMemberOptions.setTag(position);
             listItemHolder.mMemberOptions.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-            listItemHolder.mLikeOption = (TextView) mRootView.findViewById(R.id.likeOption);
+            listItemHolder.mLikeOption = mRootView.findViewById(R.id.likeOption);
             listItemHolder.mLikeOption.setTag(position);
 
-            listItemHolder.mDeleteOption = (TextView) mRootView.findViewById(R.id.deleteOption);
+            listItemHolder.mDeleteOption = mRootView.findViewById(R.id.deleteOption);
             listItemHolder.mDeleteOption.setTag(position);
 
-            listItemHolder.mReactionImage = (ImageView) mRootView.findViewById(R.id.reactionIcon);
+            listItemHolder.mReactionImage = mRootView.findViewById(R.id.reactionIcon);
 
             mRootView.setTag(listItemHolder);
             listItemHolder.mCommentBody.setTag(position);

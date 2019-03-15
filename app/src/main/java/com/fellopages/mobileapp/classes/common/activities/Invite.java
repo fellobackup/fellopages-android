@@ -60,9 +60,9 @@ public class Invite extends FormActivity {
         setContentView(R.layout.form_creation_view);
 
         //Setting up the action bar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mContext = this;
-        mNoFriendsMessageView = (SelectableTextView) findViewById(R.id.noFriendsMessage);
+        mNoFriendsMessageView = findViewById(R.id.noFriendsMessage);
 
         mCurrentSelectedModule = getIntent().getExtras().getString(ConstantVariables.EXTRA_MODULE_TYPE);
         if (mCurrentSelectedModule == null || mCurrentSelectedModule.isEmpty()) {
@@ -95,7 +95,7 @@ public class Invite extends FormActivity {
 
         CustomViews.createMarqueeTitle(this, mToolbar);
 
-        inviteFormView = (RelativeLayout) findViewById(R.id.form_view);
+        inviteFormView = findViewById(R.id.form_view);
         mAppConst = new AppConstant(this);
 
         inviteUrl = getIntent().getStringExtra(ConstantVariables.URL_STRING);

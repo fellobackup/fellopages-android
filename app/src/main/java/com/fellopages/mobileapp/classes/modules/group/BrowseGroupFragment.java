@@ -143,7 +143,7 @@ public class BrowseGroupFragment extends Fragment implements
         rootView = inflater.inflate(R.layout.grid_view_layout, container, false);
         footerView = CustomViews.getFooterView(inflater);
 
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mGridView = rootView.findViewById(R.id.gridView);
 
         mGridView.addFooterView(footerView);
         footerView.setVisibility(View.GONE);
@@ -200,7 +200,7 @@ public class BrowseGroupFragment extends Fragment implements
 
         }
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -409,8 +409,8 @@ public class BrowseGroupFragment extends Fragment implements
                     }
                 }else{
                     rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                    TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                    SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById
+                    TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                    SelectableTextView errorMessage = rootView.findViewById
                             (R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     errorIcon.setText("\uf0c0");

@@ -239,52 +239,52 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                     mRootView = inflater.inflate(mLayoutResID, parent, false);
                     switch (mCurrentSelectedList) {
                         case "members_siteevent":
-                            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                            listItemHolder.mRsvp = (TextView) mRootView.findViewById(R.id.contentDetail);
-                            listItemHolder.mOptionIconImage = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                            listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mRsvp = mRootView.findViewById(R.id.contentDetail);
+                            listItemHolder.mOptionIconImage = mRootView.findViewById(R.id.optionIcon);
                             listItemHolder.mOptionIconImage.setTag(position);
-                            listItemHolder.mMemberOption = (TextView) mRootView.findViewById(R.id.memberOption);
+                            listItemHolder.mMemberOption = mRootView.findViewById(R.id.memberOption);
                             listItemHolder.mMemberOption.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                             listItemHolder.mMemberOption.setTag(position);
                             break;
 
                         case "occurrence_siteevent":
                             mRootView.findViewById(R.id.contentImage).setVisibility(View.GONE);
-                            listItemHolder.mDateInfo = (LinearLayout) mRootView.findViewById(R.id.dateInfo);
+                            listItemHolder.mDateInfo = mRootView.findViewById(R.id.dateInfo);
                             listItemHolder.mDateInfo.setVisibility(View.VISIBLE);
-                            listItemHolder.mDay = (TextView) mRootView.findViewById(R.id.day);
-                            listItemHolder.mMonth = (TextView) mRootView.findViewById(R.id.month);
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mDay = mRootView.findViewById(R.id.day);
+                            listItemHolder.mMonth = mRootView.findViewById(R.id.month);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
                             mRootView.findViewById(R.id.contentDetail).setVisibility(View.GONE);
-                            listItemHolder.spinner = (Spinner) mRootView.findViewById(R.id.rsvpFilter);
-                            listItemHolder.rsvpFilterLayout = (LinearLayout) mRootView.findViewById(R.id.rsvpFilterLayout);
-                            listItemHolder.mOptionIconImage = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                            listItemHolder.spinner = mRootView.findViewById(R.id.rsvpFilter);
+                            listItemHolder.rsvpFilterLayout = mRootView.findViewById(R.id.rsvpFilterLayout);
+                            listItemHolder.mOptionIconImage = mRootView.findViewById(R.id.optionIcon);
                             listItemHolder.mOptionIconImage.setTag(position);
                             listItemHolder.mContentTitle.setTag(position);
                             mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.VISIBLE);
                             break;
 
                         case "manage_siteevent":
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                            listItemHolder.mListImageIcon = (ImageView) mRootView.findViewById(R.id.contentImage);
-                            listItemHolder.mHostImage = (CircularImageView) mRootView.findViewById(R.id.host_image);
-                            listItemHolder.mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocationInfo);
-                            listItemHolder.mEventTime = (TextView) mRootView.findViewById(R.id.eventTime);
-                            listItemHolder.mDateIcon = (TextView) mRootView.findViewById(R.id.date_icon);
-                            listItemHolder.mLocationIcon = (TextView) mRootView.findViewById(R.id.location_icon);
-                            listItemHolder.mDay = (TextView) mRootView.findViewById(R.id.day);
-                            listItemHolder.mMonth = (TextView) mRootView.findViewById(R.id.month);
-                            listItemHolder.mLocationLayout = (LinearLayout) mRootView.findViewById(R.id.location_layout);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mListImageIcon = mRootView.findViewById(R.id.contentImage);
+                            listItemHolder.mHostImage = mRootView.findViewById(R.id.host_image);
+                            listItemHolder.mEventLocation = mRootView.findViewById(R.id.eventLocationInfo);
+                            listItemHolder.mEventTime = mRootView.findViewById(R.id.eventTime);
+                            listItemHolder.mDateIcon = mRootView.findViewById(R.id.date_icon);
+                            listItemHolder.mLocationIcon = mRootView.findViewById(R.id.location_icon);
+                            listItemHolder.mDay = mRootView.findViewById(R.id.day);
+                            listItemHolder.mMonth = mRootView.findViewById(R.id.month);
+                            listItemHolder.mLocationLayout = mRootView.findViewById(R.id.location_layout);
                             listItemHolder.mLocationIcon.setTypeface(fontIcon);
                             listItemHolder.mDateIcon.setTypeface(fontIcon);
 
-                            listItemHolder.mViewCountIcon = (TextView) mRootView.findViewById(R.id.view_count_icon);
-                            listItemHolder.mViewCountText = (TextView) mRootView.findViewById(R.id.view_count);
-                            listItemHolder.mMemberIcon = (TextView) mRootView.findViewById(R.id.review_count_icon);
-                            listItemHolder.mMemberText = (TextView) mRootView.findViewById(R.id.review_count);
-                            listItemHolder.mLikeIcon = (TextView) mRootView.findViewById(R.id.like_count_icon);
-                            listItemHolder.mLike = (TextView) mRootView.findViewById(R.id.like_count);
+                            listItemHolder.mViewCountIcon = mRootView.findViewById(R.id.view_count_icon);
+                            listItemHolder.mViewCountText = mRootView.findViewById(R.id.view_count);
+                            listItemHolder.mMemberIcon = mRootView.findViewById(R.id.review_count_icon);
+                            listItemHolder.mMemberText = mRootView.findViewById(R.id.review_count);
+                            listItemHolder.mLikeIcon = mRootView.findViewById(R.id.like_count_icon);
+                            listItemHolder.mLike = mRootView.findViewById(R.id.like_count);
                             mRootView.findViewById(R.id.comment_count).setVisibility(View.GONE);
                             mRootView.findViewById(R.id.comment_count_icon).setVisibility(View.GONE);
 
@@ -292,7 +292,7 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                             listItemHolder.mMemberIcon.setTypeface(fontIcon);
                             listItemHolder.mViewCountIcon.setTypeface(fontIcon);
 
-                            listItemHolder.mOptionIcon = (TextView) mRootView.findViewById(R.id.optionsIcon);
+                            listItemHolder.mOptionIcon = mRootView.findViewById(R.id.optionsIcon);
                             listItemHolder.mOptionIcon.setTag(position);
 
                             listItemHolder.mEventStatus = mRootView.findViewById(R.id.tv_event_status);
@@ -303,32 +303,32 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
                             mSubjectType = mCurrentSelectedList.equals("sitepage_review") ? "sitepagereview_review" :
                                     "sitegroupreview_review";
                             mUrlText = mCurrentSelectedList.equals("sitepage_review") ? "sitepage" : "advancedgroups";
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.content_title);
-                            listItemHolder.mRatingBar = (RatingBar) mRootView.findViewById(R.id.smallRatingBar);
-                            ratingLayoutGrid = (LinearLayout) mRootView.findViewById(R.id.linearLayoutRating);
-                            listItemHolder.mReviewDate = (TextView) mRootView.findViewById(R.id.date_view);
-                            listItemHolder.mUserName = (TextView) mRootView.findViewById(R.id.user_name);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.content_title);
+                            listItemHolder.mRatingBar = mRootView.findViewById(R.id.smallRatingBar);
+                            ratingLayoutGrid = mRootView.findViewById(R.id.linearLayoutRating);
+                            listItemHolder.mReviewDate = mRootView.findViewById(R.id.date_view);
+                            listItemHolder.mUserName = mRootView.findViewById(R.id.user_name);
                             listItemHolder.mProsLabel = mRootView.findViewById(R.id.prosLabel);
                             listItemHolder.mConsLabel = mRootView.findViewById(R.id.consLabel);
-                            listItemHolder.mPros = (TextView) mRootView.findViewById(R.id.pros_text);
-                            listItemHolder.mCons = (TextView) mRootView.findViewById(R.id.cons_text);
-                            listItemHolder.mRecomended = (TextView) mRootView.findViewById(R.id.member_recommendation_text);
-                            listItemHolder.mSummary = (TextView) mRootView.findViewById(R.id.summary_text);
-                            listItemHolder.mShow = (TextView) mRootView.findViewById(R.id.show);
-                            listItemHolder.mHide = (TextView) mRootView.findViewById(R.id.hide);
-                            listItemHolder.mLike = (TextView) mRootView.findViewById(R.id.like);
-                            listItemHolder.mComments = (TextView) mRootView.findViewById(R.id.comment);
-                            listItemHolder.mLikeIcon = (TextView) mRootView.findViewById(R.id.likeIcon);
-                            listItemHolder.mOptionIconImage = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                            listItemHolder.mPros = mRootView.findViewById(R.id.pros_text);
+                            listItemHolder.mCons = mRootView.findViewById(R.id.cons_text);
+                            listItemHolder.mRecomended = mRootView.findViewById(R.id.member_recommendation_text);
+                            listItemHolder.mSummary = mRootView.findViewById(R.id.summary_text);
+                            listItemHolder.mShow = mRootView.findViewById(R.id.show);
+                            listItemHolder.mHide = mRootView.findViewById(R.id.hide);
+                            listItemHolder.mLike = mRootView.findViewById(R.id.like);
+                            listItemHolder.mComments = mRootView.findViewById(R.id.comment);
+                            listItemHolder.mLikeIcon = mRootView.findViewById(R.id.likeIcon);
+                            listItemHolder.mOptionIconImage = mRootView.findViewById(R.id.optionIcon);
                             listItemHolder.mOptionIconImage.setTag(position);
                             break;
 
                         case "site_package":
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                            listItemHolder.mContentDetails = (TextView) mRootView.findViewById(R.id.contentDetail);
-                            listItemHolder.mOptionIconImage = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mContentDetails = mRootView.findViewById(R.id.contentDetail);
+                            listItemHolder.mOptionIconImage = mRootView.findViewById(R.id.optionIcon);
                             mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.VISIBLE);
-                            listItemHolder.mContentInfoBlock = (LinearLayout) mRootView.findViewById(R.id.contentInfoBlock);
+                            listItemHolder.mContentInfoBlock = mRootView.findViewById(R.id.contentInfoBlock);
                             listItemHolder.mOptionIconImage.setTag(position);
                             mRootView.findViewById(R.id.contentImage).setVisibility(View.GONE);
                             break;
@@ -944,7 +944,7 @@ public class AdvModulesManageDataAdapter extends ArrayAdapter<Object> implements
 
                                 mAppConst.postJsonResponseForUrl(likeUnlikeUrl, postParams, new OnResponseListener() {
                                     @Override
-                                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                    public void onTaskCompleted(JSONObject jsonObject) {
 
                                         listItemsPosition.setmIsLiked(listItemHolder.isLiked);
                                         listItemsPosition.setmLikeCount(listItemHolder.mLikeCount);

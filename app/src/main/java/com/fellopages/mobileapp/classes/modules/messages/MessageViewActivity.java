@@ -64,6 +64,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -111,7 +112,7 @@ public class MessageViewActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_message_view);
 
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setSubtitleTextAppearance(this, R.style.TextAppearance_AppCompat_Caption);
 
         setSupportActionBar(mToolbar);
@@ -134,12 +135,12 @@ public class MessageViewActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setTitle(userName);
 
         mMessageListDetail = new ArrayList<>();
-        btnSend = (TextView) findViewById(R.id.btnSend);
+        btnSend = findViewById(R.id.btnSend);
         btnSend.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         btnSend.setText("\uf1d8");
-        inputMsg = (EditText) findViewById(R.id.inputMsg);
+        inputMsg = findViewById(R.id.inputMsg);
         inputMsg.addTextChangedListener(this);
-        listViewMessages = (ListView) findViewById(R.id.list_view_messages);
+        listViewMessages = findViewById(R.id.list_view_messages);
         btnSend.setOnClickListener(this);
         keyListener = inputMsg.getKeyListener();
         inputMsg.setKeyListener(null);
@@ -451,7 +452,7 @@ public class MessageViewActivity extends AppCompatActivity implements View.OnCli
         attachmentMenuItem = menu.findItem(R.id.add_attachments);
         MenuItemCompat.setActionView(badgeMenuItem, R.layout.attachment_update_count);
         View addedAttachment = MenuItemCompat.getActionView(badgeMenuItem);
-        ImageView addedAttachmentImage = (ImageView) addedAttachment.findViewById(R.id.added_attachment_image);
+        ImageView addedAttachmentImage = addedAttachment.findViewById(R.id.added_attachment_image);
         addedAttachmentImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -599,7 +600,7 @@ public class MessageViewActivity extends AppCompatActivity implements View.OnCli
 
                         //Removing leading and trailing whitespace from the String..
                         String body = inputMsg.getText().toString().trim();
-                        byte[] bytes = body.getBytes("UTF-8");
+                        byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
                         body = new String(bytes, Charset.forName("UTF-8"));
 
                         // Convert text smileys to emoticons in comments
@@ -722,7 +723,7 @@ public class MessageViewActivity extends AppCompatActivity implements View.OnCli
             mAppConst.showProgressDialog();
             mAppConst.postJsonResponseForUrl(deleteUrl, postParams, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     Intent data = new Intent();
                     setResult(ConstantVariables.MESSAGE_DELETED, data);

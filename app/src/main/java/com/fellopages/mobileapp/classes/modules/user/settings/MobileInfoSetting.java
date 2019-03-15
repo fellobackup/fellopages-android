@@ -60,7 +60,7 @@ public class MobileInfoSetting extends AppCompatActivity implements View.OnClick
 
         mContext = this;
         mAppConst = new AppConstant(this);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mAppConst.showProgressDialog();
         alertDialogWithAction = new AlertDialogWithAction(mContext);
@@ -89,19 +89,19 @@ public class MobileInfoSetting extends AppCompatActivity implements View.OnClick
             }
         });
 
-        mobileInfoLayoutContainer = (LinearLayout) findViewById(R.id.mobile_info_layout_container);
-        enablePhonenoLayout = (LinearLayout) findViewById(R.id.enable_phoneno_layout);
-        addPhonenoLayout = (LinearLayout) findViewById(R.id.add_phoneno_layout);
+        mobileInfoLayoutContainer = findViewById(R.id.mobile_info_layout_container);
+        enablePhonenoLayout = findViewById(R.id.enable_phoneno_layout);
+        addPhonenoLayout = findViewById(R.id.add_phoneno_layout);
 
-        userPhoneno = (EditText) findViewById(R.id.user_phone_no);
-        countryCode = (EditText) findViewById(R.id.country_code);
-        phoneno = (EditText) findViewById(R.id.phoneno);
-        tvPhoneno = (TextView) findViewById(R.id.tv_phoneno);
-        twoFactorTitle = (TextView) findViewById(R.id.two_factor_title);
-        statusSwitch = (Switch) findViewById(R.id.status_switch);
-        btnVerifyInfo = (Button) findViewById(R.id.btn_verify_info);
-        btnEditPhoneno = (Button) findViewById(R.id.btn_edit_phoneno);
-        btnDeletePhoneno = (Button) findViewById(R.id.btn_delete_phoneno);
+        userPhoneno = findViewById(R.id.user_phone_no);
+        countryCode = findViewById(R.id.country_code);
+        phoneno = findViewById(R.id.phoneno);
+        tvPhoneno = findViewById(R.id.tv_phoneno);
+        twoFactorTitle = findViewById(R.id.two_factor_title);
+        statusSwitch = findViewById(R.id.status_switch);
+        btnVerifyInfo = findViewById(R.id.btn_verify_info);
+        btnEditPhoneno = findViewById(R.id.btn_edit_phoneno);
+        btnDeletePhoneno = findViewById(R.id.btn_delete_phoneno);
         btnVerifyInfo.setOnClickListener(this);
         btnEditPhoneno.setOnClickListener(this);
         btnDeletePhoneno.setOnClickListener(this);
@@ -126,7 +126,7 @@ public class MobileInfoSetting extends AppCompatActivity implements View.OnClick
 
         mAppConst.getJsonResponseFromUrl(UrlUtil.TWO_FACTOR_GET_VERIFICATION_URL, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
 
                 if (jsonObject != null) {
@@ -213,7 +213,7 @@ public class MobileInfoSetting extends AppCompatActivity implements View.OnClick
 
             mAppConst.postJsonResponseForUrl(url, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     LogUtils.LOGD(MobileInfoSetting.class.getSimpleName(), "jsonObject-> " + jsonObject);
 
@@ -305,7 +305,7 @@ public class MobileInfoSetting extends AppCompatActivity implements View.OnClick
 
                         mAppConst.deleteResponseForUrl(UrlUtil.TWO_FACTOR_DELETE_MOBILE_URL, null, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                                 if (jsonObject != null) {
                                     makeRequest();
@@ -332,7 +332,7 @@ public class MobileInfoSetting extends AppCompatActivity implements View.OnClick
         final int finalSuccessMsg = enableVerification;
         mAppConst.postJsonResponseForUrl(UrlUtil.TWO_FACTOR_ENABLE_DISABLE_URL, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
 
                 mAppConst.hideProgressDialog();
                 if (jsonObject != null) {

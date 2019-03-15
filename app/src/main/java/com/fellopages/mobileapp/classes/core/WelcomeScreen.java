@@ -67,10 +67,10 @@ public class WelcomeScreen extends AppCompatActivity {
         //TODO
 //        GlobalFunctions.updateAndroidSecurityProvider(this);
 
-        TextView mLoadingText = (TextView) findViewById(R.id.loading_text);
+        TextView mLoadingText = findViewById(R.id.loading_text);
         mLoadingText.setText(mContext.getResources().getString(R.string.loading_text) + "…");
 
-        ImageView ivScreen = (ImageView) findViewById(R.id.iv_screen);
+        ImageView ivScreen = findViewById(R.id.iv_screen);
         TypedValue value = new TypedValue();
         getResources().getValue(R.mipmap.splash, value, true);
         boolean isScreenGif = value.string != null && value.string.toString().contains(".gif");
@@ -164,7 +164,7 @@ public class WelcomeScreen extends AppCompatActivity {
         mAppConst.getJsonResponseFromUrl(UrlUtil.DASHBOARD_URL + "?browse_as_guest=1",
                 new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
 
                         if (jsonObject != null) {
                             PreferencesUtils.updateGuestUserSettings(mContext, jsonObject.optString("browse_as_guest"));

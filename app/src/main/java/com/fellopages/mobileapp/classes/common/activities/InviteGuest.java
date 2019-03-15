@@ -118,7 +118,7 @@ public class InviteGuest extends AppCompatActivity implements TextWatcher, Adapt
             }
         }
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(mToolBarTitle);
 
         setSupportActionBar(mToolbar);
@@ -129,16 +129,16 @@ public class InviteGuest extends AppCompatActivity implements TextWatcher, Adapt
         CustomViews.createMarqueeTitle(this, mToolbar);
 
         //Views
-        mainLayout = (LinearLayout) findViewById(R.id.searchListLayout);
-        mRecipientView = (EditText) findViewById(R.id.searchBox);
+        mainLayout = findViewById(R.id.searchListLayout);
+        mRecipientView = findViewById(R.id.searchBox);
 
         mRecipientView.setHint(getResources().getString(R.string.invite_guest_hint_text));
 
-        mGuestListView = (ListView) findViewById(R.id.listView);
+        mGuestListView = findViewById(R.id.listView);
         mAddPeopleAdapter = new AddPeopleAdapter(this, R.layout.list_friends, mAddPeopleList);
         mGuestListView.setAdapter(mAddPeopleAdapter);
 
-        mAddedFriendListView = (RecyclerView) findViewById(R.id.addedFriendList);
+        mAddedFriendListView = findViewById(R.id.addedFriendList);
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         mAddedFriendListView.setLayoutManager(layoutManager);
         mSelectedGuestListAdapter = new SelectedFriendListAdapter(mSelectedGuestList,
@@ -297,7 +297,7 @@ public class InviteGuest extends AppCompatActivity implements TextWatcher, Adapt
 
             mAppConst.postJsonResponseForUrl(inviteFormUrl, postParams, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     findViewById(R.id.progressBar).setVisibility(View.GONE);
                     SnackbarUtils.displaySnackbarShortWithListener(mainLayout, mSnackBarMessage,
                             new SnackbarUtils.OnSnackbarDismissListener() {

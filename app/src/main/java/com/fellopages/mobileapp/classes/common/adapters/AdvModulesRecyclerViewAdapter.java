@@ -961,65 +961,65 @@ public class AdvModulesRecyclerViewAdapter extends RecyclerView.Adapter implemen
 
             switch (viewType) {
                 case "category":
-                    tvContentTitle = (TextView) view.findViewById(R.id.wishlistTitle);
-                    itemImage = (ImageView) view.findViewById(R.id.viewImage);
+                    tvContentTitle = view.findViewById(R.id.wishlistTitle);
+                    itemImage = view.findViewById(R.id.viewImage);
                     tvContentTitle.setVisibility(View.VISIBLE);
                     view.findViewById(R.id.gradient_view).setVisibility(View.GONE);
                     view.findViewById(R.id.itemTitle).setVisibility(View.GONE);
                     break;
                 case "user_review":
-                    tvContentTitle = (TextView) view.findViewById(R.id.title);
-                    tvReviewDate = (TextView) view.findViewById(R.id.reviewDate);
-                    tvUserName = (TextView) view.findViewById(R.id.userName);
-                    mRatingBar = (RatingBar) view.findViewById(R.id.smallRatingBar);
-                    tvRecommended = (TextView) view.findViewById(R.id.recommended);
-                    tvProsLabel = (TextView) view.findViewById(R.id.prosLabel);
-                    tvPros = (TextView) view.findViewById(R.id.pros);
-                    tvConsLabel = (TextView) view.findViewById(R.id.consLabel);
-                    tvCons = (TextView) view.findViewById(R.id.cons);
-                    tvSummaryLabel = (TextView) view.findViewById(R.id.summaryLabel);
-                    tvSummary = (TextView) view.findViewById(R.id.summary);
-                    tvComment = (TextView) view.findViewById(R.id.comment);
-                    tvHelpful = (TextView) view.findViewById(R.id.helpful);
-                    tvLike = (TextView) view.findViewById(R.id.like);
-                    tvUnlike = (TextView) view.findViewById(R.id.unlike);
-                    tvOptionsIcon = (TextView) view.findViewById(R.id.optionsIcon);
+                    tvContentTitle = view.findViewById(R.id.title);
+                    tvReviewDate = view.findViewById(R.id.reviewDate);
+                    tvUserName = view.findViewById(R.id.userName);
+                    mRatingBar = view.findViewById(R.id.smallRatingBar);
+                    tvRecommended = view.findViewById(R.id.recommended);
+                    tvProsLabel = view.findViewById(R.id.prosLabel);
+                    tvPros = view.findViewById(R.id.pros);
+                    tvConsLabel = view.findViewById(R.id.consLabel);
+                    tvCons = view.findViewById(R.id.cons);
+                    tvSummaryLabel = view.findViewById(R.id.summaryLabel);
+                    tvSummary = view.findViewById(R.id.summary);
+                    tvComment = view.findViewById(R.id.comment);
+                    tvHelpful = view.findViewById(R.id.helpful);
+                    tvLike = view.findViewById(R.id.like);
+                    tvUnlike = view.findViewById(R.id.unlike);
+                    tvOptionsIcon = view.findViewById(R.id.optionsIcon);
                     break;
                 case "wishlist":
                     view.findViewById(R.id.optionIcon).setVisibility(View.GONE);
                     view.findViewById(R.id.bottomView).setVisibility(View.GONE);
                     view.findViewById(R.id.date_layout).setVisibility(View.GONE);
                     view.findViewById(R.id.wishlistImageBlock).setVisibility(View.VISIBLE);
-                    tvContentTitle = (TextView) view.findViewById(R.id.wishlistTitle);
+                    tvContentTitle = view.findViewById(R.id.wishlistTitle);
                     tvContentTitle.setVisibility(View.VISIBLE);
-                    tvListingCount = (TextView) view.findViewById(R.id.listingCount);
+                    tvListingCount = view.findViewById(R.id.listingCount);
                     tvListingCount.setVisibility(View.VISIBLE);
-                    tvOptionsIcon = (TextView) view.findViewById(R.id.wishlistOptionsIcon);
-                    mContentImage = (ImageView) view.findViewById(R.id.contentImage);
+                    tvOptionsIcon = view.findViewById(R.id.wishlistOptionsIcon);
+                    mContentImage = view.findViewById(R.id.contentImage);
                     mContentImage.setVisibility(View.GONE);
-                    mFirstListingImage = (ImageView) view.findViewById(R.id.listingImage1);
-                    mSecondListingImage = (ImageView) view.findViewById(R.id.listingImage2);
-                    mThirdListingImage = (ImageView) view.findViewById(R.id.listingImage3);
-                    mFourthListingImage = (ImageView) view.findViewById(R.id.listingImage4);
+                    mFirstListingImage = view.findViewById(R.id.listingImage1);
+                    mSecondListingImage = view.findViewById(R.id.listingImage2);
+                    mThirdListingImage = view.findViewById(R.id.listingImage3);
+                    mFourthListingImage = view.findViewById(R.id.listingImage4);
                     break;
 
                 case "invite":
-                    tvContentTitle = (TextView) view.findViewById(R.id.contentTitle);
-                    tvEmail = (TextView) view.findViewById(R.id.email_id);
-                    tvInvite = (TextView) view.findViewById(R.id.send_invite);
-                    mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+                    tvContentTitle = view.findViewById(R.id.contentTitle);
+                    tvEmail = view.findViewById(R.id.email_id);
+                    tvInvite = view.findViewById(R.id.send_invite);
+                    mProgressBar = view.findViewById(R.id.progressBar);
                     break;
 
                 case "videos":
                     view.findViewById(R.id.action_button_layout).setVisibility(View.GONE);
-                    tvContentTitle = (TextView) view.findViewById(R.id.user_name);
-                    tvSummary = (TextView) view.findViewById(R.id.mutual_friend_count);
-                    tvVideoDuration = (TextView) view.findViewById(R.id.duration);
+                    tvContentTitle = view.findViewById(R.id.user_name);
+                    tvSummary = view.findViewById(R.id.mutual_friend_count);
+                    tvVideoDuration = view.findViewById(R.id.duration);
                     tvVideoDuration.setVisibility(View.VISIBLE);
-                    tvRemove = (TextView) view.findViewById(R.id.remove_icon);
+                    tvRemove = view.findViewById(R.id.remove_icon);
                     tvRemove.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
                     tvRemove.setText("\uf00d");
-                    itemImage = (ImageView) view.findViewById(R.id.user_profile_image);
+                    itemImage = view.findViewById(R.id.user_profile_image);
                     itemImage.setLayoutParams(CustomViews.getCustomWidthHeightRelativeLayoutParams(
                             context.getResources().getDimensionPixelSize(R.dimen.image_collage_view_height),
                             context.getResources().getDimensionPixelSize(R.dimen.attachment_small_image_size)));
@@ -1043,26 +1043,26 @@ public class AdvModulesRecyclerViewAdapter extends RecyclerView.Adapter implemen
             view.findViewById(R.id.artist_view_description).setVisibility(View.GONE);
 
             // User info views.
-            tvOwnerTitle = (SelectableTextView) view.findViewById(R.id.artist_author);
-            ivOwnerImage = (BezelImageView) view.findViewById(R.id.owner_image);
-            llUserInfo = (LinearLayout) view.findViewById(R.id.user_info_layout);
+            tvOwnerTitle = view.findViewById(R.id.artist_author);
+            ivOwnerImage = view.findViewById(R.id.owner_image);
+            llUserInfo = view.findViewById(R.id.user_info_layout);
             // Count conatiner views.
-            tvLikeCount = ((TextView) view.findViewById(R.id.artist_view_track_number));
-            tvViewCount = (TextView) view.findViewById(R.id.track_play_count);
+            tvLikeCount = view.findViewById(R.id.artist_view_track_number);
+            tvViewCount = view.findViewById(R.id.track_play_count);
             tvLikeCount.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
             tvViewCount.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
 
             // Inflating Error view to show no video exist.
             View errorView = LayoutInflater.from(context).inflate(R.layout.error_view, null);
-            LinearLayout mainLayout = (LinearLayout) view.findViewById(R.id.artist_view_main_layout);
+            LinearLayout mainLayout = view.findViewById(R.id.artist_view_main_layout);
             mainLayout.addView(errorView);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) errorView.getLayoutParams();
             layoutParams.setMargins(0, context.getResources().getDimensionPixelSize(R.dimen.margin_50dp), 0, 0);
             errorView.setLayoutParams(layoutParams);
             // No data message views
-            llErrorMessage = (LinearLayout) errorView.findViewById(R.id.message_layout);
-            tvErrorIcon = (TextView) errorView.findViewById(R.id.error_icon);
-            tvErrorMessage = (SelectableTextView) errorView.findViewById(R.id.error_message);
+            llErrorMessage = errorView.findViewById(R.id.message_layout);
+            tvErrorIcon = errorView.findViewById(R.id.error_icon);
+            tvErrorMessage = errorView.findViewById(R.id.error_message);
             tvErrorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
         }
     }

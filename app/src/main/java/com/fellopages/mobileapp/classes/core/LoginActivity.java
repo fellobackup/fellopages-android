@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mContext = this;
         mAppConst = new AppConstant(this);
 
-        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        mToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -102,17 +102,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        scrollView = (ScrollView) findViewById(R.id.scroll_view);
-        loginButton = (Button) findViewById(R.id.login_button);
+        scrollView = findViewById(R.id.scroll_view);
+        loginButton = findViewById(R.id.login_button);
         loginButton.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding), 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
         loginButton.setOnClickListener(this);
-        usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
-        passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
-        mForgotPassword = (TextView) findViewById(R.id.forgot_password);
+        usernameWrapper = findViewById(R.id.usernameWrapper);
+        passwordWrapper = findViewById(R.id.passwordWrapper);
+        mForgotPassword = findViewById(R.id.forgot_password);
         mForgotPassword.setOnClickListener(this);
         usernameWrapper.setHint(getResources().getString(R.string.lbl_enter_email));
         passwordWrapper.setHint(getResources().getString(R.string.lbl_enter_password));
-        errorView = (TextView) findViewById(R.id.error_view);
+        errorView = findViewById(R.id.error_view);
 
         if( PreferencesUtils.getOtpEnabledOption(mContext) != null &&
                 !PreferencesUtils.getOtpEnabledOption(mContext).isEmpty()) {
@@ -268,7 +268,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             LogUtils.LOGD(LoginActivity.class.getSimpleName(),"otp_login_params->" +params);
             mAppConst.postLoginSignUpRequest(UrlUtil.LOGIN_OTP_URL, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     sendToOtp(jsonObject);
                 }
@@ -490,7 +490,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         alertDialog.dismiss();
                         mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_URL, params, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
                                 mAppConst.hideProgressDialog();
 
                                 if (jsonObject != null) {

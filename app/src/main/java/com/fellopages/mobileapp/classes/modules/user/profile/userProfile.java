@@ -150,8 +150,8 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
             mPreviousSelectedModuleListingTypeId = PreferencesUtils.getCurrentSelectedListingId(mContext);
         }
 
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolBar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolBar);
 
@@ -163,24 +163,24 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
         mPhotoDetails = new ArrayList<>();
         mProfilePhotoDetail = new ArrayList<>();
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mContentTitle = (TextView) findViewById(R.id.content_title);
-        mCoverImage = (ImageView) findViewById(R.id.coverImage);
-        mProfileImage = (ImageView) findViewById(R.id.profile_image);
-        mCoverImageMenus = (TextView) findViewById(R.id.cover_image_menus);
-        mProfileImageMenus = (TextView) findViewById(R.id.profile_image_menus);
+        mProgressBar = findViewById(R.id.progressBar);
+        mContentTitle = findViewById(R.id.content_title);
+        mCoverImage = findViewById(R.id.coverImage);
+        mProfileImage = findViewById(R.id.profile_image);
+        mCoverImageMenus = findViewById(R.id.cover_image_menus);
+        mProfileImageMenus = findViewById(R.id.profile_image_menus);
         mCoverImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mProfileImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mTabLayout = (TabLayout) findViewById(R.id.slidingTabs);
-        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        tvAddFriend = (TextView) findViewById(R.id.add_friend);
-        tvMessage = (TextView) findViewById(R.id.message);
-        tvMore = (TextView) findViewById(R.id.more);
-        tvFollow = (TextView) findViewById(R.id.follow);
+        mViewPager = findViewById(R.id.pager);
+        mTabLayout = findViewById(R.id.slidingTabs);
+        mMainContent = findViewById(R.id.main_content);
+        appBar = findViewById(R.id.appbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        tvAddFriend = findViewById(R.id.add_friend);
+        tvMessage = findViewById(R.id.message);
+        tvMore = findViewById(R.id.more);
+        tvFollow = findViewById(R.id.follow);
 
         tvAddFriend.setOnClickListener(this);
         tvMessage.setOnClickListener(this);

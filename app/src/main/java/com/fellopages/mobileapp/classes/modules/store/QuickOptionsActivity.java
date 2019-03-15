@@ -43,13 +43,13 @@ public class QuickOptionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_options);
-        mShippingMethod = (CardView) findViewById(R.id.store_quick_option_shipping);
-        mPaymentMethod = (CardView) findViewById(R.id.store_quick_option_payment);
-        mAddProduct = (CardView) findViewById(R.id.store_quick_option_product);
-        mStoreName = (TextView) findViewById(R.id.store_quick_name);
-        mSkip = (TextView) findViewById(R.id.store_quick_skip);
-        shippingMethodDone = (ImageView) findViewById(R.id.shipping_method_check);
-        paymentMethodDone = (ImageView) findViewById(R.id.payment_method_check);
+        mShippingMethod = findViewById(R.id.store_quick_option_shipping);
+        mPaymentMethod = findViewById(R.id.store_quick_option_payment);
+        mAddProduct = findViewById(R.id.store_quick_option_product);
+        mStoreName = findViewById(R.id.store_quick_name);
+        mSkip = findViewById(R.id.store_quick_skip);
+        shippingMethodDone = findViewById(R.id.shipping_method_check);
+        paymentMethodDone = findViewById(R.id.payment_method_check);
         mContext = QuickOptionsActivity.this;
         mBody = GlobalFunctions.getCreateResponse(getIntent().getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE));
         mStoreName.setText(mBody.optString("title"));
@@ -82,7 +82,6 @@ public class QuickOptionsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String editUrl = AppConstant.DEFAULT_URL + "sitestore/set-store-gateway-info/" + mBody.optString("store_id");
                 mRedirectUrl = AppConstant.DEFAULT_URL + "sitestore/payment-info/" + mBody.optString("store_id");
-                ;
                 showValidationPopup(mContext, mRedirectUrl, editUrl);
 
             }

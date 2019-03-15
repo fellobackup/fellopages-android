@@ -69,7 +69,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
         mContext = this;
         mAppConst = new AppConstant(this);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
         if (getSupportActionBar() != null) {
@@ -130,11 +130,11 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-        otpWrapper = (TextInputLayout) findViewById(R.id.otpWrapper);
-        otpVerifyButton = (Button) findViewById(R.id.otp_verify_button);
-        mobileNo = (TextView) findViewById(R.id.mobile_no);
-        resendOtp = (TextView) findViewById(R.id.resend_otp);
-        otpTimer = (TextView) findViewById(R.id.otp_timer);
+        otpWrapper = findViewById(R.id.otpWrapper);
+        otpVerifyButton = findViewById(R.id.otp_verify_button);
+        mobileNo = findViewById(R.id.mobile_no);
+        resendOtp = findViewById(R.id.resend_otp);
+        otpTimer = findViewById(R.id.otp_timer);
 
         otpWrapper.setHint(getResources().getString(R.string.otp_enter_otp));
 
@@ -205,7 +205,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
                 mAppConst.postLoginSignUpRequest(UrlUtil.LOGIN_URL, params, new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
                         mAppConst.hideProgressDialog();
 
                         mAppConst.proceedToUserLogin(mContext, bundle, intentAction, intentType,
@@ -281,7 +281,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
         mAppConst.postJsonResponseForUrl(UrlUtil.TWO_FACTOR_OTP_VERIFICATION_URL, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
 
                 if (jsonObject != null){
@@ -307,7 +307,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
         mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_VERIFY_URL, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
 
                 if (jsonObject != null) {
@@ -344,7 +344,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
             mAppConst.postLoginSignUpRequest(UrlUtil.SIGNUP_OTP_SEND_URL, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
 
                     if (jsonObject != null) {
@@ -367,7 +367,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
             mAppConst.postJsonResponseForUrl(UrlUtil.TWO_FACTOR_EDIT_MOBILE_URL, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
 
                     if (jsonObject != null) {
@@ -388,7 +388,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
             mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_URL, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
 
                     if (jsonObject != null) {
@@ -411,7 +411,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
             mAppConst.postLoginSignUpRequest(UrlUtil.LOGIN_OTP_URL, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     if (jsonObject != null) {
                         SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.otp_main),
@@ -465,7 +465,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
         mAppConst.postLoginSignUpRequest(postSignupUrl, mPostParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
 
                 mAppConst.proceedToUserSignup(mContext, mFbTwitterBundle, emailAddress,
                         password, jsonObject.optString("body"), jsonObject);

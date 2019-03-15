@@ -56,8 +56,8 @@ public class AddPeopleAdapter extends ArrayAdapter<AddPeopleList> {
             listItemHolder = new ListItemHolder();
             mRootView = inflater.inflate(mLayoutResID, parent, false);
 
-            listItemHolder.mFriendImage = (ImageView) mRootView.findViewById(R.id.friendImage);
-            listItemHolder.mFriendLabel = (TextView) mRootView.findViewById(R.id.friendLabel);
+            listItemHolder.mFriendImage = mRootView.findViewById(R.id.friendImage);
+            listItemHolder.mFriendLabel = mRootView.findViewById(R.id.friendLabel);
             mRootView.setTag(listItemHolder);
 
         }else {

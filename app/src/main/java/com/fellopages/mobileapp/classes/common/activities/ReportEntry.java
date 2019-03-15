@@ -49,14 +49,14 @@ public class ReportEntry extends FormActivity {
 
 
         //Setting up the action bar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         CustomViews.createMarqueeTitle(this, mToolbar);
-        reportFormView = (RelativeLayout) findViewById(R.id.form_view);
+        reportFormView = findViewById(R.id.form_view);
 
         mAppConst = new AppConstant(this);
         reportUrl = getIntent().getStringExtra(ConstantVariables.URL_STRING);

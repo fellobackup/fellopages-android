@@ -77,7 +77,7 @@ public class AdvEventsOrderViewPage extends AppCompatActivity implements View.On
 
         /* Create Back Button On Action Bar **/
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         if(getIntent().hasExtra("order_id"))
@@ -99,8 +99,8 @@ public class AdvEventsOrderViewPage extends AppCompatActivity implements View.On
         if(getIntent().hasExtra(ConstantVariables.URL_STRING))
             mOrderGetInfoUrl = getIntent().getStringExtra(ConstantVariables.URL_STRING);
 
-        mListView = (ListView) findViewById(R.id.listview);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarMain);
+        mListView = findViewById(R.id.listview);
+        progressBar = findViewById(R.id.progressBarMain);
 
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -123,30 +123,30 @@ public class AdvEventsOrderViewPage extends AppCompatActivity implements View.On
         footerView.setPadding(padding10, padding10, padding10, padding10);
         mListView.addFooterView(footerView);
 
-        title = (TextView) headerView.findViewById(R.id.title);
-        dateInfo = (TextView) headerView.findViewById(R.id.date_info);
-        mEmailTextView = (TextView) headerView.findViewById(R.id.email);
-        mUserNameTextView = (TextView) headerView.findViewById(R.id.user_name);
-        mOrderDateTextView = (TextView) headerView.findViewById(R.id.order_date);
-        mOrderStatusTextView = (TextView) headerView.findViewById(R.id.order_status);
-        mPaymentMethodTextView = (TextView) headerView.findViewById(R.id.payment_method);
-        mCommissionTypeTextView = (TextView) headerView.findViewById(R.id.commission_type);
-        mCommissiontRateTextView = (TextView) headerView.findViewById(R.id.commission_rate);
-        mCommissionAmountTextView = (TextView) headerView.findViewById(R.id.commission_amount);
+        title = headerView.findViewById(R.id.title);
+        dateInfo = headerView.findViewById(R.id.date_info);
+        mEmailTextView = headerView.findViewById(R.id.email);
+        mUserNameTextView = headerView.findViewById(R.id.user_name);
+        mOrderDateTextView = headerView.findViewById(R.id.order_date);
+        mOrderStatusTextView = headerView.findViewById(R.id.order_status);
+        mPaymentMethodTextView = headerView.findViewById(R.id.payment_method);
+        mCommissionTypeTextView = headerView.findViewById(R.id.commission_type);
+        mCommissiontRateTextView = headerView.findViewById(R.id.commission_rate);
+        mCommissionAmountTextView = headerView.findViewById(R.id.commission_amount);
 
-        mTaxAmountTextView = (TextView) headerView.findViewById(R.id.tax_amount);
-        mTaxPayerBlock = (LinearLayout) headerView.findViewById(R.id.taxpayer_block);
-        mTaxPayerIdTextView = (TextView) headerView.findViewById(R.id.taxpayer_id);
+        mTaxAmountTextView = headerView.findViewById(R.id.tax_amount);
+        mTaxPayerBlock = headerView.findViewById(R.id.taxpayer_block);
+        mTaxPayerIdTextView = headerView.findViewById(R.id.taxpayer_id);
 
-        ticketsType = (TextView) headerView.findViewById(R.id.tickets_type);
-        price = (TextView) headerView.findViewById(R.id.price);
-        quantity = (TextView) headerView.findViewById(R.id.quantity);
-        subtotalColumn = (TextView) headerView.findViewById(R.id.subtotal);
+        ticketsType = headerView.findViewById(R.id.tickets_type);
+        price = headerView.findViewById(R.id.price);
+        quantity = headerView.findViewById(R.id.quantity);
+        subtotalColumn = headerView.findViewById(R.id.subtotal);
 
-        mSubtotalTextView = (TextView) footerView.findViewById(R.id.subtotal);
-        mTaxText = (TextView) footerView.findViewById(R.id.taxText);
-        mTaxTextView = (TextView) footerView.findViewById(R.id.tax);
-        mGrandTotalTextView = (TextView) footerView.findViewById(R.id.total);
+        mSubtotalTextView = footerView.findViewById(R.id.subtotal);
+        mTaxText = footerView.findViewById(R.id.taxText);
+        mTaxTextView = footerView.findViewById(R.id.tax);
+        mGrandTotalTextView = footerView.findViewById(R.id.total);
         footerView.findViewById(R.id.order_summary_text).setVisibility(View.VISIBLE);
         footerView.findViewById(R.id.divider).setVisibility(View.GONE);
         footerView.findViewById(R.id.discount).setVisibility(View.GONE);

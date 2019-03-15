@@ -91,11 +91,11 @@ public class ReactionsFragment extends Fragment implements AbsListView.OnScrollL
             e.printStackTrace();
         }
 
-        swipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setEnabled(false);
-        mListView = (ListView) mRootView.findViewById(R.id.list_item_view);
+        mListView = mRootView.findViewById(R.id.list_item_view);
         mListView.setDividerHeight(0);
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
+        mProgressBar = mRootView.findViewById(R.id.progressBar);
 
         mLikeListItems = new ArrayList<>();
         mCommentList = new CommentList();

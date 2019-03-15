@@ -31,14 +31,14 @@ public class AdMobViewHolder extends RecyclerView.ViewHolder {
 
     public static void inflateAd(Context context, NativeAppInstallAd appInstallAd, View view){
 
-        NativeAppInstallAdView adView = (NativeAppInstallAdView) view.findViewById(R.id.native_view);
-        ImageView mAdIcon = (ImageView)view.findViewById(R.id.appinstall_app_icon);
-        ImageView cardImage = (ImageView)view.findViewById(R.id.appinstall_image_card);
-        ImageView mAdImage = (ImageView) view.findViewById(R.id.appinstall_image);
-        TextView mAdHeadLine = (TextView) view.findViewById(R.id.appinstall_headline);
-        TextView mAdBody = (TextView)view.findViewById(R.id.appinstall_body);
-        Button mInstallButton = (Button)view.findViewById(R.id.appinstall_call_to_action);
-        RatingBar mAdRating = (RatingBar) view.findViewById(R.id.appinstall_stars);
+        NativeAppInstallAdView adView = view.findViewById(R.id.native_view);
+        ImageView mAdIcon = view.findViewById(R.id.appinstall_app_icon);
+        ImageView cardImage = view.findViewById(R.id.appinstall_image_card);
+        ImageView mAdImage = view.findViewById(R.id.appinstall_image);
+        TextView mAdHeadLine = view.findViewById(R.id.appinstall_headline);
+        TextView mAdBody = view.findViewById(R.id.appinstall_body);
+        Button mInstallButton = view.findViewById(R.id.appinstall_call_to_action);
+        RatingBar mAdRating = view.findViewById(R.id.appinstall_stars);
 
         ImageLoader imageLoader = new ImageLoader(context);
         if(mAdIcon != null && appInstallAd.getIcon().getUri() != null && !appInstallAd.getIcon().getUri().toString().isEmpty()) {
@@ -77,13 +77,13 @@ public class AdMobViewHolder extends RecyclerView.ViewHolder {
 
     public static void inflateAd(Context context, NativeContentAd appInstallAd, View view){
 
-        NativeContentAdView adView = (NativeContentAdView) view.findViewById(R.id.native_view);
-        ImageView mAdIcon = (ImageView)view.findViewById(R.id.contentad_logo);
-        ImageView mAdImage = (ImageView) view.findViewById(R.id.contentad_image);
-        TextView mAdHeadLine = (TextView) view.findViewById(R.id.contentad_headline);
-        TextView mAdBody = (TextView)view.findViewById(R.id.contentad_body);
-        TextView mAdStore =(TextView) view.findViewById(R.id.contentad_advertiser);
-        Button mInstallButton = (Button)view.findViewById(R.id.contentad_call_to_action);
+        NativeContentAdView adView = view.findViewById(R.id.native_view);
+        ImageView mAdIcon = view.findViewById(R.id.contentad_logo);
+        ImageView mAdImage = view.findViewById(R.id.contentad_image);
+        TextView mAdHeadLine = view.findViewById(R.id.contentad_headline);
+        TextView mAdBody = view.findViewById(R.id.contentad_body);
+        TextView mAdStore = view.findViewById(R.id.contentad_advertiser);
+        Button mInstallButton = view.findViewById(R.id.contentad_call_to_action);
 
         ImageLoader imageLoader = new ImageLoader(context);
 

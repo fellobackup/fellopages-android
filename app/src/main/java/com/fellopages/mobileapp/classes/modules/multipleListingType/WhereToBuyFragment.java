@@ -87,10 +87,10 @@ public class WhereToBuyFragment extends Fragment {
         boolean isFirstTab = getArguments().getBoolean(ConstantVariables.IS_FIRST_TAB_REQUEST);
 
         mBrowseItemList = new ArrayList<>();
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setEnabled(false);
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -171,8 +171,8 @@ public class WhereToBuyFragment extends Fragment {
                 }
             } else{
                 rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+                TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
                 errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                 errorIcon.setText("\uf143");
                 errorMessage.setText(mContext.getResources().getString(R.string.no_blogs));

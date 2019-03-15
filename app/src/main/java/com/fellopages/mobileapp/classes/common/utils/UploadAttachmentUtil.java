@@ -119,10 +119,10 @@ public class UploadAttachmentUtil extends AsyncTask<Void, Integer, String> {
         mSelectPath = selectPath;
 
         mIsAttachFileRequest = false;
-        mCaller = (OnAsyncResponseListener) feedsFragment;
+        mCaller = feedsFragment;
         mAppConst = new AppConstant(mContext);
         mIsNeedToShowDialog = processDialog;
-        mOnFeedPostListener = (OnFeedPostListener) mFeedsFragment;
+        mOnFeedPostListener = mFeedsFragment;
         mFeedsFragment = feedsFragment;
         if (postParams.containsKey("mVideoPath")) {
             mVideoPath = postParams.get("mVideoPath");

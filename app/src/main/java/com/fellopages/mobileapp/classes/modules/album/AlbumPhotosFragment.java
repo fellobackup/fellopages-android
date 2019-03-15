@@ -104,14 +104,14 @@ public class AlbumPhotosFragment extends Fragment implements SwipeRefreshLayout.
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.grid_view_layout, null);
         footerView = CustomViews.getFooterView(inflater);
-        mPhotoGridView = (GridViewWithHeaderAndFooter)rootView.findViewById(R.id.gridView);
+        mPhotoGridView = rootView.findViewById(R.id.gridView);
         mPhotoGridView.addFooterView(footerView);
         footerView.setVisibility(View.GONE);
 
         columnWidth = CustomViews.initializeGridLayout(mContext, AppConstant.NUM_OF_COLUMNS_FOR_PHOTO_GRID,
                 mPhotoGridView);
         ViewCompat.setNestedScrollingEnabled(mPhotoGridView,true);
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -232,8 +232,8 @@ public class AlbumPhotosFragment extends Fragment implements SwipeRefreshLayout.
             }
         }else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf03e");
             errorMessage.setText(mContext.getResources().getString(R.string.no_photos));

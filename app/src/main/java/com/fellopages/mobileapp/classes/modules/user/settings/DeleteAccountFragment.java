@@ -54,8 +54,8 @@ public class DeleteAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         mRootView =  inflater.inflate(R.layout.fragment_delete_account, container, false);
 
-        mDeleteButton = (Button) mRootView.findViewById(R.id.deleteAccountButton);
-        mCancelButton = (Button) mRootView.findViewById(R.id.cancelButton);
+        mDeleteButton = mRootView.findViewById(R.id.deleteAccountButton);
+        mCancelButton = mRootView.findViewById(R.id.cancelButton);
 
         mDeleteUrl = getArguments().getString("url");
 

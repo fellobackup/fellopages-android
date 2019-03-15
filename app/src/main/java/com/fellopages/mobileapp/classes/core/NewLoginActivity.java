@@ -74,7 +74,7 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
     private Button loginButton;
     private String emailValue = "", passwordValue = "";
     private boolean isValidatingData = false, isError = false, isShowFacebookButton,
-            isShowTwitterButton, isNormalLogin = false;;
+            isShowTwitterButton, isNormalLogin = false;
     private Context mContext;
     private AppConstant mAppConst;
     private Bundle bundle;
@@ -121,7 +121,7 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
         loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(this);
 
-        usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+        usernameWrapper = findViewById(R.id.usernameWrapper);
         eEmailField = findViewById(R.id.email_field);
         ePasswordField = findViewById(R.id.password_field);
 
@@ -149,7 +149,7 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
         mBrowseAsGuest.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         mBrowseAsGuest.setOnClickListener(this);
 
-        mChooseLanguage = (TextView) findViewById(R.id.choose_language);
+        mChooseLanguage = findViewById(R.id.choose_language);
         mChooseLanguage.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         mChooseLanguage.setOnClickListener(this);
 
@@ -366,7 +366,7 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
             LogUtils.LOGD(LoginActivity.class.getSimpleName(),"otp_login_params->" +params);
             mAppConst.postLoginSignUpRequest(UrlUtil.LOGIN_OTP_URL, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     sendToOtp(jsonObject);
                 }
@@ -648,7 +648,7 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
                         alertDialog.dismiss();
                         mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_URL, params, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
                                 mAppConst.hideProgressDialog();
 
                                 if (jsonObject != null) {

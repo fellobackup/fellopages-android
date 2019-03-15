@@ -201,7 +201,7 @@ public class PhotoEditActivity extends AppCompatActivity implements
                                 if (recentSelected >= removedImage) {
                                     recentSelected--;
                                 }
-                                nsViewPager = (NonSwipeableViewPager) findViewById(R.id.view_pager);
+                                nsViewPager = findViewById(R.id.view_pager);
                                 adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
                                 nsViewPager.setAdapter(adapterViewPager);
                                 nsViewPager.setOffscreenPageLimit(adapterViewPager.getCount() + 1);
@@ -238,23 +238,23 @@ public class PhotoEditActivity extends AppCompatActivity implements
         if (fragmentArrayList != null) {
             PhotoFilterFragment fragment = (PhotoFilterFragment) fragmentArrayList.get(recentSelected);
 
-            if (fragment.isFilterDisplayed ) {
-                fragment.isFilterDisplayed = false;
-                fragment.isEditToolbarDisplay = false;
+            if (PhotoFilterFragment.isFilterDisplayed) {
+                PhotoFilterFragment.isFilterDisplayed = false;
+                PhotoFilterFragment.isEditToolbarDisplay = false;
                 fragment.imgColorFilter.setVisibility(View.GONE);
                 PhotoEditActivity.mTapFilter.setVisibility(View.VISIBLE);
                 PhotoEditActivity.mCaptionView.setVisibility(View.VISIBLE);
                 PhotoEditActivity.mRecyclerViewList.setVisibility(View.VISIBLE);
 
-            } else if (fragment.isStickerViewDisplayed) {
-                fragment.isStickerViewDisplayed = false;
+            } else if (PhotoFilterFragment.isStickerViewDisplayed) {
+                PhotoFilterFragment.isStickerViewDisplayed = false;
                 StickersUtil.showStickerViewForFilter(true);
                 fragment.mEditToolbar.setVisibility(View.VISIBLE);
                 Animation slideUp = AnimationUtils.loadAnimation(mContext, R.anim.push_up_in);
                 fragment.mEditToolbar.startAnimation(slideUp);
 
-            } else if (fragment.isEditToolbarDisplay) {
-                fragment.isEditToolbarDisplay = false;
+            } else if (PhotoFilterFragment.isEditToolbarDisplay) {
+                PhotoFilterFragment.isEditToolbarDisplay = false;
                 fragment.mEditToolbar.setVisibility(View.GONE);
                 PhotoEditActivity.mTapFilter.setVisibility(View.VISIBLE);
                 PhotoEditActivity.mRecyclerViewList.setVisibility(View.VISIBLE);
@@ -439,12 +439,12 @@ public class PhotoEditActivity extends AppCompatActivity implements
             mTapFilter.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             mTapFilter.setText("\uf106" + "\n" + mContext.getResources().getString(R.string.tap_filter_text));
 
-            nsViewPager = (NonSwipeableViewPager) findViewById(R.id.view_pager);
+            nsViewPager = findViewById(R.id.view_pager);
             adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
             nsViewPager.setAdapter(adapterViewPager);
             nsViewPager.setOffscreenPageLimit(adapterViewPager.getCount() + 1);
 
-            mRecyclerViewList = (RecyclerView) findViewById(R.id.recycler_view_list);
+            mRecyclerViewList = findViewById(R.id.recycler_view_list);
             if (storyType.equals("image")) {
 
                 width = AppConstant.getDisplayMetricsWidth(mContext);

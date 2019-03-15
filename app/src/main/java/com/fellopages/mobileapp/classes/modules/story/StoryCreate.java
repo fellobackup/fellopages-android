@@ -86,7 +86,7 @@ public class StoryCreate extends AppCompatActivity implements View.OnClickListen
 
           /* Create Back Button On Action Bar **/
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -132,16 +132,16 @@ public class StoryCreate extends AppCompatActivity implements View.OnClickListen
      * Method to get all views.
      */
     private void getViews() {
-        tvStoryTitle = (TextView) findViewById(R.id.story_title);
-        tvPostTitle = (TextView) findViewById(R.id.post_title);
-        tvStoryDesc = (TextView) findViewById(R.id.story_desc);
-        tvPostDesc = (TextView) findViewById(R.id.post_desc);
-        ivUser = (BezelImageView) findViewById(R.id.owner_image);
-        llStory = (LinearLayout) findViewById(R.id.story_layout);
-        llPost = (LinearLayout) findViewById(R.id.post_layout);
-        cbStory = (AppCompatCheckBox) findViewById(R.id.select_story);
-        cbPost = (AppCompatCheckBox) findViewById(R.id.select_post);
-        pbLoading = (ProgressBar) findViewById(R.id.loadingProgress);
+        tvStoryTitle = findViewById(R.id.story_title);
+        tvPostTitle = findViewById(R.id.post_title);
+        tvStoryDesc = findViewById(R.id.story_desc);
+        tvPostDesc = findViewById(R.id.post_desc);
+        ivUser = findViewById(R.id.owner_image);
+        llStory = findViewById(R.id.story_layout);
+        llPost = findViewById(R.id.post_layout);
+        cbStory = findViewById(R.id.select_story);
+        cbPost = findViewById(R.id.select_post);
+        pbLoading = findViewById(R.id.loadingProgress);
         llStory.setOnClickListener(this);
         llPost.setOnClickListener(this);
         cbStory.setOnCheckedChangeListener(this);

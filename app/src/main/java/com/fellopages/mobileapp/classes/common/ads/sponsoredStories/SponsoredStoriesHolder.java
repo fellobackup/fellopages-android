@@ -95,15 +95,15 @@ public class SponsoredStoriesHolder extends RecyclerView.ViewHolder {
         final AppConstant mAppConst = new AppConstant(context);
         clickableParts = new HashMap<>();
 
-        TextView storyTitle = (TextView) adView.findViewById(R.id.story_title);
+        TextView storyTitle = adView.findViewById(R.id.story_title);
         storyTitle.setMovementMethod(LinkMovementMethod.getInstance());
-        BezelImageView userProfileImage = (BezelImageView) adView.findViewById(R.id.user_profile_image);
+        BezelImageView userProfileImage = adView.findViewById(R.id.user_profile_image);
 
-        ImageView adCover = (ImageView) adView.findViewById(R.id.attachment_preview);
-        TextView adTitle = (TextView) adView.findViewById(R.id.attachment_title);
-        TextView likeCount = (TextView) adView.findViewById(R.id.like_count);
+        ImageView adCover = adView.findViewById(R.id.attachment_preview);
+        TextView adTitle = adView.findViewById(R.id.attachment_title);
+        TextView likeCount = adView.findViewById(R.id.like_count);
 
-        final TextView likeView = (TextView) adView.findViewById(R.id.like_view);
+        final TextView likeView = adView.findViewById(R.id.like_view);
         likeView.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
         likeView.setText("\uf164");
 
@@ -223,7 +223,7 @@ public class SponsoredStoriesHolder extends RecyclerView.ViewHolder {
                 likeParams.put(ConstantVariables.SUBJECT_ID, String.valueOf(mSponsoredStory.getmResourceId()));
                 mAppConst.postJsonResponseForUrl(likeUnlikeUrl, likeParams, new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
 
                         if(PreferencesUtils.isNestedCommentEnabled(context)){
                             String sendNotificationUrl  = AppConstant.DEFAULT_URL + "advancedcomments/send-like-notitfication";
@@ -271,7 +271,7 @@ public class SponsoredStoriesHolder extends RecyclerView.ViewHolder {
                     AppConstant appConstant = new AppConstant(context);
                     appConstant.getJsonResponseFromUrl(removeAdsUrl, new OnResponseListener() {
                         @Override
-                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                        public void onTaskCompleted(JSONObject jsonObject) {
 
                             mSponsoredStory.setRemoveAdsOptions(jsonObject.optJSONArray("form"));
                             mRemoveAdsPosition.add(adPosition);

@@ -166,8 +166,8 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_edit_post_content, container, false);
 
-        mFormatBar = (LinearLayout) rootView.findViewById(R.id.format_bar);
-        mTitleEditText = (EditText) rootView.findViewById(R.id.post_title);
+        mFormatBar = rootView.findViewById(R.id.format_bar);
+        mTitleEditText = rootView.findViewById(R.id.post_title);
         mTitleEditText.setText(mTitle);
         mTitleEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -181,29 +181,29 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
             }
         });
 
-        mContentEditText = (WPEditText) rootView.findViewById(R.id.post_content);
+        mContentEditText = rootView.findViewById(R.id.post_content);
         mContentEditText.setText(mContent);
 
-        mPostContentLinearLayout = (LinearLayout) rootView.findViewById(R.id.post_content_wrapper);
-        mPostSettingsLinearLayout = (LinearLayout) rootView.findViewById(R.id.post_settings_wrapper);
-        Button postSettingsButton = (Button) rootView.findViewById(R.id.post_settings_button);
+        mPostContentLinearLayout = rootView.findViewById(R.id.post_content_wrapper);
+        mPostSettingsLinearLayout = rootView.findViewById(R.id.post_settings_wrapper);
+        Button postSettingsButton = rootView.findViewById(R.id.post_settings_button);
         postSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mEditorFragmentListener.onSettingsClicked();
             }
         });
-        mBoldToggleButton = (ToggleButton) rootView.findViewById(R.id.bold);
-        mEmToggleButton = (ToggleButton) rootView.findViewById(R.id.em);
-        mBquoteToggleButton = (ToggleButton) rootView.findViewById(R.id.bquote);
-        mUnderlineToggleButton = (ToggleButton) rootView.findViewById(R.id.underline);
-        mStrikeToggleButton = (ToggleButton) rootView.findViewById(R.id.strike);
-        mAddPictureButton = (Button) rootView.findViewById(R.id.addPictureButton);
-        Button linkButton = (Button) rootView.findViewById(R.id.link);
-        Button moreButton = (Button) rootView.findViewById(R.id.more);
+        mBoldToggleButton = rootView.findViewById(R.id.bold);
+        mEmToggleButton = rootView.findViewById(R.id.em);
+        mBquoteToggleButton = rootView.findViewById(R.id.bquote);
+        mUnderlineToggleButton = rootView.findViewById(R.id.underline);
+        mStrikeToggleButton = rootView.findViewById(R.id.strike);
+        mAddPictureButton = rootView.findViewById(R.id.addPictureButton);
+        Button linkButton = rootView.findViewById(R.id.link);
+        Button moreButton = rootView.findViewById(R.id.more);
 
         registerForContextMenu(mAddPictureButton);
-        mContentEditText = (WPEditText) rootView.findViewById(R.id.post_content);
+        mContentEditText = rootView.findViewById(R.id.post_content);
         mContentEditText.setOnSelectionChangedListener(this);
         mContentEditText.setOnTouchListener(this);
         mContentEditText.addTextChangedListener(this);
@@ -711,11 +711,11 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                         final View alertView = factory.inflate(R.layout.alert_image_options, null);
                         if (alertView == null)
                             return false;
-                        final EditText imageWidthText = (EditText) alertView.findViewById(R.id.imageWidthText);
-                        final EditText titleText = (EditText) alertView.findViewById(R.id.title);
-                        final EditText caption = (EditText) alertView.findViewById(R.id.caption);
-                        final CheckBox featuredCheckBox = (CheckBox) alertView.findViewById(R.id.featuredImage);
-                        final CheckBox featuredInPostCheckBox = (CheckBox) alertView.findViewById(R.id.featuredInPost);
+                        final EditText imageWidthText = alertView.findViewById(R.id.imageWidthText);
+                        final EditText titleText = alertView.findViewById(R.id.title);
+                        final EditText caption = alertView.findViewById(R.id.caption);
+                        final CheckBox featuredCheckBox = alertView.findViewById(R.id.featuredImage);
+                        final CheckBox featuredInPostCheckBox = alertView.findViewById(R.id.featuredInPost);
 
                         // show featured image checkboxes if supported
                         if (mFeaturedImageSupported) {
@@ -735,8 +735,8 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                             }
                         });
 
-                        final SeekBar seekBar = (SeekBar) alertView.findViewById(R.id.imageWidth);
-                        final Spinner alignmentSpinner = (Spinner) alertView.findViewById(R.id.alignment_spinner);
+                        final SeekBar seekBar = alertView.findViewById(R.id.imageWidth);
+                        final Spinner alignmentSpinner = alertView.findViewById(R.id.alignment_spinner);
                         ArrayAdapter<CharSequence> adapter =
                                 ArrayAdapter.createFromResource(getActivity(), R.array.alignment_array,
                                         android.R.layout.simple_spinner_item);

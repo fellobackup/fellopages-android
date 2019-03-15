@@ -154,8 +154,8 @@ public class AdvGroupsProfile extends AppCompatActivity implements View.OnClickL
         mImageLoader = new ImageLoader(getApplicationContext());
 
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -164,20 +164,20 @@ public class AdvGroupsProfile extends AppCompatActivity implements View.OnClickL
         }
 
         //Header view
-        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        mMainContent = findViewById(R.id.main_content);
+        appBar = findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(this);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
 
         // Setup the Tabs
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        mSlidingTabs = (TabLayout) findViewById(R.id.slidingTabs);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mCoverImage = (ImageView) findViewById(R.id.coverImage);
-        mContentTitle = (TextView) findViewById(R.id.content_title);
-        mProfileImage = (ImageView) findViewById(R.id.profile_image);
-        mCoverImageMenus = (TextView) findViewById(R.id.cover_image_menus);
-        mProfileImageMenus = (TextView) findViewById(R.id.profile_image_menus);
+        viewPager = findViewById(R.id.pager);
+        mSlidingTabs = findViewById(R.id.slidingTabs);
+        mProgressBar = findViewById(R.id.progressBar);
+        mCoverImage = findViewById(R.id.coverImage);
+        mContentTitle = findViewById(R.id.content_title);
+        mProfileImage = findViewById(R.id.profile_image);
+        mCoverImageMenus = findViewById(R.id.cover_image_menus);
+        mProfileImageMenus = findViewById(R.id.profile_image_menus);
         mCoverImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mProfileImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
@@ -187,22 +187,22 @@ public class AdvGroupsProfile extends AppCompatActivity implements View.OnClickL
                 Like and Unlike Fields...
             */
 
-        mLikeCountTextView = (TextView) findViewById(R.id.likeCount);
-        mCommentCountTextView = (TextView) findViewById(R.id.commentCount);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        mLikeUnlikeText = (TextView) findViewById(R.id.likeUnlikeText);
+        mLikeCountTextView = findViewById(R.id.likeCount);
+        mCommentCountTextView = findViewById(R.id.commentCount);
+        mReactionIcon = findViewById(R.id.reactionIcon);
+        mLikeUnlikeText = findViewById(R.id.likeUnlikeText);
 
-        LinearLayout mLikeBlock = (LinearLayout) findViewById(R.id.likeBlock);
-        LinearLayout mCommentBlock = (LinearLayout) findViewById(R.id.commentBlock);
-        LinearLayout mLikeCommentBlock = (LinearLayout) findViewById(R.id.likeCommentBlock);
+        LinearLayout mLikeBlock = findViewById(R.id.likeBlock);
+        LinearLayout mCommentBlock = findViewById(R.id.commentBlock);
+        LinearLayout mLikeCommentBlock = findViewById(R.id.likeCommentBlock);
 
         mLikeBlock.setOnClickListener(this);
         mLikeBlock.setOnLongClickListener(this);
         mCommentBlock.setOnClickListener(this);
         mLikeCommentBlock.setOnClickListener(this);
 
-        mLikeCommentContent = (LinearLayout) findViewById(R.id.likeCommentContent);
-        mBottomToolBar = (SplitToolbar) findViewById(R.id.toolbarBottom);
+        mLikeCommentContent = findViewById(R.id.likeCommentContent);
+        mBottomToolBar = findViewById(R.id.toolbarBottom);
 
 
         /** Getting Intent Key's. **/
@@ -226,7 +226,7 @@ public class AdvGroupsProfile extends AppCompatActivity implements View.OnClickL
                     "&subject_id=" + mContentId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     mContentReactions = mReactionsObject.optJSONObject("feed_reactions");
@@ -985,7 +985,7 @@ public class AdvGroupsProfile extends AppCompatActivity implements View.OnClickL
                     if (!isLiked) {
                         mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                             }
 

@@ -76,12 +76,12 @@ public class ContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_content, container, false);
-        TextView titleView = (TextView) v.findViewById(R.id.slideTitle);
-        TextView subtitle = (TextView) v.findViewById(R.id.slideSubtitle);
+        TextView titleView = v.findViewById(R.id.slideTitle);
+        TextView subtitle = v.findViewById(R.id.slideSubtitle);
         titleView.setText(title);
         subtitle.setText(description);
 
-        ImageView backgroundImage = (ImageView) v.findViewById(R.id.backgroundImage);
+        ImageView backgroundImage = v.findViewById(R.id.backgroundImage);
         backgroundImage.setImageDrawable(ResourceUtils.getDrawable(getActivity(), drawable));
 
         return v;

@@ -119,8 +119,8 @@ public class TrackView extends FrameLayout implements View.OnClickListener, View
 
     private void init(Context context) {
         LayoutInflater.from(context).inflate(R.layout.track_view, this);
-        mTitle = ((TextView) findViewById(R.id.track_view_title));
-        mPlayCount = ((TextView) findViewById(R.id.track_view_play_count));
+        mTitle = findViewById(R.id.track_view_title);
+        mPlayCount = findViewById(R.id.track_view_play_count);
 
         setBackgroundResource(R.drawable.selectable_background_white);
         int padding = getResources().getDimensionPixelOffset(R.dimen.padding_8dp);

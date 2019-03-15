@@ -21,15 +21,15 @@ public class EditLinkActivity extends AppCompatActivity {
         if (extras != null) {
             String selectedText = extras.getString("selectedText");
             if (selectedText != null) {
-                EditText linkTextET = (EditText) findViewById(R.id.linkText);
+                EditText linkTextET = findViewById(R.id.linkText);
                 linkTextET.setText(selectedText);
             }
         }
 
-        final Button cancelButton = (Button) findViewById(R.id.cancel);
-        final Button okButton = (Button) findViewById(R.id.ok);
+        final Button cancelButton = findViewById(R.id.cancel);
+        final Button okButton = findViewById(R.id.ok);
 
-        final EditText urlEditText = (EditText) findViewById(R.id.linkURL);
+        final EditText urlEditText = findViewById(R.id.linkURL);
         urlEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,10 +43,10 @@ public class EditLinkActivity extends AppCompatActivity {
 
         okButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                EditText linkURLET = (EditText) findViewById(R.id.linkURL);
+                EditText linkURLET = findViewById(R.id.linkURL);
                 String linkURL = linkURLET.getText().toString();
 
-                EditText linkTextET = (EditText) findViewById(R.id.linkText);
+                EditText linkTextET = findViewById(R.id.linkText);
                 String linkText = linkTextET.getText().toString();
 
                 Bundle bundle = new Bundle();

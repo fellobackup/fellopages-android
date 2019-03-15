@@ -117,9 +117,9 @@ public class AppConstant {
     public static final int STICKERS_GRID_PADDING = 8; // in dp
 
     // Default url for data access - OLD
-//    public static final String DEFAULT_URL =
-//            BuildConfig.DEBUG ? "https://www.fellopages.com/beta1/api/rest/" : "https://www.fellopages.com/api/rest/";
-    public static final String DEFAULT_URL = "https://www.fellopages.com/api/rest/";
+    public static final String DEFAULT_URL =
+            BuildConfig.DEBUG ? "https://www.fellopages.com/beta1/api/rest/" : "https://www.fellopages.com/api/rest/";
+//    public static final String DEFAULT_URL = "https://www.fellopages.com/api/rest/";
 //    public static final String DEFAULT_URL = "https://www.fellopages.com/beta1/api/rest/";
     public static final String oauth_consumer_key = "tqrqueo5pxnae436nmrgeqhzs6jiud1n";
     public static final String oauth_consumer_secret = "dlixjfdviokbfk48mv1x0ir2u8v7o9xj";
@@ -1104,7 +1104,7 @@ public class AppConstant {
 
         getJsonResponseFromUrl(communityAdsUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 if (mCommunityAdsLoadedListener != null) {
                     mCommunityAdsLoadedListener.onCommunityAdsLoaded(jsonObject.optJSONArray("advertisments"));
                 }
@@ -1125,7 +1125,7 @@ public class AppConstant {
 
         getJsonResponseFromUrl(communityAdsUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 if (onCommunityAdsLoadedListnerFeeds != null) {
                     onCommunityAdsLoadedListnerFeeds.onCommunityAdsLoaded(jsonObject.optJSONArray("advertisments"), dataObject);
                 }

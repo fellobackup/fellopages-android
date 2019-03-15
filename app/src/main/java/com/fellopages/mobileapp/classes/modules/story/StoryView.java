@@ -123,21 +123,21 @@ public class StoryView extends AppCompatActivity implements StoriesProgressView.
      */
     private void getViews() {
         mRootView = findViewById(R.id.main_view);
-        storiesProgressView = (StoriesProgressView) findViewById(R.id.stories);
-        tvUserName = (TextView) findViewById(R.id.user_name);
-        tvStoryTime = (TextView) findViewById(R.id.story_time);
-        mBottomView = (RelativeLayout) findViewById(R.id.bottom_view);
-        tvViewCount = (TextView) findViewById(R.id.view_count);
-        tvStoryCaption = (TextView) findViewById(R.id.story_caption);
-        tvWriteMessage = (TextView) findViewById(R.id.write_message);
-        tvAddToStory = (TextView) findViewById(R.id.add_to_story);
-        ivMain = (ImageView) findViewById(R.id.image);
-        ivUserProfile = (ImageView) findViewById(R.id.user_image);
-        ivOptionMenu = (ImageView) findViewById(R.id.optionMenu);
-        videoPlayer = (VideoView) findViewById(R.id.video_player);
-        pbLoading = (ProgressBar) findViewById(R.id.loadingProgress);
+        storiesProgressView = findViewById(R.id.stories);
+        tvUserName = findViewById(R.id.user_name);
+        tvStoryTime = findViewById(R.id.story_time);
+        mBottomView = findViewById(R.id.bottom_view);
+        tvViewCount = findViewById(R.id.view_count);
+        tvStoryCaption = findViewById(R.id.story_caption);
+        tvWriteMessage = findViewById(R.id.write_message);
+        tvAddToStory = findViewById(R.id.add_to_story);
+        ivMain = findViewById(R.id.image);
+        ivUserProfile = findViewById(R.id.user_image);
+        ivOptionMenu = findViewById(R.id.optionMenu);
+        videoPlayer = findViewById(R.id.video_player);
+        pbLoading = findViewById(R.id.loadingProgress);
         ivOptionMenu.setColorFilter(ContextCompat.getColor(mContext, R.color.white), PorterDuff.Mode.SRC_IN);
-        ivCloseIcon = (ImageView) findViewById(R.id.closeIcon);
+        ivCloseIcon = findViewById(R.id.closeIcon);
         ivCloseIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.white), PorterDuff.Mode.SRC_IN);
     }
 

@@ -68,9 +68,9 @@ public class FullScreenImageAdapter extends PagerAdapter implements View.OnClick
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                 false);
-        imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.image);
-        placeholder = (ImageView) viewLayout.findViewById(R.id.placeholder);
-        pbPlaceHolder = (ProgressBar) viewLayout.findViewById(R.id.holder_progress_bar);
+        imgDisplay = viewLayout.findViewById(R.id.image);
+        placeholder = viewLayout.findViewById(R.id.placeholder);
+        pbPlaceHolder = viewLayout.findViewById(R.id.holder_progress_bar);
         PhotoListDetails photoListDetails = mPhotoDetails.get(position);
 
         if (photoListDetails.getImageUrl() != null && !photoListDetails.getImageUrl().isEmpty()) {

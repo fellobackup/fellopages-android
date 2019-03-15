@@ -283,9 +283,7 @@ public class NewEditorActivity extends FormActivity implements EditorFragmentLis
 
                     ((EditorMediaUploadListener) mEditorFragment).onMediaUploadSucceeded(mediaId, mediaUrl);
 
-                    if (mFailedUploads.containsKey(mediaId)) {
-                        mFailedUploads.remove(mediaId);
-                    }
+                    mFailedUploads.remove(mediaId);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

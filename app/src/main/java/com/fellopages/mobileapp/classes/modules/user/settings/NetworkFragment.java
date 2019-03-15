@@ -93,12 +93,8 @@ public class NetworkFragment extends Fragment implements OnSuccessListener {
             }
         }
 
-        mNetworkListView = (ListView) mRootView.findViewById(R.id.network_list);
-        if (mNetworkName.equals("joined")) {
-            isJoined = true;
-        } else {
-            isJoined = false;
-        }
+        mNetworkListView = mRootView.findViewById(R.id.network_list);
+        isJoined = mNetworkName.equals("joined");
         mNetworkAdapter = new NetworkAdapter(mContext, R.layout.list_networks, mNetworkList, isJoined, this);
         mNetworkListView.setAdapter(mNetworkAdapter);
         mRootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
@@ -120,7 +116,7 @@ public class NetworkFragment extends Fragment implements OnSuccessListener {
             mNetworkAdapter.notifyDataSetChanged();
         } else {
             mNetworkListView.setVisibility(View.GONE);
-            mNoAvailableMessage = (SelectableTextView) mRootView.findViewById(R.id.noAvailableMessage);
+            mNoAvailableMessage = mRootView.findViewById(R.id.noAvailableMessage);
             mNoAvailableMessage.setVisibility(View.VISIBLE);
 
             String message;

@@ -147,8 +147,8 @@ public class MultiMediaSelectorFragment extends Fragment implements View.OnClick
         mAppConst = new AppConstant(getActivity());
         mAlertDialogWithAction = new AlertDialogWithAction(getContext());
         rootView =  inflater.inflate(R.layout.fragment_multi_image, container, false);
-        tvAddPhoto = (TextView) getActivity().findViewById(R.id.camera_add);
-        tvAddVideo = (TextView) getActivity().findViewById(R.id.video_add);
+        tvAddPhoto = getActivity().findViewById(R.id.camera_add);
+        tvAddVideo = getActivity().findViewById(R.id.video_add);
         return rootView;
     }
 
@@ -215,11 +215,11 @@ public class MultiMediaSelectorFragment extends Fragment implements View.OnClick
 
         mPopupAnchorView = view.findViewById(R.id.footer);
 
-        mTimeLineText = (TextView) view.findViewById(R.id.timeline_area);
+        mTimeLineText = view.findViewById(R.id.timeline_area);
         // Initialization , first hide the current timeline
         mTimeLineText.setVisibility(View.GONE);
 
-        mCategoryText = (TextView) view.findViewById(R.id.category_btn);
+        mCategoryText = view.findViewById(R.id.category_btn);
         // Initialization , load all pictures
         mCategoryText.setText(categoryAllText);
         mCategoryText.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +241,7 @@ public class MultiMediaSelectorFragment extends Fragment implements View.OnClick
             }
         });
 
-        mPreviewBtn = (Button) view.findViewById(R.id.preview);
+        mPreviewBtn = view.findViewById(R.id.preview);
         // Initialization , the button state initialization
         if(resultList == null || resultList.size()<=0){
             mPreviewBtn.setText(R.string.preview);
@@ -254,7 +254,7 @@ public class MultiMediaSelectorFragment extends Fragment implements View.OnClick
             }
         });
 
-        mGridView = (GridView) view.findViewById(R.id.grid);
+        mGridView = view.findViewById(R.id.grid);
         mGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int state) {

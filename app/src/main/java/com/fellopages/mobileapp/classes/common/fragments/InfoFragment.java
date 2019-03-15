@@ -109,42 +109,42 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
         //Fetch Current Selected Module
 
         mCurrentSelectedModule = getArguments().getString(ConstantVariables.EXTRA_MODULE_TYPE);
-        mLocationDateLayout = (LinearLayout) mRootView.findViewById(R.id.location_date_layout);
+        mLocationDateLayout = mRootView.findViewById(R.id.location_date_layout);
         mLocationDateLayout.setVisibility(View.GONE);
-        mOwnerDetailView = (LinearLayout) mRootView.findViewById(R.id.ownerDetailView);
-        mOwnerImage = (BezelImageView) mRootView.findViewById(R.id.owner_image);
-        mOwnerTitle = (TextView) mRootView.findViewById(R.id.owner_title);
+        mOwnerDetailView = mRootView.findViewById(R.id.ownerDetailView);
+        mOwnerImage = mRootView.findViewById(R.id.owner_image);
+        mOwnerTitle = mRootView.findViewById(R.id.owner_title);
         mOwnerImage.setOnClickListener(this);
         mOwnerTitle.setOnClickListener(this);
 
-        mCategoryLabel = (SelectableTextView) mRootView.findViewById(R.id.category_label);
-        mCategoryTitle = (SelectableTextView) mRootView.findViewById(R.id.categoryTitle);
-        mMemberCount = (SelectableTextView) mRootView.findViewById(R.id.memberCount);
-        mMemberCountLabel = (SelectableTextView) mRootView.findViewById(R.id.member_count_label);
-        mViewCount = (SelectableTextView) mRootView.findViewById(R.id.viewCount);
-        mViewCountLabel = (SelectableTextView) mRootView.findViewById(R.id.view_count_label);
+        mCategoryLabel = mRootView.findViewById(R.id.category_label);
+        mCategoryTitle = mRootView.findViewById(R.id.categoryTitle);
+        mMemberCount = mRootView.findViewById(R.id.memberCount);
+        mMemberCountLabel = mRootView.findViewById(R.id.member_count_label);
+        mViewCount = mRootView.findViewById(R.id.viewCount);
+        mViewCountLabel = mRootView.findViewById(R.id.view_count_label);
 
-        mModificationDateLabel = (SelectableTextView) mRootView.findViewById(R.id.modification_date_label);
-        mCreationDateLabel = (SelectableTextView) mRootView.findViewById(R.id.creation_date_label);
-        mCreationDate = (SelectableTextView) mRootView.findViewById(R.id.creationDate);
-        mLastUpdated = (SelectableTextView) mRootView.findViewById(R.id.lastUpdated);
-        mCategoryIcon = (TextView) mRootView.findViewById(R.id.category_icon);
-        mMemberCountIcon = (TextView) mRootView.findViewById(R.id.member_count_icon);
-        mViewCountIcon = (TextView) mRootView.findViewById(R.id.view_count_icon);
-        mCreationDateIcon = (TextView) mRootView.findViewById(R.id.creation_date_icon);
-        mModificationDateIcon = (TextView) mRootView.findViewById(R.id.modification_date_icon);
+        mModificationDateLabel = mRootView.findViewById(R.id.modification_date_label);
+        mCreationDateLabel = mRootView.findViewById(R.id.creation_date_label);
+        mCreationDate = mRootView.findViewById(R.id.creationDate);
+        mLastUpdated = mRootView.findViewById(R.id.lastUpdated);
+        mCategoryIcon = mRootView.findViewById(R.id.category_icon);
+        mMemberCountIcon = mRootView.findViewById(R.id.member_count_icon);
+        mViewCountIcon = mRootView.findViewById(R.id.view_count_icon);
+        mCreationDateIcon = mRootView.findViewById(R.id.creation_date_icon);
+        mModificationDateIcon = mRootView.findViewById(R.id.modification_date_icon);
 
-        mDescription = (SelectableTextView) mRootView.findViewById(R.id.description);
+        mDescription = mRootView.findViewById(R.id.description);
 
-        mDateLabel = (TextView) mRootView.findViewById(R.id.dateLabel);
-        mEventDate = (SelectableTextView) mRootView.findViewById(R.id.eventStartDate);
-        mEventDateTime = (SelectableTextView) mRootView.findViewById(R.id.eventEndDateTime);
-        mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocation);
-        mLocationLabel = (TextView) mRootView.findViewById(R.id.locationLabel);
+        mDateLabel = mRootView.findViewById(R.id.dateLabel);
+        mEventDate = mRootView.findViewById(R.id.eventStartDate);
+        mEventDateTime = mRootView.findViewById(R.id.eventEndDateTime);
+        mEventLocation = mRootView.findViewById(R.id.eventLocation);
+        mLocationLabel = mRootView.findViewById(R.id.locationLabel);
 
-        mAttendingButton = (Button) mRootView.findViewById(R.id.attendingButton);
-        mMayBeAttendingButton = (Button) mRootView.findViewById(R.id.mayBeAttendingButton);
-        mNotAttendingButton = (Button) mRootView.findViewById(R.id.notAttendingButton);
+        mAttendingButton = mRootView.findViewById(R.id.attendingButton);
+        mMayBeAttendingButton = mRootView.findViewById(R.id.mayBeAttendingButton);
+        mNotAttendingButton = mRootView.findViewById(R.id.notAttendingButton);
 
         mCategoryTitle.setOnClickListener(this);
         mAttendingButton.setOnClickListener(this);
@@ -154,7 +154,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
         mMayBeAttendingButton.setTypeface(fontIcon);
         mNotAttendingButton.setTypeface(fontIcon);
 
-        mCategoryInfoLayout = (LinearLayout) mRootView.findViewById(R.id.categoryInfo);
+        mCategoryInfoLayout = mRootView.findViewById(R.id.categoryInfo);
         updateData(bundle);
 
         return mRootView;
@@ -184,8 +184,8 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
             // If current module is sitereview listing then showing overview.
             if (mCurrentSelectedModule != null && mCurrentSelectedModule.equals("sitereview_listing")) {
 
-                mViewBody = (WebView) mRootView.findViewById(R.id.view_body);
-                mViewDescription = (WebView) mRootView.findViewById(R.id.view_overview);
+                mViewBody = mRootView.findViewById(R.id.view_body);
+                mViewDescription = mRootView.findViewById(R.id.view_overview);
                 mOverviewSeperaterView = mRootView.findViewById(R.id.mOverviewSeperaterView);
 
                 GlobalFunctions.setWebSettings(mViewBody, false);

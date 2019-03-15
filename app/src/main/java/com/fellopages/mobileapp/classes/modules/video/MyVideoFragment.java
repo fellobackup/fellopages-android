@@ -114,7 +114,7 @@ public class MyVideoFragment extends Fragment implements AdapterView.OnItemClick
         rootView = inflater.inflate(R.layout.grid_view_layout, container,false);
         footerView = CustomViews.getFooterView(inflater);
 
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mGridView = rootView.findViewById(R.id.gridView);
         mGridView.addFooterView(footerView);
         footerView.setVisibility(View.GONE);
 
@@ -129,7 +129,7 @@ public class MyVideoFragment extends Fragment implements AdapterView.OnItemClick
         mGridView.setAdapter(mManageDataAdapter);
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -344,8 +344,8 @@ public class MyVideoFragment extends Fragment implements AdapterView.OnItemClick
 
         }else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf03d");
             errorMessage.setText(mContext.getResources().getString(R.string.no_videos));

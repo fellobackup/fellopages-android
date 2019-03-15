@@ -115,17 +115,17 @@ public class ImageSettingsDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_image_options, container, false);
 
-        ImageView thumbnailImage = (ImageView) view.findViewById(R.id.image_thumbnail);
-        TextView filenameLabel = (TextView) view.findViewById(R.id.image_filename);
-        mTitleText = (EditText) view.findViewById(R.id.image_title);
-        mCaptionText = (EditText) view.findViewById(R.id.image_caption);
-        mAltText = (EditText) view.findViewById(R.id.image_alt_text);
-        mAlignmentSpinner = (Spinner) view.findViewById(R.id.alignment_spinner);
-        mLinkTo = (EditText) view.findViewById(R.id.image_link_to);
-        SeekBar widthSeekBar = (SeekBar) view.findViewById(R.id.image_width_seekbar);
-        mWidthText = (EditText) view.findViewById(R.id.image_width_text);
-        final CheckBox featuredCheckBox = (CheckBox) view.findViewById(R.id.featuredImage);
-        final CheckBox featuredInPostCheckBox = (CheckBox) view.findViewById(R.id.featuredInPost);
+        ImageView thumbnailImage = view.findViewById(R.id.image_thumbnail);
+        TextView filenameLabel = view.findViewById(R.id.image_filename);
+        mTitleText = view.findViewById(R.id.image_title);
+        mCaptionText = view.findViewById(R.id.image_caption);
+        mAltText = view.findViewById(R.id.image_alt_text);
+        mAlignmentSpinner = view.findViewById(R.id.alignment_spinner);
+        mLinkTo = view.findViewById(R.id.image_link_to);
+        SeekBar widthSeekBar = view.findViewById(R.id.image_width_seekbar);
+        mWidthText = view.findViewById(R.id.image_width_text);
+        final CheckBox featuredCheckBox = view.findViewById(R.id.featuredImage);
+        final CheckBox featuredInPostCheckBox = view.findViewById(R.id.featuredInPost);
 
         // Populate the dialog with existing values
         Bundle bundle = getArguments();

@@ -91,8 +91,8 @@ public class FragmentLoadActivity extends AppCompatActivity implements View.OnCl
 
         try {
             //Setting up the action bar
-            mToolbar = (Toolbar) findViewById(R.id.toolbar);
-            mFabCreate = (FloatingActionButton) findViewById(R.id.create_fab);
+            mToolbar = findViewById(R.id.toolbar);
+            mFabCreate = findViewById(R.id.create_fab);
             mContext = this;
             bundle = getIntent().getExtras();
 

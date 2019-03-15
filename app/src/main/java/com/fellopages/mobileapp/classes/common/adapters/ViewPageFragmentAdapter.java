@@ -142,13 +142,13 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
      */
     public void getViews() {
 
-        mSlidingTabs = (TabLayout) ((Activity) mContext).findViewById(R.id.slidingTabs);
-        mViewPager = (ViewPager) ((Activity) mContext).findViewById(R.id.pager);
-        mFabCreate = (FloatingActionButton) ((Activity) mContext).findViewById(R.id.create_fab);
-        mFabMenu = (FloatingActionMenu) ((Activity) mContext).findViewById(R.id.fab_menu);
-        mFabSearch = (CustomFloatingActionButton) ((Activity) mContext).findViewById(R.id.search);
-        mFabInvite = (CustomFloatingActionButton) ((Activity) mContext).findViewById(R.id.invite);
-        mFabMessage = (CustomFloatingActionButton) ((Activity) mContext).findViewById(R.id.message_members);
+        mSlidingTabs = ((Activity) mContext).findViewById(R.id.slidingTabs);
+        mViewPager = ((Activity) mContext).findViewById(R.id.pager);
+        mFabCreate = ((Activity) mContext).findViewById(R.id.create_fab);
+        mFabMenu = ((Activity) mContext).findViewById(R.id.fab_menu);
+        mFabSearch = ((Activity) mContext).findViewById(R.id.search);
+        mFabInvite = ((Activity) mContext).findViewById(R.id.invite);
+        mFabMessage = ((Activity) mContext).findViewById(R.id.message_members);
         messageView = ((Activity) mContext).findViewById(R.id.message_view);
         shadowView = ((Activity) mContext).findViewById(R.id.shadow);
         mFabCreate.hide();

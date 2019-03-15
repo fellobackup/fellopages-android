@@ -144,7 +144,7 @@ public class BrowsePollFragment extends Fragment implements AdapterView.OnItemCl
         }
 
         rootView = inflater.inflate(R.layout.list_view_layout,container,false);
-        mListView = (ListView) rootView.findViewById(R.id.list_item_view);
+        mListView = rootView.findViewById(R.id.list_item_view);
         footerView = CustomViews.getFooterView(inflater);
 
         ViewCompat.setNestedScrollingEnabled(mListView, true);
@@ -178,7 +178,7 @@ public class BrowsePollFragment extends Fragment implements AdapterView.OnItemCl
             }
         }
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -268,7 +268,7 @@ public class BrowsePollFragment extends Fragment implements AdapterView.OnItemCl
 
         mAppConst.getJsonResponseFromUrl(browsePollsUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mBrowseItemList.clear();
                 isVisibleToUser = true;
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
@@ -401,8 +401,8 @@ public class BrowsePollFragment extends Fragment implements AdapterView.OnItemCl
 
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf080");
             errorMessage.setText(mContext.getResources().getString(R.string.no_polls));
@@ -493,7 +493,7 @@ public class BrowsePollFragment extends Fragment implements AdapterView.OnItemCl
     private void loadMoreData(String url) {
         mAppConst.getJsonResponseFromUrl(url, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 if(isCommunityAds){
                     mAppConst.getCommunityAds(ConstantVariables.POLL_ADS_POSITION, ConstantVariables.POLL_ADS_TYPE);
                 } else{

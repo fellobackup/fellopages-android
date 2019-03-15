@@ -85,11 +85,11 @@ public class RemoveAdHolder extends RecyclerView.ViewHolder{
 
         mAppConst = new AppConstant(context);
 
-        mUndoTextView = (TextView) adView.findViewById(R.id.undoTextView);
-        mRemoveAdOptions = (RadioGroup) adView.findViewById(R.id.removeAdsOption);
-        mRemoveAdDescription = (TextView) adView.findViewById(R.id.removeAdDescription);
-        editText = (EditText) adView.findViewById(R.id.editText);
-        mReportAdButton = (BaseButton) adView.findViewById(R.id.report_ad_button);
+        mUndoTextView = adView.findViewById(R.id.undoTextView);
+        mRemoveAdOptions = adView.findViewById(R.id.removeAdsOption);
+        mRemoveAdDescription = adView.findViewById(R.id.removeAdDescription);
+        editText = adView.findViewById(R.id.editText);
+        mReportAdButton = adView.findViewById(R.id.report_ad_button);
 
         editText.setVisibility(View.GONE);
         editText.setText(context.getResources().getString(R.string.blank_string));
@@ -102,7 +102,7 @@ public class RemoveAdHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View view) {
                 if (mRemoveAdsPositions.contains(adPosition)) {
-                    mRemoveAdsPositions.remove(mRemoveAdsPositions.indexOf(adPosition));
+                    mRemoveAdsPositions.remove(adPosition);
                     if(mRecyclerViewAdapter != null){
                         mRecyclerViewAdapter.notifyDataSetChanged();
                     } else if (mArrayAdapter != null){
@@ -171,11 +171,11 @@ public class RemoveAdHolder extends RecyclerView.ViewHolder{
 
         mAppConst = new AppConstant(context);
 
-        mUndoTextView = (TextView) adView.findViewById(R.id.undoTextView);
-        mRemoveAdOptions = (RadioGroup) adView.findViewById(R.id.removeAdsOption);
-        mRemoveAdDescription = (TextView) adView.findViewById(R.id.removeAdDescription);
-        editText = (EditText) adView.findViewById(R.id.editText);
-        mReportAdButton = (BaseButton) adView.findViewById(R.id.report_ad_button);
+        mUndoTextView = adView.findViewById(R.id.undoTextView);
+        mRemoveAdOptions = adView.findViewById(R.id.removeAdsOption);
+        mRemoveAdDescription = adView.findViewById(R.id.removeAdDescription);
+        editText = adView.findViewById(R.id.editText);
+        mReportAdButton = adView.findViewById(R.id.report_ad_button);
 
         editText.setVisibility(View.GONE);
         editText.setText(context.getResources().getString(R.string.blank_string));
@@ -188,7 +188,7 @@ public class RemoveAdHolder extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View view) {
                 if (mRemoveAdsPositions.contains(adPosition)) {
-                    mRemoveAdsPositions.remove(mRemoveAdsPositions.indexOf(adPosition));
+                    mRemoveAdsPositions.remove(adPosition);
                     if(mRecyclerViewAdapter != null){
                         mRecyclerViewAdapter.notifyDataSetChanged();
                     } else if (mArrayAdapter != null){
@@ -262,9 +262,9 @@ public class RemoveAdHolder extends RecyclerView.ViewHolder{
 
         mAppConst.postJsonResponseForUrl(removeAdsUrl, adParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 if(mRemoveAdsPositions.contains(position)){
-                    mRemoveAdsPositions.remove(mRemoveAdsPositions.indexOf(position));
+                    mRemoveAdsPositions.remove(position);
                 }
                 SnackbarUtils.displaySnackbar(adView, context.getResources().
                         getString(R.string.ad_report_successful_submitted));
@@ -333,9 +333,9 @@ public class RemoveAdHolder extends RecyclerView.ViewHolder{
 
         mAppConst.postJsonResponseForUrl(removeAdsUrl, adParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 if(mRemoveAdsPositions.contains(position)){
-                    mRemoveAdsPositions.remove(mRemoveAdsPositions.indexOf(position));
+                    mRemoveAdsPositions.remove(position);
                 }
                 SnackbarUtils.displaySnackbar(adView, context.getResources().
                         getString(R.string.ad_report_successful_submitted));

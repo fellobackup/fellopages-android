@@ -215,7 +215,7 @@ public class CustomViews {
      * @param footerView FooterView Layout which contains the text view..
      */
     public static void showEndOfResults (Context context, View footerView) {
-        TextView tvFooter = (TextView) footerView.findViewById(R.id.footer_text);
+        TextView tvFooter = footerView.findViewById(R.id.footer_text);
         footerView.setVisibility(View.VISIBLE);
         footerView.findViewById(R.id.progressBar).setVisibility(View.GONE);
         tvFooter.setVisibility(View.VISIBLE);
@@ -517,14 +517,14 @@ public class CustomViews {
                     if (layoutType.equals("top_view")) {
                         rating_view = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).
                                 inflate(R.layout.rating_grid_layout, ratingLayout, false);
-                        parameterRatingBar = (RatingBar) rating_view.findViewById(R.id.mainRatingBar);
+                        parameterRatingBar = rating_view.findViewById(R.id.mainRatingBar);
 
                     } else {
                         rating_view = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).
                                 inflate(R.layout.rating_grid_layout_small, ratingLayout, false);
-                        parameterRatingBar = (RatingBar) rating_view.findViewById(R.id.smallRatingBar);
+                        parameterRatingBar = rating_view.findViewById(R.id.smallRatingBar);
                     }
-                    parameterText = (TextView) rating_view.findViewById(R.id.rating_parameter_text);
+                    parameterText = rating_view.findViewById(R.id.rating_parameter_text);
                     parameterRatingBar.setIsIndicator(true);
 
                     /* Set yellow color for selected star and gray for un selected stars */

@@ -57,7 +57,7 @@ public class ShareEntry extends FormActivity implements View.OnClickListener{
         setContentView(R.layout.activity_share_entry);
 
         //Setting up the action bar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setVisibility(View.VISIBLE);
 
         setSupportActionBar(mToolbar);
@@ -73,14 +73,14 @@ public class ShareEntry extends FormActivity implements View.OnClickListener{
         mContentTitle = getIntent().getStringExtra("title");
         mContentImage = getIntent().getStringExtra("image");
 
-        mShareBlock = (CardView) findViewById(R.id.share_block);
+        mShareBlock = findViewById(R.id.share_block);
         mShareBlock.setVisibility(View.VISIBLE);
-        shareEditTExt = (EditText) findViewById(R.id.shareTextBox);
+        shareEditTExt = findViewById(R.id.shareTextBox);
         shareEditTExt.setHint(getResources().getString(R.string.write_something) + "…");
         shareEditTExt.setGravity(Gravity.START|Gravity.TOP);
 
-        mImageView = (ImageView) findViewById(R.id.contentImage);
-        mTitle = (SelectableTextView) findViewById(R.id.contentTitle);
+        mImageView = findViewById(R.id.contentImage);
+        mTitle = findViewById(R.id.contentTitle);
 
         if(mContentImage != null && !mContentImage.isEmpty()){
             mImageLoader.setImageUrl(mContentImage, mImageView);

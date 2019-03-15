@@ -101,7 +101,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
 
 
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mSelectPath = new ArrayList<>();
         mSelectedMusicFiles = new ArrayList<>();
         mHashMap = new HashMap<>();
@@ -111,7 +111,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        editFormView = (RelativeLayout)findViewById(R.id.form_view);
+        editFormView = findViewById(R.id.form_view);
         isFromWebViewPayment = getIntent().getBooleanExtra("isFromWebViewPayment", false);
         mFormType = getIntent().getStringExtra(ConstantVariables.FORM_TYPE);
         mRequestCode = getIntent().getIntExtra(ConstantVariables.REQUEST_CODE, ConstantVariables.PAGE_EDIT_CODE);
@@ -607,7 +607,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
 
                             InitializeColumnWidth(12);
                             final List<ImageViewList> photoUrls = new ArrayList<>();
-                            final RecyclerView resultRecyclerView = (RecyclerView) mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
+                            final RecyclerView resultRecyclerView = mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
                             resultRecyclerView.setLayoutManager(new LinearLayoutManager(EditEntry.this));
                             mMusicImageAdapter = new CustomImageAdapter(EditEntry.this, photoUrls, columnWidth,
                                     new OnCancelClickListener() {
@@ -659,7 +659,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
 
                         InitializeColumnWidth(10);
                         final List<ImageViewList> photoUrls = new ArrayList<>();
-                        final RecyclerView resultRecyclerView = (RecyclerView) mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
+                        final RecyclerView resultRecyclerView = mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
                         resultRecyclerView.setLayoutManager(new LinearLayoutManager(EditEntry.this));
                         CustomImageAdapter customImageAdapter = new CustomImageAdapter(EditEntry.this,
                                 photoUrls, columnWidth, new OnCancelClickListener() {
@@ -690,7 +690,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                 if (FormActivity._layout != null && resultCode == ConstantVariables.SELECT_PRODUCT_RETURN_CODE) {
                     FormActivity.selectedProducts = data.getStringArrayListExtra(ConstantVariables.SELECT_PRODUCT);
                     View overView = FormActivity._layout.findViewWithTag("product_search");
-                    EditText etOverView = (EditText) overView.findViewById(R.id.field_value);
+                    EditText etOverView = overView.findViewById(R.id.field_value);
                     CustomViews.setEditText(etOverView, FormActivity.selectedProducts.size() +" "+getResources().getString(R.string.product_selected));
                 }
                 break;
@@ -699,7 +699,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                     FormActivity.overviewText = data.getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE);
                     if (FormActivity._layout != null) {
                         View overView = FormActivity._layout.findViewWithTag("overview");
-                        EditText etOverView = (EditText) overView.findViewById(R.id.field_value);
+                        EditText etOverView = overView.findViewById(R.id.field_value);
                         CustomViews.setEditText(etOverView, FormActivity.overviewText);
                     }
                 }
@@ -720,7 +720,7 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
     private void displaySelectedImages() {
         InitializeColumnWidth(4);
         final List<ImageViewList> photoUrls = new ArrayList<>();
-        final RecyclerView resultRecyclerView = (RecyclerView) mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
+        final RecyclerView resultRecyclerView = mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
         resultRecyclerView.setLayoutManager(new LinearLayoutManager(EditEntry.this,
                 LinearLayoutManager.HORIZONTAL, false));
         mCustomImageAdapter = new CustomImageAdapter(EditEntry.this, photoUrls, columnWidth, new OnCancelClickListener() {

@@ -13,7 +13,7 @@ public class ProgressBarHolder extends RecyclerView.ViewHolder {
 
     public ProgressBarHolder(View v) {
         super(v);
-        progressBar = (ProgressBar) v.findViewById(R.id.progressBar);
-        mFooterText = (TextView)v.findViewById(R.id.footer_text);
+        progressBar = v.findViewById(R.id.progressBar);
+        mFooterText = v.findViewById(R.id.footer_text);
     }
 }

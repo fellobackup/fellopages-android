@@ -72,8 +72,8 @@ public class StickerStoreListFragment extends Fragment {
             mBrowseItemList = new ArrayList<>();
             mAppConst = new AppConstant(mContext);
             rootView = inflater.inflate(R.layout.recycler_view_layout, null);
-            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-            mStickersStoreImage = (ImageView) rootView.findViewById(R.id.stickersStoreImage) ;
+            mRecyclerView = rootView.findViewById(R.id.recycler_view);
+            mStickersStoreImage = rootView.findViewById(R.id.stickersStoreImage);
             mStickersStoreImage.setImageResource(R.drawable.stickers_store);
             mStickersStoreImage.setVisibility(View.VISIBLE);
             mRecyclerView.setHasFixedSize(true);
@@ -82,7 +82,7 @@ public class StickerStoreListFragment extends Fragment {
 
             mRecyclerView.addItemDecoration(new LinearDividerItemDecorationUtil(mContext));
 
-            mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+            mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
             mSwipeRefreshLayout.setEnabled(false);
             mStoreListUrl = UrlUtil.BROWSE_STICKERS_STORES_URL;
 
@@ -147,8 +147,7 @@ public class StickerStoreListFragment extends Fragment {
 
         mAppConst.getJsonResponseFromUrl(mStoreListUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject)
-                    throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mBrowseItemList.clear();
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 

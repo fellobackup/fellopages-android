@@ -102,13 +102,13 @@ public class BrowseCategoriesFragment extends Fragment implements SwipeRefreshLa
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.recycler_view_layout, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // No data message views
-        messageLayout = (LinearLayout) rootView.findViewById(R.id.message_layout);
-        errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-        errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+        messageLayout = rootView.findViewById(R.id.message_layout);
+        errorIcon = rootView.findViewById(R.id.error_icon);
+        errorMessage = rootView.findViewById(R.id.error_message);
         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
         // The number of Columns
@@ -155,7 +155,7 @@ public class BrowseCategoriesFragment extends Fragment implements SwipeRefreshLa
             }
         });
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 

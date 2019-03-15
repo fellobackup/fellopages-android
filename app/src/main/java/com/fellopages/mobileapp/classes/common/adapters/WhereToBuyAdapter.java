@@ -53,7 +53,7 @@ public class WhereToBuyAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.where_to_buy_list, parent, false);;
+                R.layout.where_to_buy_list, parent, false);
         return new ItemViewHolder(itemView);
     }
 
@@ -118,10 +118,10 @@ public class WhereToBuyAdapter extends RecyclerView.Adapter {
         ItemViewHolder(View view) {
             super(view);
             container = view;
-            mListTitle = (TextView) view.findViewById(R.id.listTitle);
-            mPrice = (TextView) view.findViewById(R.id.listPrice);
-            mListImage = (ImageView) view.findViewById(R.id.listImage);
-            mMinPriceImage = (ImageView) view.findViewById(R.id.minPriceImage);
+            mListTitle = view.findViewById(R.id.listTitle);
+            mPrice = view.findViewById(R.id.listPrice);
+            mListImage = view.findViewById(R.id.listImage);
+            mMinPriceImage = view.findViewById(R.id.minPriceImage);
         }
     }
 

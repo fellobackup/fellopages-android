@@ -40,33 +40,33 @@ public class FacebookAdViewHolder extends RecyclerView.ViewHolder {
 
     public static void inflateAd(NativeAd nativeAd, View adView, Context context,boolean isVideoModule) {
         // Create native UI using the ad metadata.
-        TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+        TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
         nativeAdTitle.setText(nativeAd.getAdTitle());
 
-        TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+        TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
         nativeAdBody.setText(nativeAd.getAdBody());
 
         ImageLoader imageLoader = new ImageLoader(context);
         if (adView.findViewById(R.id.appinstall_store) != null) {
-            ImageView adIconImageView = (ImageView) adView.findViewById(R.id.appinstall_store);
+            ImageView adIconImageView = adView.findViewById(R.id.appinstall_store);
             imageLoader.setImageUrl(nativeAd.getAdChoicesIcon().getUrl(), adIconImageView);
         }
 
         // Setting the Text
         if(adView.findViewById(R.id.native_ad_call_to_action) != null) {
-            Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+            Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
             nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
             nativeAdCallToAction.setVisibility(View.VISIBLE);
         }
 
         NativeAd.Image adCoverImage = nativeAd.getAdCoverImage();
         if(adView.findViewById(R.id.native_ad_cover) != null){
-            ImageView nativeAdCover = (ImageView) adView.findViewById(R.id.native_ad_cover);
+            ImageView nativeAdCover = adView.findViewById(R.id.native_ad_cover);
             NativeAd.downloadAndDisplayImage(adCoverImage, nativeAdCover);
         }
         // Downloading and setting the ad icon.
         if(adView.findViewById(R.id.native_ad_icon) != null ) {
-            ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+            ImageView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
             NativeAd.Image adIcon = nativeAd.getAdIcon();
             if(isVideoModule) {
                 NativeAd.downloadAndDisplayImage(adCoverImage, nativeAdIcon);
@@ -77,7 +77,7 @@ public class FacebookAdViewHolder extends RecyclerView.ViewHolder {
 
         // Downloading and setting the ad choice icon.
         if(adView.findViewById(R.id.native_ad_choice_icon) != null ) {
-            ImageView nativeAdChoicesIcon = (ImageView) adView.findViewById(R.id.native_ad_choice_icon);
+            ImageView nativeAdChoicesIcon = adView.findViewById(R.id.native_ad_choice_icon);
             nativeAdChoicesIcon.setVisibility(View.VISIBLE);
             NativeAd.Image adChoicesIcon = nativeAd.getAdChoicesIcon();
             NativeAd.downloadAndDisplayImage(adChoicesIcon, nativeAdChoicesIcon);
@@ -87,7 +87,7 @@ public class FacebookAdViewHolder extends RecyclerView.ViewHolder {
         int bannerWidth = adCoverImage.getWidth();
         int bannerHeight = adCoverImage.getHeight();
         if(adView.findViewById(R.id.native_ad_media) != null) {
-            MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+            MediaView nativeAdMedia = adView.findViewById(R.id.native_ad_media);
             nativeAdMedia.setAutoplay(AdSettings.isVideoAutoplay());
             nativeAdMedia.setSoundEffectsEnabled(true);
             DisplayMetrics metrics = context.getResources().getDisplayMetrics();

@@ -173,78 +173,78 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
 
                     switch (mCurrentSelectedList) {
                         case "members_siteevent":
-                            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                            listItemHolder.mRsvp = (TextView) mRootView.findViewById(R.id.contentDetail);
+                            listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mRsvp = mRootView.findViewById(R.id.contentDetail);
                             mRootView.findViewById(R.id.optionsIcon).setVisibility(View.GONE);
                             break;
 
                         case "browse_diaries_siteevent":
-                            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-                            listItemHolder.mDiaryImage1 = (ImageView) mRootView.findViewById(R.id.diaryImage1);
-                            listItemHolder.mDiaryImage2 = (ImageView) mRootView.findViewById(R.id.diaryImage2);
-                            listItemHolder.mDiaryImage3 = (ImageView) mRootView.findViewById(R.id.diaryImage3);
-                            listItemHolder.mDiaryImage4 = (ImageView) mRootView.findViewById(R.id.diaryImage4);
-                            listItemHolder.mDiaryImage5 = (ImageView) mRootView.findViewById(R.id.diaryImage5);
+                            listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+                            listItemHolder.mDiaryImage1 = mRootView.findViewById(R.id.diaryImage1);
+                            listItemHolder.mDiaryImage2 = mRootView.findViewById(R.id.diaryImage2);
+                            listItemHolder.mDiaryImage3 = mRootView.findViewById(R.id.diaryImage3);
+                            listItemHolder.mDiaryImage4 = mRootView.findViewById(R.id.diaryImage4);
+                            listItemHolder.mDiaryImage5 = mRootView.findViewById(R.id.diaryImage5);
 
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                            listItemHolder.mDiaryTitle = (TextView) mRootView.findViewById(R.id.diaryTitle);
-                            listItemHolder.mHostImage = (CircularImageView) mRootView.findViewById(R.id.host_image);
-                            listItemHolder.mEventCount = (TextView) mRootView.findViewById(R.id.eventCount);
-                            listItemHolder.mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocationInfo);
-                            listItemHolder.mEventTime = (TextView) mRootView.findViewById(R.id.eventTime);
-                            listItemHolder.mDateIcon = (TextView) mRootView.findViewById(R.id.date_icon);
-                            listItemHolder.mLocationIcon = (TextView) mRootView.findViewById(R.id.location_icon);
-                            listItemHolder.mLocationLayout = (LinearLayout) mRootView.findViewById(R.id.location_layout);
-                            listItemHolder.mDay = (TextView) mRootView.findViewById(R.id.day);
-                            listItemHolder.mMonth = (TextView) mRootView.findViewById(R.id.month);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mDiaryTitle = mRootView.findViewById(R.id.diaryTitle);
+                            listItemHolder.mHostImage = mRootView.findViewById(R.id.host_image);
+                            listItemHolder.mEventCount = mRootView.findViewById(R.id.eventCount);
+                            listItemHolder.mEventLocation = mRootView.findViewById(R.id.eventLocationInfo);
+                            listItemHolder.mEventTime = mRootView.findViewById(R.id.eventTime);
+                            listItemHolder.mDateIcon = mRootView.findViewById(R.id.date_icon);
+                            listItemHolder.mLocationIcon = mRootView.findViewById(R.id.location_icon);
+                            listItemHolder.mLocationLayout = mRootView.findViewById(R.id.location_layout);
+                            listItemHolder.mDay = mRootView.findViewById(R.id.day);
+                            listItemHolder.mMonth = mRootView.findViewById(R.id.month);
                             break;
 
                         case "siteevent_tickets_info":
-                            listItemHolder.mTicketsName = (TextView) mRootView.findViewById(R.id.tickets_name);
-                            listItemHolder.mPrice = (TextView) mRootView.findViewById(R.id.price);
-                            listItemHolder.mQuantity = (TextView) mRootView.findViewById(R.id.quantity);
-                            listItemHolder.mMoreInfo = (TextView) mRootView.findViewById(R.id.more_text);
-                            listItemHolder.mLessInfo = (TextView) mRootView.findViewById(R.id.less_text);
-                            listItemHolder.mClaimedTickets = (TextView) mRootView.findViewById(R.id.claimed_tickets);
-                            listItemHolder.mEndTime = (TextView) mRootView.findViewById(R.id.end_date);
+                            listItemHolder.mTicketsName = mRootView.findViewById(R.id.tickets_name);
+                            listItemHolder.mPrice = mRootView.findViewById(R.id.price);
+                            listItemHolder.mQuantity = mRootView.findViewById(R.id.quantity);
+                            listItemHolder.mMoreInfo = mRootView.findViewById(R.id.more_text);
+                            listItemHolder.mLessInfo = mRootView.findViewById(R.id.less_text);
+                            listItemHolder.mClaimedTickets = mRootView.findViewById(R.id.claimed_tickets);
+                            listItemHolder.mEndTime = mRootView.findViewById(R.id.end_date);
                             break;
 
                         case "ordered_tickets_info":
-                            listItemHolder.mTicketsMainLayout = (LinearLayout) mRootView.findViewById(R.id.tickets_main_layout);
-                            listItemHolder.mTicketsName = (TextView) mRootView.findViewById(R.id.tickets_name);
-                            listItemHolder.mPrice = (TextView) mRootView.findViewById(R.id.price);
-                            listItemHolder.mQuantity = (TextView) mRootView.findViewById(R.id.quantity);
-                            listItemHolder.mSubTotal = (TextView) mRootView.findViewById(R.id.subtotal);
+                            listItemHolder.mTicketsMainLayout = mRootView.findViewById(R.id.tickets_main_layout);
+                            listItemHolder.mTicketsName = mRootView.findViewById(R.id.tickets_name);
+                            listItemHolder.mPrice = mRootView.findViewById(R.id.price);
+                            listItemHolder.mQuantity = mRootView.findViewById(R.id.quantity);
+                            listItemHolder.mSubTotal = mRootView.findViewById(R.id.subtotal);
                             listItemHolder.mSubTotal.setVisibility(View.VISIBLE);
                             mRootView.findViewById(R.id.more_text).setVisibility(View.GONE);
                             break;
 
                         case "my_tickets_siteevent":
-                            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
                             mRootView.findViewById(R.id.date_layout).setVisibility(View.VISIBLE);
                             mRootView.findViewById(R.id.contentDetail).setVisibility(View.GONE);
                             mRootView.findViewById(R.id.counts_container).setVisibility(View.GONE);
-                            listItemHolder.mDateIcon = (TextView) mRootView.findViewById(R.id.date_icon);
-                            listItemHolder.mEventTime = (TextView) mRootView.findViewById(R.id.eventTime);
-                            listItemHolder.mTicketsInfo = (LinearLayout) mRootView.findViewById(R.id.orderInfo);
+                            listItemHolder.mDateIcon = mRootView.findViewById(R.id.date_icon);
+                            listItemHolder.mEventTime = mRootView.findViewById(R.id.eventTime);
+                            listItemHolder.mTicketsInfo = mRootView.findViewById(R.id.orderInfo);
                             break;
 
                         default:
-                            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                            listItemHolder.mDiaryTitle = (TextView) mRootView.findViewById(R.id.diaryTitle);
-                            listItemHolder.mHostImage = (CircularImageView) mRootView.findViewById(R.id.host_image);
-                            listItemHolder.mEventCount = (TextView) mRootView.findViewById(R.id.eventCount);
-                            listItemHolder.mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocationInfo);
-                            listItemHolder.mEventTime = (TextView) mRootView.findViewById(R.id.eventTime);
-                            listItemHolder.mDateIcon = (TextView) mRootView.findViewById(R.id.date_icon);
-                            listItemHolder.mLocationIcon = (TextView) mRootView.findViewById(R.id.location_icon);
-                            listItemHolder.mLocationLayout = (LinearLayout) mRootView.findViewById(R.id.location_layout);
-                            listItemHolder.mDay = (TextView) mRootView.findViewById(R.id.day);
-                            listItemHolder.mMonth = (TextView) mRootView.findViewById(R.id.month);
-                            listItemHolder.mDateMonthIcon = (LinearLayout) mRootView.findViewById(R.id.day_month_layout);
+                            listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mDiaryTitle = mRootView.findViewById(R.id.diaryTitle);
+                            listItemHolder.mHostImage = mRootView.findViewById(R.id.host_image);
+                            listItemHolder.mEventCount = mRootView.findViewById(R.id.eventCount);
+                            listItemHolder.mEventLocation = mRootView.findViewById(R.id.eventLocationInfo);
+                            listItemHolder.mEventTime = mRootView.findViewById(R.id.eventTime);
+                            listItemHolder.mDateIcon = mRootView.findViewById(R.id.date_icon);
+                            listItemHolder.mLocationIcon = mRootView.findViewById(R.id.location_icon);
+                            listItemHolder.mLocationLayout = mRootView.findViewById(R.id.location_layout);
+                            listItemHolder.mDay = mRootView.findViewById(R.id.day);
+                            listItemHolder.mMonth = mRootView.findViewById(R.id.month);
+                            listItemHolder.mDateMonthIcon = mRootView.findViewById(R.id.day_month_layout);
                             mRootView.findViewById(R.id.counts_container).setVisibility(View.GONE);
                             break;
                     }
@@ -737,7 +737,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
 
         ImageView mListImage, mDiaryImage1, mDiaryImage2, mDiaryImage3, mDiaryImage4, mDiaryImage5;
         CircularImageView mHostImage;
-        TextView mContentTitle, mDiaryTitle;;
+        TextView mContentTitle, mDiaryTitle;
         TextView mDateIcon, mLocationIcon, mDay, mMonth;
         TextView mTicketsName, mPrice, mQuantity, mMoreInfo, mClaimedTickets, mEndTime, mLessInfo, mSubTotal;
         LinearLayout mTicketsMainLayout, mTicketsInfo;

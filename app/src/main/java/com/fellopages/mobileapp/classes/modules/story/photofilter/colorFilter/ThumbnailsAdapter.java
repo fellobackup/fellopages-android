@@ -101,8 +101,8 @@ public class ThumbnailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public ThumbnailsViewHolder(View v) {
             super(v);
-            this.thumbnail = (CircularImageView) v.findViewById(R.id.thumbnail);
-            this.filterName = (TextView) v.findViewById(R.id.filter_name);
+            this.thumbnail = v.findViewById(R.id.thumbnail);
+            this.filterName = v.findViewById(R.id.filter_name);
         }
     }
 }

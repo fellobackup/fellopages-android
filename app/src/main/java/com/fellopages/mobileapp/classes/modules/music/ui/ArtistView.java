@@ -224,20 +224,20 @@ public class ArtistView extends FrameLayout implements View.OnClickListener, Vie
         mImageLoader = new ImageLoader(mContext.getApplicationContext());
         LayoutInflater.from(context).inflate(R.layout.artist_view, this);
         this.setVisibility(INVISIBLE);
-        mArtistName = ((SelectableTextView) findViewById(R.id.artist_author));
-        mTracks = ((TextView) findViewById(R.id.artist_view_track_number));
-        mDescription = ((SelectableTextView) findViewById(R.id.artist_view_description));
-        mAvatar = (BezelImageView) findViewById(R.id.owner_image);
-        mPlayCount = (TextView) findViewById(R.id.track_play_count);
+        mArtistName = findViewById(R.id.artist_author);
+        mTracks = findViewById(R.id.artist_view_track_number);
+        mDescription = findViewById(R.id.artist_view_description);
+        mAvatar = findViewById(R.id.owner_image);
+        mPlayCount = findViewById(R.id.track_play_count);
         mPlayCount.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
         mTracks.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
-        mLikeBlock = (LinearLayout) findViewById(R.id.likeBlock);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        mLikeButton = (ActionIconThemedTextView) findViewById(R.id.like_button);
-        mCommentButton  = (ActionIconThemedTextView) findViewById(R.id.comment_button);
-        mCountsBlock = (LinearLayout) findViewById(R.id.countsBlock);
-        mLikeCountTextView = (TextView) findViewById(R.id.likeCount);
-        mCommentCountTextView = (TextView) findViewById(R.id.commentCount);
+        mLikeBlock = findViewById(R.id.likeBlock);
+        mReactionIcon = findViewById(R.id.reactionIcon);
+        mLikeButton = findViewById(R.id.like_button);
+        mCommentButton  = findViewById(R.id.comment_button);
+        mCountsBlock = findViewById(R.id.countsBlock);
+        mLikeCountTextView = findViewById(R.id.likeCount);
+        mCommentCountTextView = findViewById(R.id.commentCount);
         mLikeCountTextView.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
         mCommentCountTextView.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
         mLikeBlock.setOnClickListener(this);
@@ -421,7 +421,7 @@ public class ArtistView extends FrameLayout implements View.OnClickListener, Vie
                     if (!isLike) {
                         mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                             @Override
-                            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                            public void onTaskCompleted(JSONObject jsonObject) {
 
                             }
 

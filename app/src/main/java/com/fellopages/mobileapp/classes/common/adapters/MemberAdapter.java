@@ -362,13 +362,13 @@ public class MemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public ListItemHolder(View itemView) {
             super(itemView);
             memberBlock = itemView;
-            mOwnerName = (TextView) itemView.findViewById(R.id.ownerTitle);
-            mListImage = (ImageView) itemView.findViewById(R.id.ownerImage);
-            mOptionIcon = (ImageView) itemView.findViewById(R.id.optionIcon);
-            mOptionIconLayout = (LinearLayout) itemView.findViewById(R.id.option_icon_layout);
-            staff = (TextView) itemView.findViewById(R.id.staff);
-            mRsvpInfo = (TextView) itemView.findViewById(R.id.rsvpInfo);
-            mMemberOptions = (TextView) itemView.findViewById(R.id.memberOption);
+            mOwnerName = itemView.findViewById(R.id.ownerTitle);
+            mListImage = itemView.findViewById(R.id.ownerImage);
+            mOptionIcon = itemView.findViewById(R.id.optionIcon);
+            mOptionIconLayout = itemView.findViewById(R.id.option_icon_layout);
+            staff = itemView.findViewById(R.id.staff);
+            mRsvpInfo = itemView.findViewById(R.id.rsvpInfo);
+            mMemberOptions = itemView.findViewById(R.id.memberOption);
         }
     }
 

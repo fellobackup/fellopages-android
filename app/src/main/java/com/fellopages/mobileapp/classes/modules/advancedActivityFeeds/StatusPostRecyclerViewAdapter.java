@@ -109,8 +109,8 @@ public class StatusPostRecyclerViewAdapter extends RecyclerView.Adapter<StatusPo
         public StatusPostRecyclerViewHolder(Context context, View view) {
             super(view);
             mContainer = view;
-            tvIcon = (TextView) view.findViewById(R.id.icon);
-            tvTitle = (TextView) view.findViewById(R.id.title);
+            tvIcon = view.findViewById(R.id.icon);
+            tvTitle = view.findViewById(R.id.title);
             tvIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(context));
         }
     }

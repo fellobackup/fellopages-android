@@ -179,16 +179,16 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
 
     private void initializeView() {
 
-        mEventRsvpForm = (LinearLayout) mRootView.findViewById(R.id.eventRsvpForm);
-        mEventJoinForm = (LinearLayout) mRootView.findViewById(R.id.eventJoinForm);
-        mAttendingButton = (Button) mRootView.findViewById(R.id.attendingButton);
-        mMayBeAttendingButton = (Button) mRootView.findViewById(R.id.mayBeAttendingButton);
-        mNotAttendingButton = (Button) mRootView.findViewById(R.id.notAttendingButton);
-        mJoinButton = (Button) mRootView.findViewById(R.id.joinEventButton);
-        mEventDiaryTab = (LinearLayout) mRootView.findViewById(R.id.tabsLayout);
-        mWriteReviewButton = (Button) mRootView.findViewById(R.id.writeReview);
-        mAddToDiaryButton  = (Button) mRootView.findViewById(R.id.addToDiary);
-        mAddToCalendar = (Button) mRootView.findViewById(R.id.addToCalendar);
+        mEventRsvpForm = mRootView.findViewById(R.id.eventRsvpForm);
+        mEventJoinForm = mRootView.findViewById(R.id.eventJoinForm);
+        mAttendingButton = mRootView.findViewById(R.id.attendingButton);
+        mMayBeAttendingButton = mRootView.findViewById(R.id.mayBeAttendingButton);
+        mNotAttendingButton = mRootView.findViewById(R.id.notAttendingButton);
+        mJoinButton = mRootView.findViewById(R.id.joinEventButton);
+        mEventDiaryTab = mRootView.findViewById(R.id.tabsLayout);
+        mWriteReviewButton = mRootView.findViewById(R.id.writeReview);
+        mAddToDiaryButton  = mRootView.findViewById(R.id.addToDiary);
+        mAddToCalendar = mRootView.findViewById(R.id.addToCalendar);
 
         layoutParams = CustomViews.getFullWidthLayoutParams();
         padding = (int) getResources().getDimension(R.dimen.padding_10dp);
@@ -206,44 +206,44 @@ public class AdvEventsInfoTabFragment extends Fragment implements View.OnClickLi
         mMayBeAttendingButton.setTypeface(fontIcon);
         mNotAttendingButton.setTypeface(fontIcon);
 
-        mEventStartDate = (SelectableTextView) mRootView.findViewById(R.id.eventStartDate);
-        mEventEndDateTime = (SelectableTextView) mRootView.findViewById(R.id.eventEndDateTime);
-        mLocationInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventLocationInfo);
-        mPhoneInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventPhoneInfo);
-        mWebsiteInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventWebsiteInfo);
-        mEmailInfoBlock = (LinearLayout) mRootView.findViewById(R.id.eventEmailInfo);
-        mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocation);
-        mEventPhone = (TextView) mRootView.findViewById(R.id.eventPhone);
-        mEventEmail = (TextView) mRootView.findViewById(R.id.eventEmail);
-        mEventWebsite = (TextView) mRootView.findViewById(R.id.eventWebsite);
-        mLocationIcon = (TextView) mRootView.findViewById(R.id.locationLabel);
-        mEventsDateInfo = (LinearLayout) mRootView.findViewById(R.id.eventDatesInfo);
-        mDateIcon = (TextView) mRootView.findViewById(R.id.dateLabel);
-        mEventStatus = (TextView) mRootView.findViewById(R.id.eventStatus);
+        mEventStartDate = mRootView.findViewById(R.id.eventStartDate);
+        mEventEndDateTime = mRootView.findViewById(R.id.eventEndDateTime);
+        mLocationInfoBlock = mRootView.findViewById(R.id.eventLocationInfo);
+        mPhoneInfoBlock = mRootView.findViewById(R.id.eventPhoneInfo);
+        mWebsiteInfoBlock = mRootView.findViewById(R.id.eventWebsiteInfo);
+        mEmailInfoBlock = mRootView.findViewById(R.id.eventEmailInfo);
+        mEventLocation = mRootView.findViewById(R.id.eventLocation);
+        mEventPhone = mRootView.findViewById(R.id.eventPhone);
+        mEventEmail = mRootView.findViewById(R.id.eventEmail);
+        mEventWebsite = mRootView.findViewById(R.id.eventWebsite);
+        mLocationIcon = mRootView.findViewById(R.id.locationLabel);
+        mEventsDateInfo = mRootView.findViewById(R.id.eventDatesInfo);
+        mDateIcon = mRootView.findViewById(R.id.dateLabel);
+        mEventStatus = mRootView.findViewById(R.id.eventStatus);
 
         mLocationIcon.setTypeface(fontIcon);
         mLocationIcon.setText("\uf041" + " " + getResources().getString(R.string.location_label));
         mDateIcon.setTypeface(fontIcon);
         mDateIcon.setText("\uf017" + " " + getResources().getString(R.string.date_label));
 
-        mHostInfo = (LinearLayout) mRootView.findViewById(R.id.host_info);
-        mHostImage = (BezelImageView) mRootView.findViewById(R.id.host_image);
-        mHostName = (TextView) mRootView.findViewById(R.id.hostName);
+        mHostInfo = mRootView.findViewById(R.id.host_info);
+        mHostImage = mRootView.findViewById(R.id.host_image);
+        mHostName = mRootView.findViewById(R.id.hostName);
         mHostInfo.setOnClickListener(this);
 
-        mAnnouncementLayout = (LinearLayout) mRootView.findViewById(R.id.announcement_layout);
-        mAnnouncementTitle = (TextView) mRootView.findViewById(R.id.announcement_title);
-        mAnnouncementDescription = (TextView) mRootView.findViewById(R.id.announcement_description);
-        mMoreText  = (TextView) mRootView.findViewById(R.id.more);
+        mAnnouncementLayout = mRootView.findViewById(R.id.announcement_layout);
+        mAnnouncementTitle = mRootView.findViewById(R.id.announcement_title);
+        mAnnouncementDescription = mRootView.findViewById(R.id.announcement_description);
+        mMoreText  = mRootView.findViewById(R.id.more);
 
 
-        mRating = (RatingBar) mRootView.findViewById(R.id.smallRatingBar);
+        mRating = mRootView.findViewById(R.id.smallRatingBar);
         LayerDrawable stars = (LayerDrawable) mRating.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(getResources().getColor(R.color.dark_yellow), PorterDuff.Mode.SRC_ATOP);
 
-        mDescription  = (SelectableTextView) mRootView.findViewById(R.id.description);
-        mShow = (TextView) mRootView.findViewById(R.id.show);
-        mHide = (TextView) mRootView.findViewById(R.id.hide);
+        mDescription  = mRootView.findViewById(R.id.description);
+        mShow = mRootView.findViewById(R.id.show);
+        mHide = mRootView.findViewById(R.id.hide);
 
         items[0] = AdvEventsProfilePage.sAttending =  mContext.getResources().getString(R.string.rsvp_filter_attending);
         items[1] = AdvEventsProfilePage.sMayBeAttending = mContext.getResources().getString(R.string.rsvp_filter_may_be_attending);

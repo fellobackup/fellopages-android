@@ -153,7 +153,7 @@ public class BannerPhotoRecyclerAdapter extends RecyclerView.Adapter<BannerPhoto
             super(view);
             container = view;
 
-            ivMainImage = (ImageView) view.findViewById(R.id.main_image);
+            ivMainImage = view.findViewById(R.id.main_image);
         }
     }
 

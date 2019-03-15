@@ -41,8 +41,8 @@ public class ProgressViewHolder extends RecyclerView.ViewHolder {
      */
     public static void inflateProgressView(Context context, View progressView, Object listItem) {
 
-        ProgressBar progressBar = (ProgressBar) progressView.findViewById(R.id.progressBar);
-        TextView footerText = (TextView) progressView.findViewById(R.id.footer_text);
+        ProgressBar progressBar = progressView.findViewById(R.id.progressBar);
+        TextView footerText = progressView.findViewById(R.id.footer_text);
         if (listItem == null) {
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setIndeterminate(true);
@@ -64,9 +64,9 @@ public class ProgressViewHolder extends RecyclerView.ViewHolder {
      */
     public static void inflateFooterView(final Context context, View progressView, Object listItem, final String action) {
 
-        ProgressBar progressBar = (ProgressBar) progressView.findViewById(R.id.progressBar);
-        TextView footerText = (TextView) progressView.findViewById(R.id.footer_text);
-        RelativeLayout footerView = (RelativeLayout) progressView.findViewById(R.id.footer_layout);
+        ProgressBar progressBar = progressView.findViewById(R.id.progressBar);
+        TextView footerText = progressView.findViewById(R.id.footer_text);
+        RelativeLayout footerView = progressView.findViewById(R.id.footer_layout);
 
         if(listItem.equals(ConstantVariables.FOOTER_TYPE)){
             footerText.setVisibility(View.VISIBLE);
@@ -92,7 +92,7 @@ public class ProgressViewHolder extends RecyclerView.ViewHolder {
      * @param progressView Root View of progress layout.
      */
     public static void inflateProgressBar(View progressView) {
-        ProgressBar progressBar = (ProgressBar) progressView.findViewById(R.id.progressBar);
+        ProgressBar progressBar = progressView.findViewById(R.id.progressBar);
         progressBar.setIndeterminate(true);
     }
 

@@ -104,7 +104,7 @@ public class MyBlogFragment extends Fragment implements AdapterView.OnItemClickL
 
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.list_view_layout, container, false);
-        mListView = (ListView) rootView.findViewById(R.id.list_item_view);
+        mListView = rootView.findViewById(R.id.list_item_view);
         footerView = CustomViews.getFooterView(inflater);
 
         ViewCompat.setNestedScrollingEnabled(mListView,true);
@@ -117,7 +117,7 @@ public class MyBlogFragment extends Fragment implements AdapterView.OnItemClickL
         mListView.setAdapter(mManageDataAdapter);
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -282,8 +282,8 @@ public class MyBlogFragment extends Fragment implements AdapterView.OnItemClickL
 
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf143");
             errorMessage.setText(mContext.getResources().getString(R.string.no_blogs));

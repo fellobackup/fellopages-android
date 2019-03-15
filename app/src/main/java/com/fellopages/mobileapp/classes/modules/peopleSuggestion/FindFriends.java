@@ -59,7 +59,7 @@ public class FindFriends extends AppCompatActivity implements TabLayout.OnTabSel
         mAppConst = new AppConstant(mContext);
 
         // Setting-up the tool bar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -68,8 +68,8 @@ public class FindFriends extends AppCompatActivity implements TabLayout.OnTabSel
 
         initBottomSheet();
         // Getting views
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTabHost = (TabLayout) findViewById(R.id.materialTabHost);
+        mViewPager = findViewById(R.id.viewpager);
+        mTabHost = findViewById(R.id.materialTabHost);
 
         if (mViewPager != null) {
             mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());

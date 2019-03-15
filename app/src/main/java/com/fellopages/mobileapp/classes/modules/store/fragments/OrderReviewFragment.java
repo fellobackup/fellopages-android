@@ -87,7 +87,7 @@ public class OrderReviewFragment extends Fragment implements OnItemClickListener
         mCartPref = new CartPreferences();
         mCartItemList =  new ArrayList<>();
 
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -95,10 +95,10 @@ public class OrderReviewFragment extends Fragment implements OnItemClickListener
         mCartViewAdapter = new CartViewAdapter(mContext,mCartItemList,this);
         mRecyclerView.setAdapter(mCartViewAdapter);
 
-        mStoreSelectBtn = (FrameLayout) mRootView.findViewById(R.id.store_selection);
-        mApplyCpnBtn = (FrameLayout) mRootView.findViewById(R.id.apply_coupon_btn);
-        mCheckoutButton = (TextView) mRootView.findViewById(R.id.checkout_button);
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
+        mStoreSelectBtn = mRootView.findViewById(R.id.store_selection);
+        mApplyCpnBtn = mRootView.findViewById(R.id.apply_coupon_btn);
+        mCheckoutButton = mRootView.findViewById(R.id.checkout_button);
+        mProgressBar = mRootView.findViewById(R.id.progressBar);
 
         Drawable[] drawables = mCheckoutButton.getCompoundDrawables();
         for (Drawable drawable:drawables) {
@@ -165,7 +165,7 @@ public class OrderReviewFragment extends Fragment implements OnItemClickListener
 
             mAppConst.getJsonResponseFromUrl(orderInfoUrl  , new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     mProgressBar.setVisibility(View.GONE);
                     addDataToList(jsonObject);

@@ -90,7 +90,7 @@ public class AdvEventsViewDiaries extends AppCompatActivity implements View.OnCl
         mGutterMenuUtils = new GutterMenuUtils(this);
         mGutterMenuUtils.setOnOptionItemClickResponseListener(this);
 
-        mGridView = (GridViewWithHeaderAndFooter) findViewById(R.id.gridView);
+        mGridView = findViewById(R.id.gridView);
         mGridView.setOnScrollListener(this);
         CustomViews.initializeGridLayout(this, AppConstant.getNumOfColumns(this), mGridView);
 
@@ -108,13 +108,13 @@ public class AdvEventsViewDiaries extends AppCompatActivity implements View.OnCl
             mGridView.addHeaderView(mDiaryDescription);
         }
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
         findViewById(R.id.category_filter_block).setVisibility(View.VISIBLE);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setVisibility(View.VISIBLE);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
@@ -145,7 +145,7 @@ public class AdvEventsViewDiaries extends AppCompatActivity implements View.OnCl
         diaryId = getIntent().getExtras().getInt(ConstantVariables.VIEW_PAGE_ID);
         if (diaryId != 0) {
             mViewDiariesUrl = AppConstant.DEFAULT_URL +"advancedevents/diary/"+
-                    diaryId +"?limit=" + AppConstant.LIMIT;;
+                    diaryId +"?limit=" + AppConstant.LIMIT;
         }
         eventCount = getIntent().getExtras().getInt(ConstantVariables.TOTAL_ITEM_COUNT);
         diaryName = getIntent().getExtras().getString(ConstantVariables.CONTENT_TITLE);
@@ -159,7 +159,7 @@ public class AdvEventsViewDiaries extends AppCompatActivity implements View.OnCl
             addDataToList(mBody);
         }
 
-        mainContent = (RelativeLayout) findViewById(R.id.main_content);
+        mainContent = findViewById(R.id.main_content);
 
         sendRequestToServer();
 
@@ -169,7 +169,7 @@ public class AdvEventsViewDiaries extends AppCompatActivity implements View.OnCl
 
         if (!isLoadingFromCreate) {
 
-            mViewDiariesUrl = mAppConst.DEFAULT_URL + "advancedevents/diary/" +
+            mViewDiariesUrl = AppConstant.DEFAULT_URL + "advancedevents/diary/" +
                     diaryId + "?limit=" + AppConstant.LIMIT;
 
             mAppConst.getJsonResponseFromUrl(mViewDiariesUrl, new OnResponseListener() {
@@ -369,8 +369,8 @@ public class AdvEventsViewDiaries extends AppCompatActivity implements View.OnCl
                     mGridView.setVisibility(View.INVISIBLE);
                     findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
                     findViewById(R.id.progressBar).setVisibility(View.GONE);
-                    TextView errorIcon = (TextView) findViewById(R.id.error_icon);
-                    TextView errorMessage = (TextView) findViewById(R.id.error_message);
+                    TextView errorIcon = findViewById(R.id.error_icon);
+                    TextView errorMessage = findViewById(R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
                     errorIcon.setText("\uf073");
                     errorMessage.setText(getResources().getString(R.string.no_events));

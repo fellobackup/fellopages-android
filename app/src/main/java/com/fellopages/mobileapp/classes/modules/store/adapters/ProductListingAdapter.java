@@ -191,13 +191,13 @@ public class ProductListingAdapter extends RecyclerView.Adapter implements View.
         LinearLayout productConfigView;
         public ProductListHolder(View itemView) {
             super(itemView);
-            productImage = (ImageView) itemView.findViewById(R.id.product_image);
-            productConfigView = (LinearLayout) itemView.findViewById(R.id.product_details);
-            productQty = (TextView) itemView.findViewById(R.id.qty_count);
-            qtyAdd = (ImageView) itemView.findViewById(R.id.qty_add);
-            qtyRmv = (ImageView) itemView.findViewById(R.id.qty_rmv);
-            errorView = (TextView) itemView.findViewById(R.id.error_view);
-            productRemove = (ImageView) itemView.findViewById(R.id.remove_button);
+            productImage = itemView.findViewById(R.id.product_image);
+            productConfigView = itemView.findViewById(R.id.product_details);
+            productQty = itemView.findViewById(R.id.qty_count);
+            qtyAdd = itemView.findViewById(R.id.qty_add);
+            qtyRmv = itemView.findViewById(R.id.qty_rmv);
+            errorView = itemView.findViewById(R.id.error_view);
+            productRemove = itemView.findViewById(R.id.remove_button);
 
         }
     }

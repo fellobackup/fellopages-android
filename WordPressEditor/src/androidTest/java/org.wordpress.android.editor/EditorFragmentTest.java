@@ -51,14 +51,14 @@ public class EditorFragmentTest extends ActivityInstrumentationTestCase2<MockEdi
         }
 
         // The formatting buttons should be disabled while the title field is selected
-        ToggleButton mediaButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_media);
-        ToggleButton boldButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_bold);
-        ToggleButton italicButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_italic);
-        ToggleButton quoteButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_quote);
-        ToggleButton ulButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_ul);
-        ToggleButton olButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_ol);
-        ToggleButton linkButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_link);
-        ToggleButton strikethroughButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_strikethrough);
+        ToggleButton mediaButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_media);
+        ToggleButton boldButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_bold);
+        ToggleButton italicButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_italic);
+        ToggleButton quoteButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_quote);
+        ToggleButton ulButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_ul);
+        ToggleButton olButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_ol);
+        ToggleButton linkButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_link);
+        ToggleButton strikethroughButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_strikethrough);
 
         assertFalse(mediaButton.isEnabled());
         assertFalse(boldButton.isEnabled());
@@ -73,7 +73,7 @@ public class EditorFragmentTest extends ActivityInstrumentationTestCase2<MockEdi
         }
 
         // The HTML button should always be enabled
-        ToggleButton htmlButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_html);
+        ToggleButton htmlButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_html);
         assertTrue(htmlButton.isEnabled());
 
         selectionArgs.clear();
@@ -108,12 +108,12 @@ public class EditorFragmentTest extends ActivityInstrumentationTestCase2<MockEdi
             throw (new IllegalStateException("Fragment view is empty"));
         }
 
-        final ToggleButton htmlButton = (ToggleButton) view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_html);
+        final ToggleButton htmlButton = view.findViewById(com.wordpress.android.editor.R.id.format_bar_button_html);
 
         String content = mFragment.getContent().toString();
 
-        final SourceViewEditText titleText = (SourceViewEditText) view.findViewById(com.wordpress.android.editor.R.id.sourceview_title);
-        final SourceViewEditText contentText = (SourceViewEditText) view.findViewById(com.wordpress.android.editor.R.id.sourceview_content);
+        final SourceViewEditText titleText = view.findViewById(com.wordpress.android.editor.R.id.sourceview_title);
+        final SourceViewEditText contentText = view.findViewById(com.wordpress.android.editor.R.id.sourceview_content);
 
         // -- Check that title and content text is properly loaded into the EditTexts when switching to HTML mode
 

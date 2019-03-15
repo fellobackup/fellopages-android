@@ -47,7 +47,7 @@ public class EditProfileActivity extends FormActivity implements TabLayout.OnTab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tabbed_activity_view);
 
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
 
         if(getSupportActionBar() != null){
@@ -61,8 +61,8 @@ public class EditProfileActivity extends FormActivity implements TabLayout.OnTab
 
         bundle = getIntent().getExtras();
 
-        mViewPager = (CustomViewPager) findViewById(R.id.viewpager);
-        tabHost = (TabLayout) findViewById(R.id.materialTabHost);
+        mViewPager = findViewById(R.id.viewpager);
+        tabHost = findViewById(R.id.materialTabHost);
 
         if (mViewPager != null) {
             adapter = new FragmentAdapter(getSupportFragmentManager());

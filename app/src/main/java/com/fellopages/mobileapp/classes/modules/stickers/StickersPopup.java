@@ -138,9 +138,9 @@ public class StickersPopup{
     }
 
     private View createCustomView() {
-        mTabLayout = (TabLayout) mStickersParentView.findViewById(R.id.tabs);
-        viewPager = (ViewPager) mStickersParentView.findViewById(R.id.viewpager);
-        mAddStickerStoreButton = (ImageButton) mStickersParentView.findViewById(R.id.add_sticker_store);
+        mTabLayout = mStickersParentView.findViewById(R.id.tabs);
+        viewPager = mStickersParentView.findViewById(R.id.viewpager);
+        mAddStickerStoreButton = mStickersParentView.findViewById(R.id.add_sticker_store);
 
         if (!StickersUtil.isStorySticker) {
             mTabLayout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.gray_light));
@@ -274,8 +274,8 @@ public class StickersPopup{
             for(int i = 0; i < mCollectionsList.length() ; i++){
 
                 View linearLayout = LayoutInflater.from(mContext).inflate(R.layout.reactions_tab_layout, null);
-                ImageView imageView = (ImageView) linearLayout.findViewById(R.id.reactionIcon);
-                TextView textView = (TextView) linearLayout.findViewById(R.id.reactionsCount);
+                ImageView imageView = linearLayout.findViewById(R.id.reactionIcon);
+                TextView textView = linearLayout.findViewById(R.id.reactionsCount);
 
                 imageView.setLayoutParams(layoutParams);
                 JSONObject jsonObject = mCollectionsList.optJSONObject(i);

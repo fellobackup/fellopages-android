@@ -236,9 +236,9 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         rootView = inflater.inflate(R.layout.recycler_view_layout, container, false);
         mHeaderView = inflater.inflate(R.layout.retry_message_layout, null, false);
 
-        mMainContent = (RelativeLayout) rootView.findViewById(R.id.main_view_recycler);
+        mMainContent = rootView.findViewById(R.id.main_view_recycler);
         mMainContent.setBackgroundColor(ContextCompat.getColor(mContext, R.color.gray_progress_bar));
-        mFeedsRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mFeedsRecyclerView = rootView.findViewById(R.id.recycler_view);
         mFeedsRecyclerView.setHasFixedSize(true);
         mFeedsRecyclerView.setLayoutManager(layoutManager);
         mFeedsRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -246,14 +246,14 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         /* Setting Padding and Spacing between Items of recyclerView */
         mFeedsRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(ConstantVariables.VERTICAL_ITEM_SPACE));
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
         // Getting header views.
-        welcomeUserTextView = (TextView) rootView.findViewById(R.id.welcomeUserText);
-        mRetryMessageBlock = (LinearLayout) mHeaderView.findViewById(R.id.retryMessageBlock);
-        mRetryIconAndMessage = (ActionIconThemedTextView) mHeaderView.findViewById(R.id.retry_message);
+        welcomeUserTextView = rootView.findViewById(R.id.welcomeUserText);
+        mRetryMessageBlock = mHeaderView.findViewById(R.id.retryMessageBlock);
+        mRetryIconAndMessage = mHeaderView.findViewById(R.id.retry_message);
 
         Drawable img = ContextCompat.getDrawable(getContext(), R.drawable.ic_replay_white_18dp);
 
@@ -305,7 +305,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                             // Insert an Item for Footer View with null position
                             Tasks.call(new Callable<Void>() {
                                 @Override
-                                public Void call() throws Exception {
+                                public Void call() {
                                     mFeedItemsList.add(null);
                                     mFeedAdapter.notifyItemInserted(mFeedItemsList.size());
                                     return null;

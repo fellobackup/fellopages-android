@@ -60,7 +60,7 @@ public class SliderAdapter extends PagerAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewLayout = inflater.inflate(R.layout.pager_photo_view, container,
                 false);
-        imageView = (ImageView) viewLayout.findViewById(R.id.thumbnail);
+        imageView = viewLayout.findViewById(R.id.thumbnail);
         ImageViewList img = mPhotoList.get(position);
         mImageLoader.setImageUrl(img.getmGridViewImageUrl(), imageView);
         viewLayout.setOnClickListener(new View.OnClickListener() {

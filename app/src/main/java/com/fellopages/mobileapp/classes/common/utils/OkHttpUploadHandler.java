@@ -65,7 +65,7 @@ public class OkHttpUploadHandler extends StringCallback {
         mSelectPath = selectPath;
         mAppConst = new AppConstant(mContext);
         mIsAttachFileRequest = false;
-        mCaller = (OnAsyncResponseListener) feedsFragment;
+        mCaller = feedsFragment;
         mIsNeedToShowDialog = processDialog;
         mFeedsFragment = feedsFragment;
         if (postParams != null && postParams.containsKey("mVideoPath")) {
@@ -119,7 +119,7 @@ public class OkHttpUploadHandler extends StringCallback {
         try {
             Map<String, String> params = mPostParams;
             okHttpUtils = OkHttpUtils.getInstance();
-            PostFormBuilder multipartBuilder = okHttpUtils.post();
+            PostFormBuilder multipartBuilder = OkHttpUtils.post();
             mPostUrl = mAppConst.buildQueryString(mPostUrl, mAppConst.getAuthenticationParams());
             // Put Language Params, location addParams, and version addParams
             mPostUrl = mAppConst.buildQueryString(mPostUrl, mAppConst.getRequestParams());

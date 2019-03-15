@@ -20,7 +20,7 @@ public class SimpleSearchAdapter extends SimpleCursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         view.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        TextView textView=(TextView)view.findViewById(R.id.locationLabel);
+        TextView textView= view.findViewById(R.id.locationLabel);
         textView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         textView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
         textView.setTextColor(Color.parseColor("#8b8b8b"));

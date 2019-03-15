@@ -202,23 +202,23 @@ public class ManageDataAdapter extends ArrayAdapter<Object> implements OnMenuCli
                             || currentSelectedOption.equals(ConstantVariables.ADV_VIDEO_CHANNEL_MENU_TITLE)) {
                         mRootView.findViewById(R.id.video_view).setVisibility(View.VISIBLE);
 
-                        listItemHolder.mListImageIcon = (ImageView) mRootView.findViewById(R.id.video_thumbnail);
-                        listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.videoTitle);
-                        listItemHolder.mUpdatedDate = (TextView) mRootView.findViewById(R.id.video_createdDate);
-                        listItemHolder.mCommentCount = (TextView) mRootView.
+                        listItemHolder.mListImageIcon = mRootView.findViewById(R.id.video_thumbnail);
+                        listItemHolder.mContentTitle = mRootView.findViewById(R.id.videoTitle);
+                        listItemHolder.mUpdatedDate = mRootView.findViewById(R.id.video_createdDate);
+                        listItemHolder.mCommentCount = mRootView.
                                 findViewById(R.id.videoCommentCount);
-                        listItemHolder.mLikeCount = (TextView) mRootView.
+                        listItemHolder.mLikeCount = mRootView.
                                 findViewById(R.id.videoLikeCount);
-                        listItemHolder.mDuration = (TextView) mRootView.
+                        listItemHolder.mDuration = mRootView.
                                 findViewById(R.id.video_duration);
-                        listItemHolder.mLikeIcon = (TextView) mRootView.findViewById(R.id.likeIcon);
-                        listItemHolder.mCommentIcon = (TextView) mRootView.findViewById(R.id.commentIcon);
-                        listItemHolder.mPlayIcon = (ImageView) mRootView.findViewById(R.id.play_button);
-                        listItemHolder.mRatingIcon = (TextView) mRootView.findViewById(R.id.ratingIcon);
-                        listItemHolder.mRatingCount = (TextView) mRootView.findViewById(R.id.ratingCount);
-                        LinearLayout layout = (LinearLayout) mRootView.findViewById(R.id.option_icon_layout_video);
+                        listItemHolder.mLikeIcon = mRootView.findViewById(R.id.likeIcon);
+                        listItemHolder.mCommentIcon = mRootView.findViewById(R.id.commentIcon);
+                        listItemHolder.mPlayIcon = mRootView.findViewById(R.id.play_button);
+                        listItemHolder.mRatingIcon = mRootView.findViewById(R.id.ratingIcon);
+                        listItemHolder.mRatingCount = mRootView.findViewById(R.id.ratingCount);
+                        LinearLayout layout = mRootView.findViewById(R.id.option_icon_layout_video);
                         layout.setVisibility(View.VISIBLE);
-                        listItemHolder.mOptionIcon = (ImageView) layout.findViewById(R.id.optionIcon);
+                        listItemHolder.mOptionIcon = layout.findViewById(R.id.optionIcon);
                         listItemHolder.mOptionIcon.setTag(position);
                     } else {
                         switch (currentSelectedOption) {
@@ -226,11 +226,11 @@ public class ManageDataAdapter extends ArrayAdapter<Object> implements OnMenuCli
 
                             case "core_main_group":
 
-                                listItemHolder.memberInfo = (TextView) mRootView.findViewById(R.id.memberInfo);
-                                listItemHolder.ownerInfo = (TextView) mRootView.findViewById(R.id.ownerInfo);
+                                listItemHolder.memberInfo = mRootView.findViewById(R.id.memberInfo);
+                                listItemHolder.ownerInfo = mRootView.findViewById(R.id.ownerInfo);
                                 listItemHolder.memberInfo.setTypeface(fontIcon);
                                 listItemHolder.ownerInfo.setTypeface(fontIcon);
-                                listItemHolder.mOptionIcon = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                                listItemHolder.mOptionIcon = mRootView.findViewById(R.id.optionIcon);
 
                                 listItemHolder.mOptionIcon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_item_overflow));
                                 listItemHolder.mOptionIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.white),
@@ -241,61 +241,61 @@ public class ManageDataAdapter extends ArrayAdapter<Object> implements OnMenuCli
 
                             case "core_main_event":
 
-                                listItemHolder.mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocationInfo);
-                                listItemHolder.mEventTime = (TextView) mRootView.findViewById(R.id.eventTime);
-                                listItemHolder.mDateIcon = (TextView) mRootView.findViewById(R.id.date_icon);
-                                listItemHolder.mLocationIcon = (TextView) mRootView.findViewById(R.id.location_icon);
-                                listItemHolder.mDay = (TextView) mRootView.findViewById(R.id.day);
-                                listItemHolder.mMonth = (TextView) mRootView.findViewById(R.id.month);
-                                listItemHolder.mLocationLayout = (LinearLayout) mRootView.findViewById(R.id.location_layout);
+                                listItemHolder.mEventLocation = mRootView.findViewById(R.id.eventLocationInfo);
+                                listItemHolder.mEventTime = mRootView.findViewById(R.id.eventTime);
+                                listItemHolder.mDateIcon = mRootView.findViewById(R.id.date_icon);
+                                listItemHolder.mLocationIcon = mRootView.findViewById(R.id.location_icon);
+                                listItemHolder.mDay = mRootView.findViewById(R.id.day);
+                                listItemHolder.mMonth = mRootView.findViewById(R.id.month);
+                                listItemHolder.mLocationLayout = mRootView.findViewById(R.id.location_layout);
                                 listItemHolder.mLocationIcon.setTypeface(fontIcon);
                                 listItemHolder.mDateIcon.setTypeface(fontIcon);
-                                listItemHolder.mOptionIcon = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                                listItemHolder.mOptionIcon = mRootView.findViewById(R.id.optionIcon);
                                 mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.VISIBLE);
                                 listItemHolder.mOptionIcon.setTag(position);
                                 break;
 
                             case "core_main_poll":
-                                listItemHolder.mViewCountDetail = (TextView) mRootView.findViewById(R.id.viewCountDetail);
-                                listItemHolder.mContentDetail = (TextView) mRootView.
+                                listItemHolder.mViewCountDetail = mRootView.findViewById(R.id.viewCountDetail);
+                                listItemHolder.mContentDetail = mRootView.
                                         findViewById(R.id.contentDetail);
-                                listItemHolder.mListImageClosed = (TextView) mRootView.findViewById(R.id.closeIcon);
-                                listItemHolder.mOptionIcon = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                                listItemHolder.mListImageClosed = mRootView.findViewById(R.id.closeIcon);
+                                listItemHolder.mOptionIcon = mRootView.findViewById(R.id.optionIcon);
                                 mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.VISIBLE);
                                 listItemHolder.mOptionIcon.setTag(position);
                                 break;
 
                             case "sitepage":
-                                listItemHolder.mFollowCount = (TextView) mRootView.findViewById(R.id.memberInfo);
-                                listItemHolder.mLikeCount = (TextView) mRootView.findViewById(R.id.ownerInfo);
-                                listItemHolder.mOptionIconHoriz = (TextView) mRootView.findViewById(R.id.optionIconHoriz);
+                                listItemHolder.mFollowCount = mRootView.findViewById(R.id.memberInfo);
+                                listItemHolder.mLikeCount = mRootView.findViewById(R.id.ownerInfo);
+                                listItemHolder.mOptionIconHoriz = mRootView.findViewById(R.id.optionIconHoriz);
                                 listItemHolder.mOptionIconHoriz.setVisibility(View.VISIBLE);
                                 mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.GONE);
                                 listItemHolder.mOptionIconHoriz.setTag(position);
                                 break;
 
                             case "core_main_sitegroup":
-                                listItemHolder.mFollowCount = (TextView) mRootView.findViewById(R.id.memberInfo);
-                                listItemHolder.ownerInfo = (TextView) mRootView.findViewById(R.id.ownerInfo);
-                                listItemHolder.mLikeCount = (TextView) mRootView.findViewById(R.id.likeCountInfo);
+                                listItemHolder.mFollowCount = mRootView.findViewById(R.id.memberInfo);
+                                listItemHolder.ownerInfo = mRootView.findViewById(R.id.ownerInfo);
+                                listItemHolder.mLikeCount = mRootView.findViewById(R.id.likeCountInfo);
                                 listItemHolder.mLikeCount.setVisibility(View.VISIBLE);
-                                listItemHolder.mOptionIconHoriz = (TextView) mRootView.findViewById(R.id.optionIconHoriz);
+                                listItemHolder.mOptionIconHoriz = mRootView.findViewById(R.id.optionIconHoriz);
                                 listItemHolder.mOptionIconHoriz.setVisibility(View.VISIBLE);
                                 listItemHolder.mOptionIconHoriz.setTag(position);
                                 mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.GONE);
                                 break;
 
                             default:
-                                listItemHolder.mContentDetail = (TextView) mRootView.findViewById(R.id.contentDetail);
-                                listItemHolder.mOptionIcon = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                                listItemHolder.mContentDetail = mRootView.findViewById(R.id.contentDetail);
+                                listItemHolder.mOptionIcon = mRootView.findViewById(R.id.optionIcon);
                                 mRootView.findViewById(R.id.option_icon_layout).setVisibility(View.VISIBLE);
                                 listItemHolder.mOptionIcon.setTag(position);
 
                         }
 
-                        listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                        listItemHolder.mListImageIcon = (ImageView) mRootView.findViewById(R.id.contentImage);
-                        listItemHolder.mContentInfoBlock = (LinearLayout) mRootView.findViewById(R.id.contentInfoBlock);
+                        listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                        listItemHolder.mListImageIcon = mRootView.findViewById(R.id.contentImage);
+                        listItemHolder.mContentInfoBlock = mRootView.findViewById(R.id.contentInfoBlock);
 
                     }
                     mRootView.setTag(listItemHolder);
@@ -502,7 +502,7 @@ public class ManageDataAdapter extends ArrayAdapter<Object> implements OnMenuCli
                                 args.putString(ConstantVariables.VIDEO_URL, listItems.getmVideoUrl());
                                 args.putInt(ConstantVariables.VIDEO_TYPE, listItems.getmVideoType());
                                 lightBox.putExtras(args);
-                                ((Activity) mContext).startActivity(lightBox);
+                                mContext.startActivity(lightBox);
                                 ((Activity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.push_down_out);
                             }
                         });

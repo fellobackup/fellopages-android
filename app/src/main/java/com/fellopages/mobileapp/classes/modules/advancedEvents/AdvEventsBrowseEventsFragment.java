@@ -139,16 +139,16 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
         footerView = CustomViews.getFooterView(inflater);
         mSlideShowLayout = (LinearLayout) inflater.inflate(R.layout.slide_show_header, container, false);
 
-        mSlideShowPager = (ViewPager) mSlideShowLayout.findViewById(R.id.slide_show_pager);
-        mCircleIndicator = (CircleIndicator) mSlideShowLayout.findViewById(R.id.circle_indicator);
+        mSlideShowPager = mSlideShowLayout.findViewById(R.id.slide_show_pager);
+        mCircleIndicator = mSlideShowLayout.findViewById(R.id.circle_indicator);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
         rootView.findViewById(R.id.eventFilterBlock).setVisibility(View.VISIBLE);
 
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mGridView = rootView.findViewById(R.id.gridView);
         mGridView.setOnScrollListener(this);
         mGridView.addHeaderView(mSlideShowLayout);
         mGridView.addFooterView(footerView);
@@ -230,7 +230,7 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
          * Show Order by Spinner when fragment is loaded from dashboard.
          */
         if(!isCategoryEvents){
-            orderBySpinner = (Spinner) rootView.findViewById(R.id.filter_view);
+            orderBySpinner = rootView.findViewById(R.id.filter_view);
             rootView.findViewById(R.id.eventFilterBlock).setVisibility(View.VISIBLE);
 
             adapter = new SpinnerAdapter(mContext, R.layout.simple_text_view, mSelectedItem);
@@ -254,14 +254,14 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
 
             rootView.findViewById(R.id.eventFilterBlock).setVisibility(View.GONE);
 
-            categoryFilterBlock = (LinearLayout) rootView.findViewById(R.id.category_filter_block);
+            categoryFilterBlock = rootView.findViewById(R.id.category_filter_block);
             categoryFilterBlock.setVisibility(View.VISIBLE);
             categoryFilterBlock.findViewById(R.id.toolbar).setVisibility(View.GONE);
 
-            subCategoryLayout = (CardView) rootView.findViewById(R.id.categoryFilterLayout);
-            subSubCategoryLayout = (CardView) rootView.findViewById(R.id.subCategoryFilterLayout);
-            subCategorySpinner = (Spinner) subCategoryLayout.findViewById(R.id.filter_view);
-            subSubCategorySpinner = (Spinner) subSubCategoryLayout.findViewById(R.id.filter_view);
+            subCategoryLayout = rootView.findViewById(R.id.categoryFilterLayout);
+            subSubCategoryLayout = rootView.findViewById(R.id.subCategoryFilterLayout);
+            subCategorySpinner = subCategoryLayout.findViewById(R.id.filter_view);
+            subSubCategorySpinner = subSubCategoryLayout.findViewById(R.id.filter_view);
 
 
             /*
@@ -652,7 +652,7 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
                     }
                 } else {
                     CustomViews.removeFooterView(footerView);
-                    LinearLayout error_view = (LinearLayout) rootView.findViewById(R.id.message_layout);
+                    LinearLayout error_view = rootView.findViewById(R.id.message_layout);
                     String message = mContext.getResources().getString(R.string.no_events);
                     int padding10 = (int) mContext.getResources().getDimension(R.dimen.padding_10dp);
 
@@ -669,8 +669,8 @@ public class AdvEventsBrowseEventsFragment  extends Fragment implements AdapterV
                     }
 
                     error_view.setVisibility(View.VISIBLE);
-                    TextView errorIcon = (TextView) error_view.findViewById(R.id.error_icon);
-                    TextView errorMessage = (TextView) error_view.findViewById(R.id.error_message);
+                    TextView errorIcon = error_view.findViewById(R.id.error_icon);
+                    TextView errorMessage = error_view.findViewById(R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     errorIcon.setText("\uf073");
                     errorMessage.setPadding(0, padding10, 0, 0);

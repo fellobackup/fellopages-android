@@ -199,14 +199,14 @@ public class StoreViewAdapter extends RecyclerView.Adapter {
         public StoreViewHolder(View itemView) {
             super(itemView);
             mainView = itemView;
-            titleView = (TextView) itemView.findViewById(R.id.store_title);
-            mainImageView = (ImageView) itemView.findViewById(R.id.header_imageview);
-            ownerImageView = (CircularImageView) itemView.findViewById(R.id.owner_image);
-            categoryView = (TextView) itemView.findViewById(R.id.store_category);
-            likeFollowCountView = (TextView) itemView.findViewById(R.id.store_like_follow_count);
-            optionMenu = (ImageView) itemView.findViewById(R.id.option_icon_view);
-            featuredView = (TextView) itemView.findViewById(R.id.featuredLabel);
-            sponsoredView = (TextView) itemView.findViewById(R.id.sponsoredLabel);
+            titleView = itemView.findViewById(R.id.store_title);
+            mainImageView = itemView.findViewById(R.id.header_imageview);
+            ownerImageView = itemView.findViewById(R.id.owner_image);
+            categoryView = itemView.findViewById(R.id.store_category);
+            likeFollowCountView = itemView.findViewById(R.id.store_like_follow_count);
+            optionMenu = itemView.findViewById(R.id.option_icon_view);
+            featuredView = itemView.findViewById(R.id.featuredLabel);
+            sponsoredView = itemView.findViewById(R.id.sponsoredLabel);
         }
     }
 

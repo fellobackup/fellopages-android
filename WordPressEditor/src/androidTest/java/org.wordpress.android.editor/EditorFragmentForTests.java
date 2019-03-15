@@ -17,7 +17,7 @@ public class EditorFragmentForTests extends EditorFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-        mWebView = (EditorWebViewAbstract) view.findViewById(com.wordpress.android.editor.R.id.webview);
+        mWebView = view.findViewById(com.wordpress.android.editor.R.id.webview);
         return view;
     }
 

@@ -411,9 +411,9 @@ public class AlertDialogWithAction {
         GradientDrawable drawable = (GradientDrawable) inflatedView.getBackground();
         drawable.setCornerRadius(30f);
         inflatedView.setBackground(drawable);
-        TextView tvTitle = (TextView) inflatedView.findViewById(R.id.title);
-        TextView tvDescription = (TextView) inflatedView.findViewById(R.id.description);
-        TextView tvOkAction = (TextView) inflatedView.findViewById(R.id.tv_ok_action);
+        TextView tvTitle = inflatedView.findViewById(R.id.title);
+        TextView tvDescription = inflatedView.findViewById(R.id.description);
+        TextView tvOkAction = inflatedView.findViewById(R.id.tv_ok_action);
         inflatedView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
 
         mDialogBuilder.setView(inflatedView);

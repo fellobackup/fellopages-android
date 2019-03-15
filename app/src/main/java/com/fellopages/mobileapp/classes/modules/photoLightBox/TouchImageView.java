@@ -43,9 +43,9 @@ public class TouchImageView extends ImageView implements View.OnTouchListener{
     private float normalizedScale;
     private Matrix matrix, prevMatrix;
 
-    private static enum State {
+    private enum State {
         NONE, DRAG, ZOOM, FLING, ANIMATE_ZOOM
-    };
+    }
 
     private State state;
 
@@ -487,12 +487,9 @@ public class TouchImageView extends ImageView implements View.OnTouchListener{
         } else if (x >= -1 && direction < 0) {
             return false;
 
-        } else if (Math.abs(x) + viewWidth + 1 >= getImageWidth()
-                && direction > 0) {
-            return false;
-        }
+        } else return !(Math.abs(x) + viewWidth + 1 >= getImageWidth())
+                || direction <= 0;
 
-        return true;
     }
 
     /**
@@ -599,11 +596,11 @@ public class TouchImageView extends ImageView implements View.OnTouchListener{
 
     public interface OnTouchImageViewListener {
 
-        public void onMove();
+        void onMove();
     }
 
     public interface onTouchClickListener {
-        public void onClick1();
+        void onClick1();
     }
 
     /**

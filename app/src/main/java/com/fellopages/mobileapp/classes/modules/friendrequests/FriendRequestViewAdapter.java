@@ -132,10 +132,10 @@ public class FriendRequestViewAdapter extends RecyclerView.Adapter {
 
             super(view);
             container = view;
-            userImage = (ImageView) view.findViewById(R.id.userImage);
-            mOwnerName = (TextView) view.findViewById(R.id.userName);
-            acceptButton = (Button) view.findViewById(R.id.acceptRequest);
-            ignoreButton = (Button) view.findViewById(R.id.ignoreRequest);
+            userImage = view.findViewById(R.id.userImage);
+            mOwnerName = view.findViewById(R.id.userName);
+            acceptButton = view.findViewById(R.id.acceptRequest);
+            ignoreButton = view.findViewById(R.id.ignoreRequest);
 
         }
     }

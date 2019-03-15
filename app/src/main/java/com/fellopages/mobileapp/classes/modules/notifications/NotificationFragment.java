@@ -120,13 +120,13 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.recycler_view_layout, null);
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -150,7 +150,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                             mAppConst.postJsonResponseForUrl(notificationReadUrl, postParams,
                                     new OnResponseListener() {
                                         @Override
-                                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                        public void onTaskCompleted(JSONObject jsonObject) {
                                             listItems.setIsRead(1);
                                             mNotificationViewAdapter.notifyDataSetChanged();
                                         }
@@ -378,7 +378,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
     public void makeRequest() {
         mAppConst.getJsonResponseFromUrl(mNotificationRequestUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mBrowseItemList.clear();
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 
@@ -394,8 +394,8 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
 
                 if(mBrowseItemList.size() == 0){
                     rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                    TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                    SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+                    TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                    SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     errorIcon.setText("\uf0f3");
                     errorMessage.setText(mContext.getResources().getString(R.string.no_notifications));
@@ -479,8 +479,8 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
 
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            TextView errorMessage = (TextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            TextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf0f3");
             errorMessage.setText(mContext.getResources().getString(R.string.no_notifications));

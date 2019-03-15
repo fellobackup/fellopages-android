@@ -24,8 +24,8 @@ public class LinkDialogFragment extends DialogFragment {
 
         View view = inflater.inflate(R.layout.dialog_link, null);
 
-        final EditText urlEditText = (EditText) view.findViewById(R.id.linkURL);
-        final EditText linkEditText = (EditText) view.findViewById(R.id.linkText);
+        final EditText urlEditText = view.findViewById(R.id.linkURL);
+        final EditText linkEditText = view.findViewById(R.id.linkText);
 
         builder.setView(view)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {

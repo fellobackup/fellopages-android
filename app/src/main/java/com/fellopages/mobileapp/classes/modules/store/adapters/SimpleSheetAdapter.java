@@ -193,9 +193,9 @@ public class SimpleSheetAdapter extends RecyclerView.Adapter<SimpleSheetAdapter.
             super(itemView);
             mainView = itemView;
             this.adapter = parent;
-            textView = (TextView) itemView.findViewById(R.id.hiddenFeedOptions);
+            textView = itemView.findViewById(R.id.hiddenFeedOptions);
             textView.setGravity(Gravity.CENTER_VERTICAL);
-            tvIcon = (TextView) itemView.findViewById(R.id.icon);
+            tvIcon = itemView.findViewById(R.id.icon);
             viewContainer = itemView.findViewById(R.id.view_container);
 
         }

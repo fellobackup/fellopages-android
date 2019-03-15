@@ -108,7 +108,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
         setContentView(R.layout.activity_search);
 
         //Setting toolbar as action bar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         //setting up the back icon
@@ -133,11 +133,11 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
             }
         });
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_search);
-        drawerView = (LinearLayout) findViewById(R.id.drawer);
-        mSearchOtherModules = (TextView) findViewById(R.id.search_other_modules);
+        mDrawerLayout = findViewById(R.id.drawer_layout_search);
+        drawerView = findViewById(R.id.drawer);
+        mSearchOtherModules = findViewById(R.id.search_other_modules);
         mSearchOtherModules.setOnClickListener(this);
-        Button buttonCloseDrawer = (Button) findViewById(R.id.apply_btn);
+        Button buttonCloseDrawer = findViewById(R.id.apply_btn);
         buttonCloseDrawer.setOnClickListener(this);
         mAppConst = new AppConstant(this);
 
@@ -533,7 +533,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
 
             View inflateView = drawerView.findViewWithTag(mViewTag);
             if (inflateView != null) {
-                filterTextView = (EditText) inflateView.findViewById(R.id.field_value);
+                filterTextView = inflateView.findViewById(R.id.field_value);
             }
 
             if (mTagName != null && mTagId != null) {
@@ -883,7 +883,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
 
         View inflateView = drawerView.findViewWithTag(mViewTag);
         if (inflateView != null) {
-            filterTextView = (EditText) inflateView.findViewById(R.id.field_value);
+            filterTextView = inflateView.findViewById(R.id.field_value);
             filterTextView.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -919,7 +919,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
             // If wishlist is searched for a member then showing the member name in search query.
             View adminWishlistView = drawerView.findViewWithTag("text");
             if (adminWishlistView != null) {
-                adminWishlist = (EditText) adminWishlistView.findViewById(R.id.field_value);
+                adminWishlist = adminWishlistView.findViewById(R.id.field_value);
                 if (adminWishlist != null && categoryValue != null) {
                     adminWishlist.setText(categoryValue);
                     loadSearchFragment();
@@ -933,7 +933,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
                     categoryView = drawerView.findViewWithTag("category_id");
                 }
                 if (categoryView != null) {
-                    EditText etCategory = (EditText) categoryView.findViewById(R.id.field_value);
+                    EditText etCategory = categoryView.findViewById(R.id.field_value);
                     etCategory.setText(categoryValue);
                     etCategory.setTag(categoryId);
                 }
@@ -954,7 +954,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
                         }
                         JSONObject selectJsonObject = formArray.optJSONObject(1);
                         JSONObject jsonObjectMultiOptions = selectJsonObject.optJSONObject("multiOptions");
-                        EditText etCategory = (EditText) categoryView.findViewById(R.id.field_value);
+                        EditText etCategory = categoryView.findViewById(R.id.field_value);
                         etCategory.setText(jsonObjectMultiOptions.optString("forum"));
                         etCategory.setTag("forum");
                     }

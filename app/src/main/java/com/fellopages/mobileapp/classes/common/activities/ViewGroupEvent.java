@@ -113,8 +113,8 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
         mItemViewUrl += "&profile_rsvp=1";
 
          /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -125,14 +125,14 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
         /*
         Getting Fields to show content
          */
-        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mCoverImage = (ImageView) findViewById(R.id.coverImage);
-        mContentTitle = (TextView) findViewById(R.id.content_title);
+        mMainContent = findViewById(R.id.main_content);
+        appBar = findViewById(R.id.appbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        mCoverImage = findViewById(R.id.coverImage);
+        mContentTitle = findViewById(R.id.content_title);
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mSlidingTabs = (TabLayout) findViewById(R.id.slidingTabs);
+        mViewPager = findViewById(R.id.pager);
+        mSlidingTabs = findViewById(R.id.slidingTabs);
         mSlidingTabs.setTabTextColors(ContextCompat.getColor(mContext, R.color.light_gray),
                 ContextCompat.getColor(mContext, R.color.textColorPrimary));
         mSlidingTabs.setSelectedTabIndicatorColor(ContextCompat.getColor(mContext, R.color.textColorPrimary));

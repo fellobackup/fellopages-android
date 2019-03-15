@@ -101,7 +101,7 @@ public class ManageStoreFragment extends Fragment implements OnItemClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.recycler_view_layout, null);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mStoreItemList = new ArrayList<>();
         mContext = getContext();
@@ -111,7 +111,7 @@ public class ManageStoreFragment extends Fragment implements OnItemClickListener
                 && !PreferencesUtils.getCurrentSelectedModule(mContext).equals("core_main_sitestore")) {
             PreferencesUtils.updateCurrentModule(mContext,"core_main_sitestore");
         }
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -177,7 +177,7 @@ public class ManageStoreFragment extends Fragment implements OnItemClickListener
 
             mAppConst.getJsonResponseFromUrl(mManageStoreUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     if (snackbar != null && snackbar.isShown()) {
                         snackbar.dismiss();
@@ -272,8 +272,8 @@ public class ManageStoreFragment extends Fragment implements OnItemClickListener
 
         }else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf187");
             errorMessage.setText(mContext.getResources().getString(R.string.no_store_available));

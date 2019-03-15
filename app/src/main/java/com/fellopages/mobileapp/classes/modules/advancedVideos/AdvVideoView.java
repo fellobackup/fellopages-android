@@ -178,8 +178,8 @@ public class AdvVideoView extends AppCompatActivity implements View.OnClickListe
 
         // Getting screen orientation.
         int orientation = getResources().getConfiguration().orientation;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -280,7 +280,7 @@ public class AdvVideoView extends AppCompatActivity implements View.OnClickListe
                     "&subject_id=" + mViewId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     if (reactionsData != null) {
@@ -350,7 +350,7 @@ public class AdvVideoView extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.ownerDetailView).setVisibility(View.GONE);
         mMainView = findViewById(R.id.video_view_page);
         mScrollView = findViewById(R.id.bottomAreaScroller);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -359,49 +359,49 @@ public class AdvVideoView extends AppCompatActivity implements View.OnClickListe
         /*
         Like and Unlike Fields...
          */
-        llLikeBlock = (LinearLayout) findViewById(R.id.like_block);
-        ivReactionIcon = (ImageView) findViewById(R.id.reaction_icon);
-        tvLike = (TextView) findViewById(R.id.like_view);
+        llLikeBlock = findViewById(R.id.like_block);
+        ivReactionIcon = findViewById(R.id.reaction_icon);
+        tvLike = findViewById(R.id.like_view);
         tvLike.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-        tvComment = (TextView) findViewById(R.id.comment_view);
+        tvComment = findViewById(R.id.comment_view);
         llLikeBlock.setOnClickListener(this);
         llLikeBlock.setOnLongClickListener(this);
         tvComment.setOnClickListener(this);
 
         // Video title and description fields.
-        tvTitle = (SelectableTextView) findViewById(R.id.video_title);
-        tvDetails = (SelectableTextView) findViewById(R.id.video_detail);
-        tvViewCount = (SelectableTextView) findViewById(R.id.video_view_count);
-        tvViewOwnerName = (TextView) findViewById(R.id.owner_name);
-        tvDescription = (SelectableTextView) findViewById(R.id.video_description);
-        ivOwnerProfile = (BezelImageView) findViewById(R.id.owner_icon);
-        pbVideoLoading = (ProgressBar) findViewById(R.id.loadingProgress);
-        rbVideo = (RatingBar) findViewById(R.id.smallRatingBar);
-        tvTags = (TextView) findViewById(R.id.tagView);
-        tvVideoMode = (TextView) findViewById(R.id.video_mode);
+        tvTitle = findViewById(R.id.video_title);
+        tvDetails = findViewById(R.id.video_detail);
+        tvViewCount = findViewById(R.id.video_view_count);
+        tvViewOwnerName = findViewById(R.id.owner_name);
+        tvDescription = findViewById(R.id.video_description);
+        ivOwnerProfile = findViewById(R.id.owner_icon);
+        pbVideoLoading = findViewById(R.id.loadingProgress);
+        rbVideo = findViewById(R.id.smallRatingBar);
+        tvTags = findViewById(R.id.tagView);
+        tvVideoMode = findViewById(R.id.video_mode);
 
         //Setting up local video player
-        videoView = (VideoView) findViewById(R.id.video_player);
+        videoView = findViewById(R.id.video_player);
         mController = new MediaController(this);
         mController.setAnchorView(videoView);
         videoView.setMediaController(mController);
         videoView.requestFocus();
 
         //Setting up WebView for playing YouTube, Vimeo, DailyMotion and EmbedCode videos.
-        webViewVideo = (WebView) findViewById(R.id.webView);
+        webViewVideo = findViewById(R.id.webView);
 
         // Advanced video options.
-        tvSubscribe = (TextView) findViewById(R.id.subscribe);
-        tvAddToPlaylist = (TextView) findViewById(R.id.add_to_list);
-        tvWatchLater = (TextView) findViewById(R.id.watch_later);
-        tvFavourite = (TextView) findViewById(R.id.favourite);
+        tvSubscribe = findViewById(R.id.subscribe);
+        tvAddToPlaylist = findViewById(R.id.add_to_list);
+        tvWatchLater = findViewById(R.id.watch_later);
+        tvFavourite = findViewById(R.id.favourite);
         tvSubscribe.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         tvSubscribe.setOnClickListener(this);
         tvAddToPlaylist.setOnClickListener(this);
         tvWatchLater.setOnClickListener(this);
         tvFavourite.setOnClickListener(this);
 
-        playerView = (PlayerView) findViewById(R.id.exo_video_player);
+        playerView = findViewById(R.id.exo_video_player);
         appBarLayout = findViewById(R.id.appbar);
     }
 
@@ -903,7 +903,7 @@ public class AdvVideoView extends AppCompatActivity implements View.OnClickListe
 
         mAppConst.postJsonResponseForUrl(postRatingUrl, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
 
             }
 

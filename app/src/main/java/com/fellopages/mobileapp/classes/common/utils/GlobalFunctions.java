@@ -196,10 +196,7 @@ public class GlobalFunctions {
 
 
     public static boolean isSslEnabled() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return false;
-        }
-        return true;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
     /**
@@ -1939,15 +1936,15 @@ public class GlobalFunctions {
         String fileName = "unknown";
         Uri filePathUri = uri;
         try {
-            if (uri.getScheme().toString().compareTo("content") == 0) {
+            if (uri.getScheme().compareTo("content") == 0) {
                 Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
                 if (cursor.moveToFirst()) {
                     int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);//Instead of "MediaStore.Images.Media.DATA" can be used "_data"
                     filePathUri = Uri.parse(cursor.getString(column_index));
-                    fileName = filePathUri.getLastPathSegment().toString();
+                    fileName = filePathUri.getLastPathSegment();
                 }
             } else if (uri.getScheme().compareTo("file") == 0) {
-                fileName = filePathUri.getLastPathSegment().toString();
+                fileName = filePathUri.getLastPathSegment();
             } else {
                 fileName = fileName + "_" + filePathUri.getLastPathSegment();
             }

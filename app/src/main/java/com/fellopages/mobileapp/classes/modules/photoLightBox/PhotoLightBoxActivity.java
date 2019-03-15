@@ -171,32 +171,32 @@ public class PhotoLightBoxActivity extends AppCompatActivity implements View.OnC
 
         mContext = getApplicationContext();
 
-        mSlidingLayer = (SlidingLayer) findViewById(R.id.slidingLayer);
+        mSlidingLayer = findViewById(R.id.slidingLayer);
 
-        mPhotoTitle = (TextView) findViewById(R.id.plb_photoTitle);
-        mPhotoDescription = (TextView) findViewById(R.id.plb_photoDescription);
-        mAlbumDetail = (TextView)findViewById(R.id.plb_albumDetail);
-        mAlbumName = (TextView)findViewById(R.id.plb_albumName);
-        mPhotoCounter = (TextView)findViewById(R.id.plb_photoNumber);
-        mLikeCount = (TextView) findViewById(R.id.likeCount);
-        mCommentCount = (TextView) findViewById(R.id.commentCount);
-        likeButton = (ActionIconThemedTextView) findViewById(R.id.likeButton);
-        commentButton = (ImageButton) findViewById(R.id.commentButton);
-        shareButton = (ImageButton) findViewById(R.id.shareButton);
-        tagButton = (ImageButton) findViewById(R.id.tagButton);
-        editOption = (ImageButton) findViewById(R.id.editOption);
-        optionMenu = (ImageView) findViewById(R.id.optionMenu);
+        mPhotoTitle = findViewById(R.id.plb_photoTitle);
+        mPhotoDescription = findViewById(R.id.plb_photoDescription);
+        mAlbumDetail = findViewById(R.id.plb_albumDetail);
+        mAlbumName = findViewById(R.id.plb_albumName);
+        mPhotoCounter = findViewById(R.id.plb_photoNumber);
+        mLikeCount = findViewById(R.id.likeCount);
+        mCommentCount = findViewById(R.id.commentCount);
+        likeButton = findViewById(R.id.likeButton);
+        commentButton = findViewById(R.id.commentButton);
+        shareButton = findViewById(R.id.shareButton);
+        tagButton = findViewById(R.id.tagButton);
+        editOption = findViewById(R.id.editOption);
+        optionMenu = findViewById(R.id.optionMenu);
         optionMenu.setColorFilter(ContextCompat.getColor(this, R.color.white),
                 PorterDuff.Mode.SRC_IN);
-        navigationBack = (ImageView) findViewById(R.id.navigation_back);
-        rotateLeft = (Button) findViewById(R.id.rotateLeft);
-        rotateRight = (Button) findViewById(R.id.rotateRight);
-        flipHorizontal = (Button) findViewById(R.id.flipHorizontal);
-        flipVertical = (Button) findViewById(R.id.flipVertical);
-        saveImageBtn = (Button)findViewById(R.id.saveImage);
-        mLikeCommentCountsContainer = (RelativeLayout) findViewById(R.id.counts_container);
-        popularReactionsView = (LinearLayout) findViewById(R.id.popularReactionIcons);
-        mReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
+        navigationBack = findViewById(R.id.navigation_back);
+        rotateLeft = findViewById(R.id.rotateLeft);
+        rotateRight = findViewById(R.id.rotateRight);
+        flipHorizontal = findViewById(R.id.flipHorizontal);
+        flipVertical = findViewById(R.id.flipVertical);
+        saveImageBtn = findViewById(R.id.saveImage);
+        mLikeCommentCountsContainer = findViewById(R.id.counts_container);
+        popularReactionsView = findViewById(R.id.popularReactionIcons);
+        mReactionIcon = findViewById(R.id.reactionIcon);
 
         isReactionsEnabled = PreferencesUtils.getReactionsEnabled(this) == 1;
         isNestedCommentsEnabled = PreferencesUtils.isNestedCommentEnabled(this);
@@ -251,7 +251,7 @@ public class PhotoLightBoxActivity extends AppCompatActivity implements View.OnC
         //Comment click event
         commentButton.setOnClickListener(this);
         mLikeCommentCountsContainer.setOnClickListener(this);
-        viewPager = (LoopViewPager) findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
 
         //Tag click event
         tagButton.setOnClickListener(this);
@@ -837,7 +837,7 @@ public class PhotoLightBoxActivity extends AppCompatActivity implements View.OnC
         mRequestUrl += "&page=" + pageNo;
         mAppConst.getJsonResponseFromUrl(mRequestUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 //Main body or response from the server
                 mBody = jsonObject;
                 //Adding the contents in the list so the adapter can show them in photoLightBox
@@ -1111,7 +1111,7 @@ public class PhotoLightBoxActivity extends AppCompatActivity implements View.OnC
                 }
             }
         }  else {
-            String url = mAppConst.DEFAULT_URL + "activity/share";
+            String url = AppConstant.DEFAULT_URL + "activity/share";
             shareParams.put("type", getSubjectType());
             shareParams.put("id", String.valueOf(mSubjectId));
 
@@ -1164,7 +1164,7 @@ public class PhotoLightBoxActivity extends AppCompatActivity implements View.OnC
 
         mAppConst.postJsonResponseForUrl(editImageUrl, editParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
                 if (jsonObject != null) {
                     String rotatedImage = jsonObject.optString("image");
@@ -1534,7 +1534,7 @@ public class PhotoLightBoxActivity extends AppCompatActivity implements View.OnC
                     /* Calling to send notifications after like action */
                     mAppConst.postJsonResponseForUrl(sendLikeNotificationUrl, likeParams, new OnResponseListener() {
                         @Override
-                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                        public void onTaskCompleted(JSONObject jsonObject) {
 
                         }
 

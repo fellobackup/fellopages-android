@@ -74,9 +74,9 @@ class StickersAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.stickers_search, null);
             holder = new ViewHolder();
             assert view != null;
-            holder.stickersLayout = (LinearLayout) view.findViewById(R.id.stickersLayout);
-            holder.imageView = (ImageView) view.findViewById(R.id.stickerImage);
-            holder.stickersText = (TextView) view.findViewById(R.id.stickersText);
+            holder.stickersLayout = view.findViewById(R.id.stickersLayout);
+            holder.imageView = view.findViewById(R.id.stickerImage);
+            holder.stickersText = view.findViewById(R.id.stickersText);
             view.setTag(holder);
 
         }else{

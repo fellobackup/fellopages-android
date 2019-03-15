@@ -108,8 +108,8 @@ public class StoreViewPage extends FormActivity implements ViewPager.OnPageChang
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_view_page);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -127,28 +127,28 @@ public class StoreViewPage extends FormActivity implements ViewPager.OnPageChang
         mGutterMenuUtils = new GutterMenuUtils(this);
         mGutterMenuUtils.setOnOptionItemClickResponseListener(this);
 
-        mFilterButton = (FloatingActionButton) findViewById(R.id.filter_fab);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mOwnerTitle = (TextView) findViewById(R.id.owner_title);
-        mStoreCover = (ImageView) findViewById(R.id.cover_image);
-        mProfileImage = (ImageView) findViewById(R.id.profile_image);
-        mStoreTitleView = (TextView) findViewById(R.id.store_title);
-        mLikeCountView = (TextView) findViewById(R.id.like_count);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mFilterButton = findViewById(R.id.filter_fab);
+        mProgressBar = findViewById(R.id.progressBar);
+        mOwnerTitle = findViewById(R.id.owner_title);
+        mStoreCover = findViewById(R.id.cover_image);
+        mProfileImage = findViewById(R.id.profile_image);
+        mStoreTitleView = findViewById(R.id.store_title);
+        mLikeCountView = findViewById(R.id.like_count);
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        mPager = findViewById(R.id.pager);
 
         //Header view
-        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
-        mProfileImageMenus = (TextView) findViewById(R.id.profile_image_menus);
+        mMainContent = findViewById(R.id.main_content);
+        mProfileImageMenus = findViewById(R.id.profile_image_menus);
         mProfileImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-        mCoverImageMenus = (TextView) findViewById(R.id.cover_image_menus);
+        mCoverImageMenus = findViewById(R.id.cover_image_menus);
         mCoverImageMenus.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
         mFilterButton.setVisibility(View.GONE);
         mPagerAdapter = new FragmentAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
-        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        slidingTabLayout = findViewById(R.id.sliding_tabs);
         slidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
         slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(this,R.color.textColorPrimary));
 
@@ -172,7 +172,7 @@ public class StoreViewPage extends FormActivity implements ViewPager.OnPageChang
     public void getStoreDetails(){
         mAppConst.getJsonResponseFromUrl(mStoreViewPageUrl, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mStoreDetails = jsonObject;
                 checkSiteVideoPluginEnabled();
             }
@@ -473,7 +473,7 @@ public class StoreViewPage extends FormActivity implements ViewPager.OnPageChang
 
         mAppConst.postJsonResponseForUrl(mLikeUnlikeUrl, likeParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
                 if(isLiked == 0) {
                     mLikeCount+=1;

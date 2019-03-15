@@ -109,10 +109,10 @@ public class AdvEventsMyTicketsFragment extends Fragment implements AdapterView.
         mAppConst = new AppConstant(getActivity());
 
         rootView = inflater.inflate(R.layout.list_view_layout,container,false);
-        mListView = (ListView) rootView.findViewById(R.id.list_item_view);
+        mListView = rootView.findViewById(R.id.list_item_view);
         footerView = CustomViews.getFooterView(inflater);
 
-        spinner = (Spinner) rootView.findViewById(R.id.filter_view);
+        spinner = rootView.findViewById(R.id.filter_view);
         rootView.findViewById(R.id.eventTicketsFilter).setVisibility(View.VISIBLE);
 
         ViewCompat.setNestedScrollingEnabled(mListView,true);
@@ -123,7 +123,7 @@ public class AdvEventsMyTicketsFragment extends Fragment implements AdapterView.
                 "my_tickets_siteevent");
         mListView.setAdapter(mBrowseDataAdapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(mContext, R.color.colorAccent));
 
@@ -161,7 +161,7 @@ public class AdvEventsMyTicketsFragment extends Fragment implements AdapterView.
 
             mAppConst.getJsonResponseFromUrl(mMyTicketsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mBrowseItemList.clear();
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     if(snackbar != null && snackbar.isShown())
@@ -232,8 +232,8 @@ public class AdvEventsMyTicketsFragment extends Fragment implements AdapterView.
 
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf080");
             errorMessage.setText(mContext.getResources().getString(R.string.no_tickets));
@@ -314,7 +314,7 @@ public class AdvEventsMyTicketsFragment extends Fragment implements AdapterView.
     private void loadMoreData(String url) {
         mAppConst.getJsonResponseFromUrl(url, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 CustomViews.removeFooterView(footerView);
                 addDataToList(jsonObject);
                 isLoading=false;

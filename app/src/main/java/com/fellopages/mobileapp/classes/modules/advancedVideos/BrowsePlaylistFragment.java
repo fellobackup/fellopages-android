@@ -263,9 +263,9 @@ public class BrowsePlaylistFragment extends Fragment implements SwipeRefreshLayo
      * Method to get the views.
      */
     private void getViews() {
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
     }
@@ -466,8 +466,8 @@ public class BrowsePlaylistFragment extends Fragment implements SwipeRefreshLayo
 
             } else {
                 mRootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-                SelectableTextView errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+                TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+                SelectableTextView errorMessage = mRootView.findViewById(R.id.error_message);
                 errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                 errorIcon.setText("\uf16a");
                 errorMessage.setText(mContext.getResources().getString(R.string.no_music));

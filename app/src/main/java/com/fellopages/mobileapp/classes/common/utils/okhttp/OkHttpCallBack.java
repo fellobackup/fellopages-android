@@ -12,7 +12,7 @@ public abstract class OkHttpCallBack<T> {
     public static OkHttpCallBack CALLBACK_DEFAULT = new OkHttpCallBack() {
 
         @Override
-        public Object parseNetworkResponse(Response response, Object tag) throws Exception {
+        public Object parseNetworkResponse(Response response, Object tag) {
             return null;
         }
 

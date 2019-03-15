@@ -77,9 +77,9 @@ public class MemberSettingsActivity extends FormActivity implements
         mContext = this;
         mAppConst = new AppConstant(this);
 
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        formContainer = (RelativeLayout) findViewById(R.id.form_view);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mToolBar = findViewById(R.id.toolbar);
+        formContainer = findViewById(R.id.form_view);
+        mProgressBar = findViewById(R.id.progressBar);
         setSupportActionBar(mToolBar);
 
         if(getSupportActionBar() != null){
@@ -165,9 +165,9 @@ public class MemberSettingsActivity extends FormActivity implements
     }
 
     private void initializeNetworkView() {
-        mNetworkView = (RelativeLayout) findViewById(R.id.network_view_container);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        mTabLayout= (TabLayout) findViewById(R.id.tabs);
+        mNetworkView = findViewById(R.id.network_view_container);
+        viewPager = findViewById(R.id.viewpager);
+        mTabLayout= findViewById(R.id.tabs);
         mNetworkView.setVisibility(View.VISIBLE);
 
     }
@@ -330,7 +330,7 @@ public class MemberSettingsActivity extends FormActivity implements
 
             mAppConst.getJsonResponseFromUrl(getUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(final JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(final JSONObject jsonObject) {
 
                     mAppConst.hideProgressDialog();
 

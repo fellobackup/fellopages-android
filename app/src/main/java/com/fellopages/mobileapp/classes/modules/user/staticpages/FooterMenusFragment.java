@@ -79,15 +79,15 @@ public class FooterMenusFragment extends Fragment {
         postParams = new HashMap<>();
         mFooterMenuUrl = AppConstant.DEFAULT_URL;
 
-        mContactUsBlock = (LinearLayout) mRootView.findViewById(R.id.contact_us_block);
-        mWebView = (WebView) mRootView.findViewById(R.id.view_description);
-        mMessageIcon = (TextView) mRootView.findViewById(R.id.messageIcon);
+        mContactUsBlock = mRootView.findViewById(R.id.contact_us_block);
+        mWebView = mRootView.findViewById(R.id.view_description);
+        mMessageIcon = mRootView.findViewById(R.id.messageIcon);
         mMessageIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         mMessageIcon.setText("\uF0E0");
 
-        nameField = (EditText) mRootView.findViewById(R.id.name);
-        emailField = (EditText) mRootView.findViewById(R.id.email);
-        bodyField = (EditText) mRootView.findViewById(R.id.body);
+        nameField = mRootView.findViewById(R.id.name);
+        emailField = mRootView.findViewById(R.id.email);
+        bodyField = mRootView.findViewById(R.id.body);
 
         if(getArguments() != null){
             mCurrentSelectedOption = getArguments().getString("currentOption");

@@ -48,7 +48,7 @@ public class ProductPagerAdapter extends PagerAdapter {
     @Override public Object instantiateItem(ViewGroup view, final int position) {
         inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, view, false);
-        imageView = (ImageView) viewLayout.findViewById(R.id.image);
+        imageView = viewLayout.findViewById(R.id.image);
         ProductInfoModel productInfoModel = mProductImageList.get(position);
         mImageLoader.setProductCoverImage(productInfoModel.getProductImage(), imageView);
         viewLayout.setOnClickListener(new View.OnClickListener() {

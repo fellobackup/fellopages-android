@@ -52,13 +52,13 @@ public class StoriesProgressView extends LinearLayout {
     boolean isComplete;
 
     public interface StoriesListener {
-        public void onNext();
+        void onNext();
 
-        public void onNextStarted();
+        void onNextStarted();
 
-        public void onPrev();
+        void onPrev();
 
-        public void onComplete();
+        void onComplete();
     }
 
     public StoriesProgressView(Context context) {

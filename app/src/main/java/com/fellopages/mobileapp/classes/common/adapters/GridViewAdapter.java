@@ -113,13 +113,13 @@ public class GridViewAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.pager_photo_view,null);
             holder = new ViewHolder();
             assert view != null;
-            holder.imageView = (ImageView) view.findViewById(R.id.thumbnail);
-            holder.ivGifIcon = (ImageView) view.findViewById(R.id.gif_icon);
+            holder.imageView = view.findViewById(R.id.thumbnail);
+            holder.ivGifIcon = view.findViewById(R.id.gif_icon);
             holder.imageView.setLayoutParams(CustomViews.getCustomWidthHeightRelativeLayoutParams(mImageWidth, mImageWidth));
-            holder.likeCount = (TextView) view.findViewById(R.id.photoLikeCount);
-            holder.commentCount = (TextView) view.findViewById(R.id.photoCommentCount);
-            holder.likeIcon = (TextView) view.findViewById(R.id.photoLikeIcon);
-            holder.commentIcon = (TextView) view.findViewById(R.id.photoCommentIcon);
+            holder.likeCount = view.findViewById(R.id.photoLikeCount);
+            holder.commentCount = view.findViewById(R.id.photoCommentCount);
+            holder.likeIcon = view.findViewById(R.id.photoLikeIcon);
+            holder.commentIcon = view.findViewById(R.id.photoCommentIcon);
             view.setTag(holder);
 
         }else{

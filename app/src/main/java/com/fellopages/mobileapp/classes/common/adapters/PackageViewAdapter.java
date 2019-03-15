@@ -64,8 +64,8 @@ public class PackageViewAdapter extends BaseAdapter{
             listItemHolder = new ListItemHolder();
             mRootView = inflater.inflate(R.layout.package_view_detail, parent, false);
 
-            listItemHolder.mPackageParamLabel = (TextView) mRootView.findViewById(R.id.packageParamLabel);
-            listItemHolder.mPackageParamValue = (TextView) mRootView.findViewById(R.id.packageParamValue);
+            listItemHolder.mPackageParamLabel = mRootView.findViewById(R.id.packageParamLabel);
+            listItemHolder.mPackageParamValue = mRootView.findViewById(R.id.packageParamValue);
             mRootView.setTag(listItemHolder);
 
         }else {

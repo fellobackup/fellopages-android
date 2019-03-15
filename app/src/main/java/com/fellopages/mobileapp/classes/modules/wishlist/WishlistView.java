@@ -97,7 +97,7 @@ public class WishlistView extends AppCompatActivity implements SwipeRefreshLayou
         View headerView = getLayoutInflater().inflate(R.layout.toolbar, null, false);
 
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) headerView.findViewById(R.id.toolbar);
+        mToolbar = headerView.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -114,10 +114,10 @@ public class WishlistView extends AppCompatActivity implements SwipeRefreshLayou
 
         currentModule = getIntent().getStringExtra(ConstantVariables.EXTRA_MODULE_TYPE);
         // Getting Views
-        mRootView = (RelativeLayout) findViewById(R.id.main_view_recycler);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRootView = findViewById(R.id.main_view_recycler);
+        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         // Adding header view to main view.
@@ -203,7 +203,7 @@ public class WishlistView extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -384,8 +384,8 @@ public class WishlistView extends AppCompatActivity implements SwipeRefreshLayou
             }
         } else {
             findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) findViewById(R.id.error_message);
+            TextView errorIcon = findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf046");
             errorMessage.setText(mContext.getResources().getString(R.string.no_classified));

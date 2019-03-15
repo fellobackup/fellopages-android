@@ -65,7 +65,7 @@ public class SettingsListActivity extends AppCompatActivity implements View.OnCl
 
         mAppConst = new AppConstant(mContext);
 
-        mToolBar = (Toolbar) findViewById(R.id.toolBar);
+        mToolBar = findViewById(R.id.toolBar);
         setSupportActionBar(mToolBar);
 
         if(getSupportActionBar() != null){
@@ -84,37 +84,37 @@ public class SettingsListActivity extends AppCompatActivity implements View.OnCl
 
         mRootView = findViewById(R.id.rootView);
 
-        mGeneralNextIcon = (TextView) findViewById(R.id.general_nextIcon);
-        mPrivacyNextIcon = (TextView) findViewById(R.id.privacy_nextIcon);
-        mNetworksNextIcon = (TextView) findViewById(R.id.networks_nextIcon);
-        mNotificationsNextIcon = (TextView) findViewById(R.id.notifications_nextIcon);
-        mPasswordNextIcon = (TextView) findViewById(R.id.password_nextIcon);
-        mDeleteNextIcon = (TextView) findViewById(R.id.delete_nextIcon);
-        mSubscriptionNextIcon = (TextView) findViewById(R.id.subscription_nextIcon);
-        mMobileInfoNextIcon = (TextView) findViewById(R.id.mobile_info_nextIcon);
+        mGeneralNextIcon = findViewById(R.id.general_nextIcon);
+        mPrivacyNextIcon = findViewById(R.id.privacy_nextIcon);
+        mNetworksNextIcon = findViewById(R.id.networks_nextIcon);
+        mNotificationsNextIcon = findViewById(R.id.notifications_nextIcon);
+        mPasswordNextIcon = findViewById(R.id.password_nextIcon);
+        mDeleteNextIcon = findViewById(R.id.delete_nextIcon);
+        mSubscriptionNextIcon = findViewById(R.id.subscription_nextIcon);
+        mMobileInfoNextIcon = findViewById(R.id.mobile_info_nextIcon);
 
-        mGeneralSettingLabel = (TextView) findViewById(R.id.general_setting_label);
-        mPrivacySettingLabel = (TextView) findViewById(R.id.privacy_setting_label);
-        mNetworkSettingLabel = (TextView) findViewById(R.id.network_setting_label);
-        mNotificationSettingLabel = (TextView) findViewById(R.id.notification_setting_label);
-        mPasswordLabel = (TextView) findViewById(R.id.password_setting_label);
-        mDeleteLabel = (TextView) findViewById(R.id.delete_account_label);
-        mSoundSettingLabel = (TextView) findViewById(R.id.sound_setting_label);
-        mSubscriptionSettingLabel = (TextView) findViewById(R.id.subscription_label);
-        mMobileInfoSettingLabel = (TextView) findViewById(R.id.mobile_info_setting_label);
+        mGeneralSettingLabel = findViewById(R.id.general_setting_label);
+        mPrivacySettingLabel = findViewById(R.id.privacy_setting_label);
+        mNetworkSettingLabel = findViewById(R.id.network_setting_label);
+        mNotificationSettingLabel = findViewById(R.id.notification_setting_label);
+        mPasswordLabel = findViewById(R.id.password_setting_label);
+        mDeleteLabel = findViewById(R.id.delete_account_label);
+        mSoundSettingLabel = findViewById(R.id.sound_setting_label);
+        mSubscriptionSettingLabel = findViewById(R.id.subscription_label);
+        mMobileInfoSettingLabel = findViewById(R.id.mobile_info_setting_label);
 
-        mGeneralSettings = (RelativeLayout) findViewById(R.id.settings_general);
-        mPrivacySettings = (RelativeLayout) findViewById(R.id.settings_privacy);
-        mNotificationSettings = (RelativeLayout) findViewById(R.id.settings_notifications);
-        mNetworksSettings = (RelativeLayout) findViewById(R.id.settings_networks);
-        mPasswordSettings = (RelativeLayout) findViewById(R.id.settings_password);
-        mDeleteAccount = (RelativeLayout) findViewById(R.id.settings_delete_account);
-        mSoundSetting = (RelativeLayout) findViewById(R.id.sound_settings);
-        mSubscriptionSettings = (RelativeLayout) findViewById(R.id.settings_subscription);
-        mSoundEffectSwitch = (SwitchCompat) findViewById(R.id.sound_setting_switch);
+        mGeneralSettings = findViewById(R.id.settings_general);
+        mPrivacySettings = findViewById(R.id.settings_privacy);
+        mNotificationSettings = findViewById(R.id.settings_notifications);
+        mNetworksSettings = findViewById(R.id.settings_networks);
+        mPasswordSettings = findViewById(R.id.settings_password);
+        mDeleteAccount = findViewById(R.id.settings_delete_account);
+        mSoundSetting = findViewById(R.id.sound_settings);
+        mSubscriptionSettings = findViewById(R.id.settings_subscription);
+        mSoundEffectSwitch = findViewById(R.id.sound_setting_switch);
         mSoundEffectSwitch.setChecked(PreferencesUtils.isSoundEffectEnabled(mContext));
         mDeleteAccountBottomLine = findViewById(R.id.delete_accound_bottom_line);
-        mMobileInfoSettings = (RelativeLayout) findViewById(R.id.settings_mobile_info);
+        mMobileInfoSettings = findViewById(R.id.settings_mobile_info);
 
         mGeneralSettings.setOnClickListener(this);
         mPrivacySettings.setOnClickListener(this);
@@ -149,7 +149,7 @@ public class SettingsListActivity extends AppCompatActivity implements View.OnCl
 
         mAppConst.getJsonResponseFromUrl(UrlUtil.ACCOUNT_SETTINGS, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
 
                 if(jsonObject != null){

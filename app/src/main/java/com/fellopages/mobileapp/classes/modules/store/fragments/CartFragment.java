@@ -125,7 +125,7 @@ public class CartFragment extends Fragment implements OnItemClickListener, Popup
         mCartPref = new CartPreferences();
 
 
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -134,13 +134,13 @@ public class CartFragment extends Fragment implements OnItemClickListener, Popup
         mRecyclerView.setAdapter(mCartViewAdapter);
         mRecyclerView.setPadding(0,0,0,mContext.getResources().getDimensionPixelSize(R.dimen.playback_view_height));
 
-        mCartBottomView = (LinearLayout) mRootView.findViewById(R.id.cart_bottom);
-        mCartOptionView = (LinearLayout) mRootView.findViewById(R.id.checkout_option_view);
-        mStoreSelectBtn = (FrameLayout) mRootView.findViewById(R.id.store_selection);
-        mApplyCpnBtn = (FrameLayout) mRootView.findViewById(R.id.apply_coupon_btn);
-        mCheckoutButton = (TextView) mRootView.findViewById(R.id.checkout_button);
-        mStoreNameView = (TextView) mRootView.findViewById(R.id.store_name_view);
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
+        mCartBottomView = mRootView.findViewById(R.id.cart_bottom);
+        mCartOptionView = mRootView.findViewById(R.id.checkout_option_view);
+        mStoreSelectBtn = mRootView.findViewById(R.id.store_selection);
+        mApplyCpnBtn = mRootView.findViewById(R.id.apply_coupon_btn);
+        mCheckoutButton = mRootView.findViewById(R.id.checkout_button);
+        mStoreNameView = mRootView.findViewById(R.id.store_name_view);
+        mProgressBar = mRootView.findViewById(R.id.progressBar);
 
         Drawable[] drawables = mCheckoutButton.getCompoundDrawables();
         for (Drawable drawable:drawables) {
@@ -183,7 +183,7 @@ public class CartFragment extends Fragment implements OnItemClickListener, Popup
             url += CartData.getCouponCodeParams(mContext);
             mAppConst.getJsonResponseFromUrl(url, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mAppConst.hideProgressDialog();
                     mProgressBar.setVisibility(View.GONE);
                     addDataToList(jsonObject);
@@ -205,7 +205,7 @@ public class CartFragment extends Fragment implements OnItemClickListener, Popup
 
             mAppConst.postJsonResponseForUrl(url,null, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mProgressBar.setVisibility(View.GONE);
                     addDataToList(jsonObject);
                 }
@@ -287,8 +287,8 @@ public class CartFragment extends Fragment implements OnItemClickListener, Popup
         }else {
             mCartBottomView.setVisibility(View.GONE);
             mRootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) mRootView.findViewById
+            TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = mRootView.findViewById
                     (R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf07a");

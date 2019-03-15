@@ -147,10 +147,10 @@ public class ImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public ImageHolder(View itemView) {
             super(itemView);
             container = itemView;
-            reactionIcon = (ImageView) itemView.findViewById(R.id.reactionIcon);
-            imageView = (ImageView) itemView.findViewById(R.id.thumbnail);
-            ivGifIcon = (ImageView) itemView.findViewById(R.id.gif_icon);
-            photoCount = (TextView) itemView.findViewById(R.id.photoCount);
+            reactionIcon = itemView.findViewById(R.id.reactionIcon);
+            imageView = itemView.findViewById(R.id.thumbnail);
+            ivGifIcon = itemView.findViewById(R.id.gif_icon);
+            photoCount = itemView.findViewById(R.id.photoCount);
         }
     }
 }

@@ -185,8 +185,8 @@ public class MusicView extends AppCompatActivity implements TracksAdapter.Listen
 
         /* Create Back Button On Action Bar **/
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbar = findViewById(R.id.toolbar);
+        mToolBarTitle = findViewById(R.id.toolbar_title);
         mToolBarTitle.setSelected(true);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
@@ -202,7 +202,7 @@ public class MusicView extends AppCompatActivity implements TracksAdapter.Listen
         mAlertDialogWithAction = new AlertDialogWithAction(MusicView.this);
         mImageLoader = new ImageLoader(getApplicationContext());
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         mContext = this;
         mAppConst = new AppConstant(this);
@@ -222,7 +222,7 @@ public class MusicView extends AppCompatActivity implements TracksAdapter.Listen
         // If response coming from create page.
         mBody = GlobalFunctions.getCreateResponse(getIntent().getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE));
 
-        mTracksRecyclerView = ((RecyclerView) findViewById(R.id.tracks_list));
+        mTracksRecyclerView = findViewById(R.id.tracks_list);
         initTracksRecyclerView();
 
         getViews();
@@ -244,7 +244,7 @@ public class MusicView extends AppCompatActivity implements TracksAdapter.Listen
                     "&subject_id=" + mPlaylistId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     mContentReactions = mReactionsObject.optJSONObject("feed_reactions");
@@ -293,24 +293,24 @@ public class MusicView extends AppCompatActivity implements TracksAdapter.Listen
 
     private void getViews() {
 
-        playAllButton = (FloatingActionButton) findViewById(R.id.play_all_btn);
-        mContentTile = (SelectableTextView) findViewById(R.id.content_title);
-        playingSong = (TextView) findViewById(R.id.textNowPlaying);
-        btnPause = (ImageView) findViewById(R.id.btnPause);
-        btnPlay = (ImageView) findViewById(R.id.btnPlay);
-        control_container = (CardView) findViewById(R.id.controls_container);
-        mSeekBar = ((SeekBar) findViewById(R.id.playback_view_seekbar));
-        btnStop = (ImageView) findViewById(R.id.btnStop);
-        textBufferDuration = (TextView) findViewById(R.id.textBufferDuration);
-        textDuration = (TextView) findViewById(R.id.textDuration);
-        imageViewAlbumArt = (ImageView) findViewById(R.id.imageViewAlbumArt);
-        btnNext = (ImageView) findViewById(R.id.btnNext);
-        btnPrevious = (ImageView) findViewById(R.id.btnPrevious);
-        appBar = (AppBarLayout) findViewById(R.id.appbar);
+        playAllButton = findViewById(R.id.play_all_btn);
+        mContentTile = findViewById(R.id.content_title);
+        playingSong = findViewById(R.id.textNowPlaying);
+        btnPause = findViewById(R.id.btnPause);
+        btnPlay = findViewById(R.id.btnPlay);
+        control_container = findViewById(R.id.controls_container);
+        mSeekBar = findViewById(R.id.playback_view_seekbar);
+        btnStop = findViewById(R.id.btnStop);
+        textBufferDuration = findViewById(R.id.textBufferDuration);
+        textDuration = findViewById(R.id.textDuration);
+        imageViewAlbumArt = findViewById(R.id.imageViewAlbumArt);
+        btnNext = findViewById(R.id.btnNext);
+        btnPrevious = findViewById(R.id.btnPrevious);
+        appBar = findViewById(R.id.appbar);
         appBar.addOnOffsetChangedListener(this);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mMusicCover = (ImageView) findViewById(R.id.activity_album_art);
-        loadingProgressBar = (ProgressBar) findViewById(R.id.loadingProgress);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        mMusicCover = findViewById(R.id.activity_album_art);
+        loadingProgressBar = findViewById(R.id.loadingProgress);
 
     }
 
@@ -895,7 +895,7 @@ public class MusicView extends AppCompatActivity implements TracksAdapter.Listen
                             alertDialog.dismiss();
                             mAppConst.deleteResponseForUrl(actionUrl, null, new OnResponseListener() {
                                 @Override
-                                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                public void onTaskCompleted(JSONObject jsonObject) {
                                     mAppConst.hideProgressDialog();
                                     SnackbarUtils.displaySnackbar(findViewById(R.id.coordinator_layout_music),
                                             successMessage);
@@ -920,7 +920,7 @@ public class MusicView extends AppCompatActivity implements TracksAdapter.Listen
                                 postParams.put("song_id", String.valueOf(track.getTrackId()));
                                 mAppConst.postJsonResponseForUrl(actionUrl, postParams, new OnResponseListener() {
                                     @Override
-                                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                    public void onTaskCompleted(JSONObject jsonObject) {
                                         mAppConst.hideProgressDialog();
                                         SnackbarUtils.displaySnackbar(findViewById(R.id.coordinator_layout_music),
                                                 successMessage);

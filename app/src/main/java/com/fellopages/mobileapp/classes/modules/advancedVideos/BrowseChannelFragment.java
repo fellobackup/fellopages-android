@@ -220,7 +220,7 @@ public class BrowseChannelFragment extends Fragment implements  AdapterView.OnIt
          * Show Order by Spinner when fragment is loaded from dashboard.
          */
         if (!isCategoryBasedResult) {
-            Spinner orderBySpinner = (Spinner) mRootView.findViewById(R.id.filter_view);
+            Spinner orderBySpinner = mRootView.findViewById(R.id.filter_view);
             mRootView.findViewById(R.id.eventFilterBlock).setVisibility(View.VISIBLE);
 
             adapter = new SpinnerAdapter(mContext, R.layout.simple_text_view, mSelectedItem);
@@ -242,14 +242,14 @@ public class BrowseChannelFragment extends Fragment implements  AdapterView.OnIt
 
             mRootView.findViewById(R.id.eventFilterBlock).setVisibility(View.GONE);
 
-            llCategoryFilterBlock = (LinearLayout) mRootView.findViewById(R.id.category_filter_block);
+            llCategoryFilterBlock = mRootView.findViewById(R.id.category_filter_block);
             llCategoryFilterBlock.setVisibility(View.VISIBLE);
             llCategoryFilterBlock.findViewById(R.id.toolbar).setVisibility(View.GONE);
 
-            subCategoryLayout = (CardView) mRootView.findViewById(R.id.categoryFilterLayout);
-            subSubCategoryLayout = (CardView) mRootView.findViewById(R.id.subCategoryFilterLayout);
-            Spinner subCategorySpinner = (Spinner) subCategoryLayout.findViewById(R.id.filter_view);
-            Spinner subSubCategorySpinner = (Spinner) subSubCategoryLayout.findViewById(R.id.filter_view);
+            subCategoryLayout = mRootView.findViewById(R.id.categoryFilterLayout);
+            subSubCategoryLayout = mRootView.findViewById(R.id.subCategoryFilterLayout);
+            Spinner subCategorySpinner = subCategoryLayout.findViewById(R.id.filter_view);
+            Spinner subSubCategorySpinner = subSubCategoryLayout.findViewById(R.id.filter_view);
 
             /*
             Add swipeRefreshLayout layout below category filter
@@ -315,18 +315,18 @@ public class BrowseChannelFragment extends Fragment implements  AdapterView.OnIt
      * Method to get the views.
      */
     private void getViews() {
-        mGridView = (GridViewWithHeaderAndFooter) mRootView.findViewById(R.id.gridView);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mGridView = mRootView.findViewById(R.id.gridView);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        mSlideShowPager = (ViewPager) llSlideShowBlock.findViewById(R.id.slide_show_pager);
-        mCircleIndicator = (CircleIndicator) llSlideShowBlock.findViewById(R.id.circle_indicator);
+        mSlideShowPager = llSlideShowBlock.findViewById(R.id.slide_show_pager);
+        mCircleIndicator = llSlideShowBlock.findViewById(R.id.circle_indicator);
         mRootView.findViewById(R.id.eventFilterBlock).setVisibility(View.VISIBLE);
 
         // No data message views
-        llErrorMessage = (LinearLayout) mRootView.findViewById(R.id.message_layout);
-        tvErrorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-        tvErrorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+        llErrorMessage = mRootView.findViewById(R.id.message_layout);
+        tvErrorIcon = mRootView.findViewById(R.id.error_icon);
+        tvErrorMessage = mRootView.findViewById(R.id.error_message);
         tvErrorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
         // Adding header and footer view.

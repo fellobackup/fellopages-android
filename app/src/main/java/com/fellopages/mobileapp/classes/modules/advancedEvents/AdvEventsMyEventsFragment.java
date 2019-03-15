@@ -113,12 +113,12 @@ public class AdvEventsMyEventsFragment extends Fragment implements AdapterView.O
         Log.d("AdvEventsMyEvents ", "AdvEventsMyEventsFragment");
         footerView = CustomViews.getFooterView(inflater);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
 
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mGridView = rootView.findViewById(R.id.gridView);
         mGridView.setOnScrollListener(this);
         mGridView.addFooterView(footerView);
         footerView.setVisibility(View.GONE);
@@ -161,7 +161,7 @@ public class AdvEventsMyEventsFragment extends Fragment implements AdapterView.O
             // If The Fragment Being called from User profile page.
             if (isMemberEvents) {
 
-                spinner = (Spinner) rootView.findViewById(R.id.filter_view);
+                spinner = rootView.findViewById(R.id.filter_view);
                 rootView.findViewById(R.id.eventFilterBlock).setVisibility(View.VISIBLE);
 
                 adapter = new ArrayAdapter<>(mContext, R.layout.simple_text_view);
@@ -225,7 +225,7 @@ public class AdvEventsMyEventsFragment extends Fragment implements AdapterView.O
 
         Intent mainIntent = GlobalFunctions.getIntentForModule(mContext, listItems.getmListItemId(),
                 mCurrentSelectedModule, null);
-        mainIntent.putExtra(ConstantVariables.CONTENT_TITLE, eventTitle);;
+        mainIntent.putExtra(ConstantVariables.CONTENT_TITLE, eventTitle);
         startActivityForResult(mainIntent, ConstantVariables.VIEW_PAGE_CODE);
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -480,8 +480,8 @@ public class AdvEventsMyEventsFragment extends Fragment implements AdapterView.O
                 } else {
                     mGridView.setVisibility(View.INVISIBLE);
                     rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                    TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                    TextView errorMessage = (TextView) rootView.findViewById(R.id.error_message);
+                    TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                    TextView errorMessage = rootView.findViewById(R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     errorIcon.setText("\uf073");
                     errorMessage.setText(getActivity().getResources().getString(R.string.no_events));

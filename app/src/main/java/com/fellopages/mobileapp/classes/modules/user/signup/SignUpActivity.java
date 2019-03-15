@@ -72,12 +72,12 @@ public class SignUpActivity extends FormActivity {
         mContext = this;
         mAppConst = new AppConstant(mContext);
 
-        mAccountFormView = (RelativeLayout) findViewById(R.id.form_view);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mAccountFormView = findViewById(R.id.form_view);
+        mProgressBar = findViewById(R.id.progressBar);
 
         mProgressBar.setVisibility(View.GONE);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         if(getSupportActionBar() != null){

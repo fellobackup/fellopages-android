@@ -164,17 +164,17 @@ public class ManageChannelFragment extends Fragment implements AdapterView.OnIte
      * Method to get the views.
      */
     private void getViews() {
-        mGridView = (GridViewWithHeaderAndFooter) mRootView.findViewById(R.id.gridView);
+        mGridView = mRootView.findViewById(R.id.gridView);
         mGridView.addFooterView(mFooterView);
         mFooterView.setVisibility(View.GONE);
         CustomViews.initializeGridLayout(mContext, AppConstant.getNumOfColumns(mContext), mGridView);
         ViewCompat.setNestedScrollingEnabled(mGridView, true);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
-        Spinner orderBySpinner = (Spinner) mRootView.findViewById(R.id.filter_view);
+        Spinner orderBySpinner = mRootView.findViewById(R.id.filter_view);
         mRootView.findViewById(R.id.eventFilterBlock).setVisibility(View.VISIBLE);
 
         adapter = new SpinnerAdapter(mContext, R.layout.simple_text_view, mSelectedItem);
@@ -354,8 +354,8 @@ public class ManageChannelFragment extends Fragment implements AdapterView.OnIte
 
         } else {
             mRootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+            TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = mRootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             //TODO change this.
             errorIcon.setText("\uf233");

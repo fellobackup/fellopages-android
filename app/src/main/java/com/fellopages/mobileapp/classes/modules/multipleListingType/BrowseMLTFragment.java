@@ -232,9 +232,9 @@ public class BrowseMLTFragment extends Fragment implements SwipeRefreshLayout.On
         // Inflating recycler layout.
         mRootView = inflater.inflate(R.layout.recycler_view_layout, container, false);
         mHeaderView = inflater.inflate(R.layout.spinner_view, null, false);
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mMapView = mRootView.findViewById(R.id.map_layout);
-        myLocationButton = (FloatingActionButton) mRootView.findViewById(R.id.my_location_button);
+        myLocationButton = mRootView.findViewById(R.id.my_location_button);
         setDrawableColor(myLocationButton);
         LocationManager manager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
         if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
@@ -423,42 +423,42 @@ public class BrowseMLTFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     public void getViews() {
-        swipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
+        mProgressBar = mRootView.findViewById(R.id.progressBar);
 
         // No data message views
-        messageLayout = (LinearLayout) mRootView.findViewById(R.id.message_layout);
-        errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-        errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+        messageLayout = mRootView.findViewById(R.id.message_layout);
+        errorIcon = mRootView.findViewById(R.id.error_icon);
+        errorMessage = mRootView.findViewById(R.id.error_message);
         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
         // getting header views.
 
         if (isCategoryResults) {
             mHeaderView = layoutInflater.inflate(R.layout.layout_category_block, null, false);
-            subCategoryLayout = (CardView) mHeaderView.findViewById(R.id.categoryFilterLayout);
-            subSubCategoryLayout = (CardView) mHeaderView.findViewById(R.id.subCategoryFilterLayout);
-            subCategorySpinner = (Spinner) subCategoryLayout.findViewById(R.id.filter_view);
-            subSubCategorySpinner = (Spinner) subSubCategoryLayout.findViewById(R.id.filter_view);
+            subCategoryLayout = mHeaderView.findViewById(R.id.categoryFilterLayout);
+            subSubCategoryLayout = mHeaderView.findViewById(R.id.subCategoryFilterLayout);
+            subCategorySpinner = subCategoryLayout.findViewById(R.id.filter_view);
+            subSubCategorySpinner = subSubCategoryLayout.findViewById(R.id.filter_view);
             mHeaderView.findViewById(R.id.mlt_category_block).setVisibility(View.VISIBLE);
             mHeaderView.findViewById(R.id.toolbar).setVisibility(View.GONE);
             // Adding header view to main view.
-            RelativeLayout mainView = (RelativeLayout) mRootView.findViewById(R.id.main_view_recycler);
+            RelativeLayout mainView = mRootView.findViewById(R.id.main_view_recycler);
             mainView.addView(mHeaderView);
             CustomViews.addHeaderView(R.id.mlt_category_block, swipeRefreshLayout);
             mHeaderView.findViewById(R.id.mlt_category_block).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         } else {
             mHeaderView = layoutInflater.inflate(R.layout.spinner_view, null, false);
-            spinner = (Spinner) mHeaderView.findViewById(R.id.filter_view);
+            spinner = mHeaderView.findViewById(R.id.filter_view);
             // Adding header view to main view.
-            RelativeLayout mainView = (RelativeLayout) mRootView.findViewById(R.id.main_view_recycler);
+            RelativeLayout mainView = mRootView.findViewById(R.id.main_view_recycler);
             mainView.addView(mHeaderView);
             CustomViews.addHeaderView(R.id.spinnerCardView, swipeRefreshLayout);
             mHeaderView.findViewById(R.id.spinnerCardView).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         }
-        tvViewMore = (TextView) mRootView.findViewById(R.id.view_more);
+        tvViewMore = mRootView.findViewById(R.id.view_more);
         tvViewMore.setOnClickListener(this);
     }
 
@@ -674,7 +674,7 @@ public class BrowseMLTFragment extends Fragment implements SwipeRefreshLayout.On
         //add null , so the adapter will check view_type and show progress bar at bottom
         Tasks.call(new Callable<Void>() {
             @Override
-            public Void call() throws Exception {
+            public Void call() {
                 mBrowseItemList.add(null);
                 mBrowseMLTAdapter.notifyItemInserted(mBrowseItemList.size() - 1);
                 return null;
@@ -820,7 +820,7 @@ public class BrowseMLTFragment extends Fragment implements SwipeRefreshLayout.On
                 double latitude = jsonDataObject.optDouble("latitude");
                 String categoryTitle = jsonDataObject.optString("categoryTitle");
                 mBrowseItemList.add(new BrowseListItems(listingId, listingTypeId, title, image, ownerTitle,
-                        creationDate, location, price, currency, allowToView == 1 ? true : false, isClosed, featured, sponsored, latitude, longitude, categoryTitle));
+                        creationDate, location, price, currency, allowToView == 1, isClosed, featured, sponsored, latitude, longitude, categoryTitle));
             }
 
             // Show End of Result Message when there are less results
@@ -880,7 +880,7 @@ public class BrowseMLTFragment extends Fragment implements SwipeRefreshLayout.On
                 String categoryTitle = jsonDataObject.optString("categoryTitle");
 
                 mMapItemList.add(new BrowseListItems(listingId, listingTypeId, title, image, ownerTitle,
-                        creationDate, location, price, currency, allowToView == 1 ? true : false, isClosed, featured, sponsored, latitude, longitude, categoryTitle));
+                        creationDate, location, price, currency, allowToView == 1, isClosed, featured, sponsored, latitude, longitude, categoryTitle));
 
             }
         } else {
@@ -1353,19 +1353,19 @@ public class BrowseMLTFragment extends Fragment implements SwipeRefreshLayout.On
         quickInfoDialog = new Dialog(mContext);
         quickInfoDialog.setContentView(R.layout.mlt_quick_info_view);
         itemPosition = mMapItemList.indexOf(listItem);
-        txtclose = (TextView) quickInfoDialog.findViewById(R.id.txtclose);
+        txtclose = quickInfoDialog.findViewById(R.id.txtclose);
         txtclose.setText("x");
-        categoryTitle = (TextView) quickInfoDialog.findViewById(R.id.mlt_category);
+        categoryTitle = quickInfoDialog.findViewById(R.id.mlt_category);
         categoryTitle.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         categoryTitle.setText("\uf105 " + listItem.getCategoryTitle());
-        userTitle = (TextView) quickInfoDialog.findViewById(R.id.mlt_title);
+        userTitle = quickInfoDialog.findViewById(R.id.mlt_title);
         userTitle.setTag(listItem.getmUserId());
         userTitle.setOnClickListener(this);
-        bulletPoint = (TextView) quickInfoDialog.findViewById(R.id.bullet_point);
+        bulletPoint = quickInfoDialog.findViewById(R.id.bullet_point);
         bulletPoint.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         bulletPoint.setText("\uf105");
-        userLocation = (TextView) quickInfoDialog.findViewById(R.id.mlt_location);
-        userThumb = (ImageView) quickInfoDialog.findViewById(R.id.profile_image);
+        userLocation = quickInfoDialog.findViewById(R.id.mlt_location);
+        userThumb = quickInfoDialog.findViewById(R.id.profile_image);
         userThumb.setTag(listItem.getmBrowseImgUrl());
         userTitle.setText(listItem.getmBrowseListTitle());
         userLocation.setOnClickListener(this);

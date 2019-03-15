@@ -217,14 +217,14 @@ public class BrowseMemberFragment extends Fragment implements AbsListView.OnScro
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.fragment_browse_member, container, false);
         footerView = CustomViews.getFooterView(inflater);
-        mMemeresListView = (ListView) mRootView.findViewById(R.id.membersList);
-        tvListViewType = (TextView) mRootView.findViewById(R.id.list_view_type);
-        tvMapViewType = (TextView) mRootView.findViewById(R.id.map_view_type);
-        tvViewMoreMembers = (TextView) mRootView.findViewById(R.id.view_more);
-        mMembersCountInfo = (SelectableTextView) mRootView.findViewById(R.id.memberCountInfo);
+        mMemeresListView = mRootView.findViewById(R.id.membersList);
+        tvListViewType = mRootView.findViewById(R.id.list_view_type);
+        tvMapViewType = mRootView.findViewById(R.id.map_view_type);
+        tvViewMoreMembers = mRootView.findViewById(R.id.view_more);
+        mMembersCountInfo = mRootView.findViewById(R.id.memberCountInfo);
         mSeparator = mRootView.findViewById(R.id.saperator);
         mMapView = mRootView.findViewById(R.id.map_layout);
-        myLocationButton = (FloatingActionButton) mRootView.findViewById(R.id.my_location_button);
+        myLocationButton = mRootView.findViewById(R.id.my_location_button);
         setDrawableColor(myLocationButton);
         myLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -566,8 +566,8 @@ public class BrowseMemberFragment extends Fragment implements AbsListView.OnScro
      */
     public void showError() {
         mRootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-        TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-        SelectableTextView errorMessage = (SelectableTextView) mRootView.findViewById
+        TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+        SelectableTextView errorMessage = mRootView.findViewById
                 (R.id.error_message);
         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         errorIcon.setText("\uf007");
@@ -824,7 +824,7 @@ public class BrowseMemberFragment extends Fragment implements AbsListView.OnScro
         contactAddButton.setPadding(0, mContext.getResources().getDimensionPixelSize(R.dimen.padding_20dp),
                 0, mContext.getResources().getDimensionPixelSize(R.dimen.padding_20dp));
         llContactInfoView.addView(contactAddButton);
-        RelativeLayout mainView = (RelativeLayout) mRootView.findViewById(R.id.main_content);
+        RelativeLayout mainView = mRootView.findViewById(R.id.main_content);
         mainView.addView(llContactInfoView);
 
         // Apply click listener on add contact button.
@@ -1234,13 +1234,13 @@ public class BrowseMemberFragment extends Fragment implements AbsListView.OnScro
         quickInfoDialog = new Dialog(mContext);
         quickInfoDialog.setContentView(R.layout.user_quick_info_view);
         itemPosition = mMapListItems.indexOf(listItem);
-        txtclose = (TextView) quickInfoDialog.findViewById(R.id.txtclose);
+        txtclose = quickInfoDialog.findViewById(R.id.txtclose);
         txtclose.setText("x");
-        userTitle = (TextView) quickInfoDialog.findViewById(R.id.user_title);
+        userTitle = quickInfoDialog.findViewById(R.id.user_title);
         userTitle.setTag(listItem.getmUserId());
         userTitle.setOnClickListener(this);
-        userLocation = (TextView) quickInfoDialog.findViewById(R.id.user_location);
-        userThumb = (ImageView) quickInfoDialog.findViewById(R.id.profile_image);
+        userLocation = quickInfoDialog.findViewById(R.id.user_location);
+        userThumb = quickInfoDialog.findViewById(R.id.profile_image);
         userThumb.setTag(listItem.getmUserId());
         userTitle.setText(listItem.getmBrowseListOwnerTitle());
         if (listItem.getIsMemberVerified() == 1) {
@@ -1260,11 +1260,11 @@ public class BrowseMemberFragment extends Fragment implements AbsListView.OnScro
         });
         JSONObject mapData = listItem.mMapData;
         if (mapData != null) {
-            rv_count = (TextView) quickInfoDialog.findViewById(R.id.rv_count);
+            rv_count = quickInfoDialog.findViewById(R.id.rv_count);
             rv_count.setText(mapData.optString("rv_count"));
             LinearLayout friendshipView = quickInfoDialog.findViewById(R.id.friendship_view);
-            af_count = (TextView) quickInfoDialog.findViewById(R.id.friendship_action);
-            af_text = (TextView) quickInfoDialog.findViewById(R.id.friendship_text);
+            af_count = quickInfoDialog.findViewById(R.id.friendship_action);
+            af_text = quickInfoDialog.findViewById(R.id.friendship_text);
             af_count.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             final JSONObject menuArray = listItem.getmMemberMenus();
             if (!mAppConst.isLoggedOutUser() && menuArray != null) {
@@ -1276,11 +1276,11 @@ public class BrowseMemberFragment extends Fragment implements AbsListView.OnScro
             } else {
                 friendshipView.setVisibility(View.GONE);
             }
-            ff_count = (TextView) quickInfoDialog.findViewById(R.id.ff_count);
+            ff_count = quickInfoDialog.findViewById(R.id.ff_count);
             ff_count.setText(mapData.optString("ff_count"));
-            rv_text = (TextView) quickInfoDialog.findViewById(R.id.rv_text);
+            rv_text = quickInfoDialog.findViewById(R.id.rv_text);
             rv_text.setText(mapData.optString("rv_text"));
-            ff_text = (TextView) quickInfoDialog.findViewById(R.id.ff_text);
+            ff_text = quickInfoDialog.findViewById(R.id.ff_text);
             ff_text.setText(mapData.optString("ff_text"));
         }
         Window window = quickInfoDialog.getWindow();

@@ -91,7 +91,7 @@ public class SignupPhotoActivity extends AppCompatActivity implements OnUploadRe
         mImageLoader = new ImageLoader(mContext);
 
         mPostUrl = UrlUtil.SIGNUP_URL + "&subscriptionForm=1";
-        mToobar = (Toolbar) findViewById(R.id.toolbar);
+        mToobar = findViewById(R.id.toolbar);
         setSupportActionBar(mToobar);
 
         if (getSupportActionBar() != null) {
@@ -122,8 +122,8 @@ public class SignupPhotoActivity extends AppCompatActivity implements OnUploadRe
         emailAddress = mAccountFormParams.get("email");
         password = mAccountFormParams.get("password");
 
-        mUploadImageButton = (Button) findViewById(R.id.uploadImageButton);
-        mSelectedImage = (ImageView) findViewById(R.id.selectedImage);
+        mUploadImageButton = findViewById(R.id.uploadImageButton);
+        mSelectedImage = findViewById(R.id.selectedImage);
 
         mImageLoader.setPersonImageUrl(picture, mSelectedImage);
 

@@ -34,7 +34,7 @@ public class FilterPage extends FormActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_page);
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         mToolbar.setNavigationIcon(ContextCompat.getDrawable(this,R.drawable.ic_clear_white_24dp));
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
@@ -44,11 +44,11 @@ public class FilterPage extends FormActivity {
         mContext = this;
 //Fetch Current Selected Module
         currentSelectedOption = PreferencesUtils.getCurrentSelectedModule(mContext);
-        filterView = (RelativeLayout)findViewById(R.id.filter_view);
+        filterView = findViewById(R.id.filter_view);
 
         mAppConst.getJsonResponseFromUrl(UrlUtil.PRODUCT_FILTER_URL, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                 filterView.addView(generateForm(jsonObject, true, currentSelectedOption));
             }

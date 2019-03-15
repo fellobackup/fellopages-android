@@ -180,79 +180,79 @@ public class BrowseDataAdapter extends ArrayAdapter<Object> {
                                 || currentSelectedOption.equals(ConstantVariables.ADV_VIDEO_CHANNEL_MENU_TITLE)) {
 
                             mRootView.findViewById(R.id.video_view).setVisibility(View.VISIBLE);
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.videoTitle);
-                            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.video_thumbnail);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.videoTitle);
+                            listItemHolder.mListImage = mRootView.findViewById(R.id.video_thumbnail);
 
-                            listItemHolder.mCommentCount = (TextView) mRootView.
+                            listItemHolder.mCommentCount = mRootView.
                                     findViewById(R.id.videoCommentCount);
-                            listItemHolder.mLikeCount = (TextView) mRootView.
+                            listItemHolder.mLikeCount = mRootView.
                                     findViewById(R.id.videoLikeCount);
-                            listItemHolder.mDuration = (TextView) mRootView.
+                            listItemHolder.mDuration = mRootView.
                                     findViewById(R.id.video_duration);
-                            listItemHolder.mUpdatedDate = (TextView) mRootView.findViewById(R.id.video_createdDate);
-                            listItemHolder.mLikeIcon = (TextView) mRootView.findViewById(R.id.likeIcon);
-                            listItemHolder.mCommentIcon = (TextView) mRootView.findViewById(R.id.commentIcon);
-                            listItemHolder.mPlayIcon = (ImageView) mRootView.findViewById(R.id.play_button);
-                            listItemHolder.mRatingIcon = (TextView) mRootView.findViewById(R.id.ratingIcon);
-                            listItemHolder.mRatingCount = (TextView) mRootView.findViewById(R.id.ratingCount);
+                            listItemHolder.mUpdatedDate = mRootView.findViewById(R.id.video_createdDate);
+                            listItemHolder.mLikeIcon = mRootView.findViewById(R.id.likeIcon);
+                            listItemHolder.mCommentIcon = mRootView.findViewById(R.id.commentIcon);
+                            listItemHolder.mPlayIcon = mRootView.findViewById(R.id.play_button);
+                            listItemHolder.mRatingIcon = mRootView.findViewById(R.id.ratingIcon);
+                            listItemHolder.mRatingCount = mRootView.findViewById(R.id.ratingCount);
 
                         } else {
 
                             switch (currentSelectedOption) {
 
                                 case "core_main_group":
-                                    listItemHolder.memberInfo = (TextView) mRootView.findViewById(R.id.memberInfo);
+                                    listItemHolder.memberInfo = mRootView.findViewById(R.id.memberInfo);
                                     listItemHolder.memberInfo.setTypeface(fontIcon);
-                                    listItemHolder.ownerInfo = (TextView) mRootView.findViewById(R.id.ownerInfo);
+                                    listItemHolder.ownerInfo = mRootView.findViewById(R.id.ownerInfo);
                                     listItemHolder.ownerInfo.setTypeface(fontIcon);
                                     break;
                                 case "core_main_event":
-                                    listItemHolder.mEventLocation = (TextView) mRootView.findViewById(R.id.eventLocationInfo);
-                                    listItemHolder.mEventTime = (TextView) mRootView.findViewById(R.id.eventTime);
-                                    listItemHolder.mDateIcon = (TextView) mRootView.findViewById(R.id.date_icon);
-                                    listItemHolder.mLocationIcon = (TextView) mRootView.findViewById(R.id.location_icon);
-                                    listItemHolder.mLocationLayout = (LinearLayout) mRootView.findViewById(R.id.location_layout);
-                                    listItemHolder.mDay = (TextView) mRootView.findViewById(R.id.day);
-                                    listItemHolder.mMonth = (TextView) mRootView.findViewById(R.id.month);
+                                    listItemHolder.mEventLocation = mRootView.findViewById(R.id.eventLocationInfo);
+                                    listItemHolder.mEventTime = mRootView.findViewById(R.id.eventTime);
+                                    listItemHolder.mDateIcon = mRootView.findViewById(R.id.date_icon);
+                                    listItemHolder.mLocationIcon = mRootView.findViewById(R.id.location_icon);
+                                    listItemHolder.mLocationLayout = mRootView.findViewById(R.id.location_layout);
+                                    listItemHolder.mDay = mRootView.findViewById(R.id.day);
+                                    listItemHolder.mMonth = mRootView.findViewById(R.id.month);
                                     listItemHolder.mLocationIcon.setTypeface(fontIcon);
                                     listItemHolder.mDateIcon.setTypeface(fontIcon);
                                     break;
                                 case "core_main_poll":
-                                    listItemHolder.mViewCountDetail = (TextView) mRootView.findViewById(R.id.viewCountDetail);
-                                    listItemHolder.mContentDetail = (TextView) mRootView.
+                                    listItemHolder.mViewCountDetail = mRootView.findViewById(R.id.viewCountDetail);
+                                    listItemHolder.mContentDetail = mRootView.
                                             findViewById(R.id.contentDetail);
-                                    listItemHolder.mListImageClosed = (TextView) mRootView.findViewById(R.id.closeIcon);
+                                    listItemHolder.mListImageClosed = mRootView.findViewById(R.id.closeIcon);
                                     break;
                                 case "sitepage":
-                                    listItemHolder.mFollowCount = (TextView) mRootView.findViewById(R.id.memberInfo);
-                                    listItemHolder.mLikeCount = (TextView) mRootView.findViewById(R.id.ownerInfo);
-                                    listItemHolder.mListImageClosed = (TextView) mRootView.findViewById(R.id.closeIcon);
+                                    listItemHolder.mFollowCount = mRootView.findViewById(R.id.memberInfo);
+                                    listItemHolder.mLikeCount = mRootView.findViewById(R.id.ownerInfo);
+                                    listItemHolder.mListImageClosed = mRootView.findViewById(R.id.closeIcon);
                                     break;
 
                                 case "core_main_sitegroup":
-                                    listItemHolder.ownerInfo = (TextView) mRootView.findViewById(R.id.ownerInfo);
-                                    listItemHolder.mListImageClosed = (TextView) mRootView.findViewById(R.id.closeIcon);
-                                    listItemHolder.mFollowCount = (TextView) mRootView.findViewById(R.id.memberInfo);
-                                    listItemHolder.mLikeCount = (TextView) mRootView.findViewById(R.id.likeCountInfo);
+                                    listItemHolder.ownerInfo = mRootView.findViewById(R.id.ownerInfo);
+                                    listItemHolder.mListImageClosed = mRootView.findViewById(R.id.closeIcon);
+                                    listItemHolder.mFollowCount = mRootView.findViewById(R.id.memberInfo);
+                                    listItemHolder.mLikeCount = mRootView.findViewById(R.id.likeCountInfo);
                                     listItemHolder.mLikeCount.setVisibility(View.VISIBLE);
-                                    listItemHolder.mFeatured = (TextView) mRootView.findViewById(R.id.featuredLabel);
-                                    listItemHolder.mSponsored = (TextView) mRootView.findViewById(R.id.sponsoredLabel);
+                                    listItemHolder.mFeatured = mRootView.findViewById(R.id.featuredLabel);
+                                    listItemHolder.mSponsored = mRootView.findViewById(R.id.sponsoredLabel);
                                     break;
 
                                 case "core_main_offers":
-                                    listItemHolder.mClaimCountDetail = (TextView) mRootView.findViewById(R.id.claimCount);
-                                    listItemHolder.mEndDate = (TextView) mRootView.findViewById(R.id.contentDetail);
-                                    listItemHolder.mStartDate = (TextView) mRootView.findViewById(R.id.coupon_start_date);
-                                    listItemHolder.mCouponCode = (TextView) mRootView.findViewById(R.id.couponCode);
+                                    listItemHolder.mClaimCountDetail = mRootView.findViewById(R.id.claimCount);
+                                    listItemHolder.mEndDate = mRootView.findViewById(R.id.contentDetail);
+                                    listItemHolder.mStartDate = mRootView.findViewById(R.id.coupon_start_date);
+                                    listItemHolder.mCouponCode = mRootView.findViewById(R.id.couponCode);
                                     break;
 
                                 default:
-                                    listItemHolder.mContentDetail = (TextView) mRootView.
+                                    listItemHolder.mContentDetail = mRootView.
                                             findViewById(R.id.contentDetail);
                             }
-                            listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.contentTitle);
-                            listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-                            listItemHolder.mOptionIcon = (ImageView) mRootView.findViewById(R.id.optionIcon);
+                            listItemHolder.mContentTitle = mRootView.findViewById(R.id.contentTitle);
+                            listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+                            listItemHolder.mOptionIcon = mRootView.findViewById(R.id.optionIcon);
 
                         }
                     }
@@ -454,7 +454,7 @@ public class BrowseDataAdapter extends ArrayAdapter<Object> {
                                             args.putString(ConstantVariables.VIDEO_URL, listItems.getmVideoUrl());
                                             args.putInt(ConstantVariables.VIDEO_TYPE, listItems.getmVideoType());
                                             lightBox.putExtras(args);
-                                            ((Activity) mContext).startActivity(lightBox);
+                                            mContext.startActivity(lightBox);
                                             ((Activity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.push_down_out);
                                         }
                                     });

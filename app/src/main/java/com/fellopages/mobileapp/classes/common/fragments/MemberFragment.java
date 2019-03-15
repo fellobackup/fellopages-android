@@ -248,24 +248,24 @@ public class MemberFragment extends Fragment implements SearchView.OnQueryTextLi
      */
     public void getViews() {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         // Getting waiting member/no member views
-        mWaitingMemberInfoContainer = (RelativeLayout) infoView.findViewById(R.id.waitingMemberInfoContainer);
-        mNextIcon = (TextView) infoView.findViewById(R.id.nextIcon);
+        mWaitingMemberInfoContainer = infoView.findViewById(R.id.waitingMemberInfoContainer);
+        mNextIcon = infoView.findViewById(R.id.nextIcon);
         mNextIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
-        mWaitingInfoTextView = (TextView) infoView.findViewById(R.id.waitingMemberInfo);
+        mWaitingInfoTextView = infoView.findViewById(R.id.waitingMemberInfo);
         mWaitingMemberInfoContainer.setOnClickListener(this);
-        tvNoMember = (SelectableTextView) infoView.findViewById(R.id.no_data_msg);
+        tvNoMember = infoView.findViewById(R.id.no_data_msg);
 
         // Adding info view at top of the recycler view.
-        RelativeLayout mainView = (RelativeLayout) rootView.findViewById(R.id.main_view_recycler);
+        RelativeLayout mainView = rootView.findViewById(R.id.main_view_recycler);
         mainView.addView(infoView);
         CustomViews.addHeaderView(R.id.fragment_main_view, mSwipeRefreshLayout);
     }

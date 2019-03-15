@@ -108,7 +108,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
         setContentView(R.layout.tabbed_activity_view);
         mContext = this;
         initBottomSheet();
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -117,15 +117,15 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
         mAppConst = new AppConstant(this);
         mCartPref = new CartPreferences();
         mProductInfoList = new ArrayList<>();
-        mStoreTitle = (TextView) findViewById(R.id.store_title);
-        mUpdateCartButton = (TextView) findViewById(R.id.update_cart);
+        mStoreTitle = findViewById(R.id.store_title);
+        mUpdateCartButton = findViewById(R.id.update_cart);
         mUpdateCartButton.setOnClickListener(this);
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (CustomViewPager) findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.viewpager);
         mViewPager.addOnPageChangeListener(this);
-        mTabLayout = (TabLayout) findViewById(R.id.materialTabHost);
+        mTabLayout = findViewById(R.id.materialTabHost);
         mTabLayout.setVisibility(View.GONE);
-        mProductListView = (RecyclerView) findViewById(R.id.product_list_view);
+        mProductListView = findViewById(R.id.product_list_view);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mPagerAdapter = new FragmentAdapter(getSupportFragmentManager());
@@ -232,10 +232,10 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
     @Override
     public void onApplyCouponButtonClicked(final Fragment fragment, final String couponParam, final String storeId) {
         View applyCouponView = getLayoutInflater().inflate(R.layout.apply_coupon_view,null);
-        TextView applyBtn = (TextView) applyCouponView.findViewById(R.id.apply_btn);
-        final TextView errorView = (TextView) applyCouponView.findViewById(R.id.coupon_error);
-        final EditText couponText = (EditText) applyCouponView.findViewById(R.id.apply_coupon_text);
-        final ProgressBar progressBar = (ProgressBar) applyCouponView.findViewById(R.id.loadingProgressBar);
+        TextView applyBtn = applyCouponView.findViewById(R.id.apply_btn);
+        final TextView errorView = applyCouponView.findViewById(R.id.coupon_error);
+        final EditText couponText = applyCouponView.findViewById(R.id.apply_coupon_text);
+        final ProgressBar progressBar = applyCouponView.findViewById(R.id.loadingProgressBar);
         applyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -246,7 +246,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
                             (mAppConst.isLoggedOutUser() ? "&productsData=" + mCartPref.getProductArray(mContext):"") ,
                             new OnResponseListener() {
                         @Override
-                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                        public void onTaskCompleted(JSONObject jsonObject) {
                             CartData.updateCouponCode(mContext, couponParam, couponText.getText().toString());
                             progressBar.setVisibility(View.GONE);
                             if(storeId!= null &&
@@ -324,7 +324,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
 
 
         View view = getLayoutInflater().inflate(R.layout.fragmen_cart, null);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         view.findViewById(R.id.cart_bottom).setVisibility(View.GONE);
         recyclerView.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
         recyclerView.setHasFixedSize(true);
@@ -340,13 +340,13 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
         if(isShippingRequest) {
             CartData.clearShippingInfo(mContext);
             final View view = getLayoutInflater().inflate(R.layout.bottom_sheet_view, null);
-            final LinearLayout shippingMethodBlock = (LinearLayout) view.findViewById(R.id.custom_fields_block);
+            final LinearLayout shippingMethodBlock = view.findViewById(R.id.custom_fields_block);
             showBottomSheet(true, view);
             mAppConst.getJsonResponseFromUrl(UrlUtil.SHIPPING_METHOD_URL
                     + store_id + (mAppConst.isLoggedOutUser() ? "&productsData=" + mCartPref.getProductArray(mContext):""),
                     new OnResponseListener() {
                         @Override
-                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                        public void onTaskCompleted(JSONObject jsonObject) {
                             view.findViewById(R.id.progressBar).setVisibility(View.GONE);
                             shippingMethodBlock.setVisibility(View.VISIBLE);
                             shippingMethodBlock.setTag("ship");
@@ -370,7 +370,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
     public void showPaymentOptions(){
 
         final View view = getLayoutInflater().inflate(R.layout.bottom_sheet_view, null);
-        final LinearLayout paymentMethodBlock = (LinearLayout) view.findViewById(R.id.custom_fields_block);
+        final LinearLayout paymentMethodBlock = view.findViewById(R.id.custom_fields_block);
         showBottomSheet(false,view);
 
         mAppConst.getJsonResponseFromUrl(UrlUtil.PAYMENT_OPTION_URL
@@ -378,7 +378,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
                 (mAppConst.isLoggedOutUser() ? "&productsData=" + mCartPref.getProductArray(mContext):""),
                 new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 view.findViewById(R.id.progressBar).setVisibility(View.GONE);
                 paymentMethodBlock.setVisibility(View.VISIBLE);
                 paymentMethodBlock.setTag("pay");
@@ -562,7 +562,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
                 View parent = (View) view.getTag();
                 if (parent.getTag().equals("ship")) {
                     for (int i = 0; i < mShippingMethodList.size(); i++) {
-                        RadioGroup radioGroup = (RadioGroup) parent.findViewWithTag(mShippingMethodList.get(i));
+                        RadioGroup radioGroup = parent.findViewWithTag(mShippingMethodList.get(i));
                         int checkedId = radioGroup.getCheckedRadioButtonId();
                         if (checkedId != -1) {
                             String value = radioGroup.findViewById(checkedId).getTag().toString();
@@ -583,7 +583,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
                                 + CartData.getShippingMethodInfo(mContext),null,
                                 new OnResponseListener() {
                                     @Override
-                                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                    public void onTaskCompleted(JSONObject jsonObject) {
                                         mAppConst.hideProgressDialog();
                                         showPaymentOptions();
                                     }
@@ -600,7 +600,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
                 } else {
                     isError = false;
                     for (int i = 0; i < mPaymentOptionList.size(); i++) {
-                        RadioGroup radioGroup = (RadioGroup) parent.findViewWithTag(mPaymentOptionList.get(i));
+                        RadioGroup radioGroup = parent.findViewWithTag(mPaymentOptionList.get(i));
                         int checkedId = radioGroup.getCheckedRadioButtonId();
                         if (checkedId != -1) {
                             if(formView != null && formView.getVisibility() == View.VISIBLE){
@@ -629,7 +629,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
                                                 +"&payment_gateway=" + CartData.getPaymentGatewayInfo(mContext),
                                 mChequeDetailsMap, new OnResponseListener() {
                                     @Override
-                                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                    public void onTaskCompleted(JSONObject jsonObject) {
                                         mAppConst.hideProgressDialog();
                                         loadOrderReviewPage();
                                     }
@@ -668,7 +668,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
         postParams.put("quantity",pQtys);
         mAppConst.postJsonResponseForUrl(UrlUtil.UPDATE_CART_URL, postParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 isUpdatingCart = false;
                 mUpdateCartButton.setText(getResources().getString(R.string.update_cart));
                 for(int i = 0; i< mProductInfoList.size();i++){
@@ -763,7 +763,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
         }
         mAppConst.postJsonResponseForUrl(orderInfoUrl, mChequeDetailsMap, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
                 LogUtils.LOGD("CartView","Place order response - "+jsonObject.toString());
                 if(jsonObject.optInt("status_code") == 204){
@@ -817,7 +817,7 @@ public class CartView extends FormActivity implements CartFragment.CartFragmentA
             mAppConst.deleteResponseForUrl(UrlUtil.DELETE_PRODUCT_URL + productInfoModel.getProductId(),
                     null, new OnResponseListener() {
                         @Override
-                        public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                        public void onTaskCompleted(JSONObject jsonObject) {
                             refreshCart(true);
                         }
 

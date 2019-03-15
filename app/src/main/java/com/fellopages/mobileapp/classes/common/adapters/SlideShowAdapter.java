@@ -73,8 +73,8 @@ public class SlideShowAdapter extends PagerAdapter {
         inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mRootView = inflater.inflate(mLayoutResID, container, false);
 
-        listItemHolder.mListImage = (ImageView) mRootView.findViewById(R.id.contentImage);
-        listItemHolder.mContentTitle = (TextView) mRootView.findViewById(R.id.title);
+        listItemHolder.mListImage = mRootView.findViewById(R.id.contentImage);
+        listItemHolder.mContentTitle = mRootView.findViewById(R.id.title);
         mRootView.findViewById(R.id.featuredLabel).setVisibility(View.VISIBLE);
 
         mRootView.setTag(listItemHolder);

@@ -73,15 +73,15 @@ public class PackageView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_view);
 
-        mToolbar = (Toolbar)findViewById(R.id.toolbar);
-        mPackageInfoListView = (ListView) findViewById(R.id.packageInfo);
+        mToolbar = findViewById(R.id.toolbar);
+        mPackageInfoListView = findViewById(R.id.packageInfo);
         mPackageDetails = new ArrayList<>();
         mAppConst = new AppConstant(this);
         mPostParams = new HashMap<>();
 
 //        //Fetch Current Selected Module
 //        currentSelectedOption = PreferencesUtils.getCurrentSelectedModule(this);
-        mPackageTitle = (TextView) findViewById(R.id.package_title);
+        mPackageTitle = findViewById(R.id.package_title);
 
         currentSelectedOption = getIntent().getStringExtra(ConstantVariables.EXTRA_MODULE_TYPE);
         if (currentSelectedOption == null || currentSelectedOption.isEmpty()) {
@@ -152,7 +152,7 @@ public class PackageView extends AppCompatActivity {
          * Show Package Title and Description
          */
         mPackageTitle.setText(mSelectedPackageTitle);
-        mDescriptionValue = (TextView) findViewById(R.id.descriptionValue);
+        mDescriptionValue = findViewById(R.id.descriptionValue);
         if(isSimpleInfo) {
             setTitle(getResources().getString(R.string.shipping_details));
         } else {

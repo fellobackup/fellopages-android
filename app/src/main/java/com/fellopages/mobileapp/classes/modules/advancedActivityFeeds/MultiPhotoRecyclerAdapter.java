@@ -612,19 +612,19 @@ public class MultiPhotoRecyclerAdapter extends RecyclerView.Adapter<MultiPhotoRe
             super(view);
             container = view;
 
-            ivMainImage = (ImageView) view.findViewById(R.id.image);
+            ivMainImage = view.findViewById(R.id.image);
             counterView = view.findViewById(R.id.counts_container);
-            tvLikeCount = (ThemedTextView) view.findViewById(R.id.like_count);
-            tvCommentCount = (ThemedTextView) view.findViewById(R.id.comment_count);
-            llPopularReactionView = (LinearLayout) view.findViewById(R.id.popularReactionIcons);
+            tvLikeCount = view.findViewById(R.id.like_count);
+            tvCommentCount = view.findViewById(R.id.comment_count);
+            llPopularReactionView = view.findViewById(R.id.popularReactionIcons);
 
             // Like/Comment views
             countSeparator = view.findViewById(R.id.counts_saperator);
             footerBlock = view.findViewById(R.id.feedFooterMenusBlock);
-            ivReactionIcon = (ImageView) view.findViewById(R.id.reactionIcon);
-            tvShareButton = (ActionIconThemedTextView) view.findViewById(R.id.share_button);
-            tvLikeButton = (ActionIconThemedTextView) view.findViewById(R.id.like_button);
-            tvCommentButton = (ActionIconThemedTextView) view.findViewById(R.id.comment_button);
+            ivReactionIcon = view.findViewById(R.id.reactionIcon);
+            tvShareButton = view.findViewById(R.id.share_button);
+            tvLikeButton = view.findViewById(R.id.like_button);
+            tvCommentButton = view.findViewById(R.id.comment_button);
             mLikeBlock = view.findViewById(R.id.like_view);
             mCommentBlock = view.findViewById(R.id.comment_view);
             mShareBlock = view.findViewById(R.id.share_view);

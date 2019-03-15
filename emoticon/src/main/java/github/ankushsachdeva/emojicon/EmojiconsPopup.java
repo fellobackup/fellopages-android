@@ -213,7 +213,7 @@ public class EmojiconsPopup extends PopupWindow implements ViewPager.OnPageChang
 	private View createCustomView() {
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.emojicons, null, false);
-		emojisPager = (ViewPager) view.findViewById(R.id.emojis_pager);
+		emojisPager = view.findViewById(R.id.emojis_pager);
 		emojisPager.setOnPageChangeListener(this);
 		EmojiconRecents recents = this;
 		mEmojisAdapter = new EmojisPagerAdapter(

@@ -244,12 +244,12 @@ public class AdvReviewFragment extends Fragment implements SwipeRefreshLayout.On
     // Getting views.
     public void getViews() {
 
-        rlMainContent = (RelativeLayout) mRootView.findViewById(R.id.fragment_item_view);
-        lvReviews = (ListView) mRootView.findViewById(R.id.list_item_view);
+        rlMainContent = mRootView.findViewById(R.id.fragment_item_view);
+        lvReviews = mRootView.findViewById(R.id.list_item_view);
 
-        tvRecommendedText = (TextView) mHeaderView.findViewById(R.id.recommendedText);
-        rbAverage = (RatingBar) mHeaderView.findViewById(R.id.mainRatingBar);
-        llRating  = (LinearLayout) mHeaderView.findViewById(R.id.linearLayoutRating);
+        tvRecommendedText = mHeaderView.findViewById(R.id.recommendedText);
+        rbAverage = mHeaderView.findViewById(R.id.mainRatingBar);
+        llRating  = mHeaderView.findViewById(R.id.linearLayoutRating);
 
         // Set rating bar stars color yellow for selected and gray for unselected
         LayerDrawable avgRatingStar = (LayerDrawable) rbAverage.getProgressDrawable();
@@ -258,7 +258,7 @@ public class AdvReviewFragment extends Fragment implements SwipeRefreshLayout.On
         avgRatingStar.getDrawable(0).setColorFilter(ContextCompat.getColor(mContext, R.color.light_gray),
                 PorterDuff.Mode.SRC_ATOP);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -427,8 +427,8 @@ public class AdvReviewFragment extends Fragment implements SwipeRefreshLayout.On
                 } else {
                     removeAddHeaderView(false);
                     mRootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                    TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-                    TextView errorMessage = (TextView) mRootView.findViewById(R.id.error_message);
+                    TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+                    TextView errorMessage = mRootView.findViewById(R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     errorIcon.setText("\uf007");
                     errorMessage.setText(getResources().getString(R.string.no_review_text));

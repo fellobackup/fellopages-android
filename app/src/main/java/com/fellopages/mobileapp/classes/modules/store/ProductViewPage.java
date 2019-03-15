@@ -157,7 +157,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
         mStoreId = getIntent().getIntExtra("store_id",0);
         mContext = this;
      /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.blank_string));
@@ -169,7 +169,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
         getViews();
         mGutterMenuUtils = new GutterMenuUtils(this);
         mGutterMenuUtils.setOnOptionItemClickResponseListener(this);
-        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
+        mMainContent = findViewById(R.id.main_content);
 
         mPagerAdapter = new ProductPagerAdapter(this,mProductImageList,this);
         mProductViewPager.setAdapter(mPagerAdapter);
@@ -183,46 +183,46 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
 
     public void getViews(){
 
-        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        mProgressBar = (ProgressBar)findViewById(R.id.loadingBar);
+        mTabLayout = findViewById(R.id.tab_layout);
+        mProgressBar = findViewById(R.id.loadingBar);
 
-        mProductTitleView = (TextView) findViewById(R.id.product_title);
-        mProductDefaultPrice = (TextView) findViewById(R.id.default_price);
-        mProductPrice = (TextView) findViewById(R.id.product_price);
-        mDiscountView = (TextView) findViewById(R.id.product_discount);
+        mProductTitleView = findViewById(R.id.product_title);
+        mProductDefaultPrice = findViewById(R.id.default_price);
+        mProductPrice = findViewById(R.id.product_price);
+        mDiscountView = findViewById(R.id.product_discount);
 
-        mRatingCount = (TextView) findViewById(R.id.total_rating);
-        mRatingView = (RatingBar) findViewById(R.id.smallRatingBar);
+        mRatingCount = findViewById(R.id.total_rating);
+        mRatingView = findViewById(R.id.smallRatingBar);
         LayerDrawable stars = (LayerDrawable) mRatingView.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.dark_yellow),
                 PorterDuff.Mode.SRC_ATOP);
         mRatingView.setIsIndicator(true);
 
-        mLikeCountView = (TextView) findViewById(R.id.like_count);
-        mLikeIcon = (ImageView) findViewById(R.id.like_button);
-        mWishListIcon = (ImageView) findViewById(R.id.wishlist_icon);
+        mLikeCountView = findViewById(R.id.like_count);
+        mLikeIcon = findViewById(R.id.like_button);
+        mWishListIcon = findViewById(R.id.wishlist_icon);
 
-        mShippingDetails = (TextView) findViewById(R.id.shipping_text_view);
-        mDescriptionView = (TextView) findViewById(R.id.product_description);
-        mProductInfoLabel = (TextView) findViewById(R.id.profile_info_label);
+        mShippingDetails = findViewById(R.id.shipping_text_view);
+        mDescriptionView = findViewById(R.id.product_description);
+        mProductInfoLabel = findViewById(R.id.profile_info_label);
 
-        mDescriptionText = (WebView) findViewById(R.id.view_description);
-        mProductViewPager = (ViewPager) findViewById(R.id.product_image_pager);
-        mCircleIndicator = (CircleIndicator) findViewById(R.id.circle_indicator);
-        mScrollView = (ObservableScrollView) findViewById(R.id.scroll);
+        mDescriptionText = findViewById(R.id.view_description);
+        mProductViewPager = findViewById(R.id.product_image_pager);
+        mCircleIndicator = findViewById(R.id.circle_indicator);
+        mScrollView = findViewById(R.id.scroll);
 
         bottomPurchaseView = findViewById(R.id.purchase_view);
-        mConfigViewParent = (LinearLayout) findViewById(R.id.configuration_fields);
-        mShippingView = (LinearLayout) findViewById(R.id.shipping_details);
-        mProfileInfoView = (LinearLayout) findViewById(R.id.profile_info_fields);
-        mProductInfoBlock = (LinearLayout) findViewById(R.id.product_info_block);
-        mReviewBlock = (LinearLayout) findViewById(R.id.review_block);
+        mConfigViewParent = findViewById(R.id.configuration_fields);
+        mShippingView = findViewById(R.id.shipping_details);
+        mProfileInfoView = findViewById(R.id.profile_info_fields);
+        mProductInfoBlock = findViewById(R.id.product_info_block);
+        mReviewBlock = findViewById(R.id.review_block);
 
-        mRelatedProductView = (LinearLayout)findViewById(R.id.related_product_view);
-        mProductRecyclerView = (RecyclerView) findViewById(R.id.related_product);
-        mOtherProductRecyclerView = (RecyclerView) findViewById(R.id.other_product);
-        mOtherProductView = (LinearLayout) findViewById(R.id.other_product_view);
-        mProductTypeText = (TextView) findViewById(R.id.text_product_type);
+        mRelatedProductView = findViewById(R.id.related_product_view);
+        mProductRecyclerView = findViewById(R.id.related_product);
+        mOtherProductRecyclerView = findViewById(R.id.other_product);
+        mOtherProductView = findViewById(R.id.other_product_view);
+        mProductTypeText = findViewById(R.id.text_product_type);
 
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -548,8 +548,8 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                     JSONObject fileObject = itemsArray.optJSONObject(i);
                     View configFieldView = getLayoutInflater().inflate(R.layout.product_config_view, null);
                     configFieldView.findViewById(R.id.configuration_fields).setOnClickListener(this);
-                    TextView fieldLabel = (TextView) configFieldView.findViewById(R.id.view_label);
-                    TextView fieldValue = (TextView) configFieldView.findViewById(R.id.filed_value);
+                    TextView fieldLabel = configFieldView.findViewById(R.id.view_label);
+                    TextView fieldValue = configFieldView.findViewById(R.id.filed_value);
                     fieldValue.setCompoundDrawables(null, null, null, null);
                     fieldValue.setTextColor(ContextCompat.getColor(this, R.color.themeButtonColor));
                     fieldLabel.setText(fileObject.optString("title"));
@@ -616,8 +616,8 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                         JSONObject fieldObject = mDependentFieldArray.optJSONObject(i);
                         View configFieldView = getLayoutInflater().inflate(R.layout.product_config_view, null);
                         configFieldView.findViewById(R.id.configuration_fields).setOnClickListener(this);
-                        TextView fieldLabel = (TextView) configFieldView.findViewById(R.id.view_label);
-                        TextView fieldValue = (TextView) configFieldView.findViewById(R.id.filed_value);
+                        TextView fieldLabel = configFieldView.findViewById(R.id.view_label);
+                        TextView fieldValue = configFieldView.findViewById(R.id.filed_value);
                         fieldValue.setTag(fieldObject.optInt("order"));
                         mDependentConfigFields.put(fieldObject.optString("order"), fieldValue);
                         fieldLabel.setText(fieldObject.optString("label"));
@@ -637,8 +637,8 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                         JSONObject fieldObject = mIndependentFieldArray.optJSONObject(i);
                         View configFieldView = getLayoutInflater().inflate(R.layout.product_config_view, null);
                         configFieldView.findViewById(R.id.configuration_fields).setOnClickListener(this);
-                        TextView fieldLabel = (TextView) configFieldView.findViewById(R.id.view_label);
-                        TextView fieldValue = (TextView) configFieldView.findViewById(R.id.filed_value);
+                        TextView fieldLabel = configFieldView.findViewById(R.id.view_label);
+                        TextView fieldValue = configFieldView.findViewById(R.id.filed_value);
                         fieldValue.setTag(fieldObject.optString("name"));
                         fieldValue.setText(getResources().getString(R.string.please_select_label));
                         mIndependentConfigFields.put(fieldObject.optString("name"), fieldValue);
@@ -662,16 +662,16 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                 JSONObject methodObject = methodArray.optJSONObject(i);
                 JSONObject priceRateObject = methodObject.optJSONObject("price_rate");
                 View shippingMethodView = getLayoutInflater().inflate(R.layout.product_shipping_methods, null);
-                TextView methodTitle = (TextView) shippingMethodView.findViewById(R.id.item_title);
-                TextView methodRegion = (TextView) shippingMethodView.findViewById(R.id.shipping_method_region);
-                TextView methodWeight = (TextView) shippingMethodView.findViewById(R.id.shipping_method_weight);
-                TextView methodDelivery = (TextView) shippingMethodView.findViewById(R.id.shipping_method_delivery);
-                TextView methodDependency = (TextView) shippingMethodView.findViewById(R.id.shipping_method_dependency);
-                TextView methodLimit = (TextView) shippingMethodView.findViewById(R.id.shipping_method_limit);
-                TextView methodCharge = (TextView) shippingMethodView.findViewById(R.id.shipping_method_charge);
-                TextView methodRate = (TextView) shippingMethodView.findViewById(R.id.shipping_method_rate);
-                TextView methodCountry = (TextView) shippingMethodView.findViewById(R.id.method_country);
-                TextView methodPrice = (TextView) shippingMethodView.findViewById(R.id.shipping_price);
+                TextView methodTitle = shippingMethodView.findViewById(R.id.item_title);
+                TextView methodRegion = shippingMethodView.findViewById(R.id.shipping_method_region);
+                TextView methodWeight = shippingMethodView.findViewById(R.id.shipping_method_weight);
+                TextView methodDelivery = shippingMethodView.findViewById(R.id.shipping_method_delivery);
+                TextView methodDependency = shippingMethodView.findViewById(R.id.shipping_method_dependency);
+                TextView methodLimit = shippingMethodView.findViewById(R.id.shipping_method_limit);
+                TextView methodCharge = shippingMethodView.findViewById(R.id.shipping_method_charge);
+                TextView methodRate = shippingMethodView.findViewById(R.id.shipping_method_rate);
+                TextView methodCountry = shippingMethodView.findViewById(R.id.method_country);
+                TextView methodPrice = shippingMethodView.findViewById(R.id.shipping_price);
                 methodTitle.setText(methodObject.optString("title"));
                 methodCountry.setText("   :   " + methodObject.optString("country"));
                 methodRegion.setText("   :   " + methodObject.optString("region"));
@@ -761,7 +761,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                         }
                     });
                     View selectView = getLayoutInflater().inflate(R.layout.fragmen_cart, null);
-                    RecyclerView recyclerView = (RecyclerView) selectView.findViewById(R.id.recycler_view);
+                    RecyclerView recyclerView = selectView.findViewById(R.id.recycler_view);
                     selectView.findViewById(R.id.cart_bottom).setVisibility(View.GONE);
                     recyclerView.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
                     recyclerView.setHasFixedSize(true);
@@ -785,7 +785,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                        getResources().getDimensionPixelSize(R.dimen.margin_20dp),
                        getResources().getDimensionPixelSize(R.dimen.margin_10dp));
                View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_view, null);
-               final LinearLayout customFieldBlock = (LinearLayout) bottomSheetView.findViewById(R.id.custom_fields_block);
+               final LinearLayout customFieldBlock = bottomSheetView.findViewById(R.id.custom_fields_block);
                AppCompatTextView continueButton =  new AppCompatTextView(this);
                AppCompatTextView fieldDescription =  new AppCompatTextView(this);
                fieldDescription.setPadding(0,
@@ -904,7 +904,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                    public void onClick(View doneButton) {
                        if(doneButton.getTag() instanceof RadioGroup){
                            RadioGroup radioG = (RadioGroup) doneButton.getTag();
-                           RadioButton radioB = (RadioButton) radioG.findViewById(radioG.getCheckedRadioButtonId());
+                           RadioButton radioB = radioG.findViewById(radioG.getCheckedRadioButtonId());
                            ((TextView)view.findViewById(R.id.filed_value)).
                                    setText(radioB.getText());
                            ((TextView)view.findViewById(R.id.filed_value))
@@ -934,8 +934,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                                for (Map.Entry<String, Boolean> entry : mMultiCheckBoxValueMapTemp.entrySet()) {
                                    mMultiCheckBoxValueMap.put(entry.getKey(),entry.getValue());
                                    if(entry.getValue()){
-                                       AppCompatCheckBox checkBox= (AppCompatCheckBox)
-                                               customFieldBlock.findViewWithTag(entry.getKey());
+                                       AppCompatCheckBox checkBox= customFieldBlock.findViewWithTag(entry.getKey());
                                        if(value.isEmpty()) {
                                            value += entry.getKey();
                                        }else {
@@ -950,9 +949,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                                            string += checkBox.getText() + " ";
                                        }
                                    }else {
-                                       if (mFinalDataMap.containsKey(jsonObject.optString("name"))) {
-                                           mFinalDataMap.remove(jsonObject.optString("name"));
-                                       }
+                                       mFinalDataMap.remove(jsonObject.optString("name"));
                                        mPriceMap.put(entry.getKey(),null);
                                        updatePrice();
                                    }
@@ -993,7 +990,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
                 TextView fieldView = (TextView) mDependentConfigFields.get(key);
                 mDependentFieldsMap.put(key,null);
                 mPriceMap.put(key,null);
-                fieldView.setText(getResources().getString(R.string.please_select_label));;
+                fieldView.setText(getResources().getString(R.string.please_select_label));
             }
         }
 
@@ -1005,7 +1002,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
 
         mAppConst.getJsonResponseFromUrl(url, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
                 if(jsonObject.optJSONObject("field") != null && jsonObject.optJSONObject("field").length() > 0) {
                     mDependentFieldsMap.put(jsonObject.optJSONObject("field").optString("order"),
@@ -1199,7 +1196,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
         mAppConst.postJsonResponseForUrl(UrlUtil.ADD_TO_CART_URL + mStoreId + "/" + mProductId,
                 postParams, new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
                         // Get instance of Vibrator from current Context
                         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                         // Vibrate for 100 milliseconds
@@ -1272,7 +1269,7 @@ public class ProductViewPage extends AppCompatActivity implements ObservableScro
 
         mAppConst.postJsonResponseForUrl(mLikeUnlikeUrl, likeParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
                 if(mIsLike == 0) {
                     mIsLike = 1;

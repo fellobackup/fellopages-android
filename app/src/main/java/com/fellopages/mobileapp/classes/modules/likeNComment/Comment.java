@@ -83,6 +83,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,7 +148,7 @@ public class Comment extends AppCompatActivity implements View.OnClickListener, 
          /*
         Set Back Button on Action Bar
          */
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
@@ -174,41 +175,41 @@ public class Comment extends AppCompatActivity implements View.OnClickListener, 
         mStickersEnabled = PreferencesUtils.getStickersEnabled(mContext);
         isNestedCommentEnabled = PreferencesUtils.isNestedCommentEnabled(mContext);
 
-        mStickersParentView = (RelativeLayout) findViewById(R.id.stickersMainLayout);
-        mCommentPostBlock = (LinearLayout) findViewById(R.id.commentPostBlock);
-        mLikeCountInfoContainer = (RelativeLayout) findViewById(R.id.likeCountInfoContainer);
+        mStickersParentView = findViewById(R.id.stickersMainLayout);
+        mCommentPostBlock = findViewById(R.id.commentPostBlock);
+        mLikeCountInfoContainer = findViewById(R.id.likeCountInfoContainer);
         mLikeCountInfoContainer.setClickable(true);
         mLikeCountInfoContainer.setOnClickListener(this);
 
-        mPopularReactionsLayout = (LinearLayout) findViewById(R.id.popularReactionIcons);
+        mPopularReactionsLayout = findViewById(R.id.popularReactionIcons);
 
-        mUserListView = (ListView) findViewById(R.id.userList);
-        mUserView = (CardView) findViewById(R.id.users_view);
+        mUserListView = findViewById(R.id.userList);
+        mUserView = findViewById(R.id.users_view);
 
-        mLikeCountInfo = (SelectableTextView) findViewById(R.id.likeCountInfo);
-        mNextIcon = (TextView) findViewById(R.id.nextIcon);
+        mLikeCountInfo = findViewById(R.id.likeCountInfo);
+        mNextIcon = findViewById(R.id.nextIcon);
 
-        mNoCommentsBlock = (LinearLayout) findViewById(R.id.noCommentsBlock);
-        mNoCommentsImage = (TextView) findViewById(R.id.noCommentsImage);
-        mNoCommentsText = (SelectableTextView) findViewById(R.id.noCommentsText);
+        mNoCommentsBlock = findViewById(R.id.noCommentsBlock);
+        mNoCommentsImage = findViewById(R.id.noCommentsImage);
+        mNoCommentsText = findViewById(R.id.noCommentsText);
 
         mNoCommentsImage.setTypeface(fontIcon);
 
-        mCommentsListView = (ListView) findViewById(R.id.commentList);
-        mCommentBox = (EditText) findViewById(R.id.commentBox);
+        mCommentsListView = findViewById(R.id.commentList);
+        mCommentBox = findViewById(R.id.commentBox);
         mCommentBox.addTextChangedListener(this);
         mCommentBox.requestFocus();
-        mCommentPostButton = (TextView) findViewById(R.id.commentPostButton);
+        mCommentPostButton = findViewById(R.id.commentPostButton);
         mCommentPostButton.setTypeface(fontIcon);
 
-        mPhotoUploadingButton = (TextView) findViewById(R.id.photoUploadingButton);
+        mPhotoUploadingButton = findViewById(R.id.photoUploadingButton);
         mPhotoUploadingButton.setTypeface(fontIcon);
         mPhotoUploadingButton.setText("\uf030");
         mPhotoUploadingButton.setOnClickListener(this);
 
-        mSelectedImageBlock = (RelativeLayout) findViewById(R.id.selectedImageBlock);
-        mSelectedImageView = (ImageView) findViewById(R.id.imageView);
-        mCancelImageView = (ImageView) findViewById(R.id.removeImageButton);
+        mSelectedImageBlock = findViewById(R.id.selectedImageBlock);
+        mSelectedImageView = findViewById(R.id.imageView);
+        mCancelImageView = findViewById(R.id.removeImageButton);
         Drawable addDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_cancel_black_24dp);
         addDrawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.black),
                 PorterDuff.Mode.SRC_ATOP));
@@ -301,7 +302,7 @@ public class Comment extends AppCompatActivity implements View.OnClickListener, 
                                 mAppConst.getJsonResponseFromUrl(UrlUtil.AAF_VIEW_STICKERS_URL, new OnResponseListener() {
 
                                     @Override
-                                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                                    public void onTaskCompleted(JSONObject jsonObject) {
 
                                         if(jsonObject != null){
                                             mStickersPopup = StickersUtil.createStickersPopup(Comment.this, findViewById(R.id.comment_activity_view),
@@ -552,7 +553,7 @@ public class Comment extends AppCompatActivity implements View.OnClickListener, 
                             StickersUtil.showStickersKeyboard();
                         }
                     } else {
-                        byte[] bytes = commentBody.getBytes("UTF-8");
+                        byte[] bytes = commentBody.getBytes(StandardCharsets.UTF_8);
                         commentBody = new String(bytes, Charset.forName("UTF-8"));
 
                         if ((commentBody.length() == 0 || commentBody.trim().isEmpty()) && mSelectPath.isEmpty()) {
@@ -572,7 +573,7 @@ public class Comment extends AppCompatActivity implements View.OnClickListener, 
                             postComment(commentBody, null, null);
                         }
                     }
-                } catch (UnsupportedEncodingException | NullPointerException e) {
+                } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -584,7 +585,7 @@ public class Comment extends AppCompatActivity implements View.OnClickListener, 
                         mViewLikesUrl += "?action_id=" + mActionId;
                     } else {
                         mViewLikesUrl += "?subject_type=" + mSubjectType +
-                                "&subject_id=" + mSubjectId;;
+                                "&subject_id=" + mSubjectId;
                     }
                 } else {
                     //Changing url for the activity_action.

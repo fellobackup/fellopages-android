@@ -64,7 +64,7 @@ public class AdvEventsBuyersInfo extends FormActivity {
 
         /* Create Back Button On Action Bar **/
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.action_bar_title_buyer_info));
@@ -85,8 +85,8 @@ public class AdvEventsBuyersInfo extends FormActivity {
         mOrderInfo = getIntent().getStringExtra(ConstantVariables.RESPONSE_OBJECT);
         mCouponInfo = getIntent().getStringExtra("couponInfoObject");
 
-        formView = (RelativeLayout)findViewById(R.id.form_view);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        formView = findViewById(R.id.form_view);
+        progressBar = findViewById(R.id.progressBar);
 
         makeRequest(mBuyersInfoUrl);
 

@@ -144,8 +144,8 @@ public class MemberDetailsDialog extends DialogFragment {
      */
     public void initializeViews() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        tvTitle = (TextView) mRootView.findViewById(R.id.title);
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        tvTitle = mRootView.findViewById(R.id.title);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(layoutManager);
         ((SimpleItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -281,8 +281,8 @@ public class MemberDetailsDialog extends DialogFragment {
             layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp),
                     0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp));
             mRootView.findViewById(R.id.message_layout).setLayoutParams(layoutParams);
-            TextView errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+            TextView errorIcon = mRootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = mRootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf007");
             errorMessage.setText(mUserTitle + " " + mContext.getResources().getString(R.string.no_user_verified));

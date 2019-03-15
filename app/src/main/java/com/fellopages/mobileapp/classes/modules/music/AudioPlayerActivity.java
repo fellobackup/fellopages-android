@@ -109,7 +109,7 @@ public class AudioPlayerActivity extends AppCompatActivity {
 
 
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
@@ -223,18 +223,18 @@ public class AudioPlayerActivity extends AppCompatActivity {
 	}
 	
 	private void getViews() {
-		btnBack = (ImageView) findViewById(R.id.btnBack);
-		btnNext = (ImageView) findViewById(R.id.btnNext);
-        mSeekbar = (SeekBar) findViewById(R.id.seekBar1);
+		btnBack = findViewById(R.id.btnBack);
+		btnNext = findViewById(R.id.btnNext);
+        mSeekbar = findViewById(R.id.seekBar1);
 		mPauseDrawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_pause_white);
 		mPlayDrawable =  ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_play_white);
-        mPlayPause = (ImageView) findViewById(R.id.btnPlayPause);
-		textNowPlaying = (SelectableTextView) findViewById(R.id.textNowPlaying);
-        mBackgroundImage = (ImageView) findViewById(R.id.background_image);
-		textAlbumArtist = (SelectableTextView) findViewById(R.id.textAlbumArtist);
-		textBufferDuration = (TextView) findViewById(R.id.textBufferDuration);
-		textDuration = (TextView) findViewById(R.id.textDuration);
-        mLoadingText = (TextView) findViewById(R.id.line3);
+        mPlayPause = findViewById(R.id.btnPlayPause);
+		textNowPlaying = findViewById(R.id.textNowPlaying);
+        mBackgroundImage = findViewById(R.id.background_image);
+		textAlbumArtist = findViewById(R.id.textAlbumArtist);
+		textBufferDuration = findViewById(R.id.textBufferDuration);
+		textDuration = findViewById(R.id.textDuration);
+        mLoadingText = findViewById(R.id.line3);
 		textNowPlaying.setSelected(true);
 		textAlbumArtist.setSelected(true);
 	}

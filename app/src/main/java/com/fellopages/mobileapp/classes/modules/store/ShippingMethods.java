@@ -57,14 +57,14 @@ public class ShippingMethods extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipping_methods);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         mContext = this;
         mAppConst = new AppConstant(mContext);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_list);
+        mRecyclerView = findViewById(R.id.recycler_view_list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL));
@@ -80,7 +80,7 @@ public class ShippingMethods extends AppCompatActivity {
                         packageViewIntent.putExtra("packageObject", listItems.getmShippingItem().toString());
                         packageViewIntent.putExtra(ConstantVariables.SHIPPING_METHOD, ConstantVariables.SHIPPING_METHOD);
                         try {
-                            packageViewIntent.putExtra("packageTitle", ((JSONObject)listItems.getmShippingItem()).optJSONObject("title").optString("value"));
+                            packageViewIntent.putExtra("packageTitle", listItems.getmShippingItem().optJSONObject("title").optString("value"));
                         }catch (Exception e){
                             packageViewIntent.putExtra("packageTitle", "Shipping Info");
                         }
@@ -91,8 +91,8 @@ public class ShippingMethods extends AppCompatActivity {
         mRecyclerView.setAdapter(mBrowseAdapter);
         mURLString = getIntent().getStringExtra("URL");
 
-        mProgressBar = (ProgressBar) findViewById(R.id.shipping_progressBar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add_shipping_method);
+        mProgressBar = findViewById(R.id.shipping_progressBar);
+        FloatingActionButton fab = findViewById(R.id.fab_add_shipping_method);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,8 +153,8 @@ public class ShippingMethods extends AppCompatActivity {
             }
         } else {
             findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) findViewById(R.id.error_message);
+            TextView errorIcon = findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf0d1");
             errorMessage.setText(mContext.getResources().getString(R.string.no_shipping_available));

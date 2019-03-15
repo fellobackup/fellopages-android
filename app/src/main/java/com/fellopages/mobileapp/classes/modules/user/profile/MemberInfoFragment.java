@@ -87,13 +87,13 @@ public class MemberInfoFragment extends Fragment {
         mContext = getContext();
         mAppConst = new AppConstant(mContext);
 
-        mMemberInfoLayout = (LinearLayout) mRootView.findViewById(R.id.memberInfoLayout);
+        mMemberInfoLayout = mRootView.findViewById(R.id.memberInfoLayout);
         defaultParams = CustomViews.getFullWidthLayoutParams();
 
         // No data message views
-        messageLayout = (LinearLayout) mRootView.findViewById(R.id.message_layout);
-        errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-        errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+        messageLayout = mRootView.findViewById(R.id.message_layout);
+        errorIcon = mRootView.findViewById(R.id.error_icon);
+        errorMessage = mRootView.findViewById(R.id.error_message);
 
         Bundle bundle = getArguments();
 
@@ -390,7 +390,7 @@ public class MemberInfoFragment extends Fragment {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.small_rating_layout, null);
             view.setLayoutParams(fieldLayout);
-            RatingBar mMyRatingBar = (RatingBar) view.findViewById(R.id.smallRatingBar);
+            RatingBar mMyRatingBar = view.findViewById(R.id.smallRatingBar);
 
             LayerDrawable myRatingStar = (LayerDrawable) mMyRatingBar.getProgressDrawable();
             myRatingStar.getDrawable(2).setColorFilter(ContextCompat.getColor(mContext, R.color.dark_yellow),

@@ -71,6 +71,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -136,7 +137,7 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
         mPostParams = new HashMap<>();
         isStoryReply = getIntent().getBooleanExtra("isStoryReply", false);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -156,16 +157,16 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
         }
 
         //Views
-        main_msg_view = (LinearLayout) findViewById(R.id.main_msg_view);
-        mRecipientView = (EditText) findViewById(R.id.sendTo);
-        mSubjectView = (EditText) findViewById(R.id.subject);
-        mBodyView = (EditText) findViewById(R.id.msgDescription);
+        main_msg_view = findViewById(R.id.main_msg_view);
+        mRecipientView = findViewById(R.id.sendTo);
+        mSubjectView = findViewById(R.id.subject);
+        mBodyView = findViewById(R.id.msgDescription);
 
-        mFriendListView = (ListView) findViewById(R.id.friendListView);
+        mFriendListView = findViewById(R.id.friendListView);
         mAddPeopleAdapter = new AddPeopleAdapter(this, R.layout.list_friends, mAddPeopleList);
         mFriendListView.setAdapter(mAddPeopleAdapter);
 
-        mAddedFriendListView = (RecyclerView) findViewById(R.id.addedFriendList);
+        mAddedFriendListView = findViewById(R.id.addedFriendList);
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         mAddedFriendListView.setLayoutManager(layoutManager);
         mSelectedFriendListAdapter = new SelectedFriendListAdapter(mSelectedFriendList,
@@ -416,7 +417,7 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
         attachmentMenuItem = menu.findItem(R.id.add_attachments);
         MenuItemCompat.setActionView(badgeMenuItem, R.layout.attachment_update_count);
         View addedAttachment = MenuItemCompat.getActionView(badgeMenuItem);
-        ImageView addedAttachmentImage = (ImageView) addedAttachment.findViewById(R.id.added_attachment_image);
+        ImageView addedAttachmentImage = addedAttachment.findViewById(R.id.added_attachment_image);
         addedAttachmentImage.setOnClickListener(this);
 
         return true;
@@ -653,30 +654,26 @@ public class CreateNewMessage extends AppCompatActivity implements TextWatcher, 
                 res += iterator.next() + (iterator.hasNext() ? "," : "");
             }
 
-            try {
-                String body = mBodyView.getText().toString().trim();
-                byte[] bytes = body.getBytes("UTF-8");
-                body = new String(bytes, Charset.forName("UTF-8"));
+            String body = mBodyView.getText().toString().trim();
+            byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+            body = new String(bytes, Charset.forName("UTF-8"));
 
-                // Convert text smileys to emoticons in comments
-                body = Smileys.getEmojiFromString(body);
+            // Convert text smileys to emoticons in comments
+            body = Smileys.getEmojiFromString(body);
 
-                mPostParams.put(mRecipientView.getTag().toString(),res);
-                mPostParams.put(mSubjectView.getTag().toString(),mSubjectView.getText().toString());
-                mPostParams.put(mBodyView.getTag().toString(), body);
+            mPostParams.put(mRecipientView.getTag().toString(),res);
+            mPostParams.put(mSubjectView.getTag().toString(),mSubjectView.getText().toString());
+            mPostParams.put(mBodyView.getTag().toString(), body);
 
-                if (mAttachType != null && !mAttachType.isEmpty()) {
-                    mPostParams = UploadAttachmentUtil.getAttachmentPostParams(mPostParams, mAttachType,
-                            uriText, mSongId, mVideoId);
-                }
-
-                // Uploading files in background with the Message details.
-                new UploadAttachmentUtil(CreateNewMessage.this, createFormUrl, mPostParams,
-                        mSelectPath).execute();
-
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+            if (mAttachType != null && !mAttachType.isEmpty()) {
+                mPostParams = UploadAttachmentUtil.getAttachmentPostParams(mPostParams, mAttachType,
+                        uriText, mSongId, mVideoId);
             }
+
+            // Uploading files in background with the Message details.
+            new UploadAttachmentUtil(CreateNewMessage.this, createFormUrl, mPostParams,
+                    mSelectPath).execute();
+
         }
     }
 

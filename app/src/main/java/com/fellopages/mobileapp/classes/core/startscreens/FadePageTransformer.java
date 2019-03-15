@@ -24,8 +24,8 @@ class FadePageTransformer implements ViewPager.PageTransformer {
     @Override
     public void transformPage(View view, float position) {
         view.setTranslationX(view.getWidth() * -position);
-        title = (TextView)view.findViewById(R.id.slideTitle);
-        subtitle = (TextView)view.findViewById(R.id.slideSubtitle);
+        title = view.findViewById(R.id.slideTitle);
+        subtitle = view.findViewById(R.id.slideSubtitle);
         //view.findViewById(R.id.backgroundImage).setTranslationX(view.getWidth() * -position);
 
         if (position <= -1.0F || position >= 1.0F) {

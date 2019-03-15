@@ -61,7 +61,7 @@ public class ShowCaseStepDisplayer implements ShowCaseView.DismissListener {
         this.activity = activity;
         this.fragment = fragment;
         this.scrollView = scrollView;
-        this.colorPrimary = color;
+        colorPrimary = color;
 
         //noinspection ConstantConditions
         this.context = activity != null ? activity : fragment.getContext();

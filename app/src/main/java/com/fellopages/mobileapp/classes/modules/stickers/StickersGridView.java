@@ -69,11 +69,11 @@ public class StickersGridView{
             rootView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.black_overlay));
         }
 
-        mGridView = (GridView) rootView.findViewById(R.id.gridView);
-        mMessageLayout = (LinearLayout ) rootView.findViewById(R.id.message_layout);
+        mGridView = rootView.findViewById(R.id.gridView);
+        mMessageLayout = rootView.findViewById(R.id.message_layout);
 
         rootView.findViewById(R.id.swipe_refresh_layout).setEnabled(false);
-        mProgressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        mProgressBar = rootView.findViewById(R.id.progressBar);
         InitializeGridLayout();
 
         mStickersList = new ArrayList<>();
@@ -128,8 +128,8 @@ public class StickersGridView{
 
         } else {
             mMessageLayout.setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById
                     (R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorMessage.setText(mContext.getResources().getString(R.string.no_stickers));

@@ -187,7 +187,7 @@ public class SnackbarUtils {
 
             /* Set Max Lines on snackbar TextView to show full text in snackbar */
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setMaxLines(MESSAGE_MAX_LINE_NUMBER);
             snackbar.show();
 

@@ -208,10 +208,10 @@ public class ImageGridAdapter extends BaseAdapter {
         View mask;
 
         ViewHolde(View view){
-            image = (ImageView) view.findViewById(R.id.image);
-            ivGif = (ImageView) view.findViewById(R.id.gif_icon);
-            ivPlay = (ImageView) view.findViewById(R.id.play_button);
-            indicator = (ImageView) view.findViewById(R.id.checkmark);
+            image = view.findViewById(R.id.image);
+            ivGif = view.findViewById(R.id.gif_icon);
+            ivPlay = view.findViewById(R.id.play_button);
+            indicator = view.findViewById(R.id.checkmark);
             mask = view.findViewById(R.id.mask);
             image.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image.getLayoutParams().width = mItemSize;

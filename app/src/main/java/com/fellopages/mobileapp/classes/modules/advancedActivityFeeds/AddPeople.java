@@ -79,7 +79,7 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
        /* Set Back Button on Action Bar */
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,16 +90,16 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
         mAddPeopleList = new ArrayList<>();
 
-        mAddPeopleText = (EditText) findViewById(R.id.addPeopleBox);
+        mAddPeopleText = findViewById(R.id.addPeopleBox);
         mAddPeopleText.setHint(getResources().getString(R.string.add_people_default_text) + "…");
         mAddPeopleText.addTextChangedListener(this);
 
-        mFriendsListView = (ListView) findViewById(R.id.friendsList);
+        mFriendsListView = findViewById(R.id.friendsList);
         mAddPeopleAdapter = new AddPeopleAdapter(this, R.layout.list_friends, mAddPeopleList);
         mFriendsListView.setAdapter(mAddPeopleAdapter);
         mFriendsListView.setOnItemClickListener(this);
 
-        mSelectedFriendsLayout = (PredicateLayout) findViewById(R.id.selectedFriends);
+        mSelectedFriendsLayout = findViewById(R.id.selectedFriends);
 
         /*
         Populate the Friends Layout if already selected
@@ -285,7 +285,7 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
             mAppConst.postJsonResponseForUrl(photoTagUrl, null, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(final JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(final JSONObject jsonObject) {
 
                     SnackbarUtils.displaySnackbarLongWithListener(mFriendsListView, label + " " +
                             getResources().getString(R.string.user_tagged_in_photo_success_message),
@@ -378,7 +378,7 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
             mAppConst.deleteResponseForUrl(removeUrl, null, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(final JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(final JSONObject jsonObject) {
 
                     SnackbarUtils.displaySnackbarLongWithListener(mFriendsListView,
                             getResources().getString(R.string.remove_user_from_photo_tag_success_message),

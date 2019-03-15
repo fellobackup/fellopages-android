@@ -172,7 +172,7 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
         rootView = inflater.inflate(R.layout.recycler_view_layout,container, false);
         mHeaderView = inflater.inflate(R.layout.layout_category_block, null, false);
         mFilterView = getActivity().findViewById(R.id.quick_return_footer_ll);
-        mFilterButton = (FloatingActionButton) getActivity().findViewById(R.id.filter_fab);
+        mFilterButton = getActivity().findViewById(R.id.filter_fab);
         mAppConst = new AppConstant(mContext);
         mProductInfo = new ProductInfoModel();
         mProductList = new ArrayList<>();
@@ -202,8 +202,8 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
             sortViewBehavior.setSkipCollapsed(true);
             sortViewBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setRefreshing(false);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -245,7 +245,7 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
         if (isManageView) {
             mBrowseProductUrl = UrlUtil.MANAGE_PRODUCTS_URL +"?limit=" + AppConstant.LIMIT;
         } else if (!isCategoryResults && !isSelectProduct && !isSearchTextSubmitted){
-            mApplyFilterButton = (TextView) getActivity().findViewById(R.id.update_cart);
+            mApplyFilterButton = getActivity().findViewById(R.id.update_cart);
             mApplyFilterButton.setText(mContext.getResources().getString(R.string.filter_apply_btn));
             mApplyFilterButton.setOnClickListener(this);
         }
@@ -259,14 +259,14 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
         // getting header views, when it is laoded for category page.
         if(isCategoryResults){
             postParams = new HashMap<>();
-            subCategoryLayout = (CardView) mHeaderView.findViewById(R.id.categoryFilterLayout);
-            subSubCategoryLayout = (CardView) mHeaderView.findViewById(R.id.subCategoryFilterLayout);
-            subCategorySpinner = (Spinner) subCategoryLayout.findViewById(R.id.filter_view);
-            subSubCategorySpinner = (Spinner) subSubCategoryLayout.findViewById(R.id.filter_view);
+            subCategoryLayout = mHeaderView.findViewById(R.id.categoryFilterLayout);
+            subSubCategoryLayout = mHeaderView.findViewById(R.id.subCategoryFilterLayout);
+            subCategorySpinner = subCategoryLayout.findViewById(R.id.filter_view);
+            subSubCategorySpinner = subSubCategoryLayout.findViewById(R.id.filter_view);
             mHeaderView.findViewById(R.id.mlt_category_block).setVisibility(View.VISIBLE);
             mHeaderView.findViewById(R.id.toolbar).setVisibility(View.GONE);
             // Adding header view to main view.
-            RelativeLayout mainView = (RelativeLayout) rootView.findViewById(R.id.main_view_recycler);
+            RelativeLayout mainView = rootView.findViewById(R.id.main_view_recycler);
             mainView.addView(mHeaderView);
             CustomViews.addHeaderView(R.id.mlt_category_block, mSwipeRefreshLayout);
             mHeaderView.findViewById(R.id.mlt_category_block).getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -312,8 +312,8 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
         getProductItems();
         if(mFilterView != null && !isManageView) {
             mFilterView.setVisibility(View.VISIBLE);
-            mSortingView = (LinearLayout) mFilterView.findViewById(R.id.sorting_view);
-            mApplyFilterView = (LinearLayout) mFilterView.findViewById(R.id.filter_apply_view);
+            mSortingView = mFilterView.findViewById(R.id.sorting_view);
+            mApplyFilterView = mFilterView.findViewById(R.id.filter_apply_view);
             mSortingView.setOnClickListener(this);
             mApplyFilterView.setOnClickListener(this);
             mMinFooterTranslation = getActivity().getResources().getDimensionPixelSize(R.dimen.home_icon_tab_height);
@@ -420,7 +420,7 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
 
             mAppConst.getJsonResponseFromUrl(mBrowseProductUrl + "&page=" + pageNumber, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mProductList.clear();
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 
@@ -558,8 +558,8 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
 
         } else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById
                     (R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf291");
@@ -601,7 +601,7 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
         //add null , so the adapter will check view_type and show progress bar at bottom
         Tasks.call(new Callable<Void>() {
             @Override
-            public Void call() throws Exception {
+            public Void call() {
                 mProductList.add(null);
                 mProductViewAdapter.notifyItemInserted(mProductList.size() - 1);
                 return null;
@@ -664,11 +664,11 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
     }
 
     private void itemFilter() {
-        filterView = (NestedScrollView)getActivity().findViewById(R.id.product_filter_view);
+        filterView = getActivity().findViewById(R.id.product_filter_view);
         if(!isFilterLoaded) {
             mAppConst.getJsonResponseFromUrl(UrlUtil.PRODUCT_FILTER_URL, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     isFilterLoaded = true;
                     filterView.removeAllViews();
                     if(mFilterButton != null){
@@ -705,7 +705,7 @@ public class BrowseProductFragment extends Fragment implements SwipeRefreshLayou
         if (mSortingFieldObject == null) return;
         mRadioButtonFields =new HashMap<>();
         View bottomSheetView = getActivity().getLayoutInflater().inflate(R.layout.bottom_sheet_view, null);
-        LinearLayout customFieldBlock = (LinearLayout) bottomSheetView.findViewById(R.id.custom_fields_block);
+        LinearLayout customFieldBlock = bottomSheetView.findViewById(R.id.custom_fields_block);
         Iterator<?> keys = mSortingFieldObject.keys();
         final RadioGroup radioGroup = new RadioGroup(mContext);
         radioGroup.setLayoutParams(new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

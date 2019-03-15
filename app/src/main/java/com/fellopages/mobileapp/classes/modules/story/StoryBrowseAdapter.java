@@ -263,12 +263,12 @@ public class StoryBrowseAdapter extends RecyclerView.Adapter implements View.OnC
         public ItemViewHolder(Context context, View view) {
             super(view);
             mContainer = view;
-            mUploadingBar = (ProgressBar) view.findViewById(R.id.progressBar);
+            mUploadingBar = view.findViewById(R.id.progressBar);
             storyImageLayout = view.findViewById(R.id.story_image_layout);
-            ivUserProfile = (ImageView) view.findViewById(R.id.owner_image);
-            ivStoryImage = (ImageView) view.findViewById(R.id.story_image);
-            ivStoryAdd = (ImageView) view.findViewById(R.id.add_story);
-            tvUserName = (TextView) view.findViewById(R.id.owner_name);
+            ivUserProfile = view.findViewById(R.id.owner_image);
+            ivStoryImage = view.findViewById(R.id.story_image);
+            ivStoryAdd = view.findViewById(R.id.add_story);
+            tvUserName = view.findViewById(R.id.owner_name);
 
             //Views for the friends view Bottom sheet dialog.
             List<SheetItemModel> list = new ArrayList<>();
@@ -277,8 +277,8 @@ public class StoryBrowseAdapter extends RecyclerView.Adapter implements View.OnC
             mSheetAdapter = new SimpleSheetAdapter(context, list, true);
             inflatedView = ((Activity) context).getLayoutInflater().inflate(R.layout.fragmen_cart, null);
             inflatedView.setBackgroundResource(R.color.white);
-            tvInflatedViewTitle = (TextView) inflatedView.findViewById(R.id.header_title);
-            RecyclerView recyclerView = (RecyclerView) inflatedView.findViewById(R.id.recycler_view);
+            tvInflatedViewTitle = inflatedView.findViewById(R.id.header_title);
+            RecyclerView recyclerView = inflatedView.findViewById(R.id.recycler_view);
             inflatedView.findViewById(R.id.cart_bottom).setVisibility(View.GONE);
             recyclerView.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
             recyclerView.setHasFixedSize(true);

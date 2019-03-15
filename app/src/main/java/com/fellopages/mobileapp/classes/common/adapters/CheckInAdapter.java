@@ -55,9 +55,9 @@ public class CheckInAdapter extends ArrayAdapter<CheckInList>{
             listItemHolder = new ListItemHolder();
             mRootView = inflater.inflate(mLayoutResID, parent, false);
 
-            listItemHolder.mLocationLabel = (TextView) mRootView.findViewById(R.id.locationLabel);
-            listItemHolder.mLocationIcon = (BezelImageView) mRootView.findViewById(R.id.location_icon);
-            listItemHolder.mLocationInfo = (TextView) mRootView.findViewById(R.id.formattedAddress);
+            listItemHolder.mLocationLabel = mRootView.findViewById(R.id.locationLabel);
+            listItemHolder.mLocationIcon = mRootView.findViewById(R.id.location_icon);
+            listItemHolder.mLocationInfo = mRootView.findViewById(R.id.formattedAddress);
             mRootView.setTag(listItemHolder);
 
         }else {

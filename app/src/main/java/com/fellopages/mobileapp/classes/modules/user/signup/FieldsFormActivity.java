@@ -77,9 +77,9 @@ public class FieldsFormActivity extends FormActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_creation_view);
 
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBar);
 
         mContext = this;
         mAppConst = new AppConstant(this);
@@ -108,7 +108,7 @@ public class FieldsFormActivity extends FormActivity {
 
         CustomViews.createMarqueeTitle(this, mToolBar);
 
-        mAccountFormView = (RelativeLayout) findViewById(R.id.form_view);
+        mAccountFormView = findViewById(R.id.form_view);
 
         try {
             mFieldsJsonObject = new JSONObject(getIntent().getStringExtra("fields"));
@@ -257,7 +257,7 @@ public class FieldsFormActivity extends FormActivity {
 
             mAppConst.postLoginSignUpRequest(UrlUtil.SIGNUP_OTP_SEND_URL, params, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mProgressBar.setVisibility(View.GONE);
 
                     if (jsonObject != null) {
@@ -270,7 +270,7 @@ public class FieldsFormActivity extends FormActivity {
                         int otpDuration = otpJsonObject.optInt("duration");
 
                         if (isOtpSend) {
-                            String sentTime = otpActivity.getCurrentDateTime();
+                            String sentTime = OTPActivity.getCurrentDateTime();
 
                             Intent otpIntent = new Intent(mContext, OTPActivity.class);
                             otpIntent.putExtra("isPhotoStep", isPhotoStep);

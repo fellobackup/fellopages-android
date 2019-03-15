@@ -505,7 +505,7 @@ public class FormActivity extends AppCompatActivity implements View.OnClickListe
             case ConstantVariables.EVENT_MENU_TITLE:
             case ConstantVariables.GROUP_MENU_TITLE:
             case ConstantVariables.ADVANCED_EVENT_MENU_TITLE:
-                final AppCompatCheckedTextView checkBox = (AppCompatCheckedTextView) _layout.findViewById(R.id.form_checkbox);
+                final AppCompatCheckedTextView checkBox = _layout.findViewById(R.id.form_checkbox);
                 if (checkBox != null) {
                     checkBox.setOnClickListener(new View.OnClickListener() {
                         @Override

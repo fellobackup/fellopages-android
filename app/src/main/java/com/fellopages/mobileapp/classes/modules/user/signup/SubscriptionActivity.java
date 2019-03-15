@@ -70,9 +70,9 @@ public class SubscriptionActivity extends FormActivity {
         mSignUpUrl = AppConstant.DEFAULT_URL + "signup?subscriptionForm=1";
         mSignUpUrl = mAppConst.buildQueryString(mSignUpUrl, mAppConst.getAuthenticationParams());
 
-        mAccountFormView = (RelativeLayout) findViewById(R.id.form_view);
+        mAccountFormView = findViewById(R.id.form_view);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         if(getSupportActionBar() != null){

@@ -113,10 +113,10 @@ public class SitePagePopularFragment extends Fragment implements
         rootView = inflater.inflate(R.layout.grid_view_layout, container, false);
         footerView = CustomViews.getFooterView(inflater);
 
-        spinnerLayout = (CardView) rootView.findViewById(R.id.eventFilterBlock);
-        spinner = (Spinner) rootView.findViewById(R.id.filter_view);
+        spinnerLayout = rootView.findViewById(R.id.eventFilterBlock);
+        spinner = rootView.findViewById(R.id.filter_view);
 
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mGridView = rootView.findViewById(R.id.gridView);
         mGridView.addFooterView(footerView);
         footerView.setVisibility(View.GONE);
 
@@ -137,7 +137,7 @@ public class SitePagePopularFragment extends Fragment implements
         mGridView.setOnItemClickListener(this);
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -285,8 +285,8 @@ public class SitePagePopularFragment extends Fragment implements
                     }
                 }else{
                     rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                    TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                    SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById
+                    TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                    SelectableTextView errorMessage = rootView.findViewById
                             (R.id.error_message);
                     errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                     errorIcon.setText("\uf15c");

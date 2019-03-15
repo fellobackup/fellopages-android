@@ -70,11 +70,11 @@ public class EditPersonalInfoFragment extends Fragment {
 
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.fragment_edit_personal_info, container, false);
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
+        mProgressBar = mRootView.findViewById(R.id.progressBar);
         mContext = getContext();
         mAppConst = new AppConstant(mContext);
 
-        mFormContainer = (RelativeLayout) mRootView.findViewById(R.id.create_form);
+        mFormContainer = mRootView.findViewById(R.id.create_form);
 
         if (getArguments() != null) {
             mEditProfileUrl = getArguments().getString("url");

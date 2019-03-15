@@ -139,24 +139,24 @@ public class InfoTabFragment extends Fragment implements View.OnClickListener {
         switch (mMLTViewType) {
             case ConstantVariables.BLOG_VIEW:
 
-                mSimpleViewLayout = (LinearLayout) mRootView.findViewById(R.id.simple_view_layout);
-                mCategory = (TextView) mRootView.findViewById(R.id.category);
-                mCoverTitle = (SelectableTextView) mRootView.findViewById(R.id.view_title);
-                mPostByText = (TextView) mRootView.findViewById(R.id.post_by_text);
-                mOwnerName = (TextView) mRootView.findViewById(R.id.listing_post_owner);
-                mListingPostDate = (TextView) mRootView.findViewById(R.id.listing_post_date);
+                mSimpleViewLayout = mRootView.findViewById(R.id.simple_view_layout);
+                mCategory = mRootView.findViewById(R.id.category);
+                mCoverTitle = mRootView.findViewById(R.id.view_title);
+                mPostByText = mRootView.findViewById(R.id.post_by_text);
+                mOwnerName = mRootView.findViewById(R.id.listing_post_owner);
+                mListingPostDate = mRootView.findViewById(R.id.listing_post_date);
                 mCategory.setOnClickListener(this);
                 mOwnerName.setOnClickListener(this);
                 break;
 
             case ConstantVariables.CLASSIFIED_VIEW_WITH_CAROUSEL:
-                mWriteReviewIcon = (TextView) mRootView.findViewById(R.id.review_icon);
-                mWriteReviewView = (TextView) mRootView.findViewById(R.id.review_text);
-                mAddWishListIcon = (TextView) mRootView.findViewById(R.id.wishlist_icon);
-                mWishListBlock = (LinearLayout) mRootView.findViewById(R.id.wishlist_block);
-                mApplyNowIcon = (TextView) mRootView.findViewById(R.id.apply_now_icon);
-                mApplyNowText = (TextView) mRootView.findViewById(R.id.apply_now);
-                mApplyNowBlock = (LinearLayout) mRootView.findViewById(R.id.apply_now_block);
+                mWriteReviewIcon = mRootView.findViewById(R.id.review_icon);
+                mWriteReviewView = mRootView.findViewById(R.id.review_text);
+                mAddWishListIcon = mRootView.findViewById(R.id.wishlist_icon);
+                mWishListBlock = mRootView.findViewById(R.id.wishlist_block);
+                mApplyNowIcon = mRootView.findViewById(R.id.apply_now_icon);
+                mApplyNowText = mRootView.findViewById(R.id.apply_now);
+                mApplyNowBlock = mRootView.findViewById(R.id.apply_now_block);
                 mRootView.findViewById(R.id.apply_now_block).setOnClickListener(this);
                 mRootView.findViewById(R.id.review_block).setOnClickListener(this);
                 mRootView.findViewById(R.id.wishlist_block).setOnClickListener(this);
@@ -167,16 +167,16 @@ public class InfoTabFragment extends Fragment implements View.OnClickListener {
                 mRootView.findViewById(R.id.wishlist_block).setVisibility(View.VISIBLE);
 
             case ConstantVariables.CLASSIFIED_VIEW_WITHOUT_CAROUSEL:
-                profileFieldLayout = (GridLayout) mRootView.findViewById(R.id.profileFieldLayout);
-                mOwnerImage = (ImageView) mRootView.findViewById(R.id.owner_image);
-                mOwnerName = (TextView) mRootView.findViewById(R.id.owner_title);
-                mOwnerDetailBlock = (LinearLayout) mRootView.findViewById(R.id.owner_detail_layout);
+                profileFieldLayout = mRootView.findViewById(R.id.profileFieldLayout);
+                mOwnerImage = mRootView.findViewById(R.id.owner_image);
+                mOwnerName = mRootView.findViewById(R.id.owner_title);
+                mOwnerDetailBlock = mRootView.findViewById(R.id.owner_detail_layout);
                 mOwnerName.setOnClickListener(this);
                 mOwnerImage.setOnClickListener(this);
                 break;
         }
-        mExpiryListingInfo = (TextView) mRootView.findViewById(R.id.expiryListingInfo);
-        mViewDescription = (WebView) mRootView.findViewById(R.id.view_description);
+        mExpiryListingInfo = mRootView.findViewById(R.id.expiryListingInfo);
+        mViewDescription = mRootView.findViewById(R.id.view_description);
         GlobalFunctions.setWebSettings(mViewDescription, false);
 
         layoutParams = CustomViews.getFullWidthLayoutParams();

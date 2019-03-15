@@ -89,7 +89,7 @@ public class ForumHome extends Fragment implements SwipeRefreshLayout.OnRefreshL
         mBrowseForumList = new ArrayList<>();
 
         rootView = inflater.inflate(R.layout.list_view_layout, container,false);
-        mListView = (ListView)rootView.findViewById(R.id.list_item_view);
+        mListView = rootView.findViewById(R.id.list_item_view);
         mForumListUrl = AppConstant.DEFAULT_URL+"forums";
 
         if( PreferencesUtils.getCurrentSelectedModule(mContext) != null &&
@@ -101,7 +101,7 @@ public class ForumHome extends Fragment implements SwipeRefreshLayout.OnRefreshL
                 R.layout.forum_home_item, mBrowseForumList,"ForumHome");
         mListView.setAdapter(mBrowseDataAdapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -210,8 +210,8 @@ public class ForumHome extends Fragment implements SwipeRefreshLayout.OnRefreshL
                 }
             } else {
                 rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+                TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
                 errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                 errorIcon.setText("\uf086");
                 errorMessage.setText(getActivity().getResources().getString(R.string.no_forum));

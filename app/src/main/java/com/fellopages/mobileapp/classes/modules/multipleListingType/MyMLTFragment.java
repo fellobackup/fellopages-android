@@ -147,13 +147,13 @@ public class MyMLTFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         // Inflating recycler layout.
         mRootView = inflater.inflate(R.layout.recycler_view_layout, container, false);
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // No data message views
-        messageLayout = (LinearLayout) mRootView.findViewById(R.id.message_layout);
-        errorIcon = (TextView) mRootView.findViewById(R.id.error_icon);
-        errorMessage = (SelectableTextView) mRootView.findViewById(R.id.error_message);
+        messageLayout = mRootView.findViewById(R.id.message_layout);
+        errorIcon = mRootView.findViewById(R.id.error_icon);
+        errorMessage = mRootView.findViewById(R.id.error_message);
         errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
 
 
@@ -163,7 +163,7 @@ public class MyMLTFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         else
             setLayoutManager(2);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = mRootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 

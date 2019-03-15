@@ -47,7 +47,7 @@ public class MessageViewAdapter extends RecyclerView.Adapter {
     private ImageLoader mImageLoader;
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 
     public MessageViewAdapter(Context context,List<Object> listItem,
@@ -147,10 +147,10 @@ public class MessageViewAdapter extends RecyclerView.Adapter {
             super(view);
             view.setClickable(true);
             container = view;
-            mOwnerImage = (BezelImageView) view.findViewById(R.id.senderImage);
-            mMessageDescription = (SelectableTextView) view.findViewById(R.id.messageDescription);
-            mOwnerTitle = (TextView) view.findViewById(R.id.ownerTitle);
-            mDateView = (SelectableTextView) view.findViewById(R.id.messageDate);
+            mOwnerImage = view.findViewById(R.id.senderImage);
+            mMessageDescription = view.findViewById(R.id.messageDescription);
+            mOwnerTitle = view.findViewById(R.id.ownerTitle);
+            mDateView = view.findViewById(R.id.messageDate);
         }
     }
 

@@ -101,7 +101,7 @@ public class MyMusicFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.recycler_view_layout, null);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // The number of Columns
@@ -165,7 +165,7 @@ public class MyMusicFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
         }
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -365,8 +365,8 @@ public class MyMusicFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
         }else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf001");
             errorMessage.setText(mContext.getResources().getString(R.string.no_music));

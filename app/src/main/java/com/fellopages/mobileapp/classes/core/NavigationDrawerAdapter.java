@@ -248,14 +248,14 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
         public MyViewHolder(View itemView) {
             super(itemView);
             container = itemView;
-            title = (TextView) itemView.findViewById(R.id.drawerTitle);
-            headerLayout = (LinearLayout) itemView.findViewById(R.id.headerLayout);
-            itemLayout = (LinearLayout) itemView
+            title = itemView.findViewById(R.id.drawerTitle);
+            headerLayout = itemView.findViewById(R.id.headerLayout);
+            itemLayout = itemView
                     .findViewById(R.id.itemLayout);
-            ItemName = (TextView) itemView
+            ItemName = itemView
                     .findViewById(R.id.drawer_itemName);
-            icon = (TextView) itemView.findViewById(R.id.drawer_icon);
-            count = (TextView) itemView.findViewById(R.id.material_drawer_badge);
+            icon = itemView.findViewById(R.id.drawer_icon);
+            count = itemView.findViewById(R.id.material_drawer_badge);
         }
     }
 
@@ -268,10 +268,10 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
-            tvUserName = (TextView) itemView.findViewById(R.id.user_name);
-            ivUserImage = (TopCropImageView) itemView.findViewById(R.id.cover_image);
-            ivProfileImage = (CircularImageView) itemView.findViewById(R.id.user_profile_image);
-            llDrawerHeader = (RelativeLayout) itemView.findViewById(R.id.material_drawer_account_header_text_section);
+            tvUserName = itemView.findViewById(R.id.user_name);
+            ivUserImage = itemView.findViewById(R.id.cover_image);
+            ivProfileImage = itemView.findViewById(R.id.user_profile_image);
+            llDrawerHeader = itemView.findViewById(R.id.material_drawer_account_header_text_section);
         }
     }
 

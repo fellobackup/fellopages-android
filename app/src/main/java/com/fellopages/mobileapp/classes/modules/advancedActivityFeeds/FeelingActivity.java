@@ -95,21 +95,21 @@ public class FeelingActivity extends AppCompatActivity implements TextWatcher {
      * Method to get views of this page.
      */
     private void getViews() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        etSearch = (EditText) findViewById(R.id.search_view);
+        mProgressBar = findViewById(R.id.progressBar);
+        etSearch = findViewById(R.id.search_view);
         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
         drawable.setColorFilter(ContextCompat.getColor(mContext, R.color.grey), PorterDuff.Mode.SRC_ATOP);
         etSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         etSearch.addTextChangedListener(this);
 
         // Getting recycler view
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.addItemDecoration(new LinearDividerItemDecorationUtil(mContext));
     }

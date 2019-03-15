@@ -167,33 +167,33 @@ public class CartViewAdapter extends RecyclerView.Adapter {
 
         public CartViewHolder(View itemView) {
             super(itemView);
-            storeTitle = (TextView) itemView.findViewById(R.id.store_title);
-            viewItemsBtn = (TextView) itemView.findViewById(R.id.view_products_btn);
-            productScrollView = (HorizontalScrollView) itemView.findViewById(R.id.item_layout);
-            mProductMainView = (LinearLayout) itemView.findViewById(R.id.product_view);
+            storeTitle = itemView.findViewById(R.id.store_title);
+            viewItemsBtn = itemView.findViewById(R.id.view_products_btn);
+            productScrollView = itemView.findViewById(R.id.item_layout);
+            mProductMainView = itemView.findViewById(R.id.product_view);
 
-            subTotalLabel = (TextView) itemView.findViewById(R.id.subtotal_amount_label);
-            subTotalAmount = (TextView) itemView.findViewById(R.id.sub_total_amount);
+            subTotalLabel = itemView.findViewById(R.id.subtotal_amount_label);
+            subTotalAmount = itemView.findViewById(R.id.sub_total_amount);
 
-            shippingCostView = (TableRow) itemView.findViewById(R.id.shipping_cost_view);
-            shippingMethodName = (TextView) itemView.findViewById(R.id.shipping_method_name);
-            shippingAmount = (TextView) itemView.findViewById(R.id.shipping_amount);
+            shippingCostView = itemView.findViewById(R.id.shipping_cost_view);
+            shippingMethodName = itemView.findViewById(R.id.shipping_method_name);
+            shippingAmount = itemView.findViewById(R.id.shipping_amount);
 
-            tavVatView = (TableRow) itemView.findViewById(R.id.taxVatView);
-            taxVat = (TextView) itemView.findViewById(R.id.taxVatAmount);
+            tavVatView = itemView.findViewById(R.id.taxVatView);
+            taxVat = itemView.findViewById(R.id.taxVatAmount);
 
-            couponDetailView = (TableRow) itemView.findViewById(R.id.couponView);
-            couponDiscount =(TextView) itemView.findViewById(R.id.discountAmount);
-            couponName = (TextView) itemView.findViewById(R.id.coupon_name);
+            couponDetailView = itemView.findViewById(R.id.couponView);
+            couponDiscount = itemView.findViewById(R.id.discountAmount);
+            couponName = itemView.findViewById(R.id.coupon_name);
 
-            totalAmountView = (TableRow) itemView.findViewById(R.id.total_amount_view);
-            totalAmount = (TextView) itemView.findViewById(R.id.remainingAmount);
+            totalAmountView = itemView.findViewById(R.id.total_amount_view);
+            totalAmount = itemView.findViewById(R.id.remainingAmount);
 
             dividerFirst = itemView.findViewById(R.id.cart_divider_first);
             dividerSecond = itemView.findViewById(R.id.cart_divider_second);
 
-            writeNote = (EditText) itemView.findViewById(R.id.write_note);
-            privateOrder = (CheckBox) itemView.findViewById(R.id.make_private);
+            writeNote = itemView.findViewById(R.id.write_note);
+            privateOrder = itemView.findViewById(R.id.make_private);
         }
     }
 }

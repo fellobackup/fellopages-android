@@ -241,19 +241,19 @@ public class ReviewAdapter extends RecyclerView.Adapter {
 
         private ReviewViewHolder(View itemView) {
             super(itemView);
-            reviewTitle = (TextView) itemView.findViewById(R.id.review_title);
-            reviewOwner = (TextView) itemView.findViewById(R.id.review_owner);
-            reviewDesc = (TextView) itemView.findViewById(R.id.review_description);
-            reviewDate = (TextView) itemView.findViewById(R.id.review_date);
-            reviewRating = (RatingBar) itemView.findViewById(R.id.smallRatingBar);
-            commentCount = (TextView) itemView.findViewById(R.id.comment_count);
-            likeCount = (TextView) itemView.findViewById(R.id.like_count);
-            reviewPros = (TextView) itemView.findViewById(R.id.review_pros);
-            reviewCons = (TextView) itemView.findViewById(R.id.review_cons);
-            reviewRecmd = (TextView) itemView.findViewById(R.id.review_recomn);
-            reviewOptions = (ImageView) itemView.findViewById(R.id.review_options);
-            likeButton = (ImageView) itemView.findViewById(R.id.like_button);
-            commentButton = (ImageView) itemView.findViewById(R.id.comment_icon);
+            reviewTitle = itemView.findViewById(R.id.review_title);
+            reviewOwner = itemView.findViewById(R.id.review_owner);
+            reviewDesc = itemView.findViewById(R.id.review_description);
+            reviewDate = itemView.findViewById(R.id.review_date);
+            reviewRating = itemView.findViewById(R.id.smallRatingBar);
+            commentCount = itemView.findViewById(R.id.comment_count);
+            likeCount = itemView.findViewById(R.id.like_count);
+            reviewPros = itemView.findViewById(R.id.review_pros);
+            reviewCons = itemView.findViewById(R.id.review_cons);
+            reviewRecmd = itemView.findViewById(R.id.review_recomn);
+            reviewOptions = itemView.findViewById(R.id.review_options);
+            likeButton = itemView.findViewById(R.id.like_button);
+            commentButton = itemView.findViewById(R.id.comment_icon);
         }
     }
 
@@ -267,11 +267,11 @@ public class ReviewAdapter extends RecyclerView.Adapter {
         private ReviewHeaderHolder(View itemView) {
             super(itemView);
             itemView.findViewById(R.id.ratingInfo).setVisibility(View.VISIBLE);
-            avgRatingBar = (RatingBar) itemView.findViewById(R.id.avgRatingBar);
-            userbaseText = (TextView) itemView.findViewById(R.id.userbaseText);
-            recommendedText = (TextView) itemView.findViewById(R.id.recommendedText);
-            updateReviewText = (TextView) itemView.findViewById(R.id.updateReviewText);
-            myRatingBar = (RatingBar) itemView.findViewById(R.id.myRatingBar);
+            avgRatingBar = itemView.findViewById(R.id.avgRatingBar);
+            userbaseText = itemView.findViewById(R.id.userbaseText);
+            recommendedText = itemView.findViewById(R.id.recommendedText);
+            updateReviewText = itemView.findViewById(R.id.updateReviewText);
+            myRatingBar = itemView.findViewById(R.id.myRatingBar);
             myRatingBlock = itemView.findViewById(R.id.myRatingBlock);
             avgRatingBlock = itemView.findViewById(R.id.avgRatingBlock);
             ratingBlock = itemView.findViewById(R.id.ratingBlock);
@@ -291,7 +291,7 @@ public class ReviewAdapter extends RecyclerView.Adapter {
 
         mAppConst.postJsonResponseForUrl(mLikeUnlikeUrl, likeParams, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+            public void onTaskCompleted(JSONObject jsonObject) {
                 if(!reviewInfoModel.isReviewLiked()) {
                     reviewInfoModel.setReviewLiked(true);
                     reviewInfoModel.setReviewLikes(String.valueOf(Integer.parseInt(reviewInfoModel.getReviewLikes()) + 1));

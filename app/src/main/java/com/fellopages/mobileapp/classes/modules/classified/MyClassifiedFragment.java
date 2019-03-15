@@ -105,7 +105,7 @@ public class MyClassifiedFragment extends Fragment implements SwipeRefreshLayout
         mAppConst.setOnCommunityAdsLoadedListener(MyClassifiedFragment.this);
 
         rootView = inflater.inflate(R.layout.recycler_view_layout,container,false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         // The number of Columns
@@ -166,7 +166,7 @@ public class MyClassifiedFragment extends Fragment implements SwipeRefreshLayout
 
         mClassifiedUrl = UrlUtil.MANAGE_CLASSIFIED_URL + "&page=" + pageNumber;
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -354,8 +354,8 @@ public class MyClassifiedFragment extends Fragment implements SwipeRefreshLayout
             }
         }else {
             rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById(R.id.error_message);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf022");
             errorMessage.setText(mContext.getResources().getString(R.string.no_classified));

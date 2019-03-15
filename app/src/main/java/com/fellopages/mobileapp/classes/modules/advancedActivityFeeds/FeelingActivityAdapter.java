@@ -97,8 +97,8 @@ public class FeelingActivityAdapter extends RecyclerView.Adapter<FeelingActivity
             super(view);
             container = view;
 
-            ivMainImage = (ImageView) view.findViewById(R.id.main_image);
-            tvTitle = (TextView) view.findViewById(R.id.title);
+            ivMainImage = view.findViewById(R.id.main_image);
+            tvTitle = view.findViewById(R.id.title);
         }
     }
 

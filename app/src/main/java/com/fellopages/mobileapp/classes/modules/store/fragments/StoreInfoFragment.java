@@ -56,9 +56,9 @@ public class StoreInfoFragment extends Fragment {
 
         ViewCompat.setNestedScrollingEnabled(rootView,true);
 
-        mDescriptionText = (WebView) rootView.findViewById(R.id.view_description);
-        mInfoFieldsView = (GridLayout) rootView.findViewById(R.id.info_fields);
-        mProfileInfoView = (LinearLayout) rootView.findViewById(R.id.profile_info_fields);
+        mDescriptionText = rootView.findViewById(R.id.view_description);
+        mInfoFieldsView = rootView.findViewById(R.id.info_fields);
+        mProfileInfoView = rootView.findViewById(R.id.profile_info_fields);
 
 
         mInfoExtras = getArguments();

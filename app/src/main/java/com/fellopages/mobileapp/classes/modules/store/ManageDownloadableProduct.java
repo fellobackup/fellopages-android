@@ -50,7 +50,7 @@ public class ManageDownloadableProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_downloadable_product);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,7 +64,7 @@ public class ManageDownloadableProduct extends AppCompatActivity {
             mTitle = getResources().getString(R.string.sample_files);
         }
         setTitle(mTitle);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_list);
+        mRecyclerView = findViewById(R.id.recycler_view_list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL));
@@ -81,8 +81,8 @@ public class ManageDownloadableProduct extends AppCompatActivity {
                 });
         mRecyclerView.setAdapter(mBrowseAdapter);
         mURLString = getIntent().getStringExtra("URL");
-        mProgressBar = (ProgressBar) findViewById(R.id.downloadable_progressBar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        mProgressBar = findViewById(R.id.downloadable_progressBar);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,8 +141,8 @@ public class ManageDownloadableProduct extends AppCompatActivity {
             }
         } else {
             findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-            TextView errorIcon = (TextView) findViewById(R.id.error_icon);
-            SelectableTextView errorMessage = (SelectableTextView) findViewById(R.id.error_message);
+            TextView errorIcon = findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = findViewById(R.id.error_message);
             errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
             errorIcon.setText("\uf019");
             errorMessage.setText(mContext.getResources().getString(R.string.no_downloadable_product_available));

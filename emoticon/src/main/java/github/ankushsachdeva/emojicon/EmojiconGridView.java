@@ -44,7 +44,7 @@ public class EmojiconGridView{
 		mEmojiconPopup = emojiconPopup;
 		rootView = inflater.inflate(R.layout.emojicon_grid, null);
 		setRecents(recents);
-		 GridView gridView = (GridView) rootView.findViewById(R.id.Emoji_GridView);
+		 GridView gridView = rootView.findViewById(R.id.Emoji_GridView);
 	        if (emojicons== null) {
 	            mData = People.DATA;
 	        } else {

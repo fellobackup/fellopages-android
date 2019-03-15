@@ -159,7 +159,7 @@ public class ChannelProfilePage extends AppCompatActivity implements AppBarLayou
                     + "&subject_id=" + mContentId;
             mAppConst.getJsonResponseFromUrl(getContentReactionsUrl, new OnResponseListener() {
                 @Override
-                public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                public void onTaskCompleted(JSONObject jsonObject) {
                     mReactionsObject = jsonObject;
                     JSONObject reactionsData = mReactionsObject.optJSONObject("reactions");
                     if (reactionsData != null) {
@@ -192,45 +192,45 @@ public class ChannelProfilePage extends AppCompatActivity implements AppBarLayou
     private void getViews() {
         //Header view
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.blank_string));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         mRootView = findViewById(R.id.main_content);
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        AppBarLayout appBarLayout = findViewById(R.id.appbar);
         appBarLayout.addOnOffsetChangedListener(this);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
 
         // Setup the Tabs
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        mSlidingTabs = (TabLayout) findViewById(R.id.slidingTabs);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        viewPager = findViewById(R.id.pager);
+        mSlidingTabs = findViewById(R.id.slidingTabs);
+        mProgressBar = findViewById(R.id.progressBar);
 
          // Like and Unlike Fields...
-        llLikeSubscribeBlock = (LinearLayout) findViewById(R.id.likeCommentContent);
-        mBottomToolBar = (SplitToolbar) findViewById(R.id.toolbarBottom);
-        tvLikeCount = (TextView) findViewById(R.id.likeCount);
-        tvCommentCount = (TextView) findViewById(R.id.commentCount);
-        ivReactionIcon = (ImageView) findViewById(R.id.reactionIcon);
-        tvLikeUnlike = (TextView) findViewById(R.id.likeUnlikeText);
-        tvSubscribe = (TextView) findViewById(R.id.commentText);
-        LinearLayout llLikeBlock = (LinearLayout) findViewById(R.id.likeBlock);
-        LinearLayout llSubscribeBlock = (LinearLayout) findViewById(R.id.commentBlock);
-        LinearLayout llCountContainer = (LinearLayout) findViewById(R.id.likeCommentBlock);
+        llLikeSubscribeBlock = findViewById(R.id.likeCommentContent);
+        mBottomToolBar = findViewById(R.id.toolbarBottom);
+        tvLikeCount = findViewById(R.id.likeCount);
+        tvCommentCount = findViewById(R.id.commentCount);
+        ivReactionIcon = findViewById(R.id.reactionIcon);
+        tvLikeUnlike = findViewById(R.id.likeUnlikeText);
+        tvSubscribe = findViewById(R.id.commentText);
+        LinearLayout llLikeBlock = findViewById(R.id.likeBlock);
+        LinearLayout llSubscribeBlock = findViewById(R.id.commentBlock);
+        LinearLayout llCountContainer = findViewById(R.id.likeCommentBlock);
         llLikeBlock.setOnClickListener(this);
         llLikeBlock.setOnLongClickListener(this);
         llSubscribeBlock.setOnClickListener(this);
         llCountContainer.setOnClickListener(this);
 
         // Getting the cover image and other views.
-        ivCoverImage = (ImageView) findViewById(R.id.coverImage);
-        ivProfileImage = (ImageView) findViewById(R.id.profile_image);
-        tvContentTitle = (TextView) findViewById(R.id.content_title);
-        tvCoverMenuIcon = (TextView) findViewById(R.id.cover_image_menus);
-        tvProfileMenuIcon = (TextView) findViewById(R.id.profile_image_menus);
-        tvToolBarTitle = (TextView) findViewById(R.id.toolbar_title);
+        ivCoverImage = findViewById(R.id.coverImage);
+        ivProfileImage = findViewById(R.id.profile_image);
+        tvContentTitle = findViewById(R.id.content_title);
+        tvCoverMenuIcon = findViewById(R.id.cover_image_menus);
+        tvProfileMenuIcon = findViewById(R.id.profile_image_menus);
+        tvToolBarTitle = findViewById(R.id.toolbar_title);
         tvToolBarTitle.setSelected(true);
         tvCoverMenuIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
         tvProfileMenuIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));

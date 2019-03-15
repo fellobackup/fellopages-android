@@ -81,13 +81,13 @@ public class ForumProfile extends AppCompatActivity implements SwipeRefreshLayou
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_view);
-        mListView = (ListView)findViewById(R.id.listView_forumProfile);
+        mListView = findViewById(R.id.listView_forumProfile);
         footerView = CustomViews.getFooterView(getLayoutInflater());
 
         mBrowseList = new BrowseListItems();
         mAppConst = new AppConstant(ForumProfile.this);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -116,7 +116,7 @@ public class ForumProfile extends AppCompatActivity implements SwipeRefreshLayou
                 R.layout.forum_profile_item, mBrowseForumList,"ForumProfile");
         mListView.setAdapter(mForumAdapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -274,8 +274,8 @@ public class ForumProfile extends AppCompatActivity implements SwipeRefreshLayou
 
             } else {
                 findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                TextView errorIcon = (TextView) findViewById(R.id.error_icon);
-                SelectableTextView errorMessage = (SelectableTextView) findViewById(R.id.error_message);
+                TextView errorIcon = findViewById(R.id.error_icon);
+                SelectableTextView errorMessage = findViewById(R.id.error_message);
                 errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(ForumProfile.this));
                 errorIcon.setText("\uf086");
                 errorMessage.setText(getResources().getString(R.string.no_forum_topic));

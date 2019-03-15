@@ -97,12 +97,12 @@ public class EditProfilePhotoFragment extends Fragment implements View.OnClickLi
 
         mEditPhotoUrl = AppConstant.DEFAULT_URL + "members/edit/photo";
 
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
-        mLinearLayout = (LinearLayout) mRootView.findViewById(R.id.profileImageBlock);
-        mUserProfileImage = (ImageView) mRootView.findViewById(R.id.userProfileImage);
-        mUploadPhotoButton = (Button) mRootView.findViewById(R.id.uploadImageButton);
-        mSavePhotoButton = (Button) mRootView.findViewById(R.id.savePhotoButton);
-        mCancelButton = (Button) mRootView.findViewById(R.id.cancelButton);
+        mProgressBar = mRootView.findViewById(R.id.progressBar);
+        mLinearLayout = mRootView.findViewById(R.id.profileImageBlock);
+        mUserProfileImage = mRootView.findViewById(R.id.userProfileImage);
+        mUploadPhotoButton = mRootView.findViewById(R.id.uploadImageButton);
+        mSavePhotoButton = mRootView.findViewById(R.id.savePhotoButton);
+        mCancelButton = mRootView.findViewById(R.id.cancelButton);
 
         mUploadPhotoButton.setOnClickListener(this);
         mSavePhotoButton.setOnClickListener(this);

@@ -1299,7 +1299,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                         public void onTaskCompleted(JSONObject jsonObject) {
                                             mAppConst.hideProgressDialog();
                                             if (mHiddenFeeds.contains(viewHolder.getAdapterPosition())) {
-                                                mHiddenFeeds.remove(mHiddenFeeds.indexOf(viewHolder.getAdapterPosition()));
+                                                mHiddenFeeds.remove(viewHolder.getAdapterPosition());
                                             }
                                             mAllHiddenFeeds.clear();
                                             notifyDataSetChanged();
@@ -1598,7 +1598,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                                 headerViewHolder.thirdFilterBlock,
                                                 headerViewHolder.forthFilterBlock);
                                         View inflateView = inflater.inflate(R.layout.fragmen_cart, null);
-                                        RecyclerView recyclerView = (RecyclerView) inflateView.findViewById(R.id.recycler_view);
+                                        RecyclerView recyclerView = inflateView.findViewById(R.id.recycler_view);
                                         inflateView.findViewById(R.id.cart_bottom).setVisibility(View.GONE);
                                         recyclerView.getLayoutParams().height = RecyclerView.LayoutParams.WRAP_CONTENT;
                                         recyclerView.setHasFixedSize(true);
@@ -2592,7 +2592,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                     args.putString(ConstantVariables.VIDEO_URL, videoInfoObject.optString("attachment_video_url"));
                                     args.putInt(ConstantVariables.VIDEO_TYPE, videoInfoObject.optInt("attachment_video_type"));
                                     lightBox.putExtras(args);
-                                    ((Activity) mContext).startActivity(lightBox);
+                                    mContext.startActivity(lightBox);
                                     ((Activity) mContext).overridePendingTransition(R.anim.slide_up_in, R.anim.push_down_out);
                                 }
                             });
@@ -3560,7 +3560,6 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             } else {
                 mLikeCommentsUrl += "?subject_type=" + mSubjectType +
                         "&subject_id=" + mFeedSubjectId;
-                ;
             }
         } else {
             //Changing url for the activity_action.
@@ -4550,62 +4549,62 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
 
             /* Feed Body Info Fields */
-            mFeedBlock = (LinearLayout) itemView.findViewById(R.id.activityFeedBlock);
-            mFeedUploader = (LinearLayout) itemView.findViewById(R.id.feed_uploader);
-            mFeedProfileImage = (BezelImageView) itemView.findViewById(R.id.profile_image);
-            mFeedTitle = (TextView) itemView.findViewById(R.id.feed_title);
-            mFeedTitleBody = (EmojiconTextView) itemView.findViewById(R.id.feed_body);
-            mFeedMenusIcon = (ActionIconButton) itemView.findViewById(R.id.feed_menu);
-            mFeedPostedTime = (SelectableTextView) itemView.findViewById(R.id.feed_time);
-            mCounterView = (RelativeLayout) itemView.findViewById(R.id.counts_container);
+            mFeedBlock = itemView.findViewById(R.id.activityFeedBlock);
+            mFeedUploader = itemView.findViewById(R.id.feed_uploader);
+            mFeedProfileImage = itemView.findViewById(R.id.profile_image);
+            mFeedTitle = itemView.findViewById(R.id.feed_title);
+            mFeedTitleBody = itemView.findViewById(R.id.feed_body);
+            mFeedMenusIcon = itemView.findViewById(R.id.feed_menu);
+            mFeedPostedTime = itemView.findViewById(R.id.feed_time);
+            mCounterView = itemView.findViewById(R.id.counts_container);
             mCountSaperator = itemView.findViewById(R.id.counts_saperator);
-            mPopularReactionsView = (LinearLayout) itemView.findViewById(R.id.popularReactionIcons);
-            llTitleView = (LinearLayout) itemView.findViewById(R.id.title_view);
-            mReactionImage = (ImageView) itemView.findViewById(R.id.reactionIcon);
-            tvPinnedView = (TextView) itemView.findViewById(R.id.pinned_tag);
-            tvPostSchedule = (TextView) itemView.findViewById(R.id.tv_post_schedule);
+            mPopularReactionsView = itemView.findViewById(R.id.popularReactionIcons);
+            llTitleView = itemView.findViewById(R.id.title_view);
+            mReactionImage = itemView.findViewById(R.id.reactionIcon);
+            tvPinnedView = itemView.findViewById(R.id.pinned_tag);
+            tvPostSchedule = itemView.findViewById(R.id.tv_post_schedule);
 
             /*
             Feed Attachment Fields
              */
             // Music and link attachment fields.
-            mMusicAndLinkAttachmentImage = (ImageView) itemView.findViewById(R.id.attachment_preview_link_music);
-            mMusicAttachmentView = (LinearLayout) itemView.findViewById(R.id.attachment_view_link_music);
+            mMusicAndLinkAttachmentImage = itemView.findViewById(R.id.attachment_preview_link_music);
+            mMusicAttachmentView = itemView.findViewById(R.id.attachment_view_link_music);
             mMusicAttachmentTitle = (NameView) itemView.findViewById(R.id.attachment_title_link_music);
-            mMusicAttachmentBody = (TextView) itemView.findViewById(R.id.attachment_body_link_music);
+            mMusicAttachmentBody = itemView.findViewById(R.id.attachment_body_link_music);
 
-            mAttachmentPreviewBlock = (RelativeLayout) itemView.findViewById(R.id.attachment_preview_layout);
-            mAttachmentImage = (ImageView) itemView.findViewById(R.id.attachment_preview);
-            mPlayIcon = (ImageView) itemView.findViewById(R.id.play_button);
-            mAttachmentView = (LinearLayout) itemView.findViewById(R.id.attachment_view);
+            mAttachmentPreviewBlock = itemView.findViewById(R.id.attachment_preview_layout);
+            mAttachmentImage = itemView.findViewById(R.id.attachment_preview);
+            mPlayIcon = itemView.findViewById(R.id.play_button);
+            mAttachmentView = itemView.findViewById(R.id.attachment_view);
             mAttachmentTitle = (NameView) itemView.findViewById(R.id.attachment_title);
-            mAttachmentBody = (SelectableTextView) itemView.findViewById(R.id.attachment_body);
-            mAttachmentUrlView = (SelectableTextView) itemView.findViewById(R.id.attachment_url_view);
-            mSingleAttachmentImage = (ImageView) itemView.findViewById(R.id.singleAlbumPhoto);
-            mImagesGallery = (RecyclerView) itemView.findViewById(R.id.image_preview);
-            hashTagView = (TextView) itemView.findViewById(R.id.hashTag_view);
-            rlSingleImageLayout = (RelativeLayout) itemView.findViewById(R.id.single_attachment_layout);
-            ivGifIcon = (ImageView) itemView.findViewById(R.id.gif_icon);
-            pbPlaceHolder = (ProgressBar) itemView.findViewById(R.id.holder_progress_bar);
-            feedUploadProgress = (ProgressBar) itemView.findViewById(R.id.feed_upload_progressbar);
-            processingRequest = (ProgressBar) itemView.findViewById(R.id.processing_request);
-            mProgressPercentage = (TextView) itemView.findViewById(R.id.upload_progress);
-            mCancelUpload = (ImageView) itemView.findViewById(R.id.cancel_upload);
-            tvPrice = (TextView) itemView.findViewById(R.id.price_text);
-            tvLocation = (TextView) itemView.findViewById(R.id.location);
-            ivSticker = (ImageView) itemView.findViewById(R.id.iv_sticker);
+            mAttachmentBody = itemView.findViewById(R.id.attachment_body);
+            mAttachmentUrlView = itemView.findViewById(R.id.attachment_url_view);
+            mSingleAttachmentImage = itemView.findViewById(R.id.singleAlbumPhoto);
+            mImagesGallery = itemView.findViewById(R.id.image_preview);
+            hashTagView = itemView.findViewById(R.id.hashTag_view);
+            rlSingleImageLayout = itemView.findViewById(R.id.single_attachment_layout);
+            ivGifIcon = itemView.findViewById(R.id.gif_icon);
+            pbPlaceHolder = itemView.findViewById(R.id.holder_progress_bar);
+            feedUploadProgress = itemView.findViewById(R.id.feed_upload_progressbar);
+            processingRequest = itemView.findViewById(R.id.processing_request);
+            mProgressPercentage = itemView.findViewById(R.id.upload_progress);
+            mCancelUpload = itemView.findViewById(R.id.cancel_upload);
+            tvPrice = itemView.findViewById(R.id.price_text);
+            tvLocation = itemView.findViewById(R.id.location);
+            ivSticker = itemView.findViewById(R.id.iv_sticker);
 
             mImagesGallery.setHasFixedSize(true);
             mImagesGallery.setItemAnimator(new DefaultItemAnimator());
             mImagesGallery.addItemDecoration(new SpaceItemDecoration(5));
 
-            mMultiPhotoRecyclerView = (RecyclerView) itemView.findViewById(R.id.multi_photo_recycler);
+            mMultiPhotoRecyclerView = itemView.findViewById(R.id.multi_photo_recycler);
             mMultiPhotoRecyclerView.setHasFixedSize(true);
             mMultiPhotoRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mMultiPhotoRecyclerView.setNestedScrollingEnabled(false);
             ((SimpleItemAnimator) mMultiPhotoRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
 
-            sellPhotosRecyclerView = (RecyclerView) itemView.findViewById(R.id.sell_image_preview);
+            sellPhotosRecyclerView = itemView.findViewById(R.id.sell_image_preview);
             sellPhotosRecyclerView.setHasFixedSize(true);
             sellPhotosRecyclerView.setItemAnimator(new DefaultItemAnimator());
             ((SimpleItemAnimator) sellPhotosRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -4615,13 +4614,13 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             /*
             Like and Comment Fields
              */
-            mLikeCount = (ThemedTextView) itemView.findViewById(R.id.like_count);
-            mCommentCount = (ThemedTextView) itemView.findViewById(R.id.comment_count);
+            mLikeCount = itemView.findViewById(R.id.like_count);
+            mCommentCount = itemView.findViewById(R.id.comment_count);
 
-            mShareButton = (ActionIconThemedTextView) itemView.findViewById(R.id.share_button);
-            mLikeButton = (ActionIconThemedTextView) itemView.findViewById(R.id.like_button);
-            mCommentButton = (ActionIconThemedTextView) itemView.findViewById(R.id.comment_button);
-            mSaveFeedButton = (ActionIconThemedTextView) itemView.findViewById(R.id.save_feed_button);
+            mShareButton = itemView.findViewById(R.id.share_button);
+            mLikeButton = itemView.findViewById(R.id.like_button);
+            mCommentButton = itemView.findViewById(R.id.comment_button);
+            mSaveFeedButton = itemView.findViewById(R.id.save_feed_button);
             mLikeBlock = itemView.findViewById(R.id.like_view);
             mCommentBlock = itemView.findViewById(R.id.comment_view);
             mShareBlock = itemView.findViewById(R.id.share_view);
@@ -4632,16 +4631,16 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             /*
             Feed Footer Menu Fields
              */
-            mFeedFooterMenusBlock = (LinearLayout) itemView.findViewById(R.id.feedFooterMenusBlock);
+            mFeedFooterMenusBlock = itemView.findViewById(R.id.feedFooterMenusBlock);
 
             /* Shared feed layout fields */
-            mShareFeedContainer = (RelativeLayout) itemView.findViewById(R.id.share_feed_container);
-            mShareFeedIcon = (BezelImageView) itemView.findViewById(R.id.share_feed_icon);
-            mShareFeedTitle = (TextView) itemView.findViewById(R.id.share_feed_title);
-            mShareFeedTime = (TextView) itemView.findViewById(R.id.share_feed_time);
-            mShareFeedMenuIcon = (ActionIconButton) itemView.findViewById(R.id.share_feed_menu);
-            mShareFeedBody = (EmojiconTextView) itemView.findViewById(R.id.share_feed_body);
-            mShareFeedDivider = (View) itemView.findViewById(R.id.share_feed_divider);
+            mShareFeedContainer = itemView.findViewById(R.id.share_feed_container);
+            mShareFeedIcon = itemView.findViewById(R.id.share_feed_icon);
+            mShareFeedTitle = itemView.findViewById(R.id.share_feed_title);
+            mShareFeedTime = itemView.findViewById(R.id.share_feed_time);
+            mShareFeedMenuIcon = itemView.findViewById(R.id.share_feed_menu);
+            mShareFeedBody = itemView.findViewById(R.id.share_feed_body);
+            mShareFeedDivider = itemView.findViewById(R.id.share_feed_divider);
 
         }
     }
@@ -4656,8 +4655,8 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
         public HiddenItemHolder(View itemView) {
             super(itemView);
-            mHiddenFeedBody = (SelectableTextView) itemView.findViewById(R.id.hiddenFeedBody);
-            mHiddenFeedOptions = (TextView) itemView.findViewById(R.id.hiddenFeedOptions);
+            mHiddenFeedBody = itemView.findViewById(R.id.hiddenFeedBody);
+            mHiddenFeedOptions = itemView.findViewById(R.id.hiddenFeedOptions);
             itemView.setBackgroundResource(R.color.white);
         }
     }
@@ -4687,22 +4686,22 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
         public HeaderViewHolder(Context context, View v) {
             super(v);
-            mUserProfileImage = (BezelImageView) v.findViewById(R.id.userProfileImage);
-            mVideoMenu = (LinearLayout) v.findViewById(R.id.videoMenu);
-            mVideoMenuIcon = (TextView) v.findViewById(R.id.videoMenuIcon);
-            mVideoMenuText = (TextView) v.findViewById(R.id.videoMenuText);
-            mPhotoMenuIcon = (TextView) v.findViewById(R.id.photoMenuIcon);
-            mPhotoMenuText = (TextView) v.findViewById(R.id.photoMenuText);
-            mPhotoMenu = (LinearLayout) v.findViewById(R.id.photoMenu);
-            mCheckInMenu = (LinearLayout) v.findViewById(R.id.checkInMenu);
-            mCheckInMenuIcon = (TextView) v.findViewById(R.id.checkInMenuIcon);
-            mCheckInMenuText = (TextView) v.findViewById(R.id.checkInMenuText);
-            mPostFeedOptions = (LinearLayout) v.findViewById(R.id.postFeedLayout);
-            mStatusTextLayout = (LinearLayout) v.findViewById(R.id.status_text_layout);
-            mStatusUpdateText = (TextView) v.findViewById(R.id.status_update_text);
-            mNoFeedMessage = (SelectableTextView) v.findViewById(R.id.noFeedMessage);
+            mUserProfileImage = v.findViewById(R.id.userProfileImage);
+            mVideoMenu = v.findViewById(R.id.videoMenu);
+            mVideoMenuIcon = v.findViewById(R.id.videoMenuIcon);
+            mVideoMenuText = v.findViewById(R.id.videoMenuText);
+            mPhotoMenuIcon = v.findViewById(R.id.photoMenuIcon);
+            mPhotoMenuText = v.findViewById(R.id.photoMenuText);
+            mPhotoMenu = v.findViewById(R.id.photoMenu);
+            mCheckInMenu = v.findViewById(R.id.checkInMenu);
+            mCheckInMenuIcon = v.findViewById(R.id.checkInMenuIcon);
+            mCheckInMenuText = v.findViewById(R.id.checkInMenuText);
+            mPostFeedOptions = v.findViewById(R.id.postFeedLayout);
+            mStatusTextLayout = v.findViewById(R.id.status_text_layout);
+            mStatusUpdateText = v.findViewById(R.id.status_update_text);
+            mNoFeedMessage = v.findViewById(R.id.noFeedMessage);
 
-            storyRecyclerView = (RecyclerView) v.findViewById(R.id.story_recyclerview);
+            storyRecyclerView = v.findViewById(R.id.story_recyclerview);
             ((SimpleItemAnimator) storyRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
             storyRecyclerView.setHasFixedSize(true);
             storyRecyclerView.setLayoutManager(
@@ -4711,17 +4710,17 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             greetingView = v.findViewById(R.id.greetings_view);
             dividerView = v.findViewById(R.id.divider);
             birthdayView = v.findViewById(R.id.birthday_view);
-            ivUserProfile = (ImageView) v.findViewById(R.id.user_profile_image);
-            ivBVCancel = (ImageView) v.findViewById(R.id.birthday_cancel);
-            tvUserName = (TextView) v.findViewById(R.id.user_name);
-            tvBirthdayDescription = (TextView) v.findViewById(R.id.birthday_description);
-            tvWritePost = (TextView) v.findViewById(R.id.write_post);
-            tvSendMessage = (TextView) v.findViewById(R.id.send_message);
-            llFooterBlock = (LinearLayout) v.findViewById(R.id.birthday_footer_block);
-            llPostBlock = (LinearLayout) v.findViewById(R.id.write_post_layout);
-            llMessageBlock = (LinearLayout) v.findViewById(R.id.message_layout);
-            mGreetingWebView = (WebView) v.findViewById(R.id.greeting_web_view);
-            ivCancel = (ImageView) v.findViewById(R.id.cancel);
+            ivUserProfile = v.findViewById(R.id.user_profile_image);
+            ivBVCancel = v.findViewById(R.id.birthday_cancel);
+            tvUserName = v.findViewById(R.id.user_name);
+            tvBirthdayDescription = v.findViewById(R.id.birthday_description);
+            tvWritePost = v.findViewById(R.id.write_post);
+            tvSendMessage = v.findViewById(R.id.send_message);
+            llFooterBlock = v.findViewById(R.id.birthday_footer_block);
+            llPostBlock = v.findViewById(R.id.write_post_layout);
+            llMessageBlock = v.findViewById(R.id.message_layout);
+            mGreetingWebView = v.findViewById(R.id.greeting_web_view);
+            ivCancel = v.findViewById(R.id.cancel);
             GlobalFunctions.setWebSettings(mGreetingWebView, false);
 
             /**
@@ -4735,21 +4734,21 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             thirdFilterBlock = v.findViewById(R.id.third_filter);
             forthFilterBlock = v.findViewById(R.id.forth_filter);
             moreFilterBlock = v.findViewById(R.id.more_filter);
-            tvFirstFilterIcon = (TextView) firstFilterBlock.findViewById(R.id.filter_icon);
-            tvFirstFilter = (TextView) firstFilterBlock.findViewById(R.id.filter_title);
-            ivBgShapeFirstFilter = (ImageView) firstFilterBlock.findViewById(R.id.iv_bg);
-            tvSecondFilterIcon = (TextView) secondFilterBlock.findViewById(R.id.filter_icon);
-            tvSecondFilter = (TextView) secondFilterBlock.findViewById(R.id.filter_title);
-            ivBgShapeSecondFilter = (ImageView) secondFilterBlock.findViewById(R.id.iv_bg);
-            tvThirdFilterIcon = (TextView) thirdFilterBlock.findViewById(R.id.filter_icon);
-            tvThirdFilter = (TextView) thirdFilterBlock.findViewById(R.id.filter_title);
-            ivBgShapeThirdFilter = (ImageView) thirdFilterBlock.findViewById(R.id.iv_bg);
-            tvForthFilterIcon = (TextView) forthFilterBlock.findViewById(R.id.filter_icon);
-            tvForthFilter = (TextView) forthFilterBlock.findViewById(R.id.filter_title);
-            ivBgShapeForthFilter = (ImageView) forthFilterBlock.findViewById(R.id.iv_bg);
-            tvMoreIcon = (TextView) moreFilterBlock.findViewById(R.id.filter_icon);
-            tvMore = (TextView) moreFilterBlock.findViewById(R.id.filter_title);
-            ivBgShapeMoreFilter = (ImageView) moreFilterBlock.findViewById(R.id.iv_bg);
+            tvFirstFilterIcon = firstFilterBlock.findViewById(R.id.filter_icon);
+            tvFirstFilter = firstFilterBlock.findViewById(R.id.filter_title);
+            ivBgShapeFirstFilter = firstFilterBlock.findViewById(R.id.iv_bg);
+            tvSecondFilterIcon = secondFilterBlock.findViewById(R.id.filter_icon);
+            tvSecondFilter = secondFilterBlock.findViewById(R.id.filter_title);
+            ivBgShapeSecondFilter = secondFilterBlock.findViewById(R.id.iv_bg);
+            tvThirdFilterIcon = thirdFilterBlock.findViewById(R.id.filter_icon);
+            tvThirdFilter = thirdFilterBlock.findViewById(R.id.filter_title);
+            ivBgShapeThirdFilter = thirdFilterBlock.findViewById(R.id.iv_bg);
+            tvForthFilterIcon = forthFilterBlock.findViewById(R.id.filter_icon);
+            tvForthFilter = forthFilterBlock.findViewById(R.id.filter_title);
+            ivBgShapeForthFilter = forthFilterBlock.findViewById(R.id.iv_bg);
+            tvMoreIcon = moreFilterBlock.findViewById(R.id.filter_icon);
+            tvMore = moreFilterBlock.findViewById(R.id.filter_title);
+            ivBgShapeMoreFilter = moreFilterBlock.findViewById(R.id.iv_bg);
 
         }
     }
@@ -4762,9 +4761,9 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
         public PeopleSuggestionViewHolder(View view) {
             super(view);
-            mSuggestionRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_list);
-            tvSeeAll = (TextView) view.findViewById(R.id.tv_see_all);
-            mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+            mSuggestionRecyclerView = view.findViewById(R.id.recycler_view_list);
+            tvSeeAll = view.findViewById(R.id.tv_see_all);
+            mProgressBar = view.findViewById(R.id.progressBar);
         }
     }
 

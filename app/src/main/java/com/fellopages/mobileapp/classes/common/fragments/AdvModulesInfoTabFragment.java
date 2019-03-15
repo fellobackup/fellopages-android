@@ -90,22 +90,22 @@ public class AdvModulesInfoTabFragment extends Fragment implements View.OnClickL
 
         layoutParams = CustomViews.getFullWidthLayoutParams();
 
-        profileFieldLayout = (GridLayout) mRootView.findViewById(R.id.profileFieldLayout);
-        mOwnerDetailBlock = (LinearLayout) mRootView.findViewById(R.id.owner_detail_layout);
-        mOwnerImage = (ImageView) mRootView.findViewById(R.id.owner_image);
-        mOwnerName = (TextView) mRootView.findViewById(R.id.owner_title);
+        profileFieldLayout = mRootView.findViewById(R.id.profileFieldLayout);
+        mOwnerDetailBlock = mRootView.findViewById(R.id.owner_detail_layout);
+        mOwnerImage = mRootView.findViewById(R.id.owner_image);
+        mOwnerName = mRootView.findViewById(R.id.owner_title);
         mOwnerName.setOnClickListener(this);
         mOwnerImage.setOnClickListener(this);
 
-        mContactIcon = (TextView) mRootView.findViewById(R.id.contact_info_icon);
-        mContactText = (TextView) mRootView.findViewById(R.id.contact_info_text);
+        mContactIcon = mRootView.findViewById(R.id.contact_info_icon);
+        mContactText = mRootView.findViewById(R.id.contact_info_text);
 
-        mFollowIcon = (TextView) mRootView.findViewById(R.id.follow_icon);
-        mFollowText = (TextView) mRootView.findViewById(R.id.follow_text);
+        mFollowIcon = mRootView.findViewById(R.id.follow_icon);
+        mFollowText = mRootView.findViewById(R.id.follow_text);
 
-        mReviewBlock = (LinearLayout) mRootView.findViewById(R.id.review_block);
-        mWriteReviewIcon = (TextView) mRootView.findViewById(R.id.review_icon);
-        mWriteReviewView = (TextView) mRootView.findViewById(R.id.review_text);
+        mReviewBlock = mRootView.findViewById(R.id.review_block);
+        mWriteReviewIcon = mRootView.findViewById(R.id.review_icon);
+        mWriteReviewView = mRootView.findViewById(R.id.review_text);
 
         mRootView.findViewById(R.id.contact_info_block).setOnClickListener(this);
         mRootView.findViewById(R.id.review_block).setOnClickListener(this);
@@ -115,7 +115,7 @@ public class AdvModulesInfoTabFragment extends Fragment implements View.OnClickL
         mFollowIcon.setTypeface(fontIcon);
         mWriteReviewIcon.setTypeface(fontIcon);
 
-        mViewDescription = (WebView) mRootView.findViewById(R.id.view_description);
+        mViewDescription = mRootView.findViewById(R.id.view_description);
 
         //Set data in views
         setDataInViews(mResponseJsonObject);

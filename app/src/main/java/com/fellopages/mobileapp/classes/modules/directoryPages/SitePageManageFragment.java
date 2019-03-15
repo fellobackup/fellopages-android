@@ -102,7 +102,7 @@ public class SitePageManageFragment extends Fragment implements AdapterView.OnIt
 
         isVisibleToUser = false;
 
-        mGridView = (GridViewWithHeaderAndFooter) rootView.findViewById(R.id.gridView);
+        mGridView = rootView.findViewById(R.id.gridView);
 
         mCurrentSelectedModule = PreferencesUtils.getCurrentSelectedModule(mContext);
         if(mCurrentSelectedModule != null && !mCurrentSelectedModule.equals("sitepage")){
@@ -121,7 +121,7 @@ public class SitePageManageFragment extends Fragment implements AdapterView.OnIt
                 null, SitePageManageFragment.this);
         mGridView.setAdapter(mManageDataAdapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -344,8 +344,8 @@ public class SitePageManageFragment extends Fragment implements AdapterView.OnIt
                 }
             } else {
                 rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
-                TextView errorIcon = (TextView) rootView.findViewById(R.id.error_icon);
-                SelectableTextView errorMessage = (SelectableTextView) rootView.findViewById
+                TextView errorIcon = rootView.findViewById(R.id.error_icon);
+                SelectableTextView errorMessage = rootView.findViewById
                         (R.id.error_message);
                 errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
                 errorIcon.setText("\uf15c");

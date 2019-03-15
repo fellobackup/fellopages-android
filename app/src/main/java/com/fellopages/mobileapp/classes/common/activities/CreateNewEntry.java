@@ -145,7 +145,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
 
         /* Create Back Button On Action Bar **/
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -155,8 +155,8 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
         mSelectedMusicFiles = new ArrayList<>();
         mHashMap = new HashMap<>();
 
-        createFormView = (RelativeLayout)findViewById(R.id.form_view);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        createFormView = findViewById(R.id.form_view);
+        mProgressBar = findViewById(R.id.progressBar);
         mIsAddVideoToNewChannel = getIntent().getBooleanExtra("add_to_new_channel", false);
         mChannelId = getIntent().getIntExtra("channel_id", 0);
         mCreateFormUrl = getIntent().getStringExtra(ConstantVariables.CREATE_URL);
@@ -360,8 +360,8 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                     createFormView.addView(generateForm(jsonObject.put("userlist", Status.USER_LIST_ARRAY), true, "userlist"));
                 } else {
                     View errorView = LayoutInflater.from(mContext).inflate(R.layout.error_view, null);
-                    TextView tvErrorMessage = (TextView) errorView.findViewById(R.id.error_message);
-                    TextView tvAction = (TextView) errorView.findViewById(R.id.action);
+                    TextView tvErrorMessage = errorView.findViewById(R.id.error_message);
+                    TextView tvAction = errorView.findViewById(R.id.action);
                     tvAction.setVisibility(View.VISIBLE);
                     errorView.findViewById(R.id.error_icon).setVisibility(View.GONE);
                     tvErrorMessage.setTextColor(ContextCompat.getColor(mContext, R.color.black));
@@ -821,7 +821,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
 
                     InitializeColumnWidth(4);
                     final List<ImageViewList> photoUrls = new ArrayList<>();
-                    final RecyclerView resultRecyclerView = (RecyclerView) mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
+                    final RecyclerView resultRecyclerView = mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
                     resultRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,
                             LinearLayoutManager.HORIZONTAL, false));
                     mCustomImageAdapter = new CustomImageAdapter(CreateNewEntry.this, photoUrls, columnWidth, new OnCancelClickListener() {
@@ -856,8 +856,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                 }
                 break;
             case ConstantVariables.REQUEST_VIDEO_CODE:
-                if((resultCode == RESULT_OK && data != null)
-                        || (resultCode == RESULT_OK )) {
+                if(resultCode == RESULT_OK) {
                     setAttachedVideo(data);
 
                 } else if (resultCode != RESULT_CANCELED) {
@@ -878,7 +877,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
 
                             InitializeColumnWidth(12);
                             final List<ImageViewList> photoUrls = new ArrayList<>();
-                            final RecyclerView resultRecyclerView = (RecyclerView) mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
+                            final RecyclerView resultRecyclerView = mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
                             resultRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
                             mMusicImageAdapter = new CustomImageAdapter(CreateNewEntry.this, photoUrls, columnWidth,
                                     new OnCancelClickListener() {
@@ -957,7 +956,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                     FormActivity.overviewText = data.getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE);
                     if (FormActivity._layout != null) {
                         View overView = FormActivity._layout.findViewWithTag("overview");
-                        EditText etOverView = (EditText) overView.findViewById(R.id.field_value);
+                        EditText etOverView = overView.findViewById(R.id.field_value);
                         CustomViews.setEditText(etOverView, FormActivity.overviewText);
                     }
                 }
@@ -1001,7 +1000,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                     if (FormActivity._layout != null && resultCode == ConstantVariables.SELECT_PRODUCT_RETURN_CODE) {
                         FormActivity.selectedProducts = data.getStringArrayListExtra(ConstantVariables.SELECT_PRODUCT);
                         View overView = FormActivity._layout.findViewWithTag("product_search");
-                        EditText etOverView = (EditText) overView.findViewById(R.id.field_value);
+                        EditText etOverView = overView.findViewById(R.id.field_value);
                         CustomViews.setEditText(etOverView, FormActivity.selectedProducts.size() +" "+getResources().getString(R.string.select_a_file));
                     }
                 break;
@@ -1018,7 +1017,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                         fileDescription = "<b>" + fileDescription + "</b><br/>" + getResources().getString(R.string.file_uploading_message);
                         InitializeColumnWidth(10);
                         final List<ImageViewList> photoUrls = new ArrayList<>();
-                        final RecyclerView resultRecyclerView = (RecyclerView) mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
+                        final RecyclerView resultRecyclerView = mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
                         resultRecyclerView.setLayoutManager(new LinearLayoutManager(CreateNewEntry.this));
                         CustomImageAdapter customImageAdapter = new CustomImageAdapter(CreateNewEntry.this,
                                 photoUrls, columnWidth, new OnCancelClickListener() {
@@ -1115,7 +1114,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
             fileDescription = "<b>" + fileDescription + "</b><br/>" + getResources().getString(R.string.video_uploading_message);
             InitializeColumnWidth(10);
             final List<ImageViewList> photoUrls = new ArrayList<>();
-            final RecyclerView resultRecyclerView = (RecyclerView) mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
+            final RecyclerView resultRecyclerView = mSelectFileInflatedView.findViewById(R.id.recycler_view_list);
             resultRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             CustomImageAdapter customImageAdapter = new CustomImageAdapter(CreateNewEntry.this,
                     photoUrls, columnWidth, new OnCancelClickListener() {

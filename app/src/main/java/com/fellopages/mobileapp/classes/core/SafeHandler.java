@@ -41,7 +41,7 @@ public class SafeHandler extends AppCompatActivity {
         setTitle("");
         mContext = this;
         mAppConstant = new AppConstant(this);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -53,11 +53,11 @@ public class SafeHandler extends AppCompatActivity {
         gd.setCornerRadius(3);
         gd.setStroke(4, ContextCompat.getColor(mContext, R.color.themeButtonColor));
 
-        errorTitle = (TextView) findViewById(R.id.error_title);
-        errorDescription = (TextView) findViewById(R.id.error_description);
-        errorImage = (ImageView) findViewById(R.id.error_image);
-        errorImagePlaceholder = (ImageView) findViewById(R.id.error_image_placeholder);
-        goToHome = (Button) findViewById(R.id.go_to_home);
+        errorTitle = findViewById(R.id.error_title);
+        errorDescription = findViewById(R.id.error_description);
+        errorImage = findViewById(R.id.error_image);
+        errorImagePlaceholder = findViewById(R.id.error_image_placeholder);
+        goToHome = findViewById(R.id.go_to_home);
         goToHome.setBackground(gd);
         goToHome.setTextColor(ContextCompat.getColor(mContext, R.color.white));
         goToHome.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,7 @@ public class SafeHandler extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        contact = (Button) findViewById(R.id.contact);
+        contact = findViewById(R.id.contact);
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +124,7 @@ public class SafeHandler extends AppCompatActivity {
         mAppConstant.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "get-error-layout",
                 new OnResponseListener() {
                     @Override
-                    public void onTaskCompleted(JSONObject jsonObject) throws JSONException {
+                    public void onTaskCompleted(JSONObject jsonObject) {
                         if (jsonObject != null) {
                                 if(jsonObject.optString("title") != null && jsonObject.optString("title").isEmpty()){
                                     errorTitle.setVisibility(View.GONE);

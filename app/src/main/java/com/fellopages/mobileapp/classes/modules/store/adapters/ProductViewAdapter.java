@@ -258,17 +258,17 @@ public class ProductViewAdapter  extends RecyclerView.Adapter implements OnMenuC
         public ProductViewHolder(View itemView) {
             super(itemView);
             mainView = itemView;
-            productImageView = (ImageView) itemView.findViewById(R.id.product_image);
-            productTitleView = (TextView) itemView.findViewById(R.id.product_title);
-            priceView = (TextView) itemView.findViewById(R.id.product_price);
-            productRatingView = (RatingBar) itemView.findViewById(R.id.smallRatingBar);
-            wishListIcon = (ImageView) itemView.findViewById(R.id.wishlist_icon);
-            productDiscountLabel =(TextView) itemView.findViewById(R.id.product_discount);
-            productDiscountedPrice = (TextView) itemView.findViewById(R.id.product_discounted_price);
-            featuredView = (TextView) itemView.findViewById(R.id.featuredLabel);
-            sponsoredView = (TextView) itemView.findViewById(R.id.sponsoredLabel);
-            selectProduct = (CheckBox) itemView.findViewById(R.id.select_product);
-            optionMenu = (ImageView) itemView.findViewById(R.id.optionIcon);
+            productImageView = itemView.findViewById(R.id.product_image);
+            productTitleView = itemView.findViewById(R.id.product_title);
+            priceView = itemView.findViewById(R.id.product_price);
+            productRatingView = itemView.findViewById(R.id.smallRatingBar);
+            wishListIcon = itemView.findViewById(R.id.wishlist_icon);
+            productDiscountLabel = itemView.findViewById(R.id.product_discount);
+            productDiscountedPrice = itemView.findViewById(R.id.product_discounted_price);
+            featuredView = itemView.findViewById(R.id.featuredLabel);
+            sponsoredView = itemView.findViewById(R.id.sponsoredLabel);
+            selectProduct = itemView.findViewById(R.id.select_product);
+            optionMenu = itemView.findViewById(R.id.optionIcon);
             optionIconLayout =  itemView.findViewById(R.id.option_icon_layout);
         }
     }
