@@ -30,7 +30,6 @@ public class SafeHandler extends AppCompatActivity {
     TextView errorTitle, errorDescription;
     ImageView errorImage,errorImagePlaceholder;
     Context mContext;
-    private Toolbar mToolbar;
     private AppConstant mAppConstant;
     Button goToHome,contact;
 
@@ -41,7 +40,7 @@ public class SafeHandler extends AppCompatActivity {
         setTitle("");
         mContext = this;
         mAppConstant = new AppConstant(this);
-        mToolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -60,23 +59,15 @@ public class SafeHandler extends AppCompatActivity {
         goToHome = findViewById(R.id.go_to_home);
         goToHome.setBackground(gd);
         goToHome.setTextColor(ContextCompat.getColor(mContext, R.color.white));
-        goToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        goToHome.setOnClickListener(view -> onBackPressed());
         contact = findViewById(R.id.contact);
-        contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                Intent settingsActivity = new Intent(SafeHandler.this, FragmentLoadActivity.class);
-                settingsActivity.putExtra(ConstantVariables.FRAGMENT_NAME,ConstantVariables.CONTACT_US_MENU_TITLE);
-                settingsActivity.putExtra(ConstantVariables.CONTENT_TITLE,getResources().getString(R.string.action_bar_title_contact_us));
-                startActivity(settingsActivity);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
+        contact.setOnClickListener(view -> {
+            finish();
+            Intent settingsActivity = new Intent(SafeHandler.this, FragmentLoadActivity.class);
+            settingsActivity.putExtra(ConstantVariables.FRAGMENT_NAME,ConstantVariables.CONTACT_US_MENU_TITLE);
+            settingsActivity.putExtra(ConstantVariables.CONTENT_TITLE,getResources().getString(R.string.action_bar_title_contact_us));
+            startActivity(settingsActivity);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
         contact.setBackground(gd);
         contact.setTextColor(ContextCompat.getColor(mContext, R.color.white));

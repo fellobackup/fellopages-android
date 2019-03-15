@@ -12,6 +12,7 @@
 
 package com.fellopages.mobileapp.classes.core.startscreens;
 
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
@@ -20,12 +21,11 @@ import com.fellopages.mobileapp.R;
 
 
 class FadePageTransformer implements ViewPager.PageTransformer {
-    TextView title,subtitle;
     @Override
-    public void transformPage(View view, float position) {
+    public void transformPage(@NonNull View view, float position) {
         view.setTranslationX(view.getWidth() * -position);
-        title = view.findViewById(R.id.slideTitle);
-        subtitle = view.findViewById(R.id.slideSubtitle);
+        TextView title = view.findViewById(R.id.slideTitle);
+        TextView subtitle = view.findViewById(R.id.slideSubtitle);
         //view.findViewById(R.id.backgroundImage).setTranslationX(view.getWidth() * -position);
 
         if (position <= -1.0F || position >= 1.0F) {

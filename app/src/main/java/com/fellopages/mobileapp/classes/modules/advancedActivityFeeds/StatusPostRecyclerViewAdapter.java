@@ -16,6 +16,7 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,22 +39,23 @@ public class StatusPostRecyclerViewAdapter extends RecyclerView.Adapter<StatusPo
     private OnItemClickListener mOnClickListener;
 
 
-    public StatusPostRecyclerViewAdapter(Context context, List<BrowseListItems> browseList,
-                                         OnItemClickListener onClickListener) {
+    StatusPostRecyclerViewAdapter(Context context, List<BrowseListItems> browseList,
+                                  OnItemClickListener onClickListener) {
         mContext = context;
         mBrowseList = browseList;
         mOnClickListener = onClickListener;
     }
 
+    @NonNull
     @Override
-    public StatusPostRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StatusPostRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         return new StatusPostRecyclerViewHolder(mContext, LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.status_items, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final StatusPostRecyclerViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull final StatusPostRecyclerViewHolder viewHolder, int position) {
 
         BrowseListItems browseItem = mBrowseList.get(position);
 
@@ -76,21 +78,21 @@ public class StatusPostRecyclerViewAdapter extends RecyclerView.Adapter<StatusPo
         viewHolder.tvTitle.setText(browseItem.getTitle());
 
         if (browseItem.isAlreadyAdded()) {
-            Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_done_24dp).mutate();
-            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor),
-                    PorterDuff.Mode.SRC_ATOP));
+            Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_done_24dp);
+            if (drawable != null) {
+                drawable.mutate();
+                drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor),
+                        PorterDuff.Mode.SRC_ATOP));
+            }
             viewHolder.tvTitle.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
         } else {
             viewHolder.tvTitle.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         }
 
         // Set Onclick listener on each item of recycler view.
-        viewHolder.mContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnClickListener != null) {
-                    mOnClickListener.onItemClick(v, viewHolder.getAdapterPosition());
-                }
+        viewHolder.mContainer.setOnClickListener(v -> {
+            if (mOnClickListener != null) {
+                mOnClickListener.onItemClick(v, viewHolder.getAdapterPosition());
             }
         });
     }
@@ -103,10 +105,10 @@ public class StatusPostRecyclerViewAdapter extends RecyclerView.Adapter<StatusPo
 
     public static class StatusPostRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvIcon, tvTitle;
-        public View mContainer;
+        TextView tvIcon, tvTitle;
+        View mContainer;
 
-        public StatusPostRecyclerViewHolder(Context context, View view) {
+        StatusPostRecyclerViewHolder(Context context, View view) {
             super(view);
             mContainer = view;
             tvIcon = view.findViewById(R.id.icon);

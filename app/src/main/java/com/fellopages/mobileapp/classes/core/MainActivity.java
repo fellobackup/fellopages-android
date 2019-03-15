@@ -162,16 +162,17 @@ import static com.fellopages.mobileapp.classes.core.ConstantVariables.SERVER_SET
 import static com.fellopages.mobileapp.classes.core.ConstantVariables.STATUS_POST_OPTIONS;
 
 public class MainActivity extends FormActivity implements FragmentDrawer.FragmentDrawerListener,
-        View.OnClickListener, OnCheckInLocationResponseListener, OnUploadResponseListener,  GoogleApiClient.ConnectionCallbacks,
+        View.OnClickListener, OnCheckInLocationResponseListener, OnUploadResponseListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener, ShowCaseStepDisplayer.DismissListener {
 
-    private final int TYPE_HOME = 1,TYPE_MODULE = 2,TYPE_OTHER = 3;
+    private final int TYPE_HOME = 1, TYPE_MODULE = 2, TYPE_OTHER = 3;
     private boolean isHomePage = false, mIsCanView = true, isGuestUserHomePage = false, isSetLocation = false, isCurrentLocationSet = false;
     private String mAppTitle;
-    private String mUploadPhotoUrl, mIcon, mSingularLabel;
+    private String mIcon;
+    private String mSingularLabel;
     private ArrayList<String> mSelectPath;
     private BadgeView mCartCountBadge;
-    private Menu optionMenu=null;
+    private Menu optionMenu = null;
     private ProgressDialog progressDialog;
     private AppConstant mAppConst;
     private String currentSelectedOption;
@@ -183,16 +184,16 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     private IntentFilter intentFilter;
     private SocialShareUtil socialShareUtil;
     Toolbar toolbar;
-    CustomFloatingActionButton fabAlbumCreate,fabAlbumUpload;
+    CustomFloatingActionButton fabAlbumCreate, fabAlbumUpload;
     private FloatingActionButton mFabCreate;
     private FloatingActionMenu mFabMenu;
-    private LinearLayout mHomeTabs,mFooterTabs;
+    private LinearLayout mHomeTabs, mFooterTabs;
     private CardView mEventFilters;
     private TabLayout mTabHost;
     private AppBarLayout.LayoutParams mToolbarParams;
     private AlertDialogWithAction mAlertDialogWithAction;
     private int mListingTypeId, mBrowseType, mViewType, mSecondaryViewType;
-    private int mPackagesEnabled,mStoreWishListEnabled,mMLTWishListEnabled;
+    private int mPackagesEnabled, mStoreWishListEnabled, mMLTWishListEnabled;
     private BottomSheetBehavior<View> behavior;
     public static FirebaseAnalytics mFirebaseAnalytics;
     private GoogleApiClient mGoogleApiClient;
@@ -212,18 +213,20 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if( intent!=null){
-                switch (intent.getAction()) {
-                    case ConstantVariables.ACTION_VIEW_ALL_MESSAGES:
-                        selectItem("core_mini_messages", getResources().getString(R.string.message_tab_name), null, null, 1);
-                        break;
+            if (intent != null) {
+                if (intent.getAction() != null) {
+                    switch (intent.getAction()) {
+                        case ConstantVariables.ACTION_VIEW_ALL_MESSAGES:
+                            selectItem("core_mini_messages", getResources().getString(R.string.message_tab_name), null, null, 1);
+                            break;
 
-                    case ConstantVariables.ACTION_VIEW_ALL_NOTIFICATIONS:
-                        if(optionMenu != null){
-                            optionMenu.findItem(R.id.action_search).setVisible(false);
-                        }
-                        selectItem("core_mini_notification", getResources().getString(R.string.notification_drawer), null, null, 1);
-                        break;
+                        case ConstantVariables.ACTION_VIEW_ALL_NOTIFICATIONS:
+                            if (optionMenu != null) {
+                                optionMenu.findItem(R.id.action_search).setVisible(false);
+                            }
+                            selectItem("core_mini_notification", getResources().getString(R.string.notification_drawer), null, null, 1);
+                            break;
+                    }
                 }
             }
         }
@@ -244,9 +247,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         socialShareUtil = new SocialShareUtil(mContext);
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
 
-        if(!mAppConst.checkManifestPermission(Manifest.permission.WAKE_LOCK)){
+        if (!mAppConst.checkManifestPermission(Manifest.permission.WAKE_LOCK)) {
             mAppConst.requestForManifestPermission(Manifest.permission.WAKE_LOCK, ConstantVariables.PERMISSION_WAKE_LOCK);
-        }else{
+        } else {
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         }
 
@@ -259,7 +262,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         behavior.setHideable(true);
         behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
-        mAppTitle =  getApplicationContext().getResources().getString(R.string.app_name);
+        mAppTitle = getApplicationContext().getResources().getString(R.string.app_name);
         mHomeTabs = findViewById(R.id.home_tab_layout);
         mFooterTabs = findViewById(R.id.quick_return_footer_ll);
         mEventFilters = findViewById(R.id.eventFilterBlock);
@@ -277,7 +280,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -286,13 +289,16 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         // Header search bar's text view.
         TextView tvSearch = findViewById(R.id.tv_search);
-        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search).mutate();
-        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
+        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
+        if (drawable != null) {
+            drawable.mutate();
+            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
+        }
         tvSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
         //drawer layout settings
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, findViewById(R.id.drawer_layout),toolbar);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, findViewById(R.id.drawer_layout), toolbar);
         drawerFragment.setDrawerListener(MainActivity.this);
         isSetLocation = getIntent().hasExtra("isSetLocation");
 
@@ -346,69 +352,72 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         // calling for status post options.
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feeds/feed-decoration", new OnResponseListener() {
-                    @Override
-                    public void onTaskCompleted(JSONObject jsonObject) {
-                        STATUS_POST_OPTIONS.put(ConstantVariables.FEED_DECORATION, jsonObject.optJSONObject("feed_docoration_setting"));
-                        STATUS_POST_OPTIONS.put(ConstantVariables.WORD_STYLING, jsonObject.optJSONArray("word_styling"));
-                        STATUS_POST_OPTIONS.put(ConstantVariables.ON_THIS_DAY, jsonObject.optJSONObject("on_thisDay"));
-                    }
+            @Override
+            public void onTaskCompleted(JSONObject jsonObject) {
+                STATUS_POST_OPTIONS.put(ConstantVariables.FEED_DECORATION, jsonObject.optJSONObject("feed_docoration_setting"));
+                STATUS_POST_OPTIONS.put(ConstantVariables.WORD_STYLING, jsonObject.optJSONArray("word_styling"));
+                STATUS_POST_OPTIONS.put(ConstantVariables.ON_THIS_DAY, jsonObject.optJSONObject("on_thisDay"));
+            }
 
-                    @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
-                });
+            @Override
+            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+            }
+        });
 
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "advancedactivity/feelings/banner", new OnResponseListener() {
-                    @Override
-                    public void onTaskCompleted(JSONObject jsonObject) {
-                        STATUS_POST_OPTIONS.put(ConstantVariables.BANNER_DECORATION,
-                                jsonObject.optJSONArray("response"));
-                    }
+            @Override
+            public void onTaskCompleted(JSONObject jsonObject) {
+                STATUS_POST_OPTIONS.put(ConstantVariables.BANNER_DECORATION,
+                        jsonObject.optJSONArray("response"));
+            }
 
-                    @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
-                });
+            @Override
+            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+            }
+        });
 
         // Making server call to get response of the upgrade params.
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "get-new-version?type=android", new OnResponseListener() {
-                    @Override
-                    public void onTaskCompleted(JSONObject jsonObject) {
+            @Override
+            public void onTaskCompleted(JSONObject jsonObject) {
+                try {
+                    boolean isPopUpEnabled = jsonObject.optInt("isPopUpEnabled") == 1;
+                    String latestVersion = jsonObject.optString("latestVersion");
+                    String description = jsonObject.optString("description");
+                    PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    String currentVersion = pInfo.versionName;
+                    int hoursDifference = 0;
+
+                    if (PreferencesUtils.getAppUpgradeRemindTime(mContext) != null) {
+                        hoursDifference = GlobalFunctions.hoursDifferenceFromCurrentDate(PreferencesUtils.getAppUpgradeRemindTime(mContext));
+                    }
+
+                    // Checking for the conditions in which upgrade app dialog needs to be shown.
+                    if (isPopUpEnabled && !PreferencesUtils.isAppUpgradeDialogIgnored(mContext)
+                            && latestVersion != null && !latestVersion.isEmpty() && currentVersion != null
+                            && GlobalFunctions.versionCompare(latestVersion, currentVersion) > 0
+                            && (hoursDifference > 24 || PreferencesUtils.getAppUpgradeRemindTime(mContext) == null)) {
                         try {
-                            boolean isPopUpEnabled = jsonObject.optInt("isPopUpEnabled") == 1;
-                            String latestVersion = jsonObject.optString("latestVersion");
-                            String description = jsonObject.optString("description");
-                            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                            String currentVersion = pInfo.versionName;
-                            int hoursDifference = 0;
-
-                            if (PreferencesUtils.getAppUpgradeRemindTime(mContext) != null) {
-                                hoursDifference = GlobalFunctions.hoursDifferenceFromCurrentDate(PreferencesUtils.getAppUpgradeRemindTime(mContext));
-                            }
-
-                            // Checking for the conditions in which upgrade app dialog needs to be shown.
-                            if (isPopUpEnabled && !PreferencesUtils.isAppUpgradeDialogIgnored(mContext)
-                                    && latestVersion != null && !latestVersion.isEmpty() && currentVersion != null
-                                    && GlobalFunctions.versionCompare(latestVersion, currentVersion) > 0
-                                    && (hoursDifference > 24 || PreferencesUtils.getAppUpgradeRemindTime(mContext) == null)) {
-                                try {
-                                    showUpgradeDialogIfNeeded(latestVersion, description);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        } catch (PackageManager.NameNotFoundException | NullPointerException e) {
+                            showUpgradeDialogIfNeeded(latestVersion, description);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
+                } catch (PackageManager.NameNotFoundException | NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
-                });
+            @Override
+            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+            }
+        });
 
 
         Bundle extras = getIntent().getExtras();
 
         // Check is there any push notification intent coming from MyFcmListenerService Class
-        if(extras != null) {
+        if (extras != null) {
             int id = extras.getInt("id");
             int isSingleNotification = extras.getInt("is_single_notification");
             String type = extras.getString("type");
@@ -446,7 +455,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         selectItem("home", mAppTitle, null, null, 0);
                     }
                 } else {
-                    selectItem("core_mini_notification" ,getResources().
+                    selectItem("core_mini_notification", getResources().
                             getString(R.string.notification_drawer), null, null, 0);
                 }
             } else if (extras.getBoolean("isRedirectedFromEventProfile")) {
@@ -462,7 +471,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         displayCartCount();
 
-        if(!PreferencesUtils.isAppRated(this,PreferencesUtils.APP_RATED)) {
+        if (!PreferencesUtils.isAppRated(this, PreferencesUtils.APP_RATED)) {
             showRateAppDialogIfNeeded();
         }
     }
@@ -476,7 +485,8 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     }
 
                     @Override
-                    public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
+                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                    }
                 });
     }
 
@@ -503,37 +513,37 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
 
         if (searchBar != null &&
-            isHomePage &&
-            searchBar.getVisibility() == View.VISIBLE &&
-            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW)) {
+                isHomePage &&
+                searchBar.getVisibility() == View.VISIBLE &&
+                !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW)) {
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW);
             isShowCaseView = true;
             showCaseStepDisplayer.addStep(new ShowCaseStep(new ViewPosition(searchBar.findViewById(R.id.tv_search)), mContext.getResources().getString(R.string.search_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
         }
 
-        if (cartItem!= null &&
-            isHomePage &&
-            cartItem.isVisible() &&
-            isHomePage &&
-            cartItem.getActionView() != null &&
-            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.CART_ICON_CASE_VIEW)) {
+        if (cartItem != null &&
+                isHomePage &&
+                cartItem.isVisible() &&
+                isHomePage &&
+                cartItem.getActionView() != null &&
+                !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.CART_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.CART_ICON_CASE_VIEW);
             showCaseStepDisplayer.addStep(new ShowCaseStep(cartItem.getActionView(), mContext.getResources().getString(R.string.cart_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
         }
 
         if (locationItem != null &&
-            locationItem.isVisible() &&
-            isHomePage &&
-            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.LOCATION_ICON_CASE_VIEW)) {
+                locationItem.isVisible() &&
+                isHomePage &&
+                !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.LOCATION_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.LOCATION_ICON_CASE_VIEW);
             showCaseStepDisplayer.addStep(new ShowCaseStep(locationItem.getActionView(), mContext.getResources().getString(R.string.location_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
         }
 
         if (searchItem != null &&
-            searchItem.isVisible() &&
-            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_ICON_CASE_VIEW)) {
+                searchItem.isVisible() &&
+                !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.SEARCH_ICON_CASE_VIEW);
             showCaseStepDisplayer.addStep(new ShowCaseStep(searchItem.getActionView(), mContext.getResources().getString(R.string.search_show_case_text), mContext.getResources().getDimension(R.dimen.radius_18)));
@@ -542,28 +552,28 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         View postView = findViewById(R.id.status_update_text);
 
         if (postView != null &&
-            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.STATUS_POST_CASE_VIEW) &&
-            !drawerFragment.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.STATUS_POST_CASE_VIEW) &&
+                !drawerFragment.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.STATUS_POST_CASE_VIEW);
             showCaseStepDisplayer.addStep(new ShowCaseStep(postView, mContext.getResources().getString(R.string.feed_post_show_case_text), mContext.getResources().getDimension(R.dimen.radius_20)));
         }
 
         if (!isHomePage &&
-            mFabCreate != null &&
-            mFabCreate.getVisibility() == View.VISIBLE &&
-            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_CREATE_CASE_VIEW) &&
-            !currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE)) {
+                mFabCreate != null &&
+                mFabCreate.getVisibility() == View.VISIBLE &&
+                !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_CREATE_CASE_VIEW) &&
+                !currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.FAB_CREATE_CASE_VIEW);
             showCaseStepDisplayer.addStep(new ShowCaseStep(new ViewPosition(mFabCreate), mContext.getResources().getString(R.string.create_content_show_case_text)));
         }
 
         if (!isHomePage &&
-            mFabMenu != null &&
-            mFabMenu.getVisibility() == View.VISIBLE &&
-            currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE) &&
-            !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW) ) {
+                mFabMenu != null &&
+                mFabMenu.getVisibility() == View.VISIBLE &&
+                currentSelectedOption.equals(ConstantVariables.ALBUM_MENU_TITLE) &&
+                !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW)) {
             isShowCaseView = true;
             int padding70 = getResources().getDimensionPixelOffset(R.dimen.padding_70dp);
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.FAB_MENU_CASE_VIEW);
@@ -581,11 +591,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     public void displayCartCount() {
         if (mCartCountBadge != null) {
             if (!PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("0") &&
-                !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("") &&
-                !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("null")) {
+                    !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("") &&
+                    !PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT).equals("null")) {
                 mCartCountBadge.setVisibility(View.VISIBLE);
                 mCartCountBadge.setText(PreferencesUtils.getNotificationsCounts(this, PreferencesUtils.CART_COUNT));
-            }  else {
+            } else {
                 mCartCountBadge.setVisibility(View.GONE);
             }
         }
@@ -593,8 +603,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
     /**
      * Method to show app upgrade dialog if needed.
+     *
      * @param latestVersion Latest version of the app which is available on play store.
-     * @param description Description of the new upgradable version.
+     * @param description   Description of the new upgradable version.
      */
     private void showUpgradeDialogIfNeeded(String latestVersion, String description) {
         View view = getLayoutInflater().inflate(R.layout.layout_upgrade_dialog, null);
@@ -609,12 +620,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         drawable.setCornerRadius(30f);
         view.setBackground(drawable);
 
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this,R.style.Theme_LocationDialog);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this, R.style.Theme_LocationDialog);
         alertBuilder.setView(view);
         final AlertDialog dialog = alertBuilder.create();
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        if (dialog.getWindow() != null)
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.show();
 
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
@@ -625,53 +637,42 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         dialog.getWindow().setAttributes(layoutParams);
 
         // Adding click listener on all 3 buttons, and setting up the value accordingly.
-        tvDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                openAppInPlayStore();
-            }
+        tvDownload.setOnClickListener(v -> {
+            dialog.dismiss();
+            openAppInPlayStore();
         });
 
-        tvRemindMeLater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                PreferencesUtils.setUpgradeRemindMeLaterTime(mContext,
-                        new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH).format(new Date()));
-            }
+        tvRemindMeLater.setOnClickListener(v -> {
+            dialog.dismiss();
+            PreferencesUtils.setUpgradeRemindMeLaterTime(mContext,
+                    new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH).format(new Date()));
         });
 
-        tvIgnore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                PreferencesUtils.setAppUpgradeDialogIgnored(mContext);
-            }
+        tvIgnore.setOnClickListener(v -> {
+            dialog.dismiss();
+            PreferencesUtils.setAppUpgradeDialogIgnored(mContext);
         });
     }
 
     private void showRateAppDialogIfNeeded() {
-        PreferencesUtils.updateLaunchCount(this,PreferencesUtils.getLaunchCount(this)+1);
-        int count =  PreferencesUtils.isAppRated(this,PreferencesUtils.NOT_RATED) ? 180 : 20;
-        if(PreferencesUtils.getLaunchCount(this) % count == 0) {
-            createAppRatingDialog(getString(R.string.rate_app_title) + " "+getString(R.string.app_name),
+        PreferencesUtils.updateLaunchCount(this, PreferencesUtils.getLaunchCount(this) + 1);
+        int count = PreferencesUtils.isAppRated(this, PreferencesUtils.NOT_RATED) ? 180 : 20;
+        if (PreferencesUtils.getLaunchCount(this) % count == 0) {
+            createAppRatingDialog(getString(R.string.rate_app_title) + " " + getString(R.string.app_name),
                     getString(R.string.rate_app_message)).show();
         }
     }
 
     private AlertDialog createAppRatingDialog(String rateAppTitle, String rateAppMessage) {
-        return new AlertDialog.Builder(this,R.style.Theme_LocationDialog).setPositiveButton(getString(R.string.dialog_app_rate), new DialogInterface.OnClickListener() {
+        return new AlertDialog.Builder(this, R.style.Theme_LocationDialog).setPositiveButton(getString(R.string.dialog_app_rate), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
-                PreferencesUtils.updateRatePref(mContext,PreferencesUtils.APP_RATED);
+                PreferencesUtils.updateRatePref(mContext, PreferencesUtils.APP_RATED);
                 openAppInPlayStore();
             }
-        }).setNegativeButton(getString(R.string.dialog_app_never), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface paramAnonymousDialogInterface, int paramAnonymousInt) {
-                PreferencesUtils.updateRatePref(mContext,PreferencesUtils.NOT_RATED);
-                PreferencesUtils.updateLaunchCount(mContext,0);
-                paramAnonymousDialogInterface.dismiss();
-            }
+        }).setNegativeButton(getString(R.string.dialog_app_never), (paramAnonymousDialogInterface, paramAnonymousInt) -> {
+            PreferencesUtils.updateRatePref(mContext, PreferencesUtils.NOT_RATED);
+            PreferencesUtils.updateLaunchCount(mContext, 0);
+            paramAnonymousDialogInterface.dismiss();
         }).setMessage(rateAppMessage).setTitle(rateAppTitle).create();
     }
 
@@ -682,7 +683,10 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
         }
     }
-    /** Swaps fragments in the main content view */
+
+    /**
+     * Swaps fragments in the main content view
+     */
 
     public void selectItem(String name, String label, String headerLabel, String itemUrl, int canCreate) {
         Fragment fragment = null;
@@ -700,7 +704,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     CookieManager cookieManager = CookieManager.getInstance();
                     cookieManager.removeSessionCookie();
                     TwitterCore.getInstance().getSessionManager().clearActiveSession();
-                    task.execute((Void[])null);
+                    task.execute((Void[]) null);
                     break;
 
                 case ConstantVariables.USER_SETTINGS_MENU_TITLE:
@@ -710,14 +714,14 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     break;
 
                 case ConstantVariables.PRODUCT_CART_MENU_TITLE:
-                    Intent cartIntent = new Intent(MainActivity.this,CartView.class);
+                    Intent cartIntent = new Intent(MainActivity.this, CartView.class);
                     startActivity(cartIntent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     break;
 
                 case ConstantVariables.GLOBAL_SEARCH_MENU_TITLE:
                     Intent searchActivity = new Intent(MainActivity.this, SearchActivity.class);
-                    searchActivity.putExtra(ConstantVariables.IS_SEARCHED_FROM_DASHBOARD,true);
+                    searchActivity.putExtra(ConstantVariables.IS_SEARCHED_FROM_DASHBOARD, true);
                     startActivity(searchActivity);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     break;
@@ -731,7 +735,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             false, false, false, false, false, false, false);
 
                     PreferencesUtils.setProfileShowCaseViewPref(mContext, false, false,
-                    false, false, false, false, false);
+                            false, false, false, false, false);
 
                     menuCallingTime = 0;
                     appBarLayout.setExpanded(true);
@@ -759,11 +763,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     }
 
                     socialShareUtil.shareContent(getResources().getString(R.string.spread_the_word_title) + " " +
-                                    getResources().getString(R.string.app_name), description);
+                            getResources().getString(R.string.app_name), description);
                     break;
 
                 case ConstantVariables.RATE_US_MENU_TITLE:
-                    createAppRatingDialog(getString(R.string.rate_app_title) + " "+getString(R.string.app_name),
+                    createAppRatingDialog(getString(R.string.rate_app_title) + " " + getString(R.string.app_name),
                             getString(R.string.rate_app_message)).show();
                     break;
 
@@ -772,20 +776,22 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                      * Redirect to Cometchat app if it is installed in phone
                      * else redirect to Google playstore to download install it.
                      */
-                    if(isCometchatAppInstalled(ConstantVariables.COMETCHAT_PACKAGE_NAME)){
+                    if (isCometchatAppInstalled(ConstantVariables.COMETCHAT_PACKAGE_NAME)) {
                         String userEmail = PreferencesUtils.getLoginInfo(mContext, PreferencesUtils.LOGIN_EMAIL);
                         String password = PreferencesUtils.getLoginInfo(mContext, PreferencesUtils.LOGIN_PASSWORD);
                         int userId = PreferencesUtils.getLoginUserId(mContext);
                         Intent launchIntent = getApplicationContext().getPackageManager().
                                 getLaunchIntentForPackage(ConstantVariables.COMETCHAT_PACKAGE_NAME);
-                        launchIntent.putExtra("username", userEmail);
-                        launchIntent.putExtra("password", password);
-                        launchIntent.putExtra("user_id", userId);
+                        if (launchIntent != null) {
+                            launchIntent.putExtra("username", userEmail);
+                            launchIntent.putExtra("password", password);
+                            launchIntent.putExtra("user_id", userId);
+                        }
 
                         LogUtils.LOGD(MainActivity.class.getSimpleName(), " password " + password
-                                + "Email = " + userEmail + " userId " + userId) ;
+                                + "Email = " + userEmail + " userId " + userId);
                         startActivityForResult(launchIntent, 1);
-                    }else{
+                    } else {
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 Uri.parse("https://play.google.com/store/apps/details?id=" + ConstantVariables.COMETCHAT_PACKAGE_NAME)));
                     }
@@ -795,7 +801,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     mFooterTabs.setVisibility(View.GONE);
                     currentSelectedOption = name;
                     PreferencesUtils.updateCurrentModule(mContext, name);
-                    if(mAppConst.isLoggedOutUser()){
+                    if (mAppConst.isLoggedOutUser()) {
                         mFabCreate.hide();
                         if (name.equals("sitereview_listing")) {
                             PreferencesUtils.updateCurrentListingType(mContext, mListingTypeId, label,
@@ -805,7 +811,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             label = headerLabel = mAppTitle;
                             isHomePage = true;
                             isGuestUserHomePage = true;
-                        } else if (name.equals("core_main_siteevent")){
+                        } else if (name.equals("core_main_siteevent")) {
                             mFabCreate.show();
                         }
 
@@ -833,7 +839,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                                 break;
                         }
                         mTabHost.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         switch (name) {
                             case ConstantVariables.SAVE_FEEDS:
                             case ConstantVariables.HOME_MENU_TITLE:
@@ -856,7 +862,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
                             case ConstantVariables.ALBUM_MENU_TITLE:
                                 mFabCreate.hide();
-                                if(canCreate == 1) {
+                                if (canCreate == 1) {
                                     mFabMenu.showMenu(false);
                                 }
                                 mFabMenu.setClosedOnTouchOutside(true);
@@ -871,9 +877,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
                             case ConstantVariables.DIARY_MENU_TITLE:
                             case ConstantVariables.MLT_WISHLIST_MENU_TITLE:
-                                if(canCreate == 1) {
+                                if (canCreate == 1) {
                                     mFabCreate.show();
-                                }else {
+                                } else {
                                     mFabCreate.hide();
                                 }
                                 setTabVisibility(TYPE_OTHER);
@@ -896,9 +902,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                                         canCreate, mPackagesEnabled, mIsCanView, mSecondaryViewType);
 
                             case ConstantVariables.STORE_MENU_TITLE:
-                                if(canCreate == 1) {
+                                if (canCreate == 1) {
                                     mFabCreate.show();
-                                }else {
+                                } else {
                                     mFabCreate.hide();
                                 }
                                 setTabVisibility(TYPE_MODULE);
@@ -908,31 +914,32 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 //                                mFabCreate.setImageDrawable(ContextCompat.getDrawable(
 //                                        this, R.drawable.ic_action_new));
 
-                                if(canCreate == 1) { mFabCreate.setImageDrawable(ContextCompat.getDrawable(
-                                        this, R.drawable.ic_action_new));
+                                if (canCreate == 1) {
+                                    mFabCreate.setImageDrawable(ContextCompat.getDrawable(
+                                            this, R.drawable.ic_action_new));
                                     mFabCreate.show();
-                                }else {
+                                } else {
                                     mFabCreate.hide();
                                 }
                                 mFabMenu.hideMenu(false);
                                 setTabVisibility(TYPE_MODULE);
                                 break;
                         }
-                        fragment = GlobalFunctions.getAuthenticateUserFragment(name,mStoreWishListEnabled,mMLTWishListEnabled);
+                        fragment = GlobalFunctions.getAuthenticateUserFragment(name, mStoreWishListEnabled, mMLTWishListEnabled);
                     }
             }
 
-        }else if(label != null && !label.isEmpty() && itemUrl != null && !itemUrl.isEmpty()){
+        } else if (label != null && !label.isEmpty() && itemUrl != null && !itemUrl.isEmpty()) {
 
             AppController.getInstance().trackEvent(headerLabel, "Dashboard Selection", "Webview Loaded");
-            if(ConstantVariables.WEBVIEW_ENABLE == 1) {
+            if (ConstantVariables.WEBVIEW_ENABLE == 1) {
                 Intent webViewActivity = new Intent(MainActivity.this, WebViewActivity.class);
                 webViewActivity.putExtra("headerText", headerLabel);
                 webViewActivity.putExtra("url", itemUrl);
                 startActivityForResult(webViewActivity, ConstantVariables.WEB_VIEW_ACTIVITY_CODE);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
-            }else {
+            } else {
                 LogUtils.LOGD("MainActivity", "GlobalFunctions.getWebViewUrl(itemUrl, this) " +
                         GlobalFunctions.getWebViewUrl(itemUrl, this));
                 CustomTabUtil.launchCustomTab(this, GlobalFunctions.getWebViewUrl(itemUrl, this));
@@ -944,7 +951,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.main_content, fragment).commit();
             // Show Header label as Toolbar title if set
-            if(headerLabel != null && !headerLabel.isEmpty()) {
+            if (headerLabel != null && !headerLabel.isEmpty()) {
                 setTitle(headerLabel);
             } else {
                 setTitle(label);
@@ -973,7 +980,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
     @Override
     public void setTitle(CharSequence title) {
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
     }
@@ -985,12 +992,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        this.optionMenu=menu;
+        this.optionMenu = menu;
 
         if (AppConstant.isLocationEnable && isHomePage &&
                 PreferencesUtils.isLocationSettingEnabled(mContext)) {
@@ -999,7 +1005,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             menu.findItem(R.id.action_location).setVisible(false);
         }
 
-        if (currentSelectedOption.equals("home")){
+        if (currentSelectedOption.equals("home")) {
             menu.findItem(R.id.action_event).setVisible(true);
         } else {
             menu.findItem(R.id.action_event).setVisible(false);
@@ -1034,7 +1040,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             case R.id.action_event:
                 Intent createEntry;
                 String url;
-                if(PreferencesUtils.getPackageEnabled(mContext) == 1) {
+                if (PreferencesUtils.getPackageEnabled(mContext) == 1) {
                     createEntry = new Intent(this, SelectPackage.class);
                     url = UrlUtil.ADV_EVENTS_PACKAGE_LIST_URL;
                 } else {
@@ -1072,7 +1078,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             setColorFilter(cartItem.getActionView().findViewById(R.id.cart_icon));
         }
 
-        if(behavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+        if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
 
@@ -1159,7 +1165,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
          * all methods and views */
         if (menuCallingTime > 2 && !mAppConst.isLoggedOutUser()
                 && PreferencesUtils.getAppTourEnabled(mContext) == 1) {
-             /* Initialize show case view step builder */
+            /* Initialize show case view step builder */
             showCaseStepDisplayer = new ShowCaseStepDisplayer.Builder(this, R.color.colorAccent);
             displayShowCaseView();
         }
@@ -1192,7 +1198,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
 
     //Showing list of albums for uploading photos in a particular album
-    public void showListOfAlbums(){
+    public void showListOfAlbums() {
 
         final Dialog albumListDialog = new Dialog(this, R.style.Theme_CustomDialog);
         final ListView listViewAlbumTitle = new ListView(this);
@@ -1249,28 +1255,25 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 });
 
 
-        listViewAlbumTitle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mFabMenu.close(true);
-                String url = AppConstant.DEFAULT_URL + "albums/upload?album_id="
-                        + mBrowseItemList.get(i).getAlbumId();
-                albumListDialog.cancel();
-                Intent uploadPhoto = new Intent(MainActivity.this, MultiMediaSelectorActivity.class);
-                // Selection type photo to display items in grid
-                uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SELECTION_TYPE, MultiMediaSelectorActivity.SELECTION_PHOTO);
-                // Whether photo shoot
-                uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SHOW_CAMERA, true);
-                // The maximum number of selectable image
-                uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SELECT_COUNT,
-                        ConstantVariables.FILE_UPLOAD_LIMIT);
-                // Select mode
-                uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SELECT_MODE,
-                        MultiMediaSelectorActivity.MODE_MULTI);
-                uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_URL, url);
+        listViewAlbumTitle.setOnItemClickListener((adapterView, view, i, l) -> {
+            mFabMenu.close(true);
+            String url = AppConstant.DEFAULT_URL + "albums/upload?album_id="
+                    + mBrowseItemList.get(i).getAlbumId();
+            albumListDialog.cancel();
+            Intent uploadPhoto = new Intent(MainActivity.this, MultiMediaSelectorActivity.class);
+            // Selection type photo to display items in grid
+            uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SELECTION_TYPE, MultiMediaSelectorActivity.SELECTION_PHOTO);
+            // Whether photo shoot
+            uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SHOW_CAMERA, true);
+            // The maximum number of selectable image
+            uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SELECT_COUNT,
+                    ConstantVariables.FILE_UPLOAD_LIMIT);
+            // Select mode
+            uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_SELECT_MODE,
+                    MultiMediaSelectorActivity.MODE_MULTI);
+            uploadPhoto.putExtra(MultiMediaSelectorActivity.EXTRA_URL, url);
 
-                startActivityForResult(uploadPhoto, ConstantVariables.REQUEST_IMAGE);
-            }
+            startActivityForResult(uploadPhoto, ConstantVariables.REQUEST_IMAGE);
         });
 
     }
@@ -1278,7 +1281,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            if (checkInLocationDialog != null && checkInLocationDialog.isShowing()){
+            if (checkInLocationDialog != null && checkInLocationDialog.isShowing()) {
                 checkInLocationDialog.onActivityResult(requestCode, resultCode, data);
                 return;
             }
@@ -1294,6 +1297,8 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             if (data != null) {
                 bundle = data.getExtras();
             }
+
+            String mUploadPhotoUrl;
 
             if (requestCode == ConstantVariables.PERMISSION_GPS_SETTINGS) {
                 switch (resultCode) {
@@ -1342,16 +1347,18 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         break;
 
                     case ConstantVariables.REQUEST_IMAGE:
-                        mSelectPath = data.getStringArrayListExtra(MultiMediaSelectorActivity.EXTRA_RESULT);
-                        mUploadPhotoUrl = data.getStringExtra(MultiMediaSelectorActivity.EXTRA_URL);
-                        StringBuilder sb = new StringBuilder();
-                        for (String p : mSelectPath) {
-                            sb.append(p);
-                            sb.append("\n");
+                        if (data != null) {
+                            mSelectPath = data.getStringArrayListExtra(MultiMediaSelectorActivity.EXTRA_RESULT);
+                            mUploadPhotoUrl = data.getStringExtra(MultiMediaSelectorActivity.EXTRA_URL);
+                            StringBuilder sb = new StringBuilder();
+                            for (String p : mSelectPath) {
+                                sb.append(p);
+                                sb.append("\n");
+                            }
+                            // uploading the photos to server
+                            new UploadFileToServerUtils(mContext, findViewById(R.id.main_content),
+                                    mUploadPhotoUrl, mSelectPath, this).execute();
                         }
-                        // uploading the photos to server
-                        new UploadFileToServerUtils(mContext, findViewById(R.id.main_content),
-                                mUploadPhotoUrl, mSelectPath, this).execute();
                         break;
 
                     case ConstantVariables.FEED_REQUEST_CODE:
@@ -1375,9 +1382,10 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                                 builder.text(bundle.getString("mStatusBodyText", ""));
                                 if (bundle.containsKey("imagePath")) {
                                     String imagePath = bundle.getString("imagePath");
-                                    File myImageFile = new File(imagePath);
-
-                                    builder.image(GlobalFunctions.getFileUri(mContext, myImageFile));
+                                    if (imagePath != null) {
+                                        File myImageFile = new File(imagePath);
+                                        builder.image(GlobalFunctions.getFileUri(mContext, myImageFile));
+                                    }
                                 } else if (bundle.containsKey(ConstantVariables.VIDEO_URL)) {
                                     URL url = new URL(bundle.getString(ConstantVariables.VIDEO_URL));
                                     builder.url(url);
@@ -1411,13 +1419,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         break;
 
                     case ConstantVariables.WEB_VIEW_ACTIVITY_CODE:
-                        if(isHomePage) {
+                        if (isHomePage) {
                             selectItem("home", mAppTitle, null, null, 0);
                         }
                         break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1429,10 +1437,10 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         displayCartCount();
         registerReceiver(broadcastReceiver, intentFilter);
         if (currentSelectedOption != null && currentSelectedOption.equals("home")) {
-            if(mTabHost.getVisibility() == View.VISIBLE) {
+            if (mTabHost.getVisibility() == View.VISIBLE) {
                 mTabHost.setVisibility(View.GONE);
             }
-            if(mFooterTabs.getVisibility() == View.VISIBLE){
+            if (mFooterTabs.getVisibility() == View.VISIBLE) {
                 mFooterTabs.setVisibility(View.GONE);
             }
         }
@@ -1452,14 +1460,14 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             showCaseStepDisplayer.dismissShowCaseView();
         }
         // if drawer is open, close it.
-        if(drawerFragment.mDrawerLayout != null
-                && drawerFragment.mDrawerLayout.isDrawerOpen(GravityCompat.START) ){
+        if (drawerFragment.mDrawerLayout != null
+                && drawerFragment.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
 
             drawerFragment.mDrawerLayout.closeDrawers();
 
-        } else if(behavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+        } else if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        } else if(isHomePage) {
+        } else if (isHomePage) {
             //Going to home screen
             moveTaskToBack(true);
         } else {
@@ -1474,24 +1482,24 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     @Override
     public void onClick(View view) {
 
-        LogUtils.LOGD("MainActivity",String.valueOf(view.getId()));
+        LogUtils.LOGD("MainActivity", String.valueOf(view.getId()));
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.create_fab:
                 //create page url settings
                 Intent createEntry;
                 String url = null;
 
-                if(currentSelectedOption != null) {
+                if (currentSelectedOption != null) {
 
                     createEntry = new Intent(MainActivity.this, CreateNewEntry.class);
 
                     switch (currentSelectedOption) {
                         case ConstantVariables.HOME_MENU_TITLE:
-                            if(view.getTag().equals("core_main_message")){
+                            if (view.getTag().equals("core_main_message")) {
                                 createEntry = new Intent(MainActivity.this, CreateNewMessage.class);
-                            }else {
+                            } else {
                                 createEntry = new Intent(this, SettingsListActivity.class);
                             }
                             break;
@@ -1529,11 +1537,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             break;
 
                         case ConstantVariables.MLT_MENU_TITLE:
-                            if(mPackagesEnabled == 1){
+                            if (mPackagesEnabled == 1) {
                                 createEntry = new Intent(this, SelectPackage.class);
                                 url = UrlUtil.MLT_PACKAGE_LIST_URL + "&listingtype_id=" +
                                         PreferencesUtils.getCurrentSelectedListingId(mContext);
-                            }else{
+                            } else {
                                 url = AppConstant.DEFAULT_URL + "listings/create?listingtype_id=" +
                                         PreferencesUtils.getCurrentSelectedListingId(mContext);
                             }
@@ -1546,7 +1554,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             break;
 
                         case ConstantVariables.ADVANCED_EVENT_MENU_TITLE:
-                            if(mPackagesEnabled == 1) {
+                            if (mPackagesEnabled == 1) {
                                 createEntry = new Intent(this, SelectPackage.class);
                                 url = UrlUtil.ADV_EVENTS_PACKAGE_LIST_URL;
                             } else {
@@ -1561,7 +1569,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
                         case ConstantVariables.SITE_PAGE_MENU_TITLE:
                         case ConstantVariables.SITE_PAGE_TITLE_MENU:
-                            if(mPackagesEnabled == 1) {
+                            if (mPackagesEnabled == 1) {
                                 createEntry = new Intent(this, SelectPackage.class);
                                 url = UrlUtil.SITE_PAGE_PACKAGE_LIST_URL;
                             } else
@@ -1569,7 +1577,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             break;
 
                         case ConstantVariables.ADV_GROUPS_MENU_TITLE:
-                            if(mPackagesEnabled == 1) {
+                            if (mPackagesEnabled == 1) {
                                 createEntry = new Intent(this, SelectPackage.class);
                                 url = UrlUtil.ADV_GROUP_PACKAGE_LIST_URL;
                             } else
@@ -1588,15 +1596,15 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                             url = AppConstant.DEFAULT_URL + "advancedvideos/playlist/create";
                             break;
                         case ConstantVariables.STORE_MENU_TITLE:
-                            if(mPackagesEnabled == 1) {
+                            if (mPackagesEnabled == 1) {
                                 createEntry = new Intent(this, SelectPackage.class);
                                 url = UrlUtil.STORE_PACKAGE_LIST_URL;
                             } else {
                                 createEntry = new Intent(this, CreateNewEntry.class);
                                 url = AppConstant.DEFAULT_URL + "sitestore/create/";
                             }
-                            createEntry.putExtra(ConstantVariables.FORM_TYPE,"store_create");
-                            PreferencesUtils.updateCurrentModule(mContext,ConstantVariables.STORE_MENU_TITLE);
+                            createEntry.putExtra(ConstantVariables.FORM_TYPE, "store_create");
+                            PreferencesUtils.updateCurrentModule(mContext, ConstantVariables.STORE_MENU_TITLE);
                             break;
                         default:
                             currentSelectedOption = PreferencesUtils.getCurrentSelectedModule(mContext);
@@ -1612,7 +1620,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
             case R.id.create_new_album:
                 mFabMenu.close(true);
-                url=AppConstant.DEFAULT_URL+"albums/upload?create_new_album=1";
+                url = AppConstant.DEFAULT_URL + "albums/upload?create_new_album=1";
                 createEntry = new Intent(MainActivity.this, CreateNewEntry.class);
                 createEntry.putExtra(ConstantVariables.CREATE_URL, url);
                 startActivityForResult(createEntry, ConstantVariables.CREATE_REQUEST_CODE);
@@ -1620,10 +1628,10 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 break;
 
             case R.id.edit_album:
-                if(!mAppConst.checkManifestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                if (!mAppConst.checkManifestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     mAppConst.requestForManifestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             ConstantVariables.WRITE_EXTERNAL_STORAGE);
-                }else{
+                } else {
                     showListOfAlbums();
                 }
                 break;
@@ -1641,7 +1649,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             case R.id.search_icon:
                 //calling the search activity
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
-                searchIntent.putExtra(ConstantVariables.IS_SEARCHED_FROM_DASHBOARD,false);
+                searchIntent.putExtra(ConstantVariables.IS_SEARCHED_FROM_DASHBOARD, false);
                 searchIntent.putExtra(ConstantVariables.CATEGORY_FORUM_TOPIC,
                         getResources().getString(R.string.query_search_forum_topics));
                 startActivity(searchIntent);
@@ -1667,11 +1675,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
     }
 
-    public void setTabVisibility(int viewType){
+    public void setTabVisibility(int viewType) {
 
-        switch (viewType){
+        switch (viewType) {
             case TYPE_HOME:
-                mToolbarParams.setScrollFlags(SCROLL_FLAG_SCROLL| SCROLL_FLAG_ENTER_ALWAYS);
+                mToolbarParams.setScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_ENTER_ALWAYS);
                 mHomeTabs.setVisibility(View.VISIBLE);
                 mEventFilters.setVisibility(View.GONE);
                 mTabHost.setVisibility(View.GONE);
@@ -1679,7 +1687,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 mFabMenu.hideMenu(false);
                 break;
             case TYPE_MODULE:
-                mToolbarParams.setScrollFlags(SCROLL_FLAG_SCROLL| SCROLL_FLAG_ENTER_ALWAYS);
+                mToolbarParams.setScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_ENTER_ALWAYS);
                 isHomePage = false;
                 mHomeTabs.setVisibility(View.GONE);
                 mEventFilters.setVisibility(View.GONE);
@@ -1709,15 +1717,12 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 mStoreWishListEnabled, mMLTWishListEnabled);
         SnackbarUtils.displaySnackbarShortWithListener(findViewById(R.id.main_content),
                 mContext.getResources().getString(R.string.change_location_success_message),
-                new SnackbarUtils.OnSnackbarDismissListener() {
-                    @Override
-                    public void onSnackbarDismissed() {
-                        if (loadFragment != null && isNewLocation) {
-                            FragmentManager fragmentManager = getSupportFragmentManager();
-                            FragmentTransaction ft = fragmentManager.beginTransaction();
-                            ft.replace(R.id.main_content, loadFragment);
-                            ft.commitAllowingStateLoss();
-                        }
+                () -> {
+                    if (loadFragment != null && isNewLocation) {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction ft = fragmentManager.beginTransaction();
+                        ft.replace(R.id.main_content, loadFragment);
+                        ft.commitAllowingStateLoss();
                     }
                 });
     }
@@ -1750,14 +1755,15 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
     /**
      * Method to start new activity according to push notification type.
-     * @param type type of push notification.
-     * @param id id of content page.
-     * @param listingTypeId listingtypeId in case of sitereview.
+     *
+     * @param type                type of push notification.
+     * @param id                  id of content page.
+     * @param listingTypeId       listingtypeId in case of sitereview.
      * @param notificationViewUrl web view url.
-     * @param headerTitle title of push notification.
+     * @param headerTitle         title of push notification.
      */
     public void startNewActivity(String type, int id, int listingTypeId, String notificationViewUrl,
-                                 String headerTitle, JSONObject paramsObject){
+                                 String headerTitle, JSONObject paramsObject) {
         Intent viewIntent;
         MyFcmListenerService.clearPushNotification();
 
@@ -1778,13 +1784,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 if (type.equals("activity_action") && paramsObject != null &&
                         paramsObject.optInt("attachment_count") > 1) {
                     viewIntent = new Intent(getApplicationContext(), Comment.class);
-                    String mLikeCommentsUrl = AppConstant.DEFAULT_URL + "advancedactivity/feeds/likes-comments" ;
+                    String mLikeCommentsUrl = AppConstant.DEFAULT_URL + "advancedactivity/feeds/likes-comments";
                     viewIntent.putExtra(ConstantVariables.LIKE_COMMENT_URL, mLikeCommentsUrl);
                     viewIntent.putExtra(ConstantVariables.SUBJECT_TYPE, ConstantVariables.AAF_MENU_TITLE);
                     viewIntent.putExtra(ConstantVariables.SUBJECT_ID, id);
                     viewIntent.putExtra("reactionsEnabled", paramsObject.optInt("reactionsEnabled"));
 
-                    if(paramsObject.optJSONObject("feed_reactions") != null){
+                    if (paramsObject.optJSONObject("feed_reactions") != null) {
                         viewIntent.putExtra("popularReactions", paramsObject.optJSONObject("feed_reactions").toString());
                     }
                 } else {
@@ -1812,10 +1818,10 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     startActivityForResult(viewIntent, ConstantVariables.VIEW_PAGE_CODE);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else if (notificationViewUrl != null && !notificationViewUrl.isEmpty()) {
-                    if(ConstantVariables.WEBVIEW_ENABLE == 0) {
+                    if (ConstantVariables.WEBVIEW_ENABLE == 0) {
                         CustomTabUtil.launchCustomTab(this, GlobalFunctions.
                                 getWebViewUrl(notificationViewUrl, mContext));
-                    }else {
+                    } else {
                         Intent webViewActivity = new Intent(MainActivity.this, WebViewActivity.class);
                         webViewActivity.putExtra("headerText", headerTitle);
                         webViewActivity.putExtra("url", notificationViewUrl);
@@ -1875,7 +1881,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         });
 
                 alertBuilder.create().show();
-            }catch (JSONException|NullPointerException e) {
+            } catch (JSONException | NullPointerException e) {
                 e.printStackTrace();
             }
 
@@ -1967,7 +1973,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 ConstantVariables.WRITE_EXTERNAL_STORAGE);
 
-                    }else{
+                    } else {
                         // If user pressed never ask again on permission popup
                         // show snackbar with open app info button
                         // user can revoke the permission from Permission section of App Info.
@@ -1996,7 +2002,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
                         mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.WAKE_LOCK, ConstantVariables.PERMISSION_WAKE_LOCK);
 
-                    }else{
+                    } else {
                         // If user pressed never ask again on permission popup
                         // show snackbar with open app info button
                         // user can revoke the permission from Permission section of App Info.
@@ -2023,7 +2029,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                         mAlertDialogWithAction.showDialogForAccessPermission(Manifest.permission.ACCESS_FINE_LOCATION,
                                 ConstantVariables.ACCESS_FINE_LOCATION);
 
-                    }else{
+                    } else {
                         // If user pressed never ask again on permission popup
                         // show snackbar with open app info button
                         // user can revoke the permission from Permission section of App Info.
@@ -2073,17 +2079,19 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-            mGoogleApiClient.isConnected()) {
+                mGoogleApiClient.isConnected()) {
 
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
 
     @Override
-    public void onConnectionSuspended(int i) { }
+    public void onConnectionSuspended(int i) {
+    }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -2097,7 +2105,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 ArrayList<String> addressFragments = new ArrayList<>();
 
                 // Fetch the address lines using getAddressLine and join them.
-                for(int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
                     addressFragments.add(address.getAddressLine(i));
                 }
 
@@ -2109,9 +2117,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
                     PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_DEFAULT_LOCATION, mNewLocation);
 
-                    JSONObject userDetail = (!mAppConst.isLoggedOutUser() && PreferencesUtils.getUserDetail(mContext) != null ) ? new JSONObject(PreferencesUtils.getUserDetail(mContext)) : null;
+                    JSONObject userDetail = (!mAppConst.isLoggedOutUser() && PreferencesUtils.getUserDetail(mContext) != null) ? new JSONObject(PreferencesUtils.getUserDetail(mContext)) : null;
 
-                    if (userDetail != null){
+                    if (userDetail != null) {
                         userDetail.put(PreferencesUtils.USER_LOCATION_LATITUDE, location.getLatitude());
                         userDetail.put(PreferencesUtils.USER_LOCATION_LONGITUDE, location.getLongitude());
                         PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
@@ -2129,7 +2137,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                     locationObject.put("latitude", address.getLatitude());
                     locationObject.put("longitude", address.getLongitude());
 
-                    setCurrentLocationOnServer(locationObject.toString(), userDetail.optInt("user_id"));
+                    if (userDetail != null) {
+                        setCurrentLocationOnServer(locationObject.toString(), userDetail.optInt("user_id"));
+                    }
 
                 }
             }
@@ -2155,10 +2165,12 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         mAppConst.postJsonResponseForUrl(url, params, new OnResponseListener() {
             @Override
-            public void onTaskCompleted(JSONObject jsonObject) { }
+            public void onTaskCompleted(JSONObject jsonObject) {
+            }
 
             @Override
-            public void onErrorInExecutingTask(String message, boolean isRetryOption) { }
+            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+            }
         });
     }
 
@@ -2176,30 +2188,27 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
         builder.setAlwaysShow(true);
         PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-            @Override
-            public void onResult(LocationSettingsResult result) {
-                final Status status = result.getStatus();
-                switch (status.getStatusCode()) {
-                    case LocationSettingsStatusCodes.SUCCESS:
-                        if (isHomePage) {
-                            autoUpdateCurrentLocation();
-                        } else {
-                            loadFragmentOnGPSEnabled();
-                        }
-                        break;
+        result.setResultCallback(result1 -> {
+            final Status status = result1.getStatus();
+            switch (status.getStatusCode()) {
+                case LocationSettingsStatusCodes.SUCCESS:
+                    if (isHomePage) {
+                        autoUpdateCurrentLocation();
+                    } else {
+                        loadFragmentOnGPSEnabled();
+                    }
+                    break;
 
-                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        try {
-                            status.startResolutionForResult((Activity) mContext, ConstantVariables.PERMISSION_GPS_SETTINGS);
-                        } catch (IntentSender.SendIntentException e) {
-                            e.printStackTrace();
-                        }
-                        break;
+                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                    try {
+                        status.startResolutionForResult((Activity) mContext, ConstantVariables.PERMISSION_GPS_SETTINGS);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+                    break;
 
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        break;
-                }
+                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                    break;
             }
         });
     }
@@ -2217,9 +2226,9 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     private void checkLocationPermission() {
         isCurrentLocationSet = false;
         if (isSetLocation &&
-            AppConstant.mLocationType != null &&
-            AppConstant.mLocationType.equals("notspecific") &&
-            AppConstant.isDeviceLocationEnable == 1) {
+                AppConstant.mLocationType != null &&
+                AppConstant.mLocationType.equals("notspecific") &&
+                AppConstant.isDeviceLocationEnable == 1) {
             isSetLocation = false;
 
             if (!mAppConst.checkManifestPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {

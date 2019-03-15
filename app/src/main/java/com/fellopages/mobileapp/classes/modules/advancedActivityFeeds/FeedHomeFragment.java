@@ -13,7 +13,6 @@
 package com.fellopages.mobileapp.classes.modules.advancedActivityFeeds;
 
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +20,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -86,7 +86,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         fragment.setArguments(bundle);
         return fragment;
     }
-               /* Broadcast receiver for receiving broadcasting intent action for*/
+    /* Broadcast receiver for receiving broadcasting intent action for*/
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -118,14 +118,13 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mContext = getActivity();
         mAppConst = new AppConstant(mContext);
         rootView = inflater.inflate(R.layout.view_pager, null);
         mFabCreate = getActivity().findViewById(R.id.create_fab);
-
 
 
         home = getActivity().findViewById(R.id.home_button);
@@ -250,7 +249,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
             }
         }
 
-        if(!mAppConst.isLoggedOutUser()) {
+        if (!mAppConst.isLoggedOutUser()) {
             getAlertNotifications();
             // Kick off the first runnable task right away
             handler.postDelayed(runnableCode, ConstantVariables.FIRST_COUNT_REQUEST_DELAY);
@@ -324,13 +323,15 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(broadcastReceiver, intentFilter);
+        if (getActivity() != null)
+            getActivity().registerReceiver(broadcastReceiver, intentFilter);
     }
 
     @Override
     public void onPause() {
         // Unregister receiver if activity is not in front
-        getActivity().unregisterReceiver(broadcastReceiver);
+        if (getActivity() != null)
+            getActivity().unregisterReceiver(broadcastReceiver);
         super.onPause();
     }
 

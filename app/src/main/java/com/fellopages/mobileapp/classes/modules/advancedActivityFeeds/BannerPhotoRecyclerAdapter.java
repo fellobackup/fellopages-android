@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,8 +48,8 @@ public class BannerPhotoRecyclerAdapter extends RecyclerView.Adapter<BannerPhoto
     private ImageLoader mImageLoader;
 
 
-    public BannerPhotoRecyclerAdapter(Context context, List<BrowseListItems> browseItemList,
-                                      OnItemClickListener onItemClickListener) {
+    BannerPhotoRecyclerAdapter(Context context, List<BrowseListItems> browseItemList,
+                               OnItemClickListener onItemClickListener) {
 
         this.mContext = context;
         mBrowseItemList = browseItemList;
@@ -68,14 +69,15 @@ public class BannerPhotoRecyclerAdapter extends RecyclerView.Adapter<BannerPhoto
         return mBrowseItemList.size();
     }
 
+    @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.banner_photo_list, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position) {
 
         BrowseListItems browseListItems = mBrowseItemList.get(position);
         holder.setIsRecyclable(false);
@@ -118,15 +120,12 @@ public class BannerPhotoRecyclerAdapter extends RecyclerView.Adapter<BannerPhoto
             holder.ivMainImage.setClipToOutline(!mSelectedBanner.isEmpty() && mSelectedBanner.get(0) == position);
         }
 
-        holder.container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(v, holder.getAdapterPosition());
-                    mSelectedBanner.clear();
-                    mSelectedBanner.add(holder.getAdapterPosition());
-                    notifyDataSetChanged();
-                }
+        holder.container.setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(v, holder.getAdapterPosition());
+                mSelectedBanner.clear();
+                mSelectedBanner.add(holder.getAdapterPosition());
+                notifyDataSetChanged();
             }
         });
     }
@@ -135,7 +134,7 @@ public class BannerPhotoRecyclerAdapter extends RecyclerView.Adapter<BannerPhoto
      * Method to update editing feed's banner in status body's background.
      * @param selectedBanner Selected banner's position.
      */
-    public void setEditingBanner(int selectedBanner) {
+    void setEditingBanner(int selectedBanner) {
         if (mOnItemClickListener != null) {
             mOnItemClickListener.onItemClick(null, selectedBanner);
             mSelectedBanner.clear();
@@ -147,9 +146,9 @@ public class BannerPhotoRecyclerAdapter extends RecyclerView.Adapter<BannerPhoto
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         public View container;
-        public ImageView ivMainImage;
+        ImageView ivMainImage;
 
-        public ItemViewHolder(View view) {
+        ItemViewHolder(View view) {
             super(view);
             container = view;
 

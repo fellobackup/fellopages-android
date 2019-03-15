@@ -81,6 +81,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -91,17 +92,16 @@ import java.util.concurrent.TimeUnit;
 public class AppConstant {
     private Context mContext;
     private String oauthToken, oauth_secret;
-    private static String locale;
     public static Locale mLocale;
     private JSONObject mBody, mUserDetail;
     private boolean isRetryOption = false, mIsLoginSignUpRequest = false;
-    public ProgressDialog pDialog;
-    public Map<String, String> postParams, mAuthParams, mRequestParams;
+    private ProgressDialog pDialog;
+    private Map<String, String> postParams, mAuthParams, mRequestParams;
 
-    int mStatusCode;
-    public static final int REQUEST_TIMEOUT_MS = 10000;
-    public static final float BACK_OF_MULTIPLIER = 2.0f;
-    public static final int NO_OF_RETRY_ATTEMPTS = 3;
+    private int mStatusCode;
+    private static final int REQUEST_TIMEOUT_MS = 10000;
+    private static final float BACK_OF_MULTIPLIER = 2.0f;
+    private static final int NO_OF_RETRY_ATTEMPTS = 3;
 
     // GridView image padding
     public static final int GRID_PADDING = 2; // in dp
@@ -124,12 +124,12 @@ public class AppConstant {
     public static final String oauth_consumer_key = "tqrqueo5pxnae436nmrgeqhzs6jiud1n";
     public static final String oauth_consumer_secret = "dlixjfdviokbfk48mv1x0ir2u8v7o9xj";
 
-    public static final String tag_json_obj = "json_obj_req";
-    public static boolean isLocationEnable = false;
+    private static final String tag_json_obj = "json_obj_req";
+    static boolean isLocationEnable = false;
     public static String mLocationType = "";
     public static int isDeviceLocationEnable = 0, isDeviceLocationChange = 1;
 
-    OnCommunityAdsLoadedListener mCommunityAdsLoadedListener;
+    private OnCommunityAdsLoadedListener mCommunityAdsLoadedListener;
 
     public AppConstant(Context context) {
         mContext = context;
@@ -154,7 +154,7 @@ public class AppConstant {
     /**
      * Method to initialize class member variables.
      */
-    public void initializeVariable() {
+    private void initializeVariable() {
         mAuthParams = new HashMap<>();
         mRequestParams = new HashMap<>();
         oauthToken = PreferencesUtils.getUserPreferences(mContext).getString("oauth_token", null);
@@ -179,7 +179,7 @@ public class AppConstant {
         if (PreferencesUtils.getUserDetail(mContext) != null) {
             try {
                 mUserDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
-                locale = mUserDetail.optString("locale");
+                String locale = mUserDetail.optString("locale");
                 if (locale.contains("_")) {
                     String localNameArray[] = locale.split("_");
                     mLocale = new Locale(localNameArray[0], localNameArray[1]);
@@ -252,7 +252,7 @@ public class AppConstant {
      * @param url Url on which the request will be executed
      */
     public void postJsonRequest(String url) {
-        manageResponse(url, Request.Method.POST, new HashMap<String, String>(), null);
+        manageResponse(url, Request.Method.POST, new HashMap<>(), null);
     }
 
     /**
@@ -262,7 +262,7 @@ public class AppConstant {
      * @param responseListener Interface used to listen response events
      */
     public void postJsonRequestWithoutParams(String url, final OnResponseListener responseListener) {
-        manageResponse(url, Request.Method.POST, new HashMap<String, String>(), responseListener);
+        manageResponse(url, Request.Method.POST, new HashMap<>(), responseListener);
     }
 
     /**
@@ -322,8 +322,8 @@ public class AppConstant {
      * @param params             Post Params.
      * @param onResponseListener Interface used to listen response events
      */
-    public void manageResponse(String url, final int method, Map<String, String> params,
-                               final OnResponseListener onResponseListener) {
+    private void manageResponse(String url, final int method, Map<String, String> params,
+                                final OnResponseListener onResponseListener) {
 
 
         try {
@@ -344,63 +344,57 @@ public class AppConstant {
 
             LogUtils.LOGD(AppConstant.class.getSimpleName(), "Request Url: " + url);
             Log.d("LikeAction ", params + " " + url);
-            StringRequest request = new StringRequest(method, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        if (response != null && !response.isEmpty()) {
-                            LogUtils.LOGD(AppConstant.class.getSimpleName(), "Request Response: " + (method == Request.Method.GET ? "Successful" : response));
-                            JSONObject json = new JSONObject(response);
-                            Log.d("LoggedParamsAndUrl ", String.valueOf(json));
-                            mStatusCode = json.optInt("status_code");
-                            mBody = json.optJSONObject("body");
-                            Log.d("JsonTag ", json.toString());
-                            if (mStatusCode != 0 && isRequestSuccessful(mStatusCode) && mBody == null) {
-                                JSONArray bodyJsonArray = json.optJSONArray("body");
-                                mBody = convertToJsonObject(bodyJsonArray);
-                                if (mBody != null && mBody.length() == 0 && json.optString("body") != null) {
-                                    mBody = json;
-                                }
-                            }
-
-                            if (mStatusCode == 406) {
-                                eraseUserDatabase();
-                            } else if (isRequestSuccessful(mStatusCode) && onResponseListener != null) {
-                                onResponseListener.onTaskCompleted(mBody);
-                            } else if (onResponseListener != null) {
-                                String message = json.optString("message");
-                                String errorCode = json.optString("error_code");
-
-                                if (errorCode != null &&
-                                        (errorCode.equals("email_not_verified") || errorCode.equals("not_approved") || errorCode.equals("subscription_fail"))) {
-                                    message = json.optString("error_code");
-                                }
-
-                                onResponseListener.onErrorInExecutingTask(message, isRetryOption);
-                            }
-                        } else {
-                            if (onResponseListener != null) {
-                                onResponseListener.onErrorInExecutingTask(mContext.getResources()
-                                        .getString(R.string.please_retry_option), isRetryOption);
+            StringRequest request = new StringRequest(method, url, response -> {
+                try {
+                    if (response != null && !response.isEmpty()) {
+                        LogUtils.LOGD(AppConstant.class.getSimpleName(), "Request Response: " + (method == Request.Method.GET ? "Successful" : response));
+                        JSONObject json = new JSONObject(response);
+                        Log.d("LoggedParamsAndUrl ", String.valueOf(json));
+                        mStatusCode = json.optInt("status_code");
+                        mBody = json.optJSONObject("body");
+                        Log.d("JsonTag ", json.toString());
+                        if (mStatusCode != 0 && isRequestSuccessful(mStatusCode) && mBody == null) {
+                            JSONArray bodyJsonArray = json.optJSONArray("body");
+                            mBody = convertToJsonObject(bodyJsonArray);
+                            if (mBody != null && mBody.length() == 0 && json.optString("body") != null) {
+                                mBody = json;
                             }
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
 
+                        if (mStatusCode == 406) {
+                            eraseUserDatabase();
+                        } else if (isRequestSuccessful(mStatusCode) && onResponseListener != null) {
+                            onResponseListener.onTaskCompleted(mBody);
+                        } else if (onResponseListener != null) {
+                            String message = json.optString("message");
+                            String errorCode = json.optString("error_code");
+
+                            if (errorCode != null &&
+                                    (errorCode.equals("email_not_verified") || errorCode.equals("not_approved") || errorCode.equals("subscription_fail"))) {
+                                message = json.optString("error_code");
+                            }
+
+                            onResponseListener.onErrorInExecutingTask(message, isRetryOption);
+                        }
+                    } else {
                         if (onResponseListener != null) {
                             onResponseListener.onErrorInExecutingTask(mContext.getResources()
-                                    .getString(R.string.parse_error), isRetryOption);
+                                    .getString(R.string.please_retry_option), isRetryOption);
                         }
                     }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    LogUtils.LOGD(AppConstant.class.getSimpleName(), "VolleyError: " + error);
+                } catch (JSONException e) {
+                    e.printStackTrace();
 
                     if (onResponseListener != null) {
-                        onResponseListener.onErrorInExecutingTask(displayVolleyError(error), isRetryOption);
+                        onResponseListener.onErrorInExecutingTask(mContext.getResources()
+                                .getString(R.string.parse_error), isRetryOption);
                     }
+                }
+            }, error -> {
+                LogUtils.LOGD(AppConstant.class.getSimpleName(), "VolleyError: " + error);
+
+                if (onResponseListener != null) {
+                    onResponseListener.onErrorInExecutingTask(displayVolleyError(error), isRetryOption);
                 }
             }) {
                 @Override
@@ -494,7 +488,7 @@ public class AppConstant {
     }
 
     //Used to display volley errors on every page using the error instance
-    public String displayVolleyError(VolleyError error) {
+    private String displayVolleyError(VolleyError error) {
         if (error instanceof TimeoutError) {
             isRetryOption = true;
             return mContext.getResources().getString(R.string.time_our_error) + "…";
@@ -519,20 +513,23 @@ public class AppConstant {
      */
     @SuppressWarnings("deprecation")
     public int getScreenWidth() {
-        int columnWidth;
+        int columnWidth = 0;
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        final Point point = new Point();
+        Display display;
+        if (wm != null) {
+            display = wm.getDefaultDisplay();
+            final Point point = new Point();
 
-        try {
-            display.getSize(point);
-        } catch (NoSuchMethodError ignore) {
-            // Older device
-            point.x = display.getWidth();
-            point.y = display.getHeight();
+            try {
+                display.getSize(point);
+            } catch (NoSuchMethodError ignore) {
+                // Older device
+                point.x = display.getWidth();
+                point.y = display.getHeight();
+            }
+
+            columnWidth = point.x;
         }
-
-        columnWidth = point.x;
 
         return columnWidth;
     }
@@ -542,20 +539,26 @@ public class AppConstant {
      */
     @SuppressWarnings("deprecation")
     public int getScreenHeight() {
-        int columnHeight;
+        int columnHeight = 0;
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        final Point point = new Point();
+        Display display;
+        if (wm != null) {
+            display = wm.getDefaultDisplay();
+            final Point point = new Point();
 
-        try {
-            display.getSize(point);
-        } catch (NoSuchMethodError ignore) {
-            // Older device
-            point.x = display.getWidth();
-            point.y = display.getHeight();
+            try {
+                if (display != null) {
+                    display.getSize(point);
+                }
+            } catch (NoSuchMethodError ignore) {
+                // Older device
+                point.x = display.getWidth();
+                point.y = display.getHeight();
+            }
+
+            columnHeight = point.y;
         }
 
-        columnHeight = point.y;
         return columnHeight;
     }
 
@@ -668,8 +671,8 @@ public class AppConstant {
     @Nullable
     public static String getHoursFromDate(String date, boolean use12hrFormat) {
         if (use12hrFormat) {
-            String timeString = null;
-            String minuteString;
+//            String timeString = null;
+//            String minuteString;
             SimpleDateFormat format;
 
             if (mLocale != null) {
@@ -704,6 +707,7 @@ public class AppConstant {
             Date dateObj = format.parse(date);
             int hours = dateObj.getHours();
             int minutes = dateObj.getMinutes();
+
             if (minutes < 9)
                 minuteString = "0" + minutes;
             else
@@ -804,14 +808,18 @@ public class AppConstant {
         View view = ((Activity) mContext).getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         }
     }
 
     public void hideKeyboardInDialog(View view) {
         if (view != null) {
             InputMethodManager im = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            if (im != null) {
+                im.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         }
     }
 
@@ -819,7 +827,9 @@ public class AppConstant {
         View view = ((Activity) mContext).getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+            if (imm != null) {
+                imm.toggleSoftInputFromWindow(view.getWindowToken(), InputMethodManager.SHOW_FORCED, 0);
+            }
         }
     }
 
@@ -856,7 +866,7 @@ public class AppConstant {
      *
      * @param jsonObject json object of user details
      */
-    public void saveDashboardValues(JSONObject jsonObject) {
+    void saveDashboardValues(JSONObject jsonObject) {
         if (jsonObject != null) {
             JSONArray menuObject = jsonObject.optJSONArray("menus");
 
@@ -919,7 +929,7 @@ public class AppConstant {
 
     public void changeLanguage(final Context mContext, final String currentSelectedOption) {
         try {
-            final ArrayAdapter<String> languageAdapter, locationAdapter;
+            final ArrayAdapter<String> languageAdapter;
             final Map<String, String> mSelectedLanguageInfo;
 
             mSelectedLanguageInfo = new HashMap<>();
@@ -950,30 +960,27 @@ public class AppConstant {
             }
 
             alertBuilder.setSingleChoiceItems(languageAdapter, selectedPosition,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String localeName = mSelectedLanguageInfo.get(languageAdapter.getItem(which));
+                    (dialog, which) -> {
+                        String localeName = mSelectedLanguageInfo.get(languageAdapter.getItem(which));
 
-                            if (localeName != null && !localeName.equals(PreferencesUtils.getCurrentLanguage(mContext))) {
+                        if (localeName != null && !localeName.equals(PreferencesUtils.getCurrentLanguage(mContext))) {
 
-                                changeAppLocale(localeName, false);
+                            changeAppLocale(localeName, false);
 
-                                PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.CURRENT_LANGUAGE, localeName);
+                            PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.CURRENT_LANGUAGE, localeName);
 
-                                Bundle bundle = new Bundle();
-                                bundle.putString("previousSelected", currentSelectedOption);
-                                Intent intent = new Intent(mContext, WelcomeScreen.class);
-                                intent.putExtras(bundle);
-                                ((Activity) mContext).overridePendingTransition(0, 0);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                ((Activity) mContext).finish();
-                                ((Activity) mContext).overridePendingTransition(0, 0);
-                                mContext.startActivity(intent);
-                            }
-
-                            dialog.dismiss();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("previousSelected", currentSelectedOption);
+                            Intent intent = new Intent(mContext, WelcomeScreen.class);
+                            intent.putExtras(bundle);
+                            ((Activity) mContext).overridePendingTransition(0, 0);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            ((Activity) mContext).finish();
+                            ((Activity) mContext).overridePendingTransition(0, 0);
+                            mContext.startActivity(intent);
                         }
+
+                        dialog.dismiss();
                     });
 
             alertBuilder.create().show();
@@ -1151,13 +1158,13 @@ public class AppConstant {
      * @param passwordValue password
      * @param jsonObject    json object
      */
-    public void proceedToUserLogin(Context mContext,
-                                   Bundle bundle,
-                                   String intentAction,
-                                   String intentType,
-                                   String emailValue,
-                                   String passwordValue,
-                                   JSONObject jsonObject) {
+    void proceedToUserLogin(Context mContext,
+                            Bundle bundle,
+                            String intentAction,
+                            String intentType,
+                            String emailValue,
+                            String passwordValue,
+                            JSONObject jsonObject) {
         proceedToUserLogin(mContext, bundle, intentAction, intentType, emailValue, passwordValue, jsonObject, null);
     }
 
@@ -1173,14 +1180,14 @@ public class AppConstant {
      * @param jsonObject    json object
      * @param loginListener override callback
      */
-    public void proceedToUserLogin(Context mContext,
-                                   Bundle bundle,
-                                   String intentAction,
-                                   String intentType,
-                                   String emailValue,
-                                   String passwordValue,
-                                   JSONObject jsonObject,
-                                   @Nullable LoginListener loginListener) {
+    void proceedToUserLogin(Context mContext,
+                            Bundle bundle,
+                            String intentAction,
+                            String intentType,
+                            String emailValue,
+                            String passwordValue,
+                            JSONObject jsonObject,
+                            @Nullable LoginListener loginListener) {
 
         PreferencesUtils.clearSharedPreferences(mContext);
         PreferencesUtils.clearDashboardData(mContext);
@@ -1320,17 +1327,16 @@ public class AppConstant {
         animateClose((Activity) mContext);
     }
 
-    public static void animateEnter(Activity activity) {
+    private static void animateEnter(Activity activity) {
         activity.overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
     }
 
-    public static void animateClose(Activity activity) {
+    private static void animateClose(Activity activity) {
         activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public static String buildUrl(Integer id) {
-        String url = DEFAULT_URL + "advancedevents/view/" + id + "?gutter_menu=" + 1;
 
-        return url;
+        return DEFAULT_URL + "advancedevents/view/" + id + "?gutter_menu=" + 1;
     }
 }

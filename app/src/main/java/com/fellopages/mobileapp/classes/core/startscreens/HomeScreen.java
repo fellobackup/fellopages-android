@@ -62,13 +62,10 @@ public class HomeScreen extends FragmentActivity implements View.OnClickListener
 
     View mainView;
     private static final long ANIM_VIEWPAGER_DELAY = 5000;
-    private Button mSignInBtn, mSignUpBtn;
     private TextView mBrowseAsGuest, mChooseLanguage;
     private List<Fragment> fragments = new Vector<>();
     private ViewPager viewPager;
-    private PagerAdapter mPagerAdapter;
     private CallbackManager callbackManager;
-    private LoginButton facebookLoginButton;
     private TwitterLoginButton twitterLoginButton;
     private AppConstant mAppConst;
     private boolean mIsBrowseGuestEnabled = false, mIsMultiLanguageEnabled = false;
@@ -88,7 +85,7 @@ public class HomeScreen extends FragmentActivity implements View.OnClickListener
         setContentView(R.layout.activity_home_screen);
         callbackManager = CallbackManager.Factory.create();
         mainView = findViewById(R.id.main_content);
-        facebookLoginButton = findViewById(R.id.facebook_login_button);
+        LoginButton facebookLoginButton = findViewById(R.id.facebook_login_button);
         twitterLoginButton= findViewById(R.id.twitter_login_button);
 
         // Hide Facebook button when facebook_app_id is null or Empty.
@@ -124,19 +121,19 @@ public class HomeScreen extends FragmentActivity implements View.OnClickListener
         mChooseLanguage.setTypeface(GlobalFunctions.getFontIconTypeFace(this));
         mChooseLanguage.setOnClickListener(this);
 
-        mSignUpBtn = findViewById(R.id.signup_button);
+        Button mSignUpBtn = findViewById(R.id.signup_button);
         mSignUpBtn.setOnClickListener(this);
 
-        mSignInBtn = findViewById(R.id.signin_button);
+        Button mSignInBtn = findViewById(R.id.signin_button);
         mSignInBtn.setOnClickListener(this);
         mSignInBtn.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding),
                 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
         mSignUpBtn.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding),
                 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
 
-        mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
+        PagerAdapter mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
         viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(this.mPagerAdapter);
+        viewPager.setAdapter(mPagerAdapter);
 
         setBrowseGuestAndLanguageOptions();
 

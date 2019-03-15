@@ -59,12 +59,10 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
     private List<AddPeopleList> mAddPeopleList;
     private PredicateLayout mSelectedFriendsLayout;
     private Map<String, String> selectedFriends;
-    private Toolbar mToolbar;
     private boolean isPhotoTag = false;
     private int mSubjectId;
     private String mSubjectType;
-    private HashMap<String, String> postParams, removeTagParams;
-    private JSONArray mTagJsonArray;
+    private HashMap<String, String> postParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +77,7 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
        /* Set Back Button on Action Bar */
 
-        mToolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -130,7 +128,7 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
             if (friendsBundle.containsKey("userTagArray")){
                 try {
-                    mTagJsonArray = new JSONArray(getIntent().getStringExtra("userTagArray"));
+                    JSONArray mTagJsonArray = new JSONArray(getIntent().getStringExtra("userTagArray"));
 
                     for (int i = 0; i < mTagJsonArray.length(); i++) {
                         JSONObject jsonObject = mTagJsonArray.optJSONObject(i);
@@ -289,23 +287,13 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
                     SnackbarUtils.displaySnackbarLongWithListener(mFriendsListView, label + " " +
                             getResources().getString(R.string.user_tagged_in_photo_success_message),
-                            new SnackbarUtils.OnSnackbarDismissListener() {
-                        @Override
-                        public void onSnackbarDismissed() {
-                            setIntentDataForTag(jsonObject);
-                        }
-                    });
+                            () -> setIntentDataForTag(jsonObject));
                 }
 
                 @Override
                 public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                     SnackbarUtils.displaySnackbarLongWithListener(mFriendsListView, message,
-                            new SnackbarUtils.OnSnackbarDismissListener() {
-                        @Override
-                        public void onSnackbarDismissed() {
-                            finish();
-                        }
-                    });
+                            () -> finish());
                 }
             });
 
@@ -367,7 +355,7 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
         }
 
         if (isPhotoTag) {
-            removeTagParams = new HashMap<>();
+            HashMap<String, String> removeTagParams = new HashMap<>();
 
             removeTagParams.put("subject_id", String.valueOf(mSubjectId));
             removeTagParams.put("subject_type", mSubjectType);
@@ -382,12 +370,7 @@ public class AddPeople extends AppCompatActivity implements TextWatcher,
 
                     SnackbarUtils.displaySnackbarLongWithListener(mFriendsListView,
                             getResources().getString(R.string.remove_user_from_photo_tag_success_message),
-                            new SnackbarUtils.OnSnackbarDismissListener() {
-                                @Override
-                                public void onSnackbarDismissed() {
-                                    setIntentDataForTag(jsonObject);
-                                }
-                            }
+                            () -> setIntentDataForTag(jsonObject)
                     );
                 }
 

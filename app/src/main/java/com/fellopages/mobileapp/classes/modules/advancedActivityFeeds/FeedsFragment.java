@@ -24,6 +24,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -499,12 +500,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 String tempData = DataStorage.getResponseFromLocalStorage(mContext, DataStorage.ACTIVITY_FEED_FILE);
 
                 if (tempData != null) {
-                    swipeRefreshLayout.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            swipeRefreshLayout.setRefreshing(true);
-                        }
-                    });
+                    swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
 
                     rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                     JSONObject jsonObject = new JSONObject(tempData);
@@ -2105,7 +2101,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case ConstantVariables.WRITE_EXTERNAL_STORAGE:
                 // If request is cancelled, the result arrays are empty.

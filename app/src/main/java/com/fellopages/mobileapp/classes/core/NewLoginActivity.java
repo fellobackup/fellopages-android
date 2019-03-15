@@ -222,19 +222,9 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
             fbButton.setText(mContext.getResources().getString(R.string.com_facebook_loginview_log_in_button_long));
         }
 
-        fbButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                facebookLoginButton.performClick();
-            }
-        });
+        fbButton.setOnClickListener(view -> facebookLoginButton.performClick());
 
-        twButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                twitterLoginButton.performClick();
-            }
-        });
+        twButton.setOnClickListener(view -> twitterLoginButton.performClick());
 
         callbackManager = CallbackManager.Factory.create();
         facebookLoginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));
@@ -607,18 +597,14 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
         alertBuilder.setView(inputLayout);
 
         alertBuilder.setPositiveButton(getResources().getString(R.string.forgot_password_popup_button),
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                (dialog, which) -> {
 
-                    }
                 });
 
 
-        alertBuilder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                mAppConst.hideKeyboardInDialog(input);
-                dialog.cancel();
-            }
+        alertBuilder.setNegativeButton(getResources().getString(R.string.cancel), (dialog, which) -> {
+            mAppConst.hideKeyboardInDialog(input);
+            dialog.cancel();
         });
 
         final AlertDialog alertDialog = alertBuilder.create();
@@ -629,87 +615,84 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
         if (PreferencesUtils.isOTPPluginEnabled(mContext)) {
             alertDialogPositiveButton.setText(getResources().getString(R.string.forgot_password_popup_button_otp));
         }
-        alertDialogPositiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAppConst.showProgressDialog();
+        alertDialogPositiveButton.setOnClickListener(v -> {
+            mAppConst.showProgressDialog();
 
-                final String emailAddress = input.getText().toString();
+            final String emailAddress = input.getText().toString();
 
-                if (emailAddress.length() > 0 && !emailAddress.trim().isEmpty()) {
-                    mAppConst.hideKeyboardInDialog(v);
+            if (emailAddress.length() > 0 && !emailAddress.trim().isEmpty()) {
+                mAppConst.hideKeyboardInDialog(v);
 
-                    if (PreferencesUtils.isOTPPluginEnabled(mContext)){
+                if (PreferencesUtils.isOTPPluginEnabled(mContext)){
 
-                        HashMap<String, String> params = new HashMap<>();
-                        params.put("email", emailAddress);
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("email", emailAddress);
 
-                        mAppConst.showProgressDialog();
-                        alertDialog.dismiss();
-                        mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_URL, params, new OnResponseListener() {
-                            @Override
-                            public void onTaskCompleted(JSONObject jsonObject) {
-                                mAppConst.hideProgressDialog();
+                    mAppConst.showProgressDialog();
+                    alertDialog.dismiss();
+                    mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_URL, params, new OnResponseListener() {
+                        @Override
+                        public void onTaskCompleted(JSONObject jsonObject) {
+                            mAppConst.hideProgressDialog();
 
-                                if (jsonObject != null) {
-                                    JSONObject response = jsonObject.optJSONObject("response");
-                                    if (response.optInt("isEmail") == 1) {
-                                        SnackbarUtils.displaySnackbarLongTime(mMainView,
-                                                getResources().getString(R.string.forgot_password_success_message));
+                            if (jsonObject != null) {
+                                JSONObject response = jsonObject.optJSONObject("response");
+                                if (response.optInt("isEmail") == 1) {
+                                    SnackbarUtils.displaySnackbarLongTime(mMainView,
+                                            getResources().getString(R.string.forgot_password_success_message));
 
-                                    } else {
-                                        Intent otpIntent = new Intent(mContext, OTPActivity.class);
-                                        otpIntent.putExtra("user_phoneno", response.optString("phoneno"));
-                                        otpIntent.putExtra("country_code", response.optString("country_code"));
-                                        otpIntent.putExtra("otp_duration", response.optInt("duration"));
-                                        otpIntent.putExtra("isForgotPassword", true);
-                                        startActivity(otpIntent);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    }
+                                } else {
+                                    Intent otpIntent = new Intent(mContext, OTPActivity.class);
+                                    otpIntent.putExtra("user_phoneno", response.optString("phoneno"));
+                                    otpIntent.putExtra("country_code", response.optString("country_code"));
+                                    otpIntent.putExtra("otp_duration", response.optInt("duration"));
+                                    otpIntent.putExtra("isForgotPassword", true);
+                                    startActivity(otpIntent);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 }
                             }
+                        }
 
-                            @Override
-                            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                                mAppConst.hideProgressDialog();
-                                SnackbarUtils.displaySnackbarLongTime(mMainView, message);
-                            }
-                        });
+                        @Override
+                        public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                            mAppConst.hideProgressDialog();
+                            SnackbarUtils.displaySnackbarLongTime(mMainView, message);
+                        }
+                    });
 
-                        mAppConst.hideProgressDialog();
-
-                    } else {
-                        alertDialog.dismiss();
-                        HashMap<String, String> emailParams = new HashMap<>();
-                        emailParams.put("email", emailAddress);
-
-                        mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_URL, emailParams, new OnResponseListener() {
-                            @Override
-                            public void onTaskCompleted(JSONObject jsonObject) {
-                                mAppConst.hideProgressDialog();
-                                SnackbarUtils.displaySnackbarLongTime(mMainView,
-                                        getResources().getString(R.string.forgot_password_success_message));
-                            }
-
-                            @Override
-                            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                                mAppConst.hideProgressDialog();
-                                /* Show Message */
-                                SnackbarUtils.displaySnackbarLongTime(mMainView, message);
-                            }
-                        });
-                    }
+                    mAppConst.hideProgressDialog();
 
                 } else {
-                    mAppConst.hideProgressDialog();
-                        if (PreferencesUtils.isOTPPluginEnabled(mContext)){
-                            input.setError(getResources().getString(R.string.forgot_password_empty_email_phone_error_message));
-                        } else {
-                            input.setError(getResources().getString(R.string.forgot_password_empty_email_error_message));
+                    alertDialog.dismiss();
+                    HashMap<String, String> emailParams = new HashMap<>();
+                    emailParams.put("email", emailAddress);
+
+                    mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_URL, emailParams, new OnResponseListener() {
+                        @Override
+                        public void onTaskCompleted(JSONObject jsonObject) {
+                            mAppConst.hideProgressDialog();
+                            SnackbarUtils.displaySnackbarLongTime(mMainView,
+                                    getResources().getString(R.string.forgot_password_success_message));
                         }
+
+                        @Override
+                        public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                            mAppConst.hideProgressDialog();
+                            /* Show Message */
+                            SnackbarUtils.displaySnackbarLongTime(mMainView, message);
+                        }
+                    });
                 }
 
+            } else {
+                mAppConst.hideProgressDialog();
+                    if (PreferencesUtils.isOTPPluginEnabled(mContext)){
+                        input.setError(getResources().getString(R.string.forgot_password_empty_email_phone_error_message));
+                    } else {
+                        input.setError(getResources().getString(R.string.forgot_password_empty_email_error_message));
+                    }
             }
+
         });
 
     }

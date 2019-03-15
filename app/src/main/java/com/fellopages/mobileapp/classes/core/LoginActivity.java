@@ -14,12 +14,9 @@ package com.fellopages.mobileapp.classes.core;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -29,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.fellopages.mobileapp.R;
@@ -41,7 +37,6 @@ import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.fellopages.mobileapp.classes.common.utils.SoundUtil;
 import com.fellopages.mobileapp.classes.common.utils.UrlUtil;
-import com.fellopages.mobileapp.classes.core.impl.LoginListener;
 import com.fellopages.mobileapp.classes.core.startscreens.HomeScreen;
 
 import org.json.JSONException;
@@ -60,12 +55,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             isNormalLogin = false;
     private Context mContext;
     private AppConstant mAppConst;
-    private Toolbar mToolbar;
     private TextView mForgotPassword;
     private Bundle bundle;
     private String intentAction, intentType;
     private TextView errorView;
-    private ScrollView scrollView;
 
 
     @Override
@@ -77,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mContext = this;
         mAppConst = new AppConstant(this);
 
-        mToolbar = findViewById(R.id.my_toolbar);
+        Toolbar mToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,18 +84,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             intentType = getIntent().getType();
         }
 
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                // Playing backSound effect when user tapped on back button from tool bar.
-                if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
-                    SoundUtil.playSoundEffectOnBackPressed(mContext);
-                }
+        mToolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+            // Playing backSound effect when user tapped on back button from tool bar.
+            if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
+                SoundUtil.playSoundEffectOnBackPressed(mContext);
             }
         });
 
-        scrollView = findViewById(R.id.scroll_view);
         loginButton = findViewById(R.id.login_button);
         loginButton.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding), 0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding));
         loginButton.setOnClickListener(this);
@@ -114,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         passwordWrapper.setHint(getResources().getString(R.string.lbl_enter_password));
         errorView = findViewById(R.id.error_view);
 
-        if( PreferencesUtils.getOtpEnabledOption(mContext) != null &&
+        if (PreferencesUtils.getOtpEnabledOption(mContext) != null &&
                 !PreferencesUtils.getOtpEnabledOption(mContext).isEmpty()) {
             if (PreferencesUtils.getOtpEnabledOption(mContext).equals("both")) {
                 passwordWrapper.setVisibility(View.GONE);
@@ -133,43 +122,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void setViewHideShow() {
-        usernameWrapper.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+        if (usernameWrapper.getEditText() != null) {
+            usernameWrapper.getEditText().addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().matches("-?\\d+(.\\d+)?")) {
-                    isNormalLogin = false;
-                    mForgotPassword.setVisibility(View.GONE);
-                    passwordWrapper.setVisibility(View.GONE);
-                    loginButton.setText(getResources().getString(R.string.otp_login_btn_name));
-
-                } else {
-                    isNormalLogin = true;
-                    loginButton.setText(getResources().getString(R.string.login_btn_name));
-                    mForgotPassword.setVisibility(View.VISIBLE);
-
-                    if (charSequence.length() != 0) {
-                        passwordWrapper.setVisibility(View.VISIBLE);
-                        mForgotPassword.setVisibility(View.VISIBLE);
-                    } else {
-                        passwordWrapper.setVisibility(View.GONE);
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (charSequence.toString().matches("-?\\d+(.\\d+)?")) {
+                        isNormalLogin = false;
                         mForgotPassword.setVisibility(View.GONE);
+                        passwordWrapper.setVisibility(View.GONE);
+                        loginButton.setText(getResources().getString(R.string.otp_login_btn_name));
+
+                    } else {
+                        isNormalLogin = true;
+                        loginButton.setText(getResources().getString(R.string.login_btn_name));
+                        mForgotPassword.setVisibility(View.VISIBLE);
+
+                        if (charSequence.length() != 0) {
+                            passwordWrapper.setVisibility(View.VISIBLE);
+                            mForgotPassword.setVisibility(View.VISIBLE);
+                        } else {
+                            passwordWrapper.setVisibility(View.GONE);
+                            mForgotPassword.setVisibility(View.GONE);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable editable) { }
-        });
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+        }
     }
 
     public void LoginClicked() {
+        if (usernameWrapper.getEditText() != null)
+            emailValue = usernameWrapper.getEditText().getText().toString();
 
-        emailValue = usernameWrapper.getEditText().getText().toString();
-
-        passwordValue = passwordWrapper.getEditText().getText().toString();
+        if (passwordWrapper.getEditText() != null)
+            passwordValue = passwordWrapper.getEditText().getText().toString();
 
         if (emailValue.isEmpty()) {
             isValidatingData = false;
@@ -211,15 +205,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 emailValue,
                                 passwordValue,
                                 jsonObject,
-                                new LoginListener() {
-                                    @Override
-                                    public void onOverrideLogin() {
-                                        Intent data = new Intent();
-                                        data.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, true);
-                                        setResult(ConstantVariables.CODE_USER_CREATE_SESSION, data);
-                                        finish();
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    }
+                                () -> {
+                                    Intent data = new Intent();
+                                    data.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION_LOGIN, true);
+                                    setResult(ConstantVariables.CODE_USER_CREATE_SESSION, data);
+                                    finish();
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 });
                     } else {
                         mAppConst.proceedToUserLogin(mContext,
@@ -241,11 +232,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void otpLoginClicked(){
-        emailValue = usernameWrapper.getEditText().getText().toString();
-        passwordValue = passwordWrapper.getEditText().getText().toString();
+    public void otpLoginClicked() {
+        if (usernameWrapper.getEditText() != null)
+            emailValue = usernameWrapper.getEditText().getText().toString();
+        if (passwordWrapper.getEditText() != null)
+            passwordValue = passwordWrapper.getEditText().getText().toString();
 
-        if (emailValue.isEmpty()){
+        if (emailValue.isEmpty()) {
             isValidatingData = false;
             usernameWrapper.setError(getResources().getString(R.string.email_address_phoneno_msg));
 
@@ -265,7 +258,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             params.put("password", passwordValue);
             params.put("ip", GlobalFunctions.getLocalIpAddress());
 
-            LogUtils.LOGD(LoginActivity.class.getSimpleName(),"otp_login_params->" +params);
+            LogUtils.LOGD(LoginActivity.class.getSimpleName(), "otp_login_params->" + params);
             mAppConst.postLoginSignUpRequest(UrlUtil.LOGIN_OTP_URL, params, new OnResponseListener() {
                 @Override
                 public void onTaskCompleted(JSONObject jsonObject) {
@@ -282,7 +275,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void sendToOtp(JSONObject jsonObject){
+    public void sendToOtp(JSONObject jsonObject) {
 
         if (jsonObject != null) {
             if (!jsonObject.has("oauth_token") || jsonObject.has("phoneno")) {
@@ -293,8 +286,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 int otpDuration = jsonObject.optInt("duration");
 
                 Intent otpIntent = new Intent(mContext, OTPActivity.class);
-                otpIntent.putExtra("user_phoneno",  phoneno);
-                otpIntent.putExtra("country_code",  country_code);
+                otpIntent.putExtra("user_phoneno", phoneno);
+                otpIntent.putExtra("country_code", country_code);
                 otpIntent.putExtra("otp_duration", otpDuration);
                 otpIntent.putExtra("user_login_email", emailValue);
                 otpIntent.putExtra("user_login_pass", passwordValue);
@@ -433,7 +426,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         inputLayout.setFocusable(true);
         inputLayout.setFocusableInTouchMode(true);
         int padding20 = (int) mContext.getResources().getDimension(R.dimen.padding_20dp);
-        inputLayout.setPadding(padding20, padding20/2, padding20, padding20/2);
+        inputLayout.setPadding(padding20, padding20 / 2, padding20, padding20 / 2);
 
         if (PreferencesUtils.isOTPPluginEnabled(mContext)) {
             alertBuilder.setMessage(getResources().getString(R.string.forgot_password_popup_message_otp));
@@ -450,18 +443,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         alertBuilder.setView(inputLayout);
 
         alertBuilder.setPositiveButton(getResources().getString(R.string.forgot_password_popup_button),
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                (dialog, which) -> {
 
-                    }
                 });
 
 
-        alertBuilder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        alertBuilder.setNegativeButton(getResources().getString(R.string.cancel), (dialog, which) -> dialog.cancel());
 
         final AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
@@ -471,88 +458,85 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (PreferencesUtils.isOTPPluginEnabled(mContext)) {
             alertDialogPositiveButton.setText(getResources().getString(R.string.forgot_password_popup_button_otp));
         }
-        alertDialogPositiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAppConst.hideKeyboard();
-                mAppConst.showProgressDialog();
+        alertDialogPositiveButton.setOnClickListener(v -> {
+            mAppConst.hideKeyboard();
+            mAppConst.showProgressDialog();
 
-                final String emailAddress = input.getText().toString();
+            final String emailAddress = input.getText().toString();
 
-                if (emailAddress.length() > 0 && !emailAddress.trim().isEmpty()) {
+            if (emailAddress.length() > 0 && !emailAddress.trim().isEmpty()) {
 
-                    if (PreferencesUtils.isOTPPluginEnabled(mContext)) {
+                if (PreferencesUtils.isOTPPluginEnabled(mContext)) {
 
-                        HashMap<String, String> params = new HashMap<>();
-                        params.put("email", emailAddress);
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("email", emailAddress);
 
-                        mAppConst.showProgressDialog();
-                        alertDialog.dismiss();
-                        mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_URL, params, new OnResponseListener() {
-                            @Override
-                            public void onTaskCompleted(JSONObject jsonObject) {
-                                mAppConst.hideProgressDialog();
+                    mAppConst.showProgressDialog();
+                    alertDialog.dismiss();
+                    mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_OTP_URL, params, new OnResponseListener() {
+                        @Override
+                        public void onTaskCompleted(JSONObject jsonObject) {
+                            mAppConst.hideProgressDialog();
 
-                                if (jsonObject != null) {
-                                    JSONObject response = jsonObject.optJSONObject("response");
-                                    if (response.optInt("isEmail") == 1) {
-                                        SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main),
-                                                getResources().getString(R.string.forgot_password_success_message));
+                            if (jsonObject != null) {
+                                JSONObject response = jsonObject.optJSONObject("response");
+                                if (response.optInt("isEmail") == 1) {
+                                    SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main),
+                                            getResources().getString(R.string.forgot_password_success_message));
 
-                                    } else {
-                                        Intent otpIntent = new Intent(mContext, OTPActivity.class);
-                                        otpIntent.putExtra("user_phoneno", response.optString("phoneno"));
-                                        otpIntent.putExtra("country_code", response.optString("country_code"));
-                                        otpIntent.putExtra("otp_duration", response.optInt("duration"));
-                                        otpIntent.putExtra("isForgotPassword", true);
-                                        startActivity(otpIntent);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    }
+                                } else {
+                                    Intent otpIntent = new Intent(mContext, OTPActivity.class);
+                                    otpIntent.putExtra("user_phoneno", response.optString("phoneno"));
+                                    otpIntent.putExtra("country_code", response.optString("country_code"));
+                                    otpIntent.putExtra("otp_duration", response.optInt("duration"));
+                                    otpIntent.putExtra("isForgotPassword", true);
+                                    startActivity(otpIntent);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 }
                             }
-
-                            @Override
-                            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                                mAppConst.hideProgressDialog();
-                                SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main), message);
-                            }
-                        });
-
-                        mAppConst.hideProgressDialog();
-
-                    } else {
-                        alertDialog.dismiss();
-                        HashMap<String, String> emailParams = new HashMap<>();
-                        emailParams.put("email", emailAddress);
-
-                        mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_URL, emailParams, new OnResponseListener() {
-                            @Override
-                            public void onTaskCompleted(JSONObject jsonObject) {
-                                mAppConst.hideProgressDialog();
-
-                                SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main),
-                                        getResources().getString(R.string.forgot_password_success_message));
-                            }
-
-                            @Override
-                            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                                mAppConst.hideProgressDialog();
-                                /* Show Message */
-                                SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main), message);
-                                }
-                            });
                         }
 
-                } else {
+                        @Override
+                        public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                            mAppConst.hideProgressDialog();
+                            SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main), message);
+                        }
+                    });
+
                     mAppConst.hideProgressDialog();
-                    if (PreferencesUtils.isOTPPluginEnabled(mContext)){
-                        input.setError(getResources().getString(R.string.forgot_password_empty_email_phone_error_message));
-                    } else {
-                        input.setError(getResources().getString(R.string.forgot_password_empty_email_error_message));
-                    }
+
+                } else {
+                    alertDialog.dismiss();
+                    HashMap<String, String> emailParams = new HashMap<>();
+                    emailParams.put("email", emailAddress);
+
+                    mAppConst.postJsonResponseForUrl(UrlUtil.FORGOT_PASSWORD_URL, emailParams, new OnResponseListener() {
+                        @Override
+                        public void onTaskCompleted(JSONObject jsonObject) {
+                            mAppConst.hideProgressDialog();
+
+                            SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main),
+                                    getResources().getString(R.string.forgot_password_success_message));
+                        }
+
+                        @Override
+                        public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                            mAppConst.hideProgressDialog();
+                            /* Show Message */
+                            SnackbarUtils.displaySnackbarLongTime(findViewById(R.id.login_main), message);
+                        }
+                    });
                 }
 
+            } else {
+                mAppConst.hideProgressDialog();
+                if (PreferencesUtils.isOTPPluginEnabled(mContext)) {
+                    input.setError(getResources().getString(R.string.forgot_password_empty_email_phone_error_message));
+                } else {
+                    input.setError(getResources().getString(R.string.forgot_password_empty_email_error_message));
+                }
             }
+
         });
 
     }
