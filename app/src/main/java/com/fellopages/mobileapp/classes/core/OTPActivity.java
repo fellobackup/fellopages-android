@@ -36,15 +36,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class OTPActivity extends AppCompatActivity implements View.OnClickListener{
+public class OTPActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Toolbar mToolbar;
     private Context mContext;
     private AppConstant mAppConst;
     private TextInputLayout otpWrapper;
     private String otpCode = "";
-    private Button otpVerifyButton;
-    private TextView resendOtp, mobileNo;
     private String userPhoneNo, countryCode;
     private Bundle bundle;
     private String intentAction, intentType;
@@ -54,7 +51,6 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
             loginType;
     private Bundle mFbTwitterBundle;
     private AlertDialogWithAction mAlertDialogWithAction;
-    private Map<String, String> mPostParams;
     private HashMap<String, String> mAccountFormValues, mSignupParams;
     private boolean isPhotoStep = false, mHasProfileFields = true, isForgotPassword = false,
             isEnableOtp = false, isEditPhoneno = false, isEnableTwoFactor = false;
@@ -69,7 +65,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
         mContext = this;
         mAppConst = new AppConstant(this);
-        mToolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mAlertDialogWithAction = new AlertDialogWithAction(mContext);
         if (getSupportActionBar() != null) {
@@ -85,7 +81,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
         }
 
         userPhoneNo = getIntent().getStringExtra("user_phoneno");
-        countryCode =  getIntent().getStringExtra("country_code");
+        countryCode = getIntent().getStringExtra("country_code");
         userLoginEmail = getIntent().getStringExtra("user_login_email");
         userLoginPass = getIntent().getStringExtra("user_login_pass");
 
@@ -96,9 +92,9 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
         //for signup otp process
         mPackageId = getIntent().getStringExtra("package_id");
-        isPhotoStep = getIntent().getBooleanExtra("isPhotoStep",false);
-        isEnableOtp = getIntent().getBooleanExtra("isEnableOtp",false);
-        mHasProfileFields = getIntent().getBooleanExtra("mHasProfileFields",true);
+        isPhotoStep = getIntent().getBooleanExtra("isPhotoStep", false);
+        isEnableOtp = getIntent().getBooleanExtra("isEnableOtp", false);
+        mHasProfileFields = getIntent().getBooleanExtra("mHasProfileFields", true);
         mFbTwitterBundle = getIntent().getBundleExtra("fb_twitter_info");
         signupOtp = getIntent().getStringExtra("otp_code");
         otpDuration = getIntent().getIntExtra("otp_duration", 0);
@@ -119,21 +115,18 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
             loginType = mFbTwitterBundle.getString("loginType");
         }
 
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                // Playing backSound effect when user tapped on back button from tool bar.
-                if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
-                    SoundUtil.playSoundEffectOnBackPressed(mContext);
-                }
+        mToolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+            // Playing backSound effect when user tapped on back button from tool bar.
+            if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
+                SoundUtil.playSoundEffectOnBackPressed(mContext);
             }
         });
 
         otpWrapper = findViewById(R.id.otpWrapper);
-        otpVerifyButton = findViewById(R.id.otp_verify_button);
-        mobileNo = findViewById(R.id.mobile_no);
-        resendOtp = findViewById(R.id.resend_otp);
+        Button otpVerifyButton = findViewById(R.id.otp_verify_button);
+        TextView mobileNo = findViewById(R.id.mobile_no);
+        TextView resendOtp = findViewById(R.id.resend_otp);
         otpTimer = findViewById(R.id.otp_timer);
 
         otpWrapper.setHint(getResources().getString(R.string.otp_enter_otp));
@@ -175,23 +168,23 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    public void verifyClicked(){
+    public void verifyClicked() {
+        if (otpWrapper.getEditText() != null)
+            otpCode = otpWrapper.getEditText().getText().toString();
 
-        otpCode = otpWrapper.getEditText().getText().toString();
-
-        if(otpCode.isEmpty()){
+        if (otpCode.isEmpty()) {
             otpWrapper.setError(getResources().getString(R.string.otp_validation_error));
-        }else {
+        } else {
             mAppConst.showProgressDialog();
             otpWrapper.setErrorEnabled(false);
 
             if (isEnableOtp) {
                 verifySignupOTP(otpCode);
 
-            } else if (isEnableTwoFactor){
+            } else if (isEnableTwoFactor) {
                 verifyTwoFactorOTP(otpCode);
 
-            } else if (isForgotPassword){
+            } else if (isForgotPassword) {
                 verifyForgotPasswordOTP(otpCode);
 
             } else {
@@ -222,14 +215,14 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    public void verifySignupOTP( String otpCode){
+    public void verifySignupOTP(String otpCode) {
 
         String currentTime = getCurrentDateTime();
         int otpEnteredDuration = GlobalFunctions.secondsDifferenceFromEndDate(sentTime, currentTime);
 
         if (otpCode.equals(signupOtp)) {
 
-            if (otpEnteredDuration <= otpDuration ) {
+            if (otpEnteredDuration <= otpDuration) {
 
                 if (isPhotoStep) {
                     Intent photoIntent = new Intent(mContext, SignupPhotoActivity.class);
@@ -266,10 +259,10 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    public void verifyTwoFactorOTP( String otpCode){
+    public void verifyTwoFactorOTP(String otpCode) {
 
-        String type = null;
-        if (isEditPhoneno){
+        String type;
+        if (isEditPhoneno) {
             type = "edit";
         } else {
             type = "add";
@@ -284,7 +277,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
             public void onTaskCompleted(JSONObject jsonObject) {
                 mAppConst.hideProgressDialog();
 
-                if (jsonObject != null){
+                if (jsonObject != null) {
                     setResult(ConstantVariables.TWO_FACTOR_VIEW_PAGE);
                     finish();
                 }
@@ -333,7 +326,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    public void resendOTP(){
+    public void resendOTP() {
 
         mAppConst.showProgressDialog();
         final Map<String, String> params = new HashMap<>();
@@ -433,7 +426,7 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
 
     public void postSignupForm() {
         mAppConst.showProgressDialog();
-        mPostParams = new HashMap<>();
+        Map<String, String> mPostParams = new HashMap<>();
 
         if (mPackageId != null) {
             mPostParams.put("package_id", mPackageId);
@@ -490,10 +483,10 @@ public class OTPActivity extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    public static String getCurrentDateTime(){
+    public static String getCurrentDateTime() {
         //for getting current date and time
         DateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
-        String date=dfDate.format(Calendar.getInstance().getTime());
+        String date = dfDate.format(Calendar.getInstance().getTime());
         DateFormat dfTime = new SimpleDateFormat("HH:mm:ss");
         String time = dfTime.format(Calendar.getInstance().getTime());
         return date + " " + time;

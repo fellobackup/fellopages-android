@@ -13,9 +13,7 @@
 package com.fellopages.mobileapp.classes.modules.advancedActivityFeeds;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,20 +31,18 @@ import java.util.List;
 
 public class FeelingActivityAdapter extends RecyclerView.Adapter<FeelingActivityAdapter.ItemViewHolder> {
 
-    // Member variables.
-    private Context mContext;
     private List<BrowseListItems> mBrowseItemList;
     private OnItemClickListener mOnItemClickListener;
     private ImageLoader mImageLoader;
 
 
-    public FeelingActivityAdapter(Context context, List<BrowseListItems> browseItemList,
-                                  OnItemClickListener onItemClickListener) {
+    FeelingActivityAdapter(Context context, List<BrowseListItems> browseItemList,
+                           OnItemClickListener onItemClickListener) {
 
-        this.mContext = context;
+        // Member variables.
         mBrowseItemList = browseItemList;
         mOnItemClickListener = onItemClickListener;
-        mImageLoader = new ImageLoader(mContext);
+        mImageLoader = new ImageLoader(context);
     }
 
     @Override
@@ -59,41 +55,39 @@ public class FeelingActivityAdapter extends RecyclerView.Adapter<FeelingActivity
         return mBrowseItemList.size();
     }
 
+    @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.feeling_activity_list, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position) {
 
         BrowseListItems browseListItems = mBrowseItemList.get(position);
         mImageLoader.setAlbumPhoto(browseListItems.getmBrowseImgUrl(), holder.ivMainImage);
 
         holder.tvTitle.setText(browseListItems.getmBrowseListTitle());
 
-        holder.container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(v, holder.getAdapterPosition());
-                }
+        holder.container.setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(v, holder.getAdapterPosition());
             }
         });
     }
 
-    public void setUpdatedList(List<BrowseListItems> updatedList) {
+    void setUpdatedList(List<BrowseListItems> updatedList) {
         mBrowseItemList = updatedList;
     }
 
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
         public View container;
-        public ImageView ivMainImage;
+        ImageView ivMainImage;
         public TextView tvTitle;
 
-        public ItemViewHolder(View view) {
+        ItemViewHolder(View view) {
             super(view);
             container = view;
 

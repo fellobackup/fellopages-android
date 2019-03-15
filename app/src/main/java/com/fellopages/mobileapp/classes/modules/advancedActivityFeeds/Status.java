@@ -1361,12 +1361,12 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             // User title's part.
             ssb.setSpan(new ClickableSpan() {
                 @Override
-                public void onClick(View widget) {
+                public void onClick(@NonNull View widget) {
 
                 }
 
                 @Override
-                public void updateDrawState(TextPaint ds) {
+                public void updateDrawState(@NonNull TextPaint ds) {
                     super.updateDrawState(ds);
                     ds.setUnderlineText(false);
                     ds.setColor(ContextCompat.getColor(mContext, R.color.black));
@@ -1380,7 +1380,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             ssb.setSpan(new ImageSpan(feelingDrawable), start, start + 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
             ssb.setSpan(new ClickableSpan() {
                 @Override
-                public void onClick(View widget) {
+                public void onClick(@NonNull View widget) {
                     launchFeelingActivity();
                 }
             }, start, start + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -1388,7 +1388,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             // Making parent title clickable.
             ssb.setSpan(new ClickableSpan() {
                 @Override
-                public void onClick(View widget) {
+                public void onClick(@NonNull View widget) {
                     launchFeelingActivity();
                 }
 
@@ -1403,12 +1403,12 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             // Making child label highlighted.
             ssb.setSpan(new ClickableSpan() {
                 @Override
-                public void onClick(View widget) {
+                public void onClick(@NonNull View widget) {
                     launchFeelingActivity();
                 }
 
                 @Override
-                public void updateDrawState(TextPaint ds) {
+                public void updateDrawState(@NonNull TextPaint ds) {
                     super.updateDrawState(ds);
                     ds.setUnderlineText(false);
                     ds.setColor(ContextCompat.getColor(mContext, R.color.black));
@@ -1417,19 +1417,21 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
 
             // Cancel icon.
             Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_clear_grey);
-            drawable.setBounds(0, 0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp));
-            ssb.setSpan(new ImageSpan(drawable), ssb.length() - 1, ssb.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            if (drawable != null) {
+                drawable.setBounds(0, 0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp), mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp));
+                ssb.setSpan(new ImageSpan(drawable), ssb.length() - 1, ssb.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            }
+
             ssb.setSpan(new ClickableSpan() {
                 @Override
-                public void onClick(View widget) {
+                public void onClick(@NonNull View widget) {
                     tvUserTitle.setText(userName);
                     tvUserTitle.setTextColor(ContextCompat.getColor(mContext, R.color.black));
                     mFeelingActivityBundle = null;
                 }
 
                 @Override
-                public void updateDrawState(TextPaint ds) {
+                public void updateDrawState(@NonNull TextPaint ds) {
                     super.updateDrawState(ds);
                     ds.setUnderlineText(false);
                     ds.setColor(ContextCompat.getColor(mContext, R.color.white));
@@ -1537,7 +1539,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
     private void uploadFilesAndData() {
 
         // Uploading files in background with the status post.
-        mPostAttachmentParams = getAttachmentPostParams(new HashMap<String, String>());
+        mPostAttachmentParams = getAttachmentPostParams(new HashMap<>());
         if (isExternalShare || (mPostAttachmentParams != null && mPostAttachmentParams.get("schedule_time") != null) || mFeedList != null) {
            new UploadAttachmentUtil(Status.this, mStatusPostUrl,
                    mPostAttachmentParams,
@@ -1546,7 +1548,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
            Intent intent = new Intent();
            intent.putExtra("mSelectPath", mSelectPath);
            intent.putExtra("mStatusPostUrl", mStatusPostUrl);
-           intent.putExtra("postParam", getAttachmentPostParams(new HashMap<String, String>()));
+           intent.putExtra("postParam", getAttachmentPostParams(new HashMap<>()));
            setResult(ConstantVariables.POSTED_NEW_FEED, intent);
            finish();
        }
@@ -2084,7 +2086,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         Spannable photoTextSpannable = (Spannable) mAddLinkText.getText();
         ClickableSpan myClickSpan = new ClickableSpan() {
             @Override
-            public void onClick(View widget) {
+            public void onClick(@NonNull View widget) {
 
                 // When cancel the link attachment option then setting the default text color.
                 // and setting the attach type to null value & enable other attachment options.
@@ -2096,7 +2098,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             }
 
             @Override
-            public void updateDrawState(TextPaint ds) {
+            public void updateDrawState(@NonNull TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setUnderlineText(false);
                 ds.setColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
@@ -2175,7 +2177,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         Spannable mAddVideoTextSpannable = (Spannable) mAddVideoText.getText();
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
-            public void onClick(View widget) {
+            public void onClick(@NonNull View widget) {
 
                 // When cancel the video attachment option then setting the default text color.
                 // and setting the attach type to null value & enable other attachment options.
@@ -2186,7 +2188,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
             }
 
             @Override
-            public void updateDrawState(TextPaint ds) {
+            public void updateDrawState(@NonNull TextPaint ds) {
                 super.updateDrawState(ds);
                 ds.setUnderlineText(false);
                 ds.setColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
@@ -2426,7 +2428,10 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         switch (resultCode) {
 
             case ConstantVariables.ADD_PEOPLE_CODE:
-                Set<String> searchArgumentSet = bundle.keySet();
+                Set<String> searchArgumentSet = null;
+                if (bundle != null) {
+                    searchArgumentSet = bundle.keySet();
+                }
                 selectedFriends.clear();
                 mTaggedFriendsLayout.removeAllViews();
                 // Add Text "with" if some friends are being tagged
@@ -2999,7 +3004,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         if (checkInLocationDialog != null && checkInLocationDialog.isShowing()){
             checkInLocationDialog.onRequestPermissionsResult(requestCode, permissions, grantResults);
             return;

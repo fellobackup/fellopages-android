@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,7 +32,6 @@ import android.widget.TextView;
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.ui.CircularImageView;
 import com.fellopages.mobileapp.classes.common.ui.TopCropImageView;
-import com.fellopages.mobileapp.classes.common.utils.BitmapUtils;
 import com.fellopages.mobileapp.classes.common.utils.GlobalFunctions;
 import com.fellopages.mobileapp.classes.common.utils.ImageLoader;
 import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
@@ -39,7 +39,6 @@ import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -53,8 +52,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
     private OnDrawerItemClickListener mOnDrawerItemClickListener;
     private ImageLoader mImageLoader;
 
-    public NavigationDrawerAdapter(Context context, List<Object> data,
-                                   OnDrawerItemClickListener onDrawerItemClickListener) {
+    NavigationDrawerAdapter(Context context, List<Object> data,
+                            OnDrawerItemClickListener onDrawerItemClickListener) {
         this.mContext = context;
         this.data = data;
         this.mOnDrawerItemClickListener = onDrawerItemClickListener;
@@ -77,8 +76,9 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
         return data.get(position) instanceof DrawerItem ? TYPE_ITEM : TYPE_HEADER;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder;
         if (viewType == TYPE_ITEM) {
             viewHolder = new MyViewHolder(inflater.inflate(R.layout.custom_drawer_item, parent, false));
@@ -89,7 +89,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
 
         if (getItemViewType(position) == TYPE_ITEM) {
             final MyViewHolder holder = (MyViewHolder) viewHolder;
@@ -131,7 +131,9 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 }
 
                 Drawable mDrawable = ContextCompat.getDrawable(mContext, R.drawable.icon_circle_bg);
-                mDrawable.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP));
+                if (mDrawable != null) {
+                    mDrawable.setColorFilter(new PorterDuffColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP));
+                }
                 holder.icon.setBackground(mDrawable);
 
 
@@ -161,12 +163,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 }else {
                     holder.count.setVisibility(View.GONE);
                 }
-                holder.container.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mOnDrawerItemClickListener.onDrawerItemClick(v, position);
-                    }
-                });
+                holder.container.setOnClickListener(v -> mOnDrawerItemClickListener.onDrawerItemClick(v, position));
 
             }
         } else {
@@ -201,18 +198,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                headerViewHolder.ivUserImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mOnDrawerItemClickListener.onUserLayoutClick(mUserDetail.optInt("user_id"));
-                    }
-                });
-                headerViewHolder.ivProfileImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mOnDrawerItemClickListener.onUserLayoutClick(mUserDetail.optInt("user_id"));
-                    }
-                });
+                headerViewHolder.ivUserImage.setOnClickListener(v -> mOnDrawerItemClickListener.onUserLayoutClick(mUserDetail.optInt("user_id")));
+                headerViewHolder.ivProfileImage.setOnClickListener(v -> mOnDrawerItemClickListener.onUserLayoutClick(mUserDetail.optInt("user_id")));
 
             } else {
                 headerViewHolder.ivProfileImage.setVisibility(View.VISIBLE);
@@ -245,7 +232,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
         TextView icon,count;
         LinearLayout headerLayout, itemLayout;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             container = itemView;
             title = itemView.findViewById(R.id.drawerTitle);
@@ -261,12 +248,12 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvUserName;
-        public TopCropImageView ivUserImage;
-        public RelativeLayout llDrawerHeader;
-        public CircularImageView ivProfileImage;
+        TextView tvUserName;
+        TopCropImageView ivUserImage;
+        RelativeLayout llDrawerHeader;
+        CircularImageView ivProfileImage;
 
-        public HeaderViewHolder(View itemView) {
+        HeaderViewHolder(View itemView) {
             super(itemView);
             tvUserName = itemView.findViewById(R.id.user_name);
             ivUserImage = itemView.findViewById(R.id.cover_image);

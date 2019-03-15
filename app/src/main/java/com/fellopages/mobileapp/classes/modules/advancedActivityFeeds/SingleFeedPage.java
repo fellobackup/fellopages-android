@@ -273,9 +273,11 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
         mSelectedImageView = findViewById(R.id.imageView);
         mCancelImageView = findViewById(R.id.removeImageButton);
         Drawable addDrawable = ContextCompat.getDrawable(mContext, R.drawable.ic_cancel_black_24dp);
-        addDrawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.black),
-                PorterDuff.Mode.SRC_ATOP));
-        mCancelImageView.setImageDrawable(addDrawable);
+        if (addDrawable != null) {
+            addDrawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.black),
+                    PorterDuff.Mode.SRC_ATOP));
+            mCancelImageView.setImageDrawable(addDrawable);
+        }
 
         PreferencesUtils.updateReactionsEnabledPref(mContext, mReactionsEnabled);
         PreferencesUtils.updateStickersEnabledPref(mContext, mStickersEnabled);
@@ -325,13 +327,10 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                                             mStickersParentView, mCommentBox,
                                             jsonObject, mPhotoUploadingButton, mCommentPostButton);
 
-                                    mStickersPopup.setOnStickerClickedListener(new StickersClickListener() {
-                                        @Override
-                                        public void onStickerClicked(ImageViewList stickerItem) {
-                                            params = new HashMap<>();
-                                            postComment(null, stickerItem.getmStickerGuid(),
-                                                    stickerItem.getmGridViewImageUrl());
-                                        }
+                                    mStickersPopup.setOnStickerClickedListener(stickerItem -> {
+                                        params = new HashMap<>();
+                                        postComment(null, stickerItem.getmStickerGuid(),
+                                                stickerItem.getmGridViewImageUrl());
                                     });
                                 }
                             }
@@ -539,12 +538,9 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                         } else {
                             String message = getResources().getString(R.string.deleted_feed_message);
                             SnackbarUtils.displaySnackbarLongWithListener(mCommentsListView,
-                                    message, new SnackbarUtils.OnSnackbarDismissListener() {
-                                        @Override
-                                        public void onSnackbarDismissed() {
-                                            if (!isFinishing()) {
-                                                finish();
-                                            }
+                                    message, () -> {
+                                        if (!isFinishing()) {
+                                            finish();
                                         }
                                     });
                         }
@@ -1182,13 +1178,10 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                 mCommentAdapter.notifyDataSetChanged();
 
                 // Scroll scrollview to the bottom when any new comment is posted
-                mCommentsListView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //call smooth scroll
-                        mCommentsListView.smoothScrollToPosition(mCommentAdapter.getCount());
+                mCommentsListView.postDelayed(() -> {
+                    //call smooth scroll
+                    mCommentsListView.smoothScrollToPosition(mCommentAdapter.getCount());
 
-                    }
                 }, 500L);
             }
         } catch (JSONException e) {
@@ -1299,24 +1292,26 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                 // and any changes occured at photoLightBox page then update the like/comment count.
                 if (resultCode == ConstantVariables.LIGHT_BOX_EDIT && data != null) {
                     Bundle bundle = data.getExtras();
-                    int feedPosition = bundle.getInt(ConstantVariables.ITEM_POSITION);
-                    int likeCount = bundle.getInt(ConstantVariables.PHOTO_LIKE_COUNT);
-                    int commentCount = bundle.getInt(ConstantVariables.PHOTO_COMMENT_COUNT);
-                    int isLike = bundle.getBoolean(ConstantVariables.IS_LIKED) ? 1 : 0;
+                    if (bundle != null) {
+                        int feedPosition = bundle.getInt(ConstantVariables.ITEM_POSITION);
+                        int likeCount = bundle.getInt(ConstantVariables.PHOTO_LIKE_COUNT);
+                        int commentCount = bundle.getInt(ConstantVariables.PHOTO_COMMENT_COUNT);
+                        int isLike = bundle.getBoolean(ConstantVariables.IS_LIKED) ? 1 : 0;
 
-                    if (mFeedItemsList != null && mFeedItemsList.size() != 0) {
-                        FeedList selectedFeedRow = (FeedList) mFeedItemsList.get(feedPosition);
+                        if (mFeedItemsList != null && mFeedItemsList.size() != 0) {
+                            FeedList selectedFeedRow = (FeedList) mFeedItemsList.get(feedPosition);
 
-                        // When the single feed page is loaded from feed list
-                        // and the comment is updated on single photo comment page.
-                        if (mFeedList == null && selectedFeedRow.getmCommentCount() != commentCount) {
-                            sendRequestToServer(mCommentListUrl);
+                            // When the single feed page is loaded from feed list
+                            // and the comment is updated on single photo comment page.
+                            if (mFeedList == null && selectedFeedRow.getmCommentCount() != commentCount) {
+                                sendRequestToServer(mCommentListUrl);
+                            }
+                            selectedFeedRow.setmCommentCount(commentCount);
+                            selectedFeedRow.setmLikeCount(likeCount);
+                            selectedFeedRow.setmIsLike(isLike);
+                            mFeedAdapter.updatePhotoLikeCommentCount(feedPosition);
+                            mFeedAdapter.notifyItemChanged(feedPosition);
                         }
-                        selectedFeedRow.setmCommentCount(commentCount);
-                        selectedFeedRow.setmLikeCount(likeCount);
-                        selectedFeedRow.setmIsLike(isLike);
-                        mFeedAdapter.updatePhotoLikeCommentCount(feedPosition);
-                        mFeedAdapter.notifyItemChanged(feedPosition);
                     }
                 }
                 break;
@@ -1325,16 +1320,18 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                 // When comment page is opened from any image(from multiple images) then update the comment count.
                 if (resultCode == ConstantVariables.VIEW_COMMENT_PAGE_CODE && data != null) {
                     Bundle bundle = data.getExtras();
-                    int feedPosition = bundle.getInt(ConstantVariables.ITEM_POSITION);
+                    if (bundle != null) {
+                        int feedPosition = bundle.getInt(ConstantVariables.ITEM_POSITION);
 
-                    if (bundle.getBoolean(ConstantVariables.IS_PHOTO_COMMENT)) {
+                        if (bundle.getBoolean(ConstantVariables.IS_PHOTO_COMMENT)) {
 //                        setClickedPhotoCommentCount(bundle);
 
-                    } else if (mFeedItemsList != null && mFeedItemsList.size() != 0) {
-                        FeedList feedList = (FeedList) mFeedItemsList.get(feedPosition);
-                        feedList.setmCommentCount(bundle.getInt(ConstantVariables.PHOTO_COMMENT_COUNT));
-                        mFeedAdapter.updatePhotoLikeCommentCount(feedPosition);
-                        mFeedAdapter.notifyItemChanged(feedPosition);
+                        } else if (mFeedItemsList != null && mFeedItemsList.size() != 0) {
+                            FeedList feedList = (FeedList) mFeedItemsList.get(feedPosition);
+                            feedList.setmCommentCount(bundle.getInt(ConstantVariables.PHOTO_COMMENT_COUNT));
+                            mFeedAdapter.updatePhotoLikeCommentCount(feedPosition);
+                            mFeedAdapter.notifyItemChanged(feedPosition);
+                        }
                     }
                     break;
                 }
@@ -1477,45 +1474,42 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                 }
 
                 // Scroll scrollview to the bottom when any new comment is posted
-                mCommentsListView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //call smooth scroll
-                        mCommentsListView.smoothScrollToPosition(mCommentAdapter.getCount());
+                mCommentsListView.post(() -> {
+                    //call smooth scroll
+                    mCommentsListView.smoothScrollToPosition(mCommentAdapter.getCount());
 
-                        if (commentBody != null) {
-                            params.put("body", commentBody);
-                        }
+                    if (commentBody != null) {
+                        params.put("body", commentBody);
+                    }
 
-                        if (tagObject != null && tagObject.length() > 0) {
-                            params.put("composer", tagObject.toString());
-                        }
+                    if (tagObject != null && tagObject.length() > 0) {
+                        params.put("composer", tagObject.toString());
+                    }
 
-                        params.put("send_notification", "0");
-                        params.put(ConstantVariables.ACTION_ID, String.valueOf(mActionId));
+                    params.put("send_notification", "0");
+                    params.put(ConstantVariables.ACTION_ID, String.valueOf(mActionId));
 
-                        if (mSelectPath != null && mSelectPath.size() != 0) {
-                            mSelectedImageBlock.setVisibility(View.GONE);
+                    if (mSelectPath != null && mSelectPath.size() != 0) {
+                        mSelectedImageBlock.setVisibility(View.GONE);
 
-                            // Uploading files in background with the details.
-                            new UploadAttachmentUtil(SingleFeedPage.this, mCommentPostUrl, params,
-                                    mSelectPath).execute();
-                        } else {
+                        // Uploading files in background with the details.
+                        new UploadAttachmentUtil(SingleFeedPage.this, mCommentPostUrl, params,
+                                mSelectPath).execute();
+                    } else {
 
-                            mAppConst.postJsonResponseForUrl(mCommentPostUrl, params, new OnResponseListener() {
-                                @Override
-                                public void onTaskCompleted(JSONObject jsonObject) {
-                                    addCommentToList(jsonObject);
-                                }
+                        mAppConst.postJsonResponseForUrl(mCommentPostUrl, params, new OnResponseListener() {
+                            @Override
+                            public void onTaskCompleted(JSONObject jsonObject) {
+                                addCommentToList(jsonObject);
+                            }
 
-                                @Override
-                                public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                                    mCommentListItems.remove(mCommentAdapter.getCount() - 1);
-                                    SnackbarUtils.displaySnackbar(mCommentsListView, message);
-                                }
+                            @Override
+                            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                                mCommentListItems.remove(mCommentAdapter.getCount() - 1);
+                                SnackbarUtils.displaySnackbar(mCommentsListView, message);
+                            }
 
-                            });
-                        }
+                        });
                     }
                 });
             }
@@ -1576,22 +1570,19 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
 
             // Scroll scrollview to the bottom when any new comment is posted
             final int finalCommentId = commentId;
-            mCommentsListView.post(new Runnable() {
-                @Override
-                public void run() {
-                    //call smooth scroll
-                    mCommentsListView.smoothScrollToPosition(mCommentAdapter.getCount());
+            mCommentsListView.post(() -> {
+                //call smooth scroll
+                mCommentsListView.smoothScrollToPosition(mCommentAdapter.getCount());
 
-                    params.put("comment_id", String.valueOf(finalCommentId));
-                    params.remove("body");
-                    params.remove("send_notification");
+                params.put("comment_id", String.valueOf(finalCommentId));
+                params.remove("body");
+                params.remove("send_notification");
 
-                    mAppConst.postJsonRequest(mCommentNotificationUrl, params);
+                mAppConst.postJsonRequest(mCommentNotificationUrl, params);
 
-                    isLoading = false;
-                    mPhotoUploadingButton.setClickable(true);
-                    mPhotoUploadingButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_dark));
-                }
+                isLoading = false;
+                mPhotoUploadingButton.setClickable(true);
+                mPhotoUploadingButton.setTextColor(ContextCompat.getColor(mContext, R.color.grey_dark));
             });
         }
     }
@@ -1621,28 +1612,25 @@ public class SingleFeedPage extends AppCompatActivity implements View.OnClickLis
                 mSelectedImageView.setImageBitmap(bitmap);
 
                 // Setting OnClickListener on cancelImage.
-                mCancelImageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                mCancelImageView.setOnClickListener(v -> {
 
-                        mSelectPath.remove(imagePath);
+                    mSelectPath.remove(imagePath);
 
-                        // If canceled all the selected images then hide photoBlockLayout
-                        // and enabled other attachement click.
-                        if (mSelectPath.isEmpty()) {
-                            mAttachmentType = null;
-                            mSelectedImageBlock.setVisibility(View.GONE);
-                            if (mCommentBox.getText().toString().trim().isEmpty()) {
-                                if (mStickersEnabled == 1) {
-                                    mCommentPostButton.setText("\uf118");
-                                    mCommentPostButton.setTextColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
-                                } else {
-                                    mCommentPostButton.setText("\uf1d8");
-                                    mCommentPostButton.setTextColor(ContextCompat.getColor(mContext, R.color.gray_stroke_color));
-                                }
+                    // If canceled all the selected images then hide photoBlockLayout
+                    // and enabled other attachement click.
+                    if (mSelectPath.isEmpty()) {
+                        mAttachmentType = null;
+                        mSelectedImageBlock.setVisibility(View.GONE);
+                        if (mCommentBox.getText().toString().trim().isEmpty()) {
+                            if (mStickersEnabled == 1) {
+                                mCommentPostButton.setText("\uf118");
+                                mCommentPostButton.setTextColor(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+                            } else {
+                                mCommentPostButton.setText("\uf1d8");
+                                mCommentPostButton.setTextColor(ContextCompat.getColor(mContext, R.color.gray_stroke_color));
                             }
-
                         }
+
                     }
                 });
             }

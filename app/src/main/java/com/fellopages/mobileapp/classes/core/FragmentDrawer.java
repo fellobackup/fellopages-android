@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -77,21 +78,17 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     private ProgressBar mProgressBar;
     private LinearLayout bottomButton;
     private LinearLayout socialSitesButton;
-    private Button mSignInButton,mSignUpButton;
     private List<Object> dataList;
     private FragmentDrawerListener drawerListener;
     private AppConstant mAppConst;
-    private JSONObject mMenuJson, mMultiLanguages, mCanCreateObject;
-    private String mChildMenuLabel, mChildMenuRegName;
-    private String mMenuType, mMenuHeaderLabel;
+    private JSONObject mMultiLanguages;
     private JSONArray mEnabledModule, menuObject;
     private Context mContext;
     private IntentFilter intentFilter;
     boolean isLoadedForFirstTime = true, isMLTDataUpdated = false, isMemberBrowseTypeSet = false;
     private String mNotificationCount, mRequestCount, mMessageCount, mCartCount;
-    private int mLanguageCount, mCanCreate, mPackagesEnabled;
+    private int mLanguageCount;
     private CallbackManager callbackManager;
-    private LoginButton facebookLoginButton;
     private TwitterLoginButton twitterLoginButton;
     private View mLayoutMain;
 
@@ -100,17 +97,19 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent != null){
-                switch (intent.getAction()) {
-                    case ConstantVariables.ACTION_FEED_NOTIFICATIONS:
-                        isLoadedForFirstTime = false;
-                        mNotificationCount = PreferencesUtils.getNotificationsCounts(mContext,PreferencesUtils.NOTIFICATION_COUNT);
-                        mMessageCount = PreferencesUtils.getNotificationsCounts(mContext,PreferencesUtils.MESSAGE_COUNT);
-                        mRequestCount = PreferencesUtils.getNotificationsCounts(mContext,PreferencesUtils.FRIEND_REQ_COUNT);
-                        mCartCount = PreferencesUtils.getNotificationsCounts(mContext,PreferencesUtils.CART_COUNT);
-                        refreshModuleList();
-                        break;
+            if (intent != null) {
+                if (intent.getAction() != null) {
+                    switch (intent.getAction()) {
+                        case ConstantVariables.ACTION_FEED_NOTIFICATIONS:
+                            isLoadedForFirstTime = false;
+                            mNotificationCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.NOTIFICATION_COUNT);
+                            mMessageCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.MESSAGE_COUNT);
+                            mRequestCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.FRIEND_REQ_COUNT);
+                            mCartCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.CART_COUNT);
+                            refreshModuleList();
+                            break;
 
+                    }
                 }
             }
         }
@@ -129,7 +128,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     PreferencesUtils.MESSAGE_COUNT);
             mRequestCount = PreferencesUtils.getNotificationsCounts(mContext,
                     PreferencesUtils.FRIEND_REQ_COUNT);
-            mCartCount = PreferencesUtils.getNotificationsCounts(mContext,PreferencesUtils.CART_COUNT);
+            mCartCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.CART_COUNT);
             if (menuObject != null && menuObject.length() != 0 && dataList != null) {
                 dataList.clear();
                 addDataToDrawerList();
@@ -154,7 +153,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mContext = getContext();
@@ -182,8 +181,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
         callbackManager = CallbackManager.Factory.create();
 
-        facebookLoginButton = mLayoutMain.findViewById(R.id.facebook_login_button);
-        twitterLoginButton= mLayoutMain.findViewById(R.id.twitter_login_button);
+        LoginButton facebookLoginButton = mLayoutMain.findViewById(R.id.facebook_login_button);
+        twitterLoginButton = mLayoutMain.findViewById(R.id.twitter_login_button);
 
         twitterLoginButton.setText(getResources().getString(R.string.twitter));
         twitterLoginButton.setTextSize(15);
@@ -198,7 +197,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         } else {
             facebookLoginButton.setVisibility(View.GONE);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) twitterLoginButton.getLayoutParams();
-            layoutParams.setMargins(0,0,0,0);
+            layoutParams.setMargins(0, 0, 0, 0);
             twitterLoginButton.setText(getResources().getString(R.string.twitter_login_text));
         }
 
@@ -212,7 +211,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         } else {
             twitterLoginButton.setVisibility(View.GONE);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) facebookLoginButton.getLayoutParams();
-            layoutParams.setMargins(0,0,0,0);
+            layoutParams.setMargins(0, 0, 0, 0);
             facebookLoginButton.setLayoutParams(layoutParams);
         }
 
@@ -222,8 +221,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         mProgressBar = mLayoutMain.findViewById(R.id.progressBar);
         bottomButton = mLayoutMain.findViewById(R.id.bottomButtons);
         socialSitesButton = mLayoutMain.findViewById(R.id.socialSiteButtons);
-        mSignInButton = mLayoutMain.findViewById(R.id.signin_button);
-        mSignUpButton = mLayoutMain.findViewById(R.id.signup_button);
+        Button mSignInButton = mLayoutMain.findViewById(R.id.signin_button);
+        Button mSignUpButton = mLayoutMain.findViewById(R.id.signup_button);
         mSignInButton.setOnClickListener(this);
         mSignUpButton.setOnClickListener(this);
         mSignInButton.setPadding(0, (int) getResources().getDimension(R.dimen.login_button_top_bottom_padding),
@@ -253,10 +252,10 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                         int canCreate = drawerItem.getCanCreate();
                         int packagesEnabled = drawerItem.getmPackagesEnabled();
                         String icon = drawerItem.getmItemIcon();
-                        hideBadgeCount(position,name);
-                        Log.d("DrawerSelectedItem ", name+" "+label+" "+headerLabel);
+                        hideBadgeCount(position, name);
+                        Log.d("DrawerSelectedItem ", name + " " + label + " " + headerLabel);
                         drawerListener.onDrawerItemSelected(view, name, label, headerLabel, singularLabel,
-                                itemUrl, listingTypeId, browseType, viewType, icon,canCreate,
+                                itemUrl, listingTypeId, browseType, viewType, icon, canCreate,
                                 packagesEnabled, drawerItem.getSiteStoreEnabled(),
                                 drawerItem.getListingEnabled(), drawerItem.isCanView(), secondaryViewType);
                         mDrawerLayout.closeDrawer(containerView);
@@ -266,7 +265,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     public void onUserLayoutClick(int userId) {
                         Intent intent = new Intent(mContext.getApplicationContext(), userProfile.class);
                         intent.putExtra(ConstantVariables.USER_ID, userId);
-                        ((FragmentActivity)mContext).startActivityForResult(intent, ConstantVariables.
+                        ((FragmentActivity) mContext).startActivityForResult(intent, ConstantVariables.
                                 USER_PROFILE_CODE);
                         ((FragmentActivity) mContext).overridePendingTransition(R.anim.slide_in_right,
                                 R.anim.slide_out_left);
@@ -274,7 +273,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     }
                 });
 
-        if(menuObject != null && menuObject.length() != 0){
+        if (menuObject != null && menuObject.length() != 0) {
             addDataToDrawerList();
         }
 
@@ -301,7 +300,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     }
 
     private void hideBadgeCount(int position, String name) {
-        if(dataList != null && name != null) {
+        if (dataList != null && name != null) {
             DrawerItem drawerItem = (DrawerItem) dataList.get(position);
             if (drawerItem.getBadgeCount() != null && !drawerItem.getBadgeCount().equals("0")) {
                 switch (name) {
@@ -329,14 +328,14 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         callbackManager.onActivityResult(requestCode, resultCode, data);
         twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void refreshModuleList(){
+    public void refreshModuleList() {
         mAppConst.getJsonResponseFromUrl(AppConstant.DEFAULT_URL + "get-enabled-modules",
                 new OnResponseListener() {
                     @Override
@@ -354,8 +353,9 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                 });
     }
 
-    int storeWishListEnabled,mltWishListEnabled;
-    public void addDataToDrawerList(){
+    int storeWishListEnabled, mltWishListEnabled;
+
+    public void addDataToDrawerList() {
 
         try {
             // Adding header view.
@@ -367,14 +367,16 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
             if (menuObject != null && menuObject.length() > 0) {
                 int i;
                 for (i = 0; i < menuObject.length(); i++) {
-                    mMenuJson = menuObject.optJSONObject(i);
-                    mMenuType = mMenuJson.optString("type");
-                    mChildMenuLabel = mMenuJson.getString("label");
+                    JSONObject mMenuJson = menuObject.optJSONObject(i);
+                    String mMenuType = mMenuJson.optString("type");
+                    String mChildMenuLabel = mMenuJson.getString("label");
                     String mItemIcon = mMenuJson.optString("icon");
                     String mIconColor = mMenuJson.optString("color");
-                    mMenuHeaderLabel = mMenuJson.optString("headerLabel");
-                    mCanCreateObject = mMenuJson.optJSONObject("canCreate");
+                    String mMenuHeaderLabel = mMenuJson.optString("headerLabel");
+                    JSONObject mCanCreateObject = mMenuJson.optJSONObject("canCreate");
                     boolean canView = mMenuJson.optInt("memberView", 1) == 1;
+                    int mCanCreate;
+                    int mPackagesEnabled;
                     if (mCanCreateObject != null) {
                         mCanCreate = mCanCreateObject.optInt("default");
                         mPackagesEnabled = mCanCreateObject.optInt("packagesEnabled");
@@ -386,7 +388,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     }
                     if (mMenuType.equals("menu")) {
                         Log.d("MenuName ", mMenuJson.getString("name"));
-                        mChildMenuRegName = mMenuJson.getString("name");
+                        String mChildMenuRegName = mMenuJson.getString("name");
 
                         if (mChildMenuRegName != null && !mChildMenuRegName.isEmpty() && !mChildMenuRegName.equals("null")) {
                             switch (mChildMenuRegName) {
@@ -397,22 +399,22 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
                                 case ConstantVariables.NOTIFICATION_MENU_TITLE:
                                     dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                            mChildMenuRegName, mNotificationCount, 0, 0, mItemIcon,  mIconColor, canView));
+                                            mChildMenuRegName, mNotificationCount, 0, 0, mItemIcon, mIconColor, canView));
                                     break;
 
                                 case ConstantVariables.FRIEND_REQUEST_MENU_TITLE:
                                     dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                            mChildMenuRegName, mRequestCount, 0, 0, mItemIcon,  mIconColor, canView));
+                                            mChildMenuRegName, mRequestCount, 0, 0, mItemIcon, mIconColor, canView));
                                     break;
 
                                 case ConstantVariables.SAVE_FEEDS:
                                     dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                            mChildMenuRegName, mRequestCount, 0, 0, mItemIcon,  mIconColor, canView, i));
+                                            mChildMenuRegName, mRequestCount, 0, 0, mItemIcon, mIconColor, canView, i));
                                     break;
 
                                 case ConstantVariables.PRODUCT_CART_MENU_TITLE:
                                     dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                            mChildMenuRegName, mCartCount, 0, 0, mItemIcon,  mIconColor, canView));
+                                            mChildMenuRegName, mCartCount, 0, 0, mItemIcon, mIconColor, canView));
                                     break;
 
                                 case ConstantVariables.GLOBAL_SEARCH_MENU_TITLE:
@@ -425,20 +427,20 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                                 case ConstantVariables.RATE_US_MENU_TITLE:
                                 case "signout":
                                     dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                            mChildMenuRegName, mItemIcon,  mIconColor));
+                                            mChildMenuRegName, mItemIcon, mIconColor));
                                     break;
 
                                 case ConstantVariables.APP_TOUR_MENU_TITLE:
                                     if (!mAppConst.isLoggedOutUser()) {
                                         dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                                mChildMenuRegName, mItemIcon,  mIconColor));
+                                                mChildMenuRegName, mItemIcon, mIconColor));
                                     }
                                     break;
 
                                 case ConstantVariables.WISHLIST_MENU_TITLE:
-                                    dataList.add(new DrawerItem(mMenuHeaderLabel,mChildMenuLabel,
-                                            mChildMenuRegName,null,0,0,mItemIcon,  mIconColor,
-                                            storeWishListEnabled,mltWishListEnabled));
+                                    dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
+                                            mChildMenuRegName, null, 0, 0, mItemIcon, mIconColor,
+                                            storeWishListEnabled, mltWishListEnabled));
                                     break;
 
                                 case ConstantVariables.MLT_MENU_TITLE:
@@ -458,7 +460,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                                             mChildMenuRegName,
                                             mMenuJson.optString("header_label_singular"),
                                             mMenuJson.optString("url"),
-                                            mItemIcon,  mIconColor, mMenuJson.optInt("listingtype_id"),
+                                            mItemIcon, mIconColor, mMenuJson.optInt("listingtype_id"),
                                             mMenuJson.optInt("viewBrowseType"),
                                             mMenuJson.optInt("viewProfileType"),
                                             mCanCreate, mPackagesEnabled, canView, mMenuJson.optInt("mapViewType")));
@@ -478,17 +480,17 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                                     String defaultLocation = PreferencesUtils.getDefaultLocation(mContext);
 
                                     if (defaultLocation != null && !defaultLocation.isEmpty()) {
-                                        dataList.add(new DrawerItem(null, defaultLocation, "seaocore_location", mItemIcon,  mIconColor));
+                                        dataList.add(new DrawerItem(null, defaultLocation, "seaocore_location", mItemIcon, mIconColor));
                                     } else {
                                         dataList.add(new DrawerItem(null, mContext.getResources().
-                                                getString(R.string.location_popup_title), "seaocore_location", mItemIcon,  mIconColor));
+                                                getString(R.string.location_popup_title), "seaocore_location", mItemIcon, mIconColor));
                                     }
                                     break;
 
                                 case "core_main_cometchat":
-                                    if(!mAppConst.isLoggedOutUser() && !ConstantVariables.COMETCHAT_PACKAGE_NAME.isEmpty()){
+                                    if (!mAppConst.isLoggedOutUser() && !ConstantVariables.COMETCHAT_PACKAGE_NAME.isEmpty()) {
                                         dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                                mChildMenuRegName, null, mCanCreate, mPackagesEnabled, mItemIcon,  mIconColor, canView));
+                                                mChildMenuRegName, null, mCanCreate, mPackagesEnabled, mItemIcon, mIconColor, canView));
                                     }
                                     break;
 
@@ -519,13 +521,13 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                                             && !Arrays.asList(ConstantVariables.DELETED_MODULES).contains(
                                             getModuleName(mChildMenuRegName))) {
                                         dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                                mChildMenuRegName, null, mCanCreate, mPackagesEnabled, mItemIcon,  mIconColor, canView));
+                                                mChildMenuRegName, null, mCanCreate, mPackagesEnabled, mItemIcon, mIconColor, canView));
                                     } else {
                                         if (mEnabledModule != null && isModuleEnabled(mChildMenuRegName)
                                                 && !Arrays.asList(ConstantVariables.DELETED_MODULES).contains(
                                                 getModuleName(mChildMenuRegName)))
                                             dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
-                                                    mChildMenuRegName, null, mCanCreate, mPackagesEnabled, mItemIcon,  mIconColor, canView));
+                                                    mChildMenuRegName, null, mCanCreate, mPackagesEnabled, mItemIcon, mIconColor, canView));
                                     }
 
 
@@ -550,12 +552,12 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     adapter.notifyDataSetChanged();
                 }
             }
-            if(!mAppConst.isLoggedOutUser()){
+            if (!mAppConst.isLoggedOutUser()) {
                 int index = 0;
-                for (int x = 0; x < dataList.size(); x++){
-                    if (dataList.get(x) instanceof DrawerItem){
+                for (int x = 0; x < dataList.size(); x++) {
+                    if (dataList.get(x) instanceof DrawerItem) {
                         DrawerItem drawerItem = (DrawerItem) dataList.get(x);
-                        if ("Save Feeds".equals(drawerItem.getItemName())){
+                        if ("Save Feeds".equals(drawerItem.getItemName())) {
                             index = x;
                             break;
                         }
@@ -566,7 +568,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
             isMLTDataUpdated = true;
             adapter.notifyDataSetChanged();
 
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
             SnackbarUtils.displaySnackbar(mLayoutMain,
                     getResources().getString(R.string.no_data_available));
@@ -575,9 +577,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     }
 
 
-
-    private List<Object> deleteDuplicate(){
-        List<Object> newList = new ArrayList<Object>();
+    private List<Object> deleteDuplicate() {
+        List<Object> newList = new ArrayList<>();
 
         for (int i = 0; i < dataList.size() /* - 1 */ ; i++) {
             if (!newList.contains(dataList.get(i)))
@@ -587,10 +588,10 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         return newList;
     }
 
-    public boolean isModuleEnabled(String name){
+    public boolean isModuleEnabled(String name) {
         String mModuleName = getModuleName(name);
 
-        if(mModuleName != null ) {
+        if (mModuleName != null) {
             for (int i = 0; i < mEnabledModule.length(); i++) {
                 String moduleName = mEnabledModule.optString(i);
                 if (mModuleName.equals(moduleName)) {
@@ -601,8 +602,8 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         return false;
     }
 
-    public String getModuleName(String menuName){
-        switch (menuName){
+    public String getModuleName(String menuName) {
+        switch (menuName) {
             case ConstantVariables.BLOG_MENU_TITLE:
                 return "blog";
             case ConstantVariables.MUSIC_MENU_TITLE:
@@ -652,15 +653,17 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
             case ConstantVariables.ADV_VIDEO_CHANNEL_MENU_TITLE:
             case ConstantVariables.ADV_VIDEO_PLAYLIST_MENU_TITLE:
                 return "sitevideo";
-            default: return null;
+            default:
+                return null;
         }
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
-        containerView = getActivity().findViewById(fragmentId);
+        if (getActivity() != null)
+            containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(),
-                drawerLayout,toolbar, R.string.drawer_open, R.string.drawer_close) {
+                drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -693,12 +696,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.setFocusableInTouchMode(false);
-        mDrawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mDrawerToggle.syncState();
-            }
-        });
+        mDrawerLayout.post(() -> mDrawerToggle.syncState());
 
     }
 
@@ -778,11 +776,11 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.signup_button:
                 Intent signUpIntent = new Intent(mContext, SubscriptionActivity.class);
                 startActivity(signUpIntent);
-                ((AppCompatActivity)mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                ((AppCompatActivity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.signin_button:
                 Intent mainIntent;
@@ -792,7 +790,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                     mainIntent = new Intent(mContext, LoginActivity.class);
                 }
                 startActivity(mainIntent);
-                ((AppCompatActivity)mContext).overridePendingTransition(R.anim.slide_in_right,
+                ((AppCompatActivity) mContext).overridePendingTransition(R.anim.slide_in_right,
                         R.anim.slide_out_left);
                 break;
         }
@@ -801,14 +799,16 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     @Override
     public void onResume() {
         // Register receiver if activity is in front
-        getActivity().registerReceiver(broadcastReceiver, intentFilter);
+        if (getActivity() != null)
+            getActivity().registerReceiver(broadcastReceiver, intentFilter);
         super.onResume();
     }
 
     @Override
     public void onPause() {
         // Unregister receiver if activity is not in front
-        getActivity().unregisterReceiver(broadcastReceiver);
+        if (getActivity() != null)
+            getActivity().unregisterReceiver(broadcastReceiver);
         super.onPause();
     }
 
@@ -853,8 +853,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
         recyclerView.smoothScrollToPosition(0);
     }
 
-    public static <Object> List<Object> removeDuplicates(List<Object> list)
-    {
+    public static <Object> List<Object> removeDuplicates(List<Object> list) {
 
         // Create a new ArrayList
         List<Object> newList = new ArrayList<Object>();

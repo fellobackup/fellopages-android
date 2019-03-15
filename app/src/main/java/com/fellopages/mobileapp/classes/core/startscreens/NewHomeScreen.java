@@ -19,6 +19,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -41,7 +42,6 @@ import com.fellopages.mobileapp.classes.core.NewLoginActivity;
 public class NewHomeScreen extends FragmentActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
-    private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private TextView btnSkip, btnNext;
@@ -73,7 +73,7 @@ public class NewHomeScreen extends FragmentActivity implements View.OnClickListe
         // making notification bar transparent
         changeStatusBarColor();
 
-        myViewPagerAdapter = new MyViewPagerAdapter();
+        MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
@@ -136,7 +136,7 @@ public class NewHomeScreen extends FragmentActivity implements View.OnClickListe
 
         if (ConstantVariables.TOTAL_INTRO_SLIDESHOW_IMAGES > 0 && colorsActive != null) {
             for (int i = 0; i < ConstantVariables.TOTAL_INTRO_SLIDESHOW_IMAGES; i++ ) {
-                int color = 0;
+                int color;
                 if (i != currentPage) {
                     color = R.color.transparent_white;
                 } else {
@@ -235,13 +235,15 @@ public class NewHomeScreen extends FragmentActivity implements View.OnClickListe
     public class MyViewPagerAdapter extends android.support.v4.view.PagerAdapter {
         private LayoutInflater layoutInflater;
 
-        public MyViewPagerAdapter() {
+        MyViewPagerAdapter() {
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+            assert layoutInflater != null;
             View view = layoutInflater.inflate(R.layout.home_screen_slide, container, false);
             container.addView(view);
 
@@ -326,13 +328,13 @@ public class NewHomeScreen extends FragmentActivity implements View.OnClickListe
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object obj) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object obj) {
             return view == obj;
         }
 
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             View view = (View) object;
             container.removeView(view);
         }

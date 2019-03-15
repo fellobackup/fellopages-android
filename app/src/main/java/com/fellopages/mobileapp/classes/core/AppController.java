@@ -97,14 +97,7 @@ public class AppController extends MultiDexApplication {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(30000L, TimeUnit.MILLISECONDS)
                 .readTimeout(30000L, TimeUnit.MILLISECONDS)
-                .hostnameVerifier(new HostnameVerifier()
-                {
-                    @Override
-                    public boolean verify(String hostname, SSLSession session)
-                    {
-                        return true;
-                    }
-                })
+                .hostnameVerifier((hostname, session) -> true)
                 .build();
 
         OkHttpUtils.initClient(okHttpClient);
@@ -120,7 +113,7 @@ public class AppController extends MultiDexApplication {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 mRequestQueue = Volley.newRequestQueue(getApplicationContext());
             } else {
-                HttpStack stack = null;
+                HttpStack stack;
                 try {
                     stack = new HurlStack(null, new TLSSocketFactory());
                 } catch (KeyManagementException e) {

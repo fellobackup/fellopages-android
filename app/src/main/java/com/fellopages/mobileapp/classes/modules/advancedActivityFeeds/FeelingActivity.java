@@ -97,14 +97,15 @@ public class FeelingActivity extends AppCompatActivity implements TextWatcher {
     private void getViews() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         mProgressBar = findViewById(R.id.progressBar);
         etSearch = findViewById(R.id.search_view);
         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
-        drawable.setColorFilter(ContextCompat.getColor(mContext, R.color.grey), PorterDuff.Mode.SRC_ATOP);
+        if (drawable != null)
+            drawable.setColorFilter(ContextCompat.getColor(mContext, R.color.grey), PorterDuff.Mode.SRC_ATOP);
         etSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         etSearch.addTextChangedListener(this);
 
@@ -130,12 +131,7 @@ public class FeelingActivity extends AppCompatActivity implements TextWatcher {
                     public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                         mProgressBar.setVisibility(View.GONE);
                         SnackbarUtils.displaySnackbarShortWithListener(mRecyclerView, message,
-                                new SnackbarUtils.OnSnackbarDismissListener() {
-                                    @Override
-                                    public void onSnackbarDismissed() {
-                                        finish();
-                                    }
-                                });
+                                () -> finish());
                     }
                 });
     }
@@ -168,35 +164,32 @@ public class FeelingActivity extends AppCompatActivity implements TextWatcher {
                                 parentObject.optString(titleKey), parentObject));
                     }
 
-                    mFeelingActivityAdapter = new FeelingActivityAdapter(mContext, mBrowseListItem, new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-                            BrowseListItems browseListItem = mBrowseListItem.get(position);
-                            if (!mSearchList.isEmpty()) {
-                                browseListItem = mSearchList.get(position);
-                            }
+                    mFeelingActivityAdapter = new FeelingActivityAdapter(mContext, mBrowseListItem, (view, position) -> {
+                        BrowseListItems browseListItem = mBrowseListItem.get(position);
+                        if (!mSearchList.isEmpty()) {
+                            browseListItem = mSearchList.get(position);
+                        }
 
-                            if (isChildFeeling) {
-                                Intent intent = new Intent();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("parent_id", parentId);
-                                bundle.putString("parenttitle", parentTitle);
-                                bundle.putString("child_id", browseListItem.getParentObject().optString("child_id", "custom_feeling"));
-                                bundle.putString("photo", browseListItem.getmBrowseImgUrl());
-                                bundle.putString("childtitle", browseListItem.getmBrowseListTitle());
-                                bundle.putString("type", browseListItem.getParentObject().optString("type"));
-                                intent.putExtras(bundle);
-                                setResult(ConstantVariables.CHILD_FEELING_REQUEST_CODE, intent);
-                                finish();
+                        if (isChildFeeling) {
+                            Intent intent = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("parent_id", parentId);
+                            bundle.putString("parenttitle", parentTitle);
+                            bundle.putString("child_id", browseListItem.getParentObject().optString("child_id", "custom_feeling"));
+                            bundle.putString("photo", browseListItem.getmBrowseImgUrl());
+                            bundle.putString("childtitle", browseListItem.getmBrowseListTitle());
+                            bundle.putString("type", browseListItem.getParentObject().optString("type"));
+                            intent.putExtras(bundle);
+                            setResult(ConstantVariables.CHILD_FEELING_REQUEST_CODE, intent);
+                            finish();
 
-                            } else {
-                                Intent intent = new Intent(mContext, FeelingActivity.class);
-                                intent.putExtra("is_child_feeling", true);
-                                intent.putExtra(ConstantVariables.SUBJECT_ID, browseListItem.getParentObject().optString("parent_id"));
-                                intent.putExtra(ConstantVariables.TITLE, browseListItem.getParentObject().optString("title"));
-                                intent.putExtra(ConstantVariables.IMAGE, browseListItem.getmBrowseImgUrl());
-                                startActivityForResult(intent, ConstantVariables.CHILD_FEELING_REQUEST_CODE);
-                            }
+                        } else {
+                            Intent intent = new Intent(mContext, FeelingActivity.class);
+                            intent.putExtra("is_child_feeling", true);
+                            intent.putExtra(ConstantVariables.SUBJECT_ID, browseListItem.getParentObject().optString("parent_id"));
+                            intent.putExtra(ConstantVariables.TITLE, browseListItem.getParentObject().optString("title"));
+                            intent.putExtra(ConstantVariables.IMAGE, browseListItem.getmBrowseImgUrl());
+                            startActivityForResult(intent, ConstantVariables.CHILD_FEELING_REQUEST_CODE);
                         }
                     });
                     mRecyclerView.setAdapter(mFeelingActivityAdapter);
@@ -214,7 +207,8 @@ public class FeelingActivity extends AppCompatActivity implements TextWatcher {
                 && resultCode == ConstantVariables.CHILD_FEELING_REQUEST_CODE && data != null) {
             Intent intent = new Intent();
             Bundle bundle = data.getExtras();
-            intent.putExtras(bundle);
+            if (bundle != null)
+                intent.putExtras(bundle);
             setResult(ConstantVariables.CHILD_FEELING_REQUEST_CODE, intent);
             finish();
         }

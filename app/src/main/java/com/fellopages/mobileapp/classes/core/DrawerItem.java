@@ -14,16 +14,16 @@ package com.fellopages.mobileapp.classes.core;
 
 public class DrawerItem {
 
-    String ItemName, title, mItemRegName, mHeaderLabel, mItemUrl, mItemIcon, mListingSingularLabel;
-    String mBadgeCount,mIconBackgroundColor;
-    int mListingTypeId, mBrowseType, mViewType,mCanCreate, mPackagesEnabled,siteStoreEnabled,mListingEnabled;
-    boolean canView = true;
-    public int mSecondaryViewType;
-    public int duplicate = 0;
+    private String ItemName, title, mItemRegName, mHeaderLabel, mItemUrl, mItemIcon, mListingSingularLabel;
+    private String mBadgeCount,mIconBackgroundColor;
+    private int mListingTypeId, mBrowseType, mViewType,mCanCreate, mPackagesEnabled,siteStoreEnabled,mListingEnabled;
+    private boolean canView = true;
+    int mSecondaryViewType;
+    private int duplicate = 0;
 
     // For Notifications, Messages, Friend Request
-    public DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
-                      int packagesEnabled, String icon, String iconColor, boolean canView){
+    DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
+               int packagesEnabled, String icon, String iconColor, boolean canView){
         super();
         mHeaderLabel = headerTitle;
         ItemName=itemName;
@@ -36,8 +36,8 @@ public class DrawerItem {
         this.canView = canView;
     }
 
-    public DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
-                      int packagesEnabled, String icon, String iconColor, boolean canView, int duplicate){
+    DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
+               int packagesEnabled, String icon, String iconColor, boolean canView, int duplicate){
         super();
         mHeaderLabel = headerTitle;
         ItemName=itemName;
@@ -52,7 +52,7 @@ public class DrawerItem {
     }
 
     // For Other Options in drawer
-    public DrawerItem(String headerTitle, String itemName, String itemRegName, String icon, String iconColor){
+    DrawerItem(String headerTitle, String itemName, String itemRegName, String icon, String iconColor){
         super();
         mHeaderLabel = headerTitle;
         ItemName = itemName;
@@ -61,7 +61,7 @@ public class DrawerItem {
         mIconBackgroundColor = iconColor;
     }
 
-    public DrawerItem(String itemName, String itemRegName, String headerLabel, String url, String icon, String iconColor){
+    DrawerItem(String itemName, String itemRegName, String headerLabel, String url, String icon, String iconColor){
         super();
         ItemName = itemName;
         mItemRegName = itemRegName;
@@ -73,9 +73,9 @@ public class DrawerItem {
     }
 
     // For MLT
-    public DrawerItem(String headerTitle, String itemName, String itemRegName, String listingSingularLabel,
-                      String url, String icon, String iconColor, int listingTypeId, int browseType, int viewType, int canCreate,
-                      int packagesEnabled, boolean canView, int secondaryViewType){
+    DrawerItem(String headerTitle, String itemName, String itemRegName, String listingSingularLabel,
+               String url, String icon, String iconColor, int listingTypeId, int browseType, int viewType, int canCreate,
+               int packagesEnabled, boolean canView, int secondaryViewType){
         super();
         mHeaderLabel = headerTitle;
         ItemName=itemName;
@@ -93,13 +93,13 @@ public class DrawerItem {
         mSecondaryViewType = secondaryViewType;
     }
 
-    public DrawerItem(String headerTitle, String title) {
+    DrawerItem(String headerTitle, String title) {
         this(headerTitle, null, null, null, 0, 0, null, null, true);
         this.title = title;
     }
 
-    public DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
-                      int packagesEnabled, String icon, String iconColor, int sitestore, int sitereview) {
+    DrawerItem(String headerTitle, String itemName, String itemRegName, String badgeCount, int canCreate,
+               int packagesEnabled, String icon, String iconColor, int sitestore, int sitereview) {
         super();
         mHeaderLabel = headerTitle;
         ItemName=itemName;
@@ -113,14 +113,14 @@ public class DrawerItem {
         mListingEnabled = sitereview;
     }
 
-    public int getCanCreate() {
+    int getCanCreate() {
         return mCanCreate;
     }
-    public String getItemRegName() {
+    String getItemRegName() {
 
         return mItemRegName;
     }
-    public String getBadgeCount() {
+    String getBadgeCount() {
         return mBadgeCount;
     }
 
@@ -134,12 +134,12 @@ public class DrawerItem {
         this.title = title;
     }
 
-    public String getItemName() {
+    String getItemName() {
 
         return ItemName;
     }
 
-    public String getmListingSingularLabel() {
+    String getmListingSingularLabel() {
         return mListingSingularLabel;
     }
 
@@ -147,47 +147,47 @@ public class DrawerItem {
         return mListingTypeId;
     }
 
-    public int getmBrowseType() {
+    int getmBrowseType() {
         return mBrowseType;
     }
 
-    public int getmViewType() {
+    int getmViewType() {
         return mViewType;
     }
 
-    public void setBadgeCount(String mBadgeCount) {
+    void setBadgeCount(String mBadgeCount) {
         this.mBadgeCount = mBadgeCount;
     }
 
-    public String getmHeaderLabel() {
+    String getmHeaderLabel() {
         return mHeaderLabel;
     }
 
-    public String getmItemUrl() {
+    String getmItemUrl() {
         return mItemUrl;
     }
 
-    public String getmItemIcon() {
+    String getmItemIcon() {
         return mItemIcon;
     }
 
-    public int getmPackagesEnabled() {
+    int getmPackagesEnabled() {
         return mPackagesEnabled;
     }
 
-    public int getSiteStoreEnabled() {
+    int getSiteStoreEnabled() {
         return siteStoreEnabled;
     }
 
-    public int getListingEnabled() {
+    int getListingEnabled() {
         return mListingEnabled;
     }
 
-    public boolean isCanView() {
+    boolean isCanView() {
         return canView;
     }
 
-    public String getmIconBackgroundColor() {
+    String getmIconBackgroundColor() {
         return mIconBackgroundColor;
     }
 

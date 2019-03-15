@@ -15,6 +15,7 @@ package com.fellopages.mobileapp.classes.modules.advancedActivityFeeds;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -227,14 +228,18 @@ public class MultiPhotoRecyclerAdapter extends RecyclerView.Adapter<MultiPhotoRe
                 separatorParam.addRule(RelativeLayout.BELOW, R.id.like_count);
             }
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) holder.tvCommentCount.getLayoutParams();
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE);
+            }
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
             holder.tvCommentCount.setLayoutParams(layoutParams);
 
         } else {
             holder.tvLikeCount.setVisibility(View.GONE);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) holder.tvCommentCount.getLayoutParams();
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, 0);
+            }
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
             holder.tvCommentCount.setLayoutParams(layoutParams);
             separatorParam.addRule(RelativeLayout.BELOW, R.id.comment_count);
@@ -275,94 +280,87 @@ public class MultiPhotoRecyclerAdapter extends RecyclerView.Adapter<MultiPhotoRe
 
         if (mReactionsEnabled == 1) {
             // Applying long click listener on Like button.
-            holder.mLikeBlock.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
+            holder.mLikeBlock.setOnLongClickListener(v -> {
 
-                    final PhotoListDetails photoListDetails = mBrowseItemList.get(holder.getAdapterPosition());
+                final PhotoListDetails photoListDetails = mBrowseItemList.get(holder.getAdapterPosition());
 
-                    int[] location = new int[2];
-                    holder.footerBlock.getLocationOnScreen(location);
-                    RecyclerView reactionsRecyclerView = new RecyclerView(mContext);
-                    reactionsRecyclerView.setHasFixedSize(true);
-                    reactionsRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,
-                            LinearLayoutManager.HORIZONTAL, false));
-                    reactionsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                int[] location = new int[2];
+                holder.footerBlock.getLocationOnScreen(location);
+                RecyclerView reactionsRecyclerView = new RecyclerView(mContext);
+                reactionsRecyclerView.setHasFixedSize(true);
+                reactionsRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,
+                        LinearLayoutManager.HORIZONTAL, false));
+                reactionsRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-                    final PopupWindow popUp = new PopupWindow(reactionsRecyclerView, LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
-                    popUp.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.shape));
-                    popUp.setTouchable(true);
-                    popUp.setFocusable(true);
-                    popUp.setOutsideTouchable(true);
-                    popUp.setAnimationStyle(R.style.customDialogAnimation);
+                final PopupWindow popUp = new PopupWindow(reactionsRecyclerView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                popUp.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.shape));
+                popUp.setTouchable(true);
+                popUp.setFocusable(true);
+                popUp.setOutsideTouchable(true);
+                popUp.setAnimationStyle(R.style.customDialogAnimation);
 
-                    // Playing popup effect when user long presses on like button of a feed.
-                    if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
-                        SoundUtil.playSoundEffectOnReactionsPopup(mContext);
-                    }
-                    popUp.showAtLocation(reactionsRecyclerView, Gravity.TOP, location[0], location[1] - 50);
-
-
-                    if (mReactions != null && mReactionsArray != null) {
-
-                        reactionsImages = new ArrayList<>();
-
-                        for (int i = 0; i < mReactionsArray.size(); i++) {
-                            JSONObject reactionObject = mReactionsArray.get(i);
-                            String reaction_image_url = reactionObject.optJSONObject("icon").
-                                    optString("reaction_image_icon");
-                            String caption = reactionObject.optString("caption");
-                            String reaction = reactionObject.optString("reaction");
-                            int reactionId = reactionObject.optInt("reactionicon_id");
-                            String reactionIconUrl = reactionObject.optJSONObject("icon").
-                                    optString("reaction_image_icon");
-                            reactionsImages.add(new ImageViewList(reaction_image_url, caption,
-                                    reaction, reactionId, reactionIconUrl));
-                        }
-
-                        reactionsAdapter = new ImageAdapter((Activity) mContext, reactionsImages, true,
-                                new OnItemClickListener() {
-
-                                    @Override
-                                    public void onItemClick(View view, int position) {
-
-
-                                        ImageViewList imageViewList = reactionsImages.get(position);
-                                        String reaction = imageViewList.getmReaction();
-                                        String caption = imageViewList.getmCaption();
-                                        String reactionIcon = imageViewList.getmReactionIcon();
-                                        int reactionId = imageViewList.getmReactionId();
-                                        popUp.dismiss();
-
-                                        /**
-                                         * If the user Presses the same reaction again then don't do anything
-                                         */
-                                        JSONObject myReactions = null;
-                                        if (photoListDetails.getmReactionsObject() != null) {
-                                            try {
-                                                JSONObject reactionsObject = new JSONObject(photoListDetails.getmReactionsObject());
-                                                myReactions = reactionsObject.optJSONObject("my_feed_reaction");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                        if (myReactions != null) {
-                                            if (myReactions.optInt("reactionicon_id") != reactionId) {
-                                                doLikeUnlike(photoListDetails, reaction, true, reactionId, reactionIcon,
-                                                        caption, holder.getAdapterPosition());
-                                            }
-                                        } else {
-                                            doLikeUnlike(photoListDetails, reaction, false, reactionId, reactionIcon,
-                                                    caption, holder.getAdapterPosition());
-                                        }
-                                    }
-                                });
-
-                        reactionsRecyclerView.setAdapter(reactionsAdapter);
-                    }
-                    return true;
+                // Playing popup effect when user long presses on like button of a feed.
+                if (PreferencesUtils.isSoundEffectEnabled(mContext)) {
+                    SoundUtil.playSoundEffectOnReactionsPopup(mContext);
                 }
+                popUp.showAtLocation(reactionsRecyclerView, Gravity.TOP, location[0], location[1] - 50);
+
+
+                if (mReactions != null && mReactionsArray != null) {
+
+                    reactionsImages = new ArrayList<>();
+
+                    for (int i = 0; i < mReactionsArray.size(); i++) {
+                        JSONObject reactionObject = mReactionsArray.get(i);
+                        String reaction_image_url = reactionObject.optJSONObject("icon").
+                                optString("reaction_image_icon");
+                        String caption = reactionObject.optString("caption");
+                        String reaction = reactionObject.optString("reaction");
+                        int reactionId = reactionObject.optInt("reactionicon_id");
+                        String reactionIconUrl = reactionObject.optJSONObject("icon").
+                                optString("reaction_image_icon");
+                        reactionsImages.add(new ImageViewList(reaction_image_url, caption,
+                                reaction, reactionId, reactionIconUrl));
+                    }
+
+                    reactionsAdapter = new ImageAdapter((Activity) mContext, reactionsImages, true,
+                            (view, position1) -> {
+
+
+                                ImageViewList imageViewList = reactionsImages.get(position1);
+                                String reaction = imageViewList.getmReaction();
+                                String caption = imageViewList.getmCaption();
+                                String reactionIcon = imageViewList.getmReactionIcon();
+                                int reactionId = imageViewList.getmReactionId();
+                                popUp.dismiss();
+
+                                /**
+                                 * If the user Presses the same reaction again then don't do anything
+                                 */
+                                JSONObject myReactions1 = null;
+                                if (photoListDetails.getmReactionsObject() != null) {
+                                    try {
+                                        JSONObject reactionsObject = new JSONObject(photoListDetails.getmReactionsObject());
+                                        myReactions1 = reactionsObject.optJSONObject("my_feed_reaction");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                if (myReactions1 != null) {
+                                    if (myReactions1.optInt("reactionicon_id") != reactionId) {
+                                        doLikeUnlike(photoListDetails, reaction, true, reactionId, reactionIcon,
+                                                caption, holder.getAdapterPosition());
+                                    }
+                                } else {
+                                    doLikeUnlike(photoListDetails, reaction, false, reactionId, reactionIcon,
+                                            caption, holder.getAdapterPosition());
+                                }
+                            });
+
+                    reactionsRecyclerView.setAdapter(reactionsAdapter);
+                }
+                return true;
             });
         }
 
@@ -601,14 +599,14 @@ public class MultiPhotoRecyclerAdapter extends RecyclerView.Adapter<MultiPhotoRe
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        public View container, counterView, countSeparator, footerBlock,
+        View container, counterView, countSeparator, footerBlock,
                 mLikeBlock, mCommentBlock, mShareBlock;
-        public LinearLayout llPopularReactionView;
-        public ImageView ivMainImage, ivReactionIcon;
-        public ThemedTextView tvLikeCount, tvCommentCount;
-        public ActionIconThemedTextView tvShareButton, tvLikeButton, tvCommentButton;
+        LinearLayout llPopularReactionView;
+        ImageView ivMainImage, ivReactionIcon;
+        ThemedTextView tvLikeCount, tvCommentCount;
+        ActionIconThemedTextView tvShareButton, tvLikeButton, tvCommentButton;
 
-        public ItemViewHolder(View view) {
+        ItemViewHolder(View view) {
             super(view);
             container = view;
 

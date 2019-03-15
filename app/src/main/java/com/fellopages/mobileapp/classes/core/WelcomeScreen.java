@@ -121,40 +121,30 @@ public class WelcomeScreen extends AppCompatActivity {
 
             mAppConst.refreshUserData();
 
-            new Handler().postDelayed(new Runnable() {
-
-                public void run() {
-                    Intent intent;
-                    if (!mAppConst.isLoggedOutUser()) {
-                        intent = new Intent(WelcomeScreen.this, MainActivity.class);
-                        intent.putExtra("isSetLocation", true);
-                        intent.putExtra("isFromWelcomeScreen", true);
-                    } else if (ConstantVariables.INTRO_SLIDE_SHOW_ENABLED == 1) {
-                        intent = new Intent(WelcomeScreen.this, NewHomeScreen.class);
-                        requestDashboardData(false);
-                    } else {
-                        intent = new Intent(WelcomeScreen.this, HomeScreen.class);
-                        requestDashboardData(false);
-                    }
-
-                    if (mBundle != null) {
-                        intent.putExtras(mBundle);
-                    }
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            new Handler().postDelayed(() -> {
+                Intent intent;
+                if (!mAppConst.isLoggedOutUser()) {
+                    intent = new Intent(WelcomeScreen.this, MainActivity.class);
+                    intent.putExtra("isSetLocation", true);
+                    intent.putExtra("isFromWelcomeScreen", true);
+                } else if (ConstantVariables.INTRO_SLIDE_SHOW_ENABLED == 1) {
+                    intent = new Intent(WelcomeScreen.this, NewHomeScreen.class);
+                    requestDashboardData(false);
+                } else {
+                    intent = new Intent(WelcomeScreen.this, HomeScreen.class);
+                    requestDashboardData(false);
                 }
+
+                if (mBundle != null) {
+                    intent.putExtras(mBundle);
+                }
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }, isScreenGif ? ConstantVariables.GIF_ANIMATION_TIME*1000 : 500);
 
         } else {
-            new Handler().postDelayed(new Runnable() {
-
-                public void run() {
-
-                    requestDashboardData(true);
-
-                }
-            }, isScreenGif ? ConstantVariables.GIF_ANIMATION_TIME*1000 : 2000);
+            new Handler().postDelayed(() -> requestDashboardData(true), isScreenGif ? ConstantVariables.GIF_ANIMATION_TIME*1000 : 2000);
         }
 
     }

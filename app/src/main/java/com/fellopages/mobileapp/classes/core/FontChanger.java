@@ -20,17 +20,17 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class FontChanger {
+final class FontChanger {
 
-    public static void setDefaultFont(Context context,
-            String staticTypefaceFieldName, String fontAssetName) {
+    static void setDefaultFont(Context context,
+                               String staticTypefaceFieldName, String fontAssetName) {
         final Typeface regular = Typeface.createFromAsset(context.getAssets(),
                 "fonts/" +fontAssetName);
         replaceFont(staticTypefaceFieldName, regular);
     }
 
-    protected static void replaceFont(String staticTypefaceFieldName,
-            final Typeface newTypeface) {
+    private static void replaceFont(String staticTypefaceFieldName,
+                                    final Typeface newTypeface) {
         int sdkVersion = android.os.Build.VERSION.SDK_INT;
         if(sdkVersion >= Build.VERSION_CODES.LOLLIPOP){
             Map<String, Typeface> newMap = new HashMap<>();
