@@ -113,10 +113,10 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mWebView = (WebView) findViewById(R.id.webView);
+        mToolbar = findViewById(R.id.toolbar);
+        mWebView = findViewById(R.id.webView);
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBar);
 
         mAppConst = new AppConstant(this);
         mContext = this;
