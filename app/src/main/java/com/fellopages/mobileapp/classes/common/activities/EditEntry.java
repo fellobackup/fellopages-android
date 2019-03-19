@@ -825,10 +825,11 @@ public class EditEntry extends FormActivity implements OnUploadResponseListener 
                                         finish();
                                     } else if(isFromEventList){
                                         finish();
-                                    } else  {
+                                    } else if(isFromWebViewPayment) {
                                         redirectToAdvEventsAvailableTickets();
+                                    } else {
+                                        finish();
                                     }
-//                                    finish();
                                 }
                             });
                     break;
