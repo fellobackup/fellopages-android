@@ -35,6 +35,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.ads.NativeAd;
+import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.google.android.gms.ads.formats.NativeAppInstallAd;
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.activities.FragmentLoadActivity;
@@ -549,7 +550,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                         } else {
                             listItemHolder.mPrice.setText(GlobalFunctions.getFormattedCurrencyString(listItems.getmCurrency(), listItemHolder.mTickestPrice));
                         }
-
+                        Log.d("TicketsMStatus ", listItems.getmStatus());
                         if (listItems.getmStatus().equals("1")) {
                             int padding5 = (int) mContext.getResources().getDimension(R.dimen.padding_5dp);
                             listItemHolder.mQuantity.setText(String.valueOf(listItemHolder.mCount));
@@ -563,20 +564,29 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                             listItemHolder.mQuantity.setTextColor(ContextCompat.getColor(mContext, R.color.gray_text_color));
                             listItemHolder.mQuantity.setEnabled(false);
                         } else {
-                            int color = ContextCompat.getColor(mContext, R.color.gray_text_color);
-                            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                                    RelativeLayout.LayoutParams.WRAP_CONTENT);
-                            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-                            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-                            listItemHolder.mQuantity.setLayoutParams(layoutParams);
+//                            int color = ContextCompat.getColor(mContext, R.color.gray_text_color);
+//                            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+//                                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+//                            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+//                            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+//                            listItemHolder.mQuantity.setLayoutParams(layoutParams);
+//
+//                            if (listItems.getmStatusColor().equals("G")) {
+//                                color = ContextCompat.getColor(mContext, R.color.light_green);
+//                            } else if (listItems.getmStatusColor().equals("R")) {
+//                                color = ContextCompat.getColor(mContext, R.color.red);
+//                            }
 
-                            if (listItems.getmStatusColor().equals("G")) {
-                                color = ContextCompat.getColor(mContext, R.color.light_green);
-                            } else if (listItems.getmStatusColor().equals("R")) {
-                                color = ContextCompat.getColor(mContext, R.color.red);
+                            int padding5 = (int) mContext.getResources().getDimension(R.dimen.padding_5dp);
+                            listItemHolder.mQuantity.setText(String.valueOf(listItemHolder.mCount));
+                            listItemHolder.mQuantity.setPadding(padding10, padding5, padding10, padding5);
+                            listItemHolder.mQuantity.setBackground(ContextCompat.getDrawable(mContext, R.drawable.rectangle_box));
+                            if (listItemHolder.mMaxQuantity == 0) {
+                                listItemHolder.mMaxQuantity = ConstantVariables.DEFAULT_TICKETS_COUNT;
                             }
-                            listItemHolder.mQuantity.setTextColor(color);
-                            listItemHolder.mQuantity.setText(listItems.getmStatus());
+//                            listItemHolder.mQuantity.setText(String.valueOf(listItemHolder.mCount));
+//                            listItemHolder.mQuantity.setTextColor(color);
+//                            listItemHolder.mQuantity.setText(listItems.getmStatus());
                         }
 
                         listItemHolder.mClaimedTickets.setText(mContext.getResources().getString(R.string.claimed_tickets) +
@@ -629,13 +639,19 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                         listItemHolder.mQuantity.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                if (listItems.getmStatus().contains("Sale starts on")){
+//                                    View parentLayout = mRootView.findViewById(android.R.id.content);
+                                    SnackbarUtils.displaySnackbarLongTime(mRootView,
+                                            listItems.getmStatus());
+                                } else {
+//                                    SnackbarUtils.
 
-                                int size = listItemHolder.mMaxQuantity + 1;
+                                    int size = listItemHolder.mMaxQuantity + 1;
 
-                                if (listItemHolder.mMinQuantity > 1) {
-                                    size = size - listItemHolder.mMinQuantity;
-                                    size++;
-                                }
+                                    if (listItemHolder.mMinQuantity > 1) {
+                                        size = size - listItemHolder.mMinQuantity;
+                                        size++;
+                                    }
 
                                 /*final CharSequence[] items = new CharSequence[size];
                                 items [0] = "0";
@@ -645,47 +661,48 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                                     value++;
                                 }*/
 
-                                final CharSequence[] items = new CharSequence[size];
-                                int value = listItemHolder.mMinQuantity;
-                                if( listItemHolder.mMinQuantity != 0){
-                                    items [0] = "0";
-                                    for (int i = 1; i < size; i++) {
-                                        items[i] = String.valueOf(value);
-                                        value++;
+                                    final CharSequence[] items = new CharSequence[size];
+                                    int value = listItemHolder.mMinQuantity;
+                                    if( listItemHolder.mMinQuantity != 0){
+                                        items [0] = "0";
+                                        for (int i = 1; i < size; i++) {
+                                            items[i] = String.valueOf(value);
+                                            value++;
+                                        }
+                                    }else{
+                                        for (int i = 0; i < size; i++) {
+                                            items[i] = String.valueOf(value);
+                                            value++;
+                                        }
                                     }
-                                }else{
-                                    for (int i = 0; i < size; i++) {
-                                        items[i] = String.valueOf(value);
-                                        value++;
-                                    }
+
+                                    // Creating and Building the Dialog
+                                    final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                                    builder.setTitle(mContext.getResources().getString(R.string.chosse_tickets_quantity));
+                                    builder.setCancelable(true);
+                                    builder.setSingleChoiceItems(items, listItemHolder.selectedPosition, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int pos) {
+
+                                            listItemHolder.selectedPosition = pos;
+                                            int quantity = Integer.parseInt(items[pos].toString());
+                                            listItemHolder.mQuantity.setText(String.valueOf(quantity));
+                                            int price = 0, isAdd = 0;
+                                            if (listItemHolder.mCount > quantity) {
+                                                isAdd = 0;
+                                                price = (listItemHolder.mCount - quantity) * listItemHolder.mTickestPrice;
+                                            } else if (listItemHolder.mCount < quantity){
+                                                isAdd = 1;
+                                                price = ( quantity - listItemHolder.mCount) * listItemHolder.mTickestPrice;
+                                            }
+                                            if (listItemHolder.mCount != quantity) {
+                                                listItemHolder.mCount = quantity;
+                                                doButtonOneClickActions(price, listItemHolder.mCount, listItemHolder.mTicketsId, isAdd);
+                                            }
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    builder.create().show();
                                 }
-
-                                // Creating and Building the Dialog
-                                final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                                builder.setTitle(mContext.getResources().getString(R.string.chosse_tickets_quantity));
-                                builder.setCancelable(true);
-                                builder.setSingleChoiceItems(items, listItemHolder.selectedPosition, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int pos) {
-
-                                        listItemHolder.selectedPosition = pos;
-                                        int quantity = Integer.parseInt(items[pos].toString());
-                                        listItemHolder.mQuantity.setText(String.valueOf(quantity));
-                                        int price = 0, isAdd = 0;
-                                        if (listItemHolder.mCount > quantity) {
-                                            isAdd = 0;
-                                            price = (listItemHolder.mCount - quantity) * listItemHolder.mTickestPrice;
-                                        } else if (listItemHolder.mCount < quantity){
-                                            isAdd = 1;
-                                            price = ( quantity - listItemHolder.mCount) * listItemHolder.mTickestPrice;
-                                        }
-                                        if (listItemHolder.mCount != quantity) {
-                                            listItemHolder.mCount = quantity;
-                                            doButtonOneClickActions(price, listItemHolder.mCount, listItemHolder.mTicketsId, isAdd);
-                                        }
-                                        dialog.dismiss();
-                                    }
-                                });
-                                builder.create().show();
                             }
                         });
                         break;

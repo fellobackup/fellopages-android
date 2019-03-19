@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -304,7 +305,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                 String endDate = jsonObject.optString("sell_endtime");
                 String ticketsStatus = jsonObject.optString("status");
                 String statusColor = jsonObject.optString("statusColor");
-
+                Log.d("TicketStatus ", ticketsStatus+" "+quantity);
                 if (ticketsStatus.equals("1")) {
                     isShowBookNow = 1;
                 }
