@@ -15,8 +15,8 @@ package com.fellopages.mobileapp.classes.core;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -49,7 +49,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -58,47 +57,37 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.facebook.login.LoginManager;
 import com.fellopages.mobileapp.R;
+import com.fellopages.mobileapp.classes.common.activities.CreateNewEntry;
+import com.fellopages.mobileapp.classes.common.activities.SearchActivity;
 import com.fellopages.mobileapp.classes.common.activities.WebViewActivity;
+import com.fellopages.mobileapp.classes.common.adapters.SelectAlbumListAdapter;
 import com.fellopages.mobileapp.classes.common.dialogs.AlertDialogWithAction;
+import com.fellopages.mobileapp.classes.common.dialogs.CheckInLocationDialog;
+import com.fellopages.mobileapp.classes.common.formgenerator.FormActivity;
 import com.fellopages.mobileapp.classes.common.interfaces.OnCheckInLocationResponseListener;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
 import com.fellopages.mobileapp.classes.common.interfaces.OnUploadResponseListener;
-import com.fellopages.mobileapp.classes.common.formgenerator.FormActivity;
 import com.fellopages.mobileapp.classes.common.multimediaselector.MultiMediaSelectorActivity;
 import com.fellopages.mobileapp.classes.common.ui.BadgeView;
 import com.fellopages.mobileapp.classes.common.ui.CustomViews;
 import com.fellopages.mobileapp.classes.common.ui.fab.CustomFloatingActionButton;
 import com.fellopages.mobileapp.classes.common.ui.fab.FloatingActionMenu;
+import com.fellopages.mobileapp.classes.common.utils.BrowseListItems;
 import com.fellopages.mobileapp.classes.common.utils.CustomTabUtil;
+import com.fellopages.mobileapp.classes.common.utils.DataStorage;
 import com.fellopages.mobileapp.classes.common.utils.GlobalFunctions;
 import com.fellopages.mobileapp.classes.common.utils.LogUtils;
 import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
@@ -106,26 +95,34 @@ import com.fellopages.mobileapp.classes.common.utils.SnackbarUtils;
 import com.fellopages.mobileapp.classes.common.utils.SocialShareUtil;
 import com.fellopages.mobileapp.classes.common.utils.UploadFileToServerUtils;
 import com.fellopages.mobileapp.classes.common.utils.UrlUtil;
-import com.fellopages.mobileapp.classes.common.dialogs.CheckInLocationDialog;
 import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.FeedHomeFragment;
 import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.SingleFeedPage;
-import com.fellopages.mobileapp.classes.common.activities.CreateNewEntry;
-import com.fellopages.mobileapp.classes.common.activities.SearchActivity;
-import com.fellopages.mobileapp.classes.common.adapters.SelectAlbumListAdapter;
-
-import com.fellopages.mobileapp.classes.common.utils.BrowseListItems;
-
-
-import com.fellopages.mobileapp.classes.common.utils.DataStorage;
 import com.fellopages.mobileapp.classes.modules.likeNComment.Comment;
 import com.fellopages.mobileapp.classes.modules.messages.CreateNewMessage;
 import com.fellopages.mobileapp.classes.modules.multipleListingType.BrowseMLTFragment;
 import com.fellopages.mobileapp.classes.modules.packages.SelectPackage;
-import com.fellopages.mobileapp.classes.modules.store.CartView;
 import com.fellopages.mobileapp.classes.modules.pushnotification.MyFcmListenerService;
+import com.fellopages.mobileapp.classes.modules.store.CartView;
 import com.fellopages.mobileapp.classes.modules.user.profile.userProfile;
 import com.fellopages.mobileapp.classes.modules.user.settings.SettingsListActivity;
-import com.facebook.login.LoginManager;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
@@ -134,20 +131,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wordpress.android.util.ToastUtils;
 
-import java.io.IOException;
 import java.io.File;
-
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 import ru.dimorinny.showcasecard.position.BottomRightCustom;
@@ -505,7 +500,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         Context mContext = getApplicationContext();
         View searchBar = findViewById(R.id.search_bar);
-        Log.d("ShowItHere ", "true"+" "+searchBar+" "+isHomePage+" "+PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW));
+        Log.d("ShowItHere ", "true" + " " + searchBar + " " + isHomePage + " " + PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW));
         if (isHomePage && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.NAVIGATION_ICON_CASE_VIEW)) {
             isShowCaseView = true;
             PreferencesUtils.updateShowCaseView(mContext, PreferencesUtils.NAVIGATION_ICON_CASE_VIEW);
@@ -2159,6 +2154,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     }
 
     private void setCurrentLocationOnServer(String object, int user_id) {
+        Log.d(TAG, "setCurrentLocationOnServer");
         String url = AppConstant.DEFAULT_URL + "memberlocation/edit-address?resource_type=user&user_id=" + user_id;
         HashMap<String, String> params = new HashMap<>();
         params.put("location", object);
@@ -2187,27 +2183,38 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
         builder.setAlwaysShow(true);
-        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(result1 -> {
-            final Status status = result1.getStatus();
-            switch (status.getStatusCode()) {
-                case LocationSettingsStatusCodes.SUCCESS:
-                    if (isHomePage) {
-                        autoUpdateCurrentLocation();
-                    } else {
-                        loadFragmentOnGPSEnabled();
-                    }
-                    break;
 
+        Task<LocationSettingsResponse> resultTask = LocationServices.getSettingsClient(this).checkLocationSettings(builder.build());
+        resultTask.addOnSuccessListener(locationSettingsResponse -> {
+            Log.d(TAG, "requestForDeviceLocation success");
+
+            // All location settings are satisfied. The client can initialize location
+            // requests here.
+            if (isHomePage) {
+                autoUpdateCurrentLocation();
+            } else {
+                loadFragmentOnGPSEnabled();
+            }
+        });
+        resultTask.addOnFailureListener(e -> {
+            int statusCode = ((ApiException) e).getStatusCode();
+            switch (statusCode) {
                 case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                    // Location settings are not satisfied, but this can be fixed
+                    // by showing the user a dialog.
                     try {
-                        status.startResolutionForResult((Activity) mContext, ConstantVariables.PERMISSION_GPS_SETTINGS);
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
+                        // Show the dialog by calling startResolutionForResult(),
+                        // and check the result in onActivityResult().
+                        ResolvableApiException resolvable = (ResolvableApiException) e;
+                        resolvable.startResolutionForResult((Activity) mContext,
+                                ConstantVariables.PERMISSION_GPS_SETTINGS);
+                    } catch (IntentSender.SendIntentException sendEx) {
+                        // Ignore the error.
                     }
                     break;
-
                 case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                    // Location settings are not satisfied. However, we have no way
+                    // to fix the settings so we won't show the dialog.
                     break;
             }
         });
