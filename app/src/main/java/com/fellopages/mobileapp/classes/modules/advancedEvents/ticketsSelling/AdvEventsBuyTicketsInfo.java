@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -190,14 +191,14 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                         postParams.remove("ticket_id_" + tickets_id);
 
                     }
-                    mSubtotalTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, subTotal));
-                    mDiscountTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, discount));
+                    mSubtotalTextView.setText(currency+""+subTotal);
+                    mDiscountTextView.setText(currency+""+discount);
 
                     Double calculatedTax = (subTotal - discount) *(taxRate/100);
                     grandTotal = subTotal - discount + calculatedTax;
 
-                    mTaxTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, calculatedTax));
-                    mGrandTotalTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, grandTotal));
+                    mTaxTextView.setText(currency+""+calculatedTax);
+                    mGrandTotalTextView.setText(currency+""+grandTotal);
                 }
             }
         });
@@ -208,7 +209,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
 
 
     public void makeRequest(String getInfoUrl) {
-
+        Log.d("SomeTicketInfo ", getInfoUrl);
         mAppConst.getJsonResponseFromUrl(getInfoUrl, new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) {
@@ -295,6 +296,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                 JSONObject jsonObject = ticketsJsonArray.optJSONObject(i);
 
                 mEventId = jsonObject.optString("event_id");
+                int status = jsonObject.optInt("status");
                 String title = jsonObject.optString("title");
                 int price = jsonObject.optInt("price");
                 String quantity = jsonObject.optString("quantity");
@@ -304,12 +306,12 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                 String endDate = jsonObject.optString("sell_endtime");
                 String ticketsStatus = jsonObject.optString("status");
                 String statusColor = jsonObject.optString("statusColor");
-
+                Log.d("TicketStatus ", ticketsStatus+" "+quantity);
                 if (ticketsStatus.equals("1")) {
                     isShowBookNow = 1;
                 }
 
-                mBrowseItemList.add(new BrowseListItems(title, price, quantity, currency, minValue, maxValue,
+                mBrowseItemList.add(new BrowseListItems(status, title, price, quantity, currency, minValue, maxValue,
                         ticketsId, endDate, ticketsStatus, statusColor, jsonObject, ticketsJsonArray.length()));
 
             }
@@ -368,12 +370,12 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
         }
 
         if (isShowBookNow == 1) {
-            mSubtotalTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, subTotal));
-            mDiscountTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, discount));
+            mSubtotalTextView.setText(currency +""+subTotal);
+            mDiscountTextView.setText(currency+""+discount);
             mTaxText.setText(getResources().getString(R.string.tax_text) + " (" + taxRate + "%)");
             Double calculatedTax = (subTotal - discount) *(taxRate/100);
-            mTaxTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, calculatedTax));
-            mGrandTotalTextView.setText(GlobalFunctions.getFormattedCurrencyString(currency, grandTotal));
+            mTaxTextView.setText(currency+""+calculatedTax);
+            mGrandTotalTextView.setText(currency+""+grandTotal);
         } else {
             footerView.setVisibility(View.GONE);
         }
