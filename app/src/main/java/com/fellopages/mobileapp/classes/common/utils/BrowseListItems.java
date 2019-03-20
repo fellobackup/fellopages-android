@@ -30,7 +30,7 @@ public class BrowseListItems {
     boolean mIsRequestSent, mIsLoading, allowToView, mShowAddPeople, mGroupPublished, isLessTextShowing;
     int mIsOwner, mRsvp, mClosed, mEventId, mEventCount, mSubscribed, mWatched, mSticky, mJoined, mProfileRsvpValue;
     JSONObject mMemberMenus, responseObject, bannerObject, parentObject;
-    int mTotalTracks, canEdit, mTotalPlayCount, mContentId, mIsClosed;
+    int mTotalTracks, canEdit, mTotalPlayCount, mContentId, mIsClosed, mStatusCode;
     String mModuleType, mAlbumId, mRedirectUrl, mContentUrl, mModuleName, mBody, mBrowseListName;
 
     //For Messages
@@ -1327,8 +1327,9 @@ public class BrowseListItems {
     }
 
     // Order view page tickets listing
-    public BrowseListItems(String title, int price, String quantity, String currency, int minValue, int maxValue, int ticketsId, String endDate,
+    public BrowseListItems(int mStatusCode, String title, int price, String quantity, String currency, int minValue, int maxValue, int ticketsId, String endDate,
                            String ticketsStatus, String colorCode, JSONObject jsonObject, int listSize) {
+        this.mStatusCode = mStatusCode;
         mBrowseListTitle = title;
         mTicketsPrice = price;
         mQuantity = quantity;
@@ -2473,5 +2474,13 @@ public class BrowseListItems {
 
     public int getmIsShowProsCons() {
         return mIsShowProsCons;
+    }
+
+    public int getmStatusCode() {
+        return mStatusCode;
+    }
+
+    public void setmStatusCode(int mStatusCode) {
+        this.mStatusCode = mStatusCode;
     }
 }
