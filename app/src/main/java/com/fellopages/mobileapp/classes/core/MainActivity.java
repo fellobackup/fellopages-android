@@ -286,13 +286,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         appBarLayout = findViewById(R.id.appbar);
 
         // Header search bar's text view.
-        TextView tvSearch = findViewById(R.id.tv_search);
-        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
-        if (drawable != null) {
-            drawable.mutate();
-            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
-        }
-        tvSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+//        TextView tvSearch = findViewById(R.id.tv_search);
+//        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
+//        if (drawable != null) {
+//            drawable.mutate();
+//            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
+//        }
+//        tvSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
         //drawer layout settings
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
@@ -508,7 +508,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     private void displayShowCaseView() {
 
         Context mContext = getApplicationContext();
-        View searchBar = findViewById(R.id.search_bar);
+//        View searchBar = findViewById(R.id.search_bar);
         Log.d("ShowItHere ", "true" + " " + searchBar + " " + isHomePage + " " + PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW));
         if (isHomePage && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.NAVIGATION_ICON_CASE_VIEW)) {
             isShowCaseView = true;
@@ -972,11 +972,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
 
         if ((isHomePage || isGuestUserHomePage) && ConstantVariables.SHOW_APP_TITLE_IN_HEADER == 0) {
-            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
-            findViewById(R.id.search_bar).setOnClickListener(this);
+//            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
+//            findViewById(R.id.search_bar).setOnClickListener(this);
             invalidateOptionsMenu();
         } else {
-            findViewById(R.id.search_bar).setVisibility(View.GONE);
+//            findViewById(R.id.search_bar).setVisibility(View.GONE);
         }
 
         CustomViews.createMarqueeTitle(mContext, toolbar);
@@ -1010,7 +1010,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
 
         if (currentSelectedOption.equals("home")) {
-            menu.findItem(R.id.action_event).setVisible(true);
+            menu.findItem(R.id.action_event).setVisible(false);
         } else {
             menu.findItem(R.id.action_event).setVisible(false);
         }
@@ -1071,7 +1071,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         searchItem = menu.findItem(R.id.action_search);
         locationItem = menu.findItem(R.id.action_location);
         cartItem = menu.findItem(R.id.action_cart);
-        searchBar = findViewById(R.id.search_bar);
+//        searchBar = findViewById(R.id.search_bar);
         if (searchItem != null && searchItem.getActionView() != null) {
             setColorFilter(searchItem.getActionView().findViewById(R.id.search_icon));
         }
@@ -1112,16 +1112,16 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         /**
          * Changing search bar margin when the other menu items are visible or not.
          */
-        Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) searchBar.getLayoutParams();
-        if (!cartItem.isVisible() && !locationItem.isVisible()) {
-            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
-        } else {
-            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_10dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
-        }
+//        Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) searchBar.getLayoutParams();
+//        if (!cartItem.isVisible() && !locationItem.isVisible()) {
+//            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
+//        } else {
+//            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_10dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
+//        }
 
         if (currentSelectedOption != null) {
 
@@ -1135,8 +1135,8 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 case ConstantVariables.FRIEND_REQUEST_MENU_TITLE:
                 case ConstantVariables.STORE_OFFER_MENU_TITLE:
                     searchItem.setVisible(false);
+                    Log.d(TAG, "onPrepareOptionsMenu: seach " + searchItem.isVisible());
                     break;
-
                 case ConstantVariables.BLOG_MENU_TITLE:
                 case ConstantVariables.CLASSIFIED_MENU_TITLE:
                 case ConstantVariables.POLL_MENU_TITLE:
@@ -1153,6 +1153,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 case ConstantVariables.ADV_GROUPS_MENU_TITLE:
                 case ConstantVariables.SITE_PAGE_TITLE_MENU:
                 case ConstantVariables.PRODUCT_MENU_TITLE:
+                    Log.d(TAG, "onPrepareOptionsMenu: seach " + searchItem.isVisible());
                     break;
                 default:
                     break;
@@ -1160,7 +1161,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             }
 
             if ((isHomePage || isGuestUserHomePage) && ConstantVariables.SHOW_APP_TITLE_IN_HEADER == 0) {
-                searchItem.setVisible(false);
+                searchItem.setVisible(true);
             }
 
         }

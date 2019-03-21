@@ -659,7 +659,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                             listItemHolder.mClaimedTickets.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
 
                         }
-                        if(listItems.getmStatusCode() == 1){
+                        if(!listItems.getmStatus().contains("Sale starts on") && !listItems.getmStatus().contains("Sold Out") && !listItems.getmStatus().contains("Sale ended")){
                             listItemHolder.mQuantity.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
