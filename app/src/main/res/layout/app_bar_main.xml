@@ -35,10 +35,10 @@
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <include
-                android:id="@+id/search_bar"
-                layout="@layout/search_bar"
-                android:visibility="gone" />
+            <!--<include-->
+                <!--android:id="@+id/search_bar"-->
+                <!--layout="@layout/search_bar"-->
+                <!--android:visibility="gone" />-->
 
         </android.support.v7.widget.Toolbar>
 

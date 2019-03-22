@@ -385,6 +385,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".classes.common.utils.FetchAddressIntentService"
+            android:exported="false"/>
 
         <activity
             android:name=".classes.common.activities.WebViewActivity"

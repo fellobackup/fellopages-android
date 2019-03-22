@@ -32,13 +32,14 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.ResultReceiver;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
@@ -88,6 +89,7 @@ import com.fellopages.mobileapp.classes.common.ui.fab.FloatingActionMenu;
 import com.fellopages.mobileapp.classes.common.utils.BrowseListItems;
 import com.fellopages.mobileapp.classes.common.utils.CustomTabUtil;
 import com.fellopages.mobileapp.classes.common.utils.DataStorage;
+import com.fellopages.mobileapp.classes.common.utils.FetchAddressIntentService;
 import com.fellopages.mobileapp.classes.common.utils.GlobalFunctions;
 import com.fellopages.mobileapp.classes.common.utils.LogUtils;
 import com.fellopages.mobileapp.classes.common.utils.PreferencesUtils;
@@ -105,24 +107,22 @@ import com.fellopages.mobileapp.classes.modules.pushnotification.MyFcmListenerSe
 import com.fellopages.mobileapp.classes.modules.store.CartView;
 import com.fellopages.mobileapp.classes.modules.user.profile.userProfile;
 import com.fellopages.mobileapp.classes.modules.user.settings.SettingsListActivity;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
@@ -157,8 +157,7 @@ import static com.fellopages.mobileapp.classes.core.ConstantVariables.SERVER_SET
 import static com.fellopages.mobileapp.classes.core.ConstantVariables.STATUS_POST_OPTIONS;
 
 public class MainActivity extends FormActivity implements FragmentDrawer.FragmentDrawerListener,
-        View.OnClickListener, OnCheckInLocationResponseListener, OnUploadResponseListener, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener, ShowCaseStepDisplayer.DismissListener {
+        View.OnClickListener, OnCheckInLocationResponseListener, OnUploadResponseListener, ShowCaseStepDisplayer.DismissListener {
 
     private final int TYPE_HOME = 1, TYPE_MODULE = 2, TYPE_OTHER = 3;
     private boolean isHomePage = false, mIsCanView = true, isGuestUserHomePage = false, isSetLocation = false, isCurrentLocationSet = false;
@@ -227,6 +226,10 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
     };
 
+    private LocationCallback mLocationCallback;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private AddressResultReceiver mResultReceiver;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -283,13 +286,13 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         appBarLayout = findViewById(R.id.appbar);
 
         // Header search bar's text view.
-        TextView tvSearch = findViewById(R.id.tv_search);
-        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
-        if (drawable != null) {
-            drawable.mutate();
-            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
-        }
-        tvSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+//        TextView tvSearch = findViewById(R.id.tv_search);
+//        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_action_search);
+//        if (drawable != null) {
+//            drawable.mutate();
+//            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(mContext, R.color.gray_stroke_color), PorterDuff.Mode.SRC_ATOP));
+//        }
+//        tvSearch.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 
         //drawer layout settings
         drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
@@ -469,6 +472,12 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         if (!PreferencesUtils.isAppRated(this, PreferencesUtils.APP_RATED)) {
             showRateAppDialogIfNeeded();
         }
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mResultReceiver = new AddressResultReceiver(new Handler());
+
+        createLocationCallback();
+        createLocationRequest();
     }
 
     private void updateServerSettings() {
@@ -499,7 +508,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     private void displayShowCaseView() {
 
         Context mContext = getApplicationContext();
-        View searchBar = findViewById(R.id.search_bar);
+//        View searchBar = findViewById(R.id.search_bar);
         Log.d("ShowItHere ", "true" + " " + searchBar + " " + isHomePage + " " + PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.SEARCH_BAR_CASE_VIEW));
         if (isHomePage && !PreferencesUtils.getShowCaseView(mContext, PreferencesUtils.NAVIGATION_ICON_CASE_VIEW)) {
             isShowCaseView = true;
@@ -963,11 +972,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
 
         if ((isHomePage || isGuestUserHomePage) && ConstantVariables.SHOW_APP_TITLE_IN_HEADER == 0) {
-            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
-            findViewById(R.id.search_bar).setOnClickListener(this);
+//            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
+//            findViewById(R.id.search_bar).setOnClickListener(this);
             invalidateOptionsMenu();
         } else {
-            findViewById(R.id.search_bar).setVisibility(View.GONE);
+//            findViewById(R.id.search_bar).setVisibility(View.GONE);
         }
 
         CustomViews.createMarqueeTitle(mContext, toolbar);
@@ -1001,7 +1010,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
 
         if (currentSelectedOption.equals("home")) {
-            menu.findItem(R.id.action_event).setVisible(true);
+            menu.findItem(R.id.action_event).setVisible(false);
         } else {
             menu.findItem(R.id.action_event).setVisible(false);
         }
@@ -1062,7 +1071,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         searchItem = menu.findItem(R.id.action_search);
         locationItem = menu.findItem(R.id.action_location);
         cartItem = menu.findItem(R.id.action_cart);
-        searchBar = findViewById(R.id.search_bar);
+//        searchBar = findViewById(R.id.search_bar);
         if (searchItem != null && searchItem.getActionView() != null) {
             setColorFilter(searchItem.getActionView().findViewById(R.id.search_icon));
         }
@@ -1103,16 +1112,16 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         /**
          * Changing search bar margin when the other menu items are visible or not.
          */
-        Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) searchBar.getLayoutParams();
-        if (!cartItem.isVisible() && !locationItem.isVisible()) {
-            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
-        } else {
-            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_10dp),
-                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
-        }
+//        Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) searchBar.getLayoutParams();
+//        if (!cartItem.isVisible() && !locationItem.isVisible()) {
+//            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_20dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
+//        } else {
+//            layoutParams.setMargins(0, mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_10dp),
+//                    mContext.getResources().getDimensionPixelSize(R.dimen.margin_5dp));
+//        }
 
         if (currentSelectedOption != null) {
 
@@ -1126,8 +1135,8 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 case ConstantVariables.FRIEND_REQUEST_MENU_TITLE:
                 case ConstantVariables.STORE_OFFER_MENU_TITLE:
                     searchItem.setVisible(false);
+                    Log.d(TAG, "onPrepareOptionsMenu: seach " + searchItem.isVisible());
                     break;
-
                 case ConstantVariables.BLOG_MENU_TITLE:
                 case ConstantVariables.CLASSIFIED_MENU_TITLE:
                 case ConstantVariables.POLL_MENU_TITLE:
@@ -1144,6 +1153,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
                 case ConstantVariables.ADV_GROUPS_MENU_TITLE:
                 case ConstantVariables.SITE_PAGE_TITLE_MENU:
                 case ConstantVariables.PRODUCT_MENU_TITLE:
+                    Log.d(TAG, "onPrepareOptionsMenu: seach " + searchItem.isVisible());
                     break;
                 default:
                     break;
@@ -1151,7 +1161,7 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
             }
 
             if ((isHomePage || isGuestUserHomePage) && ConstantVariables.SHOW_APP_TITLE_IN_HEADER == 0) {
-                searchItem.setVisible(false);
+                searchItem.setVisible(true);
             }
 
         }
@@ -2047,110 +2057,131 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
         }
     }
 
-    public synchronized void buildGoogleApiClient() {
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
+    public void buildGoogleApiClient() {
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                mLocationCallback, Looper.myLooper());
+    }
 
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
+    private void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
 
-        mGoogleApiClient.connect();
-
-        if (mLocationRequest == null) {
-            mLocationRequest = new LocationRequest();
-        }
-
+        // Sets the desired interval for active location updates. This interval is
+        // inexact. You may not receive updates at all if no location sources are available, or
+        // you may receive them slower than requested. You may also receive updates faster than
+        // requested if other applications are requesting location at a faster interval.
         mLocationRequest.setInterval(1000);
+
+        // Sets the fastest rate for active location updates. This interval is exact, and your
+        // application will never receive updates faster than this value.
         mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                mGoogleApiClient.isConnected()) {
+    /**
+     *  Receiver class for {@link FetchAddressIntentService}
+     */
 
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    private class AddressResultReceiver extends ResultReceiver {
+
+        AddressResultReceiver(Handler handler) {
+            super(handler);
         }
-    }
 
-    @Override
-    public void onConnectionSuspended(int i) {
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-        try {
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-
-            if (addresses != null) {
-                Address address = addresses.get(0);
-                ArrayList<String> addressFragments = new ArrayList<>();
-
-                // Fetch the address lines using getAddressLine and join them.
-                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
-                    addressFragments.add(address.getAddressLine(i));
-                }
-
-                if (!isCurrentLocationSet) {
-                    isCurrentLocationSet = true;
-                    String mNewLocation = TextUtils.join(System.getProperty("line.separator"), addressFragments);
-
-                    Toast.makeText(mContext, getResources().getString(R.string.current_location_text) + " " + mNewLocation, Toast.LENGTH_LONG).show();
-
-                    PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_DEFAULT_LOCATION, mNewLocation);
-
-                    JSONObject userDetail = (!mAppConst.isLoggedOutUser() && PreferencesUtils.getUserDetail(mContext) != null) ? new JSONObject(PreferencesUtils.getUserDetail(mContext)) : null;
-
-                    if (userDetail != null) {
-                        userDetail.put(PreferencesUtils.USER_LOCATION_LATITUDE, location.getLatitude());
-                        userDetail.put(PreferencesUtils.USER_LOCATION_LONGITUDE, location.getLongitude());
-                        PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
-                    }
-
-                    JSONObject locationObject = new JSONObject();
-                    locationObject.put("country", address.getCountryName());
-                    locationObject.put("state", address.getAdminArea());
-                    locationObject.put("zipcode", address.getPostalCode());
-                    locationObject.put("city", address.getSubAdminArea());
-                    locationObject.put("countryCode", address.getCountryCode());
-                    locationObject.put("address", address.getLocality());
-                    locationObject.put("formatted_address", mNewLocation);
-                    locationObject.put("location", mNewLocation);
-                    locationObject.put("latitude", address.getLatitude());
-                    locationObject.put("longitude", address.getLongitude());
-
-                    if (userDetail != null) {
-                        setCurrentLocationOnServer(locationObject.toString(), userDetail.optInt("user_id"));
-                    }
-
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            if (resultCode == FetchAddressIntentService.SUCCESS_RESULT) {
+                String addressOutput = resultData.getString(FetchAddressIntentService.RESULT_DATA_KEY);
+                Gson gson = new Gson();
+                Address address = gson.fromJson(addressOutput, Address.class);
+                try {
+                    parseAddress(address);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (IOException | IndexOutOfBoundsException | JSONException e) {
-            e.printStackTrace();
         }
+    }
 
-        try {
-            //stop location updates
-            if (mGoogleApiClient != null) {
-                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    private void createLocationCallback() {
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                Location location = locationResult.getLastLocation();
+                Log.d(TAG, "onLocationResult: long: " + location.getLongitude());
+                startIntentService(location);
+                stopLocationUpdates();
             }
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
+        };
+    }
 
+    private void parseAddress(Address address) throws JSONException {
+        if (!isCurrentLocationSet) {
+            isCurrentLocationSet = true;
+
+            ArrayList<String> addressFragments = new ArrayList<>();
+
+            // Fetch the address lines using getAddressLine and join them.
+            for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                addressFragments.add(address.getAddressLine(i));
+            }
+            String mNewLocation = TextUtils.join(System.getProperty("line.separator"), addressFragments);
+
+            Toast.makeText(this, getResources().getString(R.string.current_location_text) + " " + mNewLocation, Toast.LENGTH_LONG).show();
+
+            PreferencesUtils.updateDashBoardData(mContext, PreferencesUtils.DASHBOARD_DEFAULT_LOCATION, mNewLocation);
+
+            JSONObject userDetail = (!mAppConst.isLoggedOutUser() && PreferencesUtils.getUserDetail(mContext) != null) ? new JSONObject(PreferencesUtils.getUserDetail(mContext)) : null;
+
+            if (userDetail != null) {
+                userDetail.put(PreferencesUtils.USER_LOCATION_LATITUDE, address.getLatitude());
+                userDetail.put(PreferencesUtils.USER_LOCATION_LONGITUDE, address.getLongitude());
+                PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
+            }
+
+            JSONObject locationObject = new JSONObject();
+            locationObject.put("country", address.getCountryName());
+            locationObject.put("state", address.getAdminArea());
+            locationObject.put("zipcode", address.getPostalCode());
+            locationObject.put("city", address.getSubAdminArea());
+            locationObject.put("countryCode", address.getCountryCode());
+            locationObject.put("address", address.getLocality());
+            locationObject.put("formatted_address", mNewLocation);
+            locationObject.put("location", mNewLocation);
+            locationObject.put("latitude", address.getLatitude());
+            locationObject.put("longitude", address.getLongitude());
+
+            if (userDetail != null) {
+                setCurrentLocationOnServer(locationObject.toString(), userDetail.optInt("user_id"));
+            }
+
+        }
+    }
+
+    /**
+     * Creates an intent, adds location data to it as an extra, and starts the intent service for
+     * fetching an address.
+     */
+    private void startIntentService(Location mLastLocation) {
+        // Create an intent for passing to the intent service responsible for fetching the address.
+        Intent intent = new Intent(this, FetchAddressIntentService.class);
+
+        // Pass the result receiver as an extra to the service.
+        intent.putExtra(FetchAddressIntentService.RECEIVER, mResultReceiver);
+
+        // Pass the location data as an extra to the service.
+        intent.putExtra(FetchAddressIntentService.LOCATION_DATA_EXTRA, mLastLocation);
+
+        // Start the service. If the service isn't already running, it is instantiated and started
+        // (creating a process for it if needed); if it is running then it remains running. The
+        // service kills itself automatically once all intents are processed.
+        startService(intent);
+    }
+
+    private void stopLocationUpdates() {
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }
 
     private void setCurrentLocationOnServer(String object, int user_id) {
@@ -2171,23 +2202,11 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     }
 
     public void requestForDeviceLocation() {
-        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-
-        mGoogleApiClient.connect();
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
         builder.setAlwaysShow(true);
 
         Task<LocationSettingsResponse> resultTask = LocationServices.getSettingsClient(this).checkLocationSettings(builder.build());
         resultTask.addOnSuccessListener(locationSettingsResponse -> {
-            Log.d(TAG, "requestForDeviceLocation success");
-
             // All location settings are satisfied. The client can initialize location
             // requests here.
             if (isHomePage) {
