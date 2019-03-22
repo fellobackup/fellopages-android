@@ -142,7 +142,7 @@
     <string name="unlike">Unlike</string>
     <string name="comment_text">Comment</string>
     <!--<string name="like_text">Like</string>-->
-    <string name="like_text">Fello Like</string>
+    <string name="like_text">Like</string>
     <string name="comment_empty_msg">Please Enter a Comment</string>
     <string name="viewAll">View All Comments</string>
     <string name="comment_page_like_count_text">this</string>

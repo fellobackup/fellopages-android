@@ -129,6 +129,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="@dimen/button_size_content_card"
+        android:visibility="gone"
         android:layout_gravity="center"
         android:background="?android:attr/selectableItemBackground"
         android:id="@+id/save_feed_view"
