@@ -19,6 +19,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.interfaces.OnAsyncResponseListener;
@@ -81,7 +82,7 @@ public class OkHttpUploadHandler extends StringCallback {
         if (mIsNeedToShowDialog) {
             mProgressDialog.dismiss();
         }
-
+        Log.d("ResultPost ", result);
         LogUtils.LOGD(OkHttpUploadHandler.class.getSimpleName(), "result: " + result);
 
         if (BitmapUtils.isImageRotated) {
@@ -96,7 +97,7 @@ public class OkHttpUploadHandler extends StringCallback {
                 mCaller.onAsyncSuccessResponse(obj,
                         AppConstant.isRequestSuccessful(statusCode), mIsAttachFileRequest);
             } else {
-                mFeedsFragment.cancelRequest(Integer.parseInt(tag.toString()));
+                mFeedsFragment.cancelRequest(Integer.parseInt(tag.toString()), obj.optString("message"));
             }
 
         } catch (JSONException e) {

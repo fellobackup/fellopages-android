@@ -138,7 +138,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
 
 
     public interface OnQuantityChangeListener{
-        void onDataChanged(int price, int count, int tickets_id, int isAdd);
+        void onDataChanged(double price, int count, int tickets_id, double isAdd);
     }
 
     OnQuantityChangeListener mOnQuantityChangeListener;
@@ -147,7 +147,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
         mOnQuantityChangeListener = onQuantityChangeListener;
     }
 
-    private void doButtonOneClickActions(int price, int count, int tickets_id, int isAdd) {
+    private void doButtonOneClickActions(double price, int count, int tickets_id, double isAdd) {
         if(mOnQuantityChangeListener != null){
             mOnQuantityChangeListener.onDataChanged(price, count, tickets_id, isAdd);
         }
@@ -548,6 +548,8 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                         if (listItemHolder.mTickestPrice == 0) {
                             listItemHolder.mPrice.setText(mContext.getResources().getString(R.string.free_text));
                         } else {
+//                            String currencyPrice = String.format("%.2f",);
+
                             listItemHolder.mPrice.setText(listItems.getmCurrency()+""+listItemHolder.mTickestPrice);
                         }
                         Log.d("TicketsMStatus ", listItems.getmStatus());
@@ -706,7 +708,7 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
                                                 listItemHolder.selectedPosition = pos;
                                                 int quantity = Integer.parseInt(items[pos].toString());
                                                 listItemHolder.mQuantity.setText(String.valueOf(quantity));
-                                                int price = 0, isAdd = 0;
+                                                double price = 0, isAdd = 0;
                                                 if (listItemHolder.mCount > quantity) {
                                                     isAdd = 0;
                                                     price = (listItemHolder.mCount - quantity) * listItemHolder.mTickestPrice;
@@ -787,7 +789,8 @@ public class AdvEventsBrowseDataAdapter extends ArrayAdapter<Object> {
         TextView mTicketsName, mPrice, mQuantity, mMoreInfo, mClaimedTickets, mEndTime, mLessInfo, mSubTotal;
         LinearLayout mTicketsMainLayout, mTicketsInfo;
         String mEndDate;
-        int mHostId, mCount, mTickestPrice, mMinQuantity, mMaxQuantity,  selectedPosition = 0;
+        int mHostId, mCount, mMinQuantity, mMaxQuantity,  selectedPosition = 0;
+        double mTickestPrice;
         JSONArray mOptionsArray;
         public int mTicketsId;
         int mOrderId;

@@ -109,14 +109,16 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
         mSearchUrl = AppConstant.DEFAULT_URL + "search?page=" + pageNumber + "&limit=" + AppConstant.LIMIT;
 
         if(getArguments() != null){
-            Set<String> searchArgumentSet = getArguments().keySet();
-
-            for (String key : searchArgumentSet) {
-                String value = getArguments().getString(key);
-                if(value != null && !value.isEmpty()) {
-                    postParams.put(key, value);
-                }
-            }
+//            Set<String> searchArgumentSet = getArguments().keySet();
+//
+//            for (String key : searchArgumentSet) {
+//                String value = getArguments().getString(key);
+//                Log.d("LoggedSearchKey ", value);
+//                if(value != null && !value.isEmpty()) {
+//                    postParams.put(key, value);
+//                }
+//            }
+            postParams.put("query", getArguments().getString("searchKey"));
         }
 
         postSearchRequest(mSearchUrl, false);
@@ -128,7 +130,7 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
         Log.d("PostParams ", String.valueOf(postParams));
         mCounter = 0;
         CustomViews.hideEndOfResults(footerView);
-        Log.d("GlobalSearch ", searchUrl+" "+postParams);
+
 
 //        searchUrl = "\n" +
 //                "https://www.fellopages.com/beta1/api/rest/search?oauth_consumer_key=tqrqueo5pxnae436nmrgeqhzs6jiud1n&oauth_secret=a01objk8tgm35mvtqrxxhqkle87z0fy3&oauth_consumer_secret=dlixjfdviokbfk48mv1x0ir2u8v7o9xj&oauth_token=xpc6cnig4a8f8a62v6wlwv00yvv7tnv1&_ANDROID_VERSION=3.1.10page=1&limit=20&query=Vict";
@@ -138,7 +140,7 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
             public void onTaskCompleted(JSONObject jsonObject) {
                 mRootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
                 mBrowseItemList.clear();
-
+                Log.d("GlobalSearch ", String.valueOf(jsonObject));
                 addDataToList(jsonObject);
 
           }
@@ -147,13 +149,15 @@ public class GlobalSearchFragment extends Fragment implements AdapterView.OnItem
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 mRootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        SnackbarUtils.displaySnackbar(getActivity().findViewById(android.R.id.content), message);
-//                    }
-//                },1500);
 
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (getActivity() != null){
+                            SnackbarUtils.displaySnackbar(getActivity().findViewById(android.R.id.content), message);
+                        }
+                    }
+                },1500);
             }
         });
     }

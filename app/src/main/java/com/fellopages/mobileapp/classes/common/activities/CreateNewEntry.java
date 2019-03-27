@@ -37,6 +37,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -81,6 +82,8 @@ import com.fellopages.mobileapp.classes.modules.forum.ForumUtil;
 import com.fellopages.mobileapp.classes.modules.store.ProductViewPage;
 import com.fellopages.mobileapp.classes.modules.store.QuickOptionsActivity;
 import com.fellopages.mobileapp.classes.modules.user.profile.userProfile;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -91,6 +94,7 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -660,17 +664,17 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
 
         postParams = new HashMap<>();
         postParams = save();
-
+        Gson gson = new Gson();
         if (mCurrentSelectedModule.equals("core_main_siteevent") && mFormType != null
                 && mFormType.equals("payment_method") && postParams != null) {
             mCreateFormUrl = placeOrderUrl;
             postParams.put("event_id", subject_id);
             postParams.put("order_info", mOrderInfo);
             postParams.put("buyer_info", mBuyerInfo);
+            postParams.values().removeAll(Collections.singleton(""));
             if (mCouponInfo != null && !mCouponInfo.isEmpty()) {
                 postParams.put("coupon_info", mCouponInfo);
             }
-
         } else if (mCurrentSelectedModule.equals("adv_event_payment_method") && mFormType != null){
             mCreateFormUrl = AppConstant.DEFAULT_URL + "advancedeventtickets/order/set-event-gateway-info?" + "event_id=" + mEventId;
 
@@ -1410,7 +1414,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                     case "payment_method":
                         String order_id = body.optString("order_id");
                         String method = body.optString("method");
-
+                        Log.d("LoggedMethodUsed ", method);
                         if (method.equals("online")) {
                             String webViewUrl = body.optString("webviewUrl");
                             Intent webViewIntent = new Intent(mContext, WebViewActivity.class);

@@ -174,7 +174,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
 
         mBrowseDataAdapter.setOnQuantityChangeListener(new AdvEventsBrowseDataAdapter.OnQuantityChangeListener() {
             @Override
-            public void onDataChanged(int price, int count, int tickets_id, int isAdd) {
+            public void onDataChanged(double price, int count, int tickets_id, double isAdd) {
                 ticketsCount = count;
                 if (isShowBookNow == 1) {
                     if (isShowCoupon == 1 && isCouponApplied) {
@@ -191,14 +191,14 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                         postParams.remove("ticket_id_" + tickets_id);
 
                     }
-                    mSubtotalTextView.setText(currency+""+subTotal);
-                    mDiscountTextView.setText(currency+""+discount);
+                    mSubtotalTextView.setText(String.format(currency+"%.2f", subTotal));
+                    mDiscountTextView.setText(String.format(currency+"%.2f", discount));
 
-                    Double calculatedTax = (subTotal - discount) *(taxRate/100);
+                    double calculatedTax = (subTotal - discount) *(taxRate/100);
                     grandTotal = subTotal - discount + calculatedTax;
 
-                    mTaxTextView.setText(currency+""+calculatedTax);
-                    mGrandTotalTextView.setText(currency+""+grandTotal);
+                    mTaxTextView.setText(String.format(currency+"%.2f", calculatedTax));
+                    mGrandTotalTextView.setText(String.format(currency+"%.2f", grandTotal));
                 }
             }
         });
@@ -319,7 +319,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
 
         if (mBody.has("info")) {
             mOrderInfoObject = mBody.optString("info");
-
+            Log.d("ThisIsTheTicketInfo ", mOrderInfoObject);
             if (isBookNowButtonCliked) {
                 if (mOrderInfoObject != null) {
                     String userInfoUrl = UrlUtil.USERS_INFO_ORDER_ADV_EVENTS_URL + "&event_id=" +
@@ -370,12 +370,12 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
         }
 
         if (isShowBookNow == 1) {
-            mSubtotalTextView.setText(currency +""+subTotal);
-            mDiscountTextView.setText(currency+""+discount);
+            mSubtotalTextView.setText(String.format(currency+"%.2f", subTotal));
+            mDiscountTextView.setText(String.format(currency+"%.2f", discount));
             mTaxText.setText(getResources().getString(R.string.tax_text) + " (" + taxRate + "%)");
-            Double calculatedTax = (subTotal - discount) *(taxRate/100);
-            mTaxTextView.setText(currency+""+calculatedTax);
-            mGrandTotalTextView.setText(currency+""+grandTotal);
+            double calculatedTax = (subTotal - discount) *(taxRate/100);
+            mTaxTextView.setText(String.format(currency+"%.2f", calculatedTax));
+            mGrandTotalTextView.setText(String.format(currency+"%.2f", grandTotal));
         } else {
             footerView.setVisibility(View.GONE);
         }

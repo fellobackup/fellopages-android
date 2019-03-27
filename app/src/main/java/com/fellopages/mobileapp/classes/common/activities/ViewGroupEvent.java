@@ -23,6 +23,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,7 +101,7 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
             mContentIdString = "event_id";
             mSubjectType = "event";
         }
-
+        Log.d("NowThisIsIt ", "true");
         // If response coming from create page.
         mBody = GlobalFunctions.getCreateResponse(getIntent().getStringExtra(ConstantVariables.EXTRA_CREATE_RESPONSE));
 
@@ -222,6 +223,7 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
                 mProfileRsvpForm = bodyJsonObject.optJSONArray("profile_rsvp_form");
                 mProfileRsvpValue = bodyJsonObject.optInt("profile_rsvp_value");
                 title = mDataResponse.getString("title");
+                Log.d("GroupDiscussions ", title);
                 image = mDataResponse.getString("image");
                 mContentUrl = mDataResponse.getString("content_url");
                 int isMember = mDataResponse.optInt("isMember");

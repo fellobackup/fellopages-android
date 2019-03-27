@@ -332,9 +332,9 @@ public class AppConstant {
 
                 // Don't send location for browse albums
                 if (url.contains("rest/albums?")) {
-                    mRequestParams.remove("restapilocation");
-                }
 
+                }
+                mRequestParams.remove("restapilocation");
                 // Put Language Params, location params, and version params in Params
                 url = buildQueryString(url, mRequestParams);
 
@@ -384,13 +384,14 @@ public class AppConstant {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-
+                    Log.d("JsonExceptionError ", e.toString());
                     if (onResponseListener != null) {
                         onResponseListener.onErrorInExecutingTask(mContext.getResources()
                                 .getString(R.string.parse_error), isRetryOption);
                     }
                 }
             }, error -> {
+                Log.d("JsonExceptionError ", error.toString());
                 LogUtils.LOGD(AppConstant.class.getSimpleName(), "VolleyError: " + error);
 
                 if (onResponseListener != null) {

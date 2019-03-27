@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -72,6 +73,8 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     private IntentFilter intentFilter;
     private boolean isSaveFeeds = false;
 
+    private SharedPreferences prefs = null;
+
     public static FeedHomeFragment newInstance() {
         return new FeedHomeFragment();
     }
@@ -104,6 +107,10 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         intentFilter = new IntentFilter();
         intentFilter.addAction(ConstantVariables.ACTION_COUNTER_UPDATE);
+        if (getActivity() != null){
+            prefs = getActivity().getSharedPreferences("first.app.run", Context.MODE_PRIVATE);
+        }
+
         setHasOptionsMenu(true);
     }
 
@@ -213,7 +220,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home),
                         mContext.getResources().getString(R.string.feed_tab_name));
                 adapter.addFragmentWithIcon(MyEventsFragment.newInstance(null),
-                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_cropped_event_icon),
                         mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)
@@ -228,7 +235,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home)
                         , mContext.getResources().getString(R.string.feed_tab_name));
                 adapter.addFragmentWithIcon(MyEventsFragment.newInstance(null),
-                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_event),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_cropped_event_icon),
                         mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)
@@ -238,15 +245,31 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                         , mContext.getResources().getString(R.string.notification_tab_name));
             }
 
-            pager.setAdapter(adapter);
-            pager.setOffscreenPageLimit(adapter.getCount() + 1);
+            if (prefs.getBoolean("firstrun", true)) {
+                new Handler().postDelayed(() -> {
+                    pager.setAdapter(adapter);
+                    pager.setOffscreenPageLimit(adapter.getCount() + 1);
 
-            if (pager.getCurrentItem() == 0) {
-                home.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
-                friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
-                message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
-                notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                    if (pager.getCurrentItem() == 0) {
+                        home.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+                        friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                    }
+                }, 1500);
+                prefs.edit().putBoolean("firstrun", false).apply();
+            } else {
+                pager.setAdapter(adapter);
+                pager.setOffscreenPageLimit(adapter.getCount() + 1);
+
+                if (pager.getCurrentItem() == 0) {
+                    home.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+                    friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                    message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                    notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                }
             }
+
         }
 
         if (!mAppConst.isLoggedOutUser()) {
@@ -402,8 +425,8 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
             messageBadge.setVisibility(View.GONE);
         }
         if (requestCount != null && !requestCount.equals("0")) {
-            requestBadge.setText(requestCount);
-            requestBadge.setVisibility(View.VISIBLE);
+//            requestBadge.setText(requestCount);
+//            requestBadge.setVisibility(View.VISIBLE);
             if (isClicked && mSelectedTabPosition == 1) {
                 requestBadge.setVisibility(View.GONE);
                 PreferencesUtils.clearNotificationsCount(mContext, PreferencesUtils.FRIEND_REQ_COUNT);

@@ -18,6 +18,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Context;
@@ -162,15 +163,16 @@ public class AdvEventsBuyersInfo extends FormActivity {
 
                     String paymentMethodUrl = UrlUtil.PAYMENT_METHOD_ADV_EVENTS_URL + "event_id=" +
                             subject_id + "&order_info=" + mOrderInfo;
-
+//LoggedBuyTickets
                     String placeOrderUrl = UrlUtil.PLACED_ORDER_ADV_EVENTS_URL;
-
+                    Log.d("LoggedUrlBuyInfo ", mOrderInfo);
                     Intent intent = new Intent(AdvEventsBuyersInfo.this, CreateNewEntry.class);
                     intent.putExtra(ConstantVariables.CREATE_URL, paymentMethodUrl);
                     intent.putExtra(ConstantVariables.FORM_TYPE, "payment_method");
                     intent.putExtra(ConstantVariables.URL_STRING, placeOrderUrl);
                     intent.putExtra(ConstantVariables.SUBJECT_ID, subject_id);
                     intent.putExtra(ConstantVariables.RESPONSE_OBJECT, mOrderInfo);
+                    Log.d("LoggedUrlBuyInfo 2 ", buyerObject.toString());
                     intent.putExtra("buyerInfoObject", buyerObject.toString());
                     intent.putExtra("couponInfoObject", mCouponInfo);
                     intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, "core_main_siteevent");

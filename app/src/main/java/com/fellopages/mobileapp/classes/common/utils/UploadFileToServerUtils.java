@@ -16,6 +16,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -26,7 +27,9 @@ import com.fellopages.mobileapp.classes.core.ConstantVariables;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -212,10 +215,13 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
         HttpPost httppost;
         HttpClient httpclient = MySSLSocketFactoryUtil.getNewHttpClient();
         mPostUrl = mAppConst.buildQueryString(mPostUrl, mAppConst.getAuthenticationParams());
+        Log.d("mPostUrlHttp ", mPostUrl);
         // Put Language Params, location params, and version params
-        mPostUrl = mAppConst.buildQueryString(mPostUrl, mAppConst.getRequestParams());
-
-
+        if (mPostParams != null){
+            mPostUrl = mAppConst.buildQueryString(mPostUrl, mPostParams);
+        } else {
+            mPostUrl = mAppConst.buildQueryString(mPostUrl, mAppConst.getRequestParams());
+        }
 
         httppost = new HttpPost(mPostUrl);
         LogUtils.LOGD(UploadFileToServerUtils.class.getSimpleName(), "Post Url: " + mPostUrl);
@@ -234,15 +240,15 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
 
                 // Adding post params into entity.
                 if (mPostParams != null) {
+                    Log.d("LoggedParamsInPost ", mPostParams.toString());
                     Set<String> keySet = mPostParams.keySet();
-
                     for (String key : keySet) {
                         if (!key.equals("photo")) {
                             String value = mPostParams.get(key);
                             entity.addPart(key, new StringBody(value, Charset.forName("UTF-8")));
                         }
                     }
-                    LogUtils.LOGD(UploadFileToServerUtils.class.getSimpleName(), "Post Params: " + mPostParams);
+                    LogUtils.LOGD(UploadFileToServerUtils.class.getSimpleName(), "Post Params: " + entity);
                 }
 
                 // Adding Editor data
@@ -338,16 +344,18 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
                 entity.addPart("photo", new FileBody(new File(mSelectPath.get(0))));
             }
 
-            totalSize = entity.getContentLength();
+
             httppost.setEntity(entity);
+
 
             // Making server call
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             entity.writeTo(bytes);
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity r_entity = response.getEntity();
-
             int statusCode = response.getStatusLine().getStatusCode();
+
+            Log.d("ErrorResponse ", String.valueOf(statusCode));
             if (statusCode == 200) {
                 // Server response
                 responseString = EntityUtils.toString(r_entity);
@@ -358,7 +366,7 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
 
             if (mIsDataUploadRequest && GlobalFunctions.isValidJson(responseString)) {
                 mResponseObject = new JSONObject(responseString);
-
+//                Log.d("finallyJsonObjectError ", mResponseObject);
                 int responseStatusCode = mResponseObject.getInt("status_code");
                 switch (responseStatusCode) {
                     case 400:
@@ -400,6 +408,7 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         try {
+            Log.d("LoggedResult ", result);
             LogUtils.LOGD(UploadFileToServerUtils.class.getSimpleName(), "result: " + result);
             mProgressDialog.dismiss();
 

@@ -529,10 +529,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
                                             dataList.add(new DrawerItem(mMenuHeaderLabel, mChildMenuLabel,
                                                     mChildMenuRegName, null, mCanCreate, mPackagesEnabled, mItemIcon, mIconColor, canView));
                                     }
-
-
                             }
-
                         } else {
 
                             String headerLabel = mMenuJson.optString("headerLabel");

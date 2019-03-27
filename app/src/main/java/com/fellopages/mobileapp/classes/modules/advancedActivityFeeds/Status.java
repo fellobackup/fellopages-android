@@ -63,6 +63,7 @@ import android.text.style.ClickableSpan;
 import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.util.Patterns;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -1511,6 +1512,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                         url = AppConstant.DEFAULT_URL + "videos/create?post_attach=1";
                     }
                     mStatusPostUrl = ( mSelectedVideoPath != null ) ? url : AppConstant.DEFAULT_URL + "advancedactivity/feeds/post";
+                    Log.d("LoggedmStatusPostUrl ", mStatusPostUrl);
                     if (mSubjectType != null && !mSubjectType.isEmpty() && mSubjectId != 0) {
                         mStatusPostUrl += "?subject_id=" + mSubjectId + "&subject_type=" + mSubjectType;
                     }
@@ -1522,6 +1524,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                     if (isFacebookPost) {
                         UpdateStatusOnFacebook();
                     } else {
+
                         uploadFilesAndData();
                     }
 
@@ -1537,14 +1540,16 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
     }
 
     private void uploadFilesAndData() {
-
+        Log.d("UploadingHere ", "true");
         // Uploading files in background with the status post.
         mPostAttachmentParams = getAttachmentPostParams(new HashMap<>());
         if (isExternalShare || (mPostAttachmentParams != null && mPostAttachmentParams.get("schedule_time") != null) || mFeedList != null) {
+            Log.d("UploadingHere 2 ", "true");
            new UploadAttachmentUtil(Status.this, mStatusPostUrl,
                    mPostAttachmentParams,
                    mSelectPath).execute();
        } else {
+            Log.d("UploadingHere 4 ", "true");
            Intent intent = new Intent();
            intent.putExtra("mSelectPath", mSelectPath);
            intent.putExtra("mStatusPostUrl", mStatusPostUrl);

@@ -2176,6 +2176,21 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         }
     }
 
+    public void cancelRequest(int notifyItemAt, String message) {
+        int position = mFeedItemsList.indexOf(new FeedList(String.valueOf(notifyItemAt)));
+
+        if (position >= 0 && uploadUtilMap != null && uploadUtilMap.size() > 0) {
+            OkHttpUploadHandler uploadAttachmentUtil = uploadUtilMap.get(notifyItemAt);
+            uploadAttachmentUtil.cancelRequest();
+            mFeedItemsList.remove(position);
+            mFeedAdapter.notifyItemRemoved(position);
+            NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.cancelAll();
+        }
+
+        SnackbarUtils.displaySnackbar(rootView, message);
+    }
+
     public class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
         private final int mVerticalSpaceHeight;

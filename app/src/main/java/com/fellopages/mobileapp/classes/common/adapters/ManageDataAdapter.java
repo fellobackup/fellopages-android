@@ -22,6 +22,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -439,6 +440,7 @@ public class ManageDataAdapter extends ArrayAdapter<Object> implements OnMenuCli
                 listItemHolder.mOptionsArray = listItems.getMenuArray();
 
                 mGutterMenuUtils.setOnMenuClickResponseListener(this);
+                Log.d("LoggedViewType ", currentSelectedOption);
                 switch (currentSelectedOption) {
 
                     case "core_main_group":

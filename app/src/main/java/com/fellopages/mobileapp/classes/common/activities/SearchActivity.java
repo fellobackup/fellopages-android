@@ -491,6 +491,7 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
     }
 
     public void loadSearchFragment() {
+
         try {
             Fragment fragment = null;
             postParams = new HashMap<>();
@@ -622,29 +623,30 @@ public class SearchActivity extends FormActivity implements View.OnClickListener
                 }
             }
 
-
-            if (currentSelectedOption != null && (!isDashBoardSearch || isAdvSearch)) {
-                switch (currentSelectedOption) {
-
-                    case ConstantVariables.HOME_MENU_TITLE:
-                    case ConstantVariables.GLOBAL_SEARCH_MENU_TITLE:
-                    case ConstantVariables.FORUM_MENU_TITLE:
-                    case ConstantVariables.FORUM_TITLE:
-                        if (isHashTagSearch || isSearchingHashTag) {
-                            fragment = new FeedsFragment();
-                        } else {
-                            fragment = new GlobalSearchFragment();
-                        }
-                        break;
-
-                }
-            } else if (isSearchingHashTag) {
-                fragment = new FeedsFragment();
-            } else {
-                fragment = new GlobalSearchFragment();
-            }
+            Log.d("SearchKeyHere ", currentSelectedOption+" "+isDashBoardSearch+" "+isAdvSearch);
+//            if (currentSelectedOption != null && (!isDashBoardSearch || isAdvSearch)) {
+//                switch (currentSelectedOption) {
+//
+//                    case ConstantVariables.HOME_MENU_TITLE:
+//                    case ConstantVariables.GLOBAL_SEARCH_MENU_TITLE:
+//                    case ConstantVariables.FORUM_MENU_TITLE:
+//                    case ConstantVariables.FORUM_TITLE:
+//                        if (isHashTagSearch || isSearchingHashTag) {
+//                            fragment = new FeedsFragment();
+//                        } else {
+//                            fragment = new GlobalSearchFragment();
+//                        }
+//                        break;
+//
+//                }
+//            } else if (isSearchingHashTag) {
+//                fragment = new FeedsFragment();
+//            } else {
+//
+//            }
+            fragment = new GlobalSearchFragment();
             if (fragment != null && !isFinishing()) {
-
+                searchParamsBundle.putString("searchKey", filterTextView.getText().toString().trim());
                 fragment.setArguments(searchParamsBundle);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
