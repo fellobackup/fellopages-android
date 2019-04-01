@@ -38,6 +38,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
@@ -685,25 +686,26 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     public void sendToPaymentMethod() {
-        alertDialogWithAction.showAlertDialogWithTwoBtnAction(
-                mContext.getResources().getString(R.string.payment_method_label),
-                mContext.getResources().getString(R.string.set_up_your_payment_method),
-                mContext.getResources().getString(R.string.setup_now), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String payment_method_url = null;
-                        payment_method_url = AppConstant.DEFAULT_URL
-                                + "advancedeventtickets/order/payment-info?" + "event_id=" + mEventId;
+        try {
+            alertDialogWithAction.showAlertDialogWithTwoBtnAction(
+                    mContext.getResources().getString(R.string.payment_method_label),
+                    mContext.getResources().getString(R.string.set_up_your_payment_method),
+                    mContext.getResources().getString(R.string.setup_now), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String payment_method_url = null;
+                            payment_method_url = AppConstant.DEFAULT_URL
+                                    + "advancedeventtickets/order/payment-info?" + "event_id=" + mEventId;
 
-                        String url = AppConstant.DEFAULT_URL;
-                        url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
+                            String url = AppConstant.DEFAULT_URL;
+                            url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
 
-                        Intent intent = new Intent(mContext, EditEntry.class);
-                        intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADV_EVENT_PAYMENT_METHOD);
-                        intent.putExtra(ConstantVariables.FORM_TYPE, ConstantVariables.PAYMENT_CONFIG_METHOD);
-                        intent.putExtra(ConstantVariables.URL_STRING, payment_method_url);
-                        intent.putExtra("isFromWebViewPayment", true);
-                        intent.putExtra("isAdvEventId", mEventId);
+                            Intent intent = new Intent(mContext, EditEntry.class);
+                            intent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADV_EVENT_PAYMENT_METHOD);
+                            intent.putExtra(ConstantVariables.FORM_TYPE, ConstantVariables.PAYMENT_CONFIG_METHOD);
+                            intent.putExtra(ConstantVariables.URL_STRING, payment_method_url);
+                            intent.putExtra("isFromWebViewPayment", true);
+                            intent.putExtra("isAdvEventId", mEventId);
 
 
 //                        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
@@ -713,30 +715,33 @@ public class WebViewActivity extends AppCompatActivity {
 //                        intent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
 //                        intent.putExtra("isRedirectedFromEventProfile", true);
 
-                        mContext.startActivity(intent);
-                        finish();
-                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                            mContext.startActivity(intent);
+                            finish();
+                            ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 //                        SnackbarUtils.displaySnackbar(mWebView, "You can set up your payment methods anytime by going to your event dashboard");
-                        Intent viewIntent;
-                        String url = AppConstant.DEFAULT_URL;
-                        url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
-                        viewIntent = new Intent(mContext, AdvEventsProfilePage.class);
-                        if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
-                            viewIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
-                        viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
-                        viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
-                        viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
-                        viewIntent.putExtra("isFromWebPayment", true);
-                        viewIntent.putExtra("isRedirectedFromEventProfile", true);
-                        dialogInterface.dismiss();
-                        startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    }
-                });
+                            Intent viewIntent;
+                            String url = AppConstant.DEFAULT_URL;
+                            url += "advancedevents/view/" + mEventId + "?gutter_menu=" + 1;
+                            viewIntent = new Intent(mContext, AdvEventsProfilePage.class);
+                            if (getIntent().getBooleanExtra(ConstantVariables.KEY_USER_CREATE_SESSION, false))
+                                viewIntent.putExtra(ConstantVariables.KEY_USER_CREATE_SESSION, true);
+                            viewIntent.putExtra(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.ADVANCED_EVENT_MENU_TITLE);
+                            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_URL, url);
+                            viewIntent.putExtra(ConstantVariables.VIEW_PAGE_ID, mEventId);
+                            viewIntent.putExtra("isFromWebPayment", true);
+                            viewIntent.putExtra("isRedirectedFromEventProfile", true);
+                            dialogInterface.dismiss();
+                            startActivityForResult(viewIntent, ConstantVariables.CREATE_REQUEST_CODE);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        }
+                    });
+        } catch (WindowManager.BadTokenException e){
+            e.printStackTrace();
+        }
     }
 
     public void showAlertPopup(boolean showCancel) {

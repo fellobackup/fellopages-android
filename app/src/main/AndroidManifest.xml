@@ -395,7 +395,7 @@
             android:name=".classes.modules.advancedEvents.AdvEventsProfilePage"
             android:screenOrientation="portrait"
             >
-            <intent-filter >
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -403,6 +403,14 @@
                     android:host="www.fellopages.com"
                     android:pathPrefix="/beta1/event-item" />
             </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--<category android:name="android.intent.category.BROWSABLE" />-->
+                <!--&lt;!&ndash; Accepts URIs that begin with "example://gizmos” &ndash;&gt;-->
+                <!--<data android:scheme="https"-->
+                    <!--android:host="www.fellopages" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".classes.common.activities.InviteGuest"

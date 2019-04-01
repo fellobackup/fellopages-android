@@ -331,10 +331,10 @@ public class AppConstant {
                 url = buildQueryString(url, mAuthParams);
 
                 // Don't send location for browse albums
-                if (url.contains("rest/albums?")) {
-
+                if (url.contains("rest/albums?")||url.contains("rest/advancedevents?")) {
+                    mRequestParams.remove("restapilocation");
                 }
-                mRequestParams.remove("restapilocation");
+
                 // Put Language Params, location params, and version params in Params
                 url = buildQueryString(url, mRequestParams);
 

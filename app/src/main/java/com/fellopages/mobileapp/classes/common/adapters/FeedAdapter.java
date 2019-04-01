@@ -952,7 +952,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             // Create New TextView for Like Option and add this in mFeedFooterMenusBlock.
                             if (mFeedItem.getmIsLike() == 0) {
                                 listItemHolder.mLikeButton.setCompoundDrawablesWithIntrinsicBounds(
-                                        ContextCompat.getDrawable(mContext, R.drawable.ic_thumbs_up),
+                                        ContextCompat.getDrawable(mContext, R.drawable.ic_likeicon),
                                         null, null, null);
 
                                 int drawablePadding = mContext.getResources().getDimensionPixelSize(R.dimen.element_spacing_normal);

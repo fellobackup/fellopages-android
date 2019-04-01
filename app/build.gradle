@@ -74,6 +74,9 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    implementation 'com.airbnb:deeplinkdispatch:3.1.1'
+    annotationProcessor 'com.airbnb:deeplinkdispatch-processor:3.1.1'
+
     implementation('com.facebook.android:audience-network-sdk:4.23.0') {
         exclude group: 'com.android.support'
         exclude group: 'com.google.android'

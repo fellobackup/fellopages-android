@@ -125,9 +125,10 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         intent = getIntent();
-
         //CHECK IF OPENED VIA URL
         checkIfOpenedViaURL();
+
+        Log.d("AndroidDeepLink ", String.valueOf(intent.getData()));
 
         mContext = this;
         mPhotoDetails = new ArrayList<>();
@@ -811,6 +812,13 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             }else if(isRedirectedFromEventProfile){
                 sendToEventBrowsePage();
             }
+            super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+
+        if (intent.getData() != null){
+            Intent intent = new Intent(AdvEventsProfilePage.this, MainActivity.class);
+            startActivity(intent);
             super.onBackPressed();
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }

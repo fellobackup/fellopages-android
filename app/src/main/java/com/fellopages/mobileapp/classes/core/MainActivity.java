@@ -69,6 +69,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.deeplinkdispatch.DeepLink;
 import com.facebook.login.LoginManager;
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.activities.CreateNewEntry;
@@ -99,6 +100,7 @@ import com.fellopages.mobileapp.classes.common.utils.UploadFileToServerUtils;
 import com.fellopages.mobileapp.classes.common.utils.UrlUtil;
 import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.FeedHomeFragment;
 import com.fellopages.mobileapp.classes.modules.advancedActivityFeeds.SingleFeedPage;
+import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsProfilePage;
 import com.fellopages.mobileapp.classes.modules.likeNComment.Comment;
 import com.fellopages.mobileapp.classes.modules.messages.CreateNewMessage;
 import com.fellopages.mobileapp.classes.modules.multipleListingType.BrowseMLTFragment;
@@ -234,6 +236,18 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra(DeepLink.IS_DEEP_LINK, false)) {
+            Bundle parameters = intent.getExtras();
+            if (parameters != null){
+                String body = parameters.getString("string");
+                String idString = parameters.getString("id");
+            }
+            Intent intent1 = new Intent(MainActivity.this, AdvEventsProfilePage.class);
+            startActivity(intent1);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
 
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtHandler(this));
         intentFilter = new IntentFilter();
