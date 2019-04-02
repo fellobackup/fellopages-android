@@ -12,6 +12,7 @@
 
 package com.fellopages.mobileapp.classes.common.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fellopages.mobileapp.BuildConfig;
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.adapters.ViewPageFragmentAdapter;
 import com.fellopages.mobileapp.classes.common.interfaces.OnOptionItemClickResponseListener;
@@ -85,7 +87,7 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d("ThisWasClicked ", "true");
         mProfileTabs = new JSONArray();
         mModuleName = getIntent().getStringExtra(ConstantVariables.EXTRA_MODULE_TYPE);
         mContentId = getIntent().getExtras().getInt(ConstantVariables.VIEW_PAGE_ID);
@@ -271,11 +273,20 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
                         bundle.putInt(ConstantVariables.PROFILE_RSVP_VALUE, mProfileRsvpValue);
                         bundle.putBoolean("showRsvp", true);
                     }
+                    String url = BuildConfig.DEBUG ? "https://www.fellopages.com/beta1/group/"+mContentId+"/sample-test" :
+                            "https://www.fellopages.com/group/"+mContentId+"/sample-test";
+
 
                     if (!isAdapterSet) {
                         mProfileTabSize = mProfileTabs.length();
-                        mViewPageFragmentAdapter = new ViewPageFragmentAdapter(mContext,
-                                getSupportFragmentManager(), mProfileTabs, bundle);
+                        if (mModuleName.equals("core_main_group")){
+                            mViewPageFragmentAdapter = new ViewPageFragmentAdapter(mContext,
+                                    getSupportFragmentManager(), mProfileTabs, bundle, url);
+                        } else {
+                            mViewPageFragmentAdapter = new ViewPageFragmentAdapter(mContext,
+                                    getSupportFragmentManager(), mProfileTabs, bundle);
+                        }
+
                         mViewPager.setAdapter(mViewPageFragmentAdapter);
                         mViewPager.setOffscreenPageLimit(mViewPageFragmentAdapter.getCount() + 1);
                         mSlidingTabs.setupWithViewPager(mViewPager);
@@ -308,7 +319,6 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
                     startActivityForResult(i, ConstantVariables.VIEW_LIGHT_BOX);
 
                 });
-
                 mContentTitle.setText(title);
                 collapsingToolbar.setTitle(title);
                 mToolBarTitle.setText(title);

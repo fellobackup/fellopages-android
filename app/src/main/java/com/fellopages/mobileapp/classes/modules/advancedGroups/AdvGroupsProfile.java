@@ -33,6 +33,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +49,7 @@ import android.widget.TextView;
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.activities.FragmentLoadActivity;
 import com.fellopages.mobileapp.classes.common.activities.PhotoUploadingActivity;
+import com.fellopages.mobileapp.classes.common.activities.WebViewActivity;
 import com.fellopages.mobileapp.classes.common.adapters.ImageAdapter;
 import com.fellopages.mobileapp.classes.common.adapters.ViewPageFragmentAdapter;
 import com.fellopages.mobileapp.classes.common.dialogs.AlertDialogWithAction;
@@ -140,7 +142,7 @@ public class AdvGroupsProfile extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_pages);
-
+        Log.d("ThisWasOpen ", "true");
         mContext = this;
         mAppConst = new AppConstant(mContext);
         mGutterMenuUtils = new GutterMenuUtils(this);
@@ -467,6 +469,7 @@ public class AdvGroupsProfile extends AppCompatActivity implements View.OnClickL
 
                         @Override
                         public void onPageSelected(int position) {
+                            Log.d("SamplePosition ", String.valueOf(position));
                             if (mBottomToolBar != null && mAppConst != null) {
                                 if (viewPager.getCurrentItem() == 0 && !mAppConst.isLoggedOutUser()) {
                                     mBottomToolBar.setVisibility(View.VISIBLE);

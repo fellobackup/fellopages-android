@@ -23,6 +23,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.fellopages.mobileapp.R;
@@ -40,6 +41,7 @@ import com.fellopages.mobileapp.classes.common.fragments.MapViewFragment;
 import com.fellopages.mobileapp.classes.common.fragments.MemberFragment;
 import com.fellopages.mobileapp.classes.common.fragments.PhotoFragment;
 import com.fellopages.mobileapp.classes.common.fragments.UserReviewFragment;
+import com.fellopages.mobileapp.classes.common.fragments.WebViewFragment;
 import com.fellopages.mobileapp.classes.common.interfaces.OnFragmentDataChangeListener;
 import com.fellopages.mobileapp.classes.common.ui.CustomFloatingView;
 import com.fellopages.mobileapp.classes.common.ui.fab.CustomFloatingActionButton;
@@ -108,6 +110,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
     private int isSiteVideoEnabled, mAdvVideosCount, mFriendTabPosition = 0;
     public int mPhotoTabPosition = 0;
     private BrowseListItems browseListItems;
+    private String webUrl = "";
 
 
     /**
@@ -132,6 +135,25 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
 
         isSiteVideoEnabled = bundle.getInt(ConstantVariables.ADV_VIDEO_INTEGRATED, 0);
         mAdvVideosCount = bundle.getInt(ConstantVariables.ADV_VIDEOS_COUNT, 0);
+        addVideosTab();
+        getViews();
+    }
+
+    public ViewPageFragmentAdapter(Context context, FragmentManager fragmentManager,
+                                   JSONArray profileTabs, Bundle bundle, String webUrl) {
+        super(fragmentManager);
+        this.mContext = context;
+        this.mProfileTab = profileTabs;
+        this.mBundle = bundle;
+        mAppConst = new AppConstant(mContext);
+        mCurrentSelectedModule = mBundle.getString(ConstantVariables.EXTRA_MODULE_TYPE);
+        if (mCurrentSelectedModule == null || mCurrentSelectedModule.isEmpty()) {
+            mCurrentSelectedModule = PreferencesUtils.getCurrentSelectedModule(mContext);
+        }
+
+        isSiteVideoEnabled = bundle.getInt(ConstantVariables.ADV_VIDEO_INTEGRATED, 0);
+        mAdvVideosCount = bundle.getInt(ConstantVariables.ADV_VIDEOS_COUNT, 0);
+        this.webUrl = webUrl;
         addVideosTab();
         getViews();
     }
@@ -297,7 +319,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
             bundle.putString(ConstantVariables.EXTRA_MODULE_TYPE, mCurrentSelectedModule);
             bundle.putString(ConstantVariables.TAB_LABEL, profileTabObject.optString("label"));
             bundle.putBoolean(ConstantVariables.IS_FIRST_TAB_REQUEST, (position == 0));
-
+            Log.d("tabNametabName ", tabName);
             switch (tabName) {
 
                 case "update":
@@ -362,6 +384,11 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter implement
                             loadFragment = new MemberInfoFragment();
                             break;
                     }
+                    break;
+
+                case "topic_discussion":
+                    loadFragment = new WebViewFragment();
+                    bundle.putString("discussion_url", webUrl);
                     break;
 
                 case "overview":

@@ -65,7 +65,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
     private Toolbar mToolbar;
     private HashMap postParams, urlParams;
     private String mTickestInfoUrl, mTitle, mLocation, mStartTime, mEndTime, mSubjectType = "siteevent_tickets_info";
-    private Double grandTotal, subTotal, discount, taxRate, tax;
+    private double grandTotal, subTotal, discount, taxRate, tax;
     private JSONObject mBody, mCouponInfoObject;
     private List<Object> mBrowseItemList;
     ListView mListView;
