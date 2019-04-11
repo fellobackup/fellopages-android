@@ -11,12 +11,12 @@
   -->
 <resources>
     <!-- Application Theme -->
-<color name="colorPrimary">#2196F3</color>
-<color name="colorPrimaryDark">#1565C0</color>
-<color name="colorAccent">#2196F3</color>
+<color name="colorPrimary">#10abfe</color>
+<color name="colorPrimaryDark">#10abfe</color>
+<color name="colorAccent">#10abfe</color>
 <color name="textColorPrimary">#ffffff</color>
-<color name="themeButtonColor">#2196F3</color>
-    <color name="blue_color_picker">#0066FF</color>
+<color name="themeButtonColor">#10abfe</color>
+    <color name="blue_color_picker">#10abfe</color>
     <color name="brown_color_picker">#AF593E</color>
     <color name="green_color_picker">#01A368</color>
     <color name="orange_color_picker">#FF861F</color>

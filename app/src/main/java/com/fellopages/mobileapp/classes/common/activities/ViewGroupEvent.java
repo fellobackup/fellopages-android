@@ -36,6 +36,8 @@ import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.adapters.ViewPageFragmentAdapter;
 import com.fellopages.mobileapp.classes.common.interfaces.OnOptionItemClickResponseListener;
 import com.fellopages.mobileapp.classes.common.ui.CustomViews;
+import com.fellopages.mobileapp.classes.common.ui.ParentRequestInterface;
+import com.fellopages.mobileapp.classes.common.ui.ScrollableViewPager;
 import com.fellopages.mobileapp.classes.common.utils.BrowseListItems;
 import com.fellopages.mobileapp.classes.common.utils.GlobalFunctions;
 import com.fellopages.mobileapp.classes.common.utils.GutterMenuUtils;
@@ -56,7 +58,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener,
+public class ViewGroupEvent extends AppCompatActivity implements ParentRequestInterface, AppBarLayout.OnOffsetChangedListener,
         OnOptionItemClickResponseListener {
 
     private Context mContext;
@@ -66,7 +68,7 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
     private AppConstant mAppConst;
     private BrowseListItems mBrowseList;
     private GutterMenuUtils mGutterMenuUtils;
-    private ViewPager mViewPager;
+    private ScrollableViewPager mViewPager;
     private TabLayout mSlidingTabs;
     private JSONObject mBody, mDataResponse;
     private JSONArray mGutterMenus, mProfileTabs, mProfileRsvpForm;
@@ -273,9 +275,9 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
                         bundle.putInt(ConstantVariables.PROFILE_RSVP_VALUE, mProfileRsvpValue);
                         bundle.putBoolean("showRsvp", true);
                     }
+
                     String url = BuildConfig.DEBUG ? "https://www.fellopages.com/beta1/group/"+mContentId+"/sample-test" :
                             "https://www.fellopages.com/group/"+mContentId+"/sample-test";
-
 
                     if (!isAdapterSet) {
                         mProfileTabSize = mProfileTabs.length();
@@ -290,6 +292,23 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
                         mViewPager.setAdapter(mViewPageFragmentAdapter);
                         mViewPager.setOffscreenPageLimit(mViewPageFragmentAdapter.getCount() + 1);
                         mSlidingTabs.setupWithViewPager(mViewPager);
+                        mSlidingTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                            @Override
+                            public void onTabSelected(TabLayout.Tab tab) {
+                                mViewPager.getCurrentItem();
+                                Log.d("SomethingPage ", String.valueOf(tab.getPosition()));
+                            }
+
+                            @Override
+                            public void onTabUnselected(TabLayout.Tab tab) {
+
+                            }
+
+                            @Override
+                            public void onTabReselected(TabLayout.Tab tab) {
+
+                            }
+                        });
                         isAdapterSet = true;
 
                     } else {
@@ -303,6 +322,32 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
                         }
                     }
 
+                }
+
+                if (mModuleName.equals("core_main_group")){
+                    mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+//                            if (position == mProfileTabs.length()-1){
+//                                String url = BuildConfig.DEBUG ? "https://www.fellopages.com/beta1/group/"+mContentId+"/sample-test" :
+//                                        "https://www.fellopages.com/group/"+mContentId+"/sample-test";
+//                                Intent intent = new Intent(ViewGroupEvent.this, WebViewActivity.class);
+//                                intent.putExtra("url", url);
+//                                startActivity(intent);
+//                                ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                            }
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+
+                        }
+                    });
                 }
 
                 mCoverImageDetails.clear();
@@ -458,5 +503,10 @@ public class ViewGroupEvent extends AppCompatActivity implements AppBarLayout.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void setViewPagerStatus(Boolean b) {
+        mViewPager.setPagingEnabled(b);
     }
 }

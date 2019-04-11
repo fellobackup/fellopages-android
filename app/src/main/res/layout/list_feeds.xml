@@ -353,15 +353,15 @@
                 <RelativeLayout
                     android:id="@+id/attachment_preview_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/feed_attachment_image_height"
+                    android:layout_height="400dp"
                     android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/attachment_preview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:contentDescription="@string/image_caption"
-                        android:scaleType="fitXY"
+
                         android:visibility="gone" />
 
                     <ImageView

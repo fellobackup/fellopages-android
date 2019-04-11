@@ -2550,10 +2550,12 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                                             listItemHolder.mAttachmentImage, mAppConst.getScreenWidth(),
                                             (singleImageParam.height > 0 ) ? singleImageParam.height : (int) mContext.getResources().getDimension(R.dimen.feed_attachment_image_height));
                                 } else if (imageMainObj != null && imageMainObj.length() > 0) {
-
+                                    Log.d("attachmentType videio ", attachmentType+" "+imageMainObj);
                                     LinearLayout.LayoutParams singleImageParam = CustomViews.getCustomWidthHeightLayoutParams(mAppConst.getScreenWidth(),
                                             (int) mContext.getResources().getDimension(R.dimen.feed_attachment_image_height));
                                     listItemHolder.mAttachmentPreviewBlock.setLayoutParams(singleImageParam);
+
+
                                     mImageLoader.setFeedImage(mainImage,
                                             listItemHolder.mAttachmentImage, mAppConst.getScreenWidth(),
                                             (int) mContext.getResources().getDimension(R.dimen.feed_attachment_image_height));

@@ -160,6 +160,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
         mBookNowButton = footerView.findViewById(R.id.bookNowButton);
         mBookNowButton.setVisibility(View.VISIBLE);
 
+
         spinnerAdapter = new SpinnerAdapter(this, R.layout.simple_text_view, mFilterSelectedItem);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         occurrenceFilter.setAdapter(spinnerAdapter);
@@ -183,16 +184,19 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                         discount = 0.0;
                     }
 
-                    if (isAdd == 1) {
-                        subTotal = price + subTotal;
-                        postParams.put("ticket_id_" + tickets_id, String.valueOf(count));
-                    } else {
-                        subTotal = subTotal-price;
-                        postParams.remove("ticket_id_" + tickets_id);
+                    subTotal = price + subTotal;
+                    postParams.put("ticket_id_" + tickets_id, String.valueOf(count));
 
-                    }
+//                    if (isAdd == 1) {
+//
+//                    } else {
+//                        subTotal = subTotal-price;
+//                        postParams.remove("ticket_id_" + tickets_id);
+//
+//                    }
+
                     mSubtotalTextView.setText(String.format(currency+"%.2f", subTotal));
-                    mDiscountTextView.setText(String.format(currency+"%.2f", discount));
+                    mDiscountTextView.setText(currency+""+discount);
 
                     double calculatedTax = (subTotal - discount) *(taxRate/100);
                     grandTotal = subTotal - discount + calculatedTax;
@@ -484,6 +488,7 @@ public class AdvEventsBuyTicketsInfo extends AppCompatActivity implements View.O
                     postParams.put("coupon_code", mCouponEditText.getText().toString());
                     mCouponEditText.setCursorVisible(false);
                     url = mAppConst.buildQueryString(mTickestInfoUrl, postParams);
+                    Log.d("LoggedParamsCoupon ", postParams.toString());
                     makeRequest(url);
                 } else if (mCouponEditText.getText() == null || mCouponEditText.getText().toString().isEmpty()){
                     mCouponMessageView.setVisibility(View.VISIBLE);

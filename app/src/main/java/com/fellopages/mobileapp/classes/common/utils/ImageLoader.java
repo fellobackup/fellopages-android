@@ -19,6 +19,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -171,8 +172,10 @@ public class ImageLoader {
      * @param height    Required height of image view.
      */
     public void setFeedImage(String url, ImageView imageView, int width, int height) {
+//        Log.d("ImageUrlHere 5 ", url);
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.dontAnimate();
+
         requestOptions.override(width, height);
         requestOptions.placeholder(R.color.grey_light);
         requestOptions.error(R.color.grey_light);
@@ -180,15 +183,26 @@ public class ImageLoader {
         /* Set image fit center if default image is coming from api */
         if (url.contains(ConstantVariables.DEFAULT_IMAGE_PATH)) {
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        } else {
+        } else if (url.contains("/public/video")){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        } else {
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         }
 
         if (url != null && !url.isEmpty()) {
-            Glide.with(mContext)
-                    .setDefaultRequestOptions(requestOptions)
-                    .load(url)
-                    .into(imageView);
+            if (url.contains("/public/video")){
+                Log.d("TestTrueVideo ", "true");
+                Glide.with(mContext)
+                        .setDefaultRequestOptions(requestOptions)
+                        .load(url)
+                        .into(imageView);
+            } else {
+                Glide.with(mContext)
+                        .setDefaultRequestOptions(requestOptions.fitCenter())
+                        .load(url)
+                        .into(imageView);
+            }
+
         } else {
             Glide.with(mContext)
                     .load(R.color.grey_light)
@@ -227,6 +241,7 @@ public class ImageLoader {
      * @param imageView Image view in which user image needs to be shown.
      */
     public void setSingleFeedImage(String url, ImageView imageView) {
+//        Log.d("ImageUrlHere 5 ", url);
         if (url != null && !url.isEmpty()) {
             Glide.with(mContext)
                     .setDefaultRequestOptions(getRequestOptions(R.color.white))
@@ -303,6 +318,7 @@ public class ImageLoader {
      * @param imageView Image view in which user image needs to be shown.
      */
     public void setListingImageUrl(String url, ImageView imageView) {
+        Log.d("ImageUrlHere 4 ", url);
         if (url != null && !url.isEmpty()) {
             Glide.with(mContext)
                     .setDefaultRequestOptions(getRequestOptions(R.drawable.nophoto_listing_thumb_profile))
@@ -319,7 +335,7 @@ public class ImageLoader {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.dontAnimate();
         requestOptions.dontTransform();
-
+//        Log.d("ImageUrlHere 3 ", imageUrl);
         Glide.with(mContext)
                 .setDefaultRequestOptions(requestOptions)
                 .asBitmap()
@@ -341,7 +357,7 @@ public class ImageLoader {
      * @param imageView Image view in which user image needs to be shown.
      */
     public void setAlbumPhoto(String url, ImageView imageView) {
-
+//        Log.d("ImageUrlHere 2 ", url);
         if (url != null && !url.isEmpty()) {
             Glide.with(mContext)
                     .setDefaultRequestOptions(getRequestOptions(R.drawable.default_error))
@@ -361,6 +377,7 @@ public class ImageLoader {
      * @param imageView Image view in which user image needs to be shown.
      */
     public void setVideoImage(String url, ImageView imageView) {
+        Log.d("LoadedStringURL ", url);
         if (url != null && !url.isEmpty()) {
             Glide.with(mContext)
                     .setDefaultRequestOptions(getRequestOptions(R.drawable.default_video_thumbnail))
@@ -485,6 +502,7 @@ public class ImageLoader {
      * @param imageView Image view in which user image needs to be shown.
      */
     public void setImageUrl(String url, ImageView imageView) {
+//        Log.d("ImageUrlHere 1 ", url);
         if (url != null && !url.isEmpty()) {
 
             /* Set image fit center if default image is coming from api */
@@ -794,6 +812,7 @@ public class ImageLoader {
      * */
 
     public void loadVideoThumbnail(ImageView imageView, final String imageUrl, int width, int height) {
+        Log.d("LoggedVideoThumbnail ", imageUrl);
         Glide.with(mContext)
                 .setDefaultRequestOptions(getRequestOptions(R.drawable.default_video_thumbnail, width, height))
                 .asBitmap()

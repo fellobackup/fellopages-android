@@ -234,7 +234,7 @@
     </android.support.v4.widget.NestedScrollView>
 
 
-    <android.support.v4.view.ViewPager
+    <com.fellopages.mobileapp.classes.common.ui.ScrollableViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

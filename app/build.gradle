@@ -4,8 +4,8 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 project.ext {
-    appVersionCode = 40
-    appVersionName = '3.1.12'
+    appVersionCode = 41
+    appVersionName = '3.2.1'
     storeFile = '/var/www/html/androidapp/Deepak/New/Seandroidnativeapp/Seandroidnativeapp/key-store-219'
     storePassword = 'seaddonsandroid_219'
     keyAlias = 'seaddonsandroid_219'
