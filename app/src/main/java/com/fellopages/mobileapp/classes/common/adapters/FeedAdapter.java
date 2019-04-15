@@ -410,7 +410,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 /* Start: Put Subject_id and position of the feed in
                  * HashMap for hide all by a user functionality
                  */
-
+//                Log.d("mFeedItemItems ", mFeedItem.getmHiddenBodyText());
                 if (mFeedItem != null) {
                     mSubjectPositionList.put(mFeedItem.getmSubjectId() + "-" + position, position);
                 }
@@ -447,6 +447,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 listItemHolder.mWebUrl = mFeedItem.getmWebUrl();
 
                 /* Share feed header work */
+                Log.d("IsThisSharable ", String.valueOf(mFeedItem.getmIsShareFeed()));
                 if (mFeedItem.getmIsShareFeed()) {
 
                     /* Share feed icon */
@@ -1006,6 +1007,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                         }
 
                         // Show Share Option
+                        Log.d("getmShareAble ", String.valueOf(mFeedItem.getmShareAble()));
                         if (mFeedItem.getmShareAble() != 0 && mFeedItem.getmFeedFooterMenus().optJSONObject("share") != null) {
                             listItemHolder.mShareButton.setVisibility(View.VISIBLE);
                             listItemHolder.mShareBlock.setVisibility(View.VISIBLE);

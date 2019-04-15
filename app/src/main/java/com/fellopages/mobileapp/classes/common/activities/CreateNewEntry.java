@@ -195,6 +195,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
         mContentId = getIntent().getIntExtra(ConstantVariables.CONTENT_ID, 0);
         mIsAAFVideoUpload = getIntent().getBooleanExtra(ConstantVariables.AAF_VIDEO, false);
         // Set Title of the Action Bar
+        Log.d("mCurrentSelectedModuleEvent ", mCurrentSelectedModule+" "+mFormType);
         switch (mCurrentSelectedModule){
 
             case ConstantVariables.MLT_MENU_TITLE:
@@ -667,6 +668,7 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
         Gson gson = new Gson();
         if (mCurrentSelectedModule.equals("core_main_siteevent") && mFormType != null
                 && mFormType.equals("payment_method") && postParams != null) {
+            Log.d("TestHereToLog 3 ", "true");
             mCreateFormUrl = placeOrderUrl;
             postParams.put("event_id", subject_id);
             postParams.put("order_info", mOrderInfo);
@@ -676,10 +678,12 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
                 postParams.put("coupon_info", mCouponInfo);
             }
         } else if (mCurrentSelectedModule.equals("adv_event_payment_method") && mFormType != null){
+            Log.d("TestHereToLog 4", "true");
             mCreateFormUrl = AppConstant.DEFAULT_URL + "advancedeventtickets/order/set-event-gateway-info?" + "event_id=" + mEventId;
 
         } else if(mCurrentSelectedModule.equals(ConstantVariables.STORE_MENU_TITLE)
                 && postParams != null && postParams.containsKey("product_type") && mFormType.equals("add_product")) {
+            Log.d("TestHereToLog 5", "true");
             mCreateFormUrl+="&product_type="+postParams.get("product_type");
             finish();
             Intent createIntent = new Intent(mContext, CreateNewEntry.class);
@@ -692,13 +696,21 @@ public class CreateNewEntry extends FormActivity  implements OnUploadResponseLis
 
             return;
         }
+        Log.d("TestHereToLog ", "true");
         if(FormActivity.selectedProducts != null && FormActivity.selectedProducts.size() > 0) {
             postParams.put("product_ids", android.text.TextUtils.join(",", FormActivity.selectedProducts));
         }
         if (postParams != null && !isRequestCompleted) {
+            Log.d("TestHereToLog 2 ", "true");
             // uploading the file to server
-            new UploadFileToServerUtils(mContext, mCreateFormUrl, mCurrentSelectedModule, mSelectedVideoPath, mSelectedVideoThumbnail,
-                    createForm, mSelectedPath, mSelectedMusicFiles, postParams, mHashMap, mSelectedFilePath).execute();
+            if (mCurrentSelectedModule.equals("core_main_siteevent") && mFormType == null){
+                new UploadFileToServerUtils(mContext, mCreateFormUrl, mCurrentSelectedModule, mSelectedVideoPath, mSelectedVideoThumbnail,
+                        createForm, mSelectedPath, mSelectedMusicFiles, postParams, mHashMap, mSelectedFilePath, true).execute();
+            } else {
+                new UploadFileToServerUtils(mContext, mCreateFormUrl, mCurrentSelectedModule, mSelectedVideoPath, mSelectedVideoThumbnail,
+                        createForm, mSelectedPath, mSelectedMusicFiles, postParams, mHashMap, mSelectedFilePath).execute();
+            }
+
         }
     }
 

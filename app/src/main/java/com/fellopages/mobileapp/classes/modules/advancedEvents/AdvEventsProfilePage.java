@@ -259,33 +259,37 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
 
     public void makeRequest(){
         // Do not send request if coming from create page
-        if(!isLoadingFromCreate){
-            mAppConst.getJsonResponseFromUrl(mItemViewUrl, new OnResponseListener() {
-                @Override
-                public void onTaskCompleted(JSONObject jsonObject) {
-                    mBody = jsonObject;
-                    checkSiteVideoPluginEnabled();
-                    checkLikeStatus();
-                }
+        Log.d("ThisWasCalledAfter ", "true");
+//        if(!isLoadingFromCreate){
+//
+//
+//        }
 
-                @Override
-                public void onErrorInExecutingTask(String message, boolean isRetryOption) {
-                    mProgressBar.setVisibility(View.GONE);
-                    SnackbarUtils.displaySnackbarLongWithListener(mMainContent, message,
-                            new SnackbarUtils.OnSnackbarDismissListener() {
-                                @Override
-                                public void onSnackbarDismissed() {
-                                    finish();
-                                }
-                            });
-                }
-            });
+        mAppConst.getJsonResponseFromUrl(mItemViewUrl, new OnResponseListener() {
+            @Override
+            public void onTaskCompleted(JSONObject jsonObject) {
+                mBody = jsonObject;
+                checkSiteVideoPluginEnabled();
+                checkLikeStatus();
+            }
 
-        }
+            @Override
+            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                mProgressBar.setVisibility(View.GONE);
+                SnackbarUtils.displaySnackbarLongWithListener(mMainContent, message,
+                        new SnackbarUtils.OnSnackbarDismissListener() {
+                            @Override
+                            public void onSnackbarDismissed() {
+                                finish();
+                            }
+                        });
+            }
+        });
     }
 
     private void checkLikeStatus() {
         if (!mAppConst.isLoggedOutUser()) {
+            Log.d("ThisWasrequested ", "true");
             mLikeButton.setEnabled(false);
             String url = AppConstant.DEFAULT_URL + "advancedactivity/event-has-like?sendNotification=0";
             Map<String, String> params = new HashMap<>();
@@ -590,6 +594,10 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                     }
                 }
 
+                if (viewPager != null){
+                    viewPager.setCurrentItem(1);
+                }
+
                 mViewPageFragmentAdapter.checkForMessageOwnerOption(mBrowseList);
 
                 // Set values in views
@@ -751,6 +759,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         switch (requestCode) {
             case ConstantVariables.PACKAGE_WEBVIEW_CODE:
                 isLoadingFromCreate = false;
+                Log.d("makeRequest 1 ", "true");
                 makeRequest();
                 break;
 
@@ -758,6 +767,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 if (resultCode == ConstantVariables.VIEW_PAGE_EDIT_CODE) {
                     isLoadingFromCreate = false;
                     isContentEdited = true;
+                    Log.d("makeRequest 2 ", "true");
                     makeRequest();
                 }
                 break;
@@ -794,6 +804,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             case ConstantVariables.VIEW_PAGE_CODE:
                 if (resultCode == ConstantVariables.ADD_VIDEO_CODE) {
                     isAdapterSet = false;
+                    Log.d("makeRequest 3 ", "true");
                     makeRequest();
                 }
                 break;
@@ -833,6 +844,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("makeRequest 4 ", "true");
         makeRequest();
     }
 
@@ -911,6 +923,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             case "remove_photo":
                 mProgressBar.setVisibility(View.VISIBLE);
                 mProgressBar.bringToFront();
+                Log.d("makeRequest 5 ", "true");
                 makeRequest();
                 break;
 
@@ -947,6 +960,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             SnackbarUtils.displaySnackbarLongTime(mMainContent, successMessage);
             mProgressBar.setVisibility(View.VISIBLE);
             mProgressBar.bringToFront();
+            Log.d("makeRequest 6 ", "true");
             makeRequest();
 
         } else {

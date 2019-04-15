@@ -16,6 +16,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
@@ -61,6 +62,7 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
             mIsSignUpRequest = false, mIsMainActivityImageUploadRequest;
     private long totalSize;
     private AppConstant mAppConst;
+    private boolean isCoreMainSite;
     private OnUploadResponseListener mOnUploadResponseListener;
 
     // For Image File uploading
@@ -108,6 +110,34 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
         this.mHostMap = hostMap;
         this.mSelectedFilePath = mSelectedFilePath;
         this.mSelectedVideoThumb = selectedVideoThumb;
+
+        if (mSelectedVideoThumb != null && !mSelectedVideoThumb.isEmpty()) {
+            mPostParams.put("type", "3");
+        }
+
+        mIsDataUploadRequest = true;
+        mOnUploadResponseListener = (OnUploadResponseListener) mContext;
+        mAppConst = new AppConstant(mContext);
+    }
+
+    public UploadFileToServerUtils(Context context, String postUrl, String currentSelectedModule,
+                                   String selectedVideoPath, String selectedVideoThumb, boolean isCreateForm,
+                                   ArrayList<String> selectPath,
+                                   ArrayList<String> selectedMusicFiles,
+                                   Map<String, String> postParams,
+                                   HashMap<String, ArrayList> hostMap,String mSelectedFilePath, boolean isCoreMainSite) {
+        this.mContext = context;
+        this.mPostUrl = postUrl;
+        this.mCurrentSelectedModule = currentSelectedModule;
+        this.mSelectedVideoPath = selectedVideoPath;
+        this.mIsCreateForm = isCreateForm;
+        this.mSelectPath = selectPath;
+        this.mSelectedMusicFiles = selectedMusicFiles;
+        this.mPostParams = postParams;
+        this.mHostMap = hostMap;
+        this.mSelectedFilePath = mSelectedFilePath;
+        this.mSelectedVideoThumb = selectedVideoThumb;
+        this.isCoreMainSite = isCoreMainSite;
 
         if (mSelectedVideoThumb != null && !mSelectedVideoThumb.isEmpty()) {
             mPostParams.put("type", "3");
@@ -217,11 +247,17 @@ public class UploadFileToServerUtils extends AsyncTask<Void, Integer, String> {
         mPostUrl = mAppConst.buildQueryString(mPostUrl, mAppConst.getAuthenticationParams());
         Log.d("mPostUrlHttp ", mPostUrl);
         // Put Language Params, location params, and version params
+        if (isCoreMainSite){
+            mPostParams.put("_ANDROID_VERSION", Build.VERSION.RELEASE);
+        }
+
         if (mPostParams != null){
             mPostUrl = mAppConst.buildQueryString(mPostUrl, mPostParams);
         } else {
             mPostUrl = mAppConst.buildQueryString(mPostUrl, mAppConst.getRequestParams());
         }
+
+
 
         httppost = new HttpPost(mPostUrl);
         LogUtils.LOGD(UploadFileToServerUtils.class.getSimpleName(), "Post Url: " + mPostUrl);
