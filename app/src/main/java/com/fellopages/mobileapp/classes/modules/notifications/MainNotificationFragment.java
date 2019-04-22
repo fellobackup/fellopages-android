@@ -207,7 +207,15 @@ public class MainNotificationFragment extends Fragment implements SwipeRefreshLa
 
                     }
 
+                    @Override
+                    public void onIgnoreButtonClick(View view, int position) {
 
+                    }
+
+                    @Override
+                    public void onAcceptButtonClick(View view, int position) {
+
+                    }
                 });
 
         mRecyclerView.setAdapter(mNotificationViewAdapter);

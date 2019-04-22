@@ -107,6 +107,16 @@ public class StickerStoreListFragment extends Fragment {
                         public void onOptionSelected(View v, BrowseListItems listItems, int position) {
 
                         }
+
+                        @Override
+                        public void onAcceptButtonClick(View view, int position) {
+
+                        }
+
+                        @Override
+                        public void onIgnoreButtonClick(View view, int position) {
+
+                        }
                     });
 
             mRecyclerView.setAdapter(mStickerStoreAdapter);

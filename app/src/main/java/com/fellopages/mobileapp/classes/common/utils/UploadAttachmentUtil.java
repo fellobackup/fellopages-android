@@ -15,6 +15,7 @@ package com.fellopages.mobileapp.classes.common.utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.interfaces.OnAsyncFacebookResponseListener;
@@ -341,8 +342,13 @@ public class UploadAttachmentUtil extends AsyncTask<Void, Integer, String> {
 
                     for (String key : keySet) {
                         if (!key.equals("photo")) {
+                            Log.d("ThisWasLoggedHereStory ", "true");
                             String value = mPostParams.get(key);
-                            entity.addPart(key, new StringBody(value, Charset.forName("UTF-8")));
+                            try {
+                                entity.addPart(key, new StringBody(value, Charset.forName("UTF-8")));
+                            } catch (RuntimeException e){
+                                e.printStackTrace();
+                            }
                         }
                     }
                     LogUtils.LOGD(UploadAttachmentUtil.class.getSimpleName(), "Post Params: " + mPostParams);

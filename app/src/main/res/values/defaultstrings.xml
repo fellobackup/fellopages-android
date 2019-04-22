@@ -596,7 +596,7 @@
     <string name="reaction_text">People who reacted on this</string>
     <string name="terms_of_service">Click here to read the terms of service.</string>
     <string name="signup_successful_message">Welcome! A verification message has been sent to your email address with instructions for activating your account. Once you have activated your account, you will be able to sign in.</string>
-    <string name="singup_success_dialogue_title">!</string>
+    <string name="singup_success_dialogue_title">Verify your Email</string>
     <string name="signup_success_dialogue_positive_button">OK, THANKS!</string>
     <string name="signup_admin_approval">This account still requires admin approval.</string>
     <string name="image_capture_failed">Sorry! Failed to capture image</string>

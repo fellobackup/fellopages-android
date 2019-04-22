@@ -844,6 +844,9 @@ public class AppConstant {
                         JSONObject userDetail = jsonObject.optJSONObject("response");
                         userDetail.put("gutterMenu", jsonObject.optJSONArray("gutterMenu"));
                         userDetail.put("profile_tabs", jsonObject.optJSONArray("profile_tabs"));
+                        if (userDetail.optString("image_profile").equals(userDetail.optString("cover"))){
+                            userDetail.put("cover", "");
+                        }
                         if (userDetail != null) {
                             PreferencesUtils.updateUserPreferences(mContext, userDetail.toString(),
                                     oauth_secret, oauthToken);

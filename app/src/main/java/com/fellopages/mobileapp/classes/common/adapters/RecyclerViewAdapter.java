@@ -434,7 +434,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter implements OnMenuC
                 mListItem = (BrowseListItems) mBrowseItemList.get(position);
 
                 ((ItemViewHolder) holder).listItem = mListItem;
-                String browseTitle = mContext.getResources().getText(R.string.title)+": "+mListItem.getmBrowseListTitle();
+                String browseTitle = mListItem.getmBrowseListTitle();
                 ((ItemViewHolder) holder).mContentTitle.setText(browseTitle);
 
                 ((ItemViewHolder) holder).container.setOnClickListener(new View.OnClickListener() {

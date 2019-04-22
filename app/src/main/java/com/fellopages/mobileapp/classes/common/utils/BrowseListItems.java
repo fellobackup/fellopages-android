@@ -140,6 +140,14 @@ public class BrowseListItems {
     public JSONObject mMapData;
     private boolean isRequestProcessing;
 
+    public static final int VIEW_REQUEST = 2;
+    public static final int VIEW_ITEM = 1;
+
+    public int viewType;
+
+
+//    private
+
     public BrowseListItems(String image, String title, int listingId) {
         mListItemId = listingId;
         mBrowseListTitle = title;
@@ -603,6 +611,16 @@ public class BrowseListItems {
         mBrowseListOwnerTitle = requestSenderName;
         mUserId = requestSenderId;
     }
+
+    public BrowseListItems(int viewType, int requestSenderId,String requestSenderName,String requestSenderImageUrl){
+        this.viewType = viewType;
+        mBrowseImgUrl =requestSenderImageUrl;
+        mBrowseListOwnerTitle = requestSenderName;
+        mUserId = requestSenderId;
+    }
+
+
+
     //For Global Search
     public BrowseListItems(String imgUrl, String listTitle, String body, String type, int id, String contentUrl,
                            String moduleName, int listingTypeId, int listingId, String topicSlug){
@@ -626,6 +644,28 @@ public class BrowseListItems {
                            String subjectType, String objectType, JSONObject notificationObject,
                            String actionTypeBody, String feedTitle, String notificationType,String url,
                            JSONObject subjectResponse, JSONObject objectResponse, JSONArray actionBodyParamsArray) {
+        mUserId = userId;
+        mNotificationObjectId = objectId;
+        mNotificationSubjectId =subjectId;
+        isRead = read;
+        mNotificationId =notificationId;
+        mNotificationObjectType = objectType;
+        mNotificationSubjectType = subjectType;
+        mNotificationObject =notificationObject;
+        mActionTypeBody = actionTypeBody;
+        mFeedTitle = feedTitle;
+        mNotificationType = notificationType;
+        mSubjectResponse = subjectResponse;
+        mObjectResponse = objectResponse;
+        mActionBodyParamsArray =actionBodyParamsArray;
+        mNotificationUrl = url;
+    }
+
+    public BrowseListItems(int viewType, int notificationId,int userId,int subjectId,int objectId,int read,
+                           String subjectType, String objectType, JSONObject notificationObject,
+                           String actionTypeBody, String feedTitle, String notificationType,String url,
+                           JSONObject subjectResponse, JSONObject objectResponse, JSONArray actionBodyParamsArray) {
+        this.viewType = viewType;
         mUserId = userId;
         mNotificationObjectId = objectId;
         mNotificationSubjectId =subjectId;

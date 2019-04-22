@@ -26,9 +26,11 @@ import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +44,7 @@ import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.common.utils.BrowseListItems;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.common.utils.ImageLoader;
+import com.fellopages.mobileapp.classes.modules.friendrequests.FriendRequestViewAdapter;
 
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
@@ -52,6 +55,7 @@ import java.util.List;
 
 
 public class NotificationViewAdapter extends RecyclerView.Adapter{
+    private final int VIEW_REQUEST = 2;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROGRESSBAR = 0;
     private List<Object> mBrowseItemList;
@@ -69,6 +73,8 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
         void onItemClick(View view, int position);
         void onProfilePictureClicked(View view,int position);
         void onOptionSelected(View v, BrowseListItems listItems, int position);
+        void onAcceptButtonClick(View view, int position);
+        void onIgnoreButtonClick(View view,int position);
     }
 
     public NotificationViewAdapter(Context context,List<Object> listItem,boolean isRequestPage,
@@ -94,6 +100,17 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
     @Override
     public int getItemViewType(int position) {
         return mBrowseItemList.get(position) instanceof String ? VIEW_PROGRESSBAR : VIEW_ITEM;
+//        if (mBrowseItemList.get(position) instanceof String){
+//            return VIEW_PROGRESSBAR;
+//        } else if(mBrowseItemList.get(position) instanceof BrowseListItems){
+//            BrowseListItems mListItem = (BrowseListItems) mBrowseItemList.get(position);
+//            if (mListItem.viewType == 2){
+//                return VIEW_REQUEST;
+//            } else {
+//                return VIEW_ITEM;
+//            }
+//        }
+//        return VIEW_ITEM;
     }
 
     @Override
@@ -105,7 +122,12 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
                     R.layout.fragment_notification, parent, false);
             viewHolder = new NotificationViewHolder(view);
 
-        }else {
+        } else if (viewType == VIEW_REQUEST){
+            Log.d("ThisIsExecuted ", "true");
+            View view = LayoutInflater.from(parent.getContext()).inflate(
+                    R.layout.fragment_friend_requests, parent, false);
+            viewHolder = new FRequestViewHolder(view);
+        } else {
 
             View view = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.progress_item, parent, false);
@@ -214,7 +236,7 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
                     notificationBodySpannable.setSpan(bodySpan, 0, notificationBody.length(),
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                /* Make Subject Clickable */
+                    /* Make Subject Clickable */
                     if (mSubjectLabel != null && mSubjectLabel.length() > 0) {
                         subjectStartIndex = notificationBody.indexOf(mSubjectLabel);
                         subjectEndIndex = subjectStartIndex + mSubjectLabel.length();
@@ -226,7 +248,7 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
                         }
                     }
 
-                /* Make Objetc Clickable */
+                    /* Make Objetc Clickable */
                     if (mObjectLabel != null && mObjectLabel.length() > 0) {
                         objectStartIndex = notificationBody.indexOf(mObjectLabel);
                         objectEndIndex = objectStartIndex + mObjectLabel.length();
@@ -315,7 +337,41 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
                 }
             });
 
-        }else {
+        } else if (holder instanceof FRequestViewHolder){
+            Log.d("ThisIsInitialized ", "true");
+            mListItem = (BrowseListItems) mBrowseItemList.get(position);
+            ((FRequestViewHolder) holder).listItem = mListItem;
+
+            mImageLoader.setImageForUserProfile(mListItem.getmBrowseImgUrl(), ((FRequestViewHolder) holder).userImage);
+            ((FRequestViewHolder) holder).mOwnerName.setText(mListItem.getmBrowseListOwnerTitle());
+
+            ((FRequestViewHolder) holder).acceptButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onAcceptButtonClick(v, position);
+                }
+            });
+            ((FRequestViewHolder) holder).ignoreButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onIgnoreButtonClick(v, position);
+                }
+            });
+
+            ((FRequestViewHolder) holder).userImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onProfilePictureClicked(v, position);
+                }
+            });
+
+            ((FRequestViewHolder) holder).mOwnerName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onProfilePictureClicked(v, position);
+                }
+            });
+        } else {
             ProgressViewHolder.inflateFooterView(mContext, ((ProgressViewHolder) holder).progressView,
                     mBrowseItemList.get(position), ConstantVariables.ACTION_VIEW_ALL_NOTIFICATIONS);
         }
@@ -404,5 +460,25 @@ public class NotificationViewAdapter extends RecyclerView.Adapter{
 
             }
         });
+    }
+
+
+    public static class FRequestViewHolder extends RecyclerView.ViewHolder {
+        public ImageView userImage;
+        public BrowseListItems listItem;
+        public TextView mOwnerName;
+        public Button acceptButton,ignoreButton;
+        public View container;
+
+        public FRequestViewHolder(View view) {
+
+            super(view);
+            container = view;
+            userImage = view.findViewById(R.id.userImage);
+            mOwnerName = view.findViewById(R.id.userName);
+            acceptButton = view.findViewById(R.id.acceptRequest);
+            ignoreButton = view.findViewById(R.id.ignoreRequest);
+
+        }
     }
 }

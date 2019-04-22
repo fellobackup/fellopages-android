@@ -20,6 +20,13 @@
     android:layout_height="match_parent"
     tools:context="com.fellopages.mobileapp.classes.modules.user.profile.userProfile">
 
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/swipe_refresh_layout">-->
+        <!---->
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -176,7 +183,7 @@
                 android:id="@+id/slidingTabs"
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
-                app:tabTextColor="@color/dark_gray"
+                app:tabTextColor="@color/textColorPrimary"
                 app:tabSelectedTextColor="@color/textColorPrimary"
                 app:tabTextAppearance="@style/TabTitleTextAppearance"
                 app:tabMode="scrollable"
@@ -233,12 +240,18 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-
-    <com.fellopages.mobileapp.classes.common.ui.ScrollableViewPager
-        android:id="@+id/pager"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/swipeRefresh">
+        <com.fellopages.mobileapp.classes.common.ui.ScrollableViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="wrap_content"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <include
         android:layout_width="match_parent"
@@ -257,7 +270,7 @@
         android:paddingStart="@dimen/padding_10dp"
         android:paddingEnd="@dimen/padding_10dp"
         android:paddingBottom="@dimen/padding_10dp"
-        app:layout_anchor="@id/pager"
+        app:layout_anchor="@id/swipeRefresh"
         app:layout_anchorGravity="bottom|right"
         app:menu_labels_ellipsize="end"
         app:menu_labels_singleLine="true"

@@ -73,7 +73,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
-    private NavigationDrawerAdapter adapter;
+    public static NavigationDrawerAdapter adapter;
     private View containerView;
     private ProgressBar mProgressBar;
     private LinearLayout bottomButton;
@@ -722,7 +722,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener, So
      * Method to update navigation drawer when dashboard response is updated.
      */
     public void drawerUpdate() {
-
+        Log.d("drawerUpdate ", "true");
         if (PreferencesUtils.getDashboardMenus(mContext) != null) {
             try {
                 menuObject = new JSONArray(PreferencesUtils.getDashboardMenus(mContext));

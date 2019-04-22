@@ -23,6 +23,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,11 +77,13 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
     private RecyclerView.Adapter mNotificationViewAdapter;
     private AppConstant mAppConst;
     private List<Object> mBrowseItemList;
+    private List<Object> tempFriendsList;
     private List mDeletedModulesList;
     private BrowseListItems mBrowseList;
     private HashMap<String, String> postParams;
-    int pageNumber = 1, mNotificationId, mCurrentUserId, mObjectId, mSubjectId, isRead;
+    int pageNumber = 1, mNotificationId, mCurrentUserId, mObjectId, mSubjectId, isRead, mTotalRequestCount, mLoadingPageNo = 1;;
     private String mNotificationRequestUrl;
+    private String mFriendRequestUrl;
     private boolean isVisibleToUser = false;
     String mSubjectType, mObjectType, mFeedTitle, mNotificationUrl;
     private String mViewForumTopicPageTitle, mViewForumTopicPageSlug;
@@ -90,6 +93,13 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
     int mTotalUpdatedItemCount;
     private Snackbar snackbar;
     private AlertDialogWithAction mAlertDialogWithAction;
+
+
+
+    private JSONArray mDataResponseArrayFriend;
+    private JSONObject mFRequestObjectFriend;
+    private String mRequestSenderImage, mRequestSenderName;
+    private int mRequestSenderId;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -111,6 +121,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBrowseItemList = new ArrayList<>();
+        tempFriendsList = new ArrayList<>();
         mBrowseList = new BrowseListItems();
         postParams = new HashMap<>();
         mAppConst = new AppConstant(mContext);
@@ -130,7 +141,13 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
+        // notification url
         mNotificationRequestUrl = UrlUtil.MAIN_NOTIFICATION_URL + "&page=" + pageNumber;
+
+        // friend request url
+        mFriendRequestUrl = UrlUtil.FRIEND_REQUEST_URL + "&page=" + pageNumber;
+
+
 
         mNotificationViewAdapter = new NotificationViewAdapter(getActivity(), mBrowseItemList,false,
                 new NotificationViewAdapter.OnItemClickListener() {
@@ -202,6 +219,56 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
 
                     @Override
                     public void onOptionSelected(View v, BrowseListItems listItems, int position) { }
+
+                    @Override
+                    public void onAcceptButtonClick(View view, int position) {
+                        mAppConst.showProgressDialog();
+                        BrowseListItems listItems = (BrowseListItems) mBrowseItemList.get(position);
+                        postParams.put("user_id",String.valueOf(listItems.getmUserId()));
+                        String acceptRequestUrl = UrlUtil.USER_CONFIRM_URL;
+
+                        mAppConst.postJsonResponseForUrl(acceptRequestUrl, postParams,
+                                new OnResponseListener() {
+                                    @Override
+                                    public void onTaskCompleted(JSONObject jsonObject) {
+                                        mAppConst.hideProgressDialog();
+//                                        //makeFriendRequest();
+                                        mBrowseItemList.remove(position);
+                                        mNotificationViewAdapter.notifyDataSetChanged();
+
+                                    }
+
+                                    @Override
+                                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                                        mAppConst.hideProgressDialog();
+                                        SnackbarUtils.displaySnackbar(rootView, message);
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onIgnoreButtonClick(View view, int position) {
+                        mAppConst.showProgressDialog();
+                        BrowseListItems listItems = (BrowseListItems) mBrowseItemList.get(position);
+                        postParams.put("user_id", String.valueOf(listItems.getmUserId()));
+                        String rejectRequestUrl = UrlUtil.USER_REJECT_URL;
+
+                        mAppConst.postJsonResponseForUrl(rejectRequestUrl, postParams,
+                                new OnResponseListener() {
+                                    @Override
+                                    public void onTaskCompleted(JSONObject jsonObject) {
+                                        mAppConst.hideProgressDialog();
+                                        mBrowseItemList.remove(position);
+                                        mNotificationViewAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                                        mAppConst.hideProgressDialog();
+                                        SnackbarUtils.displaySnackbar(rootView, message);
+                                    }
+                                });
+                    }
                 });
 
         mRecyclerView.setAdapter(mNotificationViewAdapter);
@@ -214,6 +281,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
 
         if (visible && !isVisibleToUser) {
             makeRequest();
+            //makeFriendRequest();
         } else {
             if(snackbar != null && snackbar.isShown())
                 snackbar.dismiss();
@@ -379,7 +447,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
         mAppConst.getJsonResponseFromUrl(mNotificationRequestUrl, new OnResponseListener() {
             @Override
             public void onTaskCompleted(JSONObject jsonObject) {
-                mBrowseItemList.clear();
+//                mBrowseItemList.clear();
                 rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 
                 if(snackbar != null && snackbar.isShown()) {
@@ -415,19 +483,64 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                 }
 
                 if (isRetryOption) {
-                    snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message,
-                            new SnackbarUtils.OnSnackbarActionClickListener() {
-                                @Override
-                                public void onSnackbarActionClick() {
-                                    rootView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-                                    makeRequest();
-                                }
+                    snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message, () -> {
+                                rootView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+                                makeRequest();
+                                //makeFriendRequest();
                             });
                 } else {
                     SnackbarUtils.displaySnackbar(rootView, message);
                 }
             }
         });
+    }
+
+    public void makeFriendRequest() {
+
+        mLoadingPageNo = 1;
+        mAppConst.getJsonResponseFromUrl(mFriendRequestUrl, new OnResponseListener() {
+            @Override
+            public void onTaskCompleted(JSONObject jsonObject) {
+                tempFriendsList.clear();
+                rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                if (snackbar != null && snackbar.isShown()) {
+                    snackbar.dismiss();
+                }
+
+                addDataToBrowseList(jsonObject);
+
+
+
+//                mFriendRequestViewAdapter.notifyDataSetChanged();
+                if (swipeRefreshLayout.isRefreshing()) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onErrorInExecutingTask(String message, boolean isRetryOption) {
+                rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                if (swipeRefreshLayout.isRefreshing()) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                if (message != null) {
+                    if (isRetryOption) {
+                        snackbar = SnackbarUtils.displaySnackbarWithAction(getActivity(), rootView, message,
+                                new SnackbarUtils.OnSnackbarActionClickListener() {
+                                    @Override
+                                    public void onSnackbarActionClick() {
+                                        rootView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+                                        makeRequest();
+                                        //makeFriendRequest();
+                                    }
+                                });
+                    } else {
+                        SnackbarUtils.displaySnackbar(rootView, message);
+                    }
+                }
+            }
+        });
+
     }
 
     public void addNotificationToTheList(JSONObject jsonObject){
@@ -457,7 +570,8 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
                 mObjectResponse = mNotificationObject.optJSONObject("object");
                 mActionBodyParamsArray = mNotificationObject.optJSONArray("action_type_body_params");
 
-                mBrowseItemList.add(new BrowseListItems(mNotificationId,
+                mBrowseItemList.add(new BrowseListItems(BrowseListItems.VIEW_ITEM,
+                                                        mNotificationId,
                                                         mCurrentUserId,
                                                         mSubjectId,
                                                         mObjectId,
@@ -487,6 +601,40 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
         }
     }
 
+
+    public void addDataToBrowseList(JSONObject jsonObject){
+        Log.d("ThisWasBeingCalled ", "true");
+        mBody = jsonObject;
+        mTotalRequestCount = mBody.optInt("totalItemCount");
+        mBrowseList.setmTotalItemCount(mTotalRequestCount);
+        mDataResponseArrayFriend = mBody.optJSONArray("response");
+        if(mDataResponseArrayFriend != null && mDataResponseArrayFriend.length() > 0) {
+            rootView.findViewById(R.id.message_layout).setVisibility(View.GONE);
+            for (int i = 0; i < mDataResponseArrayFriend.length(); i++) {
+                mFRequestObjectFriend = mDataResponseArrayFriend.optJSONObject(i);
+                mSubjectResponse = mFRequestObjectFriend.optJSONObject("subject");
+                mRequestSenderId = mSubjectResponse.optInt("user_id");
+                mRequestSenderName = mSubjectResponse.optString("displayname");
+                mRequestSenderImage = mSubjectResponse.optString("image_profile");
+                mBrowseItemList.add(new BrowseListItems(BrowseListItems.VIEW_REQUEST, mRequestSenderId, mRequestSenderName, mRequestSenderImage));
+            }
+            Log.d("ThisWasInitializedHere ", "true");
+//            if (tempFriendsList.size() > 0){
+//                Log.d("ThisWasInitializedHere ", "true");
+//                mBrowseItemList.addAll(tempFriendsList);
+//            }
+        }else {
+            rootView.findViewById(R.id.message_layout).setVisibility(View.VISIBLE);
+            TextView errorIcon = rootView.findViewById(R.id.error_icon);
+            SelectableTextView errorMessage = rootView.findViewById(R.id.error_message);
+            errorIcon.setTypeface(GlobalFunctions.getFontIconTypeFace(mContext));
+            errorIcon.setText("\uf235");
+            errorMessage.setText(mContext.getResources().getString(R.string.no_friend_requests));
+
+
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -513,6 +661,7 @@ public class NotificationFragment extends Fragment implements SwipeRefreshLayout
             public void run() {
                 swipeRefreshLayout.setRefreshing(true);
                 makeRequest();
+                //makeFriendRequest();
             }
         });
     }

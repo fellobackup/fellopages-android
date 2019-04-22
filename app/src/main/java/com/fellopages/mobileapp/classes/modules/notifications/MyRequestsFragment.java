@@ -191,6 +191,16 @@ public class MyRequestsFragment extends Fragment implements SwipeRefreshLayout.O
 
                         }
                     }
+
+                    @Override
+                    public void onIgnoreButtonClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onAcceptButtonClick(View view, int position) {
+
+                    }
                 });
 
         mRecyclerView.setAdapter(mNotificationViewAdapter);

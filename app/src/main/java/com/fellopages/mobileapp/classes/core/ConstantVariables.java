@@ -386,7 +386,7 @@ public static final int PEOPLE_SUGGESTION_LIMIT = 3;
     /**
      * Story settings
      */
-public static final int ENABLE_STORY = 0;
+public static final int ENABLE_STORY = 1;
     public static final int STORY_WORD_LIMIT = 150;
     public static final int STORY_POST_COUNT_LIMIT = 5;
     /**

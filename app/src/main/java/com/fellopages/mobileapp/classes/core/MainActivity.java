@@ -492,6 +492,8 @@ public class MainActivity extends FormActivity implements FragmentDrawer.Fragmen
 
         createLocationCallback();
         createLocationRequest();
+
+        drawerFragment.drawerUpdate();
     }
 
     private void updateServerSettings() {

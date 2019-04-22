@@ -46,6 +46,7 @@ import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.common.interfaces.OnResponseListener;
 import com.fellopages.mobileapp.classes.modules.advancedEvents.AdvEventsMyEventsFragment;
 import com.fellopages.mobileapp.classes.modules.friendrequests.FeedFriendRequests;
+import com.fellopages.mobileapp.classes.modules.friendrequests.FriendRequests;
 import com.fellopages.mobileapp.classes.modules.messages.NewMessagesFragment;
 import com.fellopages.mobileapp.classes.modules.notifications.NotificationFragment;
 
@@ -65,7 +66,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     ViewPager pager;
     FragmentAdapter adapter;
     Context mContext;
-    ImageButton home, friend, message, notification;
+    ImageButton home, friend_tab, event_tab, message, notification;
     BadgeView requestBadge, notificationBadge, messageBadge;
     String notificationCount, messageCount, requestCount;
     private FloatingActionButton mFabCreate;
@@ -135,13 +136,15 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
 
 
         home = getActivity().findViewById(R.id.home_button);
-        friend = getActivity().findViewById(R.id.friend_tab);
+        friend_tab = getActivity().findViewById(R.id.friend_tab);
+        event_tab = getActivity().findViewById(R.id.event_tab);
         message = getActivity().findViewById(R.id.msg_tab);
         notification = getActivity().findViewById(R.id.notification_tab);
-        home.setOnClickListener(this);
-        friend.setOnClickListener(this);
-        message.setOnClickListener(this);
-        notification.setOnClickListener(this);
+//        home.setOnClickListener(this);
+//        friend_tab.setOnClickListener(this);
+//        event_tab.setOnClickListener(this);
+//        message.setOnClickListener(this);
+//        notification.setOnClickListener(this);
 
         mFabCreate.setVisibility(View.GONE);
         //Setting up badge view for notification count
@@ -166,41 +169,58 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                     case 0:
                         mFabCreate.hide();
                         home.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
-                        friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        friend_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        event_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         break;
 
                     case 1:
                         mFabCreate.hide();
-                        friend.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
                         home.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        friend_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+                        event_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         updateNotificationCounts(true);
                         break;
 
                     case 2:
-                        mFabCreate.setImageDrawable(ContextCompat.getDrawable(
-                                getContext(), R.drawable.ic_action_new));
-                        mFabCreate.setTag("core_main_message");
+
+
                         mFabCreate.show();
-                        message.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
-                        friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        friend_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        event_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
                         home.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
-                        updateNotificationCounts(true);
+//                        updateNotificationCounts(true);
                         break;
 
                     case 3:
                         mFabCreate.setImageDrawable(ContextCompat.getDrawable(
+                                getContext(), R.drawable.ic_action_new));
+
+                        mFabCreate.setTag("core_main_message");
+
+                        mFabCreate.show();
+                        friend_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        event_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        message.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
+                        home.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        updateNotificationCounts(true);
+                        break;
+
+                    case 4:
+                        mFabCreate.setImageDrawable(ContextCompat.getDrawable(
                                 getContext(), R.drawable.ic_settings_white_24dp));
                         mFabCreate.setTag("core_main_notification");
-                        mFabCreate.show();
-                        notification.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
-                        friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
-                        message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         home.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        friend_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        event_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        notification.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
                         updateNotificationCounts(true);
                         break;
                 }
@@ -211,6 +231,9 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
 
             }
         });
+
+
+
         if (pager != null) {
             adapter = new FragmentAdapter(getActivity().getSupportFragmentManager());
 
@@ -219,9 +242,12 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                 adapter.addFragmentWithIcon(FeedsFragment.newInstance(bundle),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home),
                         mContext.getResources().getString(R.string.feed_tab_name));
+                adapter.addFragmentWithIcon(FeedFriendRequests.newInstance(null),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_friend_request_home),
+                        mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(MyEventsFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_cropped_event_icon),
-                        mContext.getResources().getString(R.string.requests_tab_name));
+                        mContext.getResources().getString(R.string.query_search_event));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)
                         , mContext.getResources().getString(R.string.message_tab_name));
@@ -234,9 +260,12 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                 adapter.addFragmentWithIcon(FeedsFragment.newInstance(bundle),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_home)
                         , mContext.getResources().getString(R.string.feed_tab_name));
+                adapter.addFragmentWithIcon(FeedFriendRequests.newInstance(null),
+                        ContextCompat.getDrawable(getActivity(), R.drawable.ic_friend_request_home),
+                        mContext.getResources().getString(R.string.requests_tab_name));
                 adapter.addFragmentWithIcon(MyEventsFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_cropped_event_icon),
-                        mContext.getResources().getString(R.string.requests_tab_name));
+                        mContext.getResources().getString(R.string.query_search_event));
                 adapter.addFragmentWithIcon(NewMessagesFragment.newInstance(null),
                         ContextCompat.getDrawable(getActivity(), R.drawable.ic_message)
                         , mContext.getResources().getString(R.string.message_tab_name));
@@ -248,11 +277,12 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
             if (prefs.getBoolean("firstrun", true)) {
                 new Handler().postDelayed(() -> {
                     pager.setAdapter(adapter);
-                    pager.setOffscreenPageLimit(adapter.getCount() + 1);
+                    pager.setOffscreenPageLimit(adapter.getCount());
 
                     if (pager.getCurrentItem() == 0) {
                         home.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
-                        friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        friend_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                        event_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                         notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                     }
@@ -260,17 +290,56 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                 prefs.edit().putBoolean("firstrun", false).apply();
             } else {
                 pager.setAdapter(adapter);
-                pager.setOffscreenPageLimit(adapter.getCount() + 1);
+                pager.setOffscreenPageLimit(adapter.getCount());
 
                 if (pager.getCurrentItem() == 0) {
                     home.setColorFilter(ContextCompat.getColor(mContext, R.color.themeButtonColor));
-                    friend.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                    friend_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
+                    event_tab.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                     message.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                     notification.setColorFilter(ContextCompat.getColor(mContext, R.color.gray_text_color));
                 }
             }
 
         }
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFabCreate.hide();
+                pager.setCurrentItem(0, true);
+            }
+        });
+
+        friend_tab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFabCreate.hide();
+                pager.setCurrentItem(1, true);
+            }
+        });
+
+        event_tab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFabCreate.hide();
+                pager.setCurrentItem(2, true);
+            }
+        });
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pager.setCurrentItem(3, true);
+            }
+        });
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pager.setCurrentItem(4, true);
+            }
+        });
 
         if (!mAppConst.isLoggedOutUser()) {
             getAlertNotifications();
@@ -362,7 +431,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         int clickedPosition = mSelectedTabPosition;
-
+        Log.d("ClickedPosition ", String.valueOf(clickedPosition));
         switch (id) {
             // Work for Scrolling the pages to top when the tabs will be reselected
             case R.id.home_button:
@@ -375,12 +444,18 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
                 pager.setCurrentItem(1, true);
                 break;
 
-            case R.id.msg_tab:
+            case R.id.event_tab:
+                mFabCreate.hide();
+                Log.d("ThisIsTheTab ", "true");
                 pager.setCurrentItem(2, true);
+
+            case R.id.msg_tab:
+                Log.d("ThisIsTheTab msg_tab", "true");
+                pager.setCurrentItem(3, true);
                 break;
 
             case R.id.notification_tab:
-                pager.setCurrentItem(3, true);
+                pager.setCurrentItem(4, true);
                 break;
         }
 
@@ -396,9 +471,25 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         notificationCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.NOTIFICATION_COUNT);
         messageCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.MESSAGE_COUNT);
         requestCount = PreferencesUtils.getNotificationsCounts(mContext, PreferencesUtils.FRIEND_REQ_COUNT);
-
+        Log.d("requestCount ", requestCount);
         if (notificationCount != null && !notificationCount.equals("0")) {
-            notificationBadge.setText(notificationCount);
+
+            int combined = Integer.parseInt(notificationCount) + Integer.parseInt(requestCount);
+            notificationBadge.setText(String.valueOf(combined));
+            notificationBadge.setVisibility(View.VISIBLE);
+
+            // Show app notification count on app icon in supported launcher
+            ShortcutBadger.applyCount(mContext, Integer.valueOf(notificationCount));
+
+            if (isClicked && mSelectedTabPosition == 3) {
+                notificationBadge.setVisibility(View.GONE);
+                PreferencesUtils.clearNotificationsCount(mContext, PreferencesUtils.NOTIFICATION_COUNT);
+                ShortcutBadger.removeCount(mContext);
+                mAppConst.markAllNotificationsRead();
+            }
+        } else if(!requestCount.equals("0")){
+            Log.d("requestCount ", requestCount);
+            notificationBadge.setText(requestCount);
             notificationBadge.setVisibility(View.VISIBLE);
 
             // Show app notification count on app icon in supported launcher

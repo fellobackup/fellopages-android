@@ -182,11 +182,11 @@ public class ImageLoader {
 
         /* Set image fit center if default image is coming from api */
         if (url.contains(ConstantVariables.DEFAULT_IMAGE_PATH)) {
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         } else if (url.contains("/public/video")){
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         } else {
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 
         if (url != null && !url.isEmpty()) {
@@ -490,7 +490,7 @@ public class ImageLoader {
             }
         } else {
             Glide.with(mContext)
-                    .load(R.drawable.default_user_profile)
+                    .load("https://www.formica.com/~/media/emea/images/decors/eu/f0949.jpg")
                     .into(imageView);
         }
     }
@@ -502,16 +502,16 @@ public class ImageLoader {
      * @param imageView Image view in which user image needs to be shown.
      */
     public void setImageUrl(String url, ImageView imageView) {
-//        Log.d("ImageUrlHere 1 ", url);
+        Log.d("ImageUrlHereExecuted 1 ", url);
         if (url != null && !url.isEmpty()) {
 
             /* Set image fit center if default image is coming from api */
-            if (url.contains(ConstantVariables.DEFAULT_IMAGE_PATH)) {
-                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                imageView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
-            } else {
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            }
+//            if (url.contains(ConstantVariables.DEFAULT_IMAGE_PATH)) {
+//                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                imageView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+//            } else {
+//                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//            }
 
             Glide.with(mContext)
                     .setDefaultRequestOptions(getNoAnimationOptions())

@@ -33,6 +33,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,6 +60,7 @@ import com.fellopages.mobileapp.classes.common.utils.SoundUtil;
 import com.fellopages.mobileapp.classes.common.utils.UploadFileToServerUtils;
 import com.fellopages.mobileapp.classes.core.AppConstant;
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
+import com.fellopages.mobileapp.classes.core.FragmentDrawer;
 import com.fellopages.mobileapp.classes.core.LoginActivity;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoLightBoxActivity;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoListDetails;
@@ -121,7 +123,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
+        Log.d("ThisIsTheUserAcct ", "true");
         mAppConst = new AppConstant(this);
         mContext = this;
 
@@ -209,7 +211,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                 }
             }
             if (mBody != null) {
-                setUserProfileDetails(mBody, true);
+//                setUserProfileDetails(mBody, true);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -324,6 +326,8 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                         String coverImageUrl = userDetail.optString("image");
                         if (userDetail.optInt("user_id") == mUserId && (!displayName.equals(userName) ||
                                 !userImageProfile.equals(coverImageUrl))) {
+//                            mResponseObject.optString("image_profile").equals(mCoverImageUrl)
+                            Log.d("TestHerePls ", "true");
                             userDetail.put("displayname", displayName);
                             userDetail.put("image", userImageProfile);
                             userDetail.put("image_profile", mResponseObject.optString("image_profile"));
@@ -382,6 +386,25 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                     showUploadImageDialog();
                 }
                 //Showing Cover image.
+
+                if(coverPhotoMenuArray.length() < 4){
+                    if (PreferencesUtils.getUserDetail(mContext) != null) {
+                        try {
+                            JSONObject userDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
+                            Log.d("TestLogHere ", "true");
+                            userDetail.put("cover", mCoverImage);
+                            PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+//
+//
+//                if (!mResponseObject.optString("image_profile").equals(mCoverImageUrl) || mResponseObject.optString("image_profile").equals("image")) {
+//                    Log.d("ThisCoverisSimilar ", "true");
+//
+//                }
                 mImageLoader.setImageUrl(mCoverImageUrl, mCoverImage);
 
                 mProfilePhotoDetail.clear();

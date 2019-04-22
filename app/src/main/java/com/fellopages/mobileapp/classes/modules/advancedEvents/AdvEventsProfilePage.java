@@ -25,6 +25,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -37,6 +38,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.ads.NativeAd;
 import com.fellopages.mobileapp.R;
 import com.fellopages.mobileapp.classes.common.adapters.ViewPageFragmentAdapter;
 import com.fellopages.mobileapp.classes.common.dialogs.AlertDialogWithAction;
@@ -76,7 +78,7 @@ import java.util.Map;
 
 
 public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener,
-        OnOptionItemClickResponseListener, OnUploadResponseListener {
+        OnOptionItemClickResponseListener, OnUploadResponseListener, SwipeRefreshLayout.OnRefreshListener {
 
     private Context mContext;
     private String mModuleName, mPhotoMenuTitle;
@@ -119,6 +121,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
     private boolean isCoverProfilePictureRequest = false;
     private Integer likeID = 0;
     private boolean isFromWebPayment = false;
+    private SwipeRefreshLayout swipeRefresh;
     Intent intent;
 
     @Override
@@ -128,15 +131,12 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
         //CHECK IF OPENED VIA URL
         checkIfOpenedViaURL();
 
-        Log.d("AndroidDeepLink ", String.valueOf(intent.getData()));
-
         mContext = this;
         mPhotoDetails = new ArrayList<>();
         mProfilePhotoDetail = new ArrayList<>();
         mImageLoader = new ImageLoader(getApplicationContext());
 
         setContentView(R.layout.activity_profile_pages);
-        Log.d("SoThisIsIt", "AdvEventsProfilePage");
         /* Create Back Button On Action Bar **/
         mToolbar = findViewById(R.id.toolbar);
         mToolBarTitle = findViewById(R.id.toolbar_title);
@@ -146,6 +146,10 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             getSupportActionBar().setTitle(getResources().getString(R.string.blank_string));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(this);
+        swipeRefresh.setColorSchemeResources(R.color.colorAccent);
 
         isRedirectedFromEventProfile = intent.getBooleanExtra("isRedirectedFromEventProfile", false);
         LogUtils.LOGD(AdvEventsProfilePage.class.getSimpleName(), "isRedirectedFromEventProfile->" +isRedirectedFromEventProfile );
@@ -271,11 +275,17 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 mBody = jsonObject;
                 checkSiteVideoPluginEnabled();
                 checkLikeStatus();
+                if (swipeRefresh.isRefreshing()) {
+                    swipeRefresh.setRefreshing(false);
+                }
             }
 
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 mProgressBar.setVisibility(View.GONE);
+                if (swipeRefresh.isRefreshing()) {
+                    swipeRefresh.setRefreshing(false);
+                }
                 SnackbarUtils.displaySnackbarLongWithListener(mMainContent, message,
                         new SnackbarUtils.OnSnackbarDismissListener() {
                             @Override
@@ -395,12 +405,18 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                 siteVideoPluginEnabled = jsonObject.optInt("sitevideoPluginEnabled");
                 mAdvVideosCount = jsonObject.optInt("totalItemCount");
+                if (swipeRefresh.isRefreshing()) {
+                    swipeRefresh.setRefreshing(false);
+                }
                 loadViewPageData(mBody);
             }
 
             @Override
             public void onErrorInExecutingTask(String message, boolean isRetryOption) {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
+                if (swipeRefresh.isRefreshing()) {
+                    swipeRefresh.setRefreshing(false);
+                }
                 loadViewPageData(mBody);
             }
         });
@@ -1003,5 +1019,20 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
                 break;
 
         }
+    }
+
+    @Override
+    public void onRefresh() {
+
+
+
+        swipeRefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefresh.setRefreshing(true);
+//                isAdLoaded = false;
+                checkSiteVideoPluginEnabled();
+            }
+        });
     }
 }

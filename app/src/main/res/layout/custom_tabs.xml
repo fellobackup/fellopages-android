@@ -36,6 +36,7 @@
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,7 +49,7 @@
             android:layout_height="match_parent"
             android:tint="@color/grey_light"
             android:layout_gravity="center"
-            android:src="@drawable/ic_cropped_event_icon"
+            android:src="@drawable/ic_friend_request_home"
             android:background="@drawable/abc_item_background_holo_dark"/>
 
         <com.fellopages.mobileapp.classes.common.ui.BadgeView
@@ -58,6 +59,41 @@
             android:layout_alignEnd="@+id/friend_tab"
             android:layout_alignRight="@+id/friend_tab"
             android:layout_alignTop="@+id/friend_tab"
+            android:layout_marginTop="@dimen/margin_6dp"
+            android:layout_marginRight="@dimen/margin_25dp"
+            android:layout_marginEnd="@dimen/margin_25dp"
+            android:background="@drawable/badge_bg"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:padding="@dimen/element_spacing_xsmall"
+            android:singleLine="true"
+            android:visibility="gone"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/event_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tint="@color/grey_light"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_cropped_event_icon"
+            android:background="@drawable/abc_item_background_holo_dark"/>
+
+        <com.fellopages.mobileapp.classes.common.ui.BadgeView
+            android:id="@+id/event_indicator"
+            android:layout_width="@dimen/unread_indicator_size"
+            android:layout_height="@dimen/unread_indicator_size"
+            android:layout_alignEnd="@+id/event_tab"
+            android:layout_alignRight="@+id/event_tab"
+            android:layout_alignTop="@+id/event_tab"
             android:layout_marginTop="@dimen/margin_6dp"
             android:layout_marginRight="@dimen/margin_25dp"
             android:layout_marginEnd="@dimen/margin_25dp"
