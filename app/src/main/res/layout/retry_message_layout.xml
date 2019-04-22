@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="gone"
+    android:id="@+id/retryMessageBlock"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginTop="@dimen/margin_10dp"
+    android:layout_marginBottom="@dimen/margin_10dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="@dimen/label_max_width"
+        android:layout_height="@dimen/label_max_width"
+        android:id="@+id/error_icon_image"
+        android:src="@drawable/error_cloud_image"
+        android:contentDescription="@string/caption" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/network_not_connect_error"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        style="@style/BodyMediumView"
+        android:text="@string/network_not_connected"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.ActionIconThemedTextView
+        android:id="@+id/retry_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:gravity="center"
+        android:paddingLeft="@dimen/element_spacing_normal"
+        android:paddingStart="@dimen/element_spacing_normal"
+        android:paddingRight="@dimen/element_spacing_normal"
+        android:paddingEnd="@dimen/element_spacing_normal"
+        android:drawablePadding="@dimen/element_spacing_normal"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:textSize="@dimen/body_default_font_size"
+        app:iabColor="@color/body_text_2"
+        android:textColor="@color/body_text_2"
+        android:text="@string/tap_retry"/>
+
+</LinearLayout>

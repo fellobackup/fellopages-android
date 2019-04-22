@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/padding_5dp"
+    android:paddingBottom="@dimen/padding_5dp">
+
+    <ImageView
+        android:layout_width="@dimen/user_image_width_height"
+        android:layout_height="@dimen/user_image_width_height"
+        android:id="@+id/ownerImage"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_user_profile"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp">
+    </ImageView>
+
+    <ImageView
+        android:layout_width="@dimen/margin_15dp"
+        android:layout_height="@dimen/margin_15dp"
+        android:visibility="gone"
+        android:layout_alignEnd="@+id/ownerImage"
+        android:layout_alignRight="@+id/ownerImage"
+        android:layout_alignBottom="@+id/ownerImage"
+        android:src="@drawable/ic_verification"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:id="@+id/online_icon"
+        android:contentDescription="@string/caption" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@+id/ownerImage"
+        android:layout_toEndOf="@+id/ownerImage"
+        android:layout_toStartOf="@+id/memberOption"
+        android:layout_toLeftOf="@+id/memberOption"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_centerVertical="true"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/body_default_font_size"
+            android:drawablePadding="@dimen/padding_3dp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:id="@+id/ownerTitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CaptionView"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_below="@+id/ownerTitle"
+            android:id="@+id/rsvpInfo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CaptionView"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/ownerTitle"
+            android:layout_toEndOf="@+id/ownerTitle"
+            android:textColor="@color/gray_text_color"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/staff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/age_icon"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:visibility="gone"
+            android:layout_below="@+id/rsvpInfo"
+            style="@style/CaptionView"
+            android:textColor="@color/gray_text_color"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/age"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_below="@+id/rsvpInfo"
+            android:layout_toRightOf="@+id/age_icon"
+            android:layout_toEndOf="@+id/age_icon"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/gray_text_color"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/location_icon"
+            android:layout_below="@+id/age"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/gray_text_color"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/location"
+            android:layout_below="@+id/age"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_toRightOf="@+id/location_icon"
+            android:layout_toEndOf="@+id/location_icon"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/gray_text_color"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mutualFriendIcon"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_below="@+id/location"
+            style="@style/CaptionView"
+            android:textColor="@color/gray_text_color"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mutualFriendCount"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_below="@+id/location"
+            android:layout_toRightOf="@+id/mutualFriendIcon"
+            android:layout_toEndOf="@+id/mutualFriendIcon"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/gray_text_color"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/option_icon_view"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_height="match_parent"
+        android:id="@+id/option_icon_layout"
+        android:adjustViewBounds="false"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:id="@+id/message_icon"
+        android:visibility="gone"
+        android:padding="@dimen/margin_8dp"
+        android:paddingStart="@dimen/margin_8dp"
+        android:paddingEnd="@dimen/margin_8dp"
+        android:background="@drawable/fab_circle_bg"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/option_icon_layout"
+        android:layout_toStartOf="@+id/option_icon_layout"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_message"
+        android:contentDescription="@string/image_caption" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/memberOption"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:padding="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        style="@style/TitleView"
+        android:adjustViewBounds="false"/>
+
+    <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/processing_request_pbr"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:adjustViewBounds="false"
+            android:visibility="gone"
+        />
+
+
+</RelativeLayout>

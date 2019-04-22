@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/drawerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/drawer_item_top_padding"
+            android:layout_marginStart="@dimen/drawer_item_top_padding"
+            android:textColor="@color/navigation_item_text_color"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/gray_stroke_color" >
+
+        </View>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/itemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/material_drawer_item_primary"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:paddingTop="@dimen/drawer_item_top_padding"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/drawer_icon"
+            android:layout_width="@dimen/drawer_icon_width_height"
+            android:layout_height="@dimen/drawer_icon_width_height"
+            android:layout_marginRight="@dimen/material_drawer_item_primary_icon_left"
+            android:layout_marginEnd="@dimen/material_drawer_item_primary_icon_left"
+            android:layout_marginLeft="@dimen/material_drawer_item_primary_icon_left"
+            android:layout_marginStart="@dimen/material_drawer_item_primary_icon_left"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/circle_bg"
+            style="@style/BodyMediumView" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/drawer_itemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLines="1"
+                android:textColor="@color/navigation_item_text_color"
+                android:textDirection="anyRtl"
+                android:textStyle="bold"
+                android:alpha="0.87"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/material_drawer_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_badge_bg"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/material_drawer_padding"
+            android:layout_marginRight="@dimen/material_drawer_padding"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

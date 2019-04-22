@@ -1,0 +1,77 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/chat_background_light">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center" />
+
+    <ListView
+        android:id="@+id/list_view_messages"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:divider="@null"
+        android:transcriptMode="alwaysScroll"
+        android:stackFromBottom="true">
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/llMsgCompose"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:weightSum="3" >
+
+        <EditText
+            android:id="@+id/inputMsg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxHeight="@dimen/small_image_art_width"
+            android:layout_weight="2.6"
+            android:background="@color/transparent"
+            android:textColor="@color/black"
+            style="@style/TitleView"
+            android:hint="@string/message_type_hint"
+            android:textColorHint="@color/bg_msg_input"
+            android:paddingBottom="@dimen/padding_10dp"
+            android:paddingLeft="@dimen/padding_6dp"
+            android:paddingStart="@dimen/padding_6dp"
+            android:paddingRight="@dimen/padding_6dp"
+            android:paddingEnd="@dimen/padding_6dp"/>
+
+        <TextView
+            android:id="@+id/btnSend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".4"
+            android:textSize="@dimen/play_icon_size"
+            android:layout_margin="@dimen/margin_10dp"
+            android:textColor="@color/grey_light"/>
+
+    </LinearLayout>
+
+</LinearLayout>

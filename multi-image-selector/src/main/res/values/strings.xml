@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">multi-image-selector</string>
+    <string name="folder_all">All Images</string>
+    <string name="preview">Preview</string>
+    <string name="msg_no_camera">No system camera found</string>
+    <string name="msg_amount_limit">Select images amount is limit</string>
+    <string name="action_bar_title">Picture</string>
+    <string name="action_bar_button_title">Done</string>
+    <string name="multi_img_btn_title">All photos</string>
+    <string name="multi_img_preview_btn">Preview</string>
+    <string name="camera_txt">Taking Pictures</string>
+</resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/padding_10dp"
+    android:paddingStart="@dimen/padding_10dp"
+    android:paddingEnd="@dimen/padding_10dp"
+    android:background="@drawable/gradient_blackborder"
+    android:layout_height="match_parent">
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:id="@+id/networkTitle"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/memberCount"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_below="@+id/networkTitle"
+        android:layout_marginTop="@dimen/margin_5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:id="@+id/leavejoinOption"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

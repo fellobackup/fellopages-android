@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#21282C"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:paddingLeft="@dimen/keyline_1"
+        android:paddingStart="@dimen/keyline_1"
+        android:paddingRight="@dimen/keyline_1"
+        android:paddingEnd="@dimen/keyline_1"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="@string/action_bar_title"
+        android:layout_toEndOf="@+id/btn_back"
+        android:textColor="@android:color/white"
+        style="@style/TitleMediumView"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/commit"
+        android:background="@drawable/action_btn"
+        android:minHeight="@dimen/divider_line_view_height"
+        android:minWidth="@dimen/divider_line_view_height"
+        android:text="@string/done"
+        android:layout_marginRight="@dimen/keyline_1"
+        android:layout_marginEnd="@dimen/keyline_1"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/upload"
+        android:background="@drawable/action_btn"
+        android:minHeight="@dimen/divider_line_view_height"
+        android:minWidth="@dimen/divider_line_view_height"
+        android:text="@string/upload"
+        android:layout_marginRight="@dimen/keyline_1"
+        android:layout_marginEnd="@dimen/keyline_1"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+</RelativeLayout>

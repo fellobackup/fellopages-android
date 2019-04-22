@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_background">
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/header_title"
+        android:visibility="gone"
+        android:padding="@dimen/padding_15dp"
+        android:paddingStart="@dimen/padding_15dp"
+        android:paddingEnd="@dimen/padding_15dp"
+        android:gravity="center_vertical"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_view_height"
+        android:layout_below="@+id/header_title"
+        android:id="@+id/divider"
+        android:visibility="gone"
+        android:background="@color/body_text_lightest"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_below="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <include layout="@layout/cart_info_bottom" />
+
+    <include layout ="@layout/error_view" />
+
+
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/imageViewAlbumArt"
+        android:layout_width="@dimen/user_image_width_height"
+        android:layout_height="@dimen/user_image_width_height"
+        android:paddingLeft="@dimen/album_info_margin"
+        android:paddingStart="@dimen/album_info_margin"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/album_info_margin"
+        android:paddingStart="@dimen/album_info_margin"
+        android:paddingRight="@dimen/album_info_margin"
+        android:paddingEnd="@dimen/album_info_margin"  >
+
+        <TextView
+            android:id="@+id/textSongName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            style="@style/TitleMediumView" />
+
+        <TextView
+            android:id="@+id/textAlbumName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:gravity="center_vertical"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="@color/grey_light"
+            android:textSize="@dimen/body_default_font_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnPause"
+            android:layout_width="@dimen/small_button_width"
+            android:layout_height="@dimen/small_button_width"
+            android:layout_margin="@dimen/album_info_margin"
+            android:background="@drawable/ic_pause_white" />
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="@dimen/small_button_width"
+            android:layout_height="@dimen/small_button_width"
+            android:layout_margin="@dimen/album_info_margin"
+            android:background="@drawable/ic_play_white"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="@dimen/small_button_width"
+            android:layout_height="@dimen/small_button_width"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_next_white" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="@dimen/small_button_width"
+        android:layout_height="@dimen/small_button_width"
+        android:layout_marginLeft="@dimen/album_info_margin"
+        android:layout_marginStart="@dimen/album_info_margin"
+        android:background="@drawable/ic_clear_white" />
+
+</LinearLayout>

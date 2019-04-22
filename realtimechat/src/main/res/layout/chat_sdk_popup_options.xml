@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_5dp"
+    android:divider="?android:dividerHorizontal"
+    android:showDividers="middle"
+    android:dividerPadding="10dp"
+    android:background="@drawable/message_options_border">
+
+    <Button
+        style="@style/MessageOptionButtonStyle"
+        android:text="@string/image"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_photo_camera_black_24dp"
+        android:id="@+id/photo_attachment_btn"/>
+
+    <Button
+        style="@style/MessageOptionButtonStyle"
+        android:text="@string/video"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_videocam_black_24dp"
+        android:id="@+id/video_attachment_btn"/>
+
+    <Button
+        style="@style/MessageOptionButtonStyle"
+        android:text="@string/audio"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_music_black_24dp"
+        android:id="@+id/audio_attachment_btn"/>
+
+<!-- Document Option -->
+    <!--<Button-->
+        <!--style="@style/MessageOptionButtonStyle"-->
+        <!--android:text="@string/document_attachment"-->
+        <!--android:drawableStart="@drawable/ic_insert_drive_file_black_24dp"-->
+        <!--android:id="@+id/document_attachment_btn"/>-->
+
+</LinearLayout>

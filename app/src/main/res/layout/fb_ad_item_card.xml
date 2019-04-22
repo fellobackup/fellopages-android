@@ -1,0 +1,109 @@
+<!--
+  ~
+  ~ Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~ You may not use this file except in compliance with the
+  ~ SocialEngineAddOns License Agreement.
+  ~ You may obtain a copy of the License at:
+  ~ https://www.socialengineaddons.com/android-app-license
+  ~ The full copyright and license information is also mentioned
+  ~ in the LICENSE file that was distributed with this
+  ~ source code.
+  ~
+  -->
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ad_unit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="@dimen/card_view_elevation">
+
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/native_ad_icon"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/recycler_grid_cover_height"
+            android:scaleType="fitXY"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/descr_image" />
+
+        <com.fellopages.mobileapp.classes.common.ui.CircularImageView
+            android:layout_width="@dimen/tagview_image_height_width"
+            android:layout_height="@dimen/tagview_image_height_width"
+            android:layout_alignTop="@+id/native_ad_icon"
+            android:layout_alignRight="@+id/native_ad_icon"
+            android:layout_alignEnd="@+id/native_ad_icon"
+            android:padding="@dimen/padding_3dp"
+            android:paddingEnd="@dimen/padding_3dp"
+            android:paddingStart="@dimen/padding_3dp"
+            android:id="@+id/remove_ads_button"
+            android:layout_marginTop="@dimen/minus_margin_2dp"
+            android:layout_marginRight="@dimen/minus_margin_2dp"
+            android:layout_marginEnd="@dimen/minus_margin_2dp"
+            app:civ_border="true"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/white"
+            android:visibility="gone"
+            android:src="@drawable/ic_cancel_black_24dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/native_ad_icon"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:id="@+id/textContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/appinstall_store"
+                android:layout_toStartOf="@+id/appinstall_store"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/native_ad_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:layout_gravity="center_vertical"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/native_ad_body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CaptionView"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/appinstall_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ad_badge"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/blog_image_view_margin"
+                android:layout_marginEnd="@dimen/blog_image_view_margin"
+                android:contentDescription="@string/descr_image"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+

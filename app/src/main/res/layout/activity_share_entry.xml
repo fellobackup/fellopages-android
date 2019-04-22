@@ -1,0 +1,84 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/shareBlock"
+    tools:context="com.fellopages.mobileapp.classes.common.activities.ShareEntry">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/shareTextBox"
+        style="@style/TitleView"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:textColorHint="@color/gray_text_color"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@color/white"/>
+
+    <View android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@color/light_gray" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/share_block"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_width="fill_parent"
+        app:cardUseCompatPadding="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/contentImage"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/feed_attachment_image_height">
+        </ImageView>
+
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:layout_width="fill_parent"
+            android:layout_gravity="bottom"
+            android:id="@+id/contentTitle"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="@dimen/body_default_font_size"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.CardView>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/CircularProgress"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
+

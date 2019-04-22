@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">nTrivia</string>
+    <string name="app.host">http://54.202.10.160</string>
+    <string name="app.currencySymbol">₦</string>
+    <string name="socket.host">http://54.202.10.160</string>
+    <string name="socket.port">3000</string>
+    <string name="wowza.host">54.202.10.160</string>
+    <string name="wowza.port">1935</string>
+    <string name="wowza.application">live</string>
+    <string name="settings.answer_time">10</string>
+    <string name="settings.winners_time">10</string>
+    <string name="facebook.client_id">437972373251014</string>
+    <string name="video.width">360</string>
+    <string name="video.height">640</string>
+    <string name="shared.key">com.uniprogy.outquiz.SHARED</string>
+    <string name="facebook_app_id">437972373251014</string>
+    <string name="fb_login_protocol_scheme">fb437972373251014</string>
+</resources>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_view"
+    android:background="@android:color/transparent"
+    android:padding="@dimen/padding_1dp"
+    android:paddingEnd="@dimen/padding_1dp"
+    android:paddingStart="@dimen/padding_1dp">
+
+    <!-- Thumbnail Image -->
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/default_error"
+        android:contentDescription="@string/descr_image"
+        android:scaleType="centerCrop" />
+
+
+    <ImageView
+        android:id="@+id/gif_icon"
+        android:layout_width="@dimen/speaker_image_size"
+        android:layout_height="@dimen/speaker_image_size"
+        android:layout_centerInParent="true"
+        android:src="@drawable/gif_icon"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:visibility="gone"
+        android:contentDescription="@string/image_caption" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toEndOf="@+id/thumbnail"
+        android:paddingBottom="@dimen/padding_2dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/description_block">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_marginRight="@dimen/margin_5dp"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:paddingRight="@dimen/padding_20dp"
+            android:paddingEnd="@dimen/padding_20dp"
+            android:id="@+id/image_desc"/>
+
+        <ImageView
+            android:layout_width="@dimen/tagview_image_height_width"
+            android:layout_height="@dimen/tagview_image_height_width"
+            android:scaleType="centerCrop"
+            android:layout_centerInParent="true"
+            android:layout_alignRight="@+id/image_desc"
+            android:layout_alignEnd="@+id/image_desc"
+            android:layout_marginTop="@dimen/minus_margin_2dp"
+            android:layout_marginRight="@dimen/minus_margin_2dp"
+            android:layout_marginEnd="@dimen/minus_margin_2dp"
+            android:id="@+id/image_remove"
+            android:src="@drawable/ic_clear_grey"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/thumbnail"
+        android:layout_alignEnd="@+id/thumbnail"
+        android:id="@+id/btn_image_remove"
+        android:visibility="gone"
+        android:drawableTop="@drawable/ic_clear_grey"/>
+
+    <LinearLayout
+        android:id="@+id/photoBottomView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photoLikeCount"
+            android:textColor="@color/white"
+            android:textSize="@dimen/body_default_font_size"
+            android:padding="@dimen/album_grid_photo_padding"
+            android:paddingEnd="@dimen/album_grid_photo_padding"
+            android:paddingStart="@dimen/album_grid_photo_padding"
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:layout_gravity="start|center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photoLikeIcon"
+            android:textColor="@color/white"
+            android:textSize="@dimen/body_default_font_size"
+            android:paddingRight="@dimen/album_grid_photo_padding"
+            android:paddingEnd="@dimen/album_grid_photo_padding"
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:layout_gravity="start|center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photoCommentCount"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/white"
+            android:padding="@dimen/album_grid_photo_padding"
+            android:paddingEnd="@dimen/album_grid_photo_padding"
+            android:paddingStart="@dimen/album_grid_photo_padding"
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:layout_gravity="end|center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photoCommentIcon"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/white"
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:layout_gravity="end|center_vertical"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

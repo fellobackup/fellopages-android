@@ -1,0 +1,877 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fellopages.mobileapp.classes.modules.store.fragments.ShippingDetailFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/home_icon_tab_height">
+
+        <!--//main-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--******EMAIL ID*******-->
+            <LinearLayout
+                android:id="@+id/email_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:padding="@dimen/padding_15dp">
+
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbl_enter_email"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/email_billing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--******FIRST NAME*******-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:id="@+id/layout_bill_name"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:padding="@dimen/padding_15dp">
+
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/first_name_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:maxLines="1" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <!--*******second name*******-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_second_name"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/second_name_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_send_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:maxLines="1" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <!--******PHONE NO.********-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_ph_no"
+                android:padding="16dp">
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_number_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_ph_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:maxLength="12" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <!--******Country********-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_country"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:focusableInTouchMode="false"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--******Region / State********-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_region"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/billing_region"
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_rgn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:focusableInTouchMode="false" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--******CITY********-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_city"
+                android:padding="16dp">
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:maxLines="1"
+                        android:inputType="text" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--******LOCALITY********-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_locality"
+                android:padding="16dp">
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/locality_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_locality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:maxLines="1"
+                        android:inputType="text" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--******zip********-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_zip"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zip_code_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_zip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:maxLength="7" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--******ADDRESS********-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/layout_bill_addr"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_weight=".6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address_label"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color" />
+
+                <LinearLayout
+                    android:layout_weight="0.4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/bill_addr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:background="#00000000"
+                        android:inputType="textMultiLine" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_light" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--******SWITCH********-->
+
+            <LinearLayout
+                android:id="@+id/switch_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:padding="16dp">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shipping_switch_label"
+                    android:textSize="@dimen/text_size_extra_small"
+                    android:textColor="@color/gray_text_color"
+                    android:paddingTop="8dp"/>
+
+                <LinearLayout
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/addr_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shipping_block"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:orientation="vertical">
+
+
+                <!--******FIRST NAME*******-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/layout_ship_name"
+                    android:padding="@dimen/padding_15dp">
+
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/first_name_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:maxLines="1" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <!--*******second name*******-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/layout_ship_second_name"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/second_name_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_second_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:maxLines="1" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <!--******PHONE NO.********-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/layout_ship_ph_no"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_number_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_ph_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:maxLines="1"
+                            android:inputType="number"
+                            android:maxLength="12" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--******Country********-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/layout_ship_country"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/country_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_country"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:focusableInTouchMode="false" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--******Region / State********-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/layout_ship_region"
+                    android:visibility="gone"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/shipping_region"
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_rgn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:focusableInTouchMode="false" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--******CITY********-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/layout_ship_city"
+                    android:visibility="gone"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/city_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:maxLines="1"
+                            android:inputType="textCapCharacters" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--******LOCALITY********-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/layout_ship_locality"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/locality_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_locality"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:maxLines="1"
+                            android:inputType="text" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--******zip********-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/layout_ship_zip"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zip_code_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_zip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:maxLines="1"
+                            android:inputType="number"
+                            android:maxLength="7" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--******ADDRESS********-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:id="@+id/layout_ship_addr"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_weight=".6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address_label"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/gray_text_color" />
+
+                    <LinearLayout
+                        android:layout_weight="0.4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/ship_addr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:background="#00000000"
+                            android:inputType="textMultiLine" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray_light" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+    ******ORDER******
+
+    <TextView
+        android:id="@+id/order"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_icon_tab_height"
+        android:background="@color/themeButtonColor"
+        android:text="@string/continue_to_order_label"
+        android:textSize="@dimen/body_default_font_size"
+        android:textColor="@color/white"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:drawableRight="@drawable/ic_arrow_forward_24dp"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

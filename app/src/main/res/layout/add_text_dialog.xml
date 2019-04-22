@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_overlay"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/top_view"
+        android:background="@drawable/gradient_bg">
+
+        <TextView
+            android:id="@+id/add_text_done_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:background="@drawable/rounded_border_text_view"
+            android:paddingTop="@dimen/padding_6dp"
+            android:paddingBottom="@dimen/padding_6dp"
+            android:paddingLeft="@dimen/padding_12dp"
+            android:paddingStart="@dimen/padding_12dp"
+            android:paddingRight="@dimen/padding_12dp"
+            android:paddingEnd="@dimen/padding_12dp"
+            android:text="@string/action_bar_button_title"
+            android:textAllCaps="false"
+            android:alpha=".8"
+            android:textColor="@color/white"
+            android:textSize="@dimen/body_default_font_size" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/add_text_edit_text"
+        style="@style/EditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_text_color_picker_relative_layout"
+        android:layout_below="@+id/top_view"
+        android:background="@null"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:textSize="@dimen/text_editor_size" />
+
+    <RelativeLayout
+        android:id="@+id/add_text_color_picker_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/add_text_color_picker_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:background="@android:color/black"
+            tools:listitem="@layout/color_picker_item_list" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

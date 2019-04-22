@@ -1,0 +1,72 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_10dp"
+    android:paddingRight="@dimen/padding_10dp"
+    android:paddingStart="@dimen/padding_10dp"
+    android:paddingEnd="@dimen/padding_10dp"
+    android:layout_marginTop="@dimen/margin_5dp">
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_account_alert_message"
+        android:textSize="@dimen/body_default_font_size"
+        android:textColor="@color/black"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.BaseButton
+        android:id="@+id/deleteAccountButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorPrimary"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        app:cornerRadius="@dimen/base_button_default_corner_radius"
+        app:normalStateColor="@color/themeButtonColor"
+        android:text="@string/delete_account_button_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/or_text"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginTop="@dimen/margin_5dp"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.BaseButton
+        android:id="@+id/cancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        app:cornerRadius="@dimen/base_button_default_corner_radius"
+        app:normalStateColor="@color/grey"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/delete_account_cancel_button_text"/>
+
+</LinearLayout>

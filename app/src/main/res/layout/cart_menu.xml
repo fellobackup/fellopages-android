@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cart_icon_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingRight="@dimen/padding_5dp">
+
+    <ImageView
+        android:id="@+id/cart_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/padding_8dp"
+        android:src="@drawable/ic_shopping_cart" />
+
+    <com.fellopages.mobileapp.classes.common.ui.BadgeView
+        android:id="@+id/cart_item_count"
+        android:layout_width="@dimen/unread_indicator_size"
+        android:layout_height="@dimen/unread_indicator_size"
+        android:layout_alignTop="@id/cart_icon"
+        android:layout_alignEnd="@id/cart_icon"
+        android:layout_alignRight="@id/cart_icon"
+        android:visibility="gone"
+        android:background="@drawable/badge_bg"
+        android:ellipsize="none"
+        android:padding="@dimen/element_spacing_xsmall"
+        android:singleLine="true"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

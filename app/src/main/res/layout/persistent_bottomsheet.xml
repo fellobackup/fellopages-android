@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomsheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/grey_lightest"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="@dimen/home_icon_tab_height"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_icon_tab_height"
+        android:id="@+id/attachment"
+        android:paddingLeft="@dimen/margin_10dp"
+        android:paddingStart="@dimen/margin_10dp"
+        android:paddingRight="@dimen/margin_10dp"
+        android:paddingEnd="@dimen/margin_10dp"
+        android:background="@drawable/top_divider"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/photo"
+            android:layout_toStartOf="@+id/photo"
+            android:layout_marginRight="@dimen/padding_16dp"
+            android:layout_marginEnd="@dimen/padding_16dp"
+            android:text="@string/add_photo_and_more"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_medium_font_size" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/photo"
+            android:paddingLeft="@dimen/padding_2dp"
+            android:paddingStart="@dimen/padding_2dp"
+            android:paddingRight="@dimen/padding_2dp"
+            android:paddingEnd="@dimen/padding_2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/body_large_font_size"
+            android:textColor="@color/light_green"
+            android:layout_toLeftOf="@+id/checkin"
+            android:layout_toStartOf="@+id/checkin" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/checkin"
+            android:paddingLeft="@dimen/padding_2dp"
+            android:paddingStart="@dimen/padding_2dp"
+            android:paddingRight="@dimen/padding_2dp"
+            android:paddingEnd="@dimen/padding_2dp"
+            android:textSize="@dimen/body_large_font_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_pink"
+            android:layout_toLeftOf="@+id/emoticons"
+            android:layout_toStartOf="@+id/emoticons" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/emoticons"
+            android:paddingLeft="@dimen/padding_2dp"
+            android:paddingStart="@dimen/padding_2dp"
+            android:paddingRight="@dimen/padding_2dp"
+            android:paddingEnd="@dimen/padding_2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_yellow"
+            android:textSize="@dimen/body_large_font_size"
+            android:layout_toLeftOf="@+id/tag_friends"
+            android:layout_toStartOf="@+id/tag_friends" />
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/tag_friends"
+            android:paddingLeft="@dimen/padding_2dp"
+            android:paddingStart="@dimen/padding_2dp"
+            android:paddingRight="@dimen/padding_2dp"
+            android:paddingEnd="@dimen/padding_2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/body_large_font_size"
+            android:textColor="@color/light_blue"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_view_height"
+        android:layout_gravity="center"
+        android:background="@drawable/top_divider"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:clipToPadding="false"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+
+

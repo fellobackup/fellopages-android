@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_title"
+        android:textSize="@dimen/title_font_size"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/new_version_available"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:id="@+id/tv_description"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_download"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:text="@string/download_button_label"
+        android:textSize="@dimen/body_medium_font_size"
+        android:textColor="@color/themeButtonColor"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_reming_me_later"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:textSize="@dimen/body_medium_font_size"
+        android:text="@string/remind_me_later"
+        android:textColor="@color/themeButtonColor"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_ignore"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:text="@string/ignore_request_button"
+        android:textSize="@dimen/body_medium_font_size"
+        android:textColor="@color/themeButtonColor"
+        android:textStyle="bold"/>
+
+</LinearLayout>

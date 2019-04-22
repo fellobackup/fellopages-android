@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/otp_main"
+    tools:context="com.fellopages.mobileapp.classes.core.OTPActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/otp_title"
+            android:text="@string/otp_title_msg"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/sourceview_top_margin"
+            android:layout_marginLeft="@dimen/layout_left_margin"
+            android:layout_marginStart="@dimen/layout_left_margin"
+            android:layout_marginRight="@dimen/layout_right_margin"
+            android:layout_marginEnd="@dimen/layout_right_margin" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mobile_no"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/layout_left_margin"
+            android:layout_marginStart="@dimen/layout_left_margin"
+            android:layout_marginRight="@dimen/layout_right_margin"
+            android:layout_marginEnd="@dimen/layout_right_margin" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/otpWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_left_margin"
+                android:layout_marginStart="@dimen/layout_left_margin"
+                android:layout_marginRight="@dimen/layout_right_margin"
+                android:layout_marginEnd="@dimen/layout_right_margin"
+                android:layout_marginTop="@dimen/sourceview_top_margin">
+
+                <EditText
+                    android:id="@+id/otp_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="@dimen/sourceview_top_margin"
+                    android:drawablePadding="@dimen/edit_text_drawable_padding"
+                    android:textColor="@color/black"
+                    android:maxLines="1"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/resend_otp"
+                android:text="@string/otp_resend_otp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp"
+                android:layout_marginRight="@dimen/margin_25dp"
+                android:layout_marginEnd="@dimen/margin_25dp" />
+
+        </RelativeLayout>
+
+        <com.fellopages.mobileapp.classes.common.ui.BaseButton
+            android:id="@+id/otp_verify_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:textColor="@color/textColorPrimary"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:visibility="visible"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/login_view_top_margin"
+            android:layout_marginLeft="@dimen/layout_left_margin"
+            android:layout_marginStart="@dimen/layout_left_margin"
+            android:layout_marginRight="@dimen/layout_right_margin"
+            android:layout_marginEnd="@dimen/layout_right_margin"
+            app:cornerRadius="@dimen/base_button_default_corner_radius"
+            app:normalStateColor="@color/colorPrimary"
+            android:text="@string/otp_verify_button"
+            style="@style/BodyMediumView"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/otp_timer"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_21sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:layout_marginLeft="@dimen/layout_left_margin"
+            android:layout_marginStart="@dimen/layout_left_margin"
+            android:layout_marginRight="@dimen/layout_right_margin"
+            android:layout_marginEnd="@dimen/layout_right_margin" />
+
+    </LinearLayout>
+
+</RelativeLayout>

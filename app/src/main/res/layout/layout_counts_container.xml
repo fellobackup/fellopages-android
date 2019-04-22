@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    android:id="@+id/counts_container"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:textColor="@color/dark_gray"
+        android:id="@+id/view_count_icon"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginStart="@dimen/space_size"
+        android:layout_marginLeft="@dimen/space_size"
+        android:textColor="@color/dark_gray"
+        android:id="@+id/view_count" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:textColor="@color/dark_gray"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginLeft="@dimen/margin_8dp"
+        android:id="@+id/review_count_icon"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginStart="@dimen/space_size"
+        android:layout_marginLeft="@dimen/space_size"
+        android:textColor="@color/dark_gray"
+        android:id="@+id/review_count" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginLeft="@dimen/margin_8dp"
+        android:textColor="@color/dark_gray"
+        android:id="@+id/comment_count_icon"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginStart="@dimen/space_size"
+        android:layout_marginLeft="@dimen/space_size"
+        android:textColor="@color/dark_gray"
+        android:id="@+id/comment_count" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginLeft="@dimen/margin_8dp"
+        android:textColor="@color/dark_gray"
+        android:id="@+id/like_count_icon"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginStart="@dimen/space_size"
+        android:layout_marginLeft="@dimen/space_size"
+        android:textColor="@color/dark_gray"
+        android:id="@+id/like_count" />
+
+</LinearLayout>

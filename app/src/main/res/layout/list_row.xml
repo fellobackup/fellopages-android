@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/blog_image_view_margin"
+    android:layout_centerInParent="true">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/blog_image_view_margin">
+
+        <ImageView
+            android:id="@+id/contentImage"
+            android:layout_width="@dimen/user_image_width_height"
+            android:layout_height="@dimen/user_image_width_height"
+            android:layout_margin="@dimen/blog_image_view_margin"
+            android:layout_marginStart="@dimen/blog_image_view_margin"
+            android:layout_marginEnd="@dimen/blog_image_view_margin"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center">
+        </ImageView>
+
+        <!-- it's used to show closed icon on poll list -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/closeIcon"
+            android:layout_gravity="center"
+            style="@style/TitleMediumView"
+            android:layout_marginTop="@dimen/margin_25dp"
+            android:layout_marginLeft="@dimen/list_row_textview_marginLeft"
+            android:layout_marginStart="@dimen/list_row_textview_marginLeft"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateInfo"
+            android:background="@color/colorAccent"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:weightSum="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                style="@style/TitleLargeView"
+                android:id="@+id/day"
+                android:layout_weight=".5"
+                android:layout_marginTop="@dimen/margin_8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                style="@style/TitleLargeView"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:id="@+id/month"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/blog_image_view_margin"
+        android:layout_marginStart="@dimen/layout_left_right_margin"
+        android:layout_marginLeft="@dimen/layout_left_right_margin"
+        android:layout_marginRight="@dimen/layout_left_right_margin"
+        android:layout_marginEnd="@dimen/layout_left_right_margin"
+        android:id="@+id/contentInfoBlock"
+        android:layout_weight=".8"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleView"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:id="@+id/contentTitle" />
+
+
+        <!-- Date layout Mytickets Page -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location_layout"
+            android:id="@+id/date_layout"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/margin_5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/body_text_3"
+                android:textSize="@dimen/body_default_font_size"
+                android:id="@+id/date_icon"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:textColor="@color/body_text_3"
+                android:textSize="@dimen/body_default_font_size"
+                android:id="@+id/eventTime"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:shadowColor="@color/text_shadow"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/orderInfo"
+            android:visibility="gone"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/globalSearchLayout"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/TitleView"
+                android:singleLine="true"
+                android:layout_weight=".60"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:id="@+id/title" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_weight=".40"
+                android:gravity="end"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/dark_gray"
+                android:id="@+id/moduleName" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/blog_image_view_margin"
+            style="@style/CaptionView"
+            android:textColor="@color/body_text_1"
+            android:id="@+id/contentDetail" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rsvpFilterLayout"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rsvpFilter"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_marginBottom="@dimen/margin_5dp"
+                android:drawSelectorOnTop="true" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/body_text_2"
+            android:id="@+id/viewCountDetail"
+            android:visibility="gone" />
+
+        <!--Price tag for mlt list-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/body_text_1"
+            android:id="@+id/price_tag"
+            android:visibility="gone" />
+
+        <include layout="@layout/layout_counts_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="@dimen/margin_5dp"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:id="@+id/counts_container"/>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/option_icon_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/option_icon_layout"
+        android:adjustViewBounds="false"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/sponsored_label"
+            android:id="@+id/sponsoredLabelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"/>
+
+        <include layout="@layout/featured_label"
+            android:id="@+id/featuredLabelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/memberOption"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:padding="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        style="@style/TitleView"
+        android:adjustViewBounds="false"/>
+
+</LinearLayout>

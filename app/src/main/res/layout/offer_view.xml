@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~    You may not use this file except in compliance with the
+  ~    SocialEngineAddOns License Agreement.
+  ~    You may obtain a copy of the License at:
+  ~    https://www.socialengineaddons.com/android-app-license
+  ~    The full copyright and license information is also mentioned
+  ~    in the LICENSE file that was distributed with this
+  ~    source code.
+  -->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:paddingTop="@dimen/padding_10dp"
+    android:paddingBottom="@dimen/padding_10dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/contentImage"
+        android:layout_width="@dimen/user_image_width_height"
+        android:layout_height="@dimen/user_image_width_height"
+        android:layout_margin="@dimen/blog_image_view_margin"
+        android:layout_marginStart="@dimen/blog_image_view_margin"
+        android:layout_marginEnd="@dimen/blog_image_view_margin"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/offerInfo"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/contentImage"
+        android:layout_toEndOf="@id/contentImage"
+        android:layout_marginStart="@dimen/layout_left_right_margin"
+        android:layout_marginLeft="@dimen/layout_left_right_margin"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleView"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:id="@+id/contentTitle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/blog_image_view_margin"
+            style="@style/CaptionView"
+            android:textColor="@color/body_text_2"
+            android:id="@+id/coupon_start_date" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/blog_image_view_margin"
+            style="@style/CaptionView"
+            android:textColor="@color/body_text_2"
+            android:id="@+id/contentDetail" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/body_text_2"
+            android:id="@+id/claimCount"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/body_text_2"
+            android:id="@+id/couponCode"
+            android:visibility="gone" />
+
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            style="@style/CaptionView"
+            android:textColor="@color/white"
+            android:id="@+id/couponCodeButton"
+            android:background="@color/black"
+            android:padding="@dimen/padding_8dp"
+            android:paddingStart="@dimen/padding_8dp"
+            android:paddingEnd="@dimen/padding_8dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CaptionView"
+        android:textColor="@color/body_text_2"
+        android:id="@+id/offerDescription"
+        android:layout_below="@+id/offerInfo"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:layout_margin="@dimen/blog_image_view_margin"
+        android:layout_marginStart="@dimen/blog_image_view_margin"
+        android:layout_marginEnd="@dimen/blog_image_view_margin"
+        android:visibility="gone" />
+
+</RelativeLayout>

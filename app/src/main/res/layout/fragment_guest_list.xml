@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <include
+            layout="@layout/spinner_view"
+            android:id="@+id/categoryFilterLayout"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:id="@+id/waitingMemberBlock"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                style="@style/BodyMediumView"
+                android:textColor="@color/black"
+                android:id="@+id/waitingMemberText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/black"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                style="@style/BodyMediumView"
+                android:id="@+id/nextIcon"/>
+
+            <View
+                android:layout_height="@dimen/divider_line_view_height"
+                android:id="@+id/saperator"
+                android:layout_below="@+id/waitingMemberText"
+                android:layout_marginLeft="@dimen/comment_box_padding"
+                android:layout_marginStart="@dimen/comment_box_padding"
+                android:layout_marginRight="@dimen/comment_box_padding"
+                android:layout_marginEnd="@dimen/comment_box_padding"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_width="match_parent"
+                android:background="@color/light_gray" />
+
+        </RelativeLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipe_refresh_listview_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/padding_64dp"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="true"
+                android:divider="@color/gray_stroke_color"
+                android:dividerHeight="0.5dp" >
+            </ListView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+    <include layout ="@layout/error_view" />
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

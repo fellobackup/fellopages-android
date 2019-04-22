@@ -1,0 +1,281 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<resources>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+
+    <!-- START NEW UI -->
+    <declare-styleable name="SocialEngineAddOns">
+        <attr name="cardActionButtonStyle" format="reference"/>
+        <attr name="menuIconColor" format="color"/>
+        <attr name="menuIconColorDisabled" format="color"/>
+        <attr name="menuIconColorActionBar" format="color"/>
+        <attr name="messageBubbleColor" format="color"/>
+        <attr name="cardItemBackgroundColor" format="color"/>
+        <attr name="linePageIndicatorStyle" format="reference"/>
+        <attr name="textColorDrawerNamePrimary" format="color"/>
+        <attr name="textColorDrawerNameSecondary" format="color"/>
+        <attr name="progressWheelStyle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="IconActionButton">
+        <attr name="iabColor" format="color"/>
+        <attr name="iabActivatedColor" format="color"/>
+        <attr name="iabDisabledColor" format="color"/>
+        <attr name="iabIconWidth" format="dimension"/>
+        <attr name="iabIconHeight" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ColorLabelView">
+        <attr name="ignorePadding" format="boolean"/>
+        <attr name="backgroundColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="NameView">
+        <attr name="nv_primaryTextColor" format="color"/>
+        <attr name="nv_secondaryTextColor" format="color"/>
+        <attr name="nv_primaryTextStyle"/>
+        <attr name="nv_secondaryTextStyle"/>
+    </declare-styleable>
+
+    <attr name="nv_primaryTextStyle">
+        <flag name="normal" value="0"/>
+        <flag name="bold" value="1"/>
+        <flag name="italic" value="2"/>
+    </attr>
+    <attr name="nv_secondaryTextStyle">
+        <flag name="normal" value="0"/>
+        <flag name="bold" value="1"/>
+        <flag name="italic" value="2"/>
+    </attr>
+
+    <!-- END NEW UI -->
+
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="trimLength" format="integer"/>
+        <attr name="trim_length" format="integer"/>
+        <attr name="android_text" format="string"/>
+        <attr name="span_length" format="integer"/>
+        <attr name="spannable" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="BaseTheme">
+    <attr name="actionBarIconColor" format="color" />
+    <attr name="actionBarInsetStart" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MyGallery">
+        <attr name="android:galleryItemBackground" />
+    </declare-styleable>
+
+    <declare-styleable name="BezelImageView">
+        <attr name="maskDrawable" format="reference" />
+        <attr name="borderDrawable" format="reference" />
+        <attr name="desaturateOnPress" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseButton">
+        <attr name="normalStateColor" format="color"/>
+        <attr name="cornerRadius" format="dimension"/>
+    </declare-styleable>
+
+    <!-- CircularImageView Custom Styling -->
+    <declare-styleable name="CircularImageView">
+        <attr name="civ_border" format="boolean"/>
+        <attr name="civ_borderColor" format="color"/>
+        <attr name="civ_borderWidth" format="dimension"/>
+        <attr name="civ_selector" format="boolean"/>
+        <attr name="civ_selectorColor" format="color"/>
+        <attr name="civ_selectorStrokeColor" format="color"/>
+        <attr name="civ_selectorStrokeWidth" format="dimension"/>
+        <attr name="civ_shadow" format="boolean"/>
+        <attr name="civ_shadowRadius" format="float"/>
+        <attr name="civ_shadowDx" format="float"/>
+        <attr name="civ_shadowDy" format="float"/>
+        <attr name="civ_shadowColor" format="color"/>
+        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_shadow_color" format="color"/>
+        <attr name="civ_shadow_radius" format="float"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircularImageViewStyle">
+        <attr name="circularImageViewDefault" format="reference"/>
+    </declare-styleable>
+
+
+    <!-- FloatingAction Menu Styles -->
+
+    <declare-styleable name="CustomFloatingActionButton">
+        <attr name="fab_colorNormal" format="color" />
+        <attr name="fab_colorPressed" format="color" />
+        <attr name="fab_colorDisabled" format="color" />
+        <attr name="fab_colorRipple" format="color" />
+        <attr name="fab_showShadow" format="boolean" />
+        <attr name="fab_shadowColor" format="color" />
+        <attr name="fab_shadowRadius" format="dimension" />
+        <attr name="fab_shadowXOffset" format="dimension" />
+        <attr name="fab_shadowYOffset" format="dimension" />
+        <attr name="fab_size" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="mini" value="1" />
+        </attr>
+        <attr name="fab_showAnimation" format="reference" />
+        <attr name="fab_hideAnimation" format="reference" />
+        <attr name="fab_label" format="string" />
+        <attr name="fab_elevationCompat" format="dimension" />
+        <attr name="fab_progress_color" format="color" />
+        <attr name="fab_progress_backgroundColor" format="color" />
+        <attr name="fab_progress_indeterminate" format="boolean" />
+        <attr name="fab_progress_max" format="integer" />
+        <attr name="fab_progress" format="integer" />
+        <attr name="fab_progress_showBackground" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="FloatingActionMenu">
+        <attr name="menu_showShadow" format="boolean" />
+        <attr name="menu_buttonSpacing" format="dimension" />
+        <attr name="menu_labels_margin" format="dimension" />
+        <attr name="menu_labels_showAnimation" format="reference" />
+        <attr name="menu_labels_hideAnimation" format="reference" />
+        <attr name="menu_labels_paddingTop" format="dimension" />
+        <attr name="menu_labels_paddingLeft" format="dimension" />
+        <attr name="menu_labels_paddingRight" format="dimension" />
+        <attr name="menu_labels_paddingBottom" format="dimension" />
+        <attr name="menu_labels_padding" format="dimension" />
+        <attr name="menu_labels_textColor" format="reference|color" />
+        <attr name="menu_labels_textSize" format="dimension" />
+        <attr name="menu_labels_cornerRadius" format="dimension" />
+        <attr name="menu_labels_showShadow" format="boolean" />
+        <attr name="menu_labels_colorNormal" format="color" />
+        <attr name="menu_labels_colorPressed" format="color" />
+        <attr name="menu_labels_colorRipple" format="color" />
+        <attr name="menu_labels_position" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="menu_icon" format="reference" />
+        <attr name="menu_animationDelayPerItem" format="integer" />
+        <attr name="menu_buttonToggleAnimation" format="reference" />
+        <attr name="menu_labels_singleLine" format="boolean" />
+        <attr name="menu_labels_ellipsize" format="enum">
+            <enum name="none" value="0" />
+            <enum name="start" value="1" />
+            <enum name="middle" value="2" />
+            <enum name="end" value="3" />
+            <enum name="marquee" value="4" />
+        </attr>
+        <attr name="menu_labels_maxLines" format="integer" />
+        <attr name="menu_fab_size" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="mini" value="1" />
+        </attr>
+        <attr name="menu_labels_style" format="reference" />
+        <attr name="menu_shadowColor" format="color" />
+        <attr name="menu_shadowRadius" format="dimension" />
+        <attr name="menu_shadowXOffset" format="dimension" />
+        <attr name="menu_shadowYOffset" format="dimension" />
+        <attr name="menu_colorNormal" format="color" />
+        <attr name="menu_colorPressed" format="color" />
+        <attr name="menu_colorRipple" format="color" />
+        <attr name="menu_openDirection" format="enum">
+            <enum name="up" value="0" />
+            <enum name="down" value="1" />
+        </attr>
+        <attr name="menu_backgroundColor" format="color" />
+        <attr name="menu_fab_label" format="string" />
+        <attr name="menu_fab_show_animation" format="reference" />
+        <attr name="menu_fab_hide_animation" format="reference" />
+    </declare-styleable>
+
+    <!-- END of FLOATING ACTION MENU STYLES -->
+
+
+    <!-- Start Circle Indicator -->
+    <declare-styleable name="CircleIndicator">
+        <attr name="ci_width" format="dimension"/>
+        <attr name="ci_height" format="dimension"/>
+        <attr name="ci_margin" format="dimension"/>
+        <attr name="ci_animator" format="reference"/>
+        <attr name="ci_animator_reverse" format="reference"/>
+        <attr name="ci_drawable" format="reference"/>
+        <attr name="ci_drawable_unselected" format="reference"/>
+
+        <attr name="ci_orientation" format="enum">
+            <!-- Defines an horizontal widget. -->
+            <enum name="horizontal" value="0"/>
+            <!-- Defines a vertical widget. -->
+            <enum name="vertical" value="1"/>
+        </attr>
+
+        <attr name="ci_gravity">
+            <!-- Push object to the top of its container, not changing its size. -->
+            <flag name="top" value="0x30"/>
+            <!-- Push object to the bottom of its container, not changing its size. -->
+            <flag name="bottom" value="0x50"/>
+            <!-- Push object to the left of its container, not changing its size. -->
+            <flag name="left" value="0x03"/>
+            <!-- Push object to the right of its container, not changing its size. -->
+            <flag name="right" value="0x05"/>
+            <!-- Place object in the vertical center of its container, not changing its size. -->
+            <flag name="center_vertical" value="0x10"/>
+            <!-- Grow the vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill_vertical" value="0x70"/>
+            <!-- Place object in the horizontal center of its container, not changing its size. -->
+            <flag name="center_horizontal" value="0x01"/>
+            <!-- Grow the horizontal size of the object if needed so it completely fills its container. -->
+            <flag name="fill_horizontal" value="0x07"/>
+            <!-- Place the object in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+            <flag name="center" value="0x11"/>
+            <!-- Grow the horizontal and vertical size of the object if needed so it completely fills its container. -->
+            <flag name="fill" value="0x77"/>
+            <!-- Additional option that can be set to have the top and/or bottom edges of
+            the child clipped to its container's bounds.
+            The clip will be based on the vertical gravity: a top gravity will clip the bottom
+            edge, a bottom gravity will clip the top edge, and neither will clip both edges. -->
+            <flag name="clip_vertical" value="0x80"/>
+            <!-- Additional option that can be set to have the left and/or right edges of
+            the child clipped to its container's bounds.
+            The clip will be based on the horizontal gravity: a left gravity will clip the right
+            edge, a right gravity will clip the left edge, and neither will clip both edges. -->
+            <flag name="clip_horizontal" value="0x08"/>
+            <!-- Push object to the beginning of its container, not changing its size. -->
+            <flag name="start" value="0x00800003"/>
+            <!-- Push object to the end of its container, not changing its size. -->
+            <flag name="end" value="0x00800005"/>
+        </attr>
+
+    </declare-styleable>
+
+    <!-- End Circle Indicator -->
+
+    <declare-styleable name="StoriesProgressView">
+        <attr name="progressCount" format="integer|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomFloatingView">
+        <attr name="cfv_fabText" format="string" />
+        <attr name="cfv_fabTextColor" format="color" />
+        <attr name="cfv_fabIcon" format="reference" />
+        <attr name="cfv_fabIconColor" format="color" />
+    </declare-styleable>
+
+</resources>

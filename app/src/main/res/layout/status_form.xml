@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_medium_font_size"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_5dp"
+        android:paddingStart="@dimen/margin_5dp"
+        android:paddingEnd="@dimen/margin_5dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        android:visibility="gone"
+        android:textColor="@color/gray_text_color"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_5dp"
+        android:paddingStart="@dimen/margin_5dp"
+        android:paddingEnd="@dimen/margin_5dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:id="@+id/top_line"
+        android:background="@color/grey_light" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/form_view">
+
+        <ProgressBar
+            android:theme="@style/CircularProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_text_layout"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_label"
+                android:layout_gravity="center"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="@dimen/feed_attachment_image_height"
+                android:id="@+id/et_value"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:background="@color/white"
+                android:gravity="start|top"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_char_left"
+            android:visibility="gone"
+            android:textSize="@dimen/caption_font_size"
+            android:layout_below="@+id/edit_text_layout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_view"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:id="@+id/et_bottom_line"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_ok_action"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:text="@string/schedule"
+        android:textStyle="bold"
+        android:textSize="@dimen/body_medium_font_size"
+        android:textColor="@color/themeButtonColor"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_cancel"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:textSize="@dimen/body_medium_font_size"
+        android:text="@string/cancel_attachment"
+        android:textColor="@color/themeButtonColor"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_clear"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:text="@string/clear_text"
+        android:textSize="@dimen/body_medium_font_size"
+        android:textColor="@color/themeButtonColor" />
+
+    </LinearLayout>
+
+</LinearLayout>

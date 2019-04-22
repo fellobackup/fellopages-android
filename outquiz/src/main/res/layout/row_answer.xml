@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/answer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/scaleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/answer.neutral"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent=".5"
+        />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Title"
+        android:gravity="start|center"
+        android:textAppearance="?android:textAppearanceMedium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/statsTextView"
+        />
+
+    <TextView
+        android:id="@+id/statsTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="999999"
+        android:gravity="end|center"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent=".2"
+        />
+
+</android.support.constraint.ConstraintLayout>

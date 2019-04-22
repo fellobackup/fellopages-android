@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+<com.google.android.gms.ads.formats.NativeAppInstallAdView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/native_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/appinstall_app_icon"
+            android:layout_width="@dimen/user_image_width_height"
+            android:layout_height="@dimen/user_image_width_height"
+            android:layout_margin="@dimen/blog_image_view_margin"
+            android:layout_marginStart="@dimen/blog_image_view_margin"
+            android:layout_marginEnd="@dimen/blog_image_view_margin"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center">
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/layout_left_right_margin"
+            android:layout_marginLeft="@dimen/layout_left_right_margin"
+            android:layout_marginRight="@dimen/layout_left_right_margin"
+            android:layout_marginEnd="@dimen/layout_left_right_margin"
+            android:layout_weight=".8"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:id="@+id/appinstall_headline" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/blog_image_view_margin"
+                android:textSize="@dimen/body_default_font_size"
+                android:textColor="@color/body_text_1"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:id="@+id/appinstall_body" />
+
+            <RatingBar
+                android:id="@+id/appinstall_stars"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/appinstall_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ad_badge"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/blog_image_view_margin"
+            android:layout_marginRight="@dimen/blog_image_view_margin"/>
+
+    </LinearLayout>
+</com.google.android.gms.ads.formats.NativeAppInstallAdView>

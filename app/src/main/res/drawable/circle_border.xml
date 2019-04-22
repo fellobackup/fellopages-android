@@ -1,0 +1,27 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/circle_border_focused"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:state_pressed="false" />
+    <item android:drawable="@drawable/circle_border_pressed"
+        android:state_enabled="true"
+        android:state_focused="false"
+        android:state_pressed="true" />
+    <item android:drawable="@drawable/circle_border_pressed"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:state_pressed="true" />
+    <item android:drawable="@android:color/transparent" />
+</selector>

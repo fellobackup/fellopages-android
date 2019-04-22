@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/loadingProgress"
+        android:layout_gravity="center"/>
+
+    <!--Story select views-->
+    <com.fellopages.mobileapp.classes.common.ui.BezelImageView
+        android:layout_width="@dimen/profile_image_width_height"
+        android:layout_height="@dimen/profile_image_width_height"
+        android:id="@+id/owner_image"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:contentDescription="@string/image_caption"
+        android:scaleType="centerCrop"
+        app:maskDrawable="@drawable/circle_mask"
+        app:borderDrawable="@drawable/circle_border"
+        android:src="@drawable/default_user_profile"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/profile_image_width_height"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_toRightOf="@+id/owner_image"
+        android:layout_toEndOf="@+id/owner_image"
+        android:layout_toStartOf="@+id/select_story"
+        android:layout_toLeftOf="@+id/select_story"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/story_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/story_title"
+            android:drawablePadding="@dimen/padding_8dp"
+            android:gravity="center_vertical"
+            android:text="@string/your_story"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/story_desc"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/select_story"
+        android:layout_width="@dimen/margin_25dp"
+        android:layout_height="@dimen/margin_25dp"
+        android:layout_marginTop="@dimen/margin_25dp"
+        android:layout_marginRight="@dimen/margin_3dp"
+        android:layout_marginEnd="@dimen/margin_3dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/checkbox_selector"
+        android:button="@color/white"
+        android:checked="true" />
+
+
+    <!--Post select views-->
+    <ImageView
+        android:layout_width="@dimen/profile_image_width_height"
+        android:layout_height="@dimen/profile_image_width_height"
+        android:id="@+id/post_image"
+        android:background="@drawable/bg_dot"
+        android:src="@drawable/ic_web_24dp"
+        android:scaleType="center"
+        android:layout_below="@+id/owner_image"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:contentDescription="@string/image_caption" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/profile_image_width_height"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:layout_toRightOf="@+id/post_image"
+        android:layout_toEndOf="@+id/post_image"
+        android:layout_toStartOf="@+id/select_story"
+        android:layout_toLeftOf="@+id/select_story"
+        android:layout_below="@+id/owner_image"
+        android:id="@+id/post_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/post_title"
+            android:drawablePadding="@dimen/padding_8dp"
+            android:gravity="center_vertical"
+            android:text="@string/post_status_button_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_desc"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/select_post"
+        android:layout_width="@dimen/margin_25dp"
+        android:layout_height="@dimen/margin_25dp"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:layout_marginRight="@dimen/margin_3dp"
+        android:layout_marginEnd="@dimen/margin_3dp"
+        android:layout_below="@+id/owner_image"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:background="@drawable/checkbox_selector"
+        android:button="@color/white"
+        android:checked="false" />
+
+</RelativeLayout>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingBottom="@dimen/margin_8dp"
+    android:layout_height="@dimen/album_view_height">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/contentImage"
+        android:scaleType="centerCrop">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@drawable/album_view_background"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingBottom="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/BodyLargeView"
+                android:textColor="@color/white"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:id="@+id/contentTitle" />
+
+            <include layout="@layout/option_icon_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/option_icon_layout"
+                android:adjustViewBounds="false"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/ownerInfo"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_toLeftOf="@+id/memberInfo"
+                android:layout_toStartOf="@+id/memberInfo"
+                android:id="@+id/likeCountInfo"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:textSize="@dimen/body_default_font_size"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/memberInfo"
+                android:textSize="@dimen/body_default_font_size"
+                android:shadowColor="@color/text_shadow"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/optionIconHoriz"
+        android:shadowColor="@color/black"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:textSize="@dimen/comment_post_button_size"
+        android:shadowRadius="1"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/closeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        style="@style/TitleMediumView"/>
+
+    <include layout="@layout/featured_label"
+        android:id="@+id/featuredLabelLayout"/>
+
+    <include layout="@layout/sponsored_label"
+        android:id="@+id/sponsoredLabelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:id="@+id/view_nested_scroll_view"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_light"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/simple_view_layout"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_title"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingBottom="@dimen/padding_8dp"
+                style="@style/TitleLargeView"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:textColor="@color/body_text_3"
+                    android:text="@string/category_salutation"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_10dp"
+                    android:paddingTop="@dimen/padding_10dp"
+                    android:paddingEnd="@dimen/padding_5dp"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:paddingRight="@dimen/padding_5dp"
+                    android:paddingStart="@dimen/padding_5dp"
+                    android:paddingLeft="@dimen/padding_5dp"
+                    android:id="@+id/category"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:textColor="@color/body_text_3"
+                    android:id="@+id/post_by_text"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_10dp"
+                    android:paddingTop="@dimen/padding_10dp"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:paddingEnd="@dimen/padding_5dp"
+                    android:paddingRight="@dimen/padding_5dp"
+                    android:paddingStart="@dimen/padding_5dp"
+                    android:paddingLeft="@dimen/padding_5dp"
+                    android:id="@+id/listing_post_owner"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/body_default_font_size"
+                    android:textColor="@color/body_text_3"
+                    android:id="@+id/listing_post_date"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <include layout="@layout/owner_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/owner_detail_layout"
+            android:paddingTop="@dimen/padding_10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:visibility="gone"
+            android:id="@+id/owner_view_divider"
+            android:layout_height="@dimen/view_description_margin_top"/>
+
+        <GridLayout
+            android:id="@+id/profileFieldLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:paddingTop="@dimen/padding_15dp"
+            android:paddingBottom="@dimen/padding_15dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:fillViewport="true"
+            android:orientation="horizontal"
+            android:columnCount="3">
+        </GridLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:visibility="gone"
+            android:id="@+id/profile_field_divider"
+            android:layout_height="@dimen/view_description_margin_top"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:id="@+id/expiryListingInfo"
+            android:visibility="gone"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:layout_marginTop="@dimen/margin_15dp"
+            style="@style/BodyMediumView"
+            android:paddingTop="@dimen/padding_20dp"
+            android:paddingBottom="@dimen/padding_20dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/grey_light"
+            android:visibility="gone"
+            android:id="@+id/expiry_listing_info_layout_divider"
+            android:layout_height="@dimen/margin_10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/apply_now_block"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:layout_marginBottom="@dimen/margin_15dp"
+            android:layout_marginLeft="@dimen/margin_40dp"
+            android:layout_marginStart="@dimen/margin_40dp"
+            android:layout_marginRight="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_40dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_20dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:id="@+id/apply_now_icon" />
+
+            <View
+                android:layout_width="1dp"
+                android:background="@color/grey_light"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/black"
+                android:text="@string/apply_now_button_text"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_12dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/apply_now" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/contact_info_block"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:layout_marginBottom="@dimen/margin_15dp"
+            android:layout_marginLeft="@dimen/margin_40dp"
+            android:layout_marginStart="@dimen/margin_40dp"
+            android:layout_marginRight="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_40dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_20dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:id="@+id/contact_info_icon" />
+
+            <View
+                android:layout_width="1dp"
+                android:background="@color/grey_light"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/black"
+                android:text="Contact"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_12dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/contact_info_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/follow_block"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/margin_15dp"
+            android:layout_marginLeft="@dimen/margin_40dp"
+            android:layout_marginStart="@dimen/margin_40dp"
+            android:layout_marginRight="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_40dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_20dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:id="@+id/follow_icon" />
+            <View
+                android:layout_width="1dp"
+                android:background="@color/grey_light"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/black"
+                android:text="Follow"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_12dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/follow_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/review_block"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/margin_15dp"
+            android:layout_marginLeft="@dimen/margin_40dp"
+            android:layout_marginStart="@dimen/margin_40dp"
+            android:layout_marginRight="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_40dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_20dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:id="@+id/review_icon" />
+            <View
+                android:layout_width="1dp"
+                android:background="@color/grey_light"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/black"
+                android:text="@string/title_write_a_review"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_12dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/review_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/wishlist_block"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/margin_15dp"
+            android:layout_marginLeft="@dimen/margin_40dp"
+            android:layout_marginStart="@dimen/margin_40dp"
+            android:layout_marginRight="@dimen/margin_40dp"
+            android:layout_marginEnd="@dimen/margin_40dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/themeButtonColor"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:layout_marginStart="@dimen/margin_20dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_12dp"
+                android:id="@+id/wishlist_icon" />
+            <View
+                android:layout_width="1dp"
+                android:background="@color/grey_light"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/black"
+                android:text="@string/add_wishlist_text"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_12dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/wishlist_text" />
+        </LinearLayout>
+
+        <!-- todo in future for Directory pages plugin when Members extension will be worked on -->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:id="@+id/member_block"-->
+            <!--android:weightSum="1"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_marginTop="@dimen/margin_15dp"-->
+            <!--android:layout_marginLeft="@dimen/margin_40dp"-->
+            <!--android:layout_marginStart="@dimen/margin_40dp"-->
+            <!--android:layout_marginRight="@dimen/margin_40dp"-->
+            <!--android:layout_marginEnd="@dimen/margin_40dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="0.1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:textSize="@dimen/title_font_size"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:layout_marginLeft="@dimen/margin_20dp"-->
+                <!--android:layout_marginStart="@dimen/margin_20dp"-->
+                <!--android:layout_marginRight="@dimen/margin_10dp"-->
+                <!--android:layout_marginEnd="@dimen/margin_10dp"-->
+                <!--android:layout_marginTop="@dimen/margin_12dp"-->
+                <!--android:layout_marginBottom="@dimen/margin_10dp"-->
+                <!--android:id="@+id/member_icon" />-->
+            <!--<View-->
+                <!--android:layout_width="1dp"-->
+                <!--android:background="@color/grey_light"-->
+                <!--android:layout_marginLeft="@dimen/margin_10dp"-->
+                <!--android:layout_marginStart="@dimen/margin_10dp"-->
+                <!--android:layout_marginRight="@dimen/margin_10dp"-->
+                <!--android:layout_marginEnd="@dimen/margin_10dp"-->
+                <!--android:layout_height="match_parent"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="0.9"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="@dimen/title_font_size"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:text="Become a member"-->
+                <!--android:layout_marginTop="@dimen/margin_12dp"-->
+                <!--android:layout_marginBottom="@dimen/margin_12dp"-->
+                <!--android:layout_marginLeft="@dimen/margin_10dp"-->
+                <!--android:layout_marginStart="@dimen/margin_10dp"-->
+                <!--android:id="@+id/member_text" />-->
+        <!--</LinearLayout>-->
+
+        <include layout="@layout/web_view"/>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

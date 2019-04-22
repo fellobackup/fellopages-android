@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_marginEnd="@dimen/margin_5dp"
+    android:background="@drawable/bg_msg_to"
+    android:layout_height="match_parent">
+
+    <com.socialengineaddons.messenger.ui.CircularImageView
+        android:layout_width="@dimen/user_image_width"
+        android:scaleType="centerCrop"
+        android:layout_height="@dimen/user_image_height"
+        android:id="@+id/user_image"
+        app:civ_border="false"
+        app:civ_borderColor="@color/black"
+        app:civ_borderWidth="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/userName"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/cancel"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_width="@dimen/tagview_image_height_width"
+        android:layout_height="@dimen/tagview_image_height_width"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_clear_black_24dp"/>
+
+</LinearLayout>

@@ -1,0 +1,167 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+project.ext {
+    appVersionCode = 44
+    appVersionName = '3.3.1'
+    storeFile = '/var/www/html/androidapp/Deepak/New/Seandroidnativeapp/Seandroidnativeapp/key-store-219'
+    storePassword = 'seaddonsandroid_219'
+    keyAlias = 'seaddonsandroid_219'
+    keyPassword = 'seaddonsandroid_219'
+}
+android {
+    compileSdkVersion 27
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        multiDexEnabled true
+        applicationId 'com.fellopages.mobileapp'
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode project.ext.appVersionCode.toInteger()
+        versionName project.ext.appVersionName
+        vectorDrawables.useSupportLibrary = true
+    }
+    signingConfigs {
+        release {
+            storeFile file(project.storeFile)
+            storePassword project.storePassword
+            keyAlias project.keyAlias
+            keyPassword project.keyPassword
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "2g" //specify the heap size for the dex process
+        preDexLibraries = false //delete the already predexed libraries
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+    aaptOptions {
+        cruncherEnabled = false
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            crunchPngs false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':WordPressEditor')
+    implementation project(':emoticon')
+    implementation project(':showcasecard')
+
+    implementation('org.wordpress:utils:1.6.0') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation('com.twitter.sdk.android:twitter:3.3.0@aar') {
+        transitive = true
+        exclude group: 'com.squareup.okhttp3'
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.airbnb:deeplinkdispatch:3.1.1'
+    annotationProcessor 'com.airbnb:deeplinkdispatch-processor:3.1.1'
+
+    implementation('com.facebook.android:audience-network-sdk:4.23.0') {
+        exclude group: 'com.android.support'
+        exclude group: 'com.google.android'
+        exclude group: 'com.google.android.exoplayer'
+    }
+
+    implementation 'com.android.support:support-v13:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation('com.android.support:recyclerview-v7:27.1.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation('com.android.support:design:27.1.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation('com.android.support:customtabs:27.1.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation('com.google.android.gms:play-services-location:15.0.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation('com.google.android.gms:play-services-maps:15.0.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+    implementation('com.google.android.gms:play-services-ads:15.0.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'org.jsoup:jsoup:1.10.1'
+    implementation('com.wunderlist:sliding-layer:1.2.5') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation('com.facebook.android:facebook-android-sdk:4.18.0') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation('com.google.firebase:firebase-messaging:17.1.0') {
+        exclude group: 'com.google.android'
+    }
+
+    implementation('com.google.firebase:firebase-core:16.0.1') {
+        exclude group: 'com.google.android'
+    }
+
+    implementation 'me.leolin:ShortcutBadger:1.1.19@aar'
+    implementation('com.github.bumptech.glide:glide:4.0.0') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation('ja.burhanrashid52:photoeditor:0.1.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation('com.github.zomato:androidphotofilters:1.0.1') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
+        transitive = true
+    }
+
+    // exo player
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
+}
+//TODO
+//Enable it for check dependency tree of any library
+//configurations {
+//    custom
+//}
+//
+//dependencies {
+//    custom 'com.facebook.android:audience-network-sdk:4.23.0'
+//}
+apply plugin: 'com.google.gms.google-services'

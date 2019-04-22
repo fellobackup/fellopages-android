@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topView"
+    android:background="@drawable/above_shadow_slightly_darker"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true">
+
+    <ImageView
+        android:id="@+id/navigation_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/top_layout_button_padding"
+        android:paddingStart="@dimen/top_layout_button_padding"
+        android:paddingEnd="@dimen/top_layout_button_padding"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="@string/descr_image"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@+id/optionMenu"
+        android:layout_toStartOf="@+id/optionMenu"
+        android:layout_toRightOf="@+id/navigation_back"
+        android:layout_toEndOf="@+id/navigation_back"
+        android:padding="@dimen/photo_detail_layout_padding"
+        android:paddingStart="@dimen/photo_detail_layout_padding"
+        android:paddingEnd="@dimen/photo_detail_layout_padding">
+
+        <TextView
+            android:id="@+id/plb_albumDetail"
+            android:textSize="@dimen/body_default_font_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/plb_albumName"
+            android:textSize="@dimen/body_default_font_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/plb_photoNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/optionMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/top_layout_button_padding"
+        android:paddingStart="@dimen/top_layout_button_padding"
+        android:paddingEnd="@dimen/top_layout_button_padding"
+        android:src="@drawable/ic_item_overflow"
+        android:contentDescription="@string/descr_image"/>
+
+</RelativeLayout>

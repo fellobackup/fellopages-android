@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~    You may not use this file except in compliance with the
+  ~    SocialEngineAddOns License Agreement.
+  ~    You may obtain a copy of the License at:
+  ~    https://www.socialengineaddons.com/android-app-license
+  ~    The full copyright and license information is also mentioned
+  ~    in the LICENSE file that was distributed with this
+  ~    source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/padding_10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.fellopages.mobileapp.classes.common.ui.BezelImageView
+        android:id="@+id/location_icon"
+        android:layout_width="@dimen/location_icon_width_height"
+        android:layout_height="@dimen/location_icon_width_height"
+        app:maskDrawable="@drawable/circle_mask"
+        app:borderDrawable="@drawable/circle_border"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:elevation="2dp" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:id="@+id/locationLabel"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:textColor="@color/black"
+        style="@style/TitleView"
+        android:layout_toRightOf="@+id/location_icon"
+        android:layout_toEndOf="@+id/location_icon"
+        android:layout_height="wrap_content" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:id="@+id/formattedAddress"
+        android:layout_toRightOf="@+id/location_icon"
+        android:layout_toEndOf="@+id/location_icon"
+        android:layout_below="@+id/locationLabel"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        style="@style/CaptionView"
+        android:layout_height="wrap_content" />
+    
+</RelativeLayout>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/player_background"
+        android:minHeight="@dimen/dimen_42dp"
+        android:visibility="gone"
+        android:padding="@dimen/dimen_9dp"
+        android:paddingStart="@dimen/dimen_9dp"
+        android:paddingEnd="@dimen/dimen_9dp">
+
+        <ImageButton
+            android:id="@+id/top_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            />
+
+        <TextView
+            android:id="@+id/top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/size_20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/player_background"
+        android:gravity="center"
+        android:minHeight="@dimen/dimen_42dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_9dp"
+        android:paddingStart="@dimen/dimen_9dp"
+        android:paddingEnd="@dimen/dimen_9dp"
+        >
+
+        <ImageButton
+            android:id="@+id/bottom_pause"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_marginRight="@dimen/dimen_4dp"
+            android:layout_marginEnd="@dimen/dimen_4dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_media_play" />
+
+
+        <TextView
+            android:id="@+id/bottom_time_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="@dimen/dimen_4dp"
+            android:paddingEnd="@dimen/dimen_4dp"
+            android:text="@string/player_start_time"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/size_14sp"
+            android:textStyle="bold" />
+
+        <SeekBar
+            android:id="@+id/mediacontroller_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/bottom_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/dimen_4dp"
+            android:layout_marginEnd="@dimen/dimen_4dp"
+            android:paddingLeft="@dimen/dimen_4dp"
+            android:paddingStart="@dimen/dimen_4dp"
+            android:text="@string/player_start_time"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/size_14sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/bottom_fullscreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/image_center_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+             />
+        <SeekBar
+            android:id="@+id/bottom_seekbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1" />
+        <ProgressBar
+            android:id="@+id/progress_center"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/dimen_80dp"
+            android:layout_height="@dimen/dimen_5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_35dp"
+            android:max="100"
+            android:progress="20"
+            android:progressDrawable="@drawable/layer_progress"
+            android:visibility="visible" />
+    </FrameLayout>
+
+</RelativeLayout>

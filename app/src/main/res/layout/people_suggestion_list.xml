@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_5dp">
+
+    <ImageView
+        android:layout_width="@dimen/attachment_small_image_size"
+        android:layout_height="@dimen/attachment_small_image_size"
+        android:id="@+id/user_profile_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_user_profile"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:contentDescription="@string/image_caption">
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/black_translucent"
+        android:textColor="@color/white"
+        style="@style/CaptionView"
+        android:id="@+id/duration"
+        android:visibility="gone"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:layout_alignRight="@+id/user_profile_image"
+        android:layout_alignEnd="@+id/user_profile_image"
+        android:layout_alignBottom="@+id/user_profile_image"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/remove_icon"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:visibility="gone"
+        android:textSize="@dimen/body_medium_font_size"
+        android:textColor="@color/grey_dark"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/attachment_small_image_size"
+        android:orientation="vertical"
+        android:id="@+id/user_info_layout"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_toLeftOf="@+id/cancel_request"
+        android:layout_toStartOf="@+id/cancel_request"
+        android:layout_toRightOf="@+id/user_profile_image"
+        android:layout_toEndOf="@+id/user_profile_image">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_name"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/title_font_size"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mutual_friend_count"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/gray_text_color"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_button_layout"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_marginRight="@dimen/margin_5dp"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:id="@+id/add_friend"
+                android:textColor="@color/white"
+                android:textSize="@dimen/caption_font_size"
+                android:padding="@dimen/padding_10dp"
+                android:visibility="visible"
+                android:gravity="center"
+                android:background="@drawable/background_app_theme_color"
+                android:text="@string/add_friend_title"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/background_round_shape_grey"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:padding="@dimen/padding_10dp"
+                android:visibility="visible"
+                android:gravity="center"
+                android:id="@+id/remove_suggestion"
+                android:textSize="@dimen/caption_font_size"
+                android:textColor="@color/gray_text_color"
+                android:text="@string/remove_listing_dialogue_button"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel_request"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_toLeftOf="@+id/progressBar"
+        android:layout_toStartOf="@+id/progressBar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/background_round_shape_grey"
+        android:drawableLeft="@drawable/ic_clear_white_24dp"
+        android:drawableStart="@drawable/ic_clear_white_24dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/caption_font_size"
+        android:visibility="gone"
+        android:textColor="@color/gray_text_color"
+        android:text="@string/cancel_dialogue_message"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_15dp"
+        android:layout_marginEnd="@dimen/margin_15dp"
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleSmall"
+        android:visibility="gone"
+        android:layout_toLeftOf="@+id/remove_icon"
+        android:layout_toStartOf="@+id/remove_icon"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/quick_return_footer_ll"
+    android:layout_width="match_parent"
+    android:visibility="gone"
+    android:layout_height="@dimen/home_icon_tab_height"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:baselineAligned="false"
+    android:background="@color/themeButtonColor"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/sorting_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_label"
+            android:drawableLeft="@drawable/ic_sort_black_24dp"
+            android:drawableStart="@drawable/ic_sort_black_24dp"
+            android:drawablePadding="@dimen/padding_10dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/body_medium_font_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filter_apply_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_label"
+            android:gravity="center"
+            android:singleLine="true"
+            android:drawableLeft="@drawable/ic_filter_list_black_24dp"
+            android:drawableStart="@drawable/ic_filter_list_black_24dp"
+            android:drawablePadding="@dimen/padding_10dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/body_medium_font_size" />
+
+    </LinearLayout>
+
+</LinearLayout>

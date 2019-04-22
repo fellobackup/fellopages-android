@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:layout_gravity="center"
+    style="@android:style/Widget.ActionButton">
+
+    <TextView
+        android:id="@+id/badge_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/time_stamp_text_size"
+        android:textColor="@color/white"
+        android:text="1"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginStart="@dimen/margin_20dp"
+        android:background="@drawable/badge_bg"/>
+
+    <ImageView
+        android:id="@+id/added_attachment_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/badge_count"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:gravity="center"
+        android:src="@drawable/ic_attachment_white_24dp"/>
+
+</RelativeLayout>

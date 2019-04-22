@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        android:id="@+id/selectedImage"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/addMusicBlock"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        app:cardUseCompatPadding="true"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_marginRight="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:id="@+id/music_icon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_toRightOf="@+id/music_icon"
+                android:layout_toEndOf="@+id/music_icon"
+                android:id="@+id/music_title"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body_default_font_size"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_below="@+id/music_title"
+                android:id="@+id/music_added_msg" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/linkAttachment"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_width="fill_parent"
+        app:cardUseCompatPadding="true"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginBottom="@dimen/margin_10dp">
+            <ImageView
+                android:id="@+id/linkAttachmentImage"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_width="@dimen/profile_image_width_height"
+                android:layout_height="@dimen/profile_image_width_height"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_toRightOf="@+id/linkAttachmentImage"
+                android:layout_toEndOf="@+id/linkAttachmentImage"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:id="@+id/linkAttachmentTitle"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body_default_font_size"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_toRightOf="@+id/linkAttachmentImage"
+                android:layout_toEndOf="@+id/linkAttachmentImage"
+                android:layout_below="@+id/linkAttachmentTitle"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:textSize="@dimen/body_default_font_size"
+                android:id="@+id/linkAttachmentDescription"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_toRightOf="@+id/linkAttachmentImage"
+                android:layout_toEndOf="@+id/linkAttachmentImage"
+                android:layout_below="@+id/linkAttachmentDescription"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                style="@style/CaptionView"
+                android:id="@+id/linkAttachmentUrl"
+                android:textColor="@color/gray_text_color"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addVideoLayout"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="@dimen/body_default_font_size"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_marginStart="@dimen/feed_body_left_margin"
+            android:layout_marginLeft="@dimen/feed_body_left_margin"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:layout_marginRight="@dimen/margin_5dp"
+            android:textColor="@color/black"
+            android:id="@+id/attachmentBody"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_gravity="center"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_width="fill_parent"
+            app:cardUseCompatPadding="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/attachmentIcon"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/feed_attachment_image_height">
+            </ImageView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_gravity="bottom"
+                android:id="@+id/attachmentTitle"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/body_default_font_size"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:id="@+id/video_added_msg"
+            android:textSize="@dimen/body_default_font_size"
+            android:text="@string/video_upload_msg"
+            android:layout_marginTop="@dimen/margin_10dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

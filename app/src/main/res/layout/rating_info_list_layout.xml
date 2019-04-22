@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_10dp"
+        android:paddingBottom="@dimen/padding_10dp"
+        android:orientation="horizontal"
+        android:id="@+id/ratingInfo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/content_title"
+            android:textColor="@color/black"
+            style="@style/TitleView"/>
+
+        <include layout="@layout/small_rating_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/content_title"
+            android:layout_toEndOf="@+id/content_title"
+            android:id="@+id/avgRatingBar"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:orientation="vertical"
+        android:id="@+id/linearLayoutRating"
+        android:layout_below="@+id/ratingInfo">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayoutRating"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:textSize="@dimen/body_default_font_size"
+        android:id="@+id/date_view"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/date_view"
+        android:layout_toEndOf="@+id/date_view"
+        android:layout_below="@+id/linearLayoutRating"
+        android:paddingTop="@dimen/padding_5dp"
+        android:textSize="@dimen/body_default_font_size"
+        android:textColor="@color/black"
+        android:id="@+id/user_name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_below="@+id/date_view"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:id="@+id/prosLabel"
+        android:text="@string/pros_text"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_toRightOf="@+id/prosLabel"
+        android:layout_toEndOf="@+id/prosLabel"
+        android:layout_below="@+id/date_view"
+        android:paddingTop="@dimen/padding_5dp"
+        android:maxLines="1"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:id="@+id/pros_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_below="@+id/prosLabel"
+        android:id="@+id/consLabel"
+        android:text="@string/cons_text"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_below="@+id/prosLabel"
+        android:paddingTop="@dimen/padding_5dp"
+        android:maxLines="1"
+        android:layout_toRightOf="@+id/consLabel"
+        android:layout_toEndOf="@+id/consLabel"
+        android:id="@+id/cons_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/consLabel"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_default_font_size"
+        android:text="@string/member_recommendation_text"
+        android:id="@+id/member_recommendation_Label"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/consLabel"
+        android:paddingTop="@dimen/padding_5dp"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_toRightOf="@+id/member_recommendation_Label"
+        android:layout_toEndOf="@+id/member_recommendation_Label"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:id="@+id/member_recommendation_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_below="@id/member_recommendation_Label"
+        android:id="@+id/summaryLabel"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:text="@string/summary"
+        android:textColor="@color/black"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_below="@id/member_recommendation_Label"
+        android:layout_toRightOf="@+id/summaryLabel"
+        android:layout_toEndOf="@+id/summaryLabel"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:id="@+id/less_more_layout">
+
+        <TextView
+            android:id="@+id/summary_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/body_default_font_size"
+            android:maxLines="3" />
+
+        <TextView
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/summary_text"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/themeButtonColor"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingRight="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:clickable="true" />
+
+        <TextView
+            android:id="@+id/hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/summary_text"
+            android:clickable="true"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/themeButtonColor"
+            android:paddingLeft="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:paddingRight="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_line_view_height"
+        android:id="@+id/commentLikeSeprator"
+        android:layout_below="@+id/less_more_layout"
+        android:background="@color/gray_light"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reviewLikeCommentInfo"
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_below="@+id/commentLikeSeprator"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/themeButtonColor"
+            android:textSize="@dimen/body_default_font_size"
+            android:layout_marginEnd="@dimen/margin_15dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:id="@+id/comment"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/bg_dot"
+            android:drawableStart="@drawable/bg_dot"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/themeButtonColor"
+            android:drawablePadding="@dimen/padding_15dp"
+            android:layout_marginEnd="@dimen/margin_15dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:text="Like"
+            android:id="@+id/like"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/bg_dot"
+            android:drawableStart="@drawable/bg_dot"
+            android:textSize="@dimen/body_default_font_size"
+            android:textColor="@color/themeButtonColor"
+            android:drawablePadding="@dimen/padding_15dp"
+            android:layout_marginRight="@dimen/margin_5dp"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:id="@+id/likeIcon"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/option_icon_view"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/option_icon_layout"
+        android:adjustViewBounds="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"/>
+
+</RelativeLayout>
+

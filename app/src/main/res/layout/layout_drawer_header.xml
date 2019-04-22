@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/material_drawer_account_header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/material_drawer_account_header_height">
+
+    <com.fellopages.mobileapp.classes.common.ui.TopCropImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cover_image"
+        android:scaleType="matrix"
+        android:clickable="true"
+        android:adjustViewBounds="true"
+        android:background="@color/themeButtonColor"
+        android:contentDescription="@string/image_caption" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/album_view_background"/>
+
+    <RelativeLayout
+        android:id="@+id/material_drawer_account_header_text_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <com.fellopages.mobileapp.classes.common.ui.CircularImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="@dimen/material_drawer_account_header_selected"
+            android:layout_height="@dimen/material_drawer_account_header_selected"
+            android:src="@mipmap/icon"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:visibility="gone"
+            android:elevation="@dimen/margin_2dp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/margin_10dp"
+            android:layout_below="@+id/user_profile_image"
+            android:textColor="@color/text_shadow_white"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:drawablePadding="@dimen/padding_3dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            style="@style/BodyMediumView" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

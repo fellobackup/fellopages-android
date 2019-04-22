@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cart_bottom"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="@dimen/padding_15dp"
+    android:layout_alignParentBottom="true">
+
+    <LinearLayout
+        android:id="@+id/checkout_option_view"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fab_size_mini">
+
+        <FrameLayout
+            android:id="@+id/store_selection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/store_name_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/select_store"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:padding="@dimen/padding_6dp"
+                android:textSize="@dimen/body_default_font_size"
+                android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                android:gravity="center"/>
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/grey_light"/>
+
+        <FrameLayout
+            android:id="@+id/apply_coupon_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/apply_coupon"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/caption_font_size"
+                android:gravity="center"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/checkout_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_icon_tab_height"
+        android:layout_gravity="center"
+        android:text="@string/checkout"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@color/themeButtonColor"
+        android:textSize="@dimen/body_default_font_size"
+        android:textAllCaps="true"
+        android:drawableRight="@drawable/ic_arrow_forward_24dp"
+        android:gravity="center"/>
+
+</LinearLayout>

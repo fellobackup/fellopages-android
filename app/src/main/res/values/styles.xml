@@ -1,0 +1,321 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarIconColor">@color/white</item>
+        <item name="actionBarInsetStart">@dimen/keyline_2</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="searchViewStyle">@style/Widget.AppTheme.SearchView</item>
+        <item name="android:typeface">monospace</item>
+        <item name="cardActionButtonStyle">@style/Widget.Light.CardActionButton</item>
+        <item name="cardItemBackgroundColor">@color/background_color_card_item_light</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="actionMenuTextColor">@color/textColorPrimary</item>
+    </style>
+
+    <!--Full Screen Theme applied for hiding the action bar  -->
+    <style name="FullscreenTheme" parent="AppTheme.Base">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="CircularProgress"></style>
+
+    <!-- For Customizing the Dialog -->
+    <style name="Theme.CustomDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="Theme.LocationDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowNoTitle">false</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!-- For Customizing the default theme -->
+    <style name="MyCustomTheme" parent="Theme.AppCompat.Light">
+        <item name="actionBarIconColor">@color/textColorPrimary</item>
+        <item name="actionBarInsetStart">@dimen/keyline_2</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/textColorPrimary</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:typeface">monospace</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <!-- Applied on VideoView Page -->
+    <style name="VideoViewTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:typeface">monospace</item>
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+    </style>
+
+    <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Search" parent="AppTheme">
+        <item name="android:windowBackground">@color/grey_light</item>
+        <item name="android:autoCompleteTextViewStyle">
+            @style/Widget.AppTheme.Search.AutoCompleteTextView
+        </item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="Widget.AppTheme.Search.AutoCompleteTextView" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:textColorHint">#5fff</item>
+    </style>
+
+    <style name="Widget.AppTheme.SearchView" parent="Widget.AppCompat.SearchView" />
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/textColorPrimary</item>
+    </style>
+
+    <style name="ActionBarThemeOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Style for apply transparent color to collapsing tool bar when the tool bar in expanded state (for SDK < 19)-->
+    <style name="CollapsingToolbarLayoutExpandedTextStyle" parent="AppTheme">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0.1sp</item>
+    </style>
+
+    <!-- Style for apply transparent color to collapsing tool bar when the tool bar in expanded state (for SDK >= 19)-->
+    <style name="CollapsingToolbarLayoutExpandedTextStyleForUpperVersion" parent="AppTheme">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0sp</item>
+    </style>
+
+    <!-- Style for apply text color, size and custom font on toolbar-->
+    <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/title_font_size</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <!-- Style for apply custom font on tab text-->
+    <style name="TabTitleTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="CustomTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/textColorPrimary</item>
+        <item name="tabIndicatorColor">@color/textColorPrimary</item>
+        <item name="tabBackground">@color/themeButtonColor</item>
+        <item name="tabTextAppearance">@style/CustomTabTextStyle</item>
+    </style>
+
+    <style name="CustomTabTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/title_font_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <!-- Style for apply custom font on splash screen text-->
+    <style name="TextAppearance" parent="TextAppearance.AppCompat.Title">
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="RatingBarSmall" parent="android:Widget.DeviceDefault.RatingBar.Small" />
+
+    <style name="MyRatingBar" parent="android:Widget.DeviceDefault.RatingBar.Indicator" />
+
+    <style name="RatingBar" parent="android:Widget.DeviceDefault.RatingBar" />
+
+    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light">
+
+    </style>
+
+    <style name="PopupMenuStyle" parent="Theme.AppCompat.Light">
+        <item name="android:popupBackground">@color/white</item>
+    </style>
+
+    <style name="ProgressBarStyle" parent="@android:style/Widget.Holo.ProgressBar.Horizontal" />
+
+    <!-- Style for the main container of an activity, handle top offset !-->
+    <style name="AppTheme.MainContainer">
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:layout_marginTop">0dp</item>
+    </style>
+
+    <style name="HeaderBar">
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:elevation">@dimen/headerbar_elevation</item>
+    </style>
+
+    <!-- Body content -->
+
+    <style name="ErrorView">
+        <item name="android:textSize">@dimen/caption_font_size</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="CaptionView">
+        <item name="android:textSize">@dimen/caption_font_size</item>
+    </style>
+
+    <style name="BodyMediumView">
+        <item name="android:textSize">@dimen/body_medium_font_size</item>
+    </style>
+
+    <style name="BodyLargeView">
+        <item name="android:textSize">@dimen/body_large_font_size</item>
+    </style>
+
+    <style name="TitleView">
+        <item name="android:textSize">@dimen/title_font_size</item>
+    </style>
+
+    <style name="TitleMediumView">
+        <item name="android:textSize">@dimen/title_medium_font_size</item>
+    </style>
+
+    <style name="TitleLargeView">
+        <item name="android:textSize">@dimen/title_large_font_size</item>
+    </style>
+
+    <style name="CoverTitleView">
+        <item name="android:textSize">@dimen/cover_title_font_size</item>
+    </style>
+
+
+    <style name="TransparentText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#00666666</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="TransparentText1" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#00666655</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <!-- Used for styling the progress bar used in music module for loading songs. -->
+    <style name="IndeterminateProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateDrawable">@drawable/progress_bar_indeterminate</item>
+    </style>
+
+    <!-- Style for new card theme and new views -->
+    <style name="Widget.Light.CardActionButton" parent="Widget.Base.Light.ImageButton">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:color">?android:textColorSecondary</item>
+    </style>
+
+    <style name="Widget.Base" parent="android:Widget.Holo" />
+
+    <style name="Widget.Base.Light" parent="android:Widget.Holo.Light" />
+
+    <style name="Widget.Base.Light.ImageButton" parent="android:Widget.Holo.Light.ImageButton" />
+
+    <style name="Widget.Base.ImageButton" parent="android:Widget.Holo.ImageButton" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Widget" />
+
+    <style name="Widget.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse"></style>
+
+    <style name="Widget.Light" />
+
+    <style name="Widget.Light.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid"></style>
+
+    <style name="Widget.ActionBar.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.Light.ActionBar.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+    </style>
+
+    <style name="customRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar_custom</item>
+    </style>
+
+    // zoom-in and zoom-out animation for the alert dialog.
+
+    <style name="customDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
+
+    <style name="Dialog.NoTitle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+    <style name="DialogSlideAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+    <style name="DialogSlideUpDownAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_down_out</item>
+    </style>
+
+    <!-- New Style End -->
+
+    <style name="EditText">
+        <item name="android:singleLine">true</item>
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="colorControlActivated">#FFFFFF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SwitchColor" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#26CC05</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1</item>
+        <item name="android:colorForeground">#42221f1f</item>
+    </style>
+
+</resources>
+

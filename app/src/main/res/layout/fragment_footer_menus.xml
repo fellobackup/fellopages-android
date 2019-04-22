@@ -1,0 +1,106 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fellopages.mobileapp.classes.modules.user.staticpages.FooterMenusFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/create_form">
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contact_us_block"
+        android:orientation="vertical">
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+            style="@style/TitleView"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:id="@+id/contact_us_title"
+            android:text="@string/contact_us_page_title"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/themeButtonColor"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:textSize="100sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/messageIcon"/>
+        <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contact_us_description"
+            android:textSize="@dimen/body_default_font_size"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:text="@string/contact_us_page_description"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/margin_10dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/name"
+                    style="@style/TitleView"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/contact_us_name" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TitleView"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:id="@+id/email"
+                    android:hint="@string/contact_us_email" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TitleView"
+                    android:singleLine="false"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:minHeight="@dimen/contact_us_body_height"
+                    android:id="@id/body"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:hint="@string/contact_us_message" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <include layout="@layout/web_view"/>
+
+</RelativeLayout>

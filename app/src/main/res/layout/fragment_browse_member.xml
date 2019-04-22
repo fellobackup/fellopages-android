@@ -1,0 +1,138 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <include layout="@layout/error_view" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:theme="@style/CircularProgress"
+        android:visibility="gone" />
+
+    <com.fellopages.mobileapp.classes.common.ui.SelectableTextView
+        android:id="@+id/memberCountInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_toLeftOf="@+id/list_view_type"
+        android:layout_toStartOf="@+id/list_view_type"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_default_font_size"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/list_view_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/map_view_type"
+        android:layout_toStartOf="@+id/map_view_type"
+        android:padding="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:textColor="@color/body_text_2"
+        android:textSize="@dimen/title_font_size"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/map_view_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:textColor="@color/body_text_2"
+        android:textSize="@dimen/title_font_size"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/saperator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/memberCountInfo"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@color/light_gray"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/membersList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/saperator"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:divider="@color/gray_stroke_color"
+        android:dividerHeight="0.5dp"
+        android:scrollbars="none"></ListView>
+
+    <RelativeLayout
+        android:id="@+id/map_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/saperator"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:visibility="gone">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/margin_5dp"
+            android:background="@color/black_translucent"
+            android:padding="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:text="View More"
+            android:textColor="@color/white" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/my_location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_gps_fixed_24dp"
+            android:background="@color/light_gray"
+            android:elevation="@dimen/fab_margin"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            app:backgroundTint="@color/white"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_gravity="bottom|end"/>
+    </RelativeLayout>
+
+</RelativeLayout>

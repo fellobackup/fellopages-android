@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <include layout ="@layout/error_view" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@color/gray_light"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/prevYear"
+            android:src="@drawable/ic_chevron_left"
+            android:tint="@color/black"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:foregroundGravity="center_vertical"
+            android:layout_height="wrap_content">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/prevMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/tagview_image_height_width"
+            android:layout_gravity="center"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"/>
+
+        <TextView
+            android:id="@+id/currentMonth"
+            android:layout_weight="0.6"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
+            android:id="@+id/nextMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/tagview_image_height_width"
+            android:textColor="@color/black"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"/>
+
+        <ImageView
+            android:id="@+id/nextYear"
+            android:src="@drawable/ic_chevron_right"
+            android:tint="@color/black"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:weightSum="7">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:id="@+id/day_sun"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:id="@+id/day_mon"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:id="@+id/day_tue"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:id="@+id/day_wed"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:id="@+id/day_thu"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:id="@+id/day_fri"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:id="@+id/day_sat"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <GridView
+            android:id="@+id/calendar"
+            android:numColumns="7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </GridView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

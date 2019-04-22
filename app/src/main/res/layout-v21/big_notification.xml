@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageViewAlbumArt"
+        android:layout_width="@dimen/small_image_art_width"
+        android:layout_height="@dimen/small_image_art_width"
+        android:paddingLeft="@dimen/album_info_margin"
+        android:paddingStart="@dimen/album_info_margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/album_info_margin"
+        android:paddingStart="@dimen/album_info_margin"
+        android:paddingRight="@dimen/album_info_margin"
+        android:paddingEnd="@dimen/album_info_margin"  >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textSongName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                style="@style/TitleMediumView"/>
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="@dimen/small_button_width"
+                android:layout_height="@dimen/small_button_width"
+                android:padding="@dimen/artist_image_margin"
+                android:paddingStart="@dimen/artist_image_margin"
+                android:paddingEnd="@dimen/artist_image_margin"
+                android:background="@drawable/ic_clear_grey"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textAlbumName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/grey_dark"
+            android:textSize="@dimen/body_default_font_size" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:showDividers="middle" >
+
+            <Button
+                android:id="@+id/btnPrevious"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_width"
+                android:padding="@dimen/artist_image_margin"
+                android:paddingStart="@dimen/artist_image_margin"
+                android:paddingEnd="@dimen/artist_image_margin"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_previous_grey" />
+
+            <Button
+                android:id="@+id/btnPause"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_width"
+                android:padding="@dimen/artist_image_margin"
+                android:paddingStart="@dimen/artist_image_margin"
+                android:paddingEnd="@dimen/artist_image_margin"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_pause_grey" />
+
+            <Button
+                android:id="@+id/btnPlay"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_width"
+                android:padding="@dimen/artist_image_margin"
+                android:paddingStart="@dimen/artist_image_margin"
+                android:paddingEnd="@dimen/artist_image_margin"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_play_grey"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_width"
+                android:padding="@dimen/artist_image_margin"
+                android:paddingStart="@dimen/artist_image_margin"
+                android:paddingEnd="@dimen/artist_image_margin"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_next_grey"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

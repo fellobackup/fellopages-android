@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.TabLayout    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/materialTabHost"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_icon_tab_height"
+    app:tabMaxWidth="@dimen/tab_max_width"
+    app:tabGravity="fill"
+    app:tabTextAppearance="@style/TabTitleTextAppearance"
+    app:tabMode="fixed"
+    app:tabSelectedTextColor="@color/themeButtonColor"
+    app:tabTextColor="@color/grey"
+    app:tabBackground="@drawable/tab_background"
+    app:tabIndicatorColor="@color/themeButtonColor" />

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_tab_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_icon_tab_height"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    android:background="@drawable/tab_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/home_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tint="@color/grey_light"
+            android:src="@drawable/ic_recent"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/abc_item_background_holo_dark"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/friend_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tint="@color/grey_light"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_contact"
+            android:background="@drawable/abc_item_background_holo_dark"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/msg_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_groups"
+            android:tint="@color/grey_light"
+            android:background="@drawable/abc_item_background_holo_dark"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/notification_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tint="@color/grey_light"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_setting"
+            android:background="@drawable/abc_item_background_holo_dark"/>
+    </RelativeLayout>
+
+</LinearLayout>

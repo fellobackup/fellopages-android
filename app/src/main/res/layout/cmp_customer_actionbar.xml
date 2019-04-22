@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#21282C"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:src="@drawable/ic_arrow_back"
+        android:paddingLeft="@dimen/keyline_1"
+        android:paddingStart="@dimen/keyline_1"
+        android:paddingRight="@dimen/keyline_1"
+        android:paddingEnd="@dimen/keyline_1"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="@string/action_bar_title"
+        android:layout_toRightOf="@+id/btn_back"
+        android:layout_toEndOf="@+id/btn_back"
+        android:textColor="@android:color/white"
+        style="@style/TitleMediumView"
+        android:layout_centerVertical="true"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/commit"
+        android:background="@drawable/action_btn"
+        android:minHeight="@dimen/divider_line_view_height"
+        android:minWidth="@dimen/divider_line_view_height"
+        android:text="@string/action_bar_button_title"
+        android:layout_marginRight="@dimen/keyline_1"
+        android:layout_marginEnd="@dimen/keyline_1"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/upload"
+        android:background="@drawable/action_btn"
+        android:minHeight="@dimen/divider_line_view_height"
+        android:minWidth="@dimen/divider_line_view_height"
+        android:text="@string/upload"
+        android:layout_marginRight="@dimen/keyline_1"
+        android:layout_marginEnd="@dimen/keyline_1"
+        android:paddingLeft="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/camera_add"
+        android:visibility="gone"
+        android:drawableRight="@drawable/ic_image_add"
+        android:drawableEnd="@drawable/ic_image_add"
+        android:layout_toLeftOf="@+id/video_add"
+        android:layout_toStartOf="@+id/video_add"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/video_add"
+        android:visibility="gone"
+        android:drawableRight="@drawable/ic_video_add"
+        android:drawableEnd="@drawable/ic_video_add"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:padding="@dimen/padding_5dp"
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:layout_toStartOf="@+id/commit"
+        android:layout_toLeftOf="@+id/commit"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

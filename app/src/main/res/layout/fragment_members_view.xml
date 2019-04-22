@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/people_main_view"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/margin_5dp"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_5dp">
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/progress_bar_margin_top"
+        android:layout_marginBottom="@dimen/label_max_width"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:maxLines="2"
+        android:visibility="gone"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:textSize="@dimen/body_medium_font_size"
+        android:background="@drawable/tab_background"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_5dp" />
+
+    <include layout ="@layout/error_view" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

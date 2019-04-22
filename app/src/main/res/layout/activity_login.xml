@@ -1,0 +1,141 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/login_main"
+    tools:context="com.fellopages.mobileapp.classes.core.LoginActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextAppearance="@style/ActionBar.TitleText"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/full_screen_gradient_top"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/ActionBarThemeOverlay"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scroll_view"
+        android:layout_below="@+id/my_toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:padding="@dimen/login_view_left_right_padding"
+            android:paddingStart="@dimen/login_view_left_right_padding"
+            android:paddingEnd="@dimen/login_view_left_right_padding"
+            android:background="@color/black_overlay"
+            android:theme="@style/MyCustomTheme"
+            android:id="@+id/loginView">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/error_view"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/title_font_size"
+                android:textColor="@color/red"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/usernameWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/error_view">
+
+                <EditText
+                    android:id="@+id/email_fld"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/lbl_enter_email"
+                    style="@style/TitleView"
+                    android:drawableLeft="@drawable/ic_email_white_24dp"
+                    android:drawableStart="@drawable/ic_email_white_24dp"
+                    android:drawablePadding="@dimen/edit_text_drawable_padding"
+                    android:textColor="@color/white"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/passwordWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/usernameWrapper">
+
+                <EditText
+                    android:id="@+id/password_fld"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TitleView"
+                    android:inputType="textPassword"
+                    android:hint="@string/lbl_enter_password"
+                    android:drawableLeft="@drawable/ic_lock_white_24dp"
+                    android:drawableStart="@drawable/ic_lock_white_24dp"
+                    android:drawablePadding="@dimen/edit_text_drawable_padding"
+                    android:textColor="@color/white"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Login Button -->
+
+            <com.fellopages.mobileapp.classes.common.ui.BaseButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:layout_below="@+id/passwordWrapper"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/login_view_top_margin"
+                android:layout_marginLeft="@dimen/login_button_left_right_margin"
+                android:layout_marginStart="@dimen/login_button_left_right_margin"
+                android:layout_marginRight="@dimen/login_button_left_right_margin"
+                android:layout_marginEnd="@dimen/login_button_left_right_margin"
+                app:cornerRadius="@dimen/base_button_default_corner_radius"
+                app:normalStateColor="@color/themeButtonColor"
+                android:text="@string/login_btn_name"
+                style="@style/BodyMediumView"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/login_button"
+                android:text="@string/forgot_password"
+                android:textSize="@dimen/body_default_font_size"
+                android:padding="@dimen/padding_10dp"
+                android:paddingStart="@dimen/padding_10dp"
+                android:paddingEnd="@dimen/padding_10dp"
+                android:id="@+id/forgot_password"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"  />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

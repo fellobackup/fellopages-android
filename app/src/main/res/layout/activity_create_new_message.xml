@@ -1,0 +1,125 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/create_form"
+    tools:context="com.fellopages.mobileapp.classes.modules.messages.CreateNewMessage">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/main_msg_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/sendTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:singleLine="true"
+                style="@style/TitleView"
+                android:paddingRight="@dimen/padding_15dp"
+                android:paddingEnd="@dimen/padding_15dp"
+                android:layout_margin="@dimen/margin_15dp"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginRight="@dimen/margin_15dp"
+                android:background="@color/transparent"
+                android:inputType="text" />
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sentToLoadingProgressBar"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_marginRight="@dimen/margin_5dp"
+                android:layout_marginEnd="@dimen/margin_5dp"/>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/friendListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/transparent">
+        </ListView>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/added_friend_list_view_height"
+            android:id="@+id/addedFriendList"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_line_view_height"
+            android:background="@color/grey_light"/>
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:singleLine="true"
+            style="@style/TitleView"
+            android:layout_margin="@dimen/margin_15dp"
+            android:layout_marginRight="@dimen/margin_15dp"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:background="@color/transparent"
+            android:inputType="text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_line_view_height"
+            android:background="@color/grey_light"/>
+
+        <EditText
+            android:id="@+id/msgDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            style="@style/TitleView"
+            android:layout_margin="@dimen/margin_15dp"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:layout_marginStart="@dimen/margin_15dp"
+            android:background="@color/transparent"
+            android:inputType="textMultiLine" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+

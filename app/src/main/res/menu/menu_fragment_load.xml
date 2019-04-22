@@ -1,0 +1,61 @@
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fellopages.mobileapp.classes.common.activities.FragmentLoadActivity">
+
+    <item android:id="@+id/add_entry"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/create"
+        app:showAsAction="always"
+        android:orderInCategory="200"
+        android:visible="false"/>
+
+    <item android:id="@+id/action_search"
+        android:title="@string/search_view_hint"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/ic_action_search"
+        android:orderInCategory="200"
+        android:visible="false"
+        app:showAsAction="always|collapseActionView" />
+
+    <item android:id="@+id/search_occurrence"
+        android:title="@string/search_view_hint"
+        android:icon="@drawable/ic_action_search"
+        android:orderInCategory="200"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_message"
+        android:title="@string/compose_message"
+        android:icon="@drawable/ic_action_message"
+        android:orderInCategory="100"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/post_contact"
+        android:title="@string/contact_form_post_text"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="200"
+        android:visible="false"/>
+
+    <item android:id="@+id/submit"
+        android:title="@string/ok"
+        android:icon="@drawable/ic_done_theme_color"
+        android:orderInCategory="100"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

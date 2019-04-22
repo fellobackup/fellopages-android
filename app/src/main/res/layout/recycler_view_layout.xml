@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_view_recycler"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <include
+        layout="@layout/spinner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filterLayout"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/margin_50dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomeUserText"
+        android:textSize="@dimen/title_medium_font_size"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_150dp"
+        android:layout_centerHorizontal="true"/>
+
+    <ProgressBar
+        android:theme="@style/CircularProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true" />
+
+    <include layout ="@layout/error_view"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/progressBar"
+        android:id="@+id/stickersStoreImage"/>
+
+    <RelativeLayout
+        android:id="@+id/map_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/margin_5dp"
+            android:background="@color/black_translucent"
+            android:padding="@dimen/padding_5dp"
+            android:paddingEnd="@dimen/padding_5dp"
+            android:paddingStart="@dimen/padding_5dp"
+            android:text="View More"
+            android:textColor="@color/white" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/my_location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_gps_fixed_24dp"
+            android:background="@color/light_gray"
+            android:elevation="@dimen/fab_margin"
+            android:tint="@color/colorPrimaryDark"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/dimen_74dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            app:backgroundTint="@color/white"
+            android:layout_gravity="bottom|end"/>
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/stickersStoreImage">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:paddingBottom="@dimen/padding_64dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:descendantFocusability="beforeDescendants" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

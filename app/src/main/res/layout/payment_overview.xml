@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/subtotal_amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/subtotal_label"
+            android:layout_span="4"
+            android:textSize="@dimen/body_default_font_size"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/sub_total_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:gravity="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_default_font_size"
+            android:padding="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"/>
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/shipping_cost_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/shipping_method_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_span="4"
+            android:textSize="@dimen/caption_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:textColor="@color/dark_gray" />
+
+        <TextView
+            android:id="@+id/shipping_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:gravity="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/caption_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"/>
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/taxVatView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/tax_vat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_span="4"
+            android:textSize="@dimen/caption_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:textColor="@color/dark_gray" />
+
+        <TextView
+            android:id="@+id/taxVatAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:gravity="end"
+            android:textColor="@color/red"
+            android:textSize="@dimen/caption_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"/>
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/couponView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/coupon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_span="4"
+            android:textSize="@dimen/caption_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:textColor="@color/dark_gray" />
+
+        <TextView
+            android:id="@+id/discountAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:gravity="end"
+            android:textColor="@color/light_green"
+            android:textSize="@dimen/caption_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"/>
+
+    </TableRow>
+    <TableRow
+        android:id="@+id/total_amount_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/total_amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_span="4"
+            android:textSize="@dimen/body_default_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/remainingAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="1"
+            android:gravity="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_default_font_size"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"/>
+
+    </TableRow>
+</TableLayout>

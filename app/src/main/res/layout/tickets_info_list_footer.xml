@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  ~
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="gone"
+    android:paddingBottom="@dimen/padding_10dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_below="@+id/tickets_table"
+        android:textColor="@color/black"
+        android:id="@+id/have_coupon_text"
+        android:visibility="gone"
+        android:text="@string/have_coupon_text"
+        android:textSize="@dimen/body_medium_font_size"/>
+
+    <EditText
+        android:layout_width="@dimen/coupon_edit_text_width"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:padding="@dimen/padding_8dp"
+        android:layout_below="@+id/have_coupon_text"
+        android:visibility="gone"
+        android:background="@drawable/rectangle_box"
+        android:id="@+id/coupon_edit_text"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.BaseButton
+        android:id="@+id/coupon_submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/submit_text"
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/padding_8dp"
+        android:textAlignment="center"
+        app:cornerRadius="@dimen/base_button_default_corner_radius"
+        android:layout_marginRight="@dimen/padding_3dp"
+        android:layout_marginEnd="@dimen/padding_3dp"
+        app:normalStateColor="@color/colorAccent"
+        android:layout_below="@+id/have_coupon_text"
+        android:layout_toRightOf="@+id/coupon_edit_text"
+        android:layout_toEndOf="@+id/coupon_edit_text"
+        style="@style/BodyMediumView"/>
+
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loadingBarSmall"
+        android:layout_below="@+id/have_coupon_text"
+        android:layout_toLeftOf="@+id/coupon_submit_button"
+        android:layout_toStartOf="@+id/coupon_submit_button"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:paddingTop="@dimen/padding_8dp"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_marginRight="@dimen/margin_15dp"
+        android:layout_marginEnd="@dimen/margin_15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/coupon_message"
+        android:layout_below="@+id/coupon_edit_text"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:visibility="gone"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_size"
+        android:layout_below="@+id/coupon_message"
+        android:id="@+id/divider"
+        android:paddingTop="@dimen/padding_10dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@color/gray_light"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/order_summary_text"
+        android:layout_below="@+id/divider"
+        android:textSize="@dimen/body_medium_font_size"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:visibility="gone"
+        android:text="@string/order_summary_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/padding_10dp"
+        android:layout_below="@+id/order_summary_text"
+        android:text="@string/subtotal_text"
+        android:id="@+id/subtotalText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/padding_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_below="@+id/order_summary_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/subtotalText"
+        android:layout_toEndOf="@+id/subtotalText"
+        android:id="@+id/subtotal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/subtotalText"
+        android:layout_marginTop="@dimen/padding_10dp"
+        android:text="@string/discount_text"
+        android:id="@+id/discountText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/subtotalText"
+        android:layout_marginTop="@dimen/padding_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/discountText"
+        android:layout_toEndOf="@+id/discountText"
+        android:id="@+id/discount"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_below="@+id/discountText"
+        android:text="@string/tax_text"
+        android:id="@+id/taxText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/padding_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_below="@+id/discountText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/taxText"
+        android:layout_toEndOf="@+id/taxText"
+        android:id="@+id/tax"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/padding_10dp"
+        android:layout_below="@+id/taxText"
+        android:textColor="@color/black"
+        android:text="@string/grand_total"
+        android:id="@+id/totalText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_below="@+id/taxText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/totalText"
+        android:layout_toEndOf="@+id/totalText"
+        android:textColor="@color/black"
+        android:id="@+id/total"/>
+
+    <com.fellopages.mobileapp.classes.common.ui.BaseButton
+        android:id="@+id/bookNowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_below="@+id/total"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="@string/book_now_button_text"
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/padding_8dp"
+        android:textAlignment="center"
+        app:cornerRadius="@dimen/base_button_default_corner_radius"
+        android:layout_marginRight="@dimen/padding_3dp"
+        android:layout_marginEnd="@dimen/padding_3dp"
+        app:normalStateColor="@color/colorAccent"
+        style="@style/BodyMediumView"/>
+
+</RelativeLayout>

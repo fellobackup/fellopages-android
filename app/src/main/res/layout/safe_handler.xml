@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/error_image"
+        android:layout_width="@dimen/width_180dp"
+        android:layout_height="@dimen/height_150dp"
+        android:layout_above="@+id/error_title"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerInParent="true" />
+    <ImageView
+        android:id="@+id/error_image_placeholder"
+        android:layout_width="@dimen/width_180dp"
+        android:layout_height="@dimen/height_150dp"
+        android:layout_above="@+id/error_title"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/error_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/error_description"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_20dp"
+        android:paddingStart="@dimen/padding_20dp"
+        android:textSize="@dimen/size_60sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/error_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_wrapper"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/margin_30dp"
+        android:paddingEnd="@dimen/padding_30dp"
+        android:paddingLeft="@dimen/padding_30dp"
+        android:paddingRight="@dimen/padding_30dp"
+        android:paddingStart="@dimen/padding_30dp"
+        android:textColor="@color/black_translucent"
+        android:textSize="@dimen/title_medium_font_size"
+        android:textStyle="italic"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_80dp"
+        android:layout_marginLeft="@dimen/margin_15dp"
+        android:layout_marginRight="@dimen/margin_15dp"
+        android:layout_marginStart="@dimen/padding_15dp"
+        android:layout_marginEnd="@dimen/padding_15dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/go_to_home"
+            android:layout_width="@dimen/width_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_8dp"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/padding_8dp"
+            android:paddingTop="@dimen/padding_8dp"
+            android:shadowRadius="3"
+            android:text="@string/take_me_home"
+            android:background="@color/themeButtonColor"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/contact"
+            android:layout_width="@dimen/width_0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/margin_8dp"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/padding_8dp"
+            android:paddingTop="@dimen/padding_8dp"
+            android:shadowRadius="3"
+            android:text="@string/contact"
+            android:background="@color/themeButtonColor"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/upgrade_dialog_shape">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:textSize="@dimen/body_large_font_size"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/upgrade_alert_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_marginEnd="@dimen/margin_5dp"
+        android:gravity="center"
+        android:text="@string/upgrade_alert_message"
+        android:textColor="@color/black"
+        android:id="@+id/description"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/upgrade"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:text="@string/upgrade_button_title"
+        android:textSize="@dimen/body_medium_font_size"
+        android:textColor="@color/colorPrimary"/>
+
+    <View android:layout_height="0.5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:background="@color/grey_light" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_thanks"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:padding="@dimen/padding_10dp"
+        android:paddingStart="@dimen/padding_10dp"
+        android:paddingEnd="@dimen/padding_10dp"
+        android:textSize="@dimen/body_medium_font_size"
+        android:text="@string/cancel_button_title"
+        android:textColor="@color/colorPrimary"/>
+
+</LinearLayout>

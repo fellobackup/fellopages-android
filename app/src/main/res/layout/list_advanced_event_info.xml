@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2015 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_image_view">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/event_view_height"
+            android:id="@+id/contentImage"
+            android:background="@color/white"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/event_view_height"
+            android:id="@+id/diaryImageView1"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="@dimen/divider_line_view_height"
+                android:layout_marginEnd="@dimen/divider_line_view_height"
+                android:src="@drawable/defualt_diary_profile"
+                android:background="@color/white"
+                android:id="@+id/diaryImage1"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/defualt_diary_profile"
+                android:id="@+id/diaryImage2"
+                android:background="@color/white"
+                android:scaleType="centerCrop"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/event_view_height"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:id="@+id/diaryImageView2">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="@dimen/event_view_height"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="@dimen/divider_line_view_height"
+                android:layout_marginEnd="@dimen/divider_line_view_height"
+                android:background="@color/white"
+                android:src="@drawable/defualt_diary_profile"
+                android:id="@+id/diaryImage3" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/diaryImage">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_collage_view_height"
+                    android:id="@+id/diaryImage4"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/defualt_diary_profile"
+                    android:layout_marginBottom="@dimen/divider_line_view_height"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_collage_view_height"
+                    android:src="@drawable/defualt_diary_profile"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/diaryImage5"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/optionsIcon"
+            android:shadowColor="@color/black"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:textSize="@dimen/comment_post_button_size"
+            android:shadowRadius="1"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:visibility="gone"/>
+
+        <com.fellopages.mobileapp.classes.common.ui.CircularImageView
+            android:id="@+id/host_image"
+            android:scaleType="centerCrop"
+            android:layout_width="@dimen/host_image_width_height"
+            android:layout_height="@dimen/host_image_width_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:src="@drawable/person_image_empty"
+            app:civ_border="true"
+            app:civ_borderColor="@color/white"
+            app:civ_borderWidth="4dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:foregroundGravity="left"
+            android:textColor="@color/white"
+            style="@style/TitleLargeView"
+            android:background="@drawable/album_view_background"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:id="@+id/diaryTitle"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/eventCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/black_translucent"
+            android:textColor="@color/white"
+            style="@style/BodyMediumView"
+            android:paddingBottom="@dimen/padding_5dp"
+            android:paddingTop="@dimen/padding_5dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingStart="@dimen/padding_10dp"
+            android:paddingRight="@dimen/margin_10dp"
+            android:paddingEnd="@dimen/padding_10dp"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"/>
+
+        <include layout="@layout/featured_label"
+            android:id="@+id/featuredLabelLayout"/>
+
+        <include layout="@layout/sponsored_label"
+            android:id="@+id/sponsoredLabelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/tv_event_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:visibility="gone"
+            android:background="@color/label_event_status_background"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/events_browse_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:id="@+id/eventInfo"/>
+
+</LinearLayout>

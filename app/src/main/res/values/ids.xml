@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<resources>
+
+    <item name="title" type="id"/>
+    <item name="tags" type="id"/>
+    <item name="category_id" type="id"/>
+    <item name="eventrepeat_id" type="id"/>
+    <item name="draft" type="id"/>
+    <item name="body" type="id"/>
+    <item name="auth_view" type="id"/>
+    <item name="auth_comment" type="id"/>
+    <item name="search" type="id"/>
+    <item name="orderby" type="id"/>
+    <item name="show" type="id"/>
+    <item name="upload_photo_button" type="id"/>
+    <item name="take_photo_button" type="id"/>
+    <item name="update_staff" type="id" />
+
+    <item name="editTextUrl" type="id"/>
+
+    <item name="starttime" type="id" />
+    <item name="endtime" type="id" />
+    <item name="start_date" type="id" />
+    <item name="end_date" type="id" />
+    <item name="birth_date" type="id"/>
+    <item name="date" type="id"/>
+    <item name="locationAutoComplete" type="id" />
+
+    <item name="postFeedOptions" type="id" />
+    <item name="feedFilter" type="id" />
+    <item name="form_checkbox" type="id" />
+    <item name="property" type="id" />
+    <item name="label" type="id" />
+    <item name="monthly_type" type="id" />
+
+    <item name="add_description" type="id"/>
+    <item name="form_layout" type="id"/>
+    <item name="form_radio_button" type="id" />
+
+    <item name="fab_label" type="id"/>
+    <item name="change_host" type="id"/>
+    <item name="host_id" type="id"/>
+    <item name="host_select" type="id"/>
+    <item name="add_new_host" type="id"/>
+    <item name="social_link" type="id"/>
+    <item name="edit_host" type="id" />
+    <item name="host_name" type="id" />
+    <item name="slide_show_pager" type="id" />
+    <item name="overview" type="id" />
+    <item name="close_player" type="id" />
+    <item name="create_channel" type="id" />
+    <item name="isPaypalChecked" type="id" />
+    <item name="isByChequeChecked" type="id" />
+
+</resources>
+

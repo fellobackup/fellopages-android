@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_180dp"
+    android:layout_gravity="bottom|center_horizontal"
+    android:background="@color/black_translucent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_5dp">
+
+    <TextView
+        android:id="@+id/txtclose"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:text="@string/cross_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.fellopages.mobileapp.classes.common.ui.BezelImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/dimen_80dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:contentDescription="@string/image_caption"
+            android:scaleType="centerCrop"
+            app:borderDrawable="@drawable/test_background"
+            app:layout_collapseMode="parallax"
+            app:maskDrawable="@drawable/circle_mask" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_15dp"
+            android:paddingStart="@dimen/padding_15dp"
+            android:paddingRight="@dimen/padding_10dp"
+            android:paddingEnd="@dimen/padding_10dp" >
+
+            <TextView
+                android:id="@+id/mlt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:drawablePadding="@dimen/padding_5dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size_18sp"
+                android:maxLines="2"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/mlt_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:drawablePadding="@dimen/padding_5dp"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:textSize="@dimen/size_14sp"
+                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_5dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bullet_point"
+                    android:paddingRight="@dimen/padding_4dp"
+                    android:paddingEnd="@dimen/padding_4dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_14sp"
+                    />
+                <TextView
+                    android:id="@+id/mlt_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/padding_2dp"
+                    android:drawableRight="@drawable/ic_directions_18dp"
+                    android:drawableEnd="@drawable/ic_directions_18dp"
+                    android:textSize="@dimen/size_14sp"
+                    android:lineSpacingExtra="@dimen/margin_2dp"
+                    android:paddingBottom="@dimen/padding_5dp"
+                    android:maxLines="2"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

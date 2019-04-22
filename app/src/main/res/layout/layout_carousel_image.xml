@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~   Copyright (c) 2016 BigStep Technologies Private Limited.
+  ~
+  ~   You may not use this file except in compliance with the
+  ~   SocialEngineAddOns License Agreement.
+  ~   You may obtain a copy of the License at:
+  ~   https://www.socialengineaddons.com/android-app-license
+  ~   The full copyright and license information is also mentioned
+  ~   in the LICENSE file that was distributed with this
+  ~   source code.
+  -->
+
+<RelativeLayout android:id="@+id/carouselLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/backdrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/album_view_background"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginStart="@dimen/margin_10dp"
+        style="@style/CoverTitleView"
+        android:textColor="@color/white"
+        android:layout_toLeftOf="@+id/image_count"
+        android:layout_toStartOf="@+id/image_count"
+        android:layout_marginBottom="@dimen/margin_10dp"
+        android:shadowColor="@color/text_shadow"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:id="@+id/content_title"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageView
+        android:id="@+id/left_arrow"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:tint="@color/white"
+        android:contentDescription="@string/descr_image"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:padding="@dimen/padding_15dp"
+        android:paddingStart="@dimen/padding_15dp"
+        android:paddingEnd="@dimen/padding_15dp"
+        android:src="@drawable/ic_chevron_left"/>
+
+    <ImageView
+        android:id="@+id/right_arrow"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/descr_image"
+        android:tint="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/padding_15dp"
+        android:paddingStart="@dimen/padding_15dp"
+        android:paddingEnd="@dimen/padding_15dp"
+        android:src="@drawable/ic_chevron_right"/>
+
+    <TextView
+        android:id="@+id/image_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/body_default_font_size"
+        android:layout_below="@+id/right_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="@dimen/padding_15dp"
+        android:paddingLeft="@dimen/padding_15dp"
+        android:paddingStart="@dimen/padding_15dp"
+        android:paddingEnd="@dimen/padding_15dp" />
+
+</RelativeLayout>
