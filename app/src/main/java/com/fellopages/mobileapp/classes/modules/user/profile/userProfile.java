@@ -65,6 +65,7 @@ import com.fellopages.mobileapp.classes.core.LoginActivity;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoLightBoxActivity;
 import com.fellopages.mobileapp.classes.modules.photoLightBox.PhotoListDetails;
 import com.fellopages.mobileapp.classes.modules.user.signup.SubscriptionActivity;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -292,6 +293,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
 
     private void setUserProfileDetails(JSONObject jsonObject, boolean isCache) {
         mGutterMenus = mBody.optJSONArray("gutterMenu");
+        Log.d("mGutterMenus ", String.valueOf(mGutterMenus));
         mUserProfileTabs = mBody.optJSONArray("profile_tabs");
         if (mUserProfileTabs == null) {
             mUserProfileTabs = mBody.optJSONArray("profileTabs");
@@ -386,16 +388,17 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                     showUploadImageDialog();
                 }
                 //Showing Cover image.
-
-                if(coverPhotoMenuArray.length() < 4){
-                    if (PreferencesUtils.getUserDetail(mContext) != null) {
-                        try {
-                            JSONObject userDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
-                            Log.d("TestLogHere ", "true");
-                            userDetail.put("cover", mCoverImage);
-                            PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                if (coverPhotoMenuArray != null){
+                    if(coverPhotoMenuArray.length() < 4){
+                        if (PreferencesUtils.getUserDetail(mContext) != null) {
+                            try {
+                                JSONObject userDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
+                                Log.d("TestLogHere ", "true");
+                                userDetail.put("cover", mCoverImage);
+                                PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -405,11 +408,16 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
 //                    Log.d("ThisCoverisSimilar ", "true");
 //
 //                }
-                mImageLoader.setImageUrl(mCoverImageUrl, mCoverImage);
+                Log.d("ThisShouldExecute ", mCoverImageUrl);
+//                mImageLoader.setImageUrl(mCoverImageUrl, mCoverImage);
+                Picasso.with(userProfile.this).load(mCoverImageUrl).fit().centerCrop().into(mCoverImage);
 
                 mProfilePhotoDetail.clear();
                 mProfilePhotoDetail.add(new PhotoListDetails(userImageProfile));
                 mPhotoDetails.add(new PhotoListDetails(mCoverImageUrl));
+
+//                userDetail.put("cover", mCoverImage);
+                PreferencesUtils.updateUserDetails(mContext, mResponseObject.toString());
 
             } else {
                 mImageLoader.setImageUrl(userImageProfile, mCoverImage);

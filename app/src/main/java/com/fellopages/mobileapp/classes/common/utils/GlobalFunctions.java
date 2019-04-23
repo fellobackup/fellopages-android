@@ -1182,6 +1182,7 @@ public class GlobalFunctions {
         Intent viewIntent = null;
         String url = AppConstant.DEFAULT_URL;
         Bundle bundle = new Bundle();
+        Log.d("TypeOfMenu ", type);
         switch (type) {
             case ConstantVariables.GROUP_MENU_TITLE:
             case ConstantVariables.GROUP_TITLE:
@@ -1248,6 +1249,7 @@ public class GlobalFunctions {
             case ConstantVariables.SITE_PAGE_ADD_VIDEO:
             case ConstantVariables.SITE_STORE_ADD_VIDEO:
             case ConstantVariables.ADV_GROUPS_ADD_VIDEO:
+                Log.d("FinalLoggedHere ", "true");
                 viewIntent = VideoUtil.getViewPageIntent(context, id, null, bundle);
                 break;
 

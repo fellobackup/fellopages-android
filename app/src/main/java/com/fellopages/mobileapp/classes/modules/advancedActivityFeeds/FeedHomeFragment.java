@@ -388,7 +388,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
 
             // getting the notification updates
             getAlertNotifications();
-            // Repeat this runnable code again every 60 seconds
+            // Repeat this runnable code again every 5 seconds
             handler.postDelayed(runnableCode, ConstantVariables.REFRESH_NOTIFICATION_TIME);
         }
     };
@@ -474,22 +474,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         Log.d("requestCount ", requestCount);
         if (notificationCount != null && !notificationCount.equals("0")) {
 
-            int combined = Integer.parseInt(notificationCount) + Integer.parseInt(requestCount);
-            notificationBadge.setText(String.valueOf(combined));
-            notificationBadge.setVisibility(View.VISIBLE);
-
-            // Show app notification count on app icon in supported launcher
-            ShortcutBadger.applyCount(mContext, Integer.valueOf(notificationCount));
-
-            if (isClicked && mSelectedTabPosition == 3) {
-                notificationBadge.setVisibility(View.GONE);
-                PreferencesUtils.clearNotificationsCount(mContext, PreferencesUtils.NOTIFICATION_COUNT);
-                ShortcutBadger.removeCount(mContext);
-                mAppConst.markAllNotificationsRead();
-            }
-        } else if(!requestCount.equals("0")){
-            Log.d("requestCount ", requestCount);
-            notificationBadge.setText(requestCount);
+            notificationBadge.setText(notificationCount);
             notificationBadge.setVisibility(View.VISIBLE);
 
             // Show app notification count on app icon in supported launcher
@@ -516,8 +501,8 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
             messageBadge.setVisibility(View.GONE);
         }
         if (requestCount != null && !requestCount.equals("0")) {
-//            requestBadge.setText(requestCount);
-//            requestBadge.setVisibility(View.VISIBLE);
+            requestBadge.setText(requestCount);
+            requestBadge.setVisibility(View.VISIBLE);
             if (isClicked && mSelectedTabPosition == 1) {
                 requestBadge.setVisibility(View.GONE);
                 PreferencesUtils.clearNotificationsCount(mContext, PreferencesUtils.FRIEND_REQ_COUNT);

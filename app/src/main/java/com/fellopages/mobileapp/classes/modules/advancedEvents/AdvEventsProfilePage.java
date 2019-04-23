@@ -1031,7 +1031,7 @@ public class AdvEventsProfilePage extends AppCompatActivity implements AppBarLay
             public void run() {
                 swipeRefresh.setRefreshing(true);
 //                isAdLoaded = false;
-                checkSiteVideoPluginEnabled();
+                makeRequest();
             }
         });
     }

@@ -167,6 +167,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             }
         } else {
+            Log.d("TestRefreshHere ", "test");
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) viewHolder;
             if (PreferencesUtils.getUserDetail(mContext) != null) {
                 try {

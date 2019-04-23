@@ -140,8 +140,8 @@ public static final int WEBVIEW_ENABLE = 1;
     // Google Project Number
     public final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     // Request Time
-    public final static int REFRESH_NOTIFICATION_TIME = 80000;
-    public final static int FIRST_COUNT_REQUEST_DELAY = 40000;
+    public final static int REFRESH_NOTIFICATION_TIME = 5000;
+    public final static int FIRST_COUNT_REQUEST_DELAY = 20000;
     //Swipe Refresh Layout disable request time
     public final static int REFRESH_DELAY_TIME = 1000;
     //Request code for fragment loading in twitter

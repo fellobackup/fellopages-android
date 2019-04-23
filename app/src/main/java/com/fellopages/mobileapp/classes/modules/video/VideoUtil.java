@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.fellopages.mobileapp.classes.core.ConstantVariables;
 import com.fellopages.mobileapp.classes.modules.advancedVideos.AdvVideoView;
@@ -30,6 +31,7 @@ public class VideoUtil {
     }
 
     public static Intent getViewPageIntent(Context context, int id, String url, Bundle bundle){
+        Log.d("ThisWasClicke ", "true");
         Intent intent = new Intent(context, AdvVideoView.class);
         bundle.putString(ConstantVariables.EXTRA_MODULE_TYPE, ConstantVariables.VIDEO_MENU_TITLE);
         bundle.putString(ConstantVariables.VIDEO_URL, url);

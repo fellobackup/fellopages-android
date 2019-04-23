@@ -1081,7 +1081,7 @@ public class GutterMenuUtils {
                 }
                 mRedirectUrl = mAppConst.buildQueryString(mRedirectUrl, mPostParams);
             }
-
+            Log.d("mMenuName ", mMenuName);
             switch (mMenuName) {
                 case "photo":
                     switch (mCurrentSelectedModule) {

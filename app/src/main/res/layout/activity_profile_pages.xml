@@ -270,7 +270,7 @@
         android:paddingStart="@dimen/padding_10dp"
         android:paddingEnd="@dimen/padding_10dp"
         android:paddingBottom="@dimen/padding_10dp"
-        app:layout_anchor="@id/swipeRefresh"
+        app:layout_anchor="@id/pager"
         app:layout_anchorGravity="bottom|right"
         app:menu_labels_ellipsize="end"
         app:menu_labels_singleLine="true"
