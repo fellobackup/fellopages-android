@@ -15,6 +15,7 @@ package com.fellopages.mobileapp.classes.common.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
+import android.util.Log;
 
 import com.fellopages.mobileapp.R;
 import com.google.gson.Gson;
@@ -455,12 +456,15 @@ public class PreferencesUtils {
     /* Used to clear all the stored preferences*
      *  basically used at the time of SignOut  */
     public static void clearSharedPreferences(Context context){
+
         SharedPreferences sharedPreferences = context.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(OAUTH_TOKEN);
         editor.remove(OAUTH_SECRET);
         editor.remove(USER_DETAILS);
         editor.apply();
+
+        Log.d("ThisIsExecuted ", "true");
 
         sharedPreferences = context.getSharedPreferences(LOGIN_INFO_PREF, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();

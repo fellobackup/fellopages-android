@@ -1,15 +1,3 @@
-/*
- *   Copyright (c) 2016 BigStep Technologies Private Limited.
- *
- *   You may not use this file except in compliance with the
- *   SocialEngineAddOns License Agreement.
- *   You may obtain a copy of the License at:
- *   https://www.socialengineaddons.com/android-app-license
- *   The full copyright and license information is also mentioned
- *   in the LICENSE file that was distributed with this
- *   source code.
- */
-
 package com.fellopages.mobileapp.classes.modules.user.profile;
 
 import android.Manifest;
@@ -79,12 +67,11 @@ import ru.dimorinny.showcasecard.position.ViewPosition;
 import ru.dimorinny.showcasecard.step.ShowCaseStep;
 import ru.dimorinny.showcasecard.step.ShowCaseStepDisplayer;
 
-
-public class userProfile extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener,
+public class OtherProfile extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener,
         OnUploadResponseListener, OnOptionItemClickResponseListener, View.OnClickListener, ShowCaseStepDisplayer.DismissListener {
 
     static int mUserId, index = 0;
-    private String userProfileUrl, displayName, mPreviousSelectedModule, mCoverImageUrl;
+    private String OtherProfileUrl, displayName, mPreviousSelectedModule, mCoverImageUrl;
     private int mPreviousSelectedModuleListingTypeId;
     private int ONE_WAY = 1;
     private int TWO_WAY = 2;
@@ -191,9 +178,9 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
         tvFollow.setOnClickListener(this);
 
         if (isOrganizerProfile) {
-            userProfileUrl = AppConstant.DEFAULT_URL + "advancedevents/organizer/" + mUserId;
+            OtherProfileUrl = AppConstant.DEFAULT_URL + "advancedevents/organizer/" + mUserId;
         } else {
-            userProfileUrl = AppConstant.DEFAULT_URL + "user/profile/" + mUserId;
+            OtherProfileUrl = AppConstant.DEFAULT_URL + "user/profile/" + mUserId;
         }
 
         // IF profile photo is uploaded via album view page.
@@ -224,7 +211,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
     public void makeRequest() {
 
         try {
-            mAppConst.getJsonResponseFromUrl(userProfileUrl, new OnResponseListener() {
+            mAppConst.getJsonResponseFromUrl(OtherProfileUrl, new OnResponseListener() {
                 @Override
                 public void onTaskCompleted(JSONObject jsonObject) {
                     mBody = jsonObject;
@@ -395,9 +382,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                                 JSONObject userDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
                                 Log.d("TestLogHere ", "true");
                                 userDetail.put("cover", mCoverImage);
-                                if (mGutterMenus.length() < 3){
-                                    PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
-                                }
+//                                PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -412,16 +397,15 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
 //                }
                 Log.d("ThisShouldExecute ", mCoverImageUrl);
 //                mImageLoader.setImageUrl(mCoverImageUrl, mCoverImage);
-                Picasso.with(userProfile.this).load(mCoverImageUrl).fit().centerCrop().into(mCoverImage);
+
+                Picasso.with(OtherProfile.this).load(mCoverImageUrl).fit().centerCrop().into(mCoverImage);
 
                 mProfilePhotoDetail.clear();
                 mProfilePhotoDetail.add(new PhotoListDetails(userImageProfile));
                 mPhotoDetails.add(new PhotoListDetails(mCoverImageUrl));
 
 //                userDetail.put("cover", mCoverImage);
-                if (mGutterMenus.length() < 3){
-                    PreferencesUtils.updateUserDetails(mContext, mResponseObject.toString());
-                }
+//                PreferencesUtils.updateUserDetails(mContext, mResponseObject.toString());
 
             } else {
                 mImageLoader.setImageUrl(userImageProfile, mCoverImage);
@@ -477,8 +461,8 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                 Bundle bundle = new Bundle();
                 bundle.putString(ConstantVariables.SUBJECT_TYPE, "user");
                 bundle.putInt(ConstantVariables.SUBJECT_ID, mUserId);
-                bundle.putString(ConstantVariables.MODULE_NAME, "userProfile");
-                bundle.putString(ConstantVariables.EXTRA_MODULE_TYPE, "userProfile");
+                bundle.putString(ConstantVariables.MODULE_NAME, "OtherProfile");
+                bundle.putString(ConstantVariables.EXTRA_MODULE_TYPE, "OtherProfile");
                 bundle.putInt(ConstantVariables.USER_ID, mUserId);
                 bundle.putString(ConstantVariables.RESPONSE_OBJECT, mResponseObject.toString());
 
@@ -783,7 +767,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
             tvFollow.setVisibility(View.VISIBLE);
 
             showCaseStep = new ShowCaseStep(new TopRightToolbar(),
-            mContext.getResources().getString(R.string.user_profile_more_icon_show_case_text),
+                    mContext.getResources().getString(R.string.user_profile_more_icon_show_case_text),
                     mContext.getResources().getDimension(R.dimen.radius_20));
         }
 
@@ -1010,7 +994,7 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                                 mUserId + "/special/profile";
                         successMessage = mContext.getResources().getString(R.string.profile_photo_updated);
                     }
-                    new UploadFileToServerUtils(userProfile.this, postUrl, resultList, this).execute();
+                    new UploadFileToServerUtils(OtherProfile.this, postUrl, resultList, this).execute();
                 }
                 break;
 
