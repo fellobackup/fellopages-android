@@ -480,7 +480,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
             // Show app notification count on app icon in supported launcher
             ShortcutBadger.applyCount(mContext, Integer.valueOf(notificationCount));
 
-            if (isClicked && mSelectedTabPosition == 3) {
+            if (isClicked && mSelectedTabPosition == 4) {
                 notificationBadge.setVisibility(View.GONE);
                 PreferencesUtils.clearNotificationsCount(mContext, PreferencesUtils.NOTIFICATION_COUNT);
                 ShortcutBadger.removeCount(mContext);
@@ -492,7 +492,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
         if (messageCount != null && !messageCount.equals("0")) {
             messageBadge.setText(messageCount);
             messageBadge.setVisibility(View.VISIBLE);
-            if (isClicked && mSelectedTabPosition == 2) {
+            if (isClicked && mSelectedTabPosition == 3) {
                 messageBadge.setVisibility(View.GONE);
                 PreferencesUtils.clearNotificationsCount(mContext, PreferencesUtils.MESSAGE_COUNT);
                 mAppConst.markAllMessageRead(null);

@@ -395,7 +395,9 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                                 JSONObject userDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));
                                 Log.d("TestLogHere ", "true");
                                 userDetail.put("cover", mCoverImage);
-                                PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
+                                if (mGutterMenus.length() < 3){
+                                    PreferencesUtils.updateUserDetails(mContext, userDetail.toString());
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -417,7 +419,9 @@ public class userProfile extends AppCompatActivity implements AppBarLayout.OnOff
                 mPhotoDetails.add(new PhotoListDetails(mCoverImageUrl));
 
 //                userDetail.put("cover", mCoverImage);
-                PreferencesUtils.updateUserDetails(mContext, mResponseObject.toString());
+                if (mGutterMenus.length() < 3){
+                    PreferencesUtils.updateUserDetails(mContext, mResponseObject.toString());
+                }
 
             } else {
                 mImageLoader.setImageUrl(userImageProfile, mCoverImage);

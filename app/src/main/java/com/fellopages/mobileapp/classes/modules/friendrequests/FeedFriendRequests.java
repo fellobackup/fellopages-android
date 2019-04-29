@@ -16,6 +16,7 @@ package com.fellopages.mobileapp.classes.modules.friendrequests;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -198,6 +199,12 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
 
                 });
         mRecyclerView.setAdapter(mFriendRequestViewAdapter);
+
+        /*if (!mAppConst.isLoggedOutUser()) {
+            makeRequest();
+            // Kick off the first runnable task right away
+            handler.postDelayed(runnableCode, ConstantVariables.FIRST_COUNT_REQUEST_DELAY);
+        }*/
         return rootView;
     }
 
@@ -218,6 +225,20 @@ public class FeedFriendRequests extends Fragment implements SwipeRefreshLayout.O
         super.onActivityCreated(savedInstanceState);
         mAppConst.hideKeyboard();
     }
+
+    /*Handler handler = new Handler();
+    // Define the task to be run here
+    private Runnable runnableCode = new Runnable() {
+        @Override
+        public void run() {
+
+            // getting the notification updates
+            makeRequest();
+            // Repeat this runnable code again every 5 seconds
+            handler.postDelayed(runnableCode, ConstantVariables.REFRESH_NOTIFICATION_TIME);
+        }
+    };*/
+
 
     public void makeRequest() {
         mLoadingPageNo = 1;
