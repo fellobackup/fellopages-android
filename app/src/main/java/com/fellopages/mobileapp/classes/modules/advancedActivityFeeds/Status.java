@@ -1522,9 +1522,10 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
                     }
 
                     if (isFacebookPost) {
+                        Log.d("isFacebookPost ", "true");
                         UpdateStatusOnFacebook();
                     } else {
-
+                        Log.d("isFacebookPost ", "false");
                         uploadFilesAndData();
                     }
 
@@ -1544,7 +1545,7 @@ public class Status extends AppCompatActivity implements View.OnClickListener, T
         // Uploading files in background with the status post.
         mPostAttachmentParams = getAttachmentPostParams(new HashMap<>());
         if (isExternalShare || (mPostAttachmentParams != null && mPostAttachmentParams.get("schedule_time") != null) || mFeedList != null) {
-            Log.d("UploadingHere 2 ", "true");
+            Log.d("UploadingHerePictures ", "true");
            new UploadAttachmentUtil(Status.this, mStatusPostUrl,
                    mPostAttachmentParams,
                    mSelectPath).execute();

@@ -19,6 +19,7 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.fellopages.mobileapp.R;
@@ -109,9 +110,15 @@ public class BitmapUtils {
 
         Bitmap bitmap;
         if (CacheUtils.getInstance(context).getLru().get(imagePath) != null) {
+            Log.d("ThisWasLoggedHere 1 ", "true");
             bitmap = CacheUtils.getInstance(context).getLru().get(imagePath);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 40, bytes);
         } else {
+            Log.d("ThisWasLoggedHere 2 ", "true");
             bitmap = BitmapFactory.decodeFile(imagePath, options);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 40, bytes);
             try {
                 String message = " 0";
                 ExifInterface ei = new ExifInterface(imagePath);
@@ -150,7 +157,7 @@ public class BitmapUtils {
         if (bitmap != null) {
             CacheUtils.getInstance(context).getLru().put(imagePath, bitmap);
         }
-
+        Log.d("ThisWasLoggedHere 3 ", "true");
         return bitmap;
     }
 

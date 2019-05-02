@@ -1953,6 +1953,7 @@ public class FeedsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
                 break;
             case ConstantVariables.POSTED_NEW_FEED:
                 try {
+                    Log.d("NowThisIsFinal ", "true");
                     HashMap<String, String> postParams = (HashMap<String, String>) data.getSerializableExtra("postParam");
                     String feedBody = postParams.get("body");
                     JSONObject userDetail = new JSONObject(PreferencesUtils.getUserDetail(mContext));

@@ -341,11 +341,11 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        if (!mAppConst.isLoggedOutUser()) {
-            getAlertNotifications();
-            // Kick off the first runnable task right away
-            handler.postDelayed(runnableCode, ConstantVariables.FIRST_COUNT_REQUEST_DELAY);
-        }
+//        if (!mAppConst.isLoggedOutUser()) {
+//            getAlertNotifications();
+//            // Kick off the first runnable task right away
+//            handler.postDelayed(runnableCode, ConstantVariables.FIRST_COUNT_REQUEST_DELAY);
+//        }
 
         return rootView;
     }
@@ -380,24 +380,24 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     }
 
     // Create the Handler object (on the main thread by default)
-    Handler handler = new Handler();
-    // Define the task to be run here
-    private Runnable runnableCode = new Runnable() {
-        @Override
-        public void run() {
-
-            // getting the notification updates
-            getAlertNotifications();
-            // Repeat this runnable code again every 5 seconds
-            handler.postDelayed(runnableCode, ConstantVariables.REFRESH_NOTIFICATION_TIME);
-        }
-    };
+//    Handler handler = new Handler();
+//    // Define the task to be run here
+//    private Runnable runnableCode = new Runnable() {
+//        @Override
+//        public void run() {
+//
+//            // getting the notification updates
+//            getAlertNotifications();
+//            // Repeat this runnable code again every 5 seconds
+//            handler.postDelayed(runnableCode, ConstantVariables.REFRESH_NOTIFICATION_TIME);
+//        }
+//    };
 
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        handler.removeCallbacks(runnableCode);
+//        handler.removeCallbacks(runnableCode);
     }
 
     @Override
@@ -409,7 +409,7 @@ public class FeedHomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
-        handler.removeCallbacks(runnableCode);
+//        handler.removeCallbacks(runnableCode);
     }
 
     @Override
