@@ -1249,7 +1249,7 @@ public class GlobalFunctions {
             case ConstantVariables.SITE_PAGE_ADD_VIDEO:
             case ConstantVariables.SITE_STORE_ADD_VIDEO:
             case ConstantVariables.ADV_GROUPS_ADD_VIDEO:
-                Log.d("FinalLoggedHere ", "true");
+                Log.d("FinalLoggedHere ", type);
                 viewIntent = VideoUtil.getViewPageIntent(context, id, null, bundle);
                 break;
 

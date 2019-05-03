@@ -155,7 +155,8 @@ public class OkHttpUploadHandler extends StringCallback {
                     if (BitmapUtils.isImageRotated) {
                         for (final String imagePath : mSelectPath) {
                             BitmapUtils.decodeSampledBitmapFromFile(mContext, imagePath,
-                                    30, 30, true);
+                                    AppConstant.getDisplayMetricsWidth(mContext),
+                                    (int) mContext.getResources().getDimension(R.dimen.feed_attachment_image_height), true);
                         }
                         mSelectPath = BitmapUtils.updateSelectPath();
                     }
@@ -418,12 +419,12 @@ public class OkHttpUploadHandler extends StringCallback {
         }
 
         FileOutputStream out = null;
-        String filename = getFilename();
+        String filename = imageUri;
         try {
             out = new FileOutputStream(filename);
 
 //          write the compressed bitmap at the destination specified by filename.
-            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

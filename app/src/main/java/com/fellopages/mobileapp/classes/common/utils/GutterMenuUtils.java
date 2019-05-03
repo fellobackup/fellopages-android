@@ -600,6 +600,7 @@ public class GutterMenuUtils {
      */
     public String getMenuLabel(boolean isRequestFromViewPage, String menuName) {
 
+        Log.d("menuName ", menuName);
         switch (menuName) {
             case "update_save_feed":
                 if (mFeedList.getmIsSaveFeedOption() == 1) {
